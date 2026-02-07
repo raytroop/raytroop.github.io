@@ -9,6 +9,73 @@ mathjax: true
 
 
 
+## Number Systems
+
+> Harris, David Money, and Sarah L. Harris. *Digital Design and Computer Architecture*. 2nd ed. Morgan Kaufmann, 2013. [[pdf](https://github.com/last-genius/comp_arch_list/blob/master/books/Digital%20Design%20and%20Computer%20Architecture.%20ARM%20Edition%20by%20Sarah%20Harris%2C%20David%20Harris.pdf)]
+
+***integers***
+
+![image-20260207093700537](vlsi-dsp/image-20260207093700537.png)
+
+***rational number***
+
+![image-20260207094834081](vlsi-dsp/image-20260207094834081.png)
+
+![image-20260206230528138](vlsi-dsp/image-20260206230528138.png)
+
+
+### 2's Complement
+
+> [[https://bpb-us-w2.wpmucdn.com/sites.coecis.cornell.edu/dist/4/81/files/2019/06/4740_lecture23ALU-circuits.pdf](https://bpb-us-w2.wpmucdn.com/sites.coecis.cornell.edu/dist/4/81/files/2019/06/4740_lecture23ALU-circuits.pdf)]
+
+![image-20260207085804825](vlsi-dsp/image-20260207085804825.png)
+
+> Google AI Mode [[https://share.google/aimode/KsxxgDF0vAdhAIgm0](https://share.google/aimode/KsxxgDF0vAdhAIgm0)]
+
+![image-20260207094125000](vlsi-dsp/image-20260207094125000.png)
+
+### Fixed Point Number
+
+![image-20260207095601437](vlsi-dsp/image-20260207095601437.png)
+
+
+
+
+### Floating Point Number
+
+> Dennis Forbes. Understanding Floating-Point Numbers [[https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/](https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/)]
+>
+> IEEE Standard for Floating-Point Arithmetic [[https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf](https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf)]
+
+![image-20260207101850895](vlsi-dsp/image-20260207101850895.png)
+
+![image-20260207104005414](vlsi-dsp/image-20260207104005414.png)
+
+|                                      |                                |                                                              |
+| ------------------------------------ | ------------------------------ | ------------------------------------------------------------ |
+| **32-bit floating-point version 1**  | store *implicit leading one*   | ![image-20260207102121844](vlsi-dsp/image-20260207102121844.png) |
+| **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](vlsi-dsp/image-20260207102147689.png) |
+| **IEEE 754 floating point notation** | *biased exponent*              | ![image-20260207102210468](vlsi-dsp/image-20260207102210468.png) |
+
+> [[https://share.google/aimode/yY2R2EQCTsP9BlMNx](https://share.google/aimode/yY2R2EQCTsP9BlMNx)]
+
+| Format                        | Exponent Bits | Bias (Decimal) | Representable Range |
+| ----------------------------- | ------------- | -------------- | ------------------- |
+| **Single Precision (32-bit)** | 8             | **127**        | -126 to +127        |
+| **Double Precision (64-bit)** | 11            | **1023**       | -1022 to +1023      |
+
+![image-20260207103557952](vlsi-dsp/image-20260207103557952.png)
+
+
+
+
+
+## VLSI Arithmetic
+
+*TODO* &#128197;
+
+
+
 ## Single-Pole LPF Algorithms
 
 > Neil Robertson, Model a Sigma-Delta DAC Plus RC Filter [[https://www.dsprelated.com/showarticle/1642.php](https://www.dsprelated.com/showarticle/1642.php)]
@@ -65,16 +132,6 @@ plt.plot(t, y_filt_match, color='m', marker='x', linestyle='dashed',markersize=4
 plt.legend(loc='upper right', fontsize=20)
 plt.grid(which='both');plt.xlabel('Time (s)');plt.show()
 ```
-
-
-
-## Fixed Point vs. Floating Point
-
-> Dennis Forbes. Understanding Floating-Point Numbers [[https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/](https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/)]
-
-*TODO* &#128197;
-
-![image-20260206230528138](vlsi-dsp/image-20260206230528138.png)
 
 
 

@@ -204,10 +204,8 @@ endmodule
 > [Correct Methods For Adding Delays To Verilog Behavioral Models](http://www.sunburst-design.com/papers/CummingsHDLCON1999_BehavioralDelays_Rev1_1.pdf)
 >
 > Article (20488135) Title: Selecting Different Delay Modes in GLS (RAK)
-> URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdLyEAI](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdLyEAI)
 >
 > Article (20447759) Title: Gate Level Simulation (GLS): A Quick Guide for Beginners
-> URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000005xEorEAE)
 
 
 

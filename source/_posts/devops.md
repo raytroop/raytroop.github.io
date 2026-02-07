@@ -349,7 +349,6 @@ Using **Red Hat Enterprise Linux 8**, **Rocky Linux 8** and the **GNOME 3** wind
 **reference**
 
 Article (11612426) Title: New windows and forms appear behind the Library Manager in background or iconized instead of foreground on RHEL and SuSE Linux in GNOME, KDE Desktop, Metacity window manager
-URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nSXCEA2)
 
 
 

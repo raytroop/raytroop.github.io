@@ -1,5 +1,5 @@
 ---
-title: Inductance & Transmission Line
+title: Loop and Partial Inductance
 date: 2025-01-24 14:27:50
 tags:
 categories:
@@ -124,77 +124,6 @@ $$
 
 
 
-##   Current Return Path
-
-![image-20250705171613361](ind-tline/image-20250705171613361-1751987296815-47.png)
-
-Current return paths are frequency dependent $Z = R +j\omega L$
-
-- Low frequency
-  - $R$ dominates - current use as many returns as possible to have parallel resistances
-- High frequency
-  - $j\omega L$​ dominates - current use the *closest possible return path* to form *the smallest possible loop inductance*
-- Very high frequency
-  - The current would be confined to the *nearest* possible return only at ultra-high frequencies (skin effect)
-  
-
-![image-20250705170949035](ind-tline/image-20250705170949035-1751987296815-48.png)
-
----
-
-**skin effect** & **Dielectric loss**
-
-![image-20250705170028485](ind-tline/image-20250705170028485-1751987296816-49.png)
-
----
-
-***EMX simulation***
-
-**setup:**
-
-![image-20250706004037966](ind-tline/image-20250706004037966-1751987296816-50.png)
-
-
-
-**frequency sweep:**
-
-![image-20250706010943996](ind-tline/image-20250706010943996-1751987296816-51.png)
-
-
-
-> Cadence October 2020, *Analysis of a Figure-Eight Inductor with EMX RAK*
->
-> ![image-20250706010216105](ind-tline/image-20250706010216105-1751987296817-52.png)
-
-
-
-## RLC network
-
-> [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf)]
-
-![image-20250817105056325](ind-tline/image-20250817105056325.png)
-
-![image-20250817105203031](ind-tline/image-20250817105203031.png)![image-20250817105308602](ind-tline/image-20250817105308602.png)
-
-
-
-## Decoupling Capacitor
-
-![image-20250705175343498](ind-tline/image-20250705175343498-1751987296814-46.png)
-
-![image-20260125205518872](ind-tline/image-20260125205518872.png)
-
-![image-20260125205941736](ind-tline/image-20260125205941736.png)
-
-![image-20260125211108504](ind-tline/image-20260125211108504.png)
-
-## Grounding
-
-
-> Chapter 11 Layout and grounding [[http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf](http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf)]
-
-*TODO* &#128197;
-
 
 
 ## reference
@@ -219,20 +148,4 @@ Cheung-Wei Lam. Common Misconceptions about Inductance & Current Return Path [[h
 Randy Wolff. Signal Loop Inductance in [Pin] and [Package Model] [[https://ibis.org/summits/feb10/wolff.pdf](https://ibis.org/summits/feb10/wolff.pdf)]
 
 ANSYS Q3D Getting Started LE05. Module 5: Q3D Inductance Matrix Reduction [[https://innovationspace.ansys.com/courses/wp-content/uploads/sites/5/2021/07/Q3D_GS_2020R1_EN_LE05_Ind_Matrix.pdf](https://innovationspace.ansys.com/courses/wp-content/uploads/sites/5/2021/07/Q3D_GS_2020R1_EN_LE05_Ind_Matrix.pdf)]
-
----
-
-Yuriy Shlepnev. How Interconnects Work: Characteristic Impedance and Reflections [[https://www.linkedin.com/pulse/how-interconnects-work-characteristic-impedance-yuriy-shlepnev/](https://www.linkedin.com/pulse/how-interconnects-work-characteristic-impedance-yuriy-shlepnev/)]
-
-—. How Interconnects Work: Bandwidth for Modeling and Measurements [[https://www.linkedin.com/pulse/how-interconnects-work-bandwidth-modeling-yuriy-shlepnev/?trackingId=874kpm3XuNyV9D0eP6IioA%3D%3D](https://www.linkedin.com/pulse/how-interconnects-work-bandwidth-modeling-yuriy-shlepnev/?trackingId=874kpm3XuNyV9D0eP6IioA%3D%3D)]
-
-Eric Bogatin. Pop Quiz: When is an Interconnect Not a Transmission Line?  [[https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line](https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line)]
-
-TeledyneLeCroy/SignalIntegrity Python tools for signal integrity applications [[SignalIntegrityApp](https://github.com/TeledyneLeCroy/SignalIntegrity)]
-
-A Look at Transmission-Line Losses [[http://blog.teledynelecroy.com/2018/06/a-look-at-transmission-line-losses.html](http://blog.teledynelecroy.com/2018/06/a-look-at-transmission-line-losses.html)]
-
-How Much Transmission-Line Loss is Too Much? [[http://blog.teledynelecroy.com/2018/06/how-much-transmission-line-loss-is-too.html](http://blog.teledynelecroy.com/2018/06/how-much-transmission-line-loss-is-too.html)]
-
-Raymond Y. Chen, Raymond Y. Chen. Fundamentals of S Fundamentals of S-Parameter Parameter Modeling for Power Distribution Modeling for Power Distribution System (PDS) and SSO Analysis System (PDS) and SSO Analysis [[https://ibis.org/summits/jun05/chen.pdf](https://ibis.org/summits/jun05/chen.pdf)]
 

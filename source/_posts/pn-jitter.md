@@ -352,10 +352,8 @@ In the conclusion, *`Edge Phase Noise(dBc)` is preferred for phase noise evaluat
 ## reference
 
 Article (11514536) Title: How to obtain a phase noise plot from a transient noise analysis
-URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nb1CEAQ)
 
 Article (20500632) Title: How to simulate Random and Deterministic Jitters
-URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI)
 
 Cadence, Application Note: Understanding the relations between time-average noise (phase-noise) and sampled noise (edge-phase noise or jitter) in Pnoise analysis
 

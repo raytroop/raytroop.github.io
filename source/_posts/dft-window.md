@@ -412,7 +412,6 @@ RMS@-0.25fres & rect: 0.70780
 Windows and Spectral Leakage. URL:[https://community.sw.siemens.com/s/article/windows-and-spectral-leakage](https://community.sw.siemens.com/s/article/windows-and-spectral-leakage)
 
 Article (20416822) Title: How to Utilize a Windowing Technique for Accurate DFT
-URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050UrEAI](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050UrEAI)
 
 B.P. Lathi, Roger Green. Linear Systems and Signals (The Oxford Series in Electrical and Computer Engineering) 3rd Edition
 

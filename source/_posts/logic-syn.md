@@ -223,7 +223,6 @@ This will make sure that any glitch in the clock enable signal will not be visib
 > Innovus Text Command Reference 22.10
 >
 > Article (20416394) Title: Analysis with Advanced On-chip Variation (AOCV) derating in EDI system and ETS
-> URL: https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od000000050NxEAI
 
 
 

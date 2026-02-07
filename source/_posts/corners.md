@@ -275,4 +275,4 @@ Chan, T. (2014). Mitigation of Variability and Reliability Margins in IC Impleme
 Dr. Adam Temanm, Digital VLSI Design:Lecture 10: Routing [https://www.eng.biu.ac.il/temanad/files/2017/02/Lecture-10-Routing.pdf](https://www.eng.biu.ac.il/temanad/files/2017/02/Lecture-10-Routing.pdf)
 
 Article (20487193) Title: Setting Pegasus - LVS to Quantus av_extracted view Flow with TSMC16 packages
-URL: https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V000009MprZUAS
+

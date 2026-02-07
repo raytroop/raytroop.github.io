@@ -314,7 +314,7 @@ A **sampled pxf** analysis can be used to simulate the *deterministic jitter* of
 
 ## reference
 
-Article (20500632) Title: How to simulate Random and Deterministic Jitters URL: https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fiXeEAI
+Article (20500632) Title: How to simulate Random and Deterministic Jitters
 
 Spectre Tech Tips: Measuring Noise in Digital Circuits - Analog/Custom Design - Cadence Blogs - Cadence Community [https://community.cadence.com/cadence_blogs_8/b/cic/posts/s . . .](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-measuring-noise-in-digital-circuits)
 

@@ -580,10 +580,8 @@ use **SpiceIn** GUI feature to map MOS parameter correctly in generated schemati
 ### reference
 
 Article (20488179) Title: How to use SpiceIn GUI feature to map MOS parameter correctly in generated schematic
-URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009bdPWEAY)
 
 Article (11724692) Title: SpiceIn maps the netlist parameter to the CDF parameter incorrectly on the generated schematic devices  (e.g. w to wf)
-URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1Od0000000nZ2CEAU)
 
 
 
@@ -731,7 +729,6 @@ multiple label and rectangle  in vssa net
 ### reference
 
 Article (20467964) Title: Difference in result on running Spectre APS with EMIR and without EMIR analysis
-URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O0V00000679GRUAY)
 
 StarRC User Guide and Command Reference Version O-2018.06, June 2018
 
@@ -829,7 +826,6 @@ The simulation result is wrong
 ### reference
 
 Article (20502176) Title: How does Spectre understand case-sensitive net names when using various post-layout netlists such as dspf, av_extracted view, or smart view?
-URL: [https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fthoEAA](https://support.cadence.com/apex/ArticleAttachmentPortal?id=a1O3w000009fthoEAA)
 
 spf in cadence [https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/31326/spf-in-cadence/1342278#1342278](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/31326/spf-in-cadence/1342278#1342278)
 

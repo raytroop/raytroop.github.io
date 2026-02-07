@@ -226,8 +226,19 @@ that total power will always be the ***same*** for ***any sampling rate*** used 
 
 ![image-20260205181758905](noise/image-20260205181758905.png)
 
+### White noise in CONTINUOUS-time blocks
 
-## noise generator
+> MathWorks Support Team. [[https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112](https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112)]
+
+![white_noise_sampling.drawio](noise/white_noise_sampling.drawio.svg)
+
+---
+
+![image-20260111215146609](noise/image-20260111215146609.png)
+
+
+
+## Colored Noise Generation
 
 > Allen B. Downey. *Think DSP - Digital Signal Processing in Python* [[book](http://greenteapress.com/thinkdsp/thinkdsp.pdf) [repo](https://github.com/AllenDowney/ThinkDSP)]
 >
@@ -237,10 +248,55 @@ that total power will always be the ***same*** for ***any sampling rate*** used 
 >
 > Steve Smith. An Interesting Fourier Transform - 1/f Noise [[https://www.dsprelated.com/showarticle/40.php](https://www.dsprelated.com/showarticle/40.php)]
 >
+> Mathuranathan. Generate **correlated Gaussian sequence (colored noise)** [[https://www.gaussianwaves.com/2019/10/generating-correlated-gaussian-sequences/](https://www.gaussianwaves.com/2019/10/generating-correlated-gaussian-sequences/)]
+>
+> Jeruchim et., al, Simulation of communication systems – modeling, methodology, and techniques, second edition, Kluwer academic publishers, 2002
+
+![Power spectral densities of white noise and colored noise](noise/white-noise-color-noise.png)
+
+![image-20260207205413258](noise/image-20260207205413258.png)
+
+![image-20260207214631283](noise/image-20260207214631283.png)
+
+Two methods to generate colored Gaussian noise for given mean and PSD shape
+
+- **Spectral Factorization Method**
+- **Auto-Regressive (AR) Model**
 
 
 
-### Filtered White Noise
+### Filtering in Time domain
+
+> Alessandro Cudazzo. noise generator developed in C99 (white, brown) [[https://github.com/alessandrocuda/noise_generator](https://github.com/alessandrocuda/noise_generator)]
+
+with *Derivatives approximation*, $H_p(s) = \frac{1}{s\tau +  1} \to H_p(z)=\frac{\alpha}{1 +(\alpha -1)z^{-1}}$, where $\alpha = \frac{T}{\tau+T}$
+
+![image-20251207222557118](noise/image-20251207222557118.png)
+
+```c
+get_bnoise(){
+    RawData = (randq64_double()*2.0 -1.0)/VOLUME_BN;
+	SmoothData = SmoothData - (LPF_Beta * (SmoothData - RawData)); // RC Filter
+    return SmoothData;
+}
+```
+
+
+
+![image-20260207210932591](noise/image-20260207210932591.png)
+
+```matlab
+%Colored Noise Generation
+x=whiteNoise;
+%First Order Low pass filter y(n)=a*y(n-1)+(1-a)*x(n)
+%Filter Trasfer function Y(Z) = X(Z)*(1-a)/(1-aZ^-1)
+[y zf]=filter(1-a,[1 -a],x);
+coloredNoise = y;
+```
+
+
+
+---
 
 > Julius Orion Smith III. Spectral Audio Signal Processing [[https://www.dsprelated.com/freebooks/sasp/Filtered_White_Noise.html](https://www.dsprelated.com/freebooks/sasp/Filtered_White_Noise.html)]
 
@@ -263,18 +319,7 @@ ans = 1.0991
 
 
 
-
-### White Noise + Digital Low-Pass filter
-
-> Alessandro Cudazzo. noise generator developed in C99 (white, brown) [[https://github.com/alessandrocuda/noise_generator](https://github.com/alessandrocuda/noise_generator)]
-
-with *Derivatives approximation*, $H_p(s) = \frac{1}{s\tau +  1} \to H_p(z)=\frac{\alpha}{1 +(\alpha -1)z^{-1}}$, where $\alpha = \frac{T}{\tau+T}$
-
-![image-20251207222557118](noise/image-20251207222557118.png)
-
-
-
-### Colouring Noise
+### Filtering in Frequency domain
 
 > Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)] [[https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0](https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0)]
 
@@ -290,19 +335,41 @@ The process of generating coloured noise is relatively simple:
 
 
 
-sampling shaping transfer function (not scaled by $1/T_s$), which make sense in time domain convolution between sampled noise with sampled impulse response of filter
+Sampling *shaping transfer function* (not scaled by $1/T_s$) make sense in time domain convolution between sampled noise and sampled impulse response of filter
 
+### AR(N) model method
 
+> Generate color noise using Auto-Regressive (AR) model [[https://www.gaussianwaves.com/2019/12/color-noise-generation-using-auto-regressive-ar-model-power-law-noises/](https://www.gaussianwaves.com/2019/12/color-noise-generation-using-auto-regressive-ar-model-power-law-noises/)]
+>
+> Konstantinos Chatzilygeroudis. Lecture 9 & 10: Noise Models & Linear Filters [[notes](https://eclass.upatras.gr/modules/document/file.php/EE857/%CE%A3%CE%B7%CE%BC%CE%B5%CE%B9%CF%8E%CF%83%CE%B5%CE%B9%CF%82%202025-2026/ECEUoP_SP_Notes_9.pdf), [slides](https://eclass.upatras.gr/modules/document/file.php/EE857/%CE%94%CE%B9%CE%B1%CE%BB%CE%AD%CE%BE%CE%B5%CE%B9%CF%82%202025-2026/ECEUoP_SP_Lecture_9.pdf)]
 
-### White noise in CONTINUOUS-time blocks
+![image-20260207220223975](noise/image-20260207220223975.png)
 
-> MathWorks Support Team. [[https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112](https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112)]
+![image-20260207221055698](noise/image-20260207221055698.png)
 
-![white_noise_sampling.drawio](noise/white_noise_sampling.drawio.svg)
+> Autoregressive (AR) modeling in signal processing represents a signal as a linear combination of its own previous values plus a white noise error term, effectively acting as an all-pole IIR filter
 
 ---
 
-![image-20260111215146609](noise/image-20260111215146609.png)
+Google AI Mode [[https://share.google/aimode/QAuvWdwJFng54cYZo](https://share.google/aimode/QAuvWdwJFng54cYZo)]
+
+```matlab
+% https://github.com/vineel49/colored_noise/blob/master/RUN_ME.m
+
+
+% IIR FILTER PARAMETERS (USED TO GENERATE COLOURED NOISE)
+a = 0.99;
+B = sqrt(1-a^2); % INPUT COEFFICIENTS IN THE DIFFERENCE EQUATION
+A = [1 -a]; % OUTPUT COEFFICIENTS IN THE DIFFERENCE EQUATION
+
+% ADDITIVE COLOURED GAUSSIAN NOISE
+% AWGN
+AWGN = normrnd(0,NOISE_STD_DEV,1,1000+FRAME_SIZE)+1i*normrnd(0,NOISE_STD_DEV,1,1000+FRAME_SIZE);
+ACGN = filter(B,A,AWGN);
+ACGN(1:1000) = []; % DISCARDING TRANSIENT SAMPLES
+```
+
+![image-20260207220913220](noise/image-20260207220913220.png)
 
 
 

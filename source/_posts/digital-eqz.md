@@ -129,7 +129,7 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 
 
-### TX FIR Coefficient Selection with Zero-Forcing
+### TX FIR Coefficient Selection with ZFS
 
 *TODO* &#128197;
 
@@ -167,6 +167,10 @@ There are three major ***MMSE***-based algorithms:
 - least mean square (***LMS***),
 - normalized least mean square (**NLMS**)
 - recursive least square (**RLS**)
+
+
+
+
 
 
 
@@ -268,6 +272,12 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 ---
 
 > Leslie Rusch. [[https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf](https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf)]
+
+
+
+---
+
+> Vineel Kumar Veludandi. Maximum likelihood sequence estimation (MLSE) using the Viterbi algorithm [[https://github.com/vineel49/mlse](https://github.com/vineel49/mlse)]
 
 
 

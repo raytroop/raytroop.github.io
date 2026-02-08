@@ -398,6 +398,10 @@ tt_uniform::Vector = (0:param.blk_size_osr-1) .+ prev_nui/2*param.osr
 
 `tt_uniform` is the convience vector to remap the jittered waveform back to our simulation grid
 
+> using **intermediate voltages** embed jitter information at fractional time steps
+>
+> ![image-20260208091652420](link-mdl/image-20260208091652420.png)
+
 ```julia
 drv.Δtt_ext[eachindex(drv.Δtt_prev_nui)] .= drv.Δtt_prev_nui  # 1
 drv.Δtt_ext[lastindex(drv.Δtt_prev_nui)+1:end] .= Δtt  # 2

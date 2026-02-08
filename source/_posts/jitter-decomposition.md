@@ -140,15 +140,6 @@ f_{RJ}(\Delta t) = \frac{1}{\sqrt{2\pi\sigma}}\exp(-\frac{(\Delta t)^2}{2\sigma^
 $$
 
 
-## Remarks
-
-### Periodic Jitter Generator and Insertion
-
-*Analysis and Estimation of Jitter Sub-Components: Classification and Segregation of Jitter Components*
-
-![image-20220521212129098](jitter-decomposition/image-20220521212129098.png)
-
-![image-20220521212142719](jitter-decomposition/image-20220521212142719.png)
 
 ## DJ/RJ
 
@@ -156,6 +147,14 @@ $$
 
 ![image-20251121235231154](jitter-decomposition/image-20251121235231154.png)
 
+
+## Periodic Jitter Generator & Insertion
+
+*Analysis and Estimation of Jitter Sub-Components: Classification and Segregation of Jitter Components*
+
+![image-20220521212129098](jitter-decomposition/image-20220521212129098.png)
+
+![image-20220521212142719](jitter-decomposition/image-20220521212142719.png)
 
 
 ## Reference

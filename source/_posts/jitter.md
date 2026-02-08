@@ -105,6 +105,27 @@ Thus, yield EQ(3.48)
 
 ![image-20251218222327126](jitter/image-20251218222327126.png)
 
+## Intersymbol interference (ISI)
+
+![image-20260208094957058](jitter/image-20260208094957058.png)
+
+
+
+![image-20260208095030679](jitter/image-20260208095030679.png)
+
+![image-20260208095050799](jitter/image-20260208095050799.png)
+
+> ![image-20260208095210726](jitter/image-20260208095210726.png)
+
+$$
+\color{red}\phi = 2\pi D \cdot f
+$$
+
+
+
+![image-20260208100834849](jitter/image-20260208100834849.png)
+
+
 
 
 

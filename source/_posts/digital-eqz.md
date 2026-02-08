@@ -131,7 +131,31 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 ### TX FIR Coefficient Selection with ZFS
 
-*TODO* &#128197;
+> ***Zero Forcing Solution (ZFS)***
+
+![image-20260208123317710](digital-eqz/image-20260208123317710.png)
+
+![image-20260208123432755](digital-eqz/image-20260208123432755.png)
+
+|                      | $k=-\text{npre}$   | $k=-0$ | $k=\text{npost}$   |
+| -------------------- | ------------------ | ------ | ------------------ |
+| $c_{-\text{npre}}$   | $x_0$              |        | 0                  |
+| $c_{-\text{npre}+1}$ | $x_{-1}$           |        | 0                  |
+| ...                  | ...                | ...    | ...                |
+| $c_0$                | $x_{-\text{npre}}$ | $x_0$  | $x_{\text{npost}}$ |
+| ...                  | ...                | ...    | ...                |
+| $c_{\text{npost}-1}$ | $0$                |        | $x_1$              |
+| $c_{\text{npost}}$   | $0$                |        | $x_0$              |
+
+
+
+
+
+----
+
+![image-20260208122312410](digital-eqz/image-20260208122312410.png)
+
+
 
 
 

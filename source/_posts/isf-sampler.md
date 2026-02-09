@@ -128,7 +128,7 @@ The detailed procedure for characterizing the ISF of this sampler is outlined as
 
 ![image-20260209212202355](isf-sampler/image-20260209212202355.png)
 
-One possible candidate for the ISF measurement point $\color{red}t_0$ is the time at which the  output voltage is amplified to the largest value. PAC response of the sampler to a *small signal **DC** input*, that is, the time-varying transfer function evaluated at $\color{red}\omega=0$
+One possible candidate for the ISF measurement point $\color{red}t_0$ is the time at which the  output voltage is amplified to the largest value. Figure 4(a) plots PAC response of the sampler to a *small signal **DC** input*  — the time-varying transfer function evaluated at $\color{red}\omega=0$
 $$
 H(0;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
 $$

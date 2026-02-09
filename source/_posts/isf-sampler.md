@@ -75,9 +75,9 @@ $$\begin{align}
 
 Since $H(j\omega;t)$  is periodic in $T$, The time-varying transfer function $H(j\omega;t)$ can be expressed in a Fourier series:
 $$
-H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c t}
+\color{red}H(j\omega;t)=\sum_{m=-\infty}^{\infty}H_m(j\omega) \cdot e^{jm\omega_c t}
 $$
-where $\omega_c$ is the fundamental frequency of the periodic system. $H_m(j\omega)$ represent the frequency response of the system at the *(m-th)* harmonic output sideband to a unit $j\omega$ sinusoid.
+where $\omega_c$ is the fundamental frequency of the periodic system. $H_m(j\omega)$ represent the frequency response of the system at the $m$-th harmonic output sideband to a unit $j\omega$ sinusoid.
 
 > The above equation link time-varying transfer function $H(j\omega;t)$ with PAC simulation output
 
@@ -85,15 +85,15 @@ The response to a periodic impulse train, that is:
 $$
 x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
 $$
-The idea is that if the impulse response of the system settles to zero long before the next impulse arrives, then the system response to this impulse train would be approximately equal to the periodic repetition of the true impulse response, i.e.:
+The idea is that if the impulse response of the system settles to zero long before the next impulse arrives, then the system response to this impulse train would be approximately equal to the periodic repetition of the true impulse response, i.e.
 $$
-y(t) \cong  \sum_{m=-\infty}^{\infty}h(t;\tau+nkT)
+y(t) \cong  \sum_{n=-\infty}^{\infty}h(t;\tau+nkT)
 $$
-and $y(t)$ would be approximately equal to $h(t;\tau)$ for $\tau \leq t \le t+kT$
+and $y(t)$ would be approximately equal to $h(t;\tau)$ for $\tau \leq t \le \tau+kT$
 
 ![yt.drawio](isf-sampler/yt.drawio.svg)
 
-> Without  loss of generality and for computation convenience, we set $k=1$ thereafter.
+> Without loss of generality and for computation convenience, we set $k=1$ thereafter.
 
 The Fourier transform $X(j\omega)$ of the **T-periodic** impulse train is:
 $$
@@ -105,28 +105,30 @@ y(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}H(jn\omega_c;t)\cdot e^{jn\omega_c\cdot
 $$
 The expression for the approximate time-varying impulse response:
 $$
-h(t,\tau) = \left\{ \begin{array}{cl}
+h(t,\tau) \cong y(t)= \left\{ \begin{array}{cl}
 \frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot e^{jm\omega_ct+jn\omega_c\cdot (t-\tau)} & : \ \tau \leq t \lt \tau+T \\
 0 & : \ \text{elsewhere}
 \end{array} \right.
 $$
-Finally, the ISF $\Gamma(\tau)$ is equal to $h(t,\tau)$ when $t=t_0$ and $t_0 \gt \tau$
+Finally, the ISF $\Gamma(\tau)$ is equal to $h(t,\tau)$ when $t=t_0$ if $t_0 \gt \tau$
 $$
 \Gamma(\tau)\cong \frac{1}{T}\sum_{n=-\infty}^{\infty}\sum_{m=-\infty}^{\infty}H_m(jn\omega_c)\cdot e^{jm\omega_ct_0+jn\omega_c\cdot (t_0-\tau)}
 $$
-In practice, the summations are carried out over finite ranges of **n** and **m**, for example, -50~50.
+In practice, the summations are carried out over finite ranges of **n** and **m**, for example, -50~50
 
-For each combination of **n** and **m**, the PAC analysis needs to be performed to compute $H_m(jn\omega_c)$, the m-th harmonic response to the excitation at $n\omega_c$
+For each combination of **n** and **m**, the PAC analysis needs to be performed to compute $H_m(jn\omega_c)$ — $m$-th harmonic response to the excitation at $n\omega_c$
 
 The detailed procedure for characterizing the ISF of this sampler is outlined as follows:
 
-- First, apply the proper input voltages that place the sampler in a metastable state and perform the periodic steady-state (PSS) analysis. 
+- First, apply the proper input voltages that place the sampler in *a metastable state* and perform PSS
 
-- Second, perform the PAC analysis. 
+- Second, perform PAC
 
 - Third, based on the simulated PAC response, pick a time point $t_0$ at which the ISF is to be computed and derive the ISF
 
-One possible candidate for the ISF measurement point $t_0$ is the time at which the  output voltage is amplified to the largest value. PAC response of the sampler to a *small signal DC input*, that is, the time-varying transfer function evaluated at $\omega=0$
+![image-20260209212202355](isf-sampler/image-20260209212202355.png)
+
+One possible candidate for the ISF measurement point $\color{red}t_0$ is the time at which the  output voltage is amplified to the largest value. PAC response of the sampler to a *small signal **DC** input*, that is, the time-varying transfer function evaluated at $\color{red}\omega=0$
 $$
 H(0;t)=\sum_{m=-\infty}^{\infty}H_m(0) \cdot e^{jm\omega_c t}
 $$

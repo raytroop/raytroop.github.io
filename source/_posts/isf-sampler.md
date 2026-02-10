@@ -226,6 +226,8 @@ matlab matrix **nonconjugate transpose**:
 
 `transpose`, `.'`  cf. https://www.mathworks.com/help/matlab/ref/transpose.html
 
+![image-20260210191944390](isf-sampler/image-20260210191944390.png)
+
 ### `tstab` in PSS
 
 Using shooting PSS, the steady waveform starts from `tstab+n*tperiod`.

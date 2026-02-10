@@ -83,7 +83,7 @@ where $\omega_c$ is the fundamental frequency of the periodic system. $H_m(j\ome
 
 The response to a periodic impulse train, that is:
 $$
-x(t)=\sum_{m=-\infty}^{\infty}\delta(t-\tau-nkT)
+x(t)=\sum_{n=-\infty}^{\infty}\delta(t-\tau-nkT)
 $$
 The idea is that if the impulse response of the system settles to zero long before the next impulse arrives, then the system response to this impulse train would be approximately equal to the periodic repetition of the true impulse response, i.e.
 $$

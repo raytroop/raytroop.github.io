@@ -220,13 +220,15 @@ end
 > PAC: input frequency sweep from -400G to 400G and step is 8G, which is beat frequency,
 > here K=1 Eq.(9) of paper
 
-> **freqaxis=out**: `freqaxis` of PAC not only affect "Direct Plot"'s output but also simuation data i.e. the phase shift(imaginary part).
+![image-20260210191944390](isf-sampler/image-20260210191944390.png)
+
+> **freqaxis=out**: `freqaxis` of PAC not only affect "Direct Plot"'s output but also simuation data i.e. the phase shift(imaginary part)
 
 matlab matrix **nonconjugate transpose**:
 
-`transpose`, `.'`  cf. https://www.mathworks.com/help/matlab/ref/transpose.html
+`transpose` or `.'`  cf. [[https://www.mathworks.com/help/matlab/ref/transpose.html](https://www.mathworks.com/help/matlab/ref/transpose.html)]
 
-![image-20260210191944390](isf-sampler/image-20260210191944390.png)
+
 
 ### `tstab` in PSS
 

@@ -9,9 +9,11 @@ mathjax: true
 
 ## Modulation of WSS process
 
-> Balu Santhanam, Probability Theory & Stochastic Process 2020: [Modulation of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: [[Modulation of Random Processes](https://ece-research.unm.edu/bsanthan/ece541/mod.pdf)]
+>
+> Chembian Thambidurai, "Power Spectral Density of Pulsed Noise Signals" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_psd-of-pulsed-noise-signal-activity-6992527460886040577-a0im?utm_source=share&utm_medium=member_desktop)]
 
-
+![image-20260212215230196](comm/image-20260212215230196.png)
 
 ### modulated with a random cosine
 

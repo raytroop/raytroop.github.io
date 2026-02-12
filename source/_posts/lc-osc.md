@@ -191,6 +191,55 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 
 
+## LC-VCO Temperature Sensitivities
+
+> A. L. S. Loke *et al*., "A versatile low-jitter PLL in 90-nm CMOS for SerDes transmitter clocking," *Proceedings of the IEEE 2005 Custom Integrated Circuits Conference, 2005.*, San Jose, CA, USA, 2005 [[slides](https://ewh.ieee.org/r5/denver/sscs/Presentations/2005_09_Loke.pdf), [paper](https://sci-hub.se/10.1109/CICC.2005.1568728)]
+
+![image-20251213154802429](lc-osc/image-20251213154802429.png)
+
+
+$$
+f=\frac{1}{2\pi\sqrt{L_p C_p}} = \frac{1}{2\pi\sqrt{L_s\frac{Q_L^2+1}{Q_L^2} C_s\frac{Q_C^2}{Q_C^2+1}}} = \frac{1}{2\pi\sqrt{L_sC_s}}\cdot \sqrt{\frac{1+1/Q_c^2}{1+1/Q_L^2}}
+$$
+Assuming the tank's Q is limited by the inductor's quality factor $Q_L$, i.e. $Q_L\ll Q_c$
+$$
+f\approx  \frac{1}{2\pi\sqrt{L_sC_s}}\cdot \sqrt{1-\frac{1}{Q_L^2}} =f_0\cdot\sqrt{1-\frac{1}{Q_L^2}}
+$$
+where $f_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the resonant frequency
+
+![image-20251213161312529](lc-osc/image-20251213161312529.png)
+
+
+
+## varactor simulation
+
+Three methods:
+
+- PSS +PSP (*pay attention to port termination and voltage amplitude*)
+- PSS +PAC
+- PSS Only
+
+![image-20251026155903015](lc-osc/image-20251026155903015.png)
+
+![image-20251026160758494](lc-osc/image-20251026160758494.png)
+
+![image-20251026160408516](lc-osc/image-20251026160408516.png)
+
+
+
+---
+
+`rms` only scale magnitude $1/\sqrt{2}$ but retain phase for complex number, like harmonic
+
+- `mag(vh('pss "/P5"))` = `mag(rms(vh('pss "/P5"))) * (2**0.5)` 
+- `phaseDegUnwrapped(vh('pss "/P5"))` = `phaseDegUnwrapped(rms(vh('pss "/P5")))`
+
+![image-20251026155120102](lc-osc/image-20251026155120102.png)
+
+
+
+
+
 
 
 ## Common-Mode Resonance

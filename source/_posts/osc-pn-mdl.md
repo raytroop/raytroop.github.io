@@ -1,5 +1,5 @@
 ---
-title: Oscillators in Action
+title: Oscillator Phase Noise Models
 date: 2024-12-26 12:36:49
 tags:
 categories:
@@ -15,11 +15,11 @@ mathjax: true
 
 Leeson's model is outcome of ***linearized*** VCO noise analysis
 
-![image-20250920125120068](osc-run/image-20250920125120068.png)
+![image-20250920125120068](osc-pn-mdl/image-20250920125120068.png)
 
 
 
-![image-20250920170108939](osc-run/image-20250920170108939.png)
+![image-20250920170108939](osc-pn-mdl/image-20250920170108939.png)
 
 > $$
 > Q = R_p\omega_0 C_p = \frac{R_p}{\omega_0 L}
@@ -27,51 +27,51 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 >
 > where $\omega_0 = \frac{1}{\sqrt{L_pC_p}}$
 >
-> ![image-20250920170331118](osc-run/image-20250920170331118.png)
+> ![image-20250920170331118](osc-pn-mdl/image-20250920170331118.png)
 >
 > [[https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf](https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf)]
 
-![image-20250920171147163](osc-run/image-20250920171147163.png)
+![image-20250920171147163](osc-pn-mdl/image-20250920171147163.png)
 
-![image-20250920171411886](osc-run/image-20250920171411886.png)
+![image-20250920171411886](osc-pn-mdl/image-20250920171411886.png)
 
 ---
 
 > Carlo Samori ISSCC2016 T1: Understanding Phase Noise in LC VCOs
 
-![image-20251104233318469](osc-run/image-20251104233318469.png)
+![image-20251104233318469](osc-pn-mdl/image-20251104233318469.png)
 
 ### Leeson's limitations
 
-![image-20251122144811362](osc-run/image-20251122144811362.png)
+![image-20251122144811362](osc-pn-mdl/image-20251122144811362.png)
 
 
 
 ## Hajimiri's  Model- LTV ISF
 
-![image-20251122143723827](osc-run/image-20251122143723827.png)
+![image-20251122143723827](osc-pn-mdl/image-20251122143723827.png)
 
 ---
 
-![image-20250629065454831](osc-run/image-20250629065454831.png)
+![image-20250629065454831](osc-pn-mdl/image-20250629065454831.png)
 
-![image-20250629073305626](osc-run/image-20250629073305626.png)
+![image-20250629073305626](osc-pn-mdl/image-20250629073305626.png)
 
 ### ISF model
 
-![image-20251008184336891](osc-run/image-20251008184336891.png)
+![image-20251008184336891](osc-pn-mdl/image-20251008184336891.png)
 
-![image-20251008184349072](osc-run/image-20251008184349072.png)
+![image-20251008184349072](osc-pn-mdl/image-20251008184349072.png)
 
 > C. Livanelioglu, L. He, J. Gong, S. Arjmandpour, G. Atzeni and T. Jang, "19.10 A 4.6GHz 63.3fsrms PLL-XO Co-Design Using a Self-Aligned Pulse-Injection Driver Achieving −255.2dB FoMJ Including the XO Power and Noise," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025
 >
-> ![image-20251008185243498](osc-run/image-20251008185243498.png)
+> ![image-20251008185243498](osc-pn-mdl/image-20251008185243498.png)
 >
-> ![image-20251008185406867](osc-run/image-20251008185406867.png)
+> ![image-20251008185406867](osc-pn-mdl/image-20251008185406867.png)
 
 ---
 
-![image-20250626210829173](osc-run/image-20250626210829173.png)
+![image-20250626210829173](osc-pn-mdl/image-20250626210829173.png)
 
 
 
@@ -79,19 +79,19 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 
 
 
-![image-20250629080430980](osc-run/image-20250629080430980.png)
+![image-20250629080430980](osc-pn-mdl/image-20250629080430980.png)
 
 
 
 #### Periodic ISF: Noise Folding
 
-![image-20250629080632902](osc-run/image-20250629080632902.png)
+![image-20250629080632902](osc-pn-mdl/image-20250629080632902.png)
 
 When performing the ***phase noise computation integral***, there will be a negligible contribution from all terms, other than $n=m$
 
-![image-20250629083344136](osc-run/image-20250629083344136.png)
+![image-20250629083344136](osc-pn-mdl/image-20250629083344136.png)
 
-> ![image-20250629083453955](osc-run/image-20250629083453955.png)
+> ![image-20250629083453955](osc-pn-mdl/image-20250629083453955.png)
 
 Given $i(t) = I_m \cos[(m\omega_0 +\Delta \omega)t]$,
 
@@ -112,15 +112,15 @@ $$
 
 > $m\omega_0 +\Delta \omega \ge 0$
 >
-> ![image-20250629105156403](osc-run/image-20250629105156403.png)
+> ![image-20250629105156403](osc-pn-mdl/image-20250629105156403.png)
 
 
 
-![image-20250629100444702](osc-run/image-20250629100444702.png)
+![image-20250629100444702](osc-pn-mdl/image-20250629100444702.png)
 
 > A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 [[pdf](https://people.engr.tamu.edu/spalermo/ecen620/general_pn_theory_hajimiri_jssc_1998.pdf)]
 >
-> ![image-20250629102112814](osc-run/image-20250629102112814.png)
+> ![image-20250629102112814](osc-pn-mdl/image-20250629102112814.png)
 
 ---
 
@@ -132,9 +132,9 @@ $$
 >
 >  L. Lu, Z. Tang, P. Andreani, A. Mazzanti and A. Hajimiri, "Comments on “Comments on “A General Theory of Phase Noise in Electrical Oscillators””," in *IEEE Journal of Solid-State Circuits*, vol. 43, no. 9, pp. 2170-2170, Sept. 2008 [[https://sci-hub.se/10.1109/JSSC.2008.2005028](https://sci-hub.se/10.1109/JSSC.2008.2005028)]
 
-![image-20250629104527666](osc-run/image-20250629104527666.png)
+![image-20250629104527666](osc-pn-mdl/image-20250629104527666.png)
 
-> ![image-20250629081831223](osc-run/image-20250629081831223.png)
+> ![image-20250629081831223](osc-pn-mdl/image-20250629081831223.png)
 
 
 
@@ -170,13 +170,13 @@ $$\begin{align}
 
 *TODO* &#128197;
 
-![image-20250626211817628](osc-run/image-20250626211817628.png)
+![image-20250626211817628](osc-pn-mdl/image-20250626211817628.png)
 
 
 
 ### ISF Simulation
 
-![image-20241113232703941](osc-run/image-20241113232703941.png)
+![image-20241113232703941](osc-pn-mdl/image-20241113232703941.png)
 
 
 
@@ -194,11 +194,11 @@ $$\begin{align}
 
 > David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
 
-![image-20241016211020230](osc-run/image-20241016211020230.png)
+![image-20241016211020230](osc-pn-mdl/image-20241016211020230.png)
 
-![image-20241016211101204](osc-run/image-20241016211101204.png)
+![image-20241016211101204](osc-pn-mdl/image-20241016211101204.png)
 
-![image-20241016211115630](osc-run/image-20241016211115630.png)
+![image-20241016211115630](osc-pn-mdl/image-20241016211115630.png)
 
 
 
@@ -210,9 +210,9 @@ $$\begin{align}
 
 ## Demir's Model - NLTV PPV
 
-![image-20251122143914081](osc-run/image-20251122143914081.png)
+![image-20251122143914081](osc-pn-mdl/image-20251122143914081.png)
 
-![image-20250920101142887](osc-run/image-20250920101142887.png)
+![image-20250920101142887](osc-pn-mdl/image-20250920101142887.png)
 
 ### PPV (Perturbation Projection Vector)
 
@@ -232,58 +232,13 @@ $$\begin{align}
 
 > ***Nonlinear*** Dynamics
 
- ![image-20250622202023590](osc-run/image-20250622202023590.png)
+ ![image-20250622202023590](osc-pn-mdl/image-20250622202023590.png)
 
-![image-20250920101927173](osc-run/image-20250920101927173.png)
-
-
+![image-20250920101927173](osc-pn-mdl/image-20250920101927173.png)
 
 
 
-## varactor simulation
 
-Three methods:
-
-- PSS +PSP (*pay attention to port termination and voltage amplitude*)
-- PSS +PAC
-- PSS Only
-
-![image-20251026155903015](osc-run/image-20251026155903015.png)
-
-![image-20251026160758494](osc-run/image-20251026160758494.png)
-
-![image-20251026160408516](osc-run/image-20251026160408516.png)
-
-
-
----
-
-`rms` only scale magnitude $1/\sqrt{2}$ but retain phase for complex number, like harmonic
-
-- `mag(vh('pss "/P5"))` = `mag(rms(vh('pss "/P5"))) * (2**0.5)` 
-- `phaseDegUnwrapped(vh('pss "/P5"))` = `phaseDegUnwrapped(rms(vh('pss "/P5")))`
-
-![image-20251026155120102](osc-run/image-20251026155120102.png)
-
-
-
-## LC-VCO Temperature Sensitivities
-
-> A. L. S. Loke *et al*., "A versatile low-jitter PLL in 90-nm CMOS for SerDes transmitter clocking," *Proceedings of the IEEE 2005 Custom Integrated Circuits Conference, 2005.*, San Jose, CA, USA, 2005 [[slides](https://ewh.ieee.org/r5/denver/sscs/Presentations/2005_09_Loke.pdf), [paper](https://sci-hub.se/10.1109/CICC.2005.1568728)]
-
-![image-20251213154802429](osc-run/image-20251213154802429.png)
-
-
-$$
-f=\frac{1}{2\pi\sqrt{L_p C_p}} = \frac{1}{2\pi\sqrt{L_s\frac{Q_L^2+1}{Q_L^2} C_s\frac{Q_C^2}{Q_C^2+1}}} = \frac{1}{2\pi\sqrt{L_sC_s}}\cdot \sqrt{\frac{1+1/Q_c^2}{1+1/Q_L^2}}
-$$
-Assuming the tank's Q is limited by the inductor's quality factor $Q_L$, i.e. $Q_L\ll Q_c$
-$$
-f\approx  \frac{1}{2\pi\sqrt{L_sC_s}}\cdot \sqrt{1-\frac{1}{Q_L^2}} =f_0\cdot\sqrt{1-\frac{1}{Q_L^2}}
-$$
-where $f_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the resonant frequency
-
-![image-20251213161312529](osc-run/image-20251213161312529.png)
 
 
 

@@ -437,6 +437,8 @@ where $m$ is the duty cycle
 
 ![image-20250810085721440](noise/image-20250810085721440.png)
 
+![image-20260212234532530](noise/image-20260212234532530.png)
+
 
 
 > - Calculate autocorrelation function of noise at the output of the RC filter
@@ -948,6 +950,45 @@ $$
 \overline{v_n^2}(t_i) = 4kTR_n\frac{1}{4\tau_o} \coth(\frac{t_i}{2\tau_o}) \approx 4kTR_n\frac{1}{4\tau_o} =  \frac{G_n}{G_m}\frac{kT}{C}\frac{1}{A_0}
 $$
 As expected, the input referred noise voltage is $kT/C$ noise
+
+
+
+## Windowed Integrals of Noise
+
+> A. A. Abidi, "Phase Noise and Jitter in CMOS Ring Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1803-1816, Aug. 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/sHktDSoLwzWwObCx.pdf)]
+
+![image-20260212231450725](noise/image-20260212231450725.png)
+
+### Lossless Integral
+
+> a noise current integrates onto a capacitor only
+
+![image-20260212231256772](noise/image-20260212231256772.png)
+
+> With white Gaussian noise at the input, the output spectrum is no longer white although its distribution remains Gaussian
+
+---
+
+![image-20260213001029878](noise/image-20260213001029878.png)
+
+### Lossy Integral
+
+> a noise current integrates onto a capacitor which is *shunted by a finite loss resistance* 
+
+$$
+\frac{V}{I}(s) = \frac{1}{C}\frac{RC}{1+sRC} \overset{\mathcal{L}^{-1}}{\longrightarrow}\frac{1}{C}\cdot e^{-\frac{t}{RC}}
+$$
+
+Laplace transform of Truncated Impulse Response $0 \to t_d$
+$$
+\int_{0}^{t_d}\frac{1}{C}\cdot e^{-\frac{t}{RC}} \cdot e^{-st}dt = \frac{1}{C}\cdot \frac{1}{s+\frac{1}{RC}}\left(1-e^{-(st_d+\theta)}\right)=\frac{1}{C}\cdot \color{red}\frac{t_d}{st_d+\theta}\left(1-e^{-(st_d+\theta)}\right)
+$$
+
+> Google AI Mode [[https://share.google/aimode/O6rjWM1YWel0NudI7](https://share.google/aimode/O6rjWM1YWel0NudI7)]
+
+![image-20260213011010297](noise/image-20260213011010297.png)
+
+![image-20260213010855382](noise/image-20260213010855382.png)
 
 
 

@@ -32,8 +32,10 @@ mathjax: true
 ## Charge Pump Noise
 
 > Cyclostationary Noise (Modulated Noise) [[https://raytroop.github.io/2024/04/27/noise/#cyclostationary-noise-modulated-noise](https://raytroop.github.io/2024/04/27/noise/#cyclostationary-noise-modulated-noise)]
+>
+> Sam Palermo, Lecture 3: Phase-Locked Loop Systems [[https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf)]
 
-![image-20250726174414209](cp-pll/image-20250726174414209.png)
+![image-20260212205227455](cp-pll/image-20260212205227455.png)
 
 ---
 
@@ -72,6 +74,8 @@ Saurabh Saxena,Phase Locked Loops: Noise Simulations for CP-PLL Blocks [[https:/
 
 
 ## Non-ideal Effects in Charge Pump
+
+> Sam Palermo, Lecture 11: Clocking Architectures & PLLs [[https://people.engr.tamu.edu/spalermo/ecen689/lecture11_ee720_clocking_arch_plls.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture11_ee720_clocking_arch_plls.pdf)]
 
 The ***periodic*** signal on VCTRL modulates the VCO, giving rise to ***deterministic*** jitter
 

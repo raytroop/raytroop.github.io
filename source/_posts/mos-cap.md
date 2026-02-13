@@ -34,7 +34,7 @@ mathjax: true
 
 classification with **Intrinsic** and **Extrinsic** MOS capacitor
 
-[[Circuit Insights - 11-CI: Fundamentals 4 Tsinghua Nan Sun](https://youtu.be/sAQqkdpvsZA?si=oTnYVNmPY7yMhBPt)]
+[[Circuit Insights - 11-CI: Fundamentals 4 Tsinghua Nan Sun](https://youtu.be/sAQqkdpvsZA)]
 
 
 
@@ -186,7 +186,7 @@ channel resistance & gate resistance
 
 ## reference
 
-Aditya Varma Muppala. MOS Varactors | Oscillators 15 | MMIC 27 [[https://youtu.be/LYCLZPQvIz0?si=yoSBZSD2j_wEx0zZ](https://youtu.be/LYCLZPQvIz0?si=yoSBZSD2j_wEx0zZ)]
+Aditya Varma Muppala. MOS Varactors | Oscillators 15 | MMIC 27 [[https://youtu.be/LYCLZPQvIz0](https://youtu.be/LYCLZPQvIz0)]
 
 R. L. Bunch and S. Raman, "Large-signal analysis of MOS varactors in CMOS -G/sub m/ LC VCOs," in IEEE Journal of Solid-State Circuits, vol. 38, no. 8, pp. 1325-1332, Aug. 2003, doi: 10.1109/JSSC.2003.814416.
 

@@ -885,6 +885,16 @@ data_channel_dfe=data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_o
 
 
 
+### SerDesSystemCProject
+
+> Lewis Liu [[https://github.com/LewisLiuLiuLiu/SerDesSystemCProject](https://github.com/LewisLiuLiuLiu/SerDesSystemCProject)]
+
+*TODO* &#128197;
+
+
+
+
+
 ### DaVE
 
 > Byongchan Lim. DaVE — tools regarding on analog modeling, validation, and generation, [[https://github.com/StanfordVLSI/DaVE](https://github.com/StanfordVLSI/DaVE)]

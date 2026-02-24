@@ -888,10 +888,52 @@ data_channel_dfe=data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_o
 ### SerDesSystemCProject
 
 > Lewis Liu [[https://github.com/LewisLiuLiuLiu/SerDesSystemCProject](https://github.com/LewisLiuLiuLiu/SerDesSystemCProject)]
+>
+> sasasatori, SystemC简介与安装 [[https://www.cnblogs.com/sasasatori/p/17865550.html](https://www.cnblogs.com/sasasatori/p/17865550.html)]
+>
+> Rahul Bhadani. [[SystemC-AMS Quick Installation Guide](https://medium.com/theta-hat/systemc-ams-quick-installation-guide-3484faa1d834)] [[SystemC Quick Installation Guide](SystemC Quick Installation Guide)]
 
 *TODO* &#128197;
 
 
+
+
+
+---
+
+***Install SystemC*** 
+
+```cmake
+## CMakeLists.txt
+
+set (CMAKE_CXX_STANDARD 11 CACHE STRING
+"C++ standard to build all targets. Supported values are 98, 11, 14, and 17.")
+```
+
+
+
+*test systemc*
+
+```cmake
+cmake_minimum_required(VERSION 3.0)
+project(test_systemc)
+
+list(APPEND CMAKE_PREFIX_PATH ${SYSTEMC_HOME})  
+find_package(SystemCLanguage CONFIG REQUIRED)
+set (CMAKE_CXX_STANDARD ${SystemC_CXX_STANDARD})
+
+
+add_executable(test_systemc main.cxx)
+target_link_libraries(test_systemc SystemC::systemc)
+```
+
+
+
+***Install SystemC-AMS***
+
+```bash
+../configure CXXFLAGS="-std=c++11" --prefix=/home/software/systemc-ams-2.3.4 --with-systemc=/home/software/systemc-2.3.4  --disable-systemc_compile_check
+```
 
 
 

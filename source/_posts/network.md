@@ -239,7 +239,7 @@ $$
 >
 > Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
 >
-> 7 Habits of Highly Successful S-Parameters, Spectre 21.1
+> Cadence application note: 7 Habits of Highly Successful S-Parameters, Spectre 21.1
 
 ![image-20260117130948681](network/image-20260117130948681.png)
 
@@ -260,7 +260,7 @@ $$
 
 ### Passivity
 
-![image-20260225211818201](network/image-20260225211818201.png)
+![image-20260225214456034](network/image-20260225214456034.png)
 
 
 
@@ -288,6 +288,8 @@ $H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enc
 
 ### Interpolation Methods
 
+> jinghua Huang SYNOPSYS. Optimum Frequency Sampling in S-Parameter Extraction and Simulation [[https://ibis.org/summits/nov08a/huang.pdf](https://ibis.org/summits/nov08a/huang.pdf)]
+
 ![image-20260225213110940](network/image-20260225213110940.png)
 
 ![image-20260225213125677](network/image-20260225213125677.png)
@@ -297,6 +299,14 @@ $H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enc
 ![image-20260225213345417](network/image-20260225213345417.png)
 
 ---
+
+***Real/Imaginary(RI) Magnitude/Angle(MA) interpolation***
+
+![image-20260225214121893](network/image-20260225214121893.png)
+
+![image-20260225214141563](network/image-20260225214141563.png)
+
+
 
 ***Rational Fit***
 

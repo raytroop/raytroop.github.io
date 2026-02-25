@@ -460,7 +460,27 @@ A random signal $v_n(t)$ is sampled using an ***ideal impulse sampler***
 
 ![image-20241201165157743](noise/image-20241201165157743.png)
 
-*TODO* &#128197;
+![image-20260225220015404](noise/image-20260225220015404.png)
+
+> ![image-20260225221746857](noise/image-20260225221746857.png)
+
+![image-20260225220034823](noise/image-20260225220034823.png)
+
+![image-20260225221607463](noise/image-20260225221607463.png)
+
+***Sampling coloured noise***
+
+![image-20260225224020057](noise/image-20260225224020057.png)
+
+***converging PSD***
+
+![image-20260225224308880](noise/image-20260225224308880.png)
+
+***integrated power of the sampled signal in the Nyquist band***
+
+![image-20260225225239293](noise/image-20260225225239293.png)
+
+![image-20260225221938521](noise/image-20260225221938521.png)
 
 
 

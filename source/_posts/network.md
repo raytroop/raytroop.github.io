@@ -238,6 +238,8 @@ $$
 > Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 - Lecture 3: Time-Domain Reflectometry & S-Parameter Channel Models [[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf)]
 >
 > Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
+>
+> 7 Habits of Highly Successful S-Parameters, Spectre 21.1
 
 ![image-20260117130948681](network/image-20260117130948681.png)
 
@@ -249,6 +251,18 @@ $$
 ![image-20260117122328655](network/image-20260117122328655.png)
 
 ![image-20260117123153607](network/image-20260117123153607.png)
+
+---
+
+![image-20260225211858177](network/image-20260225211858177.png)
+
+
+
+### Passivity
+
+![image-20260225211818201](network/image-20260225211818201.png)
+
+
 
 ### causality-passivity correction
 
@@ -270,7 +284,21 @@ $H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enc
 
 ![image-20260202230631326](network/image-20260202230631326.png)
 
-### Rational Fit
+
+
+### Interpolation Methods
+
+![image-20260225213110940](network/image-20260225213110940.png)
+
+![image-20260225213125677](network/image-20260225213125677.png)
+
+***Broadband SPICE (bbspice) – a Rational Interpolation Method***
+
+![image-20260225213345417](network/image-20260225213345417.png)
+
+---
+
+***Rational Fit***
 
 Use the [`rational`](https://www.mathworks.com/help/rf/ref/rational.html) function to fit data defined in the frequency domain with an equivalent Laplace transfer function. Using rational function fitting you can create simple models for a required accuracy, model order reduction, zero phase on extrapolation to DC, and **causal** modeling system among other advantages
 
@@ -319,16 +347,6 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
-
-
-
-
-
-
-
-
-
-
 ## Using S Parameters to Estimate Q
 
 *TODO* &#128197;
@@ -369,7 +387,7 @@ writeva(hfit, 'channel_32poles.va');
 
 ![image-20250705210519145](network/image-20250705210519145.png)
 
-
+![image-20260225210352189](network/image-20260225210352189.png)
 
 ## Spar in AC simulation
 
@@ -388,7 +406,7 @@ writeva(hfit, 'channel_32poles.va');
 
 [microwaves101, S-parameters (https://www.microwaves101.com/encyclopedias/s-parameters)](https://www.microwaves101.com/encyclopedias/s-parameters)
 
-Pupalaikis, P. (2020). *S-Parameters for Signal Integrity*. Cambridge: Cambridge University Press. doi:10.1017/9781108784863
+Pupalaikis, P. (2020). *S-Parameters for Signal Integrity*. Cambridge: Cambridge University Press. 
 
 Coelho, C. P., Phillips, J. R., & Silveira, L. M. (n.d.). Robust rational function approximation algorithm for model generation. Proceedings 1999 Design Automation Conference (Cat. No. 99CH36361).  [[https://sci-hub.ru/10.1109/dac.1999.781313](https://sci-hub.ru/10.1109/dac.1999.781313)]
 
@@ -403,4 +421,3 @@ Dr. Ray Kwok . Network Techniques: Conversion between Filter Transfer Function a
 田庆诚教授 台湾中华大学 射频电路基础（公司培训）[[https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249](https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
 
 Bogatin, E. (2018). *Signal and power integrity, simplified*. Prentice Hall. [[pdf](https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20Simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf)]
-

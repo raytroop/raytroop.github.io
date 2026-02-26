@@ -270,7 +270,7 @@ RF Harmonic Balance Analysis for Nonlinear Circuits [[https://resources.pcb.cade
 
 Steer, Michael. Microwave and RF Design (Third Edition, 2019). NC State University, 2019.
 
-Steer, Michael. Harmonic Balance Analysis of Nonlinear RF Circuits - Case Study Index:  CS_AmpHB [[link](https://youtu.be/BM5ZQgfb_sY?si=bjN_hMe-wvoeGHzu)]
+Steer, Michael. Harmonic Balance Analysis of Nonlinear RF Circuits - Case Study Index:  CS_AmpHB [[link](https://youtu.be/BM5ZQgfb_sY)]
 
 Vishal Saxena, "SpectreRF Periodic Analysis" URL:[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf)
 
@@ -304,7 +304,7 @@ Drakhlis, B.. (2001). Calculate oscillator jitter by using phase-noise analysis:
 
 Explanation for sampled PXF analysis. [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/45055/explanation-for-sampled-pxf-analysis/1376140#1376140](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/45055/explanation-for-sampled-pxf-analysis/1376140#1376140)]
 
-模拟放大器的低噪声设计技术2-3实践 아날로그 증폭기의 저잡음 설계 기법2-3실습 [[https://youtu.be/vXLDfEWR31k?si=p2gbwaKoTxtfvrTc](https://youtu.be/vXLDfEWR31k?si=p2gbwaKoTxtfvrTc)]
+模拟放大器的低噪声设计技术2-3实践 아날로그 증폭기의 저잡음 설계 기법2-3실습 [[https://youtu.be/vXLDfEWR31k](https://youtu.be/vXLDfEWR31k)]
 
 2.2 How POP Really Works [[https://www.simplistechnologies.com/documentation/simplis/ast_02/topics/2_2_how_pop_really_works.htm](https://www.simplistechnologies.com/documentation/simplis/ast_02/topics/2_2_how_pop_really_works.htm)]
 

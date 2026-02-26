@@ -55,7 +55,7 @@ Directly compare the input phase noise and output phase noise, the input wavefor
 >
 > n =5 buffers, fclk = 10GHz
 >
-> [[Alphawave’s CTO, Tony Chan Carusone, High Speed Communications Part 8 – On Die CMOS Clock Distribution ](https://youtu.be/nx5CiHcwrF0?si=QhOJmsW5IozRnF4F)]
+> [[Alphawave’s CTO, Tony Chan Carusone, High Speed Communications Part 8 – On Die CMOS Clock Distribution ](https://youtu.be/nx5CiHcwrF0)]
 >
 > ![image-20250818230528344](jitter-amplify/image-20250818230528344.png)
 
@@ -150,7 +150,7 @@ title('JTF of inverter chain');
 
 > ![image-20250522225506217](jitter-amplify/image-20250522225506217.png)
 >
-> [[Alphawave’s CTO, Tony Chan Carusone, High Speed Communications Part 8 – On Die CMOS Clock Distribution ](https://youtu.be/nx5CiHcwrF0?si=QhOJmsW5IozRnF4F)]
+> [[Alphawave’s CTO, Tony Chan Carusone, High Speed Communications Part 8 – On Die CMOS Clock Distribution ](https://youtu.be/nx5CiHcwrF0)]
 
 > ![image-20250522234522208](jitter-amplify/image-20250522234522208.png)
 >

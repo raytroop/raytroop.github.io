@@ -9,6 +9,20 @@ mathjax: true
 
 *TODO* &#128197;
 
+magnetic field (magnetic flux density, $B$), is the **tesla** (symbol: $T$), defined as one **weber per square meter** ($Wb/m^2$)
+
+Magnetic flux $\Phi_B$ measures the total magnetic field ($B$) passing through a given surface area ($A$), representing the number of field lines penetrating that area. Measured in **Webers** ($Wb$),
+
+
+
+## Field Inside and Outside a Current-Carrying Wire
+
+> Sources of Magnetic Fields [[https://web.mit.edu/8.02t/www/802TEAL3D/visualizations/coursenotes/modules/guide09.pdf](https://web.mit.edu/8.02t/www/802TEAL3D/visualizations/coursenotes/modules/guide09.pdf)]
+
+![image-20260227012332063](em/image-20260227012332063.png)
+
+![image-20260227012324670](em/image-20260227012324670.png)
+
 
 
 ##  Displacement Current

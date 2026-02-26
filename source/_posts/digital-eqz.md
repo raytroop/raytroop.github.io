@@ -14,45 +14,47 @@ mathjax: true
 > 32 to 56 Gbps Serial Link Analysis and Optimization Methods for Pathological Channels [[https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf](https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf)]
 
 
-## intersymbol interference (ISI)
+## Intersymbol Interference (ISI)
 
 > L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]
 
+![image-20260226224415849](digital-eqz/image-20260226224415849.png)
 
-The absolute bandwidth of rectangular multilevel pulses is *infinity*. If these pulses are filtered improperly as they pass through a communication system, they will spread in time, and the pulse for each symbol may be smeared into adjacent time slots and cause **intersymbol interference (ISI)**
-
+![image-20260226225158225](digital-eqz/image-20260226225158225.png)
 
 Nyquist discovered three different methods for pulse shaping that could be used to eliminate ISI
 
-- Nyquist's First Method (Zero ISI): physically unrealizable (i.e., the impulse response would be noncausal and of infinite duration), inaccurate sync will cause ISI
+- **Nyquist's First Method (Zero ISI)**: physically unrealizable (i.e., the impulse response would be noncausal and of infinite duration), inaccurate sync will cause ISI
 
-- Nyquist's second method: allows some ISI to be introduced in a controlled way
+  ![image-20260226225305184](digital-eqz/image-20260226225305184.png)
 
-- Nyquist's third method: area under the he(t) pulse within the desired symbol interval, Ts, is not zero, but the areas under he(t) in adjacent symbol intervals are zero
+- **Nyquist's second method**: allows some ISI to be introduced in a controlled way
 
----
+- **Nyquist's third method**: area under the $h_e(t)$ pulse within the desired symbol interval, $T_s$, is not zero, but the areas under $h_e(t)$ in adjacent symbol intervals are zero
 
-> J. Mark, W. Zhuang, Wireless Communications and Networking, Prentice-Hall, 2003
->
+
+
+## Noise Enhancement in Linear Equalizers
+
 > John M. Cioffi, Lecture 13, Thursday February 19th 2026 - Intersymbol Interference, MMSE, and SNR [[https://cioffi-group.stanford.edu/ee379a/Lectures/L13.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L13.pdf)]
 >
 > —, Lecture 14, Tuesday February 24th 2026 - Linear Equalizers [[https://cioffi-group.stanford.edu/ee379a/Lectures/L14.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L14.pdf)]
 
-- ZFE Forces ISI to Zero but ignores the noise; this may lead to noise-energy increase — **noise enhancement**
+![image-20260226223722288](digital-eqz/image-20260226223722288.png)
 
-- MMSE conditions/controls noise increase — **limits noise enhancement**
+![image-20260226223806023](digital-eqz/image-20260226223806023.png)
 
-If $SNR=\infty$, then ZF and MMSE-LE are the same
+> ***Shannon–Hartley theorem***
+>
+> ![image-20260226231916346](digital-eqz/image-20260226231916346.png)
 
-The Minimum Mean-Square Error Linear Equalizer (MMSE-LE) *balances ISI reduction and noise enhancement*. The MMSE-LE always performs as well as, or better than, the ZFE
+![image-20260226225540962](digital-eqz/image-20260226225540962.png)
 
+- ZFS eliminates the ISI only at the sampling points that correspond to the equalizer taps. The equalized pulse shows ISI in the intervals between the sample points and at sample points outside the equalizer
+- The Minimum Mean-Square Error Linear Equalizer (MMSE-LE) *balances **ISI reduction** and **noise enhancement***. The MMSE-LE always performs as well as, or better than, the ZFE
 
-ZFS approach eliminates the ISI only at the sampling points that correspond to the equalizer taps. The equalized pulse shows ISI in the intervals between the sample points and at sample points outside the equalizer
+![image-20260226230127894](digital-eqz/image-20260226230127894.png)
 
-
-## Nonidealities in Linear Equalizers
-
-*TODO* &#128197;
 
 
 ## TX FFE
@@ -491,7 +493,7 @@ Masum Hossain, ISSCC2023 T11: "Digital Equalization and Timing Recovery Techniqu
 
 A. Sharif-Bakhtiar, A. Chan Carusone, "A Methodology for Accurate DFE Characterization," *IEEE RFIC Symposium*, Philadelphia, Pennsylvania, June 2018. [[PDF](http://www.eecg.utoronto.ca/~tcc/Sharif-Bakhtiar_RFIC18.pdf)] [[Slides – PDF](http://www.eecg.utoronto.ca/~tcc/Sharif-Bakhtiar_RFIC18_slides.pdf)]
 
-Tony Chan Carusone. High Speed Communications Part 11 – SerDes DSP Interactions [[https://youtu.be/YIAwLskuVPc?si=MYIbXLwFqQj0EElU](https://youtu.be/YIAwLskuVPc?si=MYIbXLwFqQj0EElU)]
+Tony Chan Carusone. High Speed Communications Part 11 – SerDes DSP Interactions [[https://youtu.be/YIAwLskuVPc](https://youtu.be/YIAwLskuVPc)]
 
 —, 2022 Optimization Tools for Future Wireline Transceivers [[https://www.ieeetoronto.ca/wp-content/uploads/2022/12/UofT-Future-of-Wireline-Workshop-2022.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2022/12/UofT-Future-of-Wireline-Workshop-2022.pdf)]
 

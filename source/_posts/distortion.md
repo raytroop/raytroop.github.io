@@ -225,4 +225,4 @@ A. Sheikholeslami, "“Noise and Distortion, Part II” [Circuit Intuitions]," i
 
 A. Sheikholeslami, "Noise and Distortion, Part III [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 17, no. 1, pp. 8-11, winter 2025
 
-Ali Sheikholeslami, University of Toronto,  A-SSCC 2024 Circuit Insights:**FT1 Noise and Distortion** [[link](https://youtu.be/bvsJgHJ19jI?si=4uY_eYLkJ_zvOgz3)]
+Ali Sheikholeslami, University of Toronto,  A-SSCC 2024 Circuit Insights:**FT1 Noise and Distortion** [[link](https://youtu.be/bvsJgHJ19jI)]

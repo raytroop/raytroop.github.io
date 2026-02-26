@@ -268,6 +268,12 @@ $$
 
 
 
+---
+
+> [[https://cioffi-group.stanford.edu/doc/book/chap3.pdf](https://cioffi-group.stanford.edu/doc/book/chap3.pdf)]
+
+![image-20260227013005040](fourier/image-20260227013005040.png)
+
 ### Eigenfunctions & frequency response
 
 *Complex exponentials* are **eigenfunctions** of LTI systems, that is,

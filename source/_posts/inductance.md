@@ -63,13 +63,37 @@ $$
 L_\text{parallel} = (L_1 + L_{12})\parallel (L_2 + L_{12}) = \frac{L_1L_2 +L_{12}(L_1+L_2)+L_{12}^2}{L_1+L_2+2L_{12}}
 $$
 
-### self-inductance
+### internal self-inductance 
+
+![image-20260226234546294](inductance/image-20260226234546294.png)
 
 |self-inductance|magnetic-field line  |
 |--|--|
 | internal self-inductance | inside the conductor |
 | external self-inductance | outside the conductor |
 
+![image-20260226235112730](inductance/image-20260226235112730.png)
+
+![image-20260226235308288](inductance/image-20260226235308288.png)
+
+---
+
+![image-20260226233648052](inductance/image-20260226233648052.png)
+
+| Frequency      | self-inductance                         |
+| -------------- | --------------------------------------- |
+| low frequency  | $L_\text{internal} + L_\text{external}$ |
+| high frequency | $L_\text{external}$                     |
+
+
+
+---
+
+***cross-sectional area***
+
+![image-20260227002304758](inductance/image-20260227002304758.png)
+
+>  at low frequency
 
 
 

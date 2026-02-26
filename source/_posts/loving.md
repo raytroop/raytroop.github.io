@@ -55,7 +55,7 @@ tags:
 
 ---
 國立暨南國際大學112年度專書閱讀推廣：《愛的藝術》線上導讀會
-https://youtu.be/St0ngR0uag4?si=QDzjC9jeBkoEKFU3
+https://youtu.be/St0ngR0uag4
 ```
 
 
@@ -66,7 +66,7 @@ https://youtu.be/St0ngR0uag4?si=QDzjC9jeBkoEKFU3
 
 - 《愛的藝術》作者Erich Fromm
 ---
-https://youtu.be/KpEsUJu1RP0?si=su1vgv9au4Cxendw
+https://youtu.be/KpEsUJu1RP0
 ```
 
 
@@ -483,9 +483,9 @@ https://www.zhihu.com/question/653535746/answer/123928231250
 
 ---
 
-[[Why Unloved People Hate Themselves](https://youtu.be/4K41tC_d_7k?si=U9WsCHZ8kLZ-D4Pv)]
+[[Why Unloved People Hate Themselves](https://youtu.be/4K41tC_d_7k)]
 
-[[How Unloving Parents Generate Self-Hating Children](https://youtu.be/ujhn1JdOSB4?si=hROnKx0vMw8Q_sc1)]
+[[How Unloving Parents Generate Self-Hating Children](https://youtu.be/ujhn1JdOSB4)]
 
 
 
@@ -2514,7 +2514,7 @@ And I find that whenever I do this myself, everything works out so much better. 
 
 ---
 Ilya Sutskever, U of T honorary degree recipient, June 6, 2025
-https://youtu.be/zuZ2zaotrJs?si=Ta-hpVJ56WwZ5CUX
+https://youtu.be/zuZ2zaotrJs
 ```
 
 

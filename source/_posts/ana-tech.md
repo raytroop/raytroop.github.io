@@ -95,7 +95,7 @@ mathjax: true
 
 ## Response Speed in Analog Circuits
 
-> Hyun-Sik Kim, KAIST, A-SSCC 2024 Circuit Insights: **FT3 Accelerating Response Speed in Analog Circuits** [[link](https://youtu.be/Td0aacHQTFo?si=UxgGB49SsZ2uPiVK)]
+> Hyun-Sik Kim, KAIST, A-SSCC 2024 Circuit Insights: **FT3 Accelerating Response Speed in Analog Circuits** [[link](https://youtu.be/Td0aacHQTFo)]
 
 ![image-20250105085449759](ana-tech/image-20250105085449759.png)
 
@@ -144,9 +144,9 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 
 > A. Sheikholeslami, "Voltage Follower, Part III [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 2, pp. 14-26, Spring 2023, doi: 10.1109/MSSC.2023.3269457
 >
-> —, ESSCIRC2023 Circuit Insights [[https://youtu.be/2xFIZM5_FPw?si=536cMdIXyIny27Uk](https://youtu.be/2xFIZM5_FPw?si=536cMdIXyIny27Uk)]
+> —, ESSCIRC2023 Circuit Insights [[https://youtu.be/2xFIZM5_FPw](https://youtu.be/2xFIZM5_FPw)]
 >
-> —, CICC2025 Circuit Insights:  From Simple to Super Source Follower [[https://youtu.be/CWfMKltPIQ8?si=s0npv2GSQKYBv513](https://youtu.be/CWfMKltPIQ8?si=s0npv2GSQKYBv513)]
+> —, CICC2025 Circuit Insights:  From Simple to Super Source Follower [[https://youtu.be/CWfMKltPIQ8](https://youtu.be/CWfMKltPIQ8)]
 >
 > Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiYDzqDOfoPaMVM.pdf)]
 

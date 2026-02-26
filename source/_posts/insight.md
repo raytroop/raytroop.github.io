@@ -400,7 +400,7 @@ $$
 ![image-20240905202145206](insight/image-20240905202145206.png)
 
 
-> [[https://youtu.be/SL3-9ZMwdJQ?si=m_FSjnFQH4wjbZKH&t=1339](https://youtu.be/SL3-9ZMwdJQ?si=m_FSjnFQH4wjbZKH&t=1339)]
+> [[https://youtu.be/SL3-9ZMwdJQ&t=1339](https://youtu.be/SL3-9ZMwdJQ&t=1339)]
 
 ## Channel-Length Modulation & Pinched off
 
@@ -868,7 +868,7 @@ Defined as the frequency at which the **small-signal current gain** of a device 
 *mag(Ids@ft) = Ig(1mA)*
 
 
-> Aditya Varma Muppala. MMIC 08: High Frequency Device Characterization in Cadence - Fmax, Ft, NFmin vs Jd [[https://youtu.be/kgEypIA8eus?si=sd4581x2hOuhsJ3P](https://youtu.be/kgEypIA8eus?si=sd4581x2hOuhsJ3P)]
+> Aditya Varma Muppala. MMIC 08: High Frequency Device Characterization in Cadence - Fmax, Ft, NFmin vs Jd [[https://youtu.be/kgEypIA8eus](https://youtu.be/kgEypIA8eus)]
 
 ---
 
@@ -1217,7 +1217,7 @@ foreach net [get_object_name [get_nets -of_objects [get_pins */RTE -hierarchical
 
 The Analog Designer's Toolbox (ADT) | Invited Talk by IEEE Santa Clara Valley Section CAS Society, [https://youtu.be/FT6kKC5OdE0](https://youtu.be/FT6kKC5OdE0)
 
-ESSCIRC2023 Circuit Insights Ali Sheikholeslami [[https://youtu.be/2xFIZM5_FPw?si=XWwSzDgKWZGB0rX1](https://youtu.be/2xFIZM5_FPw?si=XWwSzDgKWZGB0rX1)]
+ESSCIRC2023 Circuit Insights Ali Sheikholeslami [[https://youtu.be/2xFIZM5_FPw](https://youtu.be/2xFIZM5_FPw)]
 
 Ali Sheikholeslami, Circuit Intuitions: Thevenin and Norton Equivalent Circuits, Part 3 IEEE Solid-State Circuits Magazine, Vol. 10, Issue 4, pp. 7-8, Fall 2018. 
 
@@ -1235,7 +1235,7 @@ ecircuitcenter. Switched-Capacitor Resistor [[http://www.ecircuitcenter.com/Circ
 
 Jørgen Andreas Michaelsen. INF4420 Switched-Capacitor Circuits. [[https://www.uio.no/studier/emner/matnat/ifi/INF4420/v13/undervisningsmateriale/inf4420_v13_07_switchedcapacitor_print.pdf](https://www.uio.no/studier/emner/matnat/ifi/INF4420/v13/undervisningsmateriale/inf4420_v13_07_switchedcapacitor_print.pdf)]
 
-chembiyan T. OC Lecture 10: A very basic introduction to switched capacitor circuits [[https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu](https://youtu.be/SaYtemYp4rQ?si=q2qovTKJrLy65pnu)
+chembiyan T. OC Lecture 10: A very basic introduction to switched capacitor circuits [[https://youtu.be/SaYtemYp4rQ](https://youtu.be/SaYtemYp4rQ)
 
 Robert Bogdan Staszewski, Poras T. Balsara. "All‐Digital Frequency Synthesizer in Deep‐Submicron CMOS"
 

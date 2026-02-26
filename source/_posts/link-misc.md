@@ -203,7 +203,7 @@ To understand the impact of the clock jitter on the performance of a wireline sy
 
 
 
-> Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter Circuits [[https://youtu.be/oofViBGlrjM?si=WZnOqtDVG3iDnBHI](https://youtu.be/oofViBGlrjM?si=WZnOqtDVG3iDnBHI)]
+> Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter Circuits [[https://youtu.be/oofViBGlrjM](https://youtu.be/oofViBGlrjM)]
 
 
 
@@ -215,7 +215,7 @@ To understand the impact of the clock jitter on the performance of a wireline sy
 
 
 
-> CC Chen, Why Analog PAM4 Receiver? [[https://youtu.be/J2ojSMYiuBs?si=7y41W91ciIw_hme2](https://youtu.be/J2ojSMYiuBs?si=7y41W91ciIw_hme2)]
+> CC Chen, Why Analog PAM4 Receiver? [[https://youtu.be/J2ojSMYiuBs](https://youtu.be/J2ojSMYiuBs)]
 
 
 
@@ -253,7 +253,7 @@ The look-ahead multiplexing technique brings the key benefit that the timing con
 
 
 
-> Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI?si=lFiu1Kl4AKsg3O9f](https://youtu.be/puEP0DlVZGI?si=lFiu1Kl4AKsg3O9f)]
+> Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI](https://youtu.be/puEP0DlVZGI)]
 >
 > Chen, Kuan-Chang (2022) *Energy-Efficient Receiver Design for High-Speed Interconnects.* Dissertation (Ph.D.), California Institute of Technology. [[https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf](https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf)]
 
@@ -282,7 +282,7 @@ It is called "**forward**" error correction because it can correct errors even i
 
 
 
-> Keysight Technologies. Tutorial – Why Use Forward Error Correction (FEC) [[https://youtu.be/56nF4c61KR0?si=jYJSH50q9M3pIvQt](https://youtu.be/56nF4c61KR0?si=jYJSH50q9M3pIvQt)]
+> Keysight Technologies. Tutorial – Why Use Forward Error Correction (FEC) [[https://youtu.be/56nF4c61KR0](https://youtu.be/56nF4c61KR0)]
 >
 > Paul McLellan, What the FEC is Forward Error Correction? [[https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/fec](https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/fec)]
 
@@ -499,9 +499,9 @@ legend('\xi=2', '\xi=1', '\xi=0.5', '\xi=0.2')
 
 ---
 
-CC Chen, Circuit Images: Why JTOL in a CDR? [[https://youtu.be/kZExm9wy0G8?si=5ULT0t_oHNkp7c2v](https://youtu.be/kZExm9wy0G8?si=5ULT0t_oHNkp7c2v)]
+CC Chen, Circuit Images: Why JTOL in a CDR? [[https://youtu.be/kZExm9wy0G8](https://youtu.be/kZExm9wy0G8)]
 
-—. Why Pseudo-JTOL in a CDR Design or Verification? [[https://youtu.be/DZyzLhk59aY?si=xMcN2Xo3hnCeL3RX](https://youtu.be/DZyzLhk59aY?si=xMcN2Xo3hnCeL3RX)]
+—. Why Pseudo-JTOL in a CDR Design or Verification? [[https://youtu.be/DZyzLhk59aY](https://youtu.be/DZyzLhk59aY)]
 
 ![image-20250627202659095](link-misc/image-20250627202659095.png)
 
@@ -734,7 +734,7 @@ An architecture that evaluates the received signal quality
 
 ### reference
 
-G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link Foundations Standards, Link Budgets & Models," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-95 [[https://youtu.be/OABG3u2H2J4?si=CxryBSGbxrUpZNBT](https://youtu.be/OABG3u2H2J4?si=CxryBSGbxrUpZNBT)] [[https://picture.iczhiku.com/resource/ieee/SHKhwYfGotkIymBx.pdf](https://picture.iczhiku.com/resource/ieee/SHKhwYfGotkIymBx.pdf)]
+G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link Foundations Standards, Link Budgets & Models," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-95 [[https://youtu.be/OABG3u2H2J4](https://youtu.be/OABG3u2H2J4)] [[https://picture.iczhiku.com/resource/ieee/SHKhwYfGotkIymBx.pdf](https://picture.iczhiku.com/resource/ieee/SHKhwYfGotkIymBx.pdf)]
 
 Paul Muller Yusuf Leblebici École Polytechnique Fédérale de Lausanne (EPFL). [Pattern generator model for jitter-tolerance simulation](https://designers-guide.org/modeling/JTOL_rev1.0.pdf); [VHDL-AMS models](https://designers-guide.org/modeling/fc_jtol_src_ns.vhd)
 

@@ -63,8 +63,12 @@ $$
 L_\text{parallel} = (L_1 + L_{12})\parallel (L_2 + L_{12}) = \frac{L_1L_2 +L_{12}(L_1+L_2)+L_{12}^2}{L_1+L_2+2L_{12}}
 $$
 
+### self-inductance
 
-
+|self-inductance|magnetic-field line  |
+|--|--|
+| internal self-inductance | inside the conductor |
+| external self-inductance | outside the conductor |
 
 
 

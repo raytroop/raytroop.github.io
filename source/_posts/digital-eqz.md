@@ -47,6 +47,14 @@ If $SNR=\infty$, then ZF and MMSE-LE are the same
 The Minimum Mean-Square Error Linear Equalizer (MMSE-LE) *balances ISI reduction and noise enhancement*. The MMSE-LE always performs as well as, or better than, the ZFE
 
 
+ZFS approach eliminates the ISI only at the sampling points that correspond to the equalizer taps. The equalized pulse shows ISI in the intervals between the sample points and at sample points outside the equalizer
+
+
+## Nonidealities in Linear Equalizers
+
+*TODO* &#128197;
+
+
 ## TX FFE
 
 > Jose E. Schutt-Aine, Spring 2024 ECE 546 Lecture - 27 Equalization [[http://emlab.uiuc.edu/ece546/Lect_27.pdf](http://emlab.uiuc.edu/ece546/Lect_27.pdf)]
@@ -468,6 +476,8 @@ Hall, Stephen H., and Howard L. Heck. *Advanced Signal Integrity for High-speed 
 Oh, Kyung, and Xing Yuan. *High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting*. 1st edition. Prentice Hall, 2011. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiGPFydIQAYdxVx.pdf)]
 
 John M. Cioffi, Chapter 3 - Equalization [[https://cioffi-group.stanford.edu/doc/book/chap3.pdf](https://cioffi-group.stanford.edu/doc/book/chap3.pdf)]
+
+Proakis, John G., and Masoud Salehi. Digital Communications. 5th ed. McGraw-Hill, 2008. [[pdf](https://daskalakispiros.com/files/Ebooks/digital-communication-proakis-salehi-5th-edition.pdf)]
 
 ---
 

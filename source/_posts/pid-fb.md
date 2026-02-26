@@ -31,6 +31,57 @@ The representative of Fourier transform $\frac{1}{j\omega+j\omega_0}$ back in th
 
 
 
+## System Type
+
+> Control of Steady-State Error to Polynomial Inputs: System Type
+
+![image-20240502232125317](pid-fb/image-20240502232125317.png)
+
+control systems are assigned a **type** number according to the maximum degree of the 
+input polynominal for which the steady-state error is a *finite constant*. i.e.
+
+> - Type 0: Finite error to a step (position error) 
+> - Type 1: Finite error to a ramp (velocity error)
+> - Type 2: Finite error to a parabola (acceleration error)
+
+![image-20260227020054150](pid-fb/image-20260227020054150.png)
+
+If we consider tracking the reference input alone and set $W = V = 0$
+
+The **open-loop transfer functio**n can be expressed as
+$$
+T(s) = \frac{K_n(s)}{s^n}
+$$
+
+where we collect all the terms except the pole ($s$) at eh origin into $K_n(s)$, 
+
+The polynomial inputs, $r(t)=\frac{t^k}{k!} u(t)$, whose transform is
+$$
+R(s) = \frac{1}{s^{k+1}}
+$$
+
+Then the equation for the **error**, $R(s)-Y(s)$ is simply
+$$
+E(s) = \frac{1}{1+T(s)}R(s)
+$$
+
+
+Application of the *Final Value Theorem* to the error formula gives the result
+
+$$\begin{align}
+\lim _{t\to \infty} e(t) &= e_{ss} = \lim _{s\to 0} sE(s) \\
+&= \lim _{s\to 0} s\frac{1}{1+\frac{K_n(s)}{s^n}}\frac{1}{s^{k+1}} \\
+&= \lim _{s\to 0} \frac{s^n}{s^n + K_n}\frac{1}{s^k}
+\end{align}$$
+
+- if $n > k$, $e=0$
+- if $n < k$, $e\to \infty$
+- if $n=k$
+  - $e_{ss} = \frac{1}{1+K_n}$ if $n=k=0$
+  - $e_{ss} = \frac{1}{K_n}$ if $n=k \neq 0$​
+
+where we define $K_n(0) = K_n$
+
 
 
 ## rearrangement

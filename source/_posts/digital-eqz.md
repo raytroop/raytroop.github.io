@@ -18,14 +18,34 @@ mathjax: true
 
 > L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]
 
+
 The absolute bandwidth of rectangular multilevel pulses is *infinity*. If these pulses are filtered improperly as they pass through a communication system, they will spread in time, and the pulse for each symbol may be smeared into adjacent time slots and cause **intersymbol interference (ISI)**
 
 
 Nyquist discovered three different methods for pulse shaping that could be used to eliminate ISI
 
-- Nyquist's First Method (Zero ISI): 
+- Nyquist's First Method (Zero ISI): physically unrealizable (i.e., the impulse response would be noncausal and of infinite duration), inaccurate sync will cause ISI
 
-- 
+- Nyquist's second method: allows some ISI to be introduced in a controlled way
+
+- Nyquist's third method: area under the he(t) pulse within the desired symbol interval, Ts, is not zero, but the areas under he(t) in adjacent symbol intervals are zero
+
+---
+
+> J. Mark, W. Zhuang, Wireless Communications and Networking, Prentice-Hall, 2003
+>
+> John M. Cioffi, Lecture 13, Thursday February 19th 2026 - Intersymbol Interference, MMSE, and SNR [[https://cioffi-group.stanford.edu/ee379a/Lectures/L13.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L13.pdf)]
+>
+> —, Lecture 14, Tuesday February 24th 2026 - Linear Equalizers [[https://cioffi-group.stanford.edu/ee379a/Lectures/L14.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L14.pdf)]
+
+- ZFE Forces ISI to Zero but ignores the noise; this may lead to noise-energy increase — **noise enhancement**
+
+- MMSE conditions/controls noise increase — **limits noise enhancement**
+
+If $SNR=\infty$, then ZF and MMSE-LE are the same
+
+The Minimum Mean-Square Error Linear Equalizer (MMSE-LE) *balances ISI reduction and noise enhancement*. The MMSE-LE always performs as well as, or better than, the ZFE
+
 
 ## TX FFE
 
@@ -39,7 +59,7 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 >
 > Kevin Zheng, Boris Murmann, Hongtao Zhang, and Geoff Zhang. Feedforward Equalizer Location Study for High-Speed Serial Systems [[https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems](https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems)]
 >
-> —, “System-Driven Circuit Design for ADC-Based Wireline Data Links”, Ph.D. Dissertation,
+> —, "System-Driven Circuit Design for ADC-Based Wireline Data Links", Ph.D. Dissertation,
 > Stanford University, 2018 [[https://purl.stanford.edu/hw458fp0168](https://purl.stanford.edu/hw458fp0168)]
 >
 > Hanumolu, P. K., Wei, G. Y., & Moon, Y. K. (2005). Equalizers for high-speed serial links. *International Journal of High Speed Electronics and Systems* [[https://people.engr.tamu.edu/spalermo/ecen689/hslink_eq_overview_hanumolu_jhses05.pdf](https://people.engr.tamu.edu/spalermo/ecen689/hslink_eq_overview_hanumolu_jhses05.pdf)]

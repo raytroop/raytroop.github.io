@@ -319,7 +319,7 @@ input polynominal for which the steady-state error is a *finite constant*. i.e.
 > - Type 1: Finite error to a ramp (velocity error)
 > - Type 2: Finite error to a parabola (acceleration error)
 
-The open-loop transfer function can be expressed as
+The **open-loop transfer functio**n can be expressed as
 $$
 T(s) = \frac{K_n(s)}{s^n}
 $$

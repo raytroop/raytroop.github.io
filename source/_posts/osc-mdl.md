@@ -15,11 +15,11 @@ mathjax: true
 
 Leeson's model is outcome of ***linearized*** VCO noise analysis
 
-![image-20250920125120068](osc-pn-mdl/image-20250920125120068.png)
+![image-20250920125120068](osc-mdl/image-20250920125120068.png)
 
 
 
-![image-20250920170108939](osc-pn-mdl/image-20250920170108939.png)
+![image-20250920170108939](osc-mdl/image-20250920170108939.png)
 
 > $$
 > Q = R_p\omega_0 C_p = \frac{R_p}{\omega_0 L}
@@ -27,51 +27,51 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 >
 > where $\omega_0 = \frac{1}{\sqrt{L_pC_p}}$
 >
-> ![image-20250920170331118](osc-pn-mdl/image-20250920170331118.png)
+> ![image-20250920170331118](osc-mdl/image-20250920170331118.png)
 >
 > [[https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf](https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf)]
 
-![image-20250920171147163](osc-pn-mdl/image-20250920171147163.png)
+![image-20250920171147163](osc-mdl/image-20250920171147163.png)
 
-![image-20250920171411886](osc-pn-mdl/image-20250920171411886.png)
+![image-20250920171411886](osc-mdl/image-20250920171411886.png)
 
 ---
 
 > Carlo Samori ISSCC2016 T1: Understanding Phase Noise in LC VCOs
 
-![image-20251104233318469](osc-pn-mdl/image-20251104233318469.png)
+![image-20251104233318469](osc-mdl/image-20251104233318469.png)
 
 ### Leeson's limitations
 
-![image-20251122144811362](osc-pn-mdl/image-20251122144811362.png)
+![image-20251122144811362](osc-mdl/image-20251122144811362.png)
 
 
 
 ## Hajimiri's  Model- LTV ISF
 
-![image-20251122143723827](osc-pn-mdl/image-20251122143723827.png)
+![image-20251122143723827](osc-mdl/image-20251122143723827.png)
 
 ---
 
-![image-20250629065454831](osc-pn-mdl/image-20250629065454831.png)
+![image-20250629065454831](osc-mdl/image-20250629065454831.png)
 
-![image-20250629073305626](osc-pn-mdl/image-20250629073305626.png)
+![image-20250629073305626](osc-mdl/image-20250629073305626.png)
 
 ### ISF model
 
-![image-20251008184336891](osc-pn-mdl/image-20251008184336891.png)
+![image-20251008184336891](osc-mdl/image-20251008184336891.png)
 
-![image-20251008184349072](osc-pn-mdl/image-20251008184349072.png)
+![image-20251008184349072](osc-mdl/image-20251008184349072.png)
 
 > C. Livanelioglu, L. He, J. Gong, S. Arjmandpour, G. Atzeni and T. Jang, "19.10 A 4.6GHz 63.3fsrms PLL-XO Co-Design Using a Self-Aligned Pulse-Injection Driver Achieving −255.2dB FoMJ Including the XO Power and Noise," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025
 >
-> ![image-20251008185243498](osc-pn-mdl/image-20251008185243498.png)
+> ![image-20251008185243498](osc-mdl/image-20251008185243498.png)
 >
-> ![image-20251008185406867](osc-pn-mdl/image-20251008185406867.png)
+> ![image-20251008185406867](osc-mdl/image-20251008185406867.png)
 
 ---
 
-![image-20250626210829173](osc-pn-mdl/image-20250626210829173.png)
+![image-20250626210829173](osc-mdl/image-20250626210829173.png)
 
 
 
@@ -79,19 +79,19 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 
 
 
-![image-20250629080430980](osc-pn-mdl/image-20250629080430980.png)
+![image-20250629080430980](osc-mdl/image-20250629080430980.png)
 
 
 
 #### Periodic ISF: Noise Folding
 
-![image-20250629080632902](osc-pn-mdl/image-20250629080632902.png)
+![image-20250629080632902](osc-mdl/image-20250629080632902.png)
 
 When performing the ***phase noise computation integral***, there will be a negligible contribution from all terms, other than $n=m$
 
-![image-20250629083344136](osc-pn-mdl/image-20250629083344136.png)
+![image-20250629083344136](osc-mdl/image-20250629083344136.png)
 
-> ![image-20250629083453955](osc-pn-mdl/image-20250629083453955.png)
+> ![image-20250629083453955](osc-mdl/image-20250629083453955.png)
 
 Given $i(t) = I_m \cos[(m\omega_0 +\Delta \omega)t]$,
 
@@ -112,15 +112,15 @@ $$
 
 > $m\omega_0 +\Delta \omega \ge 0$
 >
-> ![image-20250629105156403](osc-pn-mdl/image-20250629105156403.png)
+> ![image-20250629105156403](osc-mdl/image-20250629105156403.png)
 
 
 
-![image-20250629100444702](osc-pn-mdl/image-20250629100444702.png)
+![image-20250629100444702](osc-mdl/image-20250629100444702.png)
 
 > A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 [[pdf](https://people.engr.tamu.edu/spalermo/ecen620/general_pn_theory_hajimiri_jssc_1998.pdf)]
 >
-> ![image-20250629102112814](osc-pn-mdl/image-20250629102112814.png)
+> ![image-20250629102112814](osc-mdl/image-20250629102112814.png)
 
 ---
 
@@ -132,9 +132,9 @@ $$
 >
 >  L. Lu, Z. Tang, P. Andreani, A. Mazzanti and A. Hajimiri, "Comments on “Comments on “A General Theory of Phase Noise in Electrical Oscillators””," in *IEEE Journal of Solid-State Circuits*, vol. 43, no. 9, pp. 2170-2170, Sept. 2008 [[https://sci-hub.se/10.1109/JSSC.2008.2005028](https://sci-hub.se/10.1109/JSSC.2008.2005028)]
 
-![image-20250629104527666](osc-pn-mdl/image-20250629104527666.png)
+![image-20250629104527666](osc-mdl/image-20250629104527666.png)
 
-> ![image-20250629081831223](osc-pn-mdl/image-20250629081831223.png)
+> ![image-20250629081831223](osc-mdl/image-20250629081831223.png)
 
 
 
@@ -170,19 +170,19 @@ $$\begin{align}
 
 *TODO* &#128197;
 
-![image-20250626211817628](osc-pn-mdl/image-20250626211817628.png)
+![image-20250626211817628](osc-mdl/image-20250626211817628.png)
 
 
 
 ### ISF Simulation
 
-![image-20241113232703941](osc-pn-mdl/image-20241113232703941.png)
+![image-20241113232703941](osc-mdl/image-20241113232703941.png)
 
 
 
 #### PSS + PXF Method
 
-> Yizhe Hu, "A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF)" [[https://bbs.eetop.cn/thread-869343-1-1.html](https://bbs.eetop.cn/thread-869343-1-1.html)]
+> Hu, Yizhe. (2019). A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF). 10.13140/RG.2.2.32151.60323. [[link](https://www.researchgate.net/publication/331072119_A_Simulation_Technique_of_Impulse_Sensitivity_Function_ISF_Based_on_Periodic_Transfer_Function_PXF)]
 
 
 
@@ -194,11 +194,11 @@ $$\begin{align}
 
 > David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
 
-![image-20241016211020230](osc-pn-mdl/image-20241016211020230.png)
+![image-20241016211020230](osc-mdl/image-20241016211020230.png)
 
-![image-20241016211101204](osc-pn-mdl/image-20241016211101204.png)
+![image-20241016211101204](osc-mdl/image-20241016211101204.png)
 
-![image-20241016211115630](osc-pn-mdl/image-20241016211115630.png)
+![image-20241016211115630](osc-mdl/image-20241016211115630.png)
 
 
 
@@ -210,9 +210,9 @@ $$\begin{align}
 
 ## Demir's Model - NLTV PPV
 
-![image-20251122143914081](osc-pn-mdl/image-20251122143914081.png)
+![image-20251122143914081](osc-mdl/image-20251122143914081.png)
 
-![image-20250920101142887](osc-pn-mdl/image-20250920101142887.png)
+![image-20250920101142887](osc-mdl/image-20250920101142887.png)
 
 ### PPV (Perturbation Projection Vector)
 
@@ -232,9 +232,9 @@ $$\begin{align}
 
 > ***Nonlinear*** Dynamics
 
- ![image-20250622202023590](osc-pn-mdl/image-20250622202023590.png)
+ ![image-20250622202023590](osc-mdl/image-20250622202023590.png)
 
-![image-20250920101927173](osc-pn-mdl/image-20250920101927173.png)
+![image-20250920101927173](osc-mdl/image-20250920101927173.png)
 
 
 

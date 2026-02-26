@@ -934,7 +934,7 @@ disp(mag_z(1,1:10))
 
 ## bandwidth from pulse response
 
-> L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013.
+> L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]
 >
 > [Generating Basic signals – Rectangular Pulse and Power Spectral Density using FFT](https://www.gaussianwaves.com/2014/07/generating-basic-signals-rectangule-pulse-and-power-spectral-density-using-fft/)
 

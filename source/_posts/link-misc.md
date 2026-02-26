@@ -16,7 +16,9 @@ mathjax: true
 *TODO* &#128197;
 
 
+## matched filter
 
+The filter that minimizes the effect of **channel noise** is the **matched filter**. Unfortunately, if a matched filter is used for HR(f) at the receiver, the overall filter characteristic, He(f), will usually not satisfy the Nyquist characteristic for minimum ISI.
 
 
 ## Bandwidth of Digital Waveforms

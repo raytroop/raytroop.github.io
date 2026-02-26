@@ -14,6 +14,18 @@ mathjax: true
 > 32 to 56 Gbps Serial Link Analysis and Optimization Methods for Pathological Channels [[https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf](https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf)]
 
 
+## intersymbol interference (ISI)
+
+> L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]
+
+The absolute bandwidth of rectangular multilevel pulses is *infinity*. If these pulses are filtered improperly as they pass through a communication system, they will spread in time, and the pulse for each symbol may be smeared into adjacent time slots and cause **intersymbol interference (ISI)**
+
+
+Nyquist discovered three different methods for pulse shaping that could be used to eliminate ISI
+
+- Nyquist's First Method (Zero ISI): 
+
+- 
 
 ## TX FFE
 

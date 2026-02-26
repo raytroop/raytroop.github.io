@@ -257,6 +257,13 @@ $$
 ![image-20260225211858177](network/image-20260225211858177.png)
 
 
+---
+
+
+![image-20260117135705430](network/image-20260117135705430.png)
+
+$H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enclose{circle}{1}$ , $\enclose{circle}{2}$
+
 
 ### Passivity
 
@@ -276,9 +283,6 @@ $$
 
 ![image-20260117135845061](network/image-20260117135845061.png)
 
-![image-20260117135705430](network/image-20260117135705430.png)
-
-$H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enclose{circle}{1}$ , $\enclose{circle}{2}$ 
 
 ---
 
@@ -289,6 +293,12 @@ $H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enc
 ### Interpolation Methods
 
 > jinghua Huang SYNOPSYS. Optimum Frequency Sampling in S-Parameter Extraction and Simulation [[https://ibis.org/summits/nov08a/huang.pdf](https://ibis.org/summits/nov08a/huang.pdf)]
+
+- convolution-based method (ifft): `linear`, `spline`
+
+- rational approximation method: `bbspice`, `rational`
+
+
 
 ![image-20260225213110940](network/image-20260225213110940.png)
 

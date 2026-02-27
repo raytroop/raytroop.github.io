@@ -7,11 +7,65 @@ categories:
 mathjax: true
 ---
 
+## Summary of Equalizations
 
+> 32 to 56 Gbps Serial Link Analysis and Optimization Methods for Pathological Channels [[https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf](https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf)]
 
 ![image-20250930160758085](digital-eqz/image-20250930160758085.png)
 
-> 32 to 56 Gbps Serial Link Analysis and Optimization Methods for Pathological Channels [[https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf](https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf)]
+
+
+### CTLE vs. FFE
+
+> Keysight **Signal Integrity Educational Posts** [[Post 5: Root Cause of Eye Closure](https://docs.keysight.com/eesofapps/post-5-root-cause-of-eye-closure-678068340.html)], [[Post 6: Eye-opening Experience with CTLE](https://docs.keysight.com/eesofapps/post-6-eye-opening-experience-with-ctle-678068358.html)], [[Post 7: Eye-opening Experience with FFE](https://docs.keysight.com/eesofapps/post-7-eye-opening-experience-with-ffe-678068383.html)]
+
+***in the time domain***
+
+- CTLE provide only limited improvement in the pre-cursor ISI, because of the continuous-time, analog nature of CTLE
+- FFE to reduce ISI in both the pre-cursor and post-cursor, because of operating digitally in discrete-time
+
+![image-20260227230449898](digital-eqz/image-20260227230449898.png)
+
+***in the frequency domain***
+
+- CTLE focuses on boosting frequency content at the ***Nyquist frequency***
+- FFE algorithm is selecting taps that effectively amplify the ***odd harmonics of the Nyquist frequency***
+
+![image-20260227224843054](digital-eqz/image-20260227224843054.png)
+
+> In the case of FFE, because of the nature of finite impulse response filter, we would expect amplification and attenuation of different harmonics of Nyquist Frequency
+
+---
+
+Until 6.5 dB of CTLE DC attenuation, the spread of the single pulse is *positive* and reaches almost *zero* at 6.5 dB. As the DC attenuation increases to more than 6.5 dB, the single pulse spectrum is restored too much, resulting in a *negative dip* at the end of the pulse
+
+![image-20260228001551838](digital-eqz/image-20260228001551838.png)
+
+> the maximum eye opening **does not** happen at maximum DC attenuation at 9 dB
+
+![image-20260228001734379](digital-eqz/image-20260228001734379.png)
+
+### DFE
+
+> Keysight **Signal Integrity Educational Posts** [[Post 8: Eye-opening Experience with DFE](https://docs.keysight.com/eesofapps/post-8-eye-opening-experience-with-dfe-678068404.html)]
+
+There are *kinks* in the eye diagram, the signature of an opened DFE eye is different than other equalizations
+
+DFE algorithm is reducing ISI based on the *detected data (symbol)*
+
+![image-20260228004513829](digital-eqz/image-20260228004513829.png)
+
+![image-20260228005857811](digital-eqz/image-20260228005857811.png)
+
+Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions from the symbol detector corrupt the filtering of the feedback loop. As a result, the inclusion of the feedforward filter on the front end is crucial in minimizing the probability of error
+
+
+
+![image](https://docs.keysight.com/eesofapps/files/678068404/678068425/1/1629094403000/tabel.png)
+
+- because symbol detection is nonlinear, decision feedback equalization is also *nonlinear*
+- because of the nonlinearity of the DFE response, it must be modeled in the *time domain*  
+
 
 
 ## Intersymbol Interference (ISI)
@@ -54,6 +108,14 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 - The Minimum Mean-Square Error Linear Equalizer (MMSE-LE) *balances **ISI reduction** and **noise enhancement***. The MMSE-LE always performs as well as, or better than, the ZFE
 
 ![image-20260226230127894](digital-eqz/image-20260226230127894.png)
+
+
+
+## LMS (Least-Mean-Square) algorithm
+
+![image-20260227221735879](digital-eqz/image-20260227221735879.png)
+
+![image-20260227222430321](digital-eqz/image-20260227222430321.png)
 
 
 
@@ -197,6 +259,48 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 
 
+---
+
+![image-20260228011345326](digital-eqz/image-20260228011345326.png)
+
+![image-20260228014012124](digital-eqz/image-20260228014012124.png)
+
+```matlab
+ht = [0.3, 1.0, -0.2, 0.1, 0.0, 0.0];
+ytarget = [0;1;0];
+
+x1 = [[1.0 0.3 0.0];
+    [-0.2 1.0 0.3];
+    [0.1 -0.2 1.0]];
+
+x2 = [[1.0 0.3 0.0];
+    [-0.2 1.0 0.3];
+    [0.0 -0.2 1.0]];
+
+p1 = inv(x1)*ytarget; % -0.2657    0.8857    0.2037
+p2 = inv(x2)*ytarget; % -0.2679    0.8929    0.1786
+
+ht_p1 = conv(ht, p1); % p1 better -> x1
+ht_p2 = conv(ht, p2);
+
+% ht_p1 =
+%
+%    -0.0797         0    1.0000         0    0.0478    0.0204         0         0
+%
+% ht_p2 =
+%
+%    -0.0804    0.0000    1.0000   -0.0268    0.0536    0.0179         0         0
+
+subplot(3,1,1)
+stem(ht, 'LineWidth', 2); grid on; xlim([0,10])
+subplot(3,1,2)
+stem(p1, 'LineWidth', 2); hold on; stem(p2, 'LineWidth', 2);
+grid on; legend(["p1" "p2"]); xlim([0,10])
+subplot(3,1,3)
+stem(ht_p1, 'LineWidth', 2); hold on; stem(ht_p2, 'LineWidth', 2)
+grid on; legend(["h\_p1" "h\_p2"]); xlim([0,10])
+```
+
 
 
 ### TX FIR Adaptation Algorithm
@@ -204,8 +308,6 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 > Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 8: RX FIR, CTLE, DFE, & Adaptive Eq. [[https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf)]
 
 *TODO* &#128197;
-
-***sign-sign LMS algorithm***
 
 
 

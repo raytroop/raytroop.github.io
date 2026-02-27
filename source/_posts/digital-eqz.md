@@ -63,8 +63,6 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 >
 > Sam Palermo. Lecture 7 - Equalization Intro & TX FIR EQ [[https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)]
 >
-> David Johns. ECE1392H - Integrated Circuits for Digital Communications - Fall 2001: Equalization [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf)]
->
 > Vivek Telang, Equalization for High-Speed Serdes: System-level Comparison of Analog and Digital Techniques 2012 [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_08_Telang.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_08_Telang.pdf)]
 >
 > Kevin Zheng, Boris Murmann, Hongtao Zhang, and Geoff Zhang. Feedforward Equalizer Location Study for High-Speed Serial Systems [[https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems](https://www.signalintegrityjournal.com/articles/1228-feedforward-equalizer-location-study-for-high-speed-serial-systems)]
@@ -510,6 +508,11 @@ T. Toifl *et al*., "A 3.5pJ/bit 8-tap-feed-forward 8-tap-decision feedback digit
 ---
 
 Daniel Friedman, 2018 Considerations and Implementations for High data Rate Serial Link Design [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-Toronto-Nov-2018.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-Toronto-Nov-2018.pdf)]
+
+---
+David Johns. ECE1392H - Integrated Circuits for Digital Communications - Fall 2001: [[Equalization](https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf)], [[Timing Recovery](https://www.eecg.utoronto.ca/~johns/ece1392/slides/timing.pdf)]
+
+
 
 ---
 

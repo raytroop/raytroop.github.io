@@ -1,5 +1,5 @@
 ---
-title: Digital Equalization & Timing Recovery
+title: Digital Equalization and Timing Recovery
 date: 2024-09-03 11:07:31
 tags:
 categories:
@@ -11,7 +11,7 @@ mathjax: true
 
 > 32 to 56 Gbps Serial Link Analysis and Optimization Methods for Pathological Channels [[https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf](https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf)]
 
-![image-20250930160758085](digital-eqz/image-20250930160758085.png)
+![image-20250930160758085](eq-cdr/image-20250930160758085.png)
 
 
 
@@ -24,14 +24,14 @@ mathjax: true
 - CTLE provide only limited improvement in the pre-cursor ISI, because of the continuous-time, analog nature of CTLE
 - FFE to reduce ISI in both the pre-cursor and post-cursor, because of operating digitally in discrete-time
 
-![image-20260227230449898](digital-eqz/image-20260227230449898.png)
+![image-20260227230449898](eq-cdr/image-20260227230449898.png)
 
 ***in the frequency domain***
 
 - CTLE focuses on boosting frequency content at the ***Nyquist frequency***
 - FFE algorithm is selecting taps that effectively amplify the ***odd harmonics of the Nyquist frequency***
 
-![image-20260227224843054](digital-eqz/image-20260227224843054.png)
+![image-20260227224843054](eq-cdr/image-20260227224843054.png)
 
 > In the case of FFE, because of the nature of finite impulse response filter, we would expect amplification and attenuation of different harmonics of Nyquist Frequency
 
@@ -39,11 +39,11 @@ mathjax: true
 
 Until 6.5 dB of CTLE DC attenuation, the spread of the single pulse is *positive* and reaches almost *zero* at 6.5 dB. As the DC attenuation increases to more than 6.5 dB, the single pulse spectrum is restored too much, resulting in a *negative dip* at the end of the pulse
 
-![image-20260228001551838](digital-eqz/image-20260228001551838.png)
+![image-20260228001551838](eq-cdr/image-20260228001551838.png)
 
 > the maximum eye opening **does not** happen at maximum DC attenuation at 9 dB
 
-![image-20260228001734379](digital-eqz/image-20260228001734379.png)
+![image-20260228001734379](eq-cdr/image-20260228001734379.png)
 
 ### DFE
 
@@ -53,9 +53,9 @@ There are *kinks* in the eye diagram, the signature of an opened DFE eye is diff
 
 DFE algorithm is reducing ISI based on the *detected data (symbol)*
 
-![image-20260228004513829](digital-eqz/image-20260228004513829.png)
+![image-20260228004513829](eq-cdr/image-20260228004513829.png)
 
-![image-20260228005857811](digital-eqz/image-20260228005857811.png)
+![image-20260228005857811](eq-cdr/image-20260228005857811.png)
 
 Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions from the symbol detector corrupt the filtering of the feedback loop. As a result, the inclusion of the feedforward filter on the front end is crucial in minimizing the probability of error
 
@@ -72,15 +72,15 @@ Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions 
 
 > L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]
 
-![image-20260226224415849](digital-eqz/image-20260226224415849.png)
+![image-20260226224415849](eq-cdr/image-20260226224415849.png)
 
-![image-20260226225158225](digital-eqz/image-20260226225158225.png)
+![image-20260226225158225](eq-cdr/image-20260226225158225.png)
 
 Nyquist discovered three different methods for pulse shaping that could be used to eliminate ISI
 
 - **Nyquist's First Method (Zero ISI)**: physically unrealizable (i.e., the impulse response would be noncausal and of infinite duration), inaccurate sync will cause ISI
 
-  ![image-20260226225305184](digital-eqz/image-20260226225305184.png)
+  ![image-20260226225305184](eq-cdr/image-20260226225305184.png)
 
 - **Nyquist's second method**: allows some ISI to be introduced in a controlled way
 
@@ -94,28 +94,28 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 >
 > —, Lecture 14, Tuesday February 24th 2026 - Linear Equalizers [[https://cioffi-group.stanford.edu/ee379a/Lectures/L14.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L14.pdf)]
 
-![image-20260226223722288](digital-eqz/image-20260226223722288.png)
+![image-20260226223722288](eq-cdr/image-20260226223722288.png)
 
-![image-20260226223806023](digital-eqz/image-20260226223806023.png)
+![image-20260226223806023](eq-cdr/image-20260226223806023.png)
 
 > ***Shannon–Hartley theorem***
 >
-> ![image-20260226231916346](digital-eqz/image-20260226231916346.png)
+> ![image-20260226231916346](eq-cdr/image-20260226231916346.png)
 
-![image-20260226225540962](digital-eqz/image-20260226225540962.png)
+![image-20260226225540962](eq-cdr/image-20260226225540962.png)
 
 - ZFS eliminates the ISI only at the sampling points that correspond to the equalizer taps. The equalized pulse shows ISI in the intervals between the sample points and at sample points outside the equalizer
 - The Minimum Mean-Square Error Linear Equalizer (MMSE-LE) *balances **ISI reduction** and **noise enhancement***. The MMSE-LE always performs as well as, or better than, the ZFE
 
-![image-20260226230127894](digital-eqz/image-20260226230127894.png)
+![image-20260226230127894](eq-cdr/image-20260226230127894.png)
 
 
 
 ## LMS (Least-Mean-Square) algorithm
 
-![image-20260227221735879](digital-eqz/image-20260227221735879.png)
+![image-20260227221735879](eq-cdr/image-20260227221735879.png)
 
-![image-20260227222430321](digital-eqz/image-20260227222430321.png)
+![image-20260227222430321](eq-cdr/image-20260227222430321.png)
 
 
 
@@ -136,7 +136,7 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 >
 > Gain Kim. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
 
-![image-20250928235645823](digital-eqz/image-20250928235645823.png)
+![image-20250928235645823](eq-cdr/image-20250928235645823.png)
 
 
 
@@ -144,19 +144,19 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 
 > Lecture 7: Equalization Introduction & TX FIR Eq [[https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)]
 
-![image-20251102114741833](digital-eqz/image-20251102114741833.png)
+![image-20251102114741833](eq-cdr/image-20251102114741833.png)
 
-![tx-ffe-coef-conv.drawio](digital-eqz/tx-ffe-coef-conv.drawio.svg)
+![tx-ffe-coef-conv.drawio](eq-cdr/tx-ffe-coef-conv.drawio.svg)
 
 ---
 
 ***Lone-Pulse Equalization***
 
-![image-20251102133644396](digital-eqz/image-20251102133644396.png)
+![image-20251102133644396](eq-cdr/image-20251102133644396.png)
 
-![tx-ffe-coef-sel.drawio](digital-eqz/tx-ffe-coef-sel.drawio.svg)
+![tx-ffe-coef-sel.drawio](eq-cdr/tx-ffe-coef-sel.drawio.svg)
 
-![image-20260116224051584](digital-eqz/image-20260116224051584.png)
+![image-20260116224051584](eq-cdr/image-20260116224051584.png)
 
 ```matlab
 h=[0.004, 0.0010, 0.0023, 0.0052, 0.0812, 0.3437, 0.1775, 0.0917, 0.0526,...
@@ -196,9 +196,9 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 ---
 
-![image-20251102154213244](digital-eqz/image-20251102154213244.png)
+![image-20251102154213244](eq-cdr/image-20251102154213244.png)
 
-![image-20251102154455603](digital-eqz/image-20251102154455603.png)
+![image-20251102154455603](eq-cdr/image-20251102154455603.png)
 
 ```matlab
 fcsvf = readtable("hsample_pre10post20.csv");
@@ -235,9 +235,9 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 > ***Zero Forcing Solution (ZFS)***
 
-![image-20260208123317710](digital-eqz/image-20260208123317710.png)
+![image-20260208123317710](eq-cdr/image-20260208123317710.png)
 
-![image-20260208123432755](digital-eqz/image-20260208123432755.png)
+![image-20260208123432755](eq-cdr/image-20260208123432755.png)
 
 |                      | $k=-\text{npre}$   | $k=0$; $y_\text{target}=1$ | $k=\text{npost}$   |
 | -------------------- | ------------------ | -------------------------- | ------------------ |
@@ -255,15 +255,15 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 ----
 
-![image-20260208122312410](digital-eqz/image-20260208122312410.png)
+![image-20260208122312410](eq-cdr/image-20260208122312410.png)
 
 
 
 ---
 
-![image-20260228011345326](digital-eqz/image-20260228011345326.png)
+![image-20260228011345326](eq-cdr/image-20260228011345326.png)
 
-![image-20260228014012124](digital-eqz/image-20260228014012124.png)
+![image-20260228014012124](eq-cdr/image-20260228014012124.png)
 
 ```matlab
 ht = [0.3, 1.0, -0.2, 0.1, 0.0, 0.0];
@@ -351,15 +351,9 @@ This simplified version of LMS algorithm is identical to the *zero-forcing* algo
 
 
 
-> B. Kim, "Tutorial: Basics of Equalization Techniques: Channels, Equalization, and Circuits," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022 
->
-> V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link transceiver with adaptive equalization and data recovery," in IEEE Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012-1026, April 2005, [[https://sci-hub.ru/10.1109/JSSC.2004.842863](https://sci-hub.ru/10.1109/JSSC.2004.842863)]
+> E. -H. Chen et al., "Near-Optimal Equalizer and Timing Adaptation for I/O Links Using a BER-Based Metric," in IEEE Journal of Solid-State Circuits, vol. 43, no. 9, pp. 2144-2156, Sept. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2001871](https://sci-hub.ru/10.1109/JSSC.2008.2001871)]
 >
 > Jinhyung Lee, Design of High-Speed Receiver for Video Interface with Adaptive Equalization; Phd thesis, August 2019. [[thesis link](http://dcollection.snu.ac.kr/common/orgView/000000157003)]
->
-> Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical Implementation, 5th edition
->
-> E. -H. Chen et al., "Near-Optimal Equalizer and Timing Adaptation for I/O Links Using a BER-Based Metric," in IEEE Journal of Solid-State Circuits, vol. 43, no. 9, pp. 2144-2156, Sept. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2001871](https://sci-hub.ru/10.1109/JSSC.2008.2001871)]
 
 
 
@@ -402,11 +396,11 @@ To find $\hat{h}_1$, we shall use different pattern for even and odd error slice
 
 The process is also referred to as **Maximum Likelihood Sequence Estimator (MLSE)**
 
-![image-20240807233152154](digital-eqz/image-20240807233152154.png)
+![image-20240807233152154](eq-cdr/image-20240807233152154.png)
 
-![image-20240812205534753](digital-eqz/image-20240812205534753.png)
+![image-20240812205534753](eq-cdr/image-20240812205534753.png)
 
-![image-20240812205613467](digital-eqz/image-20240812205613467.png)
+![image-20240812205613467](eq-cdr/image-20240812205613467.png)
 
 > [IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes Beyond 100 Gb/s [https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf](https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf)]
 >
@@ -435,7 +429,7 @@ There are several variants of MLSD (Maximum Likelihood Sequence Detection), incl
 
 
 
-![image-20240824193839108](digital-eqz/image-20240824193839108.png)
+![image-20240824193839108](eq-cdr/image-20240824193839108.png)
 
 ---
 
@@ -488,7 +482,7 @@ The alexander PD locks that edge clock (clkedge) is located at zero crossings of
 >
 > Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025. Lecture 12: CDRs [[https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf)]
 
-![image-20240812222307061](digital-eqz/image-20240812222307061.png)
+![image-20240812222307061](eq-cdr/image-20240812222307061.png)
 
 Suppose 1-precursor, 1-postcursor — $y_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$
 $$
@@ -496,38 +490,38 @@ $$
 $$
 MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
 
-![image-20260112220639499](digital-eqz/image-20260112220639499.png)
+![image-20260112220639499](eq-cdr/image-20260112220639499.png)
 
 
 
-![image-20260112225032307](digital-eqz/image-20260112225032307.png)
+![image-20260112225032307](eq-cdr/image-20260112225032307.png)
 
 Suppose $x_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$ and $x_{k-1} = d_{k-2}h_1 + d_{k-1} h_0 + d_{k}h_{-1}$
 $$
 \color{magenta}E\{z_k\} = \frac{1}{2} E\{|d_{k-1}|^2h_1\} - \frac{1}{2} E\{|d_{k}|^2h_{-1}\} = \frac{1}{2}(h_1 - h_{-1})
 $$
-![image-20240808001449664](digital-eqz/image-20240808001449664.png)
+![image-20240808001449664](eq-cdr/image-20240808001449664.png)
 
-> ![image-20260112221328785](digital-eqz/image-20260112221328785.png)
+> ![image-20260112221328785](eq-cdr/image-20260112221328785.png)
 
-![image-20240808001501485](digital-eqz/image-20240808001501485.png)
+![image-20240808001501485](eq-cdr/image-20240808001501485.png)
 
 ### Mueller-Muller PD
 
 Mueller-Muller **type A** timing function
 
-![image-20241019163636292](digital-eqz/image-20241019163636292.png)
+![image-20241019163636292](eq-cdr/image-20241019163636292.png)
 
 
 
 Mueller-Muller **type B** timing function
 
-![image-20241019163813449](digital-eqz/image-20241019163813449.png)
+![image-20241019163813449](eq-cdr/image-20241019163813449.png)
 
 
 ### SS-MM CDR
 
-![image-20240807232814202](digital-eqz/image-20240807232814202.png)
+![image-20240807232814202](eq-cdr/image-20240807232814202.png)
 
 
 
@@ -543,7 +537,7 @@ $h_1$ is **necessary**
 
   Consequently, it suffers from a severe *multiple-locking problem with an adaptive DFE*
 
-![image-20240812232618238](digital-eqz/image-20240812232618238.png)
+![image-20240812232618238](eq-cdr/image-20240812232618238.png)
 
 
 
@@ -583,17 +577,19 @@ John M. Cioffi, [[Chapter 3 - Equalization]([https://cioffi-group.stanford.edu/d
 
 Proakis, John G., and Masoud Salehi. Digital Communications. 5th ed. McGraw-Hill, 2008. [[pdf](https://daskalakispiros.com/files/Ebooks/digital-communication-proakis-salehi-5th-edition.pdf)]
 
+Paulo S. R. Diniz, Adaptive Filtering: Algorithms and Practical Implementation, 5th edition
+
 David Johns. ECE1392H - Integrated Circuits for Digital Communications - Fall 2001: [[Equalization](https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf)], [[Timing Recovery](https://www.eecg.utoronto.ca/~johns/ece1392/slides/timing.pdf)]
 
----
-
-Stojanovic, Vladimir & Ho, A. & Garlepp, B. & Chen, Fred & Wei, J. & Alon, Elad & Werner, C. & Zerbe, J. & Horowitz, M.A.. (2004). Adaptive equalization and data recovery in a dual-mode (PAM2/4) serial link transceiver. IEEE Symposium on VLSI Circuits, Digest of Technical Papers. 348 - 351. [[https://sci-hub.ru/10.1109/VLSIC.2004.1346611](https://sci-hub.ru/10.1109/VLSIC.2004.1346611)]
-
-A. A. Bazargani, H. Shakiba and D. A. Johns, "MMSE Equalizer Design Optimization for Wireline SerDes Applications," in *IEEE Transactions on Circuits and Systems I: Regular Papers* [[https://www.eecg.utoronto.ca/~johns/nobots/papers/pdf/2024_bazaragani.pdf](https://www.eecg.utoronto.ca/~johns/nobots/papers/pdf/2024_bazaragani.pdf)]
+B. Kim, "Tutorial: Basics of Equalization Techniques: Channels, Equalization, and Circuits," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022 
 
 Masum Hossain, ISSCC2023 T11: "Digital Equalization and Timing Recovery Techniques for ADC-DSP-based Highspeed Links" [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T11.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T11.pdf)]
 
 —, "LOW POWER DIGITAL EQUALIZATION FOR HIGH SPEED SERDES" [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/SSCS_invited_talk.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/SSCS_invited_talk.pdf)]
+
+---
+
+A. A. Bazargani, H. Shakiba and D. A. Johns, "MMSE Equalizer Design Optimization for Wireline SerDes Applications," in *IEEE Transactions on Circuits and Systems I: Regular Papers* [[https://www.eecg.utoronto.ca/~johns/nobots/papers/pdf/2024_bazaragani.pdf](https://www.eecg.utoronto.ca/~johns/nobots/papers/pdf/2024_bazaragani.pdf)]
 
 A. Sharif-Bakhtiar, A. Chan Carusone, "A Methodology for Accurate DFE Characterization," *IEEE RFIC Symposium*, Philadelphia, Pennsylvania, June 2018. [[PDF](http://www.eecg.utoronto.ca/~tcc/Sharif-Bakhtiar_RFIC18.pdf)] [[Slides – PDF](http://www.eecg.utoronto.ca/~tcc/Sharif-Bakhtiar_RFIC18_slides.pdf)]
 
@@ -641,12 +637,6 @@ Aleksey Tyshchenko, SeriaLink Systems Clinton Walker, Alphawave IP. DesignCon 20
 
 ---
 
-Keshab K. Parhi [[http://www.ece.umn.edu/users/parhi/](http://www.ece.umn.edu/users/parhi/)]
-
-Tinoosh Mohsenin. CMPE 691: Digital Signal Processing Hardware Implementation [[https://userpages.cs.umbc.edu/tinoosh/cmpe691/](https://userpages.cs.umbc.edu/tinoosh/cmpe691/)]
-
----
-
 Qasim Chaudhari. Maximum Likelihood Estimation of Clock Offset [[https://wirelesspi.com/maximum-likelihood-estimation-of-clock-offset/](https://wirelesspi.com/maximum-likelihood-estimation-of-clock-offset/)]
 
 —. Channel Estimation in Wireless Communication. [[https://wirelesspi.com/channel-estimation-in-wireless-communication/](https://wirelesspi.com/channel-estimation-in-wireless-communication/)]
@@ -671,16 +661,13 @@ Qasim Chaudhari. Maximum Likelihood Estimation of Clock Offset [[https://wireles
 
 —. What is a Symbol Timing Offset and How It Distorts the Rx Signal [[https://wirelesspi.com/what-is-a-symbol-timing-offset-and-how-it-distorts-the-rx-signal/](https://wirelesspi.com/what-is-a-symbol-timing-offset-and-how-it-distorts-the-rx-signal/)]
 
+—. How Excess Bandwidth Governs Timing Recovery in Digital Communication Systems [[https://wirelesspi.com/how-excess-bandwidth-governs-timing-recovery-in-digital-communication-systems/](https://wirelesspi.com/how-excess-bandwidth-governs-timing-recovery-in-digital-communication-systems/)]
+
 —. How Automatic Gain Control (AGC) Works [[https://wirelesspi.com/how-automatic-gain-control-agc-works/](https://wirelesspi.com/how-automatic-gain-control-agc-works/)]
+
+Igor Freire. Symbol Timing Synchronization: A Tutorial [[blog](https://igorfreire.com.br/2016/10/15/symbol-timing-synchronization-tutorial/#Zero-crossing_Timing_Error_Detector_ZC-TED), [code](https://github.com/igorauad/symbol_timing_sync)]
 
 ---
 
 Hongtao Zhang, DesignCon 2016. PAM4 Signaling for 56G Serial Link Applications − A Tutorial [[https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf](https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf)]
 
----
-
-Qasim Chaudhari. What is a Symbol Timing Offset and How It Distorts the Rx Signal [[https://wirelesspi.com/what-is-a-symbol-timing-offset-and-how-it-distorts-the-rx-signal/](https://wirelesspi.com/what-is-a-symbol-timing-offset-and-how-it-distorts-the-rx-signal/)]
-
-—. How Excess Bandwidth Governs Timing Recovery in Digital Communication Systems [[https://wirelesspi.com/how-excess-bandwidth-governs-timing-recovery-in-digital-communication-systems/](https://wirelesspi.com/how-excess-bandwidth-governs-timing-recovery-in-digital-communication-systems/)]
-
-Igor Freire. Symbol Timing Synchronization: A Tutorial [[blog](https://igorfreire.com.br/2016/10/15/symbol-timing-synchronization-tutorial/#Zero-crossing_Timing_Error_Detector_ZC-TED), [code](https://github.com/igorauad/symbol_timing_sync)]

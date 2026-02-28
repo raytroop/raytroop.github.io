@@ -288,6 +288,50 @@ It is called "**forward**" error correction because it can correct errors even i
 
 
 
+## DSP-Based SerDes
+
+> Tony Chan Carusone, Alphawave Semi. VLSI2025 SC2: Connectivity Technologies to Accelerate AI
+
+![image-20250706104500363](link-misc/image-20250706104500363.png)
+
+----
+
+
+
+
+
+### Jitter Performance Limitations
+
+![image-20250706110637804](link-misc/image-20250706110637804.png)
+
+
+
+### Aliasing of baud-rate sampling
+
+The most significant impairments are considered to be the sensitivity to sampling phase, and the effect of aliasing out of band signal and noise into the baseband
+
+![image-20250706103107037](link-misc/image-20250706103107037.png)
+
+> ![image-20250706103231832](link-misc/image-20250706103231832.png)
+>
+> Tao Gui (Huawei), etc.. IEEE 802.3dj May Interim meeting San Antonio, Texas May 15, 2013: "Feasibility Study on Baud-Rate Sampling and Equalization (BRSE) for 800G-LR1" [[https://www.ieee802.org/3/dj/public/23_05/gui_3dj_01a_2305.pdf](https://www.ieee802.org/3/dj/public/23_05/gui_3dj_01a_2305.pdf)]
+>
+> D. S. Millar, D. Lavery, R. Maher, B. C. Thomsen, P. Bayvel and S. J. Savory, "A baud-rate sampled coherent transceiver with digital pulse shaping and interpolation,"in OFC 2013 [[https://www.merl.com/publications/docs/TR2013-010.pdf](https://www.merl.com/publications/docs/TR2013-010.pdf)]
+
+
+
+---
+
+![image-20250706111818147](link-misc/image-20250706111818147.png)
+
+> Tahmoureszadeh, Tina. Master's Theses (2009 - ): Analog Front-end Design for 2x Blind ADC-based Receivers [[http://hdl.handle.net/1807/29988](http://hdl.handle.net/1807/29988)]
+
+
+
+![image-20250706113229251](link-misc/image-20250706113229251.png)
+
+> Shafik, Ayman Osama Amin Mohamed. "Equalization Architectures for High Speed ADC-Based Serial I/O Receivers." PhD diss., 2016. [[https://core.ac.uk/download/79652690.pdf](https://core.ac.uk/download/79652690.pdf)]
+
 
 
 
@@ -1015,4 +1059,4 @@ Iain. What is Trellis Coding? [[https://youtu.be/rnjy4_gXLAg](https://youtu.be/r
 
 Noman Hai, Synopsys, Canada CASS Talks 2025 - May 2, 2025: High-speed Wireline Interconnects: Design Challenges and Innovations in 224G SerDes [[https://www.youtube.com/live/wHNOlxHFTzY](https://www.youtube.com/live/wHNOlxHFTzY)]
 
-T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits* [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11311714)]
+T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits* [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11311714)]y

@@ -187,6 +187,7 @@ Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
 trade-offs between *noise amplification* and *signal equalization*
 
 
+
 ## input network
 
 ![image-20250706110415914](rx-fe/image-20250706110415914.png)
@@ -341,9 +342,13 @@ A_\text{dB,peak} &= 10\log\frac{\alpha^2}{4(\alpha-1)}
 
 ## reference
 
-J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[https://2024.sci-hub.se/6715/9a3d5a4825e551544403f87f0b9f6a89/10.1109@ISSCC.2018.8310204.pdf](https://2024.sci-hub.se/6715/9a3d5a4825e551544403f87f0b9f6a89/10.1109@ISSCC.2018.8310204.pdf)] [[slides](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf)]
+J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[paper](https://sci-hub.jp/10.1109/ISSCC.2018.8310204)] [[slides](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf)]
 
 Miguel Gandara. CICC2025 Circuits Insights: Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg](https://youtu.be/X4JTuh2Gdzg)]
+
+Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers" [[pdf](https://picture.iczhiku.com/resource/eetop/wHKfZPYpAleAKXBV.pdf)]
+
+Byungsub Kim,  ISSCC 2022, "T11: Basics of Equalization Techniques: Channels, Equalization, and Circuits"
 
 ---
 
@@ -392,10 +397,6 @@ Kosnac, Stefan (2021) *Analysis* of On-*Chip Inductors* and *Arithmetic Circuits
 Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
 
 ---
-
-Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers" [[pdf](https://picture.iczhiku.com/resource/eetop/wHKfZPYpAleAKXBV.pdf)]
-
-Byungsub Kim,  ISSCC 2022, "T11: Basics of Equalization Techniques: Channels, Equalization, and Circuits"
 
 K. Yadav, P. -H. Hsieh and A. Chan Carusone, "Linearity Analysis of Source-Degenerated Differential Pairs for Wireline Applications," in IEEE Open Journal of Circuits and Systems [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10769573](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10769573)]
 

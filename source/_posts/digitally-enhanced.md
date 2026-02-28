@@ -102,6 +102,8 @@ Ahmed M. A. Ali. ISSCC2021 T5: *Calibration Techniques in ADCs* [[https://www.ni
 
 Salvatore Levantino. ISSCC2024 T5: *Calibration Techniques in PLLs* [[https://www.nishanchettri.com/isscc-slides/2024%20ISSCC/TUTORIALS/T5.pdf](https://www.nishanchettri.com/isscc-slides/2024%20ISSCC/TUTORIALS/T5.pdf)]
 
+Chadi Jabbour, Telecom Paristech. ISCAS 2019 T12: Digitally Enhanced Mixed Signal Systems [[https://www.youtube.com/watch?v=rACuCSDm5jQ](https://www.youtube.com/watch?v=rACuCSDm5jQ)]
+
 ---
 
 B. Farhang-Boroujeny (2013), *Adaptive Filters: Theory and Applications* (2nd ed.). John Wiley & Sons, Inc.
@@ -128,4 +130,3 @@ David Johns, "Integrated Circuits for Digital Communications" [[https://www.eecg
 
 Tai-Haur Kuo "Advanced Analog IC Design for Communications" [[http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html](http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html)]
 
-Chadi Jabbour, Telecom Paristech. ISCAS 2019 T12: Digitally Enhanced Mixed Signal Systems [[https://www.youtube.com/watch?v=rACuCSDm5jQ](https://www.youtube.com/watch?v=rACuCSDm5jQ)]

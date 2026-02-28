@@ -204,10 +204,10 @@ grid on;
 
 T. C. Carusone, "Introduction to Digital I/O: Constraining I/O Power Consumption in High-Performance Systems," in *IEEE Solid-State Circuits Magazine*, vol. 7, no. 4, pp. 14-22, Fall 2015
 
-Oh, Kyung Suk Dan, and Xing Chao Chuck Yuan. High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting. Prentice Hall, 2011.
+Oh, Kyung Suk Dan, and Xing Chao Chuck Yuan. High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting. Prentice Hall, 2011. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiGPFydIQAYdxVx.pdf)]
 
-Ren, Jihong and Kyung Suk Oh. “Multiple Edge Responses for Fast and Accurate System Simulations.” *IEEE Transactions on Advanced Packaging* 31 (2008): 741-748.
+Ren, Jihong and Kyung Suk Oh. "Multiple Edge Responses for Fast and Accurate System Simulations." *IEEE Transactions on Advanced Packaging* 31 (2008): 741-748.
 
-Shi, Rui. “Off-chip wire distribution and signal analysis.” (2008).
+Shi, Rui. "Off-chip wire distribution and signal analysis." (2008). [[pdf](https://escholarship.org/content/qt4mk8x7r2/qt4mk8x7r2.pdf)]
 
-X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 29, no. 7, pp. 1370-1378, July 2021, doi: 10.1109/TVLSI.2021.3082208.
+X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 29, no. 7, pp. 1370-1378, July 2021, [[https://sci-hub.ru/10.1109/TVLSI.2021.3082208](https://sci-hub.ru/10.1109/TVLSI.2021.3082208)]

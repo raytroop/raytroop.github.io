@@ -1152,6 +1152,6 @@ S. Katare, "Novel Framework for Modelling High Speed Interface Using Python for 
 
 ---
 
-G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link Foundations Standards, Link Budgets & Models," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-95 [https://youtu.be/OABG3u2H2J4] [https://picture.iczhiku.com/resource/ieee/SHKhwYfGotkIymBx.pdf]
+G. Balamurugan, A. Balankutty and C. -M. Hsu, "56G/112G Link Foundations Standards, Link Budgets & Models," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-95 [[https://youtu.be/OABG3u2H2J4](https://youtu.be/OABG3u2H2J4)] [[https://picture.iczhiku.com/resource/ieee/SHKhwYfGotkIymBx.pdf](https://picture.iczhiku.com/resource/ieee/SHKhwYfGotkIymBx.pdf)]
 
 Mathuranathan Viswanathan. Digital Modulations using Matlab: Build Simulation Models from Scratch

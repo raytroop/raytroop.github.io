@@ -306,6 +306,8 @@ grid on; legend(["h\_p1" "h\_p2"]); xlim([0,10])
 ### TX FIR Adaptation Algorithm
 
 > Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 8: RX FIR, CTLE, DFE, & Adaptive Eq. [[https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf)]
+>
+> V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link transceiver with adaptive equalization and data recovery," IEEE Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012–1026, Apr. 2005 [[https://sci-hub.ru/10.1109/JSSC.2004.842863](https://sci-hub.ru/10.1109/JSSC.2004.842863)]
 
 *TODO* &#128197;
 
@@ -468,7 +470,7 @@ The alexander PD locks that edge clock (clkedge) is located at zero crossings of
 
 > Faisal A. Musa. "HIGH-SPEED BAUD-RATE CLOCK RECOVERY" [[https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf](https://www.eecg.utoronto.ca/~tcc/thesis-musa-final.pdf)]
 >
-> Faisal A. Musa."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS" [[https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf](https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf)]
+> —."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS" [[https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf](https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf)]
 >
 > Eduardo Fuentetaja. "Analysis of the M&M Clock Recovery Algorithm" [[https://edfuentetaja.github.io/sdr/m_m_analysis/](https://edfuentetaja.github.io/sdr/m_m_analysis/)]
 >
@@ -577,7 +579,7 @@ Hall, Stephen H., and Howard L. Heck. *Advanced Signal Integrity for High-speed 
 
 Oh, Kyung, and Xing Yuan. *High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting*. 1st edition. Prentice Hall, 2011. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiGPFydIQAYdxVx.pdf)]
 
-John M. Cioffi, Chapter 3 - Equalization [[https://cioffi-group.stanford.edu/doc/book/chap3.pdf](https://cioffi-group.stanford.edu/doc/book/chap3.pdf)]
+John M. Cioffi, [[Chapter 3 - Equalization]([https://cioffi-group.stanford.edu/doc/book/chap3.pdf)], [[Chapter 6 - Fundamentals of Synchronization](https://cioffi-group.stanford.edu/doc/book/chap6.pdf)]
 
 Proakis, John G., and Masoud Salehi. Digital Communications. 5th ed. McGraw-Hill, 2008. [[pdf](https://daskalakispiros.com/files/Ebooks/digital-communication-proakis-salehi-5th-edition.pdf)]
 
@@ -674,3 +676,9 @@ Qasim Chaudhari. Maximum Likelihood Estimation of Clock Offset [[https://wireles
 ---
 
 Hongtao Zhang, DesignCon 2016. PAM4 Signaling for 56G Serial Link Applications − A Tutorial [[https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf](https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf)]
+
+---
+
+Qasim Chaudhari. What is a Symbol Timing Offset and How It Distorts the Rx Signal [[https://wirelesspi.com/what-is-a-symbol-timing-offset-and-how-it-distorts-the-rx-signal/](https://wirelesspi.com/what-is-a-symbol-timing-offset-and-how-it-distorts-the-rx-signal/)]
+
+Igor Freire. Symbol Timing Synchronization: A Tutorial [[blog](https://igorfreire.com.br/2016/10/15/symbol-timing-synchronization-tutorial/#Zero-crossing_Timing_Error_Detector_ZC-TED), [code](https://github.com/igorauad/symbol_timing_sync)]

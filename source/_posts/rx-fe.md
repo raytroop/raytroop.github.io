@@ -173,6 +173,8 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 ## Equalization Noise Enhancement
 
 > Advanced Signal Integrity for High-Speed Digital Designs, S. H. Hall and H. L. Heck, John Wiley & Sons, 2009
+>
+> CC Chen, Why CTLE? [[https://youtu.be/zsuJMqadaKY](https://youtu.be/zsuJMqadaKY)]
 
 ![image-20251021211402274](rx-fe/image-20251021211402274.png)
 
@@ -180,6 +182,9 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 
 Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
 
+---
+
+trade-offs between *noise amplification* and *signal equalization*
 
 
 ## input network

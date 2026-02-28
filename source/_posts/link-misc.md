@@ -16,9 +16,60 @@ mathjax: true
 *TODO* &#128197;
 
 
-## matched filter
 
-The filter that minimizes the effect of **channel noise** is the **matched filter**. Unfortunately, if a matched filter is used for HR(f) at the receiver, the overall filter characteristic, He(f), will usually not satisfy the Nyquist characteristic for minimum ISI.
+## Nyquist Criterion & Pulses
+
+> David A. Johns, ECE1392H - Integrated Circuits for Digital Communications - Fall 2001 [[System Overview](https://www.eecg.utoronto.ca/~johns/ece1392/slides/system.pdf)]
+
+*TODO* &#128197;
+
+
+
+## Matched-Filter
+
+> David A. Johns, ECE1392H - Integrated Circuits for Digital Communications - Fall 2001 [[System Overview](https://www.eecg.utoronto.ca/~johns/ece1392/slides/system.pdf)]
+
+The filter that minimizes the effect of **channel noise** is the **matched filter**. Unfortunately, if a matched filter is used for HR(f) at the receiver, the overall filter characteristic, He(f), will usually not satisfy the Nyquist characteristic for minimum ISI
+
+
+
+## Unipolar & Bipolar Non-Return-to-Zero (NRZ)
+
+> Mathuranathan, Line code – demonstration in Matlab and Python [[link](https://www.gaussianwaves.com/2021/01/line-code-demonstration-in-matlab-and-python/)]
+
+![image-20260301001320749](link-misc/image-20260301001320749.png)
+
+![Comparing power spectral densities of bipolar NRZ and unipolar NRZ line codes](link-misc/Power-spectral-density-of-bipolar-NRZ-line-code-1024x794.png)
+
+- For unipolar NRZ line coded signal, the average value of the signal is *not zero* and hence they have a *significant DC component*
+
+  > The DC impulses in the PSD do not carry any information and it also causes the transmission wires to heat up. This is a wastage of communication resource
+
+- The bipolar NRZ signal is devoid of a significant impulse at the zero frequency (*DC component is very close to zero*)
+
+  > Furthermore, it has more power than the unipolar line code (note: PSD curve for bipolar NRZ is slightly higher compared to that of unipolar NRZ). Therefore, bipolar NRZ signals provide better signal-to-noise ratio (SNR) at the receiver.
+
+Both Unipolar and Bipolar NRZ signal lacks embedded clock information, which posses synchronization problems at the receiver when the binary information has long runs of 0s and 1s
+
+
+
+## Baseline Wander
+
+> David A. Johns, ECE1392H - Integrated Circuits for Digital Communications - Fall 2001 [[Equalization](https://www.eecg.utoronto.ca/~johns/ece1392/slides/equalization.pdf)]
+
+![image-20260228231334894](link-misc/image-20260228231334894.png)
+
+![image-20260228231511629](link-misc/image-20260228231511629.png)
+
+> Pete Anslow, Ciena. Baseline wander with FEC [[https://www.ieee802.org/3/bs/public/17_05/anslow_3bs_03_0517.pdf](https://www.ieee802.org/3/bs/public/17_05/anslow_3bs_03_0517.pdf)]
+>
+> Vladimir Dmitriev-Zdorov. Baseline Wander, its Time Domain and Statistical Analysis [[https://ibis.org/summits/feb19/dmitriev-zdorov.pdf](https://ibis.org/summits/feb19/dmitriev-zdorov.pdf)]
+>
+> Pavel Zivny, Tektronix. Baseline Wander: Systematic Approach to Rapid Simulation and Measurement  [[pdf](https://swb.skku.edu/emc/infromation.do?mode=download&articleNo=21945&attachNo=19834)]
+>
+> Update on Performance Studies of 100 Gigabit Ethernet Enabled by Advanced Modulation Formats [[https://www.ieee802.org/3/bm/public/sep12/wei_01_0912_optx.pdf](https://www.ieee802.org/3/bm/public/sep12/wei_01_0912_optx.pdf)]
+
+
 
 
 ## Bandwidth of Digital Waveforms
@@ -333,19 +384,6 @@ The most significant impairments are considered to be the sensitivity to samplin
 > Shafik, Ayman Osama Amin Mohamed. "Equalization Architectures for High Speed ADC-Based Serial I/O Receivers." PhD diss., 2016. [[https://core.ac.uk/download/79652690.pdf](https://core.ac.uk/download/79652690.pdf)]
 
 
-
-
-## Baseline Wander
-
-*TODO* &#128197;
-
-> Pete Anslow, Ciena. Baseline wander with FEC [[https://www.ieee802.org/3/bs/public/17_05/anslow_3bs_03_0517.pdf](https://www.ieee802.org/3/bs/public/17_05/anslow_3bs_03_0517.pdf)]
-> 
-> Vladimir Dmitriev-Zdorov. Baseline Wander, its Time Domain and Statistical Analysis [[https://ibis.org/summits/feb19/dmitriev-zdorov.pdf](https://ibis.org/summits/feb19/dmitriev-zdorov.pdf)]
->
-> Pavel Zivny, Tektronix. Baseline Wander: Systematic Approach to Rapid Simulation and Measurement  [[pdf](https://swb.skku.edu/emc/infromation.do?mode=download&articleNo=21945&attachNo=19834)]
->
-> Update on Performance Studies of 100 Gigabit Ethernet Enabled by Advanced Modulation Formats [[https://www.ieee802.org/3/bm/public/sep12/wei_01_0912_optx.pdf](https://www.ieee802.org/3/bm/public/sep12/wei_01_0912_optx.pdf)]
 
 
 

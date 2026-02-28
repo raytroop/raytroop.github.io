@@ -478,17 +478,19 @@ S_{X_eX_e}(\omega) &= \lim_{N\to \infty}\frac{1}{2N+1}\cdot \mathrm{E}\{|\sum_{n
 
 ## NRZ PSD
 
+> Lecture 26 Autocorrelation Functions of Random Binary Processes [[https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf](https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf)]
+>
+> Lecture 32 Correlation Functions & Power Density Spectrum, Cross-spectral Density [[https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf](https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf)]
+
 ![image-20231111100420675](random/image-20231111100420675.png)
 
 ![image-20231111101322771](random/image-20231111101322771.png)
 
-![image-20231110224237933](random/image-20231110224237933.png)
+![image-20260301000540854](random/image-20260301000540854.png)
 
 
 
-> Lecture 26 Autocorrelation Functions of Random Binary Processes [[https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf](https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-26.pdf)]
->
-> Lecture 32 Correlation Functions & Power Density Spectrum, Cross-spectral Density [[https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf](https://bpb-us-e1.wpmucdn.com/sites.gatech.edu/dist/a/578/files/2003/12/ECE3075A-32.pdf)]
+ note $\color{red}S_x(0)=0$
 
 
 
@@ -503,12 +505,6 @@ S_{X_eX_e}(\omega) &= \lim_{N\to \infty}\frac{1}{2N+1}\cdot \mathrm{E}\{|\sum_{n
 
 
 ![Fig.2 The noise signal, its auto correlation function, and spectral density [2]](random/trnoise.jpg)
-
-
-
-
-
-
 
 
 

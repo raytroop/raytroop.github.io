@@ -264,6 +264,9 @@ $$
 
 $H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enclose{circle}{1}$ , $\enclose{circle}{2}$
 
+- $\mathcal{Re}\{H(f)\}$ must be an *even function*
+
+- $\mathcal{Im}\{H(f)\}$ must be an *odd function*
 
 ### Passivity
 

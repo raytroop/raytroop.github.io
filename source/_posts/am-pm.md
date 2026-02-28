@@ -59,6 +59,13 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 ![image-20251213091900382](am-pm/image-20251213091900382.png)
 
+***Interaction with the Fourier Transform***
+
+*TODO* &#128197;
+
+---
+
+
 ![image-20251213091009754](am-pm/image-20251213091009754.png)
 
 ## Real & Complex Modulation

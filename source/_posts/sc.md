@@ -50,6 +50,8 @@ Christian-Charles Enz. "High precision CMOS micropower amplifiers" [[pdf](https:
 
 Boris Murmann. EE315A VLSI Signal Conditioning Circuits
 
+ELEC-E3530 Integrated Analog Systems D (5 ECTS) [[video](https://youtube.com/playlist?list=PLmK06TkPUUKo-2LmZfhBpbcLTjFOxk2WJ)] [[github](https://github.com/KwantaeKim)]
+
 ---
 
 Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://youtu.be/SL3-9ZMwdJQ](https://youtu.be/SL3-9ZMwdJQ)]

@@ -511,6 +511,8 @@ John M. Cioffi, [[Chapter 3 - Equalization]([https://cioffi-group.stanford.edu/d
 
 Paulo S. R. Diniz, A*daptive Filtering: Algorithms and Practical Implementation, 5th edition* [[pdf](https://picture.iczhiku.com/resource/eetop/WYiRoZIFhjsRrXmN.pdf)]
 
+Haykin, Simon S. *Adaptive Filter Theory*. 5th ed. Prentice Hall, 2014.
+
 Barry, John R., Edward A. Lee, and David G. Messerschmitt. *Digital communication*. Springer, 2003.
 
 Proakis, John G., and Masoud Salehi. *Digital Communications. 5th ed. McGraw-Hill, 2008.* [[pdf](https://daskalakispiros.com/files/Ebooks/digital-communication-proakis-salehi-5th-edition.pdf)]

@@ -17,19 +17,79 @@ mathjax: true
 
 
 
+## Intersymbol Interference (ISI)
+
+> L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]
+
+![image-20260226224415849](link-misc/image-20260226224415849.png)
+
+![image-20260226225158225](link-misc/image-20260226225158225.png)
+
+Nyquist discovered three different methods for pulse shaping that could be used to eliminate ISI
+
+- **Nyquist's First Method (Zero ISI)**: physically unrealizable (i.e., the impulse response would be noncausal and of infinite duration), inaccurate sync will cause ISI
+
+  ![image-20260301165125997](link-misc/image-20260301165125997.png)
+
+- **Nyquist's second method**: allows some ISI to be introduced in a controlled way
+
+- **Nyquist's third method**: area under the $h_e(t)$ pulse within the desired symbol interval, $T_s$, is not zero, but the areas under $h_e(t)$ in adjacent symbol intervals are zero
+
+
+
+
+
 ## Nyquist Criterion & Pulses
 
 > David A. Johns, ECE1392H - Integrated Circuits for Digital Communications - Fall 2001 [[System Overview](https://www.eecg.utoronto.ca/~johns/ece1392/slides/system.pdf)]
 
-*TODO* &#128197;
+![image-20260301175835124](link-misc/image-20260301175835124.png)
+
+> ![image-20260301171631609](link-misc/image-20260301171631609.png)
+
+![image-20260301165454919](link-misc/image-20260301165454919.png)
 
 
 
-## Matched-Filter
+## Matched-Filter (MF)
 
 > David A. Johns, ECE1392H - Integrated Circuits for Digital Communications - Fall 2001 [[System Overview](https://www.eecg.utoronto.ca/~johns/ece1392/slides/system.pdf)]
 
-The filter that minimizes the effect of **channel noise** is the **matched filter**. Unfortunately, if a matched filter is used for HR(f) at the receiver, the overall filter characteristic, He(f), will usually not satisfy the Nyquist characteristic for minimum ISI
+![image-20260301175451088](link-misc/image-20260301175451088.png)
+
+![image-20260301175553715](link-misc/image-20260301175553715.png)
+
+---
+
+![image-20260301175653355](link-misc/image-20260301175653355.png)
+
+
+
+## Noise Enhancement in Linear Equalizers
+
+> John M. Cioffi, Lecture 13, Thursday February 19th 2026 - Intersymbol Interference, MMSE, and SNR [[https://cioffi-group.stanford.edu/ee379a/Lectures/L13.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L13.pdf)]
+>
+> —, Lecture 14, Tuesday February 24th 2026 - Linear Equalizers [[https://cioffi-group.stanford.edu/ee379a/Lectures/L14.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L14.pdf)]
+
+![image-20260226223722288](link-misc/image-20260226223722288.png)
+
+![image-20260226223806023](link-misc/image-20260226223806023.png)
+
+> ***Shannon–Hartley theorem***
+>
+> ![image-20260226231916346](link-misc/image-20260226231916346.png)
+
+![image-20260226225540962](link-misc/image-20260226225540962.png)
+
+
+
+---
+
+> David A. Johns, ECE1392H - Integrated Circuits for Digital Communications - Fall 2001 [[Introduction](https://www.eecg.utoronto.ca/~johns/ece1392/slides/intro.pdf)]
+
+![image-20260301174746547](link-misc/image-20260301174746547.png)
+
+![image-20260301174712835](link-misc/image-20260301174712835.png)
 
 
 
@@ -60,6 +120,8 @@ Both Unipolar and Bipolar NRZ signal lacks embedded clock information, which pos
 ![image-20260228231334894](link-misc/image-20260228231334894.png)
 
 ![image-20260228231511629](link-misc/image-20260228231511629.png)
+
+---
 
 > Pete Anslow, Ciena. Baseline wander with FEC [[https://www.ieee802.org/3/bs/public/17_05/anslow_3bs_03_0517.pdf](https://www.ieee802.org/3/bs/public/17_05/anslow_3bs_03_0517.pdf)]
 >

@@ -214,32 +214,6 @@ where $W$ is sampling frequency in Hz
 
 
 
-
-## Zero-order hold (ZOH)
-
-![image-20240928101832121](ss-insight/image-20240928101832121.png)
-$$
-h_{ZOH}(t) = \text{rect}(\frac{t}{T} - \frac{1}{2}) = \left\{ \begin{array}{cl}
-1 & : \ 0 \leq t \lt T \\
-0 & : \ \text{otherwise}
-\end{array} \right.
-$$
-The effective frequency response is the continuous Fourier transform of the impulse response
-$$
-H_{ZOH}(f) = \mathcal{F}\{h_{ZOH}(t)\} = T\frac{1-e^{j2\pi fT}}{j2\pi fT}=Te^{-j\pi fT}\text{sinc}(fT)
-$$
-where $\text{sinc}(x)$ is the normalized sinc function $\frac{\sin(\pi x)}{\pi x}$
-
-The Laplace transform transfer function of the ZOH is found by substituting $s=j2\pi f$
-$$
-H_{ZOH}(s) = \mathcal{L}\{h_{ZOH}(t)\}=\frac{1-e^{-sT}}{s}
-$$
-
-
-> ![image-20240928103227690](ss-insight/image-20240928103227690.png)
-
-
-
 ## frequency convention
 
 - radian frequency $\omega_0$ in **rad/s**

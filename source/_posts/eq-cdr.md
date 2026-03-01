@@ -293,6 +293,11 @@ There are three major ***MMSE***-based algorithms:
 - normalized least mean square (**NLMS**)
 - recursive least square (**RLS**)
 
+![image-20260226230127894](eq-cdr/image-20260226230127894.png)
+
+- ZFS eliminates the ISI only at the sampling points that correspond to the equalizer taps. The equalized pulse shows ISI in the intervals between the sample points and at sample points outside the equalizer
+- The Minimum Mean-Square Error Linear Equalizer (MMSE-LE) *balances **ISI reduction** and **noise enhancement***. The MMSE-LE always performs as well as, or better than, the ZFE
+
 
 
 

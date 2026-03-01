@@ -15,9 +15,8 @@ mathjax: true
 
 > Ahmed Ali, ISSCC 2021 T5: Calibration Techniques in ADCs [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf)]
 >
-> Jiang, Xicheng, ed. *Digitally-Assisted Analog and Analog-Assisted Digital IC Design*. Cambridge: Cambridge University Press, 2015.
 
-
+*TODO* &#128197;
 
 ### Offset Calibration
 

@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-Jitter separation lets you learn if the components of jitter are random or deterministic. That is, if they are caused by crosstalk, channel loss, or some other phenomenon. The identification of jitter and noise sources is critical when debugging failure sources in the transmission of high-speed serial signals
+**Jitter separation** lets you learn if the components of jitter are random or deterministic. That is, if they are caused by crosstalk, channel loss, or some other phenomenon. The identification of jitter and noise sources is critical when debugging failure sources in the transmission of high-speed serial signals
 
 - Tail Fit Method
 - Spectral method
@@ -159,7 +159,15 @@ $$
 
 ## Reference
 
-Mike Li. 2007. Jitter, noise, and signal integrity at high-speed (First. ed.). Prentice Hall Press, USA.
+Li, Mike Peng. *Jitter, Noise, and Signal Integrity at High- Speed*. Prentice Hall, 2008.
+
+—,DesignCon2007, *Simultaneous Jitter Analysis in Time, Frequency, and Statistical Domains and Their Interrelationships* [[pdf](https://www.magazines007.com/pdf/DesignCon_Mike_Li.pdf)]
+
+—,DesignCon2023, *Accuracy and Challenges of PAM4 jitter and noise measurements for >100Gbps Serial Links* [[pdf](https://mys.mapyourshow.com/mys_shared/dcon23/handouts/PAPER_8_AccuracyChallengesPAM4JitterNoiseMeasurements_Nourzad.pdf)]
+
+—, "A new method for jitter decomposition through its distribution tail fitting," International Test Conference 1999. Proceedings (IEEE Cat. No.99CH37034), 1999, pp. 788-794, [[https://sci-hub.jp/10.1109/TEST.1999.805809](https://sci-hub.jp/10.1109/TEST.1999.805809)]
+
+---
 
 [余宥浚 Jacky Yu, Keysight Taiwan AEO, Advanced Jitter and Eye-Diagram Analysis](https://keysightevent.com/191023/handout/d)
 
@@ -180,7 +188,5 @@ E. Balestrieri, L. De Vito, F. Lamonaca, F. Picariello, S. Rapuano and I. Tudosa
 McClure, Mark Scott. "Digital jitter measurement and separation." PhD diss., 2005.
 
 Ren, Nan, Zaiming Fu, Shengcu Lei, Hanglin Liu, and Shulin Tian. "Jitter generation model based on timing modulation and cross point calibration for jitter decomposition." Metrology and Measurement Systems 28, no. 1 (2021).
-
-M. P. Li, J. Wilstrup, R. Jessen and D. Petrich, "A new method for jitter decomposition through its distribution tail fitting," International Test Conference 1999. Proceedings (IEEE Cat. No.99CH37034), 1999, pp. 788-794, doi: 10.1109/TEST.1999.805809.
 
 K. Bidaj, J. -B. Begueret and J. Deroo, "RJ/DJ jitter decomposition technique for high speed links," *2016 IEEE International Conference on Electronics, Circuits and Systems (ICECS)*  [[https://sci-hub.se/10.1109/ICECS.2016.7841269](https://sci-hub.se/10.1109/ICECS.2016.7841269)]

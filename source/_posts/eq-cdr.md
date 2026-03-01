@@ -103,6 +103,12 @@ There are three major ***MMSE***-based algorithms:
 
 ![image-20260302002909317](eq-cdr/image-20260302002909317.png)
 
+> CC Chen, **Why Background EQ Adaptation?** [[https://youtu.be/l46OesuNfp4](https://youtu.be/l46OesuNfp4)]
+>
+> ![image-20260302003217588](eq-cdr/image-20260302003217588.png)
+
+
+
 
 
 ###  Sign-Sign LMS (SS-LMS)

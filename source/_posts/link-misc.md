@@ -15,7 +15,11 @@ mathjax: true
 
 *TODO* &#128197;
 
+## SNR, BER of m-PAM
 
+> David A. Johns, ECE1392H - Integrated Circuits for Digital Communications - Fall 2001 [[System Overview](https://www.eecg.utoronto.ca/~johns/ece1392/slides/system.pdf)]
+
+*TODO* &#128197;
 
 ## Intersymbol Interference (ISI)
 

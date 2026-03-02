@@ -305,13 +305,29 @@ grid on; legend(["h\_p1" "h\_p2"]); xlim([0,10])
 
 
 
-### TX FIR Adaptation Algorithm
+### TX FFE with Sign-Sign LMS
 
 > Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 8: RX FIR, CTLE, DFE, & Adaptive Eq. [[https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf)]
 >
 > V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link transceiver with adaptive equalization and data recovery," IEEE Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012–1026, Apr. 2005 [[https://sci-hub.ru/10.1109/JSSC.2004.842863](https://sci-hub.ru/10.1109/JSSC.2004.842863)]
 
-*TODO* &#128197;
+![image-20260303003640574](eq-cdr/image-20260303003640574.png)
+
+![image-20260303004118430](eq-cdr/image-20260303004118430.png)
+
+![image-20260303004717273](eq-cdr/image-20260303004717273.png)
+$$
+dLev_{n+1} = dLev_n - \frac{\Delta_{dLev}}{2}\left(\frac{\partial e_n^2}{\partial dLev_n}\right) = dLev_n - \Delta _{dLev} e_n\left(\frac{\partial (dLev_n-y_n)}{\partial dLev_n}\right) = \color{red} dLev_n - \Delta _{dLev} e_n
+$$
+note $e_n = dLev_n-y_n$
+
+---
+
+> Kwangho Lee, SNU phd thesis, *Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector* [[pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
+
+![image-20260303005850185](eq-cdr/image-20260303005850185.png)
+
+note $e[n] = d[n] - Dlev_n\cdot tx[n]$
 
 
 
@@ -499,8 +515,6 @@ Then, $h_{-1}$ and $h_1$ are same, which is desired
 
 
 
-
-
 ## reference
 
 Hall, Stephen H., and Howard L. Heck. *Advanced Signal Integrity for High-speed Digital Designs*. Wiley : IEEE, 2009 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIFhWWoIkGkuXXv.pdf)]
@@ -532,6 +546,8 @@ Masum Hossain, ISSCC2023 T11: "Digital Equalization and Timing Recovery Techniqu
 Vivek Telang, 2012, Equalization for High-Speed Serdes: System-level Comparison of Analog and Digital Techniques [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_08_Telang.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_08_Telang.pdf)]
 
 Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
+
+A. Amirkhany, "Basics of Clock and Data Recovery Circuits: Exploring High-Speed Serial Links," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 1, pp. 25-38, Winter 2020 
 
 ---
 

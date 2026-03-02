@@ -21,6 +21,25 @@ mathjax: true
 
 *TODO* &#128197;
 
+![image-20260302223217156](link-misc/image-20260302223217156.png)
+
+![image-20260302223247382](link-misc/image-20260302223247382.png)
+
+> $S_m$ Google AI mode [[https://share.google/aimode/BzYr2logpVTVs83LQ](https://share.google/aimode/BzYr2logpVTVs83LQ)]
+
+```matlab
+snr_mpam = @(m,simga) 10*log10((4^m-1)/simga^2/3);
+
+sigma = 0.1547;
+
+SNR_m2 = snr_mpam(2, sigma);  % 23.1999
+SNR_m3 = snr_mpam(3, sigma);  % 29.4324
+```
+
+
+
+
+
 ## Intersymbol Interference (ISI)
 
 > L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]

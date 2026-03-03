@@ -12,7 +12,7 @@ mathjax: true
 
 > David Johns. ECE1392H - Integrated Circuits for Digital Communications - Fall 2001: [[Timing Recovery](https://www.eecg.utoronto.ca/~johns/ece1392/slides/timing.pdf)]
 
-*TODO* &#128197;
+![image-20260303212351804](digitally-enhanced/image-20260303212351804.png)
 
 
 

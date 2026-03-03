@@ -69,61 +69,6 @@ Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions 
 - because of the nonlinearity of the DFE response, it must be modeled in the *time domain*  
 
 
-
-##  ZFS vs MMSE
-
-> ***m**inimum **m**ean **s**quared **e**rror (**MMSE**)*
-
-There are three major ***MMSE***-based algorithms: 
-
-- least mean square (***LMS***),
-- normalized least mean square (**NLMS**)
-- recursive least square (**RLS**)
-
-![image-20260302001712288](eq-cdr/image-20260302001712288.png)
-
-
-
-![image-20260226230127894](eq-cdr/image-20260226230127894.png)
-
-- ZFS eliminates the ISI only at the sampling points that correspond to the equalizer taps. The equalized pulse shows ISI in the intervals between the sample points and at sample points outside the equalizer
-- The Minimum Mean-Square Error Linear Equalizer (MMSE-LE) *balances **ISI reduction** and **noise enhancement***. The MMSE-LE always performs as well as, or better than, the ZFE
-
-
-
-## LMS (Least-Mean-Square) algorithm
-
-![image-20260227221735879](eq-cdr/image-20260227221735879.png)
-
-![image-20260227222430321](eq-cdr/image-20260227222430321.png)
-
----
-
-> Qasim Chaudhari. Least Mean Square (LMS) Equalizer – A Tutorial [[https://wirelesspi.com/least-mean-square-lms-equalizer-a-tutorial/](https://wirelesspi.com/least-mean-square-lms-equalizer-a-tutorial/)]
-
-![image-20260302002909317](eq-cdr/image-20260302002909317.png)
-
-> CC Chen, **Why Background EQ Adaptation?** [[https://youtu.be/l46OesuNfp4](https://youtu.be/l46OesuNfp4)]
->
-> ![image-20260302003217588](eq-cdr/image-20260302003217588.png)
-
-
-
-
-
-###  Sign-Sign LMS (SS-LMS)
-
-
-> E. -H. Chen et al., "Near-Optimal Equalizer and Timing Adaptation for I/O Links Using a BER-Based Metric," in IEEE Journal of Solid-State Circuits, vol. 43, no. 9, pp. 2144-2156, Sept. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2001871](https://sci-hub.ru/10.1109/JSSC.2008.2001871)]
->
-> Jinhyung Lee, Design of High-Speed Receiver for Video Interface with Adaptive Equalization; Phd thesis, August 2019. [[thesis link](http://dcollection.snu.ac.kr/common/orgView/000000157003)]
-
-*TODO* &#128197;
-
-
-
-
-
 ## TX FFE
 
 > Jose E. Schutt-Aine, Spring 2024 ECE 546 Lecture - 27 Equalization [[http://emlab.uiuc.edu/ece546/Lect_27.pdf](http://emlab.uiuc.edu/ece546/Lect_27.pdf)]
@@ -148,6 +93,8 @@ There are three major ***MMSE***-based algorithms:
 
 ![image-20251102114741833](eq-cdr/image-20251102114741833.png)
 
+> **Toeplitz matrix**: transforms discrete convolution into $y=Ax$, where $x$ is a flattened input vector [[Google AI Mode](a flattened input vector)]
+
 ![tx-ffe-coef-conv.drawio](eq-cdr/tx-ffe-coef-conv.drawio.svg)
 
 ---
@@ -158,6 +105,10 @@ There are three major ***MMSE***-based algorithms:
 
 ![tx-ffe-coef-sel.drawio](eq-cdr/tx-ffe-coef-sel.drawio.svg)
 
+$$\begin{align}
+E^TE &=(W^T H^T - Y_{des}^T)(HW-Y_{des})=W^TH^THW+Y_{des}^TY_{des}-W^TH^TY_{des}-Y_{des}^THW \\
+&=W^TH^THW+Y_{des}^TY_{des}-2Y_{des}^THW
+\end{align}$$
 ![image-20260116224051584](eq-cdr/image-20260116224051584.png)
 
 ```matlab
@@ -303,13 +254,53 @@ stem(ht_p1, 'LineWidth', 2); hold on; stem(ht_p2, 'LineWidth', 2)
 grid on; legend(["h\_p1" "h\_p2"]); xlim([0,10])
 ```
 
+##  ZFS vs MMSE
+
+> ***m**inimum **m**ean **s**quared **e**rror (**MMSE**)*
+
+There are three major ***MMSE***-based algorithms: 
+
+- least mean square (***LMS***),
+- normalized least mean square (**NLMS**)
+- recursive least square (**RLS**)
+
+![image-20260302001712288](eq-cdr/image-20260302001712288.png)
 
 
-### TX FFE with Sign-Sign LMS
+
+![image-20260226230127894](eq-cdr/image-20260226230127894.png)
+
+- ZFS eliminates the ISI only at the sampling points that correspond to the equalizer taps. The equalized pulse shows ISI in the intervals between the sample points and at sample points outside the equalizer
+- The Minimum Mean-Square Error Linear Equalizer (MMSE-LE) *balances **ISI reduction** and **noise enhancement***. The MMSE-LE always performs as well as, or better than, the ZFE
+
+
+
+
+## LMS (Least-Mean-Square)
+
+![image-20260227221735879](eq-cdr/image-20260227221735879.png)
+
+![image-20260227222430321](eq-cdr/image-20260227222430321.png)
+
+---
+
+> Qasim Chaudhari. Least Mean Square (LMS) Equalizer – A Tutorial [[https://wirelesspi.com/least-mean-square-lms-equalizer-a-tutorial/](https://wirelesspi.com/least-mean-square-lms-equalizer-a-tutorial/)]
+
+![image-20260302002909317](eq-cdr/image-20260302002909317.png)
+
+> CC Chen, **Why Background EQ Adaptation?** [[https://youtu.be/l46OesuNfp4](https://youtu.be/l46OesuNfp4)]
+>
+> ![image-20260302003217588](eq-cdr/image-20260302003217588.png)
+
+
+
+### TX with SS-LMS
 
 > Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 8: RX FIR, CTLE, DFE, & Adaptive Eq. [[https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf)]
 >
 > V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link transceiver with adaptive equalization and data recovery," IEEE Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012–1026, Apr. 2005 [[https://sci-hub.ru/10.1109/JSSC.2004.842863](https://sci-hub.ru/10.1109/JSSC.2004.842863)]
+>
+> —, "Channel-Limited High-Speed Links: Modeling, Analysis and Design," PhD. Thesis, Stanford University, Sep. 2004. [[pdf](https://vlsiweb.stanford.edu/people/alum/pdf/0409_Stojanovic_Link_Opt.pdf)]
 
 ![image-20260303003640574](eq-cdr/image-20260303003640574.png)
 
@@ -331,13 +322,14 @@ note $e[n] = d[n] - Dlev_n\cdot tx[n]$
 
 
 
-## RX FFE
+###  RX with SS-LMS
+
+
+> E. -H. Chen et al., "Near-Optimal Equalizer and Timing Adaptation for I/O Links Using a BER-Based Metric," in IEEE Journal of Solid-State Circuits, vol. 43, no. 9, pp. 2144-2156, Sept. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2001871](https://sci-hub.ru/10.1109/JSSC.2008.2001871)]
+>
+> Jinhyung Lee, Design of High-Speed Receiver for Video Interface with Adaptive Equalization; Phd thesis, August 2019. [[thesis link](http://dcollection.snu.ac.kr/common/orgView/000000157003)]
 
 *TODO* &#128197;
-
-
-
-
 
 
 

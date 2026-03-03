@@ -420,9 +420,9 @@ The alexander PD locks that edge clock (clkedge) is located at zero crossings of
 >
 > Eduardo Fuentetaja. "Analysis of the M&M Clock Recovery Algorithm" [[https://edfuentetaja.github.io/sdr/m_m_analysis/](https://edfuentetaja.github.io/sdr/m_m_analysis/)]
 >
-> Liu, Tao & Li, Tiejun & Lv, Fangxu & Liang, Bin & Zheng, Xuqiang & Wang, Heming & Wu, Miaomiao & Lu, Dechao & Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits. Electronics. 10. 1888. 10.3390/electronics10161888. 
+> Liu, Tao & Li, Tiejun & Lv, Fangxu & Liang, Bin & Zheng, Xuqiang & Wang, Heming & Wu, Miaomiao & Lu, Dechao & Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits. Electronics. [[10. 1888. 10.3390/electronics10161888.](https://www.mdpi.com/2079-9292/10/16/1888/pdf?version=1628492599)] 
 >
-> Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. 10.21203/rs.3.rs-1817774/v1. 
+> Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. [[10.21203/rs.3.rs-1817774/v1](https://www.researchgate.net/publication/362028333_Analysis_of_Mueller-Muller_Clock_and_Data_Recovery_Circuits_with_a_Linearized_Model)]
 >
 > Baud-Rate CDRs [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
 >
@@ -438,19 +438,19 @@ The alexander PD locks that edge clock (clkedge) is located at zero crossings of
 
 Suppose 1-precursor, 1-postcursor — $y_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$
 $$
-\color{magenta}E[y_k\cdot d_{k-1}] - E[y_k\cdot d_{d+1}] = E[|d_{k-1}|^2h_{1}] - E[|d_{k+1}|^2h_{-1}] =h_1-h_{-1}
+\color{red}E[y_k\cdot d_{k-1}] - E[y_k\cdot d_{k+1}] = E[|d_{k-1}|^2h_{1}] - E[|d_{k+1}|^2h_{-1}] =h_1-h_{-1}
 $$
 MMPD infers the channel response from baud-rate samples of the received data, the adaptation aligns the sampling clock such that pre-cursor is equal to the post-cursor in the *pulse response*
 
 ![image-20260112220639499](eq-cdr/image-20260112220639499.png)
 
-
+> note $E[y_k\cdot d_{k+1}] = E[y_{k-1}\cdot d_{k}] = h_{-1}$
 
 ![image-20260112225032307](eq-cdr/image-20260112225032307.png)
 
 Suppose $x_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$ and $x_{k-1} = d_{k-2}h_1 + d_{k-1} h_0 + d_{k}h_{-1}$
 $$
-\color{magenta}E\{z_k\} = \frac{1}{2} E\{|d_{k-1}|^2h_1\} - \frac{1}{2} E\{|d_{k}|^2h_{-1}\} = \frac{1}{2}(h_1 - h_{-1})
+\color{red}E\{z_k\} = \frac{1}{2} E\{|d_{k-1}|^2h_1\} - \frac{1}{2} E\{|d_{k}|^2h_{-1}\} = \frac{1}{2}(h_1 - h_{-1})
 $$
 ![image-20240808001449664](eq-cdr/image-20240808001449664.png)
 

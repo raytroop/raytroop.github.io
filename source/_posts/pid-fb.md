@@ -108,6 +108,9 @@ $$
 > Saurabh Saxena, IIT Madras. CICC2022 Clocking for Serial Links - Frequency and Jitter Requirements, Phase-Locked Loops, Clock and Data Recovery
 
 
+## derivative control
+
+> Introduction: PID Controller Design. [[https://ctms.engin.umich.edu/CTMS/?example=Introduction&section=ControlPID](https://ctms.engin.umich.edu/CTMS/?example=Introduction&section=ControlPID)]
 
 
 

@@ -7,6 +7,11 @@ categories:
 mathjax: true
 ---
 
+
+## dither
+
+> David Johns. ECE1392H - Integrated Circuits for Digital Communications - Fall 2001: [[Timing Recovery](https://www.eecg.utoronto.ca/~johns/ece1392/slides/timing.pdf)]
+
 *TODO* &#128197;
 
 

@@ -7,6 +7,10 @@ categories:
 mathjax: true
 ---
 
+## PAM-4 pattern generation
+
+> Keysight Technologies PAM-4 Design Challenges and the Implications on Test [[pdf](https://assets-us-01.kc-usercontent.com/ecb176a6-5a2e-0000-8943-84491e5fc8d1/868a2e18-ec19-4feb-919c-56d07e120214/KS_PAM-4_Design_Challenges_5992-0527EN.pdf)]
+
 
 
 ## PRQS (pseudo random quaternary sequence)

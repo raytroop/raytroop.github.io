@@ -513,6 +513,10 @@ During adapting,  we make
 
 Then, $h_{-1}$ and $h_1$ are same, which is desired
 
+### symmetrical pulse
+
+> Avago Technologies, US8649476B2 Adjusting sampling phase in a baud-rate CDR using timing skew [[pdf](https://patentimages.storage.googleapis.com/03/d4/ec/906e619ce1d719/US8649476.pdf)]
+
 
 
 ## reference

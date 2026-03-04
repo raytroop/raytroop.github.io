@@ -301,6 +301,8 @@ There are three major ***MMSE***-based algorithms:
 > V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link transceiver with adaptive equalization and data recovery," IEEE Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012–1026, Apr. 2005 [[https://sci-hub.ru/10.1109/JSSC.2004.842863](https://sci-hub.ru/10.1109/JSSC.2004.842863)]
 >
 > —, "Channel-Limited High-Speed Links: Modeling, Analysis and Design," PhD. Thesis, Stanford University, Sep. 2004. [[pdf](https://vlsiweb.stanford.edu/people/alum/pdf/0409_Stojanovic_Link_Opt.pdf)]
+>
+> —, US7423454B2. *High speed signaling system with adaptive transmit pre-emphasis* [[pdf](https://patentimages.storage.googleapis.com/78/37/fb/bb72b025139a5f/US7423454.pdf)]
 
 ![image-20260303003640574](eq-cdr/image-20260303003640574.png)
 

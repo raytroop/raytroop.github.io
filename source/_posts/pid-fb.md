@@ -114,6 +114,30 @@ $$
 
 
 
+## Stability Criterion
+
+### Barkhausen criteria
+
+Barkhausen criteria are *necessary* but **not sufficient conditions** for sustainable **oscillations**
+
+![image-20240720090654883](pid-fb/image-20240720090654883.png)
+
+it simply *"latches up"* rather than oscillates
+
+### Nyquist Stability Criterion
+
+> Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers[[https://www.cppsim.com/CommCircuitLectures/lec15.pdf](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
+>
+> *Zoran Gajic*. Nyquist Stability Criterion [[https://eceweb1.rutgers.edu/~gajic/psfiles/nyquist.pdf](https://eceweb1.rutgers.edu/~gajic/psfiles/nyquist.pdf)]
+
+*TODO* &#128197;
+
+![image-20251122095944300](pid-fb/image-20251122095944300.png)
+
+![image-20251122095709631](pid-fb/image-20251122095709631.png)
+
+
+
 ## reference
 
 Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. Feedback Control of Dynamic Systems, Global Edition (8th Edition). Pearson. [[pdf](https://mrce.in/ebooks/Feedback%20Control%20of%20Dynamic%20Systems%208th%20Ed.pdf)]

@@ -37,6 +37,49 @@ mathjax: true
 
 
 
+## Clocking Structures
+
+> Mark Horowitz, Lecture 6 Clocked Elements [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/lect_06.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/lect_06.pdf)]
+>
+> Ran Ginosar, ISCAS2008 Tutorial-4: *Synchronization Circuits for Multiple Clock Domian SoCs*
+
+***Synchronous***, ***Mesochronous***, ***Plesiochronous***
+
+![image-20250815221238051](clock-dist/image-20250815221238051.png)
+
+![image-20260304220804525](clock-dist/image-20260304220804525.png)
+
+
+
+## Cascaded PLLs
+
+> Chembiyan T, A General Theory of Cascaded PLL Design [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_theory-of-cascaded-pll-activity-7331339385952448512-ZwxN?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
+>
+> Nicola Da Dalt, ISSCC 2012 T5: JITTER basic and advanced concepts, statistics and applications [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf)]
+>
+> —. ESSCIRC 2019 Tutorials: Jitter in Wireline and Data Converter Applications [[https://youtu.be/aapkfCeHTrQ](https://youtu.be/aapkfCeHTrQ)]
+
+To understand the impact of the clock jitter on the performance of a wireline system, *the transfer functions of the PLL in the transmitter side* and *the CDR loop in the receiver* should be taken into consideration
+
+![image-20250524111908032](clock-dist/image-20250524111908032.png)
+
+
+
+![image-20250524091655525](clock-dist/image-20250524091655525.png)
+
+![image-20250524222625524](clock-dist/image-20250524222625524.png)
+
+
+
+> *the **minimum** jitter* occurs at the point where the *transmit PLL UGB is **minimum*** and the *CDR UGB is **maximized***
+
+- the net rms jitter that impacts the performance of a wireline transceiver is much lower than the rms jitter of the transmit PLL
+- the jitter requirements of the transmit PLL on the wireline system is much more relaxed compared to the wireless transceiver  
+
+
+
+
+
 ## AC-coupled buffer & DCC
 
 The amount of correction can be set by intentional injection of an *offset current* into the summing input node of INV, ***threshold-adjustable inverter***

@@ -33,27 +33,7 @@ The average value of output pulse are same because of **same DC gain (0dB)**
 
 
 
-## Stability Criterion
 
-### Barkhausen criteria
-
-Barkhausen criteria are *necessary* but **not sufficient conditions** for sustainable **oscillations**
-
-![image-20240720090654883](ss-insight/image-20240720090654883.png)
-
-it simply *"latches up"* rather than oscillates
-
-### Nyquist Stability Criterion
-
-> Michael H. Perrott, High Speed Communication Circuits and Systems, Lecture 15 Integer-N Frequency Synthesizers[[https://www.cppsim.com/CommCircuitLectures/lec15.pdf](https://www.cppsim.com/CommCircuitLectures/lec15.pdf)]
->
-> *Zoran Gajic*. Nyquist Stability Criterion [[https://eceweb1.rutgers.edu/~gajic/psfiles/nyquist.pdf](https://eceweb1.rutgers.edu/~gajic/psfiles/nyquist.pdf)]
-
-*TODO* &#128197;
-
-![image-20251122095944300](ss-insight/image-20251122095944300.png)
-
-![image-20251122095709631](ss-insight/image-20251122095709631.png)
 
 ## Incrementally linear system
 

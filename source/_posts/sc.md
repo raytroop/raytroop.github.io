@@ -38,6 +38,14 @@ $$
 
 ![image-20260301154610913](sc/image-20260301154610913.png)
 
+---
+
+***PSS+PAC SImulaiton*** [[https://youtu.be/VLdcY76V9Ss](https://youtu.be/VLdcY76V9Ss)]
+
+![image-20260304214124216](sc/image-20260304214124216.png)
+
+
+
 ## Sample-and-Hold (SH)
 
 > ***Zero-Order Hold***
@@ -118,7 +126,7 @@ $$
 
 Boris Murmann. EE315A VLSI Signal Conditioning Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SyIgQJfyzyuDhBXc.pdf)]
 
-Kwantae Kim. ELEC-E3530 Integrated Analog Systems D (5 ECTS) [[video](https://youtube.com/playlist?list=PLmK06TkPUUKo-2LmZfhBpbcLTjFOxk2WJ)] [[github](https://github.com/KwantaeKim)]
+Kwantae Kim. ELEC-E3530 Integrated Analog Systems D (5 ECTS) [[video](https://youtube.com/playlist?list=PLmK06TkPUUKo-2LmZfhBpbcLTjFOxk2WJ)] [[github](https://github.com/KwantaeKim/ELEC-E3530)]
 
 R. S. Ashwin Kumar, Analog circuits for signal processing [[https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html](https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html)]
 

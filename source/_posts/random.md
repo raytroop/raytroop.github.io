@@ -249,6 +249,8 @@ $$
 
 > Norbert Wiener proved this theorem for the case of a ***deterministic function*** in 1930; Aleksandr Khinchin later formulated an analogous result for ***stationary stochastic processes*** and published that probabilistic analogue in 1934. Albert Einstein explained, without proofs, the idea in a brief two-page memo in 1914
 
+### Continuous time
+
 $x(t)$, Fourier transform over a limited period of time $[-T/2, +T/2]$ , $X_T(f) = \int_{-T/2}^{T/2}x(t)e^{-j2\pi ft}dt$
 
 
@@ -279,7 +281,7 @@ S_x(f) &= \int_{-\infty}^{+\infty}R_x(\tau)e^{-j2\pi f \tau}d\tau \\
 R_x(\tau) &= \int_{-\infty}^{+\infty}S_x(f)e^{j2\pi f \tau}df
 \end{align}$$
 
-Note: $S_x(f)$ in *Hz*  and inverse Fourier Transform in *Hz* ($\frac{1}{2\pi}d\omega = df$)
+Note: $S_x(f)$ in ***Hz***  and inverse Fourier Transform in *Hz* ($\frac{1}{2\pi}d\omega = df$)
 
 > Topic 6 Random Processes and Signals [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf)]
 >
@@ -324,7 +326,9 @@ due to $\cos(\omega_0 t +\phi_0) = \sin(\omega_0 t +\phi_0 + \frac{\pi}{2})$
 
 
 
-### Energy Signal
+---
+
+***Energy Signal***
 
 ![image-20240910004411501](random/image-20240910004411501.png)
 
@@ -334,11 +338,31 @@ due to $\cos(\omega_0 t +\phi_0) = \sin(\omega_0 t +\phi_0 + \frac{\pi}{2})$
 
 ### Discrete time
 
+> Diniz PSR, da Silva EAB, Netto SL. *Digital Signal Processing: System Analysis and Design*. 2nd ed. Cambridge University Press; 2010.
+
+![image-20260304232947364](random/image-20260304232947364.png)
+
+***filtered by a linear time-invariant system***
+
+![image-20260304233139451](random/image-20260304233139451.png)
+
+---
+
+![image-20260304233253325](random/image-20260304233253325.png)
+
+> [[http://pfister.ee.duke.edu/courses/ece485/dtft_table.pdf](http://pfister.ee.duke.edu/courses/ece485/dtft_table.pdf)]
+>
+> ![image-20260304233404003](random/image-20260304233404003.png)
+
+
+
+---
+
 > SIMG-713 Noise and Random Processes Spring 2002 . Lecture 15 Power Spectrum Estimation [[https://www.cis.rit.edu/class/simg713/Lectures/Lecture713-15-4.pdf](https://www.cis.rit.edu/class/simg713/Lectures/Lecture713-15-4.pdf)]
 >
 > Properties of the Fourier Transform for Discrete-Time Signals [[https://www.comm.utoronto.ca/dkundur/course_info/362/EmanHammadDTFT2.pdf](https://www.comm.utoronto.ca/dkundur/course_info/362/EmanHammadDTFT2.pdf)]
 
-![image-20250810165917800](random/image-20250810165917800.png)
+![image-20260304231554434](random/image-20260304231554434.png)
 $$
 \frac{1}{2\pi}F^{-1}\{R_{xx}\}d\omega = \frac{1}{2\pi}F^{-1}\{R_{xx}\}d(2\pi f T)=T\cdot F^{-1}\{R_{xx}\}df = P_{xx}(f)df
 $$
@@ -346,6 +370,11 @@ power spectral density of a *discrete*-time *random* process $\{x(n)\}$ is given
 $$
 P_{xx}(f) =T\cdot F^{-1}\{R_{xx}\}
 $$
+
+---
+
+
+
 
 
 ## Periodic and Cyclostationary Processes

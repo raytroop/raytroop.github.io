@@ -271,6 +271,14 @@ $$
 
 
 
+---
+
+>  2.161 Signal Processing - Continuous and Discrete Fall Term 2008 Lecture 22 [[pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/5af5cf66ca3148b1ef0c6d94284a3382_lecture_22.pdf)]
+
+![image-20260305232711337](random/image-20260305232711337.png)
+
+
+
 ##  LTI Filtering of WSS process
 
 ![image-20240827221945277](random/image-20240827221945277.png)

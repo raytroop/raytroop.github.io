@@ -134,3 +134,9 @@ David Johns, "Integrated Circuits for Digital Communications" [[https://www.eecg
 
 Tai-Haur Kuo "Advanced Analog IC Design for Communications" [[http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html](http://msic.ee.ncku.edu.tw/course/AdvancedAnalogICDesign/AdvancedAnalogICDesign.html)]
 
+---
+
+andrew yu. Understanding Metastability in SAR ADCs: Part II: Asynchronous [[https://github.com/phonon/sar-adc-metastability](https://github.com/phonon/sar-adc-metastability)] [[pdf](https://sci-hub.jp/10.1109/MSSC.2019.2922890)]
+
+oscarmattia. Data Converter Toolbox [[https://github.com/oscarmattia/data_converter_toolbox](https://github.com/oscarmattia/data_converter_toolbox)]
+

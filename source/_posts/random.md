@@ -22,6 +22,29 @@ mathjax: true
 
 
 
+---
+
+***Derivatives of Random Processes***
+
+since $x(t)$ is stationary process, and $y(t) = \frac{dx(t)}{dt}$
+
+Using $R_{yy}(\tau) = h(\tau)*R_{xx}(\tau)*h(-\tau)$
+
+$$\begin{align}
+R_{yy}(\tau) &= \mathcal{F}^{-1}[H(j\omega)\Phi_{xx}(j\omega)H(-j\omega)] \\
+&= \mathcal{F}^{-1}[-(j\omega)^2\Phi_{xx}(j\omega)]
+\end{align}$$
+
+we obtain the autocorrelation function of the output process as
+$$
+R_{yy}(\tau) = -\frac{d^2}{d\tau^2}R_{xx}(\tau)
+$$
+
+
+> Liu Congfeng, Xidian University. *Random Signal Processing: Chapter 5 Linear System: Random Process* [[https://web.xidian.edu.cn/cfliu/files/20121125_153218.pdf](https://web.xidian.edu.cn/cfliu/files/20121125_153218.pdf)]
+>
+> [[https://sharif.ir/~bahram/sp4cl/PapoulisLectureSlides/lectr14.pdf](https://sharif.ir/~bahram/sp4cl/PapoulisLectureSlides/lectr14.pdf)]
+
 
 
 ## Ergodicity
@@ -41,7 +64,7 @@ mathjax: true
 > ECE438 - Laboratory 7: Discrete-Time Random Processes (Week 2) October 6, 2010 [[https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf](https://engineering.purdue.edu/VISE/ee438L/lab7/pdf/lab7b.pdf)]
 
 
-###  Ensemble Averages and Time Averages
+###  Ensemble Averages & Time Averages
 
 > [[https://ece-research.unm.edu/bsanthan/ece541/stat.pdf](https://ece-research.unm.edu/bsanthan/ece541/stat.pdf)]
 >
@@ -51,6 +74,8 @@ mathjax: true
 - **ensemble average**: ensemble-averaged quantities for all members of the ensemble at *a certain time*
 
 ![image-20241116113758119](random/image-20241116113758119.png)
+
+![image-20260305230152167](random/image-20260305230152167.png)
 
 ![image-20241116215119239](random/image-20241116215119239.png)
 
@@ -98,12 +123,9 @@ mathjax: true
 
 
 
+---
 
-
-
-##  LTI Filtering of WSS process
-
-### mean
+***mean***
 
 ![image-20240917104857284](random/image-20240917104857284.png)
 
@@ -111,136 +133,6 @@ mathjax: true
 
 
 
----
-
-![image-20240827221945277](random/image-20240827221945277.png)
-
-### autocorrelation
-
-**deterministic autocorrelation function**
-
-
-
-![image-20240427170024123](random/image-20240427170024123.png)
-
-$$
-R_{yy}(\tau) = h(\tau)*R_{xx}(\tau)*h(-\tau) =R_{xx}(\tau)*h(\tau)*h(-\tau)
-$$
-
-![image-20240907211343832](random/image-20240907211343832.png)
-
-
-
-> why $\overline{R}_{hh}(\tau)  \overset{\Delta}{=} h(\tau)*h(-\tau)$ is autocorrelation ?  the proof is as follows:
-> 
-> $$\begin{align}
->\overline{R}_{hh}(\tau) &= h(\tau)*h(-\tau) \\
-> &= \int_{-\infty}^{\infty}h(x)h(-(\tau - x))dx \\
-> &= \int_{-\infty}^{\infty}h(x)h(-\tau + x)dx \\
-> &=\int_{-\infty}^{\infty}h(x+\tau)h(x)dx
-> \end{align}$$
-
----
-
-
-
-### PSD
-
-![image-20240827222224395](random/image-20240827222224395.png)
-
-![image-20240827222235906](random/image-20240827222235906.png)
-
-
-
-
-
-> Topic 6 Random Processes and Signals [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf)]
->
-> Alan V. Oppenheim, Introduction To Communication, Control, And Signal Processing [[https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf](https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf)]
->
-> Balu Santhanam, Probability Theory & Stochastic Process 2020: LTI Systems and Random Signals  [[https://ece-research.unm.edu/bsanthan/ece541/LTI.pdf](https://ece-research.unm.edu/bsanthan/ece541/LTI.pdf)]
-
-
-
----
-
-**Time Reversal**
-$$
-x(-t) \overset{FT}{\longrightarrow} X(-j\omega)
-$$
-
-
- if $x(t)$ is *real*, then $X(j\omega)$​ has **conjugate symmetry**
-$$
-X(-j\omega) = X^*(j\omega)
-$$
-
-
-### Derivatives of Random Processes
-since $x(t)$ is stationary process, and $y(t) = \frac{dx(t)}{dt}$
-
-Using $R_{yy}(\tau) = h(\tau)*R_{xx}(\tau)*h(-\tau)$
-
-$$\begin{align}
-R_{yy}(\tau) &= \mathcal{F}^{-1}[H(j\omega)\Phi_{xx}(j\omega)H(-j\omega)] \\
-&= \mathcal{F}^{-1}[-(j\omega)^2\Phi_{xx}(j\omega)]
-\end{align}$$
-
-we obtain the autocorrelation function of the output process as
-$$
-R_{yy}(\tau) = -\frac{d^2}{d\tau^2}R_{xx}(\tau)
-$$
-
-
-> Liu Congfeng, Xidian University. *Random Signal Processing: Chapter 5 Linear System: Random Process* [[https://web.xidian.edu.cn/cfliu/files/20121125_153218.pdf](https://web.xidian.edu.cn/cfliu/files/20121125_153218.pdf)]
->
-> [[https://sharif.ir/~bahram/sp4cl/PapoulisLectureSlides/lectr14.pdf](https://sharif.ir/~bahram/sp4cl/PapoulisLectureSlides/lectr14.pdf)]
-
-
-## Periodogram
-
-The periodogram is in fact the Fourier transform of the aperiodic correlation of the windowed data sequence
-
-![image-20240907215822425](random/image-20240907215822425.png)
-
-![image-20240907215957865](random/image-20240907215957865.png)
-
-> ![image-20240907230715637](random/image-20240907230715637.png)
->
-
-### estimating continuous-time stationary random signal
-
-
-![periodogram.drawio](random/periodogram.drawio.svg)
-
-The sequence $x[n]$ is typically multiplied by a *finite*-duration window $w[n]$, since the input to the DFT must be of *finite* duration. This produces the *finite*-length sequence $v[n] = w[n]x[n]$
-
-![image-20240910005608007](random/image-20240910005608007.png)
-
-![image-20240910005927534](random/image-20240910005927534.png)
-
-![image-20240910005723458](random/image-20240910005723458.png)
-
-$$\begin{align}
-\hat{P}_{ss}(\Omega) &= \frac{|V(e^{j\omega})|^2}{LU} \\
-&= \frac{|V(e^{j\omega})|^2}{\sum_{n=0}^{L-1}(w[n])^2} \tag{1}\\
-&= \frac{L|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}(W[k])^2} \tag{2}
-\end{align}$$
-
-![image-20240910010638376](random/image-20240910010638376.png)
-
-That is, by $(1)$
-$$
-\hat{P}_{ss}(\Omega) = T_s\hat{P}_{xx(\omega)} = \frac{T_s|V(e^{j\omega})|^2}{\sum_{n=0}^{L-1}(w[n])^2}=\frac{|V(e^{j\omega})|^2}{f_{res}L\sum_{n=0}^{L-1}(w[n])^2}
-$$
-
-
-That is, by $(2)$
-$$
-\hat{P}_{ss}(\Omega) = T_s\hat{P}_{xx(\omega)} = \frac{T_sL|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}(W[k])^2} = \frac{|V(e^{j\omega})|^2}{f_{res}\sum_{k=0}^{L-1}(W[k])^2}
-$$
-
-> !! *ENBW*
 
 
 
@@ -250,6 +142,12 @@ $$
 > Norbert Wiener proved this theorem for the case of a ***deterministic function*** in 1930; Aleksandr Khinchin later formulated an analogous result for ***stationary stochastic processes*** and published that probabilistic analogue in 1934. Albert Einstein explained, without proofs, the idea in a brief two-page memo in 1914
 
 ### Continuous time
+
+> [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf)]
+>
+> Frank R. Kschischang. The Wiener-Khinchin Theorem [[https://www.comm.utoronto.ca/~frank/notes/wk.pdf](https://www.comm.utoronto.ca/~frank/notes/wk.pdf)]
+
+![image-20240910003805151](random/image-20240910003805151.png)
 
 $x(t)$, Fourier transform over a limited period of time $[-T/2, +T/2]$ , $X_T(f) = \int_{-T/2}^{T/2}x(t)e^{-j2\pi ft}dt$
 
@@ -289,15 +187,9 @@ Note: $S_x(f)$ in ***Hz***  and inverse Fourier Transform in *Hz* ($\frac{1}{2\p
 
 
 
-![image-20240910003805151](random/image-20240910003805151.png)
-
-> [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf)]
->
-> Frank R. Kschischang. The Wiener-Khinchin Theorem [[https://www.comm.utoronto.ca/~frank/notes/wk.pdf](https://www.comm.utoronto.ca/~frank/notes/wk.pdf)]
-
 ---
 
-**Example**
+***Example***
 
 ![image-20240904203802604](random/image-20240904203802604.png)
 
@@ -332,19 +224,17 @@ due to $\cos(\omega_0 t +\phi_0) = \sin(\omega_0 t +\phi_0 + \frac{\pi}{2})$
 
 ![image-20260304232947364](random/image-20260304232947364.png)
 
-***filtered by a linear time-invariant system***
+> ***filtered by a linear time-invariant system***![image-20260304233139451](random/image-20260304233139451.png)
 
-![image-20260304233139451](random/image-20260304233139451.png)
+
 
 ---
 
-![image-20260304233253325](random/image-20260304233253325.png)
+> ACF of discrete-time sinusoid. Google AI Mode [[https://share.google/aimode/IHyr7o8jLUMx2Leb3](https://share.google/aimode/IHyr7o8jLUMx2Leb3)]
 
-> [[http://pfister.ee.duke.edu/courses/ece485/dtft_table.pdf](http://pfister.ee.duke.edu/courses/ece485/dtft_table.pdf)]
->
-> ![image-20260304233404003](random/image-20260304233404003.png)
+![image-20260305224358226](random/image-20260305224358226.png)
 
-
+![image-20260305224328950](random/image-20260305224328950.png)
 
 ---
 
@@ -363,19 +253,139 @@ $$
 
 
 
-### Energy Signal
+### PSD & ESD
 
-![image-20240910004411501](random/image-20240910004411501.png)
+> David Murray. Topic 5 Energy & Power Spectra, and Correlation [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2011/2TF-L5.pdf)]
 
-![image-20240910004421791](random/image-20240910004421791.png)
+***Finite Energy signals & Finite Power signals***
 
-![image-20240910004448439](random/image-20240910004448439.png)
+![image-20260305231350101](random/image-20260305231350101.png)
+
+---
+
+![image-20260305225312430](random/image-20260305225312430.png)
+
+![image-20260305230629208](random/image-20260305230629208.png)
+
+![image-20260305231618933](random/image-20260305231618933.png)
 
 
 
+##  LTI Filtering of WSS process
+
+![image-20240827221945277](random/image-20240827221945277.png)
+
+### CT Deterministic Autocorrelation Function
+
+> Topic 6 Random Processes and Signals [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf)]
+>
+> Alan V. Oppenheim, Introduction To Communication, Control, And Signal Processing [[https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf](https://ocw.mit.edu/courses/6-011-introduction-to-communication-control-and-signal-processing-spring-2010/a6bddaee5966f6e73450e6fe79ab0566_MIT6_011S10_notes.pdf)]
+>
+> Balu Santhanam, Probability Theory & Stochastic Process 2020: LTI Systems and Random Signals  [[https://ece-research.unm.edu/bsanthan/ece541/LTI.pdf](https://ece-research.unm.edu/bsanthan/ece541/LTI.pdf)]
+
+![image-20260305211727250](random/image-20260305211727250.png)
+$$
+R_{yy}(\tau) = h(\tau)*R_{xx}(\tau)*h(-\tau) =R_{xx}(\tau)*h(\tau)*h(-\tau)
+$$
+
+![image-20240907211343832](random/image-20240907211343832.png)
 
 
-## Periodic and Cyclostationary Processes
+
+> why $\overline{R}_{hh}(\tau)  \overset{\Delta}{=} h(\tau)*h(-\tau)$ is autocorrelation ?  the proof is as follows:
+> 
+> $$\begin{align}
+>\overline{R}_{hh}(\tau) &= h(\tau)*h(-\tau) \\
+> &= \int_{-\infty}^{\infty}h(x)h(-(\tau - x))dx \\
+> &= \int_{-\infty}^{\infty}h(x)h(-\tau + x)dx \\
+> &=\int_{-\infty}^{\infty}h(x+\tau)h(x)dx
+> \end{align}$$
+
+---
+
+
+
+![image-20240827222224395](random/image-20240827222224395.png)
+
+![image-20240827222235906](random/image-20240827222235906.png)
+
+---
+
+**Time Reversal**
+$$
+x(-t) \overset{FT}{\longrightarrow} X(-j\omega)
+$$
+
+
+ if $x(t)$ is *real*, then $X(j\omega)$​ has **conjugate symmetry**
+$$
+X(-j\omega) = X^*(j\omega)
+$$
+
+
+
+### DT Deterministic Autocorrelation Function
+
+![image-20260305222010513](random/image-20260305222010513.png)
+
+![image-20260305222059412](random/image-20260305222059412.png)
+
+$$
+c_{hh}[l] = \sum_{k=-\infty}^{\infty}h[k]h[l+k]=\sum_{k=-\infty}^{\infty}h[-l+k]h[k]=\sum_{k=-\infty}^{\infty}h[-(l-k)]h[k]=h[k]*h[-k]
+$$
+![image-20260305223209840](random/image-20260305223209840.png)
+
+
+
+## Periodogram
+
+The periodogram is in fact the Fourier transform of the aperiodic correlation of the windowed data sequence
+
+![image-20240907215822425](random/image-20240907215822425.png)
+
+![image-20240907215957865](random/image-20240907215957865.png)
+
+> ![image-20240907230715637](random/image-20240907230715637.png)
+
+---
+
+***estimating continuous-time stationary random signal***
+
+
+![periodogram.drawio](random/periodogram.drawio.svg)
+
+The sequence $x[n]$ is typically multiplied by a *finite*-duration window $w[n]$, since the input to the DFT must be of *finite* duration. This produces the *finite*-length sequence $v[n] = w[n]x[n]$
+
+![image-20240910005608007](random/image-20240910005608007.png)
+
+![image-20240910005927534](random/image-20240910005927534.png)
+
+![image-20240910005723458](random/image-20240910005723458.png)
+
+$$\begin{align}
+\hat{P}_{ss}(\Omega) &= \frac{|V(e^{j\omega})|^2}{LU} \\
+&= \frac{|V(e^{j\omega})|^2}{\sum_{n=0}^{L-1}(w[n])^2} \tag{1}\\
+&= \frac{L|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}(W[k])^2} \tag{2}
+\end{align}$$
+
+![image-20240910010638376](random/image-20240910010638376.png)
+
+That is, by $(1)$
+$$
+\hat{P}_{ss}(\Omega) = T_s\hat{P}_{xx(\omega)} = \frac{T_s|V(e^{j\omega})|^2}{\sum_{n=0}^{L-1}(w[n])^2}=\frac{|V(e^{j\omega})|^2}{f_{res}L\sum_{n=0}^{L-1}(w[n])^2}
+$$
+
+
+That is, by $(2)$
+$$
+\hat{P}_{ss}(\Omega) = T_s\hat{P}_{xx(\omega)} = \frac{T_sL|V(e^{j\omega})|^2}{\sum_{k=0}^{L-1}(W[k])^2} = \frac{|V(e^{j\omega})|^2}{f_{res}\sum_{k=0}^{L-1}(W[k])^2}
+$$
+
+> !! *ENBW*
+
+
+
+## Periodic & Cyclostationary Processes
 
 ![image-20250809234136591](random/image-20250809234136591.png)
 

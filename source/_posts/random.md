@@ -326,16 +326,6 @@ due to $\cos(\omega_0 t +\phi_0) = \sin(\omega_0 t +\phi_0 + \frac{\pi}{2})$
 
 
 
----
-
-***Energy Signal***
-
-![image-20240910004411501](random/image-20240910004411501.png)
-
-![image-20240910004421791](random/image-20240910004421791.png)
-
-![image-20240910004448439](random/image-20240910004448439.png)
-
 ### Discrete time
 
 > Diniz PSR, da Silva EAB, Netto SL. *Digital Signal Processing: System Analysis and Design*. 2nd ed. Cambridge University Press; 2010.
@@ -371,7 +361,15 @@ $$
 P_{xx}(f) =T\cdot F^{-1}\{R_{xx}\}
 $$
 
----
+
+
+### Energy Signal
+
+![image-20240910004411501](random/image-20240910004411501.png)
+
+![image-20240910004421791](random/image-20240910004421791.png)
+
+![image-20240910004448439](random/image-20240910004448439.png)
 
 
 

@@ -437,7 +437,7 @@ snr_tot = 10*log10(1/(n_if + n_ds + n_ana))
 
 
 
-## MASH 1-1-1  implementaion
+## MASH 1-1-1 implementaion
 
 > J. W. M. Rogers, F. F. Dai, M. S. Cavin and D. G. Rahn, "A multiband /spl Delta//spl Sigma/ fractional-N frequency synthesizer for a MIMO WLAN transceiver RFIC," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 3, pp. 678-689, March 2005 [[https://sci-hub.se/10.1109/JSSC.2005.843604](https://sci-hub.se/10.1109/JSSC.2005.843604)]
 
@@ -528,6 +528,16 @@ plt.ylim([0,0.04]); plt.grid(True); plt.legend(loc='upper left')
 
 plt.show()
 ```
+
+
+
+---
+
+> Harald Pretl, Radio-Frequency Integrated Circuits. 7.4 Fractional-N PLL [[note](https://iic-jku.github.io/radio-frequency-integrated-circuits/rfic.html#sec-pll-frac-n)] [[MASH Modulator (3rd Order) code](https://iic-jku.github.io/radio-frequency-integrated-circuits/content/pll/delta_sigma_modulator-preview.html)]
+
+
+
+
 
 
 

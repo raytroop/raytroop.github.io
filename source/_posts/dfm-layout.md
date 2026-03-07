@@ -487,6 +487,8 @@ Gate = (ALD MG stack to set $\Phi_M$)+(metal fill to reduce RG)
 > Aleksandr Sidun. Matching patterns in layout [[https://analoghub.ie/category/Layout/article/layoutMatchingPatterns](https://analoghub.ie/category/Layout/article/layoutMatchingPatterns)]
 >
 > —. Matching in layout [[https://analoghub.ie/category/Layout/article/layoutMatching](https://analoghub.ie/category/Layout/article/layoutMatching)]
+>
+> 藍色天空. 匹配那些事儿… [[https://www.kaixinspace.com/matching/](https://www.kaixinspace.com/matching/)]
 
 ![image-20251011205334957](dfm-layout/image-20251011205334957.png)
 
@@ -961,4 +963,3 @@ A. L. S. Loke, Migrating Analog/Mixed-Signal Designs to FinFET Alvin Loke / Qual
 
 Lattice Semiconductor, 16FFC Process Technology Introduction December 9th, 2021[[pdf](https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/HR1000000009.pdf)]
 
-藍色天空. 匹配那些事儿… [[https://www.kaixinspace.com/matching/](https://www.kaixinspace.com/matching/)]

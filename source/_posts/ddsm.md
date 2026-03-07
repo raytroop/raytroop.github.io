@@ -17,6 +17,8 @@ mathjax: true
 
 ## linearized model
 
+> ***Noise Cancellation Network***
+
 ![image-20250824092757793](ddsm/image-20250824092757793.png)
 $$\begin{align}
 v[n] = \{0,1,2,...,M-1\} &\space\Rightarrow\space  y[n] = 0 \space\Rightarrow\space  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\} \\
@@ -196,6 +198,20 @@ $N = k +1$ is sufficient for any $k$
 > $$
 
 Generally speaking, $N \propto k$ and $N \propto \frac{1}{m}$, especially $N_{min} = k+1$ if *single-bit quantizer* $m=1$
+
+
+
+## DSM Order & Output Range
+
+> 7.4.1 Delta-Sigma Modulator [[https://iic-jku.github.io/radio-frequency-integrated-circuits/rfic.html#sec-pll-delta-sigma](https://iic-jku.github.io/radio-frequency-integrated-circuits/rfic.html#sec-pll-delta-sigma)]
+>
+> Google AI Mode [[https://share.google/aimode/FTiU7YPjm3tnqEk7t](https://share.google/aimode/FTiU7YPjm3tnqEk7t)]
+
+![image-20260307120539781](ddsm/image-20260307120539781.png)
+
+![image-20260307120745402](ddsm/image-20260307120745402.png)
+
+
 
 
 
@@ -535,11 +551,50 @@ plt.show()
 
 > Harald Pretl, Radio-Frequency Integrated Circuits. 7.4 Fractional-N PLL [[note](https://iic-jku.github.io/radio-frequency-integrated-circuits/rfic.html#sec-pll-frac-n)] [[MASH Modulator (3rd Order) code](https://iic-jku.github.io/radio-frequency-integrated-circuits/content/pll/delta_sigma_modulator-preview.html)]
 
+![image-20260307140247849](ddsm/image-20260307140247849.png)
 
 
 
+```python
+# Stage 1: 1st order modulator with input signal
+self.integrator1 += input_value
+y1 = 1 if self.integrator1 >= 1.0 else 0
+e1 = self.integrator1 - y1  # Quantization error
+self.integrator1 = e1  # Store error for next iteration
+
+# Stage 2: 1st order modulator fed with quantization error from stage 1
+self.integrator2 += e1
+y2 = 1 if self.integrator2 >= 1.0 else 0
+e2 = self.integrator2 - y2
+self.integrator2 = e2
+
+# Stage 3: 1st order modulator fed with quantization error from stage 2
+self.integrator3 += e2
+y3 = 1 if self.integrator3 >= 1.0 else 0
+e3 = self.integrator3 - y3
+self.integrator3 = e3
+
+# Digital noise cancellation logic for MASH 1-1-1
+# Output = Y1 + (1-z^-1)*Y2 + (1-z^-1)^2*Y3
+# Expanding (1-z^-1)^2 = 1 - 2*z^-1 + z^-2:
+# Output = Y1 + Y2 - Y2[z^-1] + Y3 - 2*Y3[z^-1] + Y3[z^-2]
+
+combined = y1 + (y2 - self.y2_prev) + (y3 - 2*self.y3_prev + self.y3_prev2)
+```
 
 
+
+```python
+# Plot 2: Frequency spectrum (with dither)
+ax2 = plt.subplot(1, 2, 2)
+N = len(mash_combined_with_dither)
+fft_freq = np.fft.fftfreq(N)
+pos_freq = fft_freq >= 0
+fft_no = np.fft.fft(mash_combined_with_dither)
+psd_no = 20 * np.log10(np.abs(fft_no) / N + 1e-12)
+```
+
+![fig-mash-dither](ddsm/fig-mash-dither-1772863879951-5.png)
 
 ## reference
 

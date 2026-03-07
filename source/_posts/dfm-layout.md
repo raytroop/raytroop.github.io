@@ -905,6 +905,30 @@ LVS can help checking unintended shorting upper/lower curls by via, covering ind
 
 
 
+## Electrical Rule Check (ERC)
+
+> Daniel Payne. Soft checks are needed during Electrical Rule Checking of IC layouts [[https://semiwiki.com/eda/342526-soft-checks-are-needed-during-electrical-rule-checking-of-ic-layouts/](https://semiwiki.com/eda/342526-soft-checks-are-needed-during-electrical-rule-checking-of-ic-layouts/)]
+>
+> 藍色天空. 一文搞懂版图ERC类型 [[https://www.kaixinspace.com/layout-erc-type/](https://www.kaixinspace.com/layout-erc-type/)]
+>
+> ERC Usage PDKD/TSMC 2008 [[https://www.scribd.com/document/751641438/ERC-Usage](https://www.scribd.com/document/751641438/ERC-Usage)]
+
+![image-20260307103848378](dfm-layout/image-20260307103848378.png)
+
+---
+
+***floating well***
+
+![image-20260307104101837](dfm-layout/image-20260307104101837.png)
+
+For pnp BJT, *N* type Base in *Nwell*, the "floating.nxwell" can be waived 
+
+![image-20260307104728040](dfm-layout/image-20260307104728040.png)
+
+
+
+
+
 ## reference
 
 Mikael Sahrling, Layout Techniques for Integrated Circuit Designers 1st Edition , Artech House 2022

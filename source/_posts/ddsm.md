@@ -585,6 +585,18 @@ combined = y1 + (y2 - self.y2_prev) + (y3 - 2*self.y3_prev + self.y3_prev2)
 
 
 ```python
+for i in range(length):
+    dither = rng.uniform(-dither_amplitude, dither_amplitude) if dither_amplitude > 0 else 0.0
+    combined, y1, y2, y3 = self.step(input_value + dither)
+    combined_output[i] = combined
+    y1_output[i] = y1
+    y2_output[i] = y2
+    y3_output[i] = y3
+```
+
+
+
+```python
 # Plot 2: Frequency spectrum (with dither)
 ax2 = plt.subplot(1, 2, 2)
 N = len(mash_combined_with_dither)

@@ -427,6 +427,8 @@ The alexander PD locks that edge clock (clkedge) is located at zero crossings of
 > Jaeduk Han, "Design and Automatic Generation of 60Gb/s Wireline Transceivers" [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf)]
 >
 > Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025. Lecture 12: CDRs [[https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf)]
+>
+> S. Kim, K. K. Tokgoz and G. Kim, "Modeling and Simulation of Mueller-Muller Clock Data Recovery System for PAM-4 Wireline Transceivers," *2025 IEEE/IEIE International Conference on Consumer Electronics-Asia (ICCE-Asia)*, Busan, Korea, Republic of, 2025, pp. 1-3, doi: 10.1109/ICCE-Asia67487.2025.11263607
 
 ![image-20240812222307061](eq-cdr/image-20240812222307061.png)
 
@@ -519,17 +521,7 @@ Hall, Stephen H., and Howard L. Heck. *Advanced Signal Integrity for High-speed 
 
 Oh, Kyung, and Xing Yuan. *High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting*. 1st edition. Prentice Hall, 2011. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiGPFydIQAYdxVx.pdf)]
 
-John M. Cioffi, [[Chapter 3 - Equalization]([https://cioffi-group.stanford.edu/doc/book/chap3.pdf)], [[Chapter 6 - Fundamentals of Synchronization](https://cioffi-group.stanford.edu/doc/book/chap6.pdf)]
-
-Paulo S. R. Diniz, A*daptive Filtering: Algorithms and Practical Implementation, 5th edition* [[pdf](https://picture.iczhiku.com/resource/eetop/WYiRoZIFhjsRrXmN.pdf)], [[matlab](http://www.mathworks.com/matlabcentral/fileexchange/135266-adaptive_filtering_toolbox_v5a)], [[python](https://github.com/BruninLima/PydaptiveFiltering)]
-
-Haykin, Simon S. *Adaptive Filter Theory*. 5th ed. Prentice Hall, 2014.
-
-Barry, John R., Edward A. Lee, and David G. Messerschmitt. *Digital communication*. Springer, 2003.
-
-Proakis, John G., and Masoud Salehi. *Digital Communications. 5th ed. McGraw-Hill, 2008.* [[pdf](https://daskalakispiros.com/files/Ebooks/digital-communication-proakis-salehi-5th-edition.pdf)]
-
-Qasim Chaudhari, *Wireless Communications From the Ground Up – An SDR Perspective*
+John M. Cioffi, [[Chapter 3 - Equalization](https://cioffi-group.stanford.edu/doc/book/chap3.pdf)], [[Chapter 6 - Fundamentals of Synchronization](https://cioffi-group.stanford.edu/doc/book/chap6.pdf)]
 
 ---
 
@@ -593,38 +585,3 @@ Aleksey Tyshchenko, SeriaLink Systems Clinton Walker, Alphawave IP. DesignCon 20
 
 **Ali Sheikholeslami** Electronics Group, University of Toronto [[https://www.eecg.utoronto.ca/~ali/](https://www.eecg.utoronto.ca/~ali/)]
 
----
-
-Qasim Chaudhari. Maximum Likelihood Estimation of Clock Offset [[https://wirelesspi.com/maximum-likelihood-estimation-of-clock-offset/](https://wirelesspi.com/maximum-likelihood-estimation-of-clock-offset/)]
-
-—. Channel Estimation in Wireless Communication. [[https://wirelesspi.com/channel-estimation-in-wireless-communication/](https://wirelesspi.com/channel-estimation-in-wireless-communication/)]
-
-—. Phase Locked Loop (PLL) in a Software Defined Radio (SDR) [[https://wirelesspi.com/phase-locked-loop-pll-in-a-software-defined-radio-sdr/](https://wirelesspi.com/phase-locked-loop-pll-in-a-software-defined-radio-sdr/)]
-
-—. Phase Locked Loop (PLL) for Symbol Timing Recovery [[https://wirelesspi.com/phase-locked-loop-pll-for-symbol-timing-recovery/](https://wirelesspi.com/phase-locked-loop-pll-for-symbol-timing-recovery/)]
-
-—. How Decision Feedback Equalizers (DFE) Work [[https://wirelesspi.com/how-decision-feedback-equalizers-dfe-work/](https://wirelesspi.com/how-decision-feedback-equalizers-dfe-work/)]
-
-—. Maximum Likelihood Sequence Estimation (MLSE Equalizer) [[https://wirelesspi.com/maximum-likelihood-sequence-estimation-mlse-equalizer/](https://wirelesspi.com/maximum-likelihood-sequence-estimation-mlse-equalizer/)]
-
-—. Early-Late Bit Synchronizer in Digital Communication [[https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/](https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/)]
-
-—. Gardner Timing Error Detector: A Non-Data-Aided Version of Zero-Crossing Timing Error Detectors [[https://wirelesspi.com/gardner-timing-error-detector-a-non-data-aided-version-of-zero-crossing-timing-error-detectors/](https://wirelesspi.com/gardner-timing-error-detector-a-non-data-aided-version-of-zero-crossing-timing-error-detectors/)]
-
-—. Mueller and Muller Timing Synchronization Algorithm [[https://wirelesspi.com/mueller-and-muller-timing-synchronization-algorithm/](https://wirelesspi.com/mueller-and-muller-timing-synchronization-algorithm/)]
-
-—. Digital Filter and Square Timing Recovery [[https://wirelesspi.com/digital-filter-and-square-timing-recovery/](https://wirelesspi.com/digital-filter-and-square-timing-recovery/)]
-
-—. What is a Symbol Timing Offset and How It Distorts the Rx Signal [[https://wirelesspi.com/what-is-a-symbol-timing-offset-and-how-it-distorts-the-rx-signal/](https://wirelesspi.com/what-is-a-symbol-timing-offset-and-how-it-distorts-the-rx-signal/)]
-
-—. How Excess Bandwidth Governs Timing Recovery in Digital Communication Systems [[https://wirelesspi.com/how-excess-bandwidth-governs-timing-recovery-in-digital-communication-systems/](https://wirelesspi.com/how-excess-bandwidth-governs-timing-recovery-in-digital-communication-systems/)]
-
-—. How Automatic Gain Control (AGC) Works [[https://wirelesspi.com/how-automatic-gain-control-agc-works/](https://wirelesspi.com/how-automatic-gain-control-agc-works/)]
-
-Igor Freire. Symbol Timing Synchronization: A Tutorial [[blog](https://igorfreire.com.br/2016/10/15/symbol-timing-synchronization-tutorial/#Zero-crossing_Timing_Error_Detector_ZC-TED), [code](https://github.com/igorauad/symbol_timing_sync)]
-
----
-
-Chris Li, *mmse_dfe* [[https://github.com/ChrisZonghaoLi/mmse_dfe](https://github.com/ChrisZonghaoLi/mmse_dfe)]
-
-ScottXjw, *equalizer-code-FFE-DFE-VolterraFFEandDFE* [[https://github.com/ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE](https://github.com/ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE)]

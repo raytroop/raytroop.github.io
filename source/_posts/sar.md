@@ -473,3 +473,6 @@ L. Jie et al., "An Overview of Noise-Shaping SAR ADC: From Fundamentals to the F
 
 W. Liu, P. Huang and Y. Chiu, "A 12-bit, 45-MS/s, 3-mW Redundant Successive-Approximation-Register Analog-to-Digital Converter With Digital Calibration," in IEEE Journal of Solid-State Circuits, vol. 46, no. 11, pp. 2661-2672, Nov. 2011 [[https://sci-hub.st/10.1109/JSSC.2011.2163556](https://sci-hub.st/10.1109/JSSC.2011.2163556)]
 
+---
+
+Andrew Yu. Understanding Metastability in SAR ADCs: Part II: Asynchronous [[https://github.com/phonon/sar-adc-metastability](https://github.com/phonon/sar-adc-metastability)] [[pdf](https://sci-hub.jp/10.1109/MSSC.2019.2922890)]

@@ -287,3 +287,6 @@ Yida Duan. Design Techniques for Ultra-High-Speed Time-Interleaved Analog-to-Dig
 
 Preview Lecture #1 - "Extreme SAR ADCs" Online Course (2024) - Prof. Chi-Hang Chan (U. of Macau) [[https://youtu.be/rgMRL4QZ-wA](https://youtu.be/rgMRL4QZ-wA)]
 
+---
+
+oscarmattia. Data Converter Toolbox [[https://github.com/oscarmattia/data_converter_toolbox](https://github.com/oscarmattia/data_converter_toolbox)]

@@ -80,6 +80,8 @@ $\Delta\tau \lt \pm \frac{1}{100} T$ don't ensure $\Delta \phi \ll 2\pi$ due to 
 
 > Mathuranathan, Symbol Timing Recovery for QPSK (digital modulations) [[https://www.gaussianwaves.com/2013/11/symbol-timing-recovery-for-qpsk-digital-modulations/](https://www.gaussianwaves.com/2013/11/symbol-timing-recovery-for-qpsk-digital-modulations/)]
 >
+> Qasim Chaudhari. Early-Late Bit Synchronizer in Digital Communication [[https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/](https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/)]
+>
 > Igor Freire. Symbol Timing Synchronization: A Tutorial [[blog](https://igorfreire.com.br/2016/10/15/symbol-timing-synchronization-tutorial/#Zero-crossing_Timing_Error_Detector_ZC-TED), [code](https://github.com/igorauad/symbol_timing_sync)]
 
 ![BPSK synchronization Matlab](digital-comm/BPSK_Synchronization_Matlab_7.png)
@@ -101,6 +103,8 @@ But the problem here is: "How does the receiver know the ideal sampling instants
 ---
 
 ***Mueller and Muller Timing Synchronization Algorithm***
+
+> Qasim Chaudhari. Mueller and Muller Timing Synchronization Algorithm [[https://wirelesspi.com/mueller-and-muller-timing-synchronization-algorithm/](https://wirelesspi.com/mueller-and-muller-timing-synchronization-algorithm/)]
 
 *TODO* &#128197;
 
@@ -173,10 +177,6 @@ Qasim Chaudhari. Maximum Likelihood Estimation of Clock Offset [[https://wireles
 —. Maximum Likelihood Sequence Estimation (MLSE Equalizer) [[https://wirelesspi.com/maximum-likelihood-sequence-estimation-mlse-equalizer/](https://wirelesspi.com/maximum-likelihood-sequence-estimation-mlse-equalizer/)]
 
 —. Gardner Timing Error Detector: A Non-Data-Aided Version of Zero-Crossing Timing Error Detectors [[https://wirelesspi.com/gardner-timing-error-detector-a-non-data-aided-version-of-zero-crossing-timing-error-detectors/](https://wirelesspi.com/gardner-timing-error-detector-a-non-data-aided-version-of-zero-crossing-timing-error-detectors/)]
-
-—. Early-Late Bit Synchronizer in Digital Communication [[https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/](https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/)]
-
-—. Mueller and Muller Timing Synchronization Algorithm [[https://wirelesspi.com/mueller-and-muller-timing-synchronization-algorithm/](https://wirelesspi.com/mueller-and-muller-timing-synchronization-algorithm/)]
 
 —. Digital Filter and Square Timing Recovery [[https://wirelesspi.com/digital-filter-and-square-timing-recovery/](https://wirelesspi.com/digital-filter-and-square-timing-recovery/)]
 

@@ -1,11 +1,65 @@
 ---
-title: Adaptive Filtering & Symbol Synchronization
+title: Adaptive Filtering & Synchronization
 date: 2024-09-02 15:45:16
 tags:
 categories:
 - dsp
 mathjax: true
 ---
+
+
+
+## Pulse Amplitude Modulation (PAM)
+
+> David A. Johns, ECE1392H - Integrated Circuits for Digital Communications - Fall 2001 [[System Overview](https://www.eecg.utoronto.ca/~johns/ece1392/slides/system.pdf)]
+
+![image-20260302223217156](digital-comm/image-20260302223217156.png)
+
+![image-20260302223247382](digital-comm/image-20260302223247382.png)
+
+> $S_m$ Google AI mode [[https://share.google/aimode/BzYr2logpVTVs83LQ](https://share.google/aimode/BzYr2logpVTVs83LQ)]
+
+```matlab
+snr_mpam = @(m,simga) 10*log10((4^m-1)/simga^2/3);
+
+sigma = 0.1547;
+
+SNR_m2 = snr_mpam(2, sigma);  % 23.1999
+SNR_m3 = snr_mpam(3, sigma);  % 29.4324
+```
+
+---
+
+> Lecture 3, Tuesday January 13th 2026 - Modulation Types (PAM/QAM) [[https://cioffi-group.stanford.edu/ee379a/Lectures/L3.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L3.pdf)]
+
+![image-20260308110418448](digital-comm/image-20260308110418448.png)
+
+---
+
+![image-20260308110557392](digital-comm/image-20260308110557392.png)
+
+
+
+## Carrier Synchronization
+
+![image-20260308094928314](digital-comm/image-20260308094928314.png)
+
+![image-20260308095105635](digital-comm/image-20260308095105635.png)
+
+---
+
+> [[https://ndl.ethernet.edu.et/bitstream/123456789/87843/14/LECT_13%2614.Synchronization.pdf](https://ndl.ethernet.edu.et/bitstream/123456789/87843/14/LECT_13%2614.Synchronization.pdf)]
+
+![image-20260308101114543](digital-comm/image-20260308101114543.png)
+
+![image-20260308101312037](digital-comm/image-20260308101312037.png)
+
+
+
+## Symbol Synchronization
+
+
+
 
 
 ## dither

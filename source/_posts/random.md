@@ -277,6 +277,12 @@ $$
 
 ![image-20260305232711337](random/image-20260305232711337.png)
 
+---
+
+> Sklar, Bernard. *Digital communications: fundamentals and applications*. Pearson, 2021.
+
+![image-20260308111211454](random/image-20260308111211454.png)
+
 
 
 ##  LTI Filtering of WSS process

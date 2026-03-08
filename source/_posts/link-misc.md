@@ -19,27 +19,6 @@ mathjax: true
 
 *TODO* &#128197;
 
-## SNR, BER of m-PAM
-
-> David A. Johns, ECE1392H - Integrated Circuits for Digital Communications - Fall 2001 [[System Overview](https://www.eecg.utoronto.ca/~johns/ece1392/slides/system.pdf)]
-
-*TODO* &#128197;
-
-![image-20260302223217156](link-misc/image-20260302223217156.png)
-
-![image-20260302223247382](link-misc/image-20260302223247382.png)
-
-> $S_m$ Google AI mode [[https://share.google/aimode/BzYr2logpVTVs83LQ](https://share.google/aimode/BzYr2logpVTVs83LQ)]
-
-```matlab
-snr_mpam = @(m,simga) 10*log10((4^m-1)/simga^2/3);
-
-sigma = 0.1547;
-
-SNR_m2 = snr_mpam(2, sigma);  % 23.1999
-SNR_m3 = snr_mpam(3, sigma);  % 29.4324
-```
-
 
 
 

@@ -337,19 +337,6 @@ The look-ahead multiplexing technique brings the key benefit that the timing con
 
 
 
-## Trellis Coding
-
-*TODO* &#128197;
-
-
-
-
-## Convolutional Code
-
-*TODO* &#128197;
-
-
-
 
 
 ## Forward Error Correction (FEC)

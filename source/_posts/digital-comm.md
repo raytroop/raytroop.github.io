@@ -7,6 +7,10 @@ categories:
 mathjax: true
 ---
 
+## Bandpass Modulation
+
+![image-20260308134006414](digital-comm/image-20260308134006414.png)
+
 
 
 ## Pulse Amplitude Modulation (PAM)
@@ -40,7 +44,15 @@ SNR_m3 = snr_mpam(3, sigma);  % 29.4324
 
 
 
-## Carrier Synchronization
+## Carrier & Symbol Synchronization
+
+![image-20260308143452122](digital-comm/image-20260308143452122.png)
+
+$\Delta\tau \lt \pm \frac{1}{100} T$ don't ensure $\Delta \phi \ll 2\pi$ due to $T \gg \frac{1}{f_c}$
+
+![image-20260308144246973](digital-comm/image-20260308144246973.png)
+
+### Carrier Synchronization
 
 ![image-20260308094928314](digital-comm/image-20260308094928314.png)
 
@@ -56,9 +68,41 @@ SNR_m3 = snr_mpam(3, sigma);  % 29.4324
 
 
 
-## Symbol Synchronization
+### Symbol Synchronization
 
+![image-20260308150119546](digital-comm/image-20260308150119546.png)
 
+> [[https://www.ieee802.org/3/dm/public/1125/cordaro_3dm_01_1125.pdf](https://www.ieee802.org/3/dm/public/1125/cordaro_3dm_01_1125.pdf)]
+
+![image-20260308160850433](digital-comm/image-20260308160850433.png)
+
+---
+
+> Mathuranathan, Symbol Timing Recovery for QPSK (digital modulations) [[https://www.gaussianwaves.com/2013/11/symbol-timing-recovery-for-qpsk-digital-modulations/](https://www.gaussianwaves.com/2013/11/symbol-timing-recovery-for-qpsk-digital-modulations/)]
+>
+> Igor Freire. Symbol Timing Synchronization: A Tutorial [[blog](https://igorfreire.com.br/2016/10/15/symbol-timing-synchronization-tutorial/#Zero-crossing_Timing_Error_Detector_ZC-TED), [code](https://github.com/igorauad/symbol_timing_sync)]
+
+![BPSK synchronization Matlab](digital-comm/BPSK_Synchronization_Matlab_7.png)
+
+But the problem here is: "How does the receiver know the ideal sampling instants?". The solution is "someone has to supply those **ideal sampling instants**". A **symbol time recovery** circuit is used for this purpose.
+
+![Synchronization in receiver with timing recovery, matched filter for QPSK](digital-comm/Synchronization_7.png)
+
+***Early/Late Symbol Recovery algorithm***
+
+- **non-decision-directed timing estimator** exploits the **symmetry properties of the signal**
+
+![Early late synchronization](digital-comm/Synchronization_6.png)
+
+1) If the ***Early Sample = Late Sample*** : The peak occurs at the on-time sampling instant $T$. No adjustment in the timing is needed.
+2) If ***|Early Sample| > |Late Sample|*** : Late timing, the sampling time is offset so that the next symbol is sampled $T-\delta/2$ seconds after the current sampling time.
+3) If ***|Early Sample| < |Late Sample|*** : Early timing, the sampling time is offset so that the next symbol is sampled $T+\delta/2$ seconds after the current sampling time.
+
+---
+
+***Mueller and Muller Timing Synchronization Algorithm***
+
+*TODO* &#128197;
 
 
 
@@ -72,9 +116,9 @@ SNR_m3 = snr_mpam(3, sigma);  % 29.4324
 
 ## reference
 
-Sklar, Bernard. *Digital communications: fundamentals and applications*. Pearson, 2021.
-
 Proakis, John G., and Masoud Salehi. *Digital Communications. 5th ed. McGraw-Hill, 2008.* [[pdf](https://daskalakispiros.com/files/Ebooks/digital-communication-proakis-salehi-5th-edition.pdf)]
+
+Sklar, Bernard. *Digital communications: fundamentals and applications*. Pearson, 2021.
 
 Ling, F. (2017). *Synchronization in Digital Communication Systems*. Cambridge: Cambridge University Press.
 
@@ -110,8 +154,6 @@ David Johns, "Integrated Circuits for Digital Communications" [[https://www.eecg
 
 ---
 
-Igor Freire. Symbol Timing Synchronization: A Tutorial [[blog](https://igorfreire.com.br/2016/10/15/symbol-timing-synchronization-tutorial/#Zero-crossing_Timing_Error_Detector_ZC-TED), [code](https://github.com/igorauad/symbol_timing_sync)]
-
 Chris Li, *mmse_dfe* [[https://github.com/ChrisZonghaoLi/mmse_dfe](https://github.com/ChrisZonghaoLi/mmse_dfe)]
 
 ScottXjw, *equalizer-code-FFE-DFE-VolterraFFEandDFE* [[https://github.com/ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE](https://github.com/ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE)]
@@ -130,9 +172,9 @@ Qasim Chaudhari. Maximum Likelihood Estimation of Clock Offset [[https://wireles
 
 —. Maximum Likelihood Sequence Estimation (MLSE Equalizer) [[https://wirelesspi.com/maximum-likelihood-sequence-estimation-mlse-equalizer/](https://wirelesspi.com/maximum-likelihood-sequence-estimation-mlse-equalizer/)]
 
-—. Early-Late Bit Synchronizer in Digital Communication [[https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/](https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/)]
-
 —. Gardner Timing Error Detector: A Non-Data-Aided Version of Zero-Crossing Timing Error Detectors [[https://wirelesspi.com/gardner-timing-error-detector-a-non-data-aided-version-of-zero-crossing-timing-error-detectors/](https://wirelesspi.com/gardner-timing-error-detector-a-non-data-aided-version-of-zero-crossing-timing-error-detectors/)]
+
+—. Early-Late Bit Synchronizer in Digital Communication [[https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/](https://wirelesspi.com/early-late-bit-synchronizer-in-digital-communication/)]
 
 —. Mueller and Muller Timing Synchronization Algorithm [[https://wirelesspi.com/mueller-and-muller-timing-synchronization-algorithm/](https://wirelesspi.com/mueller-and-muller-timing-synchronization-algorithm/)]
 

@@ -345,7 +345,7 @@ $$
 ![image-20260305222059412](random/image-20260305222059412.png)
 
 $$
-c_{hh}[l] = \sum_{k=-\infty}^{\infty}h[k]h[l+k]=\sum_{k=-\infty}^{\infty}h[-l+k]h[k]=\sum_{k=-\infty}^{\infty}h[-(l-k)]h[k]=h[k]*h[-k]
+c_{hh}[l] = \sum_{k=-\infty}^{\infty}h[k]h[l+k]=\sum_{k=-\infty}^{\infty}h[-l+k]h[k]=\sum_{k=-\infty}^{\infty}h[-(l-k)]h[k]=h[l]*h[-l]
 $$
 ![image-20260305223209840](random/image-20260305223209840.png)
 

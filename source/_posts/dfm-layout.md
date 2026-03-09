@@ -927,7 +927,15 @@ For pnp BJT, *N* type Base in *Nwell*, the "floating.nxwell" can be waived
 
 ![image-20260307104728040](dfm-layout/image-20260307104728040.png)
 
+---
 
+***SOFTCHK & PSUB2***
+
+![image-20260309210754404](dfm-layout/image-20260309210754404.png)
+
+> ![image-20260309211006145](dfm-layout/image-20260309211006145.png)
+
+![image-20260309211158577](dfm-layout/image-20260309211158577.png)
 
 
 

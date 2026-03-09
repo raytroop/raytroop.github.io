@@ -218,7 +218,7 @@ that total power will always be the ***same*** for ***any sampling rate*** used 
 
 ---
 
-> How to generate white noise signal from a given PSD? [https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849]
+> How to generate white noise signal from a given PSD? [[https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849](https://www.mathworks.com/matlabcentral/answers/1968-how-to-generate-white-noise-signal-from-a-given-psd#answer_1498849)]
 
 ![image-20251208012745236](noise/image-20251208012745236-1769785341251-5.png)
 

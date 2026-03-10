@@ -1,5 +1,5 @@
 ---
-title: Digital Equalization & Clock Recovery
+title: Digital Equalization & Clock Data Recovery
 date: 2024-09-03 11:07:31
 tags:
 categories:
@@ -412,21 +412,9 @@ The alexander PD locks that edge clock (clkedge) is located at zero crossings of
 >
 > —."CLOCK RECOVERY IN HIGH-SPEED MULTILEVEL SERIAL LINKS" [[https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf](https://www.eecg.utoronto.ca/~tcc/faisal_iscas03.pdf)]
 >
-> Eduardo Fuentetaja. "Analysis of the M&M Clock Recovery Algorithm" [[https://edfuentetaja.github.io/sdr/m_m_analysis/](https://edfuentetaja.github.io/sdr/m_m_analysis/)]
->
-> Liu, Tao & Li, Tiejun & Lv, Fangxu & Liang, Bin & Zheng, Xuqiang & Wang, Heming & Wu, Miaomiao & Lu, Dechao & Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits. Electronics. [[10. 1888. 10.3390/electronics10161888.](https://www.mdpi.com/2079-9292/10/16/1888/pdf?version=1628492599)] 
->
-> Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. [[10.21203/rs.3.rs-1817774/v1](https://www.researchgate.net/publication/362028333_Analysis_of_Mueller-Muller_Clock_and_Data_Recovery_Circuits_with_a_Linearized_Model)]
->
-> Baud-Rate CDRs [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%206%20-%20Clock%20and%20Data%20Recovery.pdf)]
->
-> F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 366-367, [[https://sci-hub.ru/10.1109/ISSCC.2010.5433823](https://sci-hub.ru/10.1109/ISSCC.2010.5433823)]
->
 > K. Yadav, P. -H. Hsieh and A. C. Carusone, "Loop Dynamics Analysis of PAM-4 Mueller–Muller Clock and Data Recovery System," in *IEEE Open Journal of Circuits and Systems*, vol. 3, pp. 216-227, 2022 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9910561](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9910561)]
 >
 > Jaeduk Han, "Design and Automatic Generation of 60Gb/s Wireline Transceivers" [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2019/EECS-2019-143.pdf)]
->
-> Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025. Lecture 12: CDRs [[https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf)]
 >
 > S. Kim, K. K. Tokgoz and G. Kim, "Modeling and Simulation of Mueller-Muller Clock Data Recovery System for PAM-4 Wireline Transceivers," *2025 IEEE/IEIE International Conference on Consumer Electronics-Asia (ICCE-Asia)*, Busan, Korea, Republic of, 2025, pp. 1-3, doi: 10.1109/ICCE-Asia67487.2025.11263607
 
@@ -442,6 +430,19 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 
 > note $E[y_k\cdot d_{k+1}] = E[y_{k-1}\cdot d_{k}] = h_{-1}$
 
+
+
+### SS-MMPD
+
+> F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 366-367, [[https://sci-hub.ru/10.1109/ISSCC.2010.5433823](https://sci-hub.ru/10.1109/ISSCC.2010.5433823)]
+>
+> Liu, Tao & Li, Tiejun & Lv, Fangxu & Liang, Bin & Zheng, Xuqiang & Wang, Heming & Wu, Miaomiao & Lu, Dechao & Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits. Electronics. [[10. 1888. 10.3390/electronics10161888.](https://www.mdpi.com/2079-9292/10/16/1888/pdf?version=1628492599)] 
+>
+> Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. [[10.21203/rs.3.rs-1817774/v1](https://www.researchgate.net/publication/362028333_Analysis_of_Mueller-Muller_Clock_and_Data_Recovery_Circuits_with_a_Linearized_Model)]
+>
+
+
+
 ![image-20260112225032307](eq-cdr/image-20260112225032307.png)
 
 Suppose $x_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$ and $x_{k-1} = d_{k-2}h_1 + d_{k-1} h_0 + d_{k}h_{-1}$
@@ -454,24 +455,13 @@ $$
 
 ![image-20240808001501485](eq-cdr/image-20240808001501485.png)
 
-### Mueller-Muller PD
-
-Mueller-Muller **type A** timing function
-
-![image-20241019163636292](eq-cdr/image-20241019163636292.png)
 
 
 
-Mueller-Muller **type B** timing function
 
-![image-20241019163813449](eq-cdr/image-20241019163813449.png)
+---
 
-
-### SS-MM CDR
-
-![image-20240807232814202](eq-cdr/image-20240807232814202.png)
-
-
+> Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector" [[https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
 
 $h_1$ is **necessary**
 
@@ -486,10 +476,6 @@ $h_1$ is **necessary**
   Consequently, it suffers from a severe *multiple-locking problem with an adaptive DFE*
 
 ![image-20240812232618238](eq-cdr/image-20240812232618238.png)
-
-
-
-> Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector" [[https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
 
 
 
@@ -509,9 +495,15 @@ During adapting,  we make
 
 Then, $h_{-1}$ and $h_1$ are same, which is desired
 
-### symmetrical pulse
+
+
+### Symmetrical Pulse
 
 > Avago Technologies, US8649476B2 Adjusting sampling phase in a baud-rate CDR using timing skew [[pdf](https://patentimages.storage.googleapis.com/03/d4/ec/906e619ce1d719/US8649476.pdf)]
+>
+> Y. Jung, H. -J. Shin, J. Kim, S. Lee, J. -S. Park and K. Park, "A 28-Gb/s Receiver with Baud-Rate CDR Employing Integrated Pattern-Based Phase Detector Achieving ISI Invariant Phase Locking," *2025 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Daejeon, Korea, Republic of, 2025,
+>
+> R. Dokania *et al*., "10.5 A 5.9pJ/b 10Gb/s serial link with unequalized MM-CDR in 14nm tri-gate CMOS," *2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers*, San Francisco, CA, USA, 2015 [[https://sci-hub.jp/10.1109/ISSCC.2015.7062987](https://sci-hub.jp/10.1109/ISSCC.2015.7062987)]
 
 
 

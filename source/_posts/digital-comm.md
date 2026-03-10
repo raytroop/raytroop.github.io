@@ -7,6 +7,16 @@ categories:
 mathjax: true
 ---
 
+
+## Raised Cosine
+
+> Equations for the Raised Cosine and Square-Root Raised Cosine Shapes [[https://engineering.purdue.edu/~ee538/SquareRootRaisedCosine.pdf](https://engineering.purdue.edu/~ee538/SquareRootRaisedCosine.pdf)]
+>
+> Pulse Shaping Filter [[https://wirelesspi.com/pulse-shaping-filter/](https://wirelesspi.com/pulse-shaping-filter/)]
+
+*TODO* &#128197;
+
+
 ## Bandpass Modulation
 
 ![image-20260308134006414](digital-comm/image-20260308134006414.png)

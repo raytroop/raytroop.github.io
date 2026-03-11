@@ -919,7 +919,7 @@ LVS can help checking unintended shorting upper/lower curls by via, covering ind
 
 ---
 
-***floating well***
+### floating well
 
 ![image-20260307104101837](dfm-layout/image-20260307104101837.png)
 
@@ -929,7 +929,7 @@ For pnp BJT, *N* type Base in *Nwell*, the "floating.nxwell" can be waived
 
 ---
 
-***SOFTCHK & PSUB2***
+### SOFTCHK & PSUB2
 
 ![image-20260309210754404](dfm-layout/image-20260309210754404.png)
 
@@ -937,7 +937,19 @@ For pnp BJT, *N* type Base in *Nwell*, the "floating.nxwell" can be waived
 
 ![image-20260309211158577](dfm-layout/image-20260309211158577.png)
 
+### Calibre LVS ERC
 
+> Y.Liu, PDK Training Calibre user guide [[https://picture.iczhiku.com/resource/eetop/SyKTloquGiZeHMbx.pdf](https://picture.iczhiku.com/resource/eetop/SyKTloquGiZeHMbx.pdf)]
+>
+> Adam Teman, Digital-on-top Physical Verification LVS and DRC using Innovus and Calibre [[https://www.eng.biu.ac.il/temanad/files/2020/09/Full-Chip-DRC-LVS-slides.pdf](https://www.eng.biu.ac.il/temanad/files/2020/09/Full-Chip-DRC-LVS-slides.pdf)]
+
+![image-20260311210654083](dfm-layout/image-20260311210654083.png)
+
+![image-20260311210534002](dfm-layout/image-20260311210534002.png)
+
+![image-20260311210942569](dfm-layout/image-20260311210942569.png)
+
+![image-20260311215442746](dfm-layout/image-20260311215442746.png)
 
 ## reference
 

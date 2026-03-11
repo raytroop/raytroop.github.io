@@ -173,7 +173,7 @@ V_{bg} &= \frac{\Delta V_{be}+V_{os}}{R_2}(R_1+R_2) + V_{be2} \\
 &= \alpha \Delta V_{be,0} + \alpha \frac{kT}{q}\ln(\frac{I_{e1}}{I_{e2}}) + \alpha V_{os} + \frac{kT}{q}\ln(\frac{I_{e2,0}}{nI_{ss}})+\frac{kT}{q}\ln(\frac{I_{e2}}{I_{e2,0}})
 \end{align}$$
 
-
+where $\alpha = \frac{R_1+R_2}{R_2}$
 
 We omit the last part
 $$\begin{align}
@@ -228,7 +228,14 @@ where $I_{e0} = \frac{\Delta V_{be}}{R_1}$, $\Delta V_{be}=V_T\ln n$
 
 > That is, both $I_{e1}$ and $I_{e2}$ are proportional to $V_{os}$
 
-$I_{e1}$ and $I_{e2}$ can be expressed as
+
+$$
+I_{e,tot} = I_{e1} + I_{e2} = 2I_{e0} + V_{os}\left(\frac{2}{R_1} + \frac{1}{R_2} \right) = 2I_{e0} + V_{os}\frac{R_1+2R_2}{R_1R_2} = I_0 + \frac{V_{os}}{R_E}
+$$
+
+where $I_0 = 2I_{e0}$, $R_E = \frac{R_1R_2}{R_1+2R_2}$
+
+$I_{e1}$ and $I_{e2}$ can also be expressed as
 $$\begin{align}
 I_{e1} &= I_{e0} + V_{os}\left(\frac{1}{R_1} + \frac{1}{2R_2} \right) + \frac{V_{os}}{2R_2} \\
 I_{e2} &= I_{e0} + V_{os}\left(\frac{1}{R_1} + \frac{1}{2R_2} \right) - \frac{V_{os}}{2R_2}

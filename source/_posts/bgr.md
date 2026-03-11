@@ -207,8 +207,8 @@ $$
 
 $$\begin{align}
 V_{ip} &= V_{im} + V_{os} \\
-\frac{V_{bg}-V_{ip}}{R_2} &= I_{e2} \qquad \frac{V_{bg}-V_{im}}{R_2} &= I_{e1} \\
-V_{ip} &= I_{e2}R_1 + V_T\frac{I_{e2}}{nI_S} \qquad V_{im} &= V_T\frac{I_{e1}}{I_S}
+\frac{V_{bg}-V_{ip}}{R_2} &= I_{e2} \qquad \frac{V_{bg}-V_{im}}{R_2} = I_{e1} \\
+V_{ip} &= I_{e2}R_1 + V_T\frac{I_{e2}}{nI_S} \qquad V_{im} = V_T\frac{I_{e1}}{I_S}
 \end{align}$$
 where $V_T = \frac{kT}{q}$
 

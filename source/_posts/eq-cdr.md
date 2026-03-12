@@ -296,8 +296,6 @@ There are three major ***MMSE***-based algorithms:
 
 ### TX with SS-LMS
 
-> Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 8: RX FIR, CTLE, DFE, & Adaptive Eq. [[https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf)]
->
 > V. Stojanovic et al., "Autonomous dual-mode (PAM2/4) serial link transceiver with adaptive equalization and data recovery," IEEE Journal of Solid-State Circuits, vol. 40, no. 4, pp. 1012–1026, Apr. 2005 [[https://sci-hub.ru/10.1109/JSSC.2004.842863](https://sci-hub.ru/10.1109/JSSC.2004.842863)]
 >
 > —, "Channel-Limited High-Speed Links: Modeling, Analysis and Design," PhD. Thesis, Stanford University, Sep. 2004. [[pdf](https://vlsiweb.stanford.edu/people/alum/pdf/0409_Stojanovic_Link_Opt.pdf)]
@@ -308,19 +306,13 @@ There are three major ***MMSE***-based algorithms:
 
 ![image-20260303004118430](eq-cdr/image-20260303004118430.png)
 
-![image-20260303004717273](eq-cdr/image-20260303004717273.png)
+![image-20260313001119286](eq-cdr/image-20260313001119286.png)
 $$
 dLev_{n+1} = dLev_n - \frac{\Delta_{dLev}}{2}\left(\frac{\partial e_n^2}{\partial dLev_n}\right) = dLev_n - \Delta _{dLev} e_n\left(\frac{\partial (dLev_n-y_n)}{\partial dLev_n}\right) = \color{red} dLev_n - \Delta _{dLev} e_n
 $$
 note $e_n = dLev_n-y_n$
 
----
 
-> Kwangho Lee, SNU phd thesis, *Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector* [[pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
-
-![image-20260303005850185](eq-cdr/image-20260303005850185.png)
-
-note $e[n] = d[n] - Dlev_n\cdot tx[n]$
 
 
 
@@ -329,11 +321,28 @@ note $e[n] = d[n] - Dlev_n\cdot tx[n]$
 
 > E. -H. Chen et al., "Near-Optimal Equalizer and Timing Adaptation for I/O Links Using a BER-Based Metric," in IEEE Journal of Solid-State Circuits, vol. 43, no. 9, pp. 2144-2156, Sept. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2001871](https://sci-hub.ru/10.1109/JSSC.2008.2001871)]
 >
+> Sam Palermo. ECEN720: High-Speed Links Circuits and Systems [[Lecture 7 - Equalization Intro & TX FIR EQ](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)], [[Lecture 8 - RX FIR, CTLE, DFE, & Adaptive Eq.](https://people.engr.tamu.edu/spalermo/ecen689/lecture8_ee720_rx_adaptive_eq.pdf)]
+
+![image-20260313002613321](eq-cdr/image-20260313002613321.png)
+
+---
+
+
 > Jinhyung Lee, Design of High-Speed Receiver for Video Interface with Adaptive Equalization; Phd thesis, August 2019. [[thesis link](http://dcollection.snu.ac.kr/common/orgView/000000157003)]
 
 *TODO* &#128197;
 
+![image-20260312235927742](eq-cdr/image-20260312235927742.png)
 
+---
+
+> Kwangho Lee, SNU phd thesis, *Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector* [[pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
+
+![image-20260312221305468](eq-cdr/image-20260312221305468.png)
+
+>  $e[n] = d[n] - Dlev_n\cdot tx[n]$
+>
+> ![image-20260312215652390](eq-cdr/image-20260312215652390.png)
 
 
 
@@ -529,7 +538,7 @@ Vivek Telang, 2012, Equalization for High-Speed Serdes: System-level Comparison 
 
 Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
 
-A. Amirkhany, "Basics of Clock and Data Recovery Circuits: Exploring High-Speed Serial Links," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 1, pp. 25-38, Winter 2020 
+A. Amirkhany, "Basics of Clock and Data Recovery Circuits: Exploring High-Speed Serial Links," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 1, pp. 25-38, Winter 2020
 
 ---
 

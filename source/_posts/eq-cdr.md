@@ -17,6 +17,10 @@ mathjax: true
 
 > Qasim Chaudhari. *A Classification of Equalization Techniques* [[https://wirelesspi.com/a-classification-of-equalization-techniques/](https://wirelesspi.com/a-classification-of-equalization-techniques/)]
 
+![image-20260313234954626](eq-cdr/image-20260313234954626.png)
+
+
+
 ### CTLE vs. FFE
 
 > Keysight **Signal Integrity Educational Posts** [[Post 5: Root Cause of Eye Closure](https://docs.keysight.com/eesofapps/post-5-root-cause-of-eye-closure-678068340.html)], [[Post 6: Eye-opening Experience with CTLE](https://docs.keysight.com/eesofapps/post-6-eye-opening-experience-with-ctle-678068358.html)], [[Post 7: Eye-opening Experience with FFE](https://docs.keysight.com/eesofapps/post-7-eye-opening-experience-with-ffe-678068383.html)]
@@ -84,6 +88,8 @@ Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions 
 >
 
 ![image-20250928235645823](eq-cdr/image-20250928235645823.png)
+
+![image-20260314000824959](eq-cdr/image-20260314000824959.png)
 
 
 
@@ -214,6 +220,8 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 ---
 
+The number of **channel samples** may **exceed** the number of **equalizer taps** to accurately compute the optimal tap coefficients
+
 ![image-20260228011345326](eq-cdr/image-20260228011345326.png)
 
 ![image-20260228014012124](eq-cdr/image-20260228014012124.png)
@@ -224,7 +232,7 @@ ytarget = [0;1;0];
 
 x1 = [[1.0 0.3 0.0];
     [-0.2 1.0 0.3];
-    [0.1 -0.2 1.0]];
+    [0.1 -0.2 1.0]];  % better
 
 x2 = [[1.0 0.3 0.0];
     [-0.2 1.0 0.3];
@@ -253,6 +261,42 @@ subplot(3,1,3)
 stem(ht_p1, 'LineWidth', 2); hold on; stem(ht_p2, 'LineWidth', 2)
 grid on; legend(["h\_p1" "h\_p2"]); xlim([0,10])
 ```
+
+
+
+![image-20260314001938792](eq-cdr/image-20260314001938792.png)
+
+```matlab
+h = [0.01 -0.02 0.05 -0.1 0.2 1 0.15 -0.15 0.05 -0.02 0.005];
+[val, idx] = max(h);
+
+htc = h(idx-2:idx+2)';
+
+H1 = [1 0.2 -0.1 0.05 -0.02;
+    0.15 1 0.2 -0.1 0.05;
+    -0.15 0.15 1 0.2 -0.1;
+    0.05 -0.15 0.15 1 0.2;
+    -0.02 0.05 -0.15 0.15 1];  % better
+
+H2 = [1 0.2 -0.1 0 0;
+    0.15 1 0.2 -0.1 0;
+    -0.15 0.15 1 0.2 -0.1;
+    0 -0.15 0.15 1 0.2;
+    0 0 -0.15 0.15 1];
+
+
+ytgt = zeros(5,1);
+ytgt(3) = 1;
+
+heq1 = inv(H1)*ytgt;
+heq2 = inv(H2)*ytgt;
+```
+
+![image-20260314005217946](eq-cdr/image-20260314005217946.png)
+
+
+
+
 
 ##  ZFS vs MMSE
 
@@ -542,7 +586,9 @@ Vivek Telang, 2012, Equalization for High-Speed Serdes: System-level Comparison 
 
 Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
 
-A. Amirkhany, "Basics of Clock and Data Recovery Circuits: Exploring High-Speed Serial Links," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 1, pp. 25-38, Winter 2020
+S. Laxman, "Equalization algorithms in Millimeter wave communication systems," *2017 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2017 [[pdf](https://picture.iczhiku.com/resource/eetop/shIHewZLfoEzkMVc.pdf)]
+
+A. Amirkhany, "Basics of Clock and Data Recovery Circuits: Exploring High-Speed Serial Links," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 1, pp. 25-38, Winter 2020 [[https://sci-hub.jp/10.1109/MSSC.2019.2939342](https://sci-hub.jp/10.1109/MSSC.2019.2939342)]
 
 ---
 

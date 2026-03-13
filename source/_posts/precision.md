@@ -260,7 +260,7 @@ where assuming $\tau \ll T$
 
 ![chopping_OTA_limitedBW.drawio](precision/chopping_OTA_limitedBW.drawio.svg)
 
-
+> [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/57799/very-low-dc-gain-of-pstb-simulation/1392299](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/57799/very-low-dc-gain-of-pstb-simulation/1392299)]
 
 ### Residual Offset of Chopping
 
@@ -274,11 +274,24 @@ $$
 Then, residual offset is
 
 $$\begin{align}
-\overline{V_\text{os}} &= \frac{2\int_0^{T_{ch}/2}V_\text{spike}(t)dt}{T_{ch}} \\
-&= 2f_{ch}V_o\int_0^{T_{ch}/2}  e^{-\frac{t}{\tau}}dt\\
-&= 2f_{ch}V_o\tau\int_0^{T_{ch}/2\tau} e^{-\frac{t}{\tau}}d\frac{t}{\tau} \\
+\overline{V_\text{os}} &= \frac{2\int_0^{T_{ch}/2}V_\text{spike}(t)dt}{T_{ch}} = 2f_{ch}V_o\int_0^{T_{ch}/2}  e^{-\frac{t}{\tau}}dt = 2f_{ch}V_o\tau\int_0^{T_{ch}/2\tau} e^{-\frac{t}{\tau}}d\frac{t}{\tau}\\ 
 &\approx 2f_{ch}V_o\tau 
-\end{align}$$​
+\end{align}$$
+
+### Chopping Simulation
+
+> EE 501: CMOS Analog Integrated Circuit Design — Chopping for Offset reduction [[https://class.ece.iastate.edu/djchen/ee501/2016/Chopper_design_EE501.pptx](https://class.ece.iastate.edu/djchen/ee501/2016/Chopper_design_EE501.pptx)]
+
+- Run transient simulation to ensure the amp output can settle into a steady-state and offset ripple is small
+- Run PAC/ Pnoise to verify the ac and noise performance with chopping on
+
+![image-20260313222441008](precision/image-20260313222441008.png)
+
+![image-20260313222605049](precision/image-20260313222605049.png)
+
+![image-20260313223136592](precision/image-20260313223136592.png)
+
+![image-20260313223245981](precision/image-20260313223245981.png)
 
 
 

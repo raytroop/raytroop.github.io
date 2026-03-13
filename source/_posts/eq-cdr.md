@@ -312,6 +312,10 @@ dLev_{n+1} = dLev_n - \frac{\Delta_{dLev}}{2}\left(\frac{\partial e_n^2}{\partia
 $$
 note $e_n = dLev_n-y_n$
 
+---
+
+> J. T. Stonick, Gu-Yeon Wei, J. L. Sonntag and D. K. Weinlader, "An adaptive PAM-4 5-Gb/s backplane transceiver in 0.25-μm CMOS," in IEEE Journal of Solid-State Circuits, vol. 38, no. 3, pp. 436-443, March 2003, [[https://sci-hub.st/10.1109/JSSC.2002.808282](https://sci-hub.st/10.1109/JSSC.2002.808282)]
+
 
 
 

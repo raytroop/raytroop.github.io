@@ -69,7 +69,7 @@ Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions 
 - because of the nonlinearity of the DFE response, it must be modeled in the *time domain*  
 
 
-## TX FFE
+## FIR Coefficient Selection
 
 > Jose E. Schutt-Aine, Spring 2024 ECE 546 Lecture - 27 Equalization [[http://emlab.uiuc.edu/ece546/Lect_27.pdf](http://emlab.uiuc.edu/ece546/Lect_27.pdf)]
 >
@@ -87,7 +87,7 @@ Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions 
 
 
 
-### TX FIR Coefficient Selection with MMSE
+### with MMSE
 
 > Lecture 7: Equalization Introduction & TX FIR Eq [[https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture7_ee720_eq_intro_txeq.pdf)]
 
@@ -184,7 +184,7 @@ Wlsnorm = Wls/sum(norm(Wls,1));
 
 
 
-### TX FIR Coefficient Selection with ZFS
+### with ZFS
 
 > ***Zero Forcing Solution (ZFS)***
 

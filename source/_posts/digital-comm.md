@@ -18,8 +18,93 @@ mathjax: true
 
 
 
+## Toeplitz matrix
 
+> Robert M. Gray, Toeplitz and Circulant Matrices: A review [[https://ee.stanford.edu/~gray/toeplitz.pdf](https://ee.stanford.edu/~gray/toeplitz.pdf)]
+>
+> `toeplitz` Toeplitz matrix, [[https://www.mathworks.com/help/matlab/ref/toeplitz.html](https://www.mathworks.com/help/matlab/ref/toeplitz.html)]
 
+![image-20260314123213083](digital-comm/image-20260314123213083.png)
+
+---
+
+***ZFS***
+
+![image-20260314125127698](digital-comm/image-20260314125127698.png)
+
+```matlab
+h = [0.01 -0.02 0.05 -0.1 0.2 1 0.15 -0.15 0.05 -0.02 0.005];
+[val, idx] = max(h);
+
+htc = h(idx-2:idx+2)';
+
+H1 = [1 0.2 -0.1 0.05 -0.02;
+    0.15 1 0.2 -0.1 0.05;
+    -0.15 0.15 1 0.2 -0.1;
+    0.05 -0.15 0.15 1 0.2;
+    -0.02 0.05 -0.15 0.15 1];
+
+c = [1 0.15 -0.15 0.05 -0.02];
+r = fliplr([-0.02 0.05 -0.1 0.2 1]);
+T = toeplitz(c, r);
+
+isequal(H1, T) % logical 1
+
+inv(T)
+% 
+% ans =
+% 
+%     1.0774   -0.2682    0.1932   -0.1314    0.0806
+%    -0.2266    1.1272   -0.2983    0.2034   -0.1314
+%     0.2326   -0.2737    1.1517   -0.2983    0.1932
+%    -0.1405    0.2516   -0.2737    1.1272   -0.2682
+%     0.0888   -0.1405    0.2326   -0.2266    1.0774
+```
+
+---
+
+***MMSE***
+
+![image-20260314115828173](digital-comm/image-20260314115828173.png)
+
+```matlab
+h=[0.004, 0.0010, 0.0023, 0.0052, 0.0812, 0.3437, 0.1775, 0.0917, 0.0526,...
+    0.0360, 0.0224, 0.0162, 0.0152, 0.0097, 0.0090, 0.0067];
+
+k = length(h);
+n = 3;
+l = 1;
+m2 = 5;
+m1 = 1;
+
+H = zeros([k+n+l-2, n+l-1]);
+H(1:end-2,1) = h;
+H(2:end-1,2) = h;
+H(3:end,3) = h;
+
+c = zeros(length(h)+2, 1);
+c(1:end-2) = h;
+r = zeros(3, 1);
+r(1) = h(1);
+
+T = toeplitz(c, r);
+
+isequal(H, T) % logical 1
+```
+
+---
+
+`transpose(toeplitz(c,r))` is same with `toeplitz(r,c)`
+
+```matlab
+isequal(transpose(toeplitz(c, r)), toeplitz(r, c)) % logical 1
+```
+
+> V. Stojanovic, "Channel-Limited High-Speed Links: Modeling, Analysis and Design," PhD. Thesis, Stanford University, Sep. 2004. [[pdf](https://vlsiweb.stanford.edu/people/alum/pdf/0409_Stojanovic_Link_Opt.pdf)]
+
+![image-20260314134225499](digital-comm/image-20260314134225499.png)
+
+> ![image-20260314134258739](digital-comm/image-20260314134258739.png)
 
 ## Bandpass Modulation
 

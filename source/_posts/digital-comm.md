@@ -102,7 +102,7 @@ isequal(transpose(toeplitz(c, r)), toeplitz(r, c)) % logical 1
 
 > V. Stojanovic, "Channel-Limited High-Speed Links: Modeling, Analysis and Design," PhD. Thesis, Stanford University, Sep. 2004. [[pdf](https://vlsiweb.stanford.edu/people/alum/pdf/0409_Stojanovic_Link_Opt.pdf)]
 
-![image-20260314134225499](digital-comm/image-20260314134225499.png)
+![image-20260314134616818](digital-comm/image-20260314134616818.png)
 
 > ![image-20260314134258739](digital-comm/image-20260314134258739.png)
 

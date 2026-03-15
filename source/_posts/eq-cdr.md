@@ -448,9 +448,9 @@ plt.show()
 
 Alexander (Bang-Bang) PD **does not typically lock at the maximum pulse value** when the pulse is asymmetric. 
 
-For an asymmetric pulse (like one with a slow trailing edge caused by ISI), this **lock point** shifts toward the slower-decaying side of the pulse.
+For an **asymmetric pulse** (like one with a slow trailing edge caused by ISI), this **lock point** shifts toward the slower-decaying side of the pulse.
 
-![image-20260315165701477](eq-cdr/image-20260315165701477.png)
+![image-20260315201620989](eq-cdr/image-20260315201620989.png)
 
 ```python
 # https://share.google/aimode/l0gnYPTxlyUa7WUed
@@ -460,7 +460,7 @@ import matplotlib.pyplot as plt
 
 
 t = np.linspace(-1, 1.5, 1000)
-T = 0.5  # Sampling width
+T = 1  # Sampling width
 
 # Asymmetric Pulse: Fast rise, slow tail
 p = 0.8 * np.exp(-15 * (t + 0.1) ** 2) + 0.4 * np.exp(-1.5 * (t - 0.4) ** 2)

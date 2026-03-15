@@ -341,6 +341,8 @@ $$
 >
 > —, DesignCon 2021. A Generalized Power Supply Induced Jitter Model Based on Power Supply Rejection Ratio Response [[paper](https://par.nsf.gov/servlets/purl/10314293)]
 >
+> —, "Power Supply Induced Jitter: Introduction and Recent Advances," in *IEEE Transactions on Signal and Power Integrity*, vol. 5, pp. 22-32, 2026
+>
 > X. Mo, J. Wu, N. Wary and T. C. Carusone, "Design Methodologies for Low-Jitter CMOS Clock Distribution," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 1, pp. 94-103, 2021. [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9559395)]
 
 A **sampled pxf** analysis can be used to simulate the *deterministic jitter* of a circuit due to *power supply ripple*

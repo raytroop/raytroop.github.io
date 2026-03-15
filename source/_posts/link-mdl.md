@@ -1007,7 +1007,19 @@ target_link_libraries(test_systemc SystemC::systemc)
 
 
 
+### ngscopeclient
 
+> [[https://github.com/ngscopeclient/scopehal-apps](https://github.com/ngscopeclient/scopehal-apps)]
+
+*TODO* &#128197;
+
+
+
+### SignalIntegrity
+
+> SignalIntegrity: Signal and Power Integrity Tools [[https://github.com/Nubis-Communications/SignalIntegrity](https://github.com/Nubis-Communications/SignalIntegrity)]
+
+*TODO* &#128197;
 
 
 

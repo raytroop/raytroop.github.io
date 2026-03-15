@@ -395,64 +395,96 @@ note $e_n = dLev_n-y_n$
 
 
 
-## MLSD (Maximum Likelihood Sequence Detection)
-
-The process is also referred to as **Maximum Likelihood Sequence Estimator (MLSE)**
-
-![image-20240807233152154](eq-cdr/image-20240807233152154.png)
-
-![image-20240812205534753](eq-cdr/image-20240812205534753.png)
-
-![image-20240812205613467](eq-cdr/image-20240812205613467.png)
-
-> [IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes Beyond 100 Gb/s [https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf](https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf)]
->
-> M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A. Sheikholeslami, "Design and Implementation of an On-Demand Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of Circuits and Systems, vol. 3, pp. 97-108, 2022, doi: 10.1109/OJCAS.2022.3173686.
->
-> Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing Architecture Using Viterbi Algorithm for ADC-Based Serial Link. Undergraduate Research Scholars Program. Available electronically from [[https://hdl.handle.net/1969.1/166485](https://hdl.handle.net/1969.1/166485)]
-
-
-
-There are several variants of MLSD (Maximum Likelihood Sequence Detection), including:
-
-- Viterbi Algorithm
-- Decision Feedback Sequence Estimation (DFSE)
-- Soft-Output MLSD
-
-
-
-
-> [Evolution Of Equalization Techniques In High-Speed SerDes For Extended Reaches. [https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/](https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/)]
->
-> S. Song, K. D. Choo, T. Chen, S. Jang, M. P. Flynn and Z. Zhang, "A Maximum-Likelihood Sequence Detection Powered ADC-Based Serial Link," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 65, no. 7, pp. 2269-2278, July 2018
->
-> [[http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf](http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf)]
->
-> David Johns. Partial Response and Viterbi Detecti [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf)]
-
-
-
-![image-20240824193839108](eq-cdr/image-20240824193839108.png)
-
----
-
-> Leslie Rusch. [[https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf](https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf)]
-
-
-
----
-
-> Vineel Kumar Veludandi. Maximum likelihood sequence estimation (MLSE) using the Viterbi algorithm [[https://github.com/vineel49/mlse](https://github.com/vineel49/mlse)]
-
-
 
 ## Bang-Bang CDR
 
-> alexander PD or !!PD
+>  ***Alexander PD*** or ***!!PD***
 
-The alexander PD locks that edge clock (clkedge) is located at zero crossings of the data. The $h_{-0.5}$ and $h_{0.5}$ are **equal** at the *lock point,* where the  $h_{-0.5}$ and $h_{0.5}$ are the cursors located at -0.5 UI and 0.5 UI. 
+By definition the **edge sample** will be **zero** at a **zero crossing**, given $a_na_{n+1}=-1$
+
+![image-20260315161503187](eq-cdr/image-20260315161503187.png)
+
+![image-20260315161701385](eq-cdr/image-20260315161701385.png)
+
+By *proper equalization* choice, the pulse response may *approximate even symmetry*
+
+![image-20260315162345071](eq-cdr/image-20260315162345071.png)
+
+```python
+# https://share.google/aimode/l0gnYPTxlyUa7WUed
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+t = np.linspace(-1.5, 1.5, 1000)
+
+# Pulse Response and its continuous derivative
+p = np.exp(-4 * t ** 2)
+p_prime = -8 * t * np.exp(-4 * t ** 2)
+
+# Discrete Approximation (Finite Difference over T=1 UI)
+T = 1
+discrete_approx = (np.exp(-4 * (t + T / 2) ** 2) - np.exp(-4 * (t - T / 2) ** 2)) / T
+
+# Alexander Bang-Bang Output
+g_tau = np.sign(discrete_approx)
+
+plt.figure(figsize=(10, 6))
+plt.plot(t, p, label="Pulse Response", color='k', alpha=0.8)
+plt.plot(t, p_prime, label="Continuous Derivative $P'(t)$", color='red', alpha=0.6)
+plt.plot(t, discrete_approx, label="Discrete Finite Difference Approx", color='blue', ls='--')
+plt.step(t, g_tau, where='mid', color='green', lw=1, label="Alexander PD Timing Function", alpha=0.6)
+plt.axhline(0, color='black', lw=1)
+plt.axvline(0, color='gray', ls=':', lw=1, label='Lock Point')
+plt.title('Discrete Approximation of Pulse Derivative (Page 42)')
+plt.xlabel('Phase Error (UI)')
+plt.ylabel('Amplitude')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+![image-20260315162737717](eq-cdr/image-20260315162737717.png)
+
+Alexander (Bang-Bang) PD **does not typically lock at the maximum pulse value** when the pulse is asymmetric. 
+
+For an asymmetric pulse (like one with a slow trailing edge caused by ISI), this **lock point** shifts toward the slower-decaying side of the pulse.
+
+```python
+# https://share.google/aimode/l0gnYPTxlyUa7WUed
+
+import numpy as np
+import matplotlib.pyplot as plt
 
 
+t = np.linspace(-1, 1.5, 1000)
+T = 0.5  # Sampling width
+
+# Asymmetric Pulse: Fast rise, slow tail
+p = 0.8 * np.exp(-15 * (t + 0.1) ** 2) + 0.4 * np.exp(-1.5 * (t - 0.4) ** 2)
+
+# Calculate Slope Approximation (Alexander PD Function)
+p_plus = np.interp(t + T / 2, t, p)
+p_minus = np.interp(t - T / 2, t, p)
+slope = (p_plus - p_minus) / T
+
+# Find Critical Points
+t_peak = t[np.argmax(p)]
+t_lock = t[np.argmin(np.abs(slope))]
+
+plt.figure(figsize=(10, 5))
+plt.plot(t, p, label="Asymmetric Pulse", lw=2)
+plt.plot(t, slope, label="Discrete Finite Difference Approx", color='blue', ls='--')
+plt.axvline(t_peak, color='red', ls='--', label=f'True Peak: {t_peak:.2f} UI')
+plt.axvline(t_lock, color='green', ls='-', label=f'PD Lock Point: {t_lock:.2f} UI')
+plt.title("Sampling Error in Alexander PD due to Pulse Asymmetry")
+plt.legend(); plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+
+
+---
 
 > Kwangho Lee, "Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector" [[https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
 >
@@ -491,7 +523,7 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 
 ### SS-MMPD
 
-> F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 366-367, [[https://sci-hub.ru/10.1109/ISSCC.2010.5433823](https://sci-hub.ru/10.1109/ISSCC.2010.5433823)]
+> F. Spagna *et al*., "A 78mW 11.8Gb/s serial link transceiver with adaptive RX equalization and baud-rate CDR in 32nm CMOS," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, [[https://sci-hub.ru/10.1109/ISSCC.2010.5433823](https://sci-hub.ru/10.1109/ISSCC.2010.5433823)]
 >
 > Liu, Tao & Li, Tiejun & Lv, Fangxu & Liang, Bin & Zheng, Xuqiang & Wang, Heming & Wu, Miaomiao & Lu, Dechao & Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits. Electronics. [[10. 1888. 10.3390/electronics10161888.](https://www.mdpi.com/2079-9292/10/16/1888/pdf?version=1628492599)] 
 >
@@ -564,6 +596,59 @@ Then, $h_{-1}$ and $h_1$ are same, which is desired
 
 
 
+## MLSD (Maximum Likelihood Sequence Detection)
+
+The process is also referred to as **Maximum Likelihood Sequence Estimator (MLSE)**
+
+![image-20240807233152154](eq-cdr/image-20240807233152154.png)
+
+![image-20240812205534753](eq-cdr/image-20240812205534753.png)
+
+![image-20240812205613467](eq-cdr/image-20240812205613467.png)
+
+> [IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes Beyond 100 Gb/s [https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf](https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf)]
+>
+> M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A. Sheikholeslami, "Design and Implementation of an On-Demand Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of Circuits and Systems, vol. 3, pp. 97-108, 2022, doi: 10.1109/OJCAS.2022.3173686.
+>
+> Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing Architecture Using Viterbi Algorithm for ADC-Based Serial Link. Undergraduate Research Scholars Program. Available electronically from [[https://hdl.handle.net/1969.1/166485](https://hdl.handle.net/1969.1/166485)]
+
+
+
+There are several variants of MLSD (Maximum Likelihood Sequence Detection), including:
+
+- Viterbi Algorithm
+- Decision Feedback Sequence Estimation (DFSE)
+- Soft-Output MLSD
+
+
+
+
+> [Evolution Of Equalization Techniques In High-Speed SerDes For Extended Reaches. [https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/](https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/)]
+>
+> S. Song, K. D. Choo, T. Chen, S. Jang, M. P. Flynn and Z. Zhang, "A Maximum-Likelihood Sequence Detection Powered ADC-Based Serial Link," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 65, no. 7, pp. 2269-2278, July 2018
+>
+> [[http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf](http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf)]
+>
+> David Johns. Partial Response and Viterbi Detecti [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf)]
+
+
+
+![image-20240824193839108](eq-cdr/image-20240824193839108.png)
+
+---
+
+> Leslie Rusch. [[https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf](https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf)]
+
+
+
+---
+
+> Vineel Kumar Veludandi. Maximum likelihood sequence estimation (MLSE) using the Viterbi algorithm [[https://github.com/vineel49/mlse](https://github.com/vineel49/mlse)]
+
+
+
+
+
 ## reference
 
 Hall, Stephen H., and Howard L. Heck. *Advanced Signal Integrity for High-speed Digital Designs*. Wiley : IEEE, 2009 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIFhWWoIkGkuXXv.pdf)]
@@ -589,6 +674,8 @@ Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Se
 S. Laxman, "Equalization algorithms in Millimeter wave communication systems," *2017 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2017 [[pdf](https://picture.iczhiku.com/resource/eetop/shIHewZLfoEzkMVc.pdf)]
 
 A. Amirkhany, "Basics of Clock and Data Recovery Circuits: Exploring High-Speed Serial Links," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 1, pp. 25-38, Winter 2020 [[https://sci-hub.jp/10.1109/MSSC.2019.2939342](https://sci-hub.jp/10.1109/MSSC.2019.2939342)]
+
+Fulvio Spagna, CICC2018 Clock and Data Recovery Systems [[pdf](https://picture.iczhiku.com/resource/eetop/WhiTfzdJZSZyDcBM.pdf)]
 
 ---
 

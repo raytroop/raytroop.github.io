@@ -450,6 +450,8 @@ Alexander (Bang-Bang) PD **does not typically lock at the maximum pulse value** 
 
 For an asymmetric pulse (like one with a slow trailing edge caused by ISI), this **lock point** shifts toward the slower-decaying side of the pulse.
 
+![image-20260315165701477](eq-cdr/image-20260315165701477.png)
+
 ```python
 # https://share.google/aimode/l0gnYPTxlyUa7WUed
 

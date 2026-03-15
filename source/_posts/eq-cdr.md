@@ -409,6 +409,10 @@ By definition the **edge sample** will be **zero** at a **zero crossing**, given
 By *proper equalization* choice, the pulse response may *approximate even symmetry*
 
 ![image-20260315162345071](eq-cdr/image-20260315162345071.png)
+$$
+f(t) = g(t+T/2) - g(t-T/2)
+$$
+
 
 ```python
 # https://share.google/aimode/l0gnYPTxlyUa7WUed
@@ -509,6 +513,62 @@ plt.show()
 >
 > S. Kim, K. K. Tokgoz and G. Kim, "Modeling and Simulation of Mueller-Muller Clock Data Recovery System for PAM-4 Wireline Transceivers," *2025 IEEE/IEIE International Conference on Consumer Electronics-Asia (ICCE-Asia)*, Busan, Korea, Republic of, 2025, pp. 1-3, doi: 10.1109/ICCE-Asia67487.2025.11263607
 
+![image-20260316001106973](eq-cdr/image-20260316001106973.png)
+
+![image-20260316001435496](eq-cdr/image-20260316001435496.png)
+
+---
+
+***Mueller-Muller type A timing function***
+
+![image-20260316000555457](eq-cdr/image-20260316000555457.png)
+
+***Mueller-Muller type B timing function***
+
+![image-20260316000723470](eq-cdr/image-20260316000723470.png) 
+
+![image-20260316000303776](eq-cdr/image-20260316000303776.png)
+
+```python
+# https://share.google/aimode/ajIRVJNOatjPnY2zp
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Asymmetric Pulse Modeling
+t_cont = np.linspace(-3, 8, 2000)
+h_cont = np.where(t_cont >= -0.8, (t_cont + 0.8) * np.exp(-0.6 * (t_cont + 0.8)), 0)
+h_cont /= np.max(h_cont)
+
+def get_h(phase):
+    return np.interp(phase, t_cont, h_cont)
+
+# 2. Timing Error Calculations
+phases = np.linspace(-0.5, 3.5, 1000)
+tef_a = np.array([get_h(ts + 1) - get_h(ts - 1) for ts in phases])
+tef_b = np.array([get_h(ts - 1) for ts in phases])
+
+# 3. Robust Lock Logic
+t_lock_a = phases[np.argmin(np.abs(tef_a))]
+
+# Type B: Finding the LAST minimal error before h(-1) rises
+indices_b = np.where(np.abs(tef_b) == np.min(np.abs(tef_b)))[0]
+t_lock_b = phases[indices_b][-1]
+
+# 4. Plotting Results
+plt.figure(figsize=(10, 6))
+plt.plot(t_cont, h_cont, 'k-', lw=2, label='Pulse Response $h(t)$')
+plt.axvline(t_lock_a, color='red', linestyle='--', label=f'Type A Lock: {t_lock_a:.2f}T')
+plt.axvline(t_lock_b, color='green', linestyle='--', label=f'Type B Lock: {t_lock_b:.2f}T')
+plt.plot(t_lock_b - 1, get_h(t_lock_b - 1), 'go', label='Type B: $h_{-1}=0$')
+plt.title('Baud Rate Lock: Type A (Symmetry) vs. Type B (Last-Zero Precursor)')
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+---
+
 ![image-20240812222307061](eq-cdr/image-20240812222307061.png)
 
 Suppose 1-precursor, 1-postcursor — $y_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$
@@ -534,21 +594,55 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 
 
 
+![image-20240808001449664](eq-cdr/image-20240808001449664.png)
+
+> ![image-20260112221328785](eq-cdr/image-20260112221328785.png)
+
+
+
+> [[https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture12_ee720_cdrs.pdf)]
+>
+> ![image-20240808001501485](eq-cdr/image-20240808001501485.png)
+
+
+
+> ![image-20260315215701263](eq-cdr/image-20260315215701263.png)
+>
+> ![image-20260315215014444](eq-cdr/image-20260315215014444.png)
+
 ![image-20260112225032307](eq-cdr/image-20260112225032307.png)
 
 Suppose $x_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$ and $x_{k-1} = d_{k-2}h_1 + d_{k-1} h_0 + d_{k}h_{-1}$
 $$
 \color{red}E\{z_k\} = \frac{1}{2} E\{|d_{k-1}|^2h_1\} - \frac{1}{2} E\{|d_{k}|^2h_{-1}\} = \frac{1}{2}(h_1 - h_{-1})
 $$
-![image-20240808001449664](eq-cdr/image-20240808001449664.png)
-
-> ![image-20260112221328785](eq-cdr/image-20260112221328785.png)
-
-![image-20240808001501485](eq-cdr/image-20240808001501485.png)
 
 
+---
+
+> 
 
 
+
+
+
+
+
+
+
+### Adjust Locking Point
+
+> Avago Technologies, US8649476B2 Adjusting sampling phase in a baud-rate CDR using timing skew [[pdf](https://patentimages.storage.googleapis.com/03/d4/ec/906e619ce1d719/US8649476.pdf)]
+>
+> Y. Jung, H. -J. Shin, J. Kim, S. Lee, J. -S. Park and K. Park, "A 28-Gb/s Receiver with Baud-Rate CDR Employing Integrated Pattern-Based Phase Detector Achieving ISI Invariant Phase Locking," *2025 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Daejeon, Korea, Republic of, 2025,
+>
+> R. Dokania *et al*., "10.5 A 5.9pJ/b 10Gb/s serial link with unequalized MM-CDR in 14nm tri-gate CMOS," *2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers*, San Francisco, CA, USA, 2015 [[https://sci-hub.jp/10.1109/ISSCC.2015.7062987](https://sci-hub.jp/10.1109/ISSCC.2015.7062987)]
+>
+> H. Zhang, B. Jiao, Y. Liao, and G. Zhang, "A Tutorial on PAM4 Signaling for 56G Serial Link,"  [[DesignCon  2016](https://www.xilinx.com/publications/events/designcon/2016/slides-pam4signalingfor56gserial-zhang-designcon.pdf)], [[DesignCon  2017](https://www.oldfriend.url.tw/article/IEEE_paper/PAM4/SLIDES_10_PAM4_Signaling_for_56G_Serial_Zhang_1_.pdf)]
+
+*TODO* &#128197;
+
+![image-20260315220455757](eq-cdr/image-20260315220455757.png)
 
 ---
 
@@ -566,9 +660,7 @@ $h_1$ is **necessary**
 
   Consequently, it suffers from a severe *multiple-locking problem with an adaptive DFE*
 
-![image-20240812232618238](eq-cdr/image-20240812232618238.png)
-
-
+![image-20260315220208339](eq-cdr/image-20260315220208339.png)
 
 ***Pattern filter***
 
@@ -585,18 +677,6 @@ During adapting,  we make
 - $s_{100}$ & $s_{001}$ are approaching to each other
 
 Then, $h_{-1}$ and $h_1$ are same, which is desired
-
-
-
-### Symmetrical Pulse
-
-> Avago Technologies, US8649476B2 Adjusting sampling phase in a baud-rate CDR using timing skew [[pdf](https://patentimages.storage.googleapis.com/03/d4/ec/906e619ce1d719/US8649476.pdf)]
->
-> Y. Jung, H. -J. Shin, J. Kim, S. Lee, J. -S. Park and K. Park, "A 28-Gb/s Receiver with Baud-Rate CDR Employing Integrated Pattern-Based Phase Detector Achieving ISI Invariant Phase Locking," *2025 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Daejeon, Korea, Republic of, 2025,
->
-> R. Dokania *et al*., "10.5 A 5.9pJ/b 10Gb/s serial link with unequalized MM-CDR in 14nm tri-gate CMOS," *2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers*, San Francisco, CA, USA, 2015 [[https://sci-hub.jp/10.1109/ISSCC.2015.7062987](https://sci-hub.jp/10.1109/ISSCC.2015.7062987)]
-
-
 
 ## MLSD (Maximum Likelihood Sequence Detection)
 
@@ -673,11 +753,17 @@ Vivek Telang, 2012, Equalization for High-Speed Serdes: System-level Comparison 
 
 Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
 
+—, CICC2022 ES4: Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver
+
 S. Laxman, "Equalization algorithms in Millimeter wave communication systems," *2017 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2017 [[pdf](https://picture.iczhiku.com/resource/eetop/shIHewZLfoEzkMVc.pdf)]
 
 A. Amirkhany, "Basics of Clock and Data Recovery Circuits: Exploring High-Speed Serial Links," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 1, pp. 25-38, Winter 2020 [[https://sci-hub.jp/10.1109/MSSC.2019.2939342](https://sci-hub.jp/10.1109/MSSC.2019.2939342)]
 
+—, ISSCC2019 T6: "Basics of Clock and Data Recovery Circuits"
+
 Fulvio Spagna, CICC2018 Clock and Data Recovery Systems [[pdf](https://picture.iczhiku.com/resource/eetop/WhiTfzdJZSZyDcBM.pdf)]
+
+Wei-Zen Chen, ISSCC2026. T9: Clocking and CDR Techniques for High-Performance Wireline Transceiver
 
 ---
 

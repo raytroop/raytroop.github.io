@@ -231,3 +231,5 @@ Griffiths, David J. *Introduction to Electrodynamics*. Fifth edition. Cambridge 
 邓友金. 电磁学 2022春 [[http://staff.ustc.edu.cn/~yjdeng/EM2022/EM2022.html](http://staff.ustc.edu.cn/~yjdeng/EM2022/EM2022.html)]
 
 Scott Hughes. Spring 2005 8.022: Electricity & Magnetism [[https://web.mit.edu/sahughes/www/8.022/](https://web.mit.edu/sahughes/www/8.022/)]
+
+David Smith, Electromagnetic Theory for Complete Idiot

@@ -17,18 +17,100 @@ Magnetic flux $\Phi_B$ measures the total magnetic field ($B$) passing through a
 
 > 3Blue1Brown, Divergence and curl: The language of Maxwell's equations, fluid flow, and more [[https://youtu.be/rB83DpBJQsE](https://youtu.be/rB83DpBJQsE)]
 
-*TODO* &#128197;
+![image-20260316220628358](em/image-20260316220628358.png)
 
 ### Gradient
+
+![image-20260316221131492](em/image-20260316221131492.png)
+
+
 
 
 ### Divergence 
 
-> [[https://share.google/aimode/frOOdd5BflINzdTVh](https://share.google/aimode/frOOdd5BflINzdTVh)]
+![image-20260316221847450](em/image-20260316221847450.png)
+
+![image-20260316222656776](em/image-20260316222656776.png)
+
+```python
+# https://share.google/aimode/l3lNa2MRAOG8hkpOc
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Define the grid
+x = np.linspace(-6, 6, 40)
+y = np.linspace(-3, 3, 20)
+X, Y = np.meshgrid(x, y)
+
+# 2. Define the vector field components F = [U, V]
+U = np.sin(X)
+V = np.cos(Y)
+
+# 3. Calculate Divergence (Scalar Field)
+div_F = np.cos(X) - np.sin(Y)
+
+# 4. Create the plot
+fig, ax = plt.subplots(figsize=(16, 8))
+
+# Use 'RdBu_r' (reversed) so Positive = Red, Negative = Blue
+contour = ax.contourf(X, Y, div_F, cmap='RdBu_r', levels=30, alpha=0.8)
+fig.colorbar(contour, label='Divergence (Red=Source, Blue=Sink)')
+
+# Plot Vector Field
+ax.quiver(X, Y, U, V, color='black', alpha=0.9, scale=20)
+ax.set_xlabel('X', fontsize=12)
+ax.set_ylabel('Y', fontsize=12)
+ax.set_title(r'Positive Divergence (Red) and Negative Divergence (Blue)')
+plt.show()
+```
 
 ### Curl
 
-> [[https://share.google/aimode/rZ4h7NiyXDh8ZJStb](https://share.google/aimode/rZ4h7NiyXDh8ZJStb)]
+![image-20260316222022456](em/image-20260316222022456.png)
+
+![image-20260316223410884](em/image-20260316223410884.png)
+
+```python
+# https://share.google/aimode/hWb3cR4vCBoWV4Moi
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Setup the coordinate grid
+x = np.linspace(-2, 2, 7)
+y = np.linspace(-2, 2, 7)
+z = np.linspace(-2, 2, 7)
+X, Y, Z = np.meshgrid(x, y, z)
+
+# 2. Define the Vector Field F and Curl(F)
+U, V, W = X, Y*Z, 3*X*Z
+C_U, C_V, C_W = -Y, -3*Z, np.zeros_like(Z)
+
+# 3. Create the plot
+fig = plt.figure(figsize=(16, 8), constrained_layout=True)
+
+# Subplot 1: Vector Field
+ax1 = fig.add_subplot(121, projection='3d')
+ax1.quiver(X, Y, Z, U, V, W, length=0.3, normalize=True, color='royalblue')
+ax1.set_title('Vector Field F')
+ax1.set_xlabel('X', fontsize=16)  # Adding x-label
+ax1.set_ylabel('Y', fontsize=16)  # Adding y-label
+ax1.set_zlabel('Z', fontsize=16)  # Adding z-label
+
+# Subplot 2: Curl
+ax2 = fig.add_subplot(122, projection='3d')
+ax2.quiver(X, Y, Z, C_U, C_V, C_W, length=0.3, normalize=True, color='crimson')
+ax2.set_title('Curl(F)')
+ax2.set_xlabel('X', fontsize=16)  # Adding x-label
+ax2.set_ylabel('Y', fontsize=16)  # Adding y-label
+ax2.set_zlabel('Z', fontsize=16)  # Adding z-label
+
+# plt.tight_layout(pad=3.0, rect=[0, 0, 1, 0.95])
+plt.show()
+```
+
+
 
 
 ## Field Inside and Outside a Current-Carrying Wire

@@ -712,6 +712,10 @@ Extended ESD design window example. The failure voltage of a thin gate oxide in 
 
 ![image-20260124104225655](esd-latchup/image-20260124104225655.png)
 
+### metal resistance of guard ring
+
+![image-20260317001511923](esd-latchup/image-20260317001511923.png)
+
 
 
 

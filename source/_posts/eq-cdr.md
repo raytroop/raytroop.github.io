@@ -360,7 +360,7 @@ note $e_n = dLev_n-y_n$
 
 > J. T. Stonick, Gu-Yeon Wei, J. L. Sonntag and D. K. Weinlader, "An adaptive PAM-4 5-Gb/s backplane transceiver in 0.25-μm CMOS," in IEEE Journal of Solid-State Circuits, vol. 38, no. 3, pp. 436-443, March 2003, [[https://sci-hub.st/10.1109/JSSC.2002.808282](https://sci-hub.st/10.1109/JSSC.2002.808282)]
 
-
+![image-20260316231021263](eq-cdr/image-20260316231021263.png)
 
 
 
@@ -378,13 +378,11 @@ note $e_n = dLev_n-y_n$
 
 > Jinhyung Lee, Design of High-Speed Receiver for Video Interface with Adaptive Equalization; Phd thesis, August 2019. [[thesis link](http://dcollection.snu.ac.kr/common/orgView/000000157003)]
 
-*TODO* &#128197;
-
 ![image-20260312235927742](eq-cdr/image-20260312235927742.png)
 
 ---
 
-> Kwangho Lee, SNU phd thesis, *Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector* [[pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
+> Kwangho Lee, Design of Receiver with Offset Cancellation of Adaptive Equalizer and Multi-Level Baud-Rate Phase Detector; Phd thesis, August 2021.[[pdf](https://s-space.snu.ac.kr/bitstream/10371/177584/1/000000167211.pdf)]
 
 ![image-20260312221305468](eq-cdr/image-20260312221305468.png)
 

@@ -13,6 +13,22 @@ magnetic field (magnetic flux density, $B$), is the **tesla** (symbol: $T$), def
 
 Magnetic flux $\Phi_B$ measures the total magnetic field ($B$) passing through a given surface area ($A$), representing the number of field lines penetrating that area. Measured in **Webers** ($Wb$),
 
+## Vector Calculus
+
+> 3Blue1Brown, Divergence and curl: The language of Maxwell's equations, fluid flow, and more [[https://youtu.be/rB83DpBJQsE](https://youtu.be/rB83DpBJQsE)]
+
+*TODO* &#128197;
+
+### Gradient
+
+
+### Divergence 
+
+> [[https://share.google/aimode/frOOdd5BflINzdTVh](https://share.google/aimode/frOOdd5BflINzdTVh)]
+
+### Curl
+
+> [[https://share.google/aimode/rZ4h7NiyXDh8ZJStb](https://share.google/aimode/rZ4h7NiyXDh8ZJStb)]
 
 
 ## Field Inside and Outside a Current-Carrying Wire

@@ -309,9 +309,12 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 
 
 
-## LMS & its Quantized-Error Algorithms  
+## LMS & its Quantized-Error Algorithms
+
+> Bruno Lima, Adaptive filtering in Python Implementations based on Adaptive Filtering: Algorithms and Practical Implementation (Paulo S. R. Diniz). [[https://github.com/BruninLima/PydaptiveFiltering](https://github.com/BruninLima/PydaptiveFiltering)]
+
 $$\begin{align}
-x_k &= [x[k], x[k-1], \ldots, x[k-M]]^T \in \mathbb{C}^{M+1}.\\
+x_k &= [x[k], x[k-1], \ldots, x[k-M]]^T \in \mathbb{C}^{M+1}\\
 y[k] &= w^H[k] x_k, \qquad e[k] = d[k] - y[k],
 \end{align}$$
 

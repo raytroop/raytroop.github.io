@@ -308,13 +308,6 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 ![image-20260301174712835](digital-comm/image-20260301174712835.png)
 
 
-## Forward Error Correction (FEC)
-
-> Cathy Ye Liu, Broadcom Inc. DesignCon 2019: 100+ Gb/s Ethernet Forward Error Correction (FEC) Analysis
->
-> —, Broadcom Inc. DesignCon 2024: 200+ Gbps Ethernet Forward Error Correction (FEC) Analysis
-
-*TODO* &#128197;
 
 ## LMS & its Quantized-Error Algorithms  
 $$\begin{align}
@@ -390,6 +383,18 @@ for k in range(n_samples):
 ***sign–sign algorithm***
 
 ![image-20260317230938532](digital-comm/image-20260317230938532.png)
+
+
+
+## Forward Error Correction (FEC)
+
+> Cathy Ye Liu, Broadcom Inc. DesignCon 2019: 100+ Gb/s Ethernet Forward Error Correction (FEC) Analysis
+>
+> —, Broadcom Inc. DesignCon 2024: 200+ Gbps Ethernet Forward Error Correction (FEC) Analysis
+
+*TODO* &#128197;
+
+
 
 
 

@@ -1,6 +1,6 @@
 ---
 title: Digital Equalization & Clock Data Recovery
-date: 2024-09-03 11:07:31
+date: 2025-05-16 11:07:31
 tags:
 categories:
 - link

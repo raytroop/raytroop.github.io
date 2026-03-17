@@ -316,6 +316,83 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 
 *TODO* &#128197;
 
+## LMS & its Quantized-Error Algorithms  
+$$\begin{align}
+x_k &= [x[k], x[k-1], \ldots, x[k-M]]^T \in \mathbb{C}^{M+1}.\\
+y[k] &= w^H[k] x_k, \qquad e[k] = d[k] - y[k],
+\end{align}$$
+
+---
+
+***LMS algorithm***
+
+![image-20260317224545818](digital-comm/image-20260317224545818.png)
+$$
+w[k+1] = w[k] + \mu\, e^*[k] \, x_k.
+$$
+
+```python
+if w_init is not None:
+    self.w: np.ndarray = np.asarray(w_init, dtype=self._dtype)
+else:
+    self.w = np.zeros(self.filter_order + 1, dtype=self._dtype)
+```
+
+```python
+x: np.ndarray = np.asarray(input_signal, dtype=complex).ravel()
+d: np.ndarray = np.asarray(desired_signal, dtype=complex).ravel()
+
+n_samples: int = int(x.size)
+m: int = int(self.filter_order)
+
+outputs: np.ndarray = np.zeros(n_samples, dtype=complex)
+errors: np.ndarray = np.zeros(n_samples, dtype=complex)
+
+x_padded: np.ndarray = np.zeros(n_samples + m, dtype=complex)
+x_padded[m:] = x
+
+for k in range(n_samples):
+    x_k: np.ndarray = x_padded[k : k + m + 1][::-1]
+
+    y_k: complex = complex(np.vdot(self.w, x_k)) 
+    outputs[k] = y_k
+
+    e_k: complex = d[k] - y_k
+    errors[k] = e_k
+
+    self.w = self.w + self.step_size * np.conj(e_k) * x_k
+```
+
+---
+
+***Sign-Data Algorithm***
+$$
+w[k+1] = w[k] + 2\mu\, e^*[k] \, \operatorname{sign}(x_k)
+$$
+
+```python
+for k in range(n_samples):
+    x_k = x_padded[k : k + m + 1][::-1]
+
+    y_k = complex(np.vdot(self.w, x_k))
+    outputs[k] = y_k
+
+    e_k = d[k] - y_k
+    errors[k] = e_k
+
+    sign_xk = np.sign(x_k)
+
+    self.w = self.w + (2.0 * self.step_size) * np.conj(e_k) * sign_xk
+```
+
+---
+
+***sign–sign algorithm***
+
+![image-20260317230938532](digital-comm/image-20260317230938532.png)
+
+
+
 ## reference
 
 Proakis, John G., and Masoud Salehi. *Digital Communications. 5th ed. McGraw-Hill, 2008.* [[pdf](https://daskalakispiros.com/files/Ebooks/digital-communication-proakis-salehi-5th-edition.pdf)]

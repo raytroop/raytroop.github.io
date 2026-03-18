@@ -362,6 +362,14 @@ Dual diode should be used with **power clamp** for **PS** and **ND** path
 
 
 
+### Reverse diode for 1.8V/3.3V power clamp
+
+![image-20260319000536114](esd-latchup/image-20260319000536114.png)
+
+![image-20260319000723635](esd-latchup/image-20260319000723635.png)
+
+The resistance between HIA Diode and power/ground bump is constricted in PERC check
+
 
 
 ## B2B Diode

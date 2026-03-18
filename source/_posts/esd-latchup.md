@@ -293,6 +293,24 @@ To assess the design solutions, a ***distributed DUT model***, as presented in F
 
 ![Figure 3](https://assets.incompliancemag.com/2025/11/2512-C2-fig3.png)
 
+
+
+## Protection Design
+
+> Lin, Chun-Yu and Ming-Dou Ker. “CDM ESD protection design with initial-on concept in nanoscale CMOS process.” *2010 17th IEEE International Symposium on the Physical and Failure Analysis of Integrated Circuits* (2010): 1-4. [[https://sci-hub.jp/10.1109/IPFA.2010.5532223](https://sci-hub.jp/10.1109/IPFA.2010.5532223)]
+>
+> Shih-Hung Chen, Ming-Dou Ker, Active ESD protection circuit design against charged-device-model ESD event in CMOS integrated circuits [[https://sci-hub.jp/10.1016/j.microrel.2007.07.095](https://sci-hub.jp/10.1016/j.microrel.2007.07.095)]
+>
+> Jian-Hsing Lee *et al*., "The study of sensitive circuit and layout for CDM improvement," *2009 16th IEEE International Symposium on the Physical and Failure Analysis of Integrated Circuits*, Suzhou, China, 2009 [[link](https://www.researchgate.net/publication/227656014_The_Study_of_Sensitive_Circuit_and_Layout_for_CDM_Improvement)]
+
+***using the deep N-well***
+
+![image-20260318232850972](esd-latchup/image-20260318232850972.png)
+
+***source pumping resistor***
+
+![image-20260318234516521](esd-latchup/image-20260318234516521.png)
+
 ## Power Clamp
 
 > Ein.019, RCCLAMP个人理解 [[https://blog.eetop.cn/blog-1779684-6962653.html](https://blog.eetop.cn/blog-1779684-6962653.html)]

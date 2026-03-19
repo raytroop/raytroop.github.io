@@ -268,6 +268,15 @@ $$
 S_\phi(f) = \frac{1}{12F_{ref}} \cdot \left|2\sin\frac{\pi f}{F_{ref}}\right|^{2(L-1)}\cdot 4\pi^2 = \frac{\pi^2}{3F_{ref}} \cdot \left|2\sin\frac{\pi f}{F_{ref}}\right|^{2(L-1)}
 $$
 
+### Accumulated Quantization Error (AQE)
+
+> X. Wang and M. P. Kennedy, "Unified Analysis of Digital Δ-Σ Modulators (DDSMs) for Fractional-N Frequency Synthesis—Introducing the PASS Family of DDSMs Featuring Independent Shaping of the Probability Density and Spectral Envelope," in IEEE Transactions on Circuits and Systems I: Regular Papers [[link](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11436020)]
+>
+> X. Wang and M. P. Kennedy, "Performance Limits of Fractional-N Digital PLLs with Mid-Rise TDCs," 2023 18th Conference on Ph.D Research in Microelectronics and Electronics (PRIME), Valencia, Spain, 2023 
+
+
+*TODO* &#128197;
+
 
 ## Impulse Train Modulator (ITM)
 

@@ -272,7 +272,7 @@ $$
 
 > X. Wang and M. P. Kennedy, "Unified Analysis of Digital Δ-Σ Modulators (DDSMs) for Fractional-N Frequency Synthesis—Introducing the PASS Family of DDSMs Featuring Independent Shaping of the Probability Density and Spectral Envelope," in IEEE Transactions on Circuits and Systems I: Regular Papers [[link](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11436020)]
 >
-> X. Wang and M. P. Kennedy, "Performance Limits of Fractional-N Digital PLLs with Mid-Rise TDCs," 2023 18th Conference on Ph.D Research in Microelectronics and Electronics (PRIME), Valencia, Spain, 2023 
+> X. Wang and M. P. Kennedy, "Performance Limits of Fractional-N Digital PLLs with Mid-Rise TDCs," 2023 18th Conference on Ph.D Research in Microelectronics and Electronics (PRIME), Valencia, Spain, 2023 [[link](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10161782)]
 
 
 *TODO* &#128197;

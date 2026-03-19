@@ -223,8 +223,7 @@ Generally speaking, $N \propto k$ and $N \propto \frac{1}{m}$, especially $N_{mi
 
 
 
-
-### Divider Model
+### Accumulated Quantization Error (AQE)
 
 ![image-20250824221530772](ddsm/image-20250824221530772.png)
 $$
@@ -240,10 +239,24 @@ where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$
 
 ![image-20250824221741018](ddsm/image-20250824221741018.png)
 
+---
+
+> Y. Zhang *et al*., "A Fractional- N PLL With Space–Time Averaging for Quantization Noise Reduction," in *IEEE Journal of Solid-State Circuits*, vol. 55, no. 3, pp. 602-614, March 2020, [[pdf](https://labs.engineering.asu.edu/mixedsignals/wp-content/uploads/sites/58/2020/04/PLL_JSSC_2020.pdf)]
+
+![image-20260319212257566](ddsm/image-20260319212257566.png)
+
+![image-20260319212741334](ddsm/image-20260319212741334.png)
+
+---
+
+> X. Wang and M. P. Kennedy, "Unified Analysis of Digital Δ-Σ Modulators (DDSMs) for Fractional-N Frequency Synthesis—Introducing the PASS Family of DDSMs Featuring Independent Shaping of the Probability Density and Spectral Envelope," in IEEE Transactions on Circuits and Systems I: Regular Papers [[link](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11436020)]
+>
+> X. Wang and M. P. Kennedy, "Performance Limits of Fractional-N Digital PLLs with Mid-Rise TDCs," 2023 18th Conference on Ph.D Research in Microelectronics and Electronics (PRIME), Valencia, Spain, 2023 [[link](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10161782)]
+
+![image-20260319213514456](ddsm/image-20260319213514456.png)
 
 
-
-### $\Delta\Sigma$ noise in PLL
+### $\Delta\Sigma$ Noise in PLL
 
 ![image-20250824162417584](ddsm/image-20250824162417584.png)
 
@@ -268,14 +281,7 @@ $$
 S_\phi(f) = \frac{1}{12F_{ref}} \cdot \left|2\sin\frac{\pi f}{F_{ref}}\right|^{2(L-1)}\cdot 4\pi^2 = \frac{\pi^2}{3F_{ref}} \cdot \left|2\sin\frac{\pi f}{F_{ref}}\right|^{2(L-1)}
 $$
 
-### Accumulated Quantization Error (AQE)
 
-> X. Wang and M. P. Kennedy, "Unified Analysis of Digital Δ-Σ Modulators (DDSMs) for Fractional-N Frequency Synthesis—Introducing the PASS Family of DDSMs Featuring Independent Shaping of the Probability Density and Spectral Envelope," in IEEE Transactions on Circuits and Systems I: Regular Papers [[link](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11436020)]
->
-> X. Wang and M. P. Kennedy, "Performance Limits of Fractional-N Digital PLLs with Mid-Rise TDCs," 2023 18th Conference on Ph.D Research in Microelectronics and Electronics (PRIME), Valencia, Spain, 2023 [[link](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10161782)]
-
-
-*TODO* &#128197;
 
 
 ## Impulse Train Modulator (ITM)

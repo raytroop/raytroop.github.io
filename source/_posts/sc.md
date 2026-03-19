@@ -15,6 +15,22 @@ mathjax: true
 
 
 
+## Switched-Capacitor Filter
+
+***switched-Capacitor Resistor***
+
+![image-20260319234852885](sc/image-20260319234852885.png)
+
+> [[https://youtu.be/G0lzrMll-Ho](https://youtu.be/G0lzrMll-Ho)], [[https://youtu.be/eMOFMjuKiJQ](https://youtu.be/eMOFMjuKiJQ)]
+
+![image-20260319235853713](sc/image-20260319235853713.png)
+
+Due to not taking loading $C_2$ into account, actual switched-capacitor filter deviate from equivalent $R_{SC}$ + $C_2$ low pass filter as $f_p$ approaching to $f_s$
+
+*TODO* &#128197;
+
+
+
 
 ## Track-and-Hold (TH)
 

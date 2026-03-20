@@ -758,6 +758,12 @@ s &= \frac{g_2}{C_{12}}
 
 ![image-20241016212100040](insight/image-20241016212100040.png)
 
+---
+
+> [[https://youtu.be/G0lzrMll-Ho&t=3114](https://youtu.be/G0lzrMll-Ho&t=3114)]
+
+![image-20260320221142263](insight/image-20260320221142263.png)
+
 
 
 ## Single ended Amplifier Offset Voltage

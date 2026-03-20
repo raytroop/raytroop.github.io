@@ -27,7 +27,25 @@ mathjax: true
 
 Due to not taking loading $C_2$ into account, actual switched-capacitor filter deviate from equivalent $R_{SC}$ + $C_2$ low pass filter as $f_p$ approaching to $f_s$
 
-*TODO* &#128197;
+![image-20260320213653416](sc/image-20260320213653416.png)
+
+
+
+![image-20260320225532492](sc/image-20260320225532492.png)
+$$
+\color{red}H(z) =\frac{V_{OUT}(z)}{V_{IN}(z)}=\frac{C_1z^{-1/2}}{C_1+C_2}\frac{1}{1-\frac{C_2}{C_1+C_2}z^{-1}}
+$$
+
+
+---
+
+![image-20260320225157429](sc/image-20260320225157429.png)
+
+
+
+![image-20260320225029809](sc/image-20260320225029809.png)
+
+> [[https://youtu.be/eMOFMjuKiJQ](https://youtu.be/eMOFMjuKiJQ)]
 
 
 

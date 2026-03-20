@@ -615,7 +615,7 @@ $$
 
 
 
-### VREF & Gain
+### Reference Level Choice
 
 > Chen, J., Gu, Y., Feng, X., Chi, R., Wu, J., & Chen, Y. (2024). Analysis of Mueller–Muller Clock and Data Recovery Circuits with a Linearized Model. *Electronics*, *13*(21), 4218 [[https://www.mdpi.com/2079-9292/13/21/4218](https://www.mdpi.com/2079-9292/13/21/4218)]
 >

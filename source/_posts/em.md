@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-*TODO* &#128197;
+![image-20260321140400409](em/image-20260321140400409.png)
 
 magnetic field (magnetic flux density, $B$), is the **tesla** (symbol: $T$), defined as one **weber per square meter** ($Wb/m^2$)
 
@@ -287,10 +287,10 @@ $$
 
 Griffiths, David J. *Introduction to Electrodynamics*. Fifth edition. Cambridge University Press, 2024. [[pdf](https://nucleares.unam.mx/~martinel/griffiths_4ed.pdf)]
 
-谢处方、饶克谨、杨显清等.《电磁场与电磁波》（第五版），高等教育出. 版社，2019.
+David Smith, Electromagnetic Theory for Complete Idiot, 2021
 
 邓友金. 电磁学 2022春 [[http://staff.ustc.edu.cn/~yjdeng/EM2022/EM2022.html](http://staff.ustc.edu.cn/~yjdeng/EM2022/EM2022.html)]
 
-Scott Hughes. Spring 2005 8.022: Electricity & Magnetism [[https://web.mit.edu/sahughes/www/8.022/](https://web.mit.edu/sahughes/www/8.022/)]
+谢处方、饶克谨、杨显清等.《电磁场与电磁波》（第五版），高等教育出. 版社，2019.
 
-David Smith, Electromagnetic Theory for Complete Idiot, 2021
+Scott Hughes. Spring 2005 8.022: Electricity & Magnetism [[https://web.mit.edu/sahughes/www/8.022/](https://web.mit.edu/sahughes/www/8.022/)]

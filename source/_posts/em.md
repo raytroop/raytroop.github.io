@@ -124,6 +124,7 @@ plt.show()
 
 ### Divergence Theorem (Gauss's Theorem)
 
+***surface integral -> volume integral***
 $$
 \oint_S \vec{F} \cdot d\vec{S} = \int_V (\nabla \cdot \vec{F}) dv
 $$
@@ -136,6 +137,7 @@ $$
 
 ### Stoke's theorem 
 
+***line integral -> surface inegral***
 $$
 \oint_{c} \vec{F} \cdot \vec{dl} = \int_{s} (\nabla \times \vec{F}) \cdot \vec{dS}
 $$
@@ -169,6 +171,34 @@ $$
 ### Magnetic Vector Potential
 
 *TODO* &#128197;
+
+
+
+## Electrodynamics
+
+### Faraday's Law
+
+![image-20260321145115368](em/image-20260321145115368.png)
+
+### Ampère's law with Maxwell's correction
+
+***displacement current***
+
+![image-20260321164106898](em/image-20260321164106898.png)
+
+---
+
+> [[https://youtu.be/t-W6_fn_1bI](https://youtu.be/t-W6_fn_1bI)]
+
+![image-20260321164637168](em/image-20260321164637168.png)
+
+---
+
+> [[Google AI Mode](https://share.google/aimode/LLoGCyUvLnsbjhu4R)]
+
+![image-20260321165601743](em/image-20260321165601743.png)
+
+![image-20260321165747417](em/image-20260321165747417.png)
 
 ## Field Inside and Outside a Current-Carrying Wire
 

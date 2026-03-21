@@ -110,8 +110,65 @@ ax2.set_zlabel('Z', fontsize=16)  # Adding z-label
 plt.show()
 ```
 
+---
+
+![image-20260321090249927](em/image-20260321090249927.png)
+
+---
+
+***cross product*** [[Google AI Mode](https://share.google/aimode/X61My7I4dFxHqjzxA)]
+
+![image-20260321090724009](em/image-20260321090724009.png)
 
 
+
+### Divergence Theorem (Gauss's Theorem)
+
+$$
+\oint_S \vec{F} \cdot d\vec{S} = \int_V (\nabla \cdot \vec{F}) dv
+$$
+
+![image-20260321093235348](em/image-20260321093235348.png)
+
+> Divergence theorem is only applicable to ***closed surfaces***
+
+![image-20260321093550711](em/image-20260321093550711.png)
+
+### Stoke's theorem 
+
+$$
+\oint_{c} \vec{F} \cdot \vec{dl} = \int_{s} (\nabla \times \vec{F}) \cdot \vec{dS}
+$$
+
+
+
+![image-20260321095927152](em/image-20260321095927152.png)
+
+
+
+## Magnetostatics
+
+***Magnetostatics*** is the study of magnetic fields in systems where the **currents are steady** (not changing with time)
+
+![image-20260321111009923](em/image-20260321111009923.png)
+
+### Magnetic Field Intensity($H$) & Magnetic Flux Density($B$)
+
+*TODO* &#128197;
+
+
+
+
+
+## Magnetic Potential
+
+### Magnetic Scalar Potential
+
+*TODO* &#128197;
+
+### Magnetic Vector Potential
+
+*TODO* &#128197;
 
 ## Field Inside and Outside a Current-Carrying Wire
 
@@ -206,7 +263,11 @@ $$
 
 ![image-20240713140911612](em/image-20240713140911612.png)
 
+***magnetic flux***
+
 ![image-20240713135148710](em/image-20240713135148710.png)
+
+***magnetic linkage***
 
 ![image-20240713135236291](em/image-20240713135236291.png)
 
@@ -232,4 +293,4 @@ Griffiths, David J. *Introduction to Electrodynamics*. Fifth edition. Cambridge 
 
 Scott Hughes. Spring 2005 8.022: Electricity & Magnetism [[https://web.mit.edu/sahughes/www/8.022/](https://web.mit.edu/sahughes/www/8.022/)]
 
-David Smith, Electromagnetic Theory for Complete Idiot
+David Smith, Electromagnetic Theory for Complete Idiot, 2021

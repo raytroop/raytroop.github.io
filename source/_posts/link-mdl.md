@@ -230,21 +230,30 @@ def _quantize(signal, voltage_levels):
 ```python
 # https://github.com/richard259/serdespy/blob/main/serdespy/receiver.py
 
-for symbol_idx in range(n_symbols-1):
+def pam4_DFE(self, tap_weights):
+    """Behavioural model of DFE for PAM-4 signal. Input signal is self.signal, this method modifies self.signal.
 
-    idx = symbol_idx*self.samples_per_symbol
+    Parameters
+    ----------
+    tap_weights: array
+        DFE tap weights
+    """
+    
+    for symbol_idx in range(n_symbols-1):
 
-    #decide on value of current bit 
-    symbol = pam4_decision(signal_out[idx],l,m,h)
+        idx = symbol_idx*self.samples_per_symbol
 
-    #update taps            
-    taps[1:] = taps[:-1]
-    taps[0] = self.voltage_levels[symbol]
+        #decide on value of current bit 
+        symbol = pam4_decision(signal_out[idx],l,m,h)
 
-    #apply feedback to signal
-    feedback = np.sum(taps*tap_weights)
+        #update taps            
+        taps[1:] = taps[:-1]
+        taps[0] = self.voltage_levels[symbol]
 
-    signal_out[idx+half_symbol:idx+self.samples_per_symbol+half_symbol] -= feedback
+        #apply feedback to signal
+        feedback = np.sum(taps*tap_weights)
+
+        signal_out[idx+half_symbol:idx+self.samples_per_symbol+half_symbol] -= feedback
 ```
 
 

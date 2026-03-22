@@ -17,9 +17,15 @@ While many different analysis methods exist, including frequency and statistical
 
 > Richard Barrie. serdespy — A python library for system-level SerDes modelling and simulation [[https://github.com/richard259/serdespy](https://github.com/richard259/serdespy)]
 >
-> `python 3.10, samplerate`
+> —, Microelectronics [[Introduction to SerDesPy](https://youtu.be/FPr4emBE7fo)], [[Simple Channel Modeling Example with SerDesPy](https://youtu.be/9dWpIQuulWo)], [[Modelling Equalization with SerDesPy](https://youtu.be/QPd3AhgH6Ko)]
+>
+> ```bash
+> # Python 3.10
+> pip install samplerate
+> pip install 'numpy<2.0.0'
+> ```
 
-
+![image-20260322185817496](link-mdl/image-20260322185817496.png)
 
 ***ifft of sampling continuous-time transfer function***
 
@@ -79,9 +85,262 @@ plt.grid(); plt.legend(['impulse response by continuous-time transfer function',
 plt.ylabel('Mag'); plt.xlabel('time (s)'); plt.show()
 ```
 
+---
 
 
 
+```python
+import scipy as sp
+
+
+#time per bit
+UI = 1/data_rate
+
+#define oversample ratio
+samples_per_symbol = 64
+
+#timestep
+dt = UI/samples_per_symbol
+
+#oversampled signal
+signal_ideal = np.repeat(signal_BR, samples_per_symbol)
+
+#eye diagram of ideal signal
+sdp.simple_eye(signal_ideal, samples_per_symbol*3, 100, dt, "{}Gbps 2-PAM Signal".format(data_rate/1e9),linewidth=1.5, res=200)
+
+#max frequency for constructing discrete transfer function
+max_f = 1/dt
+
+#max_f in rad/s
+max_w = max_f*2*np.pi
+
+#heuristic to get a reasonable impulse response length
+ir_length = int(4/(freq_bw*dt))
+
+#calculate discrete transfer function of low-pass filter with pole at freq_bw
+w, H = sp.signal.freqs([freq_bw*(2*np.pi)], [1,freq_bw*(2*np.pi)], np.linspace(0,0.5*max_w,ir_length*4))
+
+#find impluse response of low-pass filter
+h, t = sdp.freq2impulse(H,f)
+
+signal_filtered = sp.signal.fftconvolve(signal_ideal, h[:ir_length], mode="full")
+signal_filtered_raw = sp.signal.convolve(signal_ideal, h[:ir_length], mode="full")
+assert np.allclose(signal_filtered, signal_filtered_raw)
+```
+
+> [[Google AI Mode](https://share.google/aimode/iENnIZQapJ3zcXvYm)]
+>
+> ![image-20260322204100971](link-mdl/image-20260322204100971.png)
+
+
+
+---
+
+***active CTLE***
+
+![image-20260322190438173](link-mdl/image-20260322190438173.png)
+
+```python
+#set poles and zeroes for peaking at nyquist freq
+#high peaking because channel is high insertion loss
+z = 5e10
+p = 1.7e11
+k = p**2/z
+
+#calculate Frequency response of CTLE at given frequencies
+w, H_ctle = sp.signal.freqs([k/p**2, k*z/p**2], [1/p**2, 2/p, 1], w)
+assert 1/(len(t_ctle)*t_ctle[1]) == f[1]
+assert 1/(2*f[-1]) == t_ctle[1]
+
+h_ctle, t_ctle = sdp.freq2impulse(H_ctle,f)
+h_ctle = h_ctle[0:200]
+
+signal_ctle = sp.signal.convolve(signal,h_ctle)
+```
+
+![image-20260322185631462](link-mdl/image-20260322185631462.png)
+
+---
+
+***FFE & DFE Co-Optimization with LMS***
+
+![image-20260322204210257](link-mdl/image-20260322204210257.png)
+
+![image-20260322214151852](link-mdl/image-20260322214151852.png)
+
+
+
+```python
+def lms_equalizer(y, mu, N, w_ffe, FFE_pre, w_dfe, voltage_levels,
+        alpha=None, reference=None, update_rate=1):
+    """
+    voltage_levels: array
+        discrete voltage levels to use in DFE optimization
+    alpha: array (optional)
+        used to fix the first `len(alpha)` weights in `w_dfe`, starting from the
+        first pre-tap. these weights will not be optimized and will stay constant
+        throughout LMS updates.
+        
+    reference: array (optional)
+        if provided, LMS will attempt to optimize according to the error between
+        the signal and reference, rather than estimating it based on the cloest
+        voltage level. `len(reference)` may be less than `len(y)`, in which case
+        only the first `len(reference)` updates will be optimized in this manner.
+    """
+    min_delay = max(FFE_post, DFE_taps)
+    for k in range(min_delay, N - FFE_pre):
+        y_k = y[k - FFE_post:k + FFE_pre + 1][::-1]
+        z_k = z[k - DFE_taps:k][::-1]
+
+        # alpha takes over the first len(alpha) terms of w_dfe
+        if is_cooptimizing and alpha is not None:
+            w_dfe[:len(alpha)] = alpha
+
+        if w_ffe is not None:
+            v_ffe[k] = np.dot(y_k, w_ffe)
+        else:
+            v_ffe[k] = y_k[0]
+
+        if w_dfe is not None:
+            v_dfe[k] = v_ffe[k] - np.dot(z_k, w_dfe)
+        else:
+            v_dfe[k] = v_ffe[k]
+
+        z[k] = _quantize(v_dfe[k], voltage_levels)
+        if reference is None or k >= len(reference):
+            y_ref = z[k]
+        else:
+            y_ref = reference[k]
+
+        e[k] = v_dfe[k] - y_ref
+        if (k - min_delay) % update_rate == 0:
+            #print(k)
+            if w_ffe is not None:
+                w_ffe -= mu * e[k] * y_k	# y_k
+            if w_dfe is not None:
+                w_dfe += mu * e[k] * z_k	# z_k
+
+def _quantize(signal, voltage_levels):
+    idx = np.abs(voltage_levels - signal).argmin()
+    return voltage_levels[idx]
+```
+
+
+
+```python
+# https://github.com/richard259/serdespy/blob/main/serdespy/receiver.py
+
+for symbol_idx in range(n_symbols-1):
+
+    idx = symbol_idx*self.samples_per_symbol
+
+    #decide on value of current bit 
+    symbol = pam4_decision(signal_out[idx],l,m,h)
+
+    #update taps            
+    taps[1:] = taps[:-1]
+    taps[0] = self.voltage_levels[symbol]
+
+    #apply feedback to signal
+    feedback = np.sum(taps*tap_weights)
+
+    signal_out[idx+half_symbol:idx+self.samples_per_symbol+half_symbol] -= feedback
+```
+
+
+
+
+
+![image-20260322235910848](link-mdl/image-20260322235910848.png)
+
+```python
+def FFE(self,tap_weights, n_taps_pre):
+    """Behavioural model of FFE. Input signal is self.signal, this method modifies self.signal
+
+    Parameters
+    ----------
+    tap_weights: array
+        DFE tap weights
+
+    n_taps_pre: int
+        number of precursor taps
+    """
+
+    n_taps = tap_weights.size
+
+    tap_filter = np.zeros((n_taps-1)*self.samples_per_symbol+1)
+
+    for i in range(n_taps):
+        tap_filter[i*self.samples_per_symbol] = tap_weights[i]
+
+    length = self.signal.size
+    self.signal = np.convolve(self.signal,tap_filter)
+    #shift = round((n_taps_pre-n_taps)*self.samples_per_symbol)
+    self.signal = self.signal[n_taps_pre*self.samples_per_symbol:n_taps_pre*self.samples_per_symbol+length]
+```
+
+
+
+---
+
+***PRQSm Generator*** by **multiplexing two PRBSn**
+
+> Ilya Lyubomirsky, Finisar. PRQS Test Patterns for PAM4 [[https://www.ieee802.org/3/bs/public/15_09/lyubomirsky_3bs_01_0915.pdf](https://www.ieee802.org/3/bs/public/15_09/lyubomirsky_3bs_01_0915.pdf)]
+
+![image-20260322225429249](link-mdl/image-20260322225429249.png)
+
+
+
+```python
+# https://github.com/richard259/serdespy/blob/main/serdespy/prs.py
+# https://github.com/richard259/serdespy/blob/main/serdespy/signal.py
+
+def prqs10(seed):
+    """Genterates PRQS10 sequence
+
+    Parameters
+    ----------
+    seed : int
+        seed used to generate sequence
+        should be greater than 0 and less than 2^20
+
+    Returns
+    -------
+    array:
+        PRQS10 sequence
+    """
+    
+    a = prbs20(seed)
+    shift = int((2**20-1)/3)
+    b = np.hstack((a[shift:],a[:shift]))
+    
+    c = np.vstack((a,b))    # c[0,:] MSB, c[1,:] LSB
+
+    pqrs = np.zeros(a.size,dtype = np.uint8)
+    
+    for i in range(a.size):
+        pqrs[i] = grey_encode(c[:,i])
+    
+    return pqrs
+
+
+def prqs12(seed):
+    
+    a = prbs24(seed)
+    shift = int((2**24-1)/3)
+    b = np.hstack((a[shift:],a[:shift]))
+    
+    c = np.vstack((a,b))
+
+    pqrs = np.zeros(a.size,dtype = np.uint8)
+    
+    for i in range(a.size):
+        if (i%1e5 == 0):
+            print("i =", i)
+        pqrs[i] = grey_encode(c[:,i])
+    
+    return pqrs
+```
 
 
 

@@ -329,6 +329,12 @@ that’s the difference between using and import - the former brings all exporte
 
 ![image-20260118010932797](coding/image-20260118010932797.png)
 
+---
+
+***Observables***
+
+*TODO* &#128197;
+
 
 
 ## C++ Conditional Compilation

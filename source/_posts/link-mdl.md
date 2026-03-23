@@ -168,7 +168,47 @@ signal_ctle = sp.signal.convolve(signal,h_ctle)
 
 ![image-20260322214151852](link-mdl/image-20260322214151852.png)
 
+`shift_signal` work as simple CDR's phase lock
 
+```
+def shift_signal(signal, samples_per_symbol):
+    """Shifts signal vector so that 0th element is at centre of eye, heuristic
+
+    Parameters
+    ----------
+    signal: array
+        signal vector at RX
+        
+    samples_per_symbol: int
+        number of samples per UI
+    
+    Returns
+    -------
+    array
+        signal shifted so that 0th element is at centre of eye
+
+    """
+    
+    #Loss function evaluated at each step from 0 to steps_per_signal
+    loss_vec = np.zeros(samples_per_symbol)
+    
+    for i in range(samples_per_symbol):
+        
+        samples = signal[i::samples_per_symbol]
+        
+        #add loss for samples that are close to threshold voltage
+        loss_vec[i] += np.sum(abs(samples)**2)
+        
+    #find shift index with least loss
+    shift = np.where(loss_vec == np.max(loss_vec))[0][0]
+    
+   # plt.plot(np.linspace(0,samples_per_symbol-1,samples_per_symbol),loss_vec)
+   # plt.show()
+    
+    return np.copy(signal[shift+1:])
+```    
+
+`lms_equalizer` is *offline* adaptation actually
 
 ```python
 def lms_equalizer(y, mu, N, w_ffe, FFE_pre, w_dfe, voltage_levels,
@@ -239,6 +279,12 @@ def pam4_DFE(self, tap_weights):
         DFE tap weights
     """
     
+    signal_out =  np.copy(self.signal)
+    n_taps = tap_weights.size
+    n_symbols = int(round(self.signal.size/self.samples_per_symbol))
+    half_symbol = int(round(self.samples_per_symbol/2))
+    taps = np.zeros(n_taps)
+
     for symbol_idx in range(n_symbols-1):
 
         idx = symbol_idx*self.samples_per_symbol

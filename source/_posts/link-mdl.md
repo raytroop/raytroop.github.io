@@ -170,7 +170,7 @@ signal_ctle = sp.signal.convolve(signal,h_ctle)
 
 `shift_signal` work as simple CDR's phase lock
 
-```
+```python
 def shift_signal(signal, samples_per_symbol):
     """Shifts signal vector so that 0th element is at centre of eye, heuristic
 
@@ -206,7 +206,7 @@ def shift_signal(signal, samples_per_symbol):
    # plt.show()
     
     return np.copy(signal[shift+1:])
-```    
+```
 
 `lms_equalizer` is *offline* adaptation actually
 
@@ -265,7 +265,7 @@ def _quantize(signal, voltage_levels):
     return voltage_levels[idx]
 ```
 
-
+![image-20260323211129651](link-mdl/image-20260323211129651.png)
 
 ```python
 # https://github.com/richard259/serdespy/blob/main/serdespy/receiver.py

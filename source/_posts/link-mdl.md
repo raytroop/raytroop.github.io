@@ -399,6 +399,50 @@ def prqs12(seed):
 
 
 
+---
+
+***Gaussian distribution jitter***
+
+![image-20260323222626489](link-mdl/image-20260323222626489.png)
+
+***TX signal with jitter***
+
+*TODO* &#128197;
+
+
+
+***RX signal with jitter***
+
+*TODO* &#128197;
+
+---
+
+***RLM*** *through **nonlinearity***
+
+![image-20260323223744508](link-mdl/image-20260323223744508.png)
+
+```python
+#convolution of impulse response with ideal signal
+signal_filtered = sp.signal.fftconvolve(signal_ideal, h[:ir_length])
+
+#optical modulator nonlinearity
+def optical_nonlinearity(signal):
+    return np.sin(np.pi*signal/5)
+
+signal_optical = optical_nonlinearity(signal_filtered)
+
+#calculate RLM
+levels_optical = optical_nonlinearity(voltage_levels)
+
+Vmin = (levels_optical[0]+levels_optical[3])/2
+
+ES1 = (levels_optical[1]-Vmin)/(levels_optical[0]-Vmin)
+
+ES2 = (levels_optical[2]-Vmin)/(levels_optical[3]-Vmin)
+
+RLM = min((3*ES1),(3*ES2),(2-3*ES1),(2-3*ES2))
+```
+
 
 
 ### JLSD

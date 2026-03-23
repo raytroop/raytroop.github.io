@@ -333,6 +333,8 @@ that’s the difference between using and import - the former brings all exporte
 
 ***Observables***
 
+Using `observable` completely separates the figure configuration and the actual data pipeline
+
 *TODO* &#128197;
 
 

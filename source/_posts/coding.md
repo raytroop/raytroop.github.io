@@ -331,11 +331,19 @@ that’s the difference between using and import - the former brings all exporte
 
 ---
 
-***Observables***
+***Observable***
 
 Using `observable` completely separates the figure configuration and the actual data pipeline
 
-*TODO* &#128197;
+The argument to the `Observable()` **constructor** provides both an **initial value** and determines the
+**type of the observable variable**.
+
+There are two ways to access/update an observable's value - w/ `.val` or `[]`
+
+The difference is that only using `[]` will trigger the listener event when updating the observable
+value
+
+
 
 
 

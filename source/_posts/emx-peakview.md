@@ -506,12 +506,13 @@ Z_s &= \frac{1}{Y_{11}}\\
 Z_0  &= \sqrt{Z_o*Z_s}
 \end{align}$$
 
-propagation constant is given as
-$$\begin{align}
-\gamma &= \frac{1}{2}\log\left( \frac{Z_0+Z_s}{Z_0-Z_s} \right) \\
-&= \alpha + j\beta
-\end{align}$$
+*propagation constant* is given as
+
+$$\gamma \cdot l = \frac{1}{2}\log\left( \frac{Z_0+Z_s}{Z_0-Z_s} \right)$$
+
 where $\alpha$ is **attenuation constant** and $\beta$ is **phase constant**
+
+> $\gamma \cdot l$ [[Google AI Mode](https://share.google/aimode/LzaP3VplJIgHHuifw)]
 
 The relationship between these parameter and geometry of the transmission line
 $$\begin{align}

@@ -471,22 +471,24 @@ def gaussian_jitter(signal_ideal, UI,n_symbols,samples_per_symbol,stdev):
 
 
 
-***RX signal with jitter***
+***RX eye_diagram with jitter by horizontal shift***
 
 Each trace is shifted by its corresponding $\epsilon$, which is only used for **visualization** rather than as an input for the subsequent block.
 
 ```python
 def rx_jitter_eye(signal, window_len, ntraces, n_symbols, tstep, title,  stdev, res=600, linewidth=0.15,):
-
+    """Genterates eye diagram with jitter introduved by splitting traces and applying 
+    horizontal shift with gaussian distribution
+    """
     for symbol_index,symbol_epsilon in enumerate(epsilon):
         epsilon_duration = int(round(symbol_epsilon/tstep))
-        t = np.linspace( -tstep * (((window_len-1))/2 + epsilon_duration ) ,tstep * (((window_len-1))/2 + epsilon_duration ), window_len)
-        tt = np.linspace(-tstep * (((window_len - 1)) / 2), tstep * (((window_len - 1)) / 2), window_len) + epsilon_duration*tstep
-        assert np.allclose(t, tt)
+        #t = np.linspace( -tstep * (((window_len-1))/2 + epsilon_duration ) ,tstep * (((window_len-1))/2 + epsilon_duration ), window_len)	# Stretch
+        t = np.linspace(-tstep * (((window_len - 1)) / 2), tstep * (((window_len - 1)) / 2), window_len) + epsilon_duration*tstep	# shift
+
         plt.plot(t*1e12,np.reshape((traces[symbol_index][:]),window_len), color = 'blue', linewidth = linewidth)
 ```
 
-![image-20260324195125382](link-mdl/image-20260324195125382.png)
+![image-20260324214429994](link-mdl/image-20260324214429994.png)
 
 
 

@@ -345,5 +345,6 @@ $$\begin{align}
 
 ## reference
 
-B. Razavi, "The Design of a Low-Voltage Bandgap Reference [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 13, no. 3, pp. 6-16, Summer 2021, doi: 10.1109/MSSC.2021.3088963
+B. Razavi, "The Design of a Low-Voltage Bandgap Reference [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 13, no. 3, pp. 6-16, Summer 2021, [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2021.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2021.pdf)]
 
+Shanthi Pavan, IIT Madras, India , ISSCC 2026: Circuit Insights *Voltage and Current Reference Generation* [[https://youtu.be/i1bKJvtiXmY](https://youtu.be/i1bKJvtiXmY)], [[slides](https://www.dropbox.com/scl/fo/s3awhbmbp9ad6s0732hhq/AKFhh4Pyh1OrvUwMJQuc-JM?rlkey=6vzkd4mkvsuhgzeoajgzciw8q&e=2&st=qw2cuxjh&dl=0)]

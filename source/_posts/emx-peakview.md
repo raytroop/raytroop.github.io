@@ -510,8 +510,6 @@ Z_0  &= \sqrt{Z_o*Z_s}
 
 $$\gamma \cdot l = \frac{1}{2}\log\left( \frac{Z_0+Z_s}{Z_0-Z_s} \right)$$
 
-where $\alpha$ is **attenuation constant** and $\beta$ is **phase constant**
-
 > $Z_s$ depends on the length of tline [[Google AI Mode](https://share.google/aimode/LzaP3VplJIgHHuifw)]
 
 The relationship between these parameter and geometry of the transmission line

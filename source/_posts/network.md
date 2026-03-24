@@ -65,7 +65,7 @@ mathjax: true
 
 ![image-20250718223340699](network/image-20250718223340699.png)
 
-### Telegrapher’s equations
+### Telegrapher's equations
 
 > EECS 723- Microwave Engineering Spring 2.1 -The Lumped Element Circuit Model for Transmission Lines 
 >

@@ -410,7 +410,7 @@ def prqs12(seed):
 
 ![txjitter_serdespy.drawio](link-mdl/txjitter_serdespy.drawio.svg)
 
-jitter resolution is `sample_time = UI/samples_per_symbol` in `gaussian_jitter`, which limit accuracy of Jitter in model
+The accuracy of the jitter model is **constrained by the resolution** defined as `sample_time = UI/samples_per_symbol` within the `gaussian_jitter` implementation.
 
 ```python
 #https://github.com/richard259/serdespy/blob/main/serdespy/transmitter.py
@@ -473,7 +473,22 @@ def gaussian_jitter(signal_ideal, UI,n_symbols,samples_per_symbol,stdev):
 
 ***RX signal with jitter***
 
-*TODO* &#128197;
+Each trace is shifted by its corresponding $\epsilon$, which is only used for **visualization** rather than as an input for the subsequent block.
+
+```python
+def rx_jitter_eye(signal, window_len, ntraces, n_symbols, tstep, title,  stdev, res=600, linewidth=0.15,):
+
+    for symbol_index,symbol_epsilon in enumerate(epsilon):
+        epsilon_duration = int(round(symbol_epsilon/tstep))
+        t = np.linspace( -tstep * (((window_len-1))/2 + epsilon_duration ) ,tstep * (((window_len-1))/2 + epsilon_duration ), window_len)
+        tt = np.linspace(-tstep * (((window_len - 1)) / 2), tstep * (((window_len - 1)) / 2), window_len) + epsilon_duration*tstep
+        assert np.allclose(t, tt)
+        plt.plot(t*1e12,np.reshape((traces[symbol_index][:]),window_len), color = 'blue', linewidth = linewidth)
+```
+
+![image-20260324195125382](link-mdl/image-20260324195125382.png)
+
+
 
 ---
 

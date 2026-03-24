@@ -17,17 +17,21 @@ mathjax: true
 
 ## Skew (Timing Mismatch) Calibration
 
-*TODO* &#128197;
-
-
-
-
-
-> M. Gu, Y. Tao, Y. Zhong, L. Jie and N. Sun, "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 1-10, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
+> M. Gu, Y. Tao, X. He, Y. Zhong, L. Jie and N. Sun, "A 1-GS/s 11-b Time-Interleaved SAR ADC With Robust, Fast, and Accurate Autocorrelation-Based Background Timing-Skew Calibration," in IEEE Journal of Solid-State Circuits, vol. 60, no. 2, pp. 421-431, Feb. 2025
+>
+> —. "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 1-10, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
 >
 > S. Chen, L. Wang, H. Zhang, R. Murugesu, D. Dunwell, A. Chan Carusone, “All-Digital Calibration of Timing Mismatch Error in Time-Interleaved Analog-to-Digital Converters,” *IEEE Transactions on VLSI Systems*, Sept. 2017. [[PDF](https://www.eecg.utoronto.ca/~tcc/Chen_TVLSI17.pdf), [slides](https://www.eecg.utoronto.ca/~tcc/Wang_ISCAS_SLIDES_2018.pdf)]
 >
 > B. Razavi, "Problem of timing mismatch in interleaved ADCs," *Proceedings of the IEEE 2012 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2012 [[https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf)]
+
+*TODO* &#128197;
+
+
+
+1) autocorrelation-based; 2) reference-channel-based; and 3) reference-signal-based
+
+
 
 
 

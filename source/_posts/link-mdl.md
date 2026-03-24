@@ -413,7 +413,7 @@ def prqs12(seed):
 jitter resolution is `sample_time = UI/samples_per_symbol` in `gaussian_jitter`, which limit accuracy of Jitter in model
 
 ```python
-# https://github.com/richard259/serdespy/blob/main/serdespy/transmitter.py
+#https://github.com/richard259/serdespy/blob/main/serdespy/transmitter.py
 
 def gaussian_jitter(signal_ideal, UI,n_symbols,samples_per_symbol,stdev):
     """Generates the TX waveform from ideal, square, self.signal_ideal with jitter
@@ -467,7 +467,7 @@ def gaussian_jitter(signal_ideal, UI,n_symbols,samples_per_symbol,stdev):
     #calculate TX output waveform
     signal = np.copy(signal_ideal+non_ideal)
     return signal
-```    
+```
 
 
 

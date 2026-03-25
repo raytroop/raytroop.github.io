@@ -263,9 +263,15 @@ That is $C_{-M}  = \frac{1}{\omega^2 M} \approx 10 \times C_E$
 
 ![image-20251206000718234](rx-fe/image-20251206000718234.png)
 
+---
 
+***series resonance $\omega_\text{res}$***
 
+Assuming, $I_\text{in}=\cos\omega_r t$ and $V_\text{out}=g\cos(\omega_r t +\theta)$ 
 
+with $I_\text{in} = C_L\frac{dV_\text{out}}{dt}$, yield $g=\sqrt{\frac{L}{C}}$ and $\theta=- \frac{\pi}{2}$, i.e. $V_\text{out} = \sqrt{\frac{L}{C}}\cos(\omega_r t - \frac{\pi}{2})$
+
+---
 
 
 

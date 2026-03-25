@@ -208,7 +208,7 @@ def shift_signal(signal, samples_per_symbol):
     return np.copy(signal[shift+1:])
 ```
 
-`lms_equalizer` is *offline* adaptation actually
+`lms_equalizer` is *offline* adaptation actually and it fail due to DFE error feedback if `reference` is `Noe`
 
 ```python
 def lms_equalizer(y, mu, N, w_ffe, FFE_pre, w_dfe, voltage_levels,

@@ -816,6 +816,8 @@ end
 
 **warp** or **remap** a *"jittery time grid"* onto our *"uniform time grid"*
 
+> The brilliance is that **you don't need infinitesimal time steps**—instead, you remap the sampling grid to account for jitter!
+
 ```julia
 prev_nui = 4
 Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)
@@ -889,7 +891,11 @@ extrapolation shall **not** be used to avoid introducing any error
 
 - `prev_nui` denotes the number of previous symbols to be stitched to the current block's signal to *prevent overflow/underflow when jitter is introduced*
 
-- `tt_uniform` is shifted by `prev_nui/2` to give wiggle room for sampling "before" and "after" the current block. This is necessary for sinusoidal jitter
+- `tt_uniform` is shifted by `prev_nui/2` to give wiggle room for sampling "before" and "after" the current block. **This is necessary for sinusoidal jitter**
+
+> [[copilot](https://github.com/copilot/share/c85d51be-0004-88e7-9840-ba09a4d569f8)]
+>
+> DCD and RJ have much smaller shifts (typically <1 UI), but SJ can oscillate over multiple UI widths, requiring this ***centered offset to prevent interpolation boundary errors***.
 
 ![itp.drawio](link-mdl/itp.drawio.svg)
 

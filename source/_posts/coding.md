@@ -311,6 +311,21 @@ numbers = [1, 2, 3]
 doubled_numbers = map(x -> 2 * x, numbers) # doubled_numbers will be [2, 4, 6]
 ```
 
+---
+
+`do` keyword is **syntactic sugar** for creating an **anonymous function** and passing it as the **first argument** to another function
+
+```julia
+map([1, 2, 3]) do x
+    y = x * 2
+    return y + 1
+end
+```
+
+- `do` starts the block.
+- `x, y` (optional) following `do` are the **arguments** the anonymous function receives.
+- `end` closes the block
+
 
 
 ---
@@ -333,15 +348,18 @@ that’s the difference between using and import - the former brings all exporte
 
 ***Observable***
 
-Using `observable` completely separates the figure configuration and the actual data pipeline
-
-The argument to the `Observable()` **constructor** provides both an **initial value** and determines the
-**type of the observable variable**.
+The argument to the `Observable()` **constructor** provides both an **initial value** and determines the **type of the observable variable**.
 
 There are two ways to access/update an observable's value - w/ `.val` or `[]`
 
 The difference is that only using `[]` will trigger the listener event when updating the observable
 value
+
+| Feature          | `lift`                                  | `on`                                    |
+| :--------------- | :-------------------------------------- | :-------------------------------------- |
+| **Return Value** | A **new Observable**                    | A **Handler** (for disconnecting later) |
+| **Purpose**      | To transform data (create a dependency) | To perform an action (side effect)      |
+| **Data Flow**    | Value flows from parent to child        | Value triggers an external event        |
 
 
 

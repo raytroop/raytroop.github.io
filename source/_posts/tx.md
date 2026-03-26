@@ -422,7 +422,11 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 *TODO* &#128197;
 
+### PCIe Transmitter Equalization Preset Measurement
 
+> Christiaan Bil Intel, DesignCon2026, An Experimental Study of PCIe Transmitter Equalization Preset Measurement Methods for 64 and 128 GT/s PAM4 Signaling
+
+*TODO* &#128197;
 
 
 ## reference

@@ -964,14 +964,16 @@ $$
 
 run simulation by **recursion** 
 
+![image-20260326211044232](link-mdl/image-20260326211044232.png)
+
+![image-20260326211938908](link-mdl/image-20260326211938908.png)
+
 ```julia
-function run_blk_iter(trx, idx, n_tot_blk, blk_func::Function)
-    if idx < n_tot_blk
-        blk_func(trx, idx+1)
-        run_blk_iter(trx, idx+1, n_tot_blk, blk_func)
-    end
-end
+wvfm.V11_x.val = eachindex(wvfm.buffer11)  # Update X-axis index, no redraw trigger
+wvfm.V11_y[] = wvfm.buffer11               # Update Y-axis data, triggers redraw
 ```
+
+
 
 
 

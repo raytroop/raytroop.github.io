@@ -1336,7 +1336,13 @@ data_channel_dfe=data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_o
 >
 > Rahul Bhadani. [[SystemC-AMS Quick Installation Guide](https://medium.com/theta-hat/systemc-ams-quick-installation-guide-3484faa1d834)] [[SystemC Quick Installation Guide](SystemC Quick Installation Guide)]
 
-*TODO* &#128197;
+***SerDes - High-Speed Serial Link Simulator (SystemC-AMS)***
+
+
+
+
+
+
 
 
 
@@ -1355,7 +1361,7 @@ set (CMAKE_CXX_STANDARD 11 CACHE STRING
 
 
 
-*test systemc*
+**test systemc**
 
 ```cmake
 cmake_minimum_required(VERSION 3.0)
@@ -1375,12 +1381,10 @@ target_link_libraries(test_systemc SystemC::systemc)
 ***Install SystemC-AMS***
 
 ```bash
-../configure CXXFLAGS="-std=c++11" --prefix=/home/software/systemc-ams-2.3.4 --with-systemc=/home/software/systemc-2.3.4  --disable-systemc_compile_check
+mkdir build && cd build
+../configure CXXFLAGS="-std=c++14" --prefix=/home/software/systemc-ams-2.3.4 --with-systemc=/home/software/systemc-2.3.4  --disable-systemc_compile_check
+make install
 ```
-
----
-
-`sca_tdf::sca_ltf_nd`
 
 
 

@@ -11,7 +11,7 @@ mathjax: true
 
 ![image-20250703212349339](rx/image-20250703212349339.png)
 
-***speculative DFE*** is also known as ***loop unrolled DFE***, which solve the critical timing on first tap
+
 
 ---
 
@@ -25,25 +25,11 @@ mathjax: true
 
 
 
-
-## Inductive Peaking
-*TODO* &#128197;
-
-**series peaking**: *capacitive splitting* - *split* the load capacitance between the amplifier drain capacitance and the next stage gate capacitance
-
-
-> S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension Techniques for CMOS Amplifiers," in IEEE Journal of Solid-State Circuits, vol. 41, no. 11, pp. 2424-2439, Nov. 2006 [[https://people.engr.tamu.edu/spalermo/ecen689_oi/2006_passive_bw_extension_techniques_shekhar_jssc.pdf](https://people.engr.tamu.edu/spalermo/ecen689_oi/2006_passive_bw_extension_techniques_shekhar_jssc.pdf)]
-
-
-
-
-
 ## CTLE Linearity
 
 *TODO* &#128197;
-![image-20250726180642570](rx/image-20250726180642570.png)
 
-
+![image-20260328182645140](rx/image-20260328182645140.png)
 
 
 
@@ -59,34 +45,26 @@ mathjax: true
 
 
 
-## DFE Error Propagation
-
-> Geoff Zhang. Preliminary Studies on DFE Error Propagation, Precoding, and their Impact on KP4 FEC Performance for PAM4 Signaling Systems [[https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf](https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf)]
->
-> Z. Wu and J. -R. Guo, "Analysis of UCIe 48/64 GT/s Electrical Links," in *IEEE Open Journal of the Solid-State Circuits Society* [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11150380)]
-
-*TODO* &#128197;
-
-![image-20250609201647012](rx/image-20250609201647012.png)
-
-
-
-
-
-
 
 ## CTLE transfer function
 
-![image-20250609201257138](rx/image-20250609201257138.png)
-
 > Circuit Insights @ ISSCC2025: Circuits for Wireline Communications - Kevin Zheng [[https://youtu.be/8NZl81Dj45M&t=1045](https://youtu.be/8NZl81Dj45M&t=1045)]
 
+![image-20260328182328792](rx/image-20260328182328792.png)
+
+![image-20260328182339762](rx/image-20260328182339762.png)
 
 
 
-## DFE architecture
+## Decision Feedback Equalizer (DFE)
 
-![image-20250609201522455](rx/image-20250609201522455.png)
+***speculative DFE*** is also known as ***loop unrolled DFE***, which solve the critical timing on first tap
+
+### DFE architecture
+
+![image-20260328182441169](rx/image-20260328182441169.png)
+
+
 
 ![image-20250607235201147](rx/image-20250607235201147.png)
 
@@ -109,10 +87,24 @@ Extensive work on DFEs has produced a multitude of architectures, which can be b
 > S. Ibrahim and B. Razavi, *Low-Power DFE Design* [[https://picture.iczhiku.com/resource/eetop/wykflwIuIQDzYNcB.PDF](https://picture.iczhiku.com/resource/eetop/wykflwIuIQDzYNcB.PDF)]
 
 
+### DFE Error Propagation
+
+> Geoff Zhang. Preliminary Studies on DFE Error Propagation, Precoding, and their Impact on KP4 FEC Performance for PAM4 Signaling Systems [[https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf](https://www.ieee802.org/3/ck/public/18_09/zhang_3ck_01a_0918.pdf)]
+>
+> Cathy Liu, The Effect of DFE Error Propagation [[https://www.ieee802.org/3/ap/public/nov05/liu_01_1105.pdf](https://www.ieee802.org/3/ap/public/nov05/liu_01_1105.pdf)]
+>
+> Yuchun Lu, Huawei, Elimination of DFE Error Propagation and Post-FEC Error Floor (Precoding 2.0) [[https://www.ieee802.org/3/ck/public/19_03/lu_3ck_01_0319.pdf](https://www.ieee802.org/3/ck/public/19_03/lu_3ck_01_0319.pdf)]
+>
+> Z. Wu and J. -R. Guo, "Analysis of UCIe 48/64 GT/s Electrical Links," in *IEEE Open Journal of the Solid-State Circuits Society* [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11150380)]
+
+*TODO* &#128197;
+
+![image-20260328182254717](rx/image-20260328182254717.png)
 
 
 
-## PAM4 DFE
+
+### PAM4 DFE
 
 ![image-20250525202236767](rx/image-20250525202236767.png)
 

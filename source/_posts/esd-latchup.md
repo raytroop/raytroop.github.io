@@ -1187,7 +1187,7 @@ Wang, Albert. *Practical ESD Protection Design*. John Wiley & Sons, 2021.
 
 *JESD22-C101E*: Field-Induced Charged-Device Model Test Method for Electrostatic Discharge-Withstand Thresholds of Microelectronic Components
 
-C. -Y. Lin and M. -D. Ker, "ESD Protection Design: Fundamentals and Advanced Strategies," in IEEE Open Journal of the Solid-State Circuits Society, vol. 6, pp. 61-76, 2026
+C. -Y. Lin and M. -D. Ker, "ESD Protection Design: Fundamentals and Advanced Strategies," in IEEE Open Journal of the Solid-State Circuits Society, vol. 6, pp. 61-76, 2026 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11408826)]
 
 ---
 

@@ -26,6 +26,16 @@ For instance
 
 
 
+## relative dielectric constant vs permittivity
+
+
+
+![img](xtalk/Difference-Between-Dielectric-Constant-and-Permittivity-.png)
+
+The relative dielectric constant characterizes some of the electrical properties of an insulator
+
+
+
 ##   Return Path
 
 ![image-20250705171613361](xtalk/image-20250705171613361-1751987296815-47.png)

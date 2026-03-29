@@ -87,7 +87,7 @@ plt.ylabel('Mag'); plt.xlabel('time (s)'); plt.show()
 
 ---
 
-
+---
 
 ```python
 import scipy as sp
@@ -132,7 +132,7 @@ assert np.allclose(signal_filtered, signal_filtered_raw)
 >
 > ![image-20260322204100971](link-mdl/image-20260322204100971.png)
 
-
+---
 
 ---
 
@@ -159,6 +159,8 @@ signal_ctle = sp.signal.convolve(signal,h_ctle)
 ```
 
 ![image-20260322185631462](link-mdl/image-20260322185631462.png)
+
+---
 
 ---
 
@@ -207,6 +209,8 @@ def shift_signal(signal, samples_per_symbol):
     
     return np.copy(signal[shift+1:])
 ```
+
+---
 
 `lms_equalizer` performs **offline adaptation** and it fail due to DFE Error Propagation if `reference` is `None`
 
@@ -267,6 +271,44 @@ def _quantize(signal, voltage_levels):
 
 ![image-20260323211129651](link-mdl/image-20260323211129651.png)
 
+---
+
+
+
+![image-20260322235910848](link-mdl/image-20260322235910848.png)
+
+```python
+def FFE(self,tap_weights, n_taps_pre):
+    """Behavioural model of FFE. Input signal is self.signal, this method modifies self.signal
+
+    Parameters
+    ----------
+    tap_weights: array
+        DFE tap weights
+
+    n_taps_pre: int
+        number of precursor taps
+    """
+
+    n_taps = tap_weights.size
+
+    tap_filter = np.zeros((n_taps-1)*self.samples_per_symbol+1)
+
+    for i in range(n_taps):
+        tap_filter[i*self.samples_per_symbol] = tap_weights[i]
+
+    length = self.signal.size
+    self.signal = np.convolve(self.signal,tap_filter)
+    #shift = round((n_taps_pre-n_taps)*self.samples_per_symbol)
+    self.signal = self.signal[n_taps_pre*self.samples_per_symbol:n_taps_pre*self.samples_per_symbol+length]
+```
+
+![image-20260329104223421](link-mdl/image-20260329104223421.png)
+
+
+
+---
+
 ```python
 # https://github.com/richard259/serdespy/blob/main/serdespy/receiver.py
 
@@ -302,39 +344,9 @@ def pam4_DFE(self, tap_weights):
         signal_out[idx+half_symbol:idx+self.samples_per_symbol+half_symbol] -= feedback
 ```
 
+![image-20260329104313002](link-mdl/image-20260329104313002.png)
 
-
-
-
-![image-20260322235910848](link-mdl/image-20260322235910848.png)
-
-```python
-def FFE(self,tap_weights, n_taps_pre):
-    """Behavioural model of FFE. Input signal is self.signal, this method modifies self.signal
-
-    Parameters
-    ----------
-    tap_weights: array
-        DFE tap weights
-
-    n_taps_pre: int
-        number of precursor taps
-    """
-
-    n_taps = tap_weights.size
-
-    tap_filter = np.zeros((n_taps-1)*self.samples_per_symbol+1)
-
-    for i in range(n_taps):
-        tap_filter[i*self.samples_per_symbol] = tap_weights[i]
-
-    length = self.signal.size
-    self.signal = np.convolve(self.signal,tap_filter)
-    #shift = round((n_taps_pre-n_taps)*self.samples_per_symbol)
-    self.signal = self.signal[n_taps_pre*self.samples_per_symbol:n_taps_pre*self.samples_per_symbol+length]
-```
-
-
+---
 
 ---
 
@@ -524,9 +536,8 @@ RLM = min((3*ES1),(3*ES2),(2-3*ES1),(2-3*ES2))
 
 ### JLSD
 
-> Kevin Zheng. JLSD — Julia SerDes [[https://github.com/kevjzheng/JLSD](https://github.com/kevjzheng/JLSD)]
+> Kevin Zheng, *JLSD - Julia SerDes* [[https://github.com/kevjzheng/JLSD](https://github.com/kevjzheng/JLSD)], [[forked](https://github.com/raytroop/JLSD)]
 >
-> *boundary conditions internally*, *remembering states from the previous (sub-)block*
 
 ---
 
@@ -560,6 +571,8 @@ end
 
 ---
 
+---
+
 
 
 ***Kronecker product*** to create ***oversampled*** waveform
@@ -580,7 +593,11 @@ end
 
 
 
-***normalized to the time step***
+----
+
+---
+
+***first order RC response, normalized to the time step***
 $$
 \frac{\alpha}{s+\alpha} \overset{\mathcal{L}^{-1}}{\longrightarrow} \alpha\cdot e^{-\alpha t}
 $$
@@ -606,39 +623,7 @@ end
 
 
 
-
-```julia
-using Plots
-using LaTeXStrings
-
-tui = 1/10e9;
-tlen_ir = 20*tui;
-
-
-osr_list = [4, 8, 16, 32, 64, 128, 256, 512, 1024];
-bw_ir = 8e9;
-
-ω = (2*π*bw_ir);
-
-ir_dt_sum_list = [];
-
-for osr_cur in osr_list
-    dt = tui/osr_cur; # Simulation time step
-    tt = [0:dt:tlen_ir-dt;]
-    ir = ω*exp.(-tt*ω);
-    ir_dt_sum = sum(ir*dt);
-    push!(ir_dt_sum_list, ir_dt_sum)
-end
-
-println(ir_dt_sum_list)
-# Any[1.756575097878581, 1.3468434968519964, 1.1652908056870317, 1.0805951388547221, 1.0397838972257087, 1.0197634612560418, 1.0098496044545267, 1.0049167704129547, 1.0024563772359665]
-
-p = plot(osr_list, ir_dt_sum_list, label = "OSR")
-gui(p)
-```
-
-![image-20251008131325508](link-mdl/image-20251008131325508.png)
-
+---
 
 ---
 
@@ -664,6 +649,10 @@ end
 ```
 
 ---
+
+---
+
+
 
 ***Detailed Transmitter***
 
@@ -744,6 +733,8 @@ stem(xir+12, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
 
 ---
 
+---
+
 ***eye diagram*** based on `heatmap`
 
 ```julia
@@ -811,6 +802,10 @@ end
 ```
 
 ---
+
+---
+
+
 
 ***model jitter*** with ***fixed simulation time step***
 
@@ -935,6 +930,8 @@ drv.Vext[lastindex(drv.V_prev_nui)+1:end] .= Vosr
 
 ---
 
+---
+
 ***channel***
 
 ```julia
@@ -961,16 +958,246 @@ $$
 
 ---
 
+---
 
-run simulation by **recursion** 
+***adaptation and CDR loop***
 
 ![image-20260326211044232](link-mdl/image-20260326211044232.png)
 
 ![image-20260326211938908](link-mdl/image-20260326211938908.png)
 
+![image-20260329234042295](link-mdl/image-20260329234042295.png)
+
 ```julia
-wvfm.V11_x.val = eachindex(wvfm.buffer11)  # Update X-axis index, no redraw trigger
-wvfm.V11_y[] = wvfm.buffer11               # Update Y-axis data, triggers redraw
+## pseudocode
+
+## outter loop block 
+run_blk_iter(trx, ++0, nblk, sim_blk) begin
+    pam_gen_top!(bist)
+    dac_drv_top!(drv, bist.So)
+    ch_top!(ch, drv.Vo)
+    sample_itp_top!(splr, ch.Vo)	# update splr.Vext, splr.itp_Vext
+    
+    ## inner loop sub-blok
+    run_blk_iter(trx, ++0, nsubblk, sim_subblk) begin
+       	clkgen_pi_itp_top!(clkgen, pi_code=cdr.pi_code)
+        sample_phi_top!(splr, clkgen.Φo_subblk)
+        # dslc.So[1:subblk_size]
+        slicers_top!(dslc, splr.So_subblk, ref_code=[[128],[128],[128],[128]])
+        # eslc.So[1:subblk_size]
+        slicers_top!(eslc, splr.So_subblk, ref_code=adpt.eslc_ref_vec)
+        cdr_top!(cdr, dslc.So, eslc.So)
+        adpt_top!(adpt, dslc.So, eslc.So)
+        
+        append!(bist.Si, [sum(dvec) for dvec in dslc.So])
+        push!(wvfm.buffer12, adpt.eslc_ref_code)
+        push!(wvfm.buffer22, cdr.pi_code)
+    end
+    
+    ber_checker_top!(bist)
+    append!(wvfm.buffer11, drv.Vo)
+    append!(wvfm.buffer21, ch.Vo)
+    append!(wvfm.buffer31, splr.So)
+    append!(wvfm.eye1.buffer, splr.Vo)
+    wvfm.eslc_ref_ob.val = adpt.eslc_ref_code*eslc.dac_lsb+eslc.dac_min
+end    
+```
+
+
+
+---
+
+
+
+- `clkgen = TrxStruct.Clkgen(nphases = 4, skews = [0e-12, 0e-12, 0e-12, 0e-12])`
+- `dslc = TrxStruct.Slicers(N_per_phi = ones(UInt8, clkgen.nphases), dac_min = -0.1, dac_max = 0.1)`
+- `eslc = TrxStruct.Slicers(N_per_phi = UInt8.([1,0,0,0]),dac_min = 0, dac_max = 0.5)`
+- `cdr = TrxStruct.Cdr(Neslc_per_phi = eslc.N_per_phi)`
+- `adpt = TrxStruct.Adpt(Neslc_per_phi = eslc.N_per_phi`
+
+
+
+```julia
+@kwdef mutable struct Splr
+    # continuous signal
+    Vo_conv::Vector = zeros(param.blk_size_osr+lastindex(ir)-1)
+    Vo = @views Vo_conv[1:param.blk_size_osr]
+    Vo_mem = @views Vo_conv[param.blk_size_osr+1:end]
+    ...
+    # sampled signal
+    So = CircularBuffer{Float64}(param.blk_size)
+    So_subblk::Vector = zeros(param.subblk_size)
+    itp_Vext = nothing
+end
+
+
+function sample_itp_top!(splr, Vi)
+    u_conv!(Vo_conv, Vi, ir, Vi_mem=Vo_mem, gain=dt)
+    splr.itp_Vext = linear_interpolation(tt_Vext, Vext)
+end
+
+
+function clkgen_pi_itp_top!(clkgen; pi_code)
+    Φskew = kron(ones(Int(subblk_size/nphases)), skews/tui*osr)
+    Φrj = rj/tui*osr*randn(subblk_size)
+    ...
+    @. clkgen.Φo_subblk = Φ0 + Φnom + Φskew + Φrj	# subblk_size
+    append!(clkgen.Φo, clkgen.Φo_subblk)
+end
+
+
+function sample_phi_top!(splr, Φi)
+    splr.So_subblk .= itp_Vext.(Φi)		# subblk_size
+    append!(splr.So, splr.So_subblk)
+end
+
+
+@kwdef mutable struct Cdr
+    Neslc_per_phi::Vector
+    nphases = length(Neslc_per_phi)
+    Sd_prev = 0
+
+    # [1,0,0,0, 1,0,0,0, 1,0,0,0,...], subblk_size-elements repeating [1,0,0,0]
+    eslc_nvec = kron(ones(Int(param.subblk_size/nphases)),Neslc_per_phi)
+
+    filt_patterns = [[0, 1, 1], [1, 1, 0]]
+end
+
+
+@kwdef mutable struct Adpt
+    Neslc_per_phi::Vector
+    nphases = length(Neslc_per_phi)
+    Sd_prev = 0
+
+    eslc_ref_accum = 128.0
+    eslc_ref_max = 255
+    eslc_ref_code = floor(eslc_ref_accum)
+
+    # [1,0,0,0, 1,0,0,0, 1,0,0,0,...], subblk_size-elements repeating [1,0,0,0]
+    eslc_nvec = kron(ones(Int(param.subblk_size/nphases)),Neslc_per_phi)
+
+    eslc_filt_patterns = [[0, 1, 1], [1, 1, 0]]
+
+    # [[eslc_ref_code], [], []. []]
+    eslc_ref_vec = [eslc_ref_code*ones(Int,n) for n in Neslc_per_phi]
+end
+```
+
+
+
+***Sign-Sign Mueller-Muller CDR*** - `cdr_top!`
+
+| pattern | main cursor               | Se (assuming $h_0=\operatorname{dLev}$) | vote                                |
+| ------- | ------------------------- | --------------------------------------- | ----------------------------------- |
+| 0**1**1 | $s_{011}=-h_1+h_0+h_{-1}$ | $\operatorname{sign}({-h_1+h_{-1}})$    | $\operatorname{sign}({h_1-h_{-1}})$ |
+| 1**1**0 | $s_{110}=h_1+h_0-h_{-1}$  | $\operatorname{sign}({h_1-h_{-1}})$     | $\operatorname{sign}({h_1-h_{-1}})$ |
+
+```julia
+function cdr_top!(cdr, Sd, Se)
+    pi_bnd = 2^pi_res
+    Sd_val = [Sd_prev; [sum(dvec) for dvec in Sd]]
+
+    for n = findall(eslc_nvec.!=0)
+        if Sd_val[n:n+2] in filt_patterns
+            vote = sign(Se[n][1].-0.5)*sign(Sd_val[n]-Sd_val[n+2])
+            ki_accum += ki*vote
+            pd_accum += pd_gain*(kp*vote + ki_accum)
+        end
+    end
+
+    cdr.Sd_prev = Sd_val[end]
+end
+```
+
+![cdr_adapt.drawio](link-mdl/cdr_adapt.drawio.svg)
+
+***$\operatorname{dLev}$ adaptation***
+$$
+dLev_{n+1} = dLev_n + \mu\cdot \operatorname{sign}( e_n)
+$$
+
+```julia
+function adpt_top!(adpt, Sd, Se)
+    Sd_val = [Sd_prev; [sum(dvec) for dvec in Sd]]
+
+    ref_accum = adpt.eslc_ref_accum
+
+    for n = findall(eslc_nvec.!=0)
+        ref_accum +=  (Sd_val[n:n+2] in eslc_filt_patterns) ?
+                        mu_eslc*sign(Se[n][1].-0.5) : 0
+    end
+    adpt.eslc_ref_accum =   ref_accum < 0 ? 0 :
+                            ref_accum > eslc_ref_max ? eslc_ref_max :
+                            ref_accum
+    adpt.eslc_ref_code = floor(adpt.eslc_ref_accum)
+    adpt.eslc_ref_vec = [adpt.eslc_ref_code*ones(Int,n) for n in Neslc_per_phi]
+
+    adpt.Sd_prev = Sd_val[end]
+end
+```
+
+
+
+
+
+---
+
+***`dslc.So` & `eslc.So` initialization*** with ***Number of comparisons executed during each phase `N_per_phi`***
+
+```julia
+@kwdef mutable struct Slicers
+    N_per_phi::Vector
+    nphases = length(N_per_phi)
+    dac_res = 8
+    dac_min = 0
+    dac_max = 0.5
+    dac_lsb = (dac_max-dac_min)/2^dac_res
+
+    So = [zeros(Bool, Int(N_per_phi[n%nphases+1])) for n in 0:param.subblk_size-1]
+end
+
+
+function slicers_top!(slc, Si; ref_code)
+    ref_lvl = [(dac_min .+ dac_lsb * ref_code[n]) for n in 1:nphases]
+
+    for n = eachindex(Si)
+        phi_idx = (n-1)%nphases + 1
+        nslc = N_per_phi[phi_idx]
+        if nslc != 0
+            slc.So[n] .=  (ref_lvl[phi_idx]
+                            + ofsts[phi_idx]
+                            + (noise_rms * randn(nslc))		# noise per comparison
+                            ) .< Si[n]
+
+        end
+    end
+end
+```
+
+***For DSLC: N_per_phi=[1,1,1,1]***
+
+```julia
+dslc.So = [zeros(Bool, Int(N_per_phi[n%nphases+1])) for n in 0:param.subblk_size-1]
+          = [zeros(Bool, 1), zeros(Bool, 1), zeros(Bool, 1), zeros(Bool, 1),
+             zeros(Bool, 1), zeros(Bool, 1), ...]
+          = [[false], [false], [false], [false], 
+             [false], [false], ...]
+```
+
+***For ESLC: N_per_phi=[1,0,0,0]***
+
+```julia
+eslc.So = [zeros(Bool, Int(N_per_phi[n%nphases+1])) for n in 0:param.subblk_size-1]
+
+n     │ n%4+1 │ N_per_phi[n%4+1] │ zeros(Bool, ...)
+──────┼───────┼──────────────────┼──────────────────
+0     │ 1     │ 1                │ [false] (1 bool)
+1     │ 2     │ 0                │ [] (0 bools - EMPTY!)
+2     │ 3     │ 0                │ [] (0 bools - EMPTY!)
+3     │ 4     │ 0                │ [] (0 bools - EMPTY!)
+4     │ 1     │ 1                │ [false] (1 bool)
+5     │ 2     │ 0                │ [] (EMPTY!)
+...
 ```
 
 

@@ -373,6 +373,29 @@ value
 
 
 
+---
+
+***multiple dispatch***
+
+A function can take arguments of diferent types, and share the same name
+
+
+
+---
+
+`@.` :  used for **automatic broadcasting** across an entire expression
+
+```julia
+# Manual broadcasting
+y = exp.(sin.(x)) .+ 2 .* x
+
+
+# Automatic broadcasting
+@. y = exp(sin(x)) + 2 * x
+```
+
+
+
 
 
 ## C++ Conditional Compilation

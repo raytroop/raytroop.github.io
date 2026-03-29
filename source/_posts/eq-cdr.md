@@ -673,6 +673,8 @@ During adapting,  we make
 
 Then, $h_{-1}$ and $h_1$ are same, which is desired
 
+
+
 ## MLSD (Maximum Likelihood Sequence Detection)
 
 The process is also referred to as **Maximum Likelihood Sequence Estimator (MLSE)**

@@ -148,23 +148,25 @@ Frequency-dependent: the *higher* frequency input signal $f_\text{in}$, the *lar
 
 ---
 
-> M. Gu, Y. Tao, X. He, Y. Zhong, L. Jie and N. Sun, "A 1-GS/s 11-b Time-Interleaved SAR ADC With Robust, Fast, and Accurate Autocorrelation-Based Background Timing-Skew Calibration," in IEEE Journal of Solid-State Circuits, vol. 60, no. 2, pp. 421-431, Feb. 2025
->
-> —. "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 1-10, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
-
-
-
-
-
-
-
----
-
 > H. Wei, P. Zhang, B. Datta Sahoo and B. Razavi, "An 8-Bit 4-GS/s 120-mW CMOS ADC," *Proceedings of the IEEE 2013 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2013 [[pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf)]
 >
 > —, "An 8 Bit 4 GS/s 120 mW CMOS ADC," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 8, pp. 1751-1761, Aug. 2014 [[pdf](https://sci-hub.jp/10.1109/JSSC.2014.2313571)]
 
+***Binary-Search Calibration Method & its limitations***
+
 ![image-20260328225656118](ti-adc/image-20260328225656118.png)
+
+---
+
+> M. Gu, Y. Tao, X. He, Y. Zhong, L. Jie and N. Sun, "A 1-GS/s 11-b Time-Interleaved SAR ADC With Robust, Fast, and Accurate Autocorrelation-Based Background Timing-Skew Calibration," in IEEE Journal of Solid-State Circuits, vol. 60, no. 2, pp. 421-431, Feb. 2025
+>
+> —. "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 1-10, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
+
+An autocorrelation-based background timing-skew calibration method, which uses the correlations between adjacent channels to extract timing-skew errors, which relaxes the input bandwidth limitation up to the **Nyquist frequency**
+
+![image-20260330204902627](ti-adc/image-20260330204902627.png)
+
+![image-20260330205119231](ti-adc/image-20260330205119231.png)
 
 
 

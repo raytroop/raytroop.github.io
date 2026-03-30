@@ -311,6 +311,10 @@ To assess the design solutions, a ***distributed DUT model***, as presented in F
 
 ![image-20260318234516521](esd-latchup/image-20260318234516521.png)
 
+---
+
+![image-20260330212157901](esd-latchup/image-20260330212157901.png)
+
 ## Power Clamp
 
 > Ein.019, RCCLAMP个人理解 [[https://blog.eetop.cn/blog-1779684-6962653.html](https://blog.eetop.cn/blog-1779684-6962653.html)]

@@ -1200,7 +1200,14 @@ n     │ n%4+1 │ N_per_phi[n%4+1] │ zeros(Bool, ...)
 ...
 ```
 
+---
 
+---
+
+***elastic buffer for frequency offsets of TRX***
+
+
+*TODO* &#128197;
 
 
 

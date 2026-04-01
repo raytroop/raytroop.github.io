@@ -23,6 +23,8 @@ mathjax: true
 >
 > wikibooks, Clock and Data Recovery/Buffer Memory (Elastic Buffer)/Cascades of Buffers and CDRs, delays and tolerance [[link](https://en.wikibooks.org/wiki/Clock_and_Data_Recovery/Buffer_Memory_(Elastic_Buffer)/Cascades_of_Buffers_and_CDRs,_delays_and_tolerance)]
 
+![image-20260402000348140](phy/image-20260402000348140.png)
+
 bridge between ***Recovered Clock Domain*** and ***Local Clock Domain***
 
 ![image-20260331221404321](phy/image-20260331221404321.png)

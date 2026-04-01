@@ -311,12 +311,16 @@ Nyquist discovered three different methods for pulse shaping that could be used 
 
 ## LMS & its Quantized-Error Algorithms
 
-> Bruno Lima, Adaptive filtering in Python Implementations based on Adaptive Filtering: Algorithms and Practical Implementation (Paulo S. R. Diniz). [[https://github.com/BruninLima/PydaptiveFiltering](https://github.com/BruninLima/PydaptiveFiltering)]
+> Bruno Lima, *Adaptive filtering in Python Implementations based on Adaptive Filtering: Algorithms and Practical Implementation (Paulo S. R. Diniz).* [[https://github.com/BruninLima/PydaptiveFiltering](https://github.com/BruninLima/PydaptiveFiltering)]
+
+![image-20260401210526151](digital-comm/image-20260401210526151.png)
 
 $$\begin{align}
 x_k &= [x[k], x[k-1], \ldots, x[k-M]]^T \in \mathbb{C}^{M+1}\\
 y[k] &= w^H[k] x_k, \qquad e[k] = d[k] - y[k],
 \end{align}$$
+
+---
 
 ---
 
@@ -361,6 +365,8 @@ for k in range(n_samples):
 
 ---
 
+---
+
 ***Sign-Data Algorithm***
 $$
 w[k+1] = w[k] + 2\mu\, e^*[k] \, \operatorname{sign}(x_k)
@@ -383,19 +389,11 @@ for k in range(n_samples):
 
 ---
 
+---
+
 ***sign–sign algorithm***
 
 ![image-20260317230938532](digital-comm/image-20260317230938532.png)
-
-
-
-## Forward Error Correction (FEC)
-
-> Cathy Ye Liu, Broadcom Inc. DesignCon 2019: 100+ Gb/s Ethernet Forward Error Correction (FEC) Analysis
->
-> —, Broadcom Inc. DesignCon 2024: 200+ Gbps Ethernet Forward Error Correction (FEC) Analysis
-
-*TODO* &#128197;
 
 
 

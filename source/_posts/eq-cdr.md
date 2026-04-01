@@ -675,55 +675,6 @@ Then, $h_{-1}$ and $h_1$ are same, which is desired
 
 
 
-## MLSD (Maximum Likelihood Sequence Detection)
-
-The process is also referred to as **Maximum Likelihood Sequence Estimator (MLSE)**
-
-![image-20240807233152154](eq-cdr/image-20240807233152154.png)
-
-![image-20240812205534753](eq-cdr/image-20240812205534753.png)
-
-![image-20240812205613467](eq-cdr/image-20240812205613467.png)
-
-> [IBIS-AMI Modeling and Correlation Methodology for ADC-Based SerDes Beyond 100 Gb/s [https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf](https://static1.squarespace.com/static/5fb343ad64be791dab79a44f/t/63d807441bcd266de258b975/1675102025481/SLIDES_Track02_IBIS_AMI_Modeling_and_Correlation_Tyshchenko.pdf)]
->
-> M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A. Sheikholeslami, "Design and Implementation of an On-Demand Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of Circuits and Systems, vol. 3, pp. 97-108, 2022, doi: 10.1109/OJCAS.2022.3173686.
->
-> Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing Architecture Using Viterbi Algorithm for ADC-Based Serial Link. Undergraduate Research Scholars Program. Available electronically from [[https://hdl.handle.net/1969.1/166485](https://hdl.handle.net/1969.1/166485)]
-
-
-
-There are several variants of MLSD (Maximum Likelihood Sequence Detection), including:
-
-- Viterbi Algorithm
-- Decision Feedback Sequence Estimation (DFSE)
-- Soft-Output MLSD
-
-
-
-
-> [Evolution Of Equalization Techniques In High-Speed SerDes For Extended Reaches. [https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/](https://semiengineering.com/evolution-of-equalization-techniques-in-high-speed-serdes-for-extended-reaches/)]
->
-> S. Song, K. D. Choo, T. Chen, S. Jang, M. P. Flynn and Z. Zhang, "A Maximum-Likelihood Sequence Detection Powered ADC-Based Serial Link," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 65, no. 7, pp. 2269-2278, July 2018
->
-> [[http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf](http://contents.kocw.or.kr/document/lec/2012/Korea/KoYoungChai/33.pdf)]
->
-> David Johns. Partial Response and Viterbi Detecti [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf)]
-
-
-
-![image-20240824193839108](eq-cdr/image-20240824193839108.png)
-
----
-
-> Leslie Rusch. [[https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf](https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module4_en_1by1_1.pdf)]
-
-
-
----
-
-> Vineel Kumar Veludandi. Maximum likelihood sequence estimation (MLSE) using the Viterbi algorithm [[https://github.com/vineel49/mlse](https://github.com/vineel49/mlse)]
-
 
 
 

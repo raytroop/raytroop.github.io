@@ -352,10 +352,8 @@ Z_2 = \frac{1}{Y_{22}}
 $$
 Then
 $$\begin{align}
-L1 &= \frac{Im(Z_1)}{2\pi f} \\
-Q1 &= \frac{Im(Z_1)}{Re(Z_1)} \\
-L2 &= \frac{Im(Z_2)}{2\pi f} \\
-Q2 &= \frac{Im(Z_2)}{Re(Z_2)}
+L1 &= \frac{Im(Z_1)}{2\pi f} \qquad Q1 = \frac{Im(Z_1)}{Re(Z_1)} \\
+L2 &= \frac{Im(Z_2)}{2\pi f} \qquad Q2 = \frac{Im(Z_2)}{Re(Z_2)}
 \end{align}$$
 
 > EMX only plot L1 and Q1
@@ -369,8 +367,7 @@ Q2 &= \frac{Im(Z_2)}{Re(Z_2)}
 Both with and without shield apply
 
 $$\begin{align}
-L_{diff} &= \frac{Im(Z_{diff})}{2\pi f} \\
-Q_{diff} &= \frac{Im(Z_{diff})}{Re(Z_{diff})}
+L_{diff} = \frac{Im(Z_{diff})}{2\pi f} \qquad Q_{diff} = \frac{Im(Z_{diff})}{Re(Z_{diff})}
 \end{align}$$
 
 ### Center-tapped inductor
@@ -411,8 +408,7 @@ $$
 Finally,  differential inductance and Q are obtained, shown as below
 
 $$\begin{align}
-L_{diff} &= \frac{Im(Z_{diff})}{2\pi f} \\
-Q_{diff} &= \frac{Im(Z_{diff})}{Re(Z_{diff})}
+L_{diff} = \frac{Im(Z_{diff})}{2\pi f} \qquad Q_{diff} = \frac{Im(Z_{diff})}{Re(Z_{diff})}
 \end{align}$$
 
 ![image-20220331013735370](emx-peakview/image-20220331013735370.png)
@@ -442,20 +438,16 @@ Q_{diff} &= \frac{Im(Z_{diff})}{Re(Z_{diff})}
 We define Port-1 impedance $Z_1$, Port-2 impedance $Z_2$
 
 $$\begin{align}
-Z_1 &= \frac {1}{Y_{11}}\\
-Z_2 &= \frac {1}{Y_{22}}
+Z_1 = \frac {1}{Y_{11}} \qquad Z_2 = \frac {1}{Y_{22}}
 \end{align}$$
 
 > Caution above $\color{red}z_1 \neq Z_{11}$, but $z_1=\frac{1}{Y_{11}}$
 
 Then single-ended cap and Q
 $$\begin{align}
-C_1 &= -\frac{1/Im(Z_1)}{2\pi f} \\
-Q_1 &= -\frac{Im(Z_1)}{Re(Z_1)} \\
-C_2 &=  -\frac{1/Im(Z_2)}{2\pi f} \\
-Q_2 &= -\frac{Im(Z_2)}{Re(Z_2)} \\
-C_{12} &= -\frac{Im(Y_{12})}{2\pi f}\\
-Q_{12} &= \frac{Im(Y_{12})}{Re(Y_{12})}
+C_1 &= -\frac{1/Im(Z_1)}{2\pi f} \qquad Q_1 = -\frac{Im(Z_1)}{Re(Z_1)} \\
+C_2 &=  -\frac{1/Im(Z_2)}{2\pi f} \qquad Q_2 = -\frac{Im(Z_2)}{Re(Z_2)} \\
+C_{12} &= -\frac{Im(Y_{12})}{2\pi f} \qquad Q_{12} = \frac{Im(Y_{12})}{Re(Y_{12})}
 \end{align}$$
 
 - **Series equivalent** model is used in $C_1$, $Q_1$, $C_2$ and $Q_2$
@@ -490,8 +482,7 @@ Q_{12} &= \frac{Im(Y_{12})}{Re(Y_{12})}
 
 First obtain differential impedance, $Z_{diff}$ then apply series equivalent model
 $$\begin{align}
-C_{diff} &= -\frac{1/Im(Z_{diff})}{2\pi f} \\
-Q_{diff} &= -\frac{Im(Z_{diff})}{Re(Z_{diff})}
+C_{diff} = -\frac{1/Im(Z_{diff})}{2\pi f} \qquad Q_{diff} = -\frac{Im(Z_{diff})}{Re(Z_{diff})}
 \end{align}$$
 
 ![image-20220331022224865](emx-peakview/image-20220331022224865.png)
@@ -501,9 +492,7 @@ Q_{diff} &= -\frac{Im(Z_{diff})}{Re(Z_{diff})}
 Open circuit impedance $Z_o$, short circuit impedance $Z_s$ and characteristic impedance $Z_0$
 
 $$\begin{align}
-Z_o &= Z_{11}\\
-Z_s &= \frac{1}{Y_{11}}\\
-Z_0  &= \sqrt{Z_o*Z_s}
+Z_o = Z_{11} \qquad Z_s = \frac{1}{Y_{11}} \qquad Z_0  = \sqrt{Z_o*Z_s}
 \end{align}$$
 
 *propagation constant* is given as
@@ -514,8 +503,7 @@ $$\gamma \cdot l = \frac{1}{2}\log\left( \frac{Z_0+Z_s}{Z_0-Z_s} \right)$$
 
 The relationship between these parameter and geometry of the transmission line
 $$\begin{align}
-Z_0 &= \sqrt{\frac{R+j\omega L}{G+j\omega C}} \\
-\gamma &= \sqrt{(G+j\omega C)(R+j\omega L)}
+Z_0 = \sqrt{\frac{R+j\omega L}{G+j\omega C}} \qquad \gamma = \sqrt{(G+j\omega C)(R+j\omega L)}
 \end{align}$$
 EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 
@@ -553,10 +541,7 @@ EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 
 for single-end capicator
 $$\begin{align}
-Q_1 &= -\frac{Im(Z_1)}{Re(Z_1)} \\
-&= -\frac{Im(1/Y_{11})}{Re(1/Y_{11})} \\
-&= -\frac{Im(Y_{11}^*)/|Y_{11}|^2}{Re(Y_{11}^*)/|Y_{11}|^2} \\
-&= \frac{Im(Y_{11})}{Re(Y_{11})}
+Q_1 &= -\frac{Im(Z_1)}{Re(Z_1)} = -\frac{Im(1/Y_{11})}{Re(1/Y_{11})} = -\frac{Im(Y_{11}^*)/|Y_{11}|^2}{Re(Y_{11}^*)/|Y_{11}|^2} = \frac{Im(Y_{11})}{Re(Y_{11})}
 \end{align}$$
 
 So, the EMX model and foundary model is consistent.
@@ -795,9 +780,7 @@ ParaView
 LVS issue for circuits with customized devices
 
 - auCdl: Analog and Microwave CDL, is a netlister used for creating CDL netlist for analog circuits
-
 - auLVS: Analog and Microwave LVS, is used for analog circuit LVS
-- 
 
 ## reference
 

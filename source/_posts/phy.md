@@ -52,6 +52,10 @@ bridge between ***Recovered Clock Domain*** and ***Local Clock Domain***
 *TODO* &#128197;
 
 
+## Feed-Forward Error Correction (FEC)
+
+> Cathy Liu, Broadcom, DesignCon2026 *What is FEC and how do I use it in 200G/400G/800G/1.6T Ethernet?*
+
 
 ## reference
 

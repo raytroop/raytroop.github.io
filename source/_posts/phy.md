@@ -19,6 +19,8 @@ mathjax: true
 
 ## RX Elastic Buffer
 
+> Joe Winkles, *Elastic Buffer Implementations in PCI Express Devices* [[pdf](https://www.docdroid.net/B4VS5Nv/mindshare-pcie-elastic-buffer-pdf)]
+
 bridge between ***Recovered Clock Domain*** and ***Local Clock Domain***
 
 ![image-20260331221404321](phy/image-20260331221404321.png)
@@ -32,6 +34,8 @@ bridge between ***Recovered Clock Domain*** and ***Local Clock Domain***
 
 
 ## First In First Out (FIFO) 
+
+> Clifford E. Cummings, *Simulation and Synthesis Techniques for Asynchronous FIFO Design with Asynchronous Pointer Comparisons* [[pdf](https://twins.ee.nctu.edu.tw/courses/ip_core_04/resource_pdf/cummings1_final.pdf)]
 
 *TODO* &#128197;
 

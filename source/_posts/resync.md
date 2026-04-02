@@ -77,8 +77,6 @@ mathjax: true
 
 ***MTBF (Mean Time Between Failures)***
 
-![image-20260402211215546](resync/image-20260402211215546.png)
-
 ![image-20260402211924586](resync/image-20260402211924586.png)
 
 ![image-20260402212255182](resync/image-20260402212255182.png)
@@ -86,6 +84,8 @@ mathjax: true
 ![image-20260402212425616](resync/image-20260402212425616.png)
 
 ![image-20260402212648758](resync/image-20260402212648758.png)
+
+![image-20260402211215546](resync/image-20260402211215546.png)
 
 ---
 

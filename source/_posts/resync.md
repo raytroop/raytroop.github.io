@@ -51,6 +51,52 @@ mathjax: true
 
 
 
+## Ran Ginosar
+
+> ISCAS 2008 tutorial:  Synchronization Circuits for Multiple Clock Domains SoCs
+
+***Enter metastabilty***
+
+![image-20260402210557862](resync/image-20260402210557862.png)
+
+
+
+---
+
+---
+
+***Exit metastabilty***
+
+![image-20260402211731588](resync/image-20260402211731588.png)
+
+
+
+---
+
+---
+
+***MTBF (Mean Time Between Failures)***
+
+![image-20260402211215546](resync/image-20260402211215546.png)
+
+![image-20260402211924586](resync/image-20260402211924586.png)
+
+![image-20260402212255182](resync/image-20260402212255182.png)
+
+![image-20260402212425616](resync/image-20260402212425616.png)
+
+![image-20260402212648758](resync/image-20260402212648758.png)
+
+---
+
+---
+
+***MTBF of Many Synchronizers***
+
+![image-20260402211014731](resync/image-20260402211014731.png)
+
+
+
 ## Synchronizer Characterization
 
 > I. W. Jones, S. Yang and M. Greenstreet, "Synchronizer Behavior and Analysis," 2009 15th IEEE Symposium on Asynchronous Circuits and Systems, Chapel Hill, NC, USA, 2009 [[https://sci-hub.ru/10.1109/ASYNC.2009.8](https://sci-hub.ru/10.1109/ASYNC.2009.8)]

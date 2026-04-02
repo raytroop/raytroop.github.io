@@ -114,7 +114,7 @@ $$
 
 ![image-20260401230936331](phy/image-20260401230936331.png)
 
-In above figure, symbol 3 must change when symbol is hardened, {-1,-1,**-1**} -> {-1,-1,**1**}, and its Vexp -1.3 -> -0.7. In this way,  rewind take affect, weighted sum of hardening function symbol 3 may change and its hard decision may change also. 
+*symbol decision (N=3)* must change when *symbol 4* is hardened, {-1,-1,**-1**} -> {-1,-1,**1**}, and its Vexp -1.3 -> -0.7. In this way,  **rewind** take affect, weighted sum of hardening function symbol 3 may change and its hard decision may change also. 
 
 ### Viterbi Decoder
 

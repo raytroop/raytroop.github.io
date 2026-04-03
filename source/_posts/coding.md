@@ -1,5 +1,5 @@
 ---
-title: Programming Tricks
+title: Coding Cheatsheets
 date: 2022-02-07 23:52:42
 tags:
 categories:
@@ -396,11 +396,51 @@ y = exp.(sin.(x)) .+ 2 .* x
 
 
 
+---
+
+---
+
+***Makie.jl***
+
+> Storopoli, Huijzer and Alonso (2021). Julia Data Science. [[https://juliadatascience.github.io/JuliaDataScience/](https://juliadatascience.github.io/JuliaDataScience/)]
+
+`non-mutating` methods of plotting function:  `Figure` `Axis` `plot object` in collection`FigureAxisPlot`
+
+`mutating` methods of plotting function: `plot object`
 
 
-## C++ Conditional Compilation
 
-### Using g++ only
+**Figure + Axis + plot + axislegend**
+
+```julia
+fig = Figure()
+ax = Axis(fig[1,1])
+scatterlines!(ax, 0.5:0.2:3pi, x -> -cos(x)/x, label = "cos(x)/x")
+axislegend(; position=:rt)	# plot function's label rather xlabel, ylabel of Axis
+fig
+```
+
+
+
+
+
+
+
+## Python
+
+
+
+
+
+## Matlab
+
+
+
+
+
+## C++
+
+***Using g++ only***
 
 **conditional.cpp**
 
@@ -445,7 +485,7 @@ a[3] = 5
 
 ---
 
-### Using **CMakeLists.txt** *add_definitions*
+***add_definitions in CMakeLists.txt***
 
 ```cmake
 cmake_minimum_required(VERSION 3.2)

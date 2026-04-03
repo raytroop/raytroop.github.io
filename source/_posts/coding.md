@@ -356,28 +356,11 @@ that’s the difference between using and import - the former brings all exporte
 
 ---
 
-***Observable***
-
-The argument to the `Observable()` **constructor** provides both an **initial value** and determines the **type of the observable variable**.
-
-There are two ways to access/update an observable's value - w/ `.val` or `[]`
-
-The difference is that only using `[]` will trigger the listener event when updating the observable
-value
-
-| Feature          | `lift`                                  | `on`                                    |
-| :--------------- | :-------------------------------------- | :-------------------------------------- |
-| **Return Value** | A **new Observable**                    | A **Handler** (for disconnecting later) |
-| **Purpose**      | To transform data (create a dependency) | To perform an action (side effect)      |
-| **Data Flow**    | Value flows from parent to child        | Value triggers an external event        |
-
-
-
 ---
 
 ***multiple dispatch***
 
-A function can take arguments of diferent types, and share the same name
+A function can take arguments of different types, and share the same name
 
 
 
@@ -418,6 +401,33 @@ ax = Axis(fig[1,1])
 scatterlines!(ax, 0.5:0.2:3pi, x -> -cos(x)/x, label = "cos(x)/x")
 axislegend(; position=:rt)	# plot function's label rather xlabel, ylabel of Axis
 fig
+```
+
+***Observable***
+
+The argument to the `Observable()` **constructor** provides both an **initial value** and determines the **type of the observable variable**.
+
+There are two ways to access/update an observable's value - w/ `.val` or `[]`
+
+The difference is that only using `[]` will trigger the listener event when updating the observable
+value
+
+| Feature          | `lift`                                  | `on`                                    |
+| :--------------- | :-------------------------------------- | :-------------------------------------- |
+| **Return Value** | A **new Observable**                    | A **Handler** (for disconnecting later) |
+| **Purpose**      | To transform data (create a dependency) | To perform an action (side effect)      |
+| **Data Flow**    | Value flows from parent to child        | Value triggers an external event        |
+
+```julia
+using GLMakie
+
+x = Observable(0.0)
+
+on(x) do x
+    println("New value of x is $x")
+end
+
+x[] = 5.0
 ```
 
 

@@ -7,6 +7,22 @@ categories:
 mathjax: true
 ---
 
+## Clocking Structures
+
+> Mark Horowitz, Lecture 6 Clocked Elements [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/lect_06.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/lect_06.pdf)]
+>
+> Ran Ginosar, ISCAS2008 Tutorial-4: *Synchronization Circuits for Multiple Clock Domain SoCs*
+
+***Synchronous***, ***Mesochronous***, ***Plesiochronous***
+
+![image-20250815221238051](clock-dist/image-20250815221238051.png)
+
+![image-20260304220804525](clock-dist/image-20260304220804525.png)
+
+![image-20260403213719657](clock-dist/image-20260403213719657.png)
+
+![image-20260403213819780](clock-dist/image-20260403213819780.png)
+
 
 
 ## QEC (Quadrature Error Corrector )
@@ -36,18 +52,6 @@ mathjax: true
 *TODO* &#128197;
 
 
-
-## Clocking Structures
-
-> Mark Horowitz, Lecture 6 Clocked Elements [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/lect_06.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/lectures/lect_06.pdf)]
->
-> Ran Ginosar, ISCAS2008 Tutorial-4: *Synchronization Circuits for Multiple Clock Domian SoCs*
-
-***Synchronous***, ***Mesochronous***, ***Plesiochronous***
-
-![image-20250815221238051](clock-dist/image-20250815221238051.png)
-
-![image-20260304220804525](clock-dist/image-20260304220804525.png)
 
 
 

@@ -444,9 +444,7 @@ title('frequency response of different methods');
 
 ***!!! only multiply Ts***
 
-![image-20250517083748566](z-laplace/image-20250517083748566.png)
-
-
+![tf_impulse.drawio](z-laplace/tf_impulse.drawio.svg)
 
 
 

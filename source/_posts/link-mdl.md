@@ -537,41 +537,6 @@ RLM = min((3*ES1),(3*ES2),(2-3*ES1),(2-3*ES2))
 ### JLSD
 
 > Kevin Zheng, *JLSD - Julia SerDes* [[https://github.com/kevjzheng/JLSD](https://github.com/kevjzheng/JLSD)], [[forked](https://github.com/raytroop/JLSD)]
->
-
----
-
-```julia
-out = conv(ir, vbits)*tui/osr
-lines(tt, out[1:length(vbits)])
-```
-
-![image-20251201003243976](link-mdl/image-20251201003243976.png)
-
-
-
-```julia
-#call our convolution function; let's keep the input memory zero for now
-#change the drv parameters in the struct definition to see the waveform/eye change
-u_conv!(drv.Vo_conv, Vosr, drv.ir, Vi_mem=zeros(1), gain = drv.swing * param.dt);
-
-
-#we will also create a non-mutating u_conv function for other uses
-function u_conv(input, ir; Vi_mem = zeros(1), gain = 1)
-    vconv = gain .* conv(ir, input)
-    vconv[eachindex(Vi_mem)] += Vi_mem
-
-    return vconv
-end
-```
-
-![image-20260127222632389](link-mdl/image-20260127222632389.png)
-
-
-
----
-
----
 
 
 
@@ -620,7 +585,35 @@ end
 
 > `sum(ir)*dt = 1`, i.e. the step response `1`
 
+---
 
+---
+
+```julia
+out = conv(ir, vbits)*tui/osr
+lines(tt, out[1:length(vbits)])
+```
+
+![image-20251201003243976](link-mdl/image-20251201003243976.png)
+
+
+
+```julia
+#call our convolution function; let's keep the input memory zero for now
+#change the drv parameters in the struct definition to see the waveform/eye change
+u_conv!(drv.Vo_conv, Vosr, drv.ir, Vi_mem=zeros(1), gain = drv.swing * param.dt);
+
+
+#we will also create a non-mutating u_conv function for other uses
+function u_conv(input, ir; Vi_mem = zeros(1), gain = 1)
+    vconv = gain .* conv(ir, input)
+    vconv[eachindex(Vi_mem)] += Vi_mem
+
+    return vconv
+end
+```
+
+![image-20260127222632389](link-mdl/image-20260127222632389.png)
 
 
 ---
@@ -652,29 +645,27 @@ end
 
 ---
 
-
-
 ***Detailed Transmitter***
 
 ![tx blk diagram](link-mdl/tx_blk_diagram.png)
 
 ```julia
 function drv_top!(drv, input)
-	@unpack all parameters and vectors
+    @unpack all parameters and vectors
 
     apply_fir_filter!(Sfir, input, fir, kwargs...)
 
-	oversample!(Vfir,Sfir)
+    oversample!(Vfir,Sfir)
 
-	if jitter_en
+    if jitter_en
         # !!! jitter gen before impulse response convolution
         # !!! jitter information at each edge location
-		add_jitter!(drv, Vfir)
-	end
-	
+        add_jitter!(drv, Vfir)
+    end
+
     # impulse response of the driver (and subsequent channel, RX front end, etc.) plays a crucial role 
     # in low-pass filtering the jittered waveform to give it a "smoother look"
-	convolve!(Vo_conv, Vfir, ir, kwargs...)
+    convolve!(Vo_conv, Vfir, ir, kwargs...)
 
 end
 ```
@@ -733,81 +724,7 @@ stem(xir+12, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
 
 ---
 
----
-
-***eye diagram*** based on `heatmap`
-
-```julia
-function w_gen_eye_simple_test(input,x_npts_ui, x_npts, y_range, y_npts; osr, x_ofst=0)
-    heatmap = zeros(x_npts, y_npts)
-
-    input_x = 0:1/osr:(lastindex(input)-1)/osr
-    itp_resample = linear_interpolation(input_x, input) # interpolation object
-    idx_itp = 0:1/x_npts_ui:input_x[end]
-    input_itp = itp_resample.(idx_itp)
-
-    for n = 1:x_npts
-        heatmap[n,:] = u_hist(input_itp[n:x_npts:end], -y_range/2, y_range/2, y_npts)
-    end
-   
-    return circshift(heatmap, (Int(x_ofst), 0))
-end
-```
-
-> Julia's interpolation return a *function object* that can operate on any values you throw at it
-
-![eyebin.drawio](link-mdl/eyebin.drawio.svg)
-
-```julia
-function u_hist(samples, minval, maxval, nbin)
-    weights = zeros(Float64, nbin)
-    bin_size = (maxval-minval)/nbin
-
-    for s in samples
-        idx = Int(floor((s-minval)/bin_size))+1
-        idx = idx < 1 ? 1 : idx > nbin ? nbin : idx
-        weights[idx] += 1.0
-    end
-    return weights
-end
-
-
-feye = Figure()
-heatmap!(Axis(feye[1,1]), x_grid, y_grid, eye_tx, 
-            colormap=:turbo, #try :inferno, :hot, :viridis
-        )
-feye
-```
-
----
-
-FIR filter typically is much shorter (<10 taps) than the symbol vector, using *FFT convolution might be an overkill*. For optimization, a simple ***shift-and-add filter*** function can be written
-
-![image-20260118013730655](link-mdl/image-20260118013730655.png)
-
-```julia
-function u_filt(So_conv, input, fir; Si_mem=Float64[])
-    sconv = zeros(length(input) + length(fir) - 1)
-
-    s_in = lastindex(input)
-    
-    for n=eachindex(fir)
-        sconv[n:s_in+n-1] .+= fir[n] .* input
-    end
-
-    sconv[eachindex(Si_mem)] .+= Si_mem
-
-    return sconv
-end
-```
-
----
-
----
-
-
-
-***model jitter*** with ***fixed simulation time step***
+***TX model jitter*** with ***fixed simulation time step***
 
 **warp** or **remap** a *"jittery time grid"* onto our *"uniform time grid"*
 
@@ -955,6 +872,16 @@ $$
 $$
 
 > `noise_rms::Float64 = sqrt(2/param.dt*10^((noise_dbm_hz-30.0)/10)` rather than ~~`sqrt(0.5/param.dt*10^((noise_dbm_hz-30.0)/10)`~~
+
+---
+
+---
+
+***sampler***
+
+
+
+
 
 ---
 
@@ -1204,7 +1131,7 @@ n     │ n%4+1 │ N_per_phi[n%4+1] │ zeros(Bool, ...)
 
 ---
 
-***elastic buffer for frequency offsets of TRX***
+***elastic buffer layer between block size and sub-block size to model frequency offsets of TRX***
 
 
 *TODO* &#128197;
@@ -1721,6 +1648,78 @@ function int2bits(num, nbit)
 	return [Bool((num>>k)%2) for k in nbit-1:-1:0]
 end
 ```
+
+
+
+### eye diagram based on `heatmap`
+
+```julia
+function w_gen_eye_simple_test(input,x_npts_ui, x_npts, y_range, y_npts; osr, x_ofst=0)
+    heatmap = zeros(x_npts, y_npts)
+
+    input_x = 0:1/osr:(lastindex(input)-1)/osr
+    itp_resample = linear_interpolation(input_x, input) # interpolation object
+    idx_itp = 0:1/x_npts_ui:input_x[end]
+    input_itp = itp_resample.(idx_itp)
+
+    for n = 1:x_npts
+        heatmap[n,:] = u_hist(input_itp[n:x_npts:end], -y_range/2, y_range/2, y_npts)
+    end
+   
+    return circshift(heatmap, (Int(x_ofst), 0))
+end
+```
+
+> Julia's interpolation return a *function object* that can operate on any values you throw at it
+
+![eyebin.drawio](link-mdl/eyebin.drawio.svg)
+
+```julia
+function u_hist(samples, minval, maxval, nbin)
+    weights = zeros(Float64, nbin)
+    bin_size = (maxval-minval)/nbin
+
+    for s in samples
+        idx = Int(floor((s-minval)/bin_size))+1
+        idx = idx < 1 ? 1 : idx > nbin ? nbin : idx
+        weights[idx] += 1.0
+    end
+    return weights
+end
+
+
+feye = Figure()
+heatmap!(Axis(feye[1,1]), x_grid, y_grid, eye_tx, 
+            colormap=:turbo, #try :inferno, :hot, :viridis
+        )
+feye
+```
+
+
+
+### FIR by shift-and-add filter
+
+FIR filter typically is much shorter (<10 taps) than the symbol vector, using *FFT convolution might be an overkill*. For optimization, a simple ***shift-and-add filter*** function can be written
+
+![image-20260118013730655](link-mdl/image-20260118013730655.png)
+
+```julia
+function u_filt(So_conv, input, fir; Si_mem=Float64[])
+    sconv = zeros(length(input) + length(fir) - 1)
+
+    s_in = lastindex(input)
+    
+    for n=eachindex(fir)
+        sconv[n:s_in+n-1] .+= fir[n] .* input
+    end
+
+    sconv[eachindex(Si_mem)] .+= Si_mem
+
+    return sconv
+end
+```
+
+
 
 ### PRBS Generator
 

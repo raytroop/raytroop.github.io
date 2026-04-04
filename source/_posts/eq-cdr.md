@@ -496,6 +496,14 @@ plt.show()
 >
 > MENIN, DAVIDE, "Modelling and Design of High-Speed Wireline Transceivers with Fully-Adaptive Equalization" [[https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf](https://air.uniud.it/retrieve/e27ce0ca-15f7-055e-e053-6605fe0a7873/Modelling%20and%20Design%20of%20High-Speed%20Wireline%20Transceivers%20with%20Fully-Adaptive%20Equalization.pdf)]
 
+---
+
+---
+
+> Oh, Kyung Suk, and Xingchao Yuan. *High Speed Signaling Jitter Modeling, Analysis, and Budgeting*. Pearson Education, 2012
+
+![image-20260404103850471](eq-cdr/image-20260404103850471.png)
+
 
 
 

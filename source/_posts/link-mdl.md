@@ -620,57 +620,33 @@ end
 
 ---
 
-***generate PAM symbols***
-
-> here *Big Endian*
-
-```julia
-	#generate PAM symbols
-    fill!(So, zero(Float64)) #reset So to all 0
-    for n = 1:bits_per_sym
-        @. So = So + 2^(bits_per_sym-n)*So_bits[n:bits_per_sym:end]
-    end
-```
-
-```julia
-function int2bits(num, nbit)
-    return [Bool((num>>k)%2) for k in nbit-1:-1:0]
-end
-
-
- Si_bits .= vec(stack(int2bits.(Si, bits_per_sym)))
-```
-
----
-
----
-
 ***Detailed Transmitter***
 
 ![tx blk diagram](link-mdl/tx_blk_diagram.png)
 
 ```julia
-function drv_top!(drv, input)
-    @unpack all parameters and vectors
+Sfir_conv::Vector = zeros(param.blk_size+length(fir)-1)
+Sfir = @views Sfir_conv[1:param.blk_size]
+Sfir_mem = @views Sfir_conv[param.blk_size+1:end]
 
-    apply_fir_filter!(Sfir, input, fir, kwargs...)
+Vo_conv::Vector = zeros(param.blk_size_osr+lastindex(ir)-1)
+Vo = @views Vo_conv[1:param.blk_size_osr]
+Vo_mem = @views Vo_conv[param.blk_size_osr+1:end]
 
-    oversample!(Vfir,Sfir)
+function dac_drv_top!(drv, Si)
 
-    if jitter_en
-        # !!! jitter gen before impulse response convolution
-        # !!! jitter information at each edge location
-        add_jitter!(drv, Vfir)
+    u_filt!(drv.Sfir_conv, Si, fir_norm, Si_mem = Sfir_mem)
+
+    kron!(drv.Vfir, drv.Sfir, ones(osr))
+
+    if drv.jitter_en
+        drv_add_jitter!(drv, drv.Vfir)
     end
 
-    # impulse response of the driver (and subsequent channel, RX front end, etc.) plays a crucial role 
-    # in low-pass filtering the jittered waveform to give it a "smoother look"
-    convolve!(Vo_conv, Vfir, ir, kwargs...)
+    u_conv!(drv.Vo_conv, drv.Vfir, ir, Vi_mem=Vo_mem, gain=dt*swing/2)
 
 end
 ```
-
-
 
 
 
@@ -678,100 +654,45 @@ end
 
 ![image-20251216231344142](link-mdl/image-20251216231344142.png)
 
-```julia
-Vo_conv::Vector = zeros(param.blk_size_osr+lastindex(ir)-1) 
-Vo = @views Vo_conv[1:param.blk_size_osr] 
-Vo_mem = @views Vo_conv[param.blk_size_osr+1:end]
-```
-
 
 
 ![image-20251216230945058](link-mdl/image-20251216230945058.png)
 
-```matlab
-si = [1,0.3,0.5];
-vi = kron(si, ones(1,3));
-xi = 0:1:(length(vi)-1);
+> [[code link](https://gist.github.com/raytroop/c4a15600f9da1a8a8824ec94bd11c65d)]
 
+```julia
+function u_conv!(Vo_conv, input, ir; Vi_mem = Float64[], gain = 1)
+    Vo_conv[eachindex(Vi_mem)] .= Vi_mem
+    Vo_conv[lastindex(Vi_mem)+1:end] .= zero(Float64)
 
-subplot(6,1,1)
-stem(xi, vi, "filled", 'r', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
-
-ir = [0.1, 0.2, 0.3, 0.6, 1];
-xir = -length(ir)+1:1:0;
-
-subplot(8,1,2)
-stem(xir, ir, "filled", 'b', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
-
-subplot(8,1,3)
-stem(xir+1, ir, "filled", 'b', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
-
-subplot(8,1,4)
-stem(xir+8, ir, "filled", 'b', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
-
-subplot(8,1,5)
-stem(xir+9, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
-
-subplot(8,1,6)
-stem(xir+10, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
-
-subplot(8,1,7)
-stem(xir+11, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
-
-subplot(8,1,8)
-stem(xir+12, ir, "filled", 'm', LineWidth=2); xlim([-4,12]); xticks(-4:1:12)
+    Vo_conv .+= conv(gain .* input, ir)
+    return nothing
+end
 ```
+
+
 
 ---
 
 ***TX model jitter*** with ***fixed simulation time step***
+
+![image-20260405101146001](link-mdl/image-20260405101146001.png)
 
 **warp** or **remap** a *"jittery time grid"* onto our *"uniform time grid"*
 
 > The brilliance is that **you don't need infinitesimal time steps**—instead, you remap the sampling grid to account for jitter!
 
 ```julia
-prev_nui = 4
-Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)
-V_prev_nui = @views Vext[end-prev_nui*param.osr+1:end]  # prev_nui*osr
-tt_Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)
-Δtt_ext = zeros(param.blk_size+prev_nui+1)  # blk_size + prev_nui + 1
-Δtt = zeros(param.blk_size)
-Δtt_prev_nui = @views Δtt_ext[end-prev_nui:end]  # prev_nui +  1
-tt_uniform::Vector = (0:param.blk_size_osr-1) .+ prev_nui/2*param.osr
+Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)	#(prev_nui + blk_size)*osr
+V_prev_nui = @views Vext[end-prev_nui*param.osr+1:end]		#prev_nui*osr
+
+Δtt_ext = zeros(param.blk_size+prev_nui+1)		# prev_nui + blk_size + 1
+Δtt_prev_nui = @views Δtt_ext[end-prev_nui:end]		# prev_nui + 1
 ```
 
-`Δtt*` vectors store the jitter information *at each edge location*
+![deltatt_Vext.drawio](link-mdl/deltatt_Vext.drawio.svg)
 
-`tt_Vext` vector is the jittered time grid vector
-
-`tt_uniform` is the convience vector to remap the jittered waveform back to our simulation grid
-
-> using **intermediate voltages** embed jitter information at fractional time steps
->
-> ![image-20260208091652420](link-mdl/image-20260208091652420.png)
-
-```julia
-drv.Δtt_ext[eachindex(drv.Δtt_prev_nui)] .= drv.Δtt_prev_nui  # 1
-drv.Δtt_ext[lastindex(drv.Δtt_prev_nui)+1:end] .= Δtt  # 2
-```
-
-
-
-![deltatt.drawio](link-mdl/deltatt.drawio.svg)
-
-```julia
-drv.Vext[eachindex(drv.V_prev_nui)] .= drv.V_prev_nui  # 1
-drv.Vext[lastindex(drv.V_prev_nui)+1:end] .= Vosr  # 2
-```
-
-
-
-![vext.drawio](link-mdl/vext.drawio.svg)
-
-
-
-
+Because each symbol's width is determined by **two** edges,  $\Delta tt\_\text{ext}$ is is **one greater** than $V_\text{ext}$
 
 ```julia
 function drv_jitter_tvec!(tt_Vext, Δtt_ext, osr)
@@ -782,67 +703,103 @@ function drv_jitter_tvec!(tt_Vext, Δtt_ext, osr)
     return nothing
 end
 
+# tt_Vext: (prev_nui+blk_size)*osr
 drv_jitter_tvec!(drv.tt_Vext, drv.Δtt_ext, param.osr);
+```
 
+![image-20260405145738818](link-mdl/image-20260405145738818.png)
+
+![image-20260405145948297](link-mdl/image-20260405145948297.png)
+
+```julia
 itp = linear_interpolation(drv.tt_Vext, drv.Vext); #itp is a function object
+```
 
+![image-20260405145552162](link-mdl/image-20260405145552162.png)
+
+`itp = linear_interpolation(drv.tt_Vext, drv.Vext)` create **linear interpolation only**, *extrapolation* shall **not** be used to avoid inducing any error
+
+```julia
 #note here tt_uniform is shifted by prev_nui/2 to give wiggle room for sampling "before" and "after" the current block. This is necessary for sinusoidal jitter
 tt_uniform = (0:param.blk_size_osr-1) .+ drv.prev_nui/2*param.osr;
 
 #To interpolate, use the itp object like a function and broadcast to a vector
-Vosr_jittered = itp.(tt_uniform); 
-
-# `interp_linear_extrap = linear_interpolation(xs, A, extrapolation_bc=Line())` create #linear interpolation object **with extrapolation**
+Vfir = itp.(tt_uniform);
 ```
 
-![image-20260118180411601](link-mdl/image-20260118180411601.png)
 
-`itp = linear_interpolation(drv.tt_Vext, drv.Vext)` create linear interpolation object **without extrapolation**
 
-extrapolation shall **not** be used to avoid introducing any error
+![itp.drawio](link-mdl/itp.drawio.svg)
 
-- `prev_nui` denotes the number of previous symbols to be stitched to the current block's signal to *prevent overflow/underflow when jitter is introduced*
-
-- `tt_uniform` is shifted by `prev_nui/2` to give wiggle room for sampling "before" and "after" the current block. **This is necessary for sinusoidal jitter**
+`tt_uniform` is shifted by `prev_nui/2` to give wiggle room for sampling "before" and "after" the current block. **This is necessary for sinusoidal jitter**
 
 > [[copilot](https://github.com/copilot/share/c85d51be-0004-88e7-9840-ba09a4d569f8)]
 >
 > DCD and RJ have much smaller shifts (typically <1 UI), but SJ can oscillate over multiple UI widths, requiring this ***centered offset to prevent interpolation boundary errors***.
 
-![itp.drawio](link-mdl/itp.drawio.svg)
 
 
-
-> a specialized interpolation function to optimize for performance, which support interpolation only
->
-> ```julia
-> function drv_interp_jitter!(vo, tt_jitter, vi, tt_uniform)
->     last_idx = 1
->     for n = eachindex(tt_uniform)
->         t = tt_uniform[n]
->         for m = last_idx:lastindex(tt_jitter)-1
->             if (t >= tt_jitter[m]) && (t < tt_jitter[m+1])
->                 k = (vi[m+1]-vi[m])/(tt_jitter[m+1]-tt_jitter[m])
->                 vo[n] = vi[m] + k*(t-tt_jitter[m])
->                 last_idx = m
->                 break
->             end
->         end
->     end
-> 
->     return nothing
-> end
-> ```
+---
 
 ```julia
-drv.Δtt_ext[eachindex(drv.Δtt_prev_nui)] .= drv.Δtt_prev_nui
-drv.Δtt_ext[lastindex(drv.Δtt_prev_nui)+1:end] .= Δtt
+function drv_jitter_tvec!(tt_Vext, Δtt_ext, osr)
+    for n = 1:lastindex(Δtt_ext)-1
+        # Starting from 0
+        tt_Vext[(n-1)*osr+1:n*osr] .= LinRange((n-1)*osr+Δtt_ext[n], n*osr+Δtt_ext[n+1], osr+1)[1:end-1]	# drop the last
+    end
 
-drv.Vext[eachindex(drv.V_prev_nui)] .= drv.V_prev_nui
-drv.Vext[lastindex(drv.V_prev_nui)+1:end] .= Vosr
+    return nothing
+end
+
+
+# Starting from 0
+tt_uniform::Vector = (0:param.blk_size_osr-1) .+ prev_nui/2*param.osr
 ```
 
+This creates `tt_Vext` starting from `(n-1)*osr`, which means:
+
+- First segment: `0*osr + offset` to `1*osr + offset` = **starts at 0**
+- Second segment: `1*osr + offset` to `2*osr + offset`
+- etc.
+
+`tt_uniform` must **align with this same time scale** for interpolation to work correctly.
+
+Starting from **0** ensures `tt_uniform` aligns with the OSR sample grid and matches the time values in `tt_Vext` for correct interpolation.
+
+
+
+---
+
+
+
+```julia
+function drv_add_jitter!(drv, Vfir)
+
+    drv.last_sj_phi = drv_jitter_Δt!(Δtt;)
+
+    Vext[eachindex(V_prev_nui)] .= V_prev_nui			# prev_nui*osr
+    Vext[lastindex(V_prev_nui)+1:end] .= Vfir			# blk_size*osr
+    Δtt_ext[eachindex(Δtt_prev_nui)] .= Δtt_prev_nui	# prev_nui + 1
+    Δtt_ext[lastindex(Δtt_prev_nui)+1:end] .= Δtt		# blk_size
+
+    drv_jitter_tvec!(tt_Vext, Δtt_ext, osr)
+
+    drv_interp_jitter!(Vfir, tt_Vext, Vext, tt_uniform)
+    return nothing
+end
+```
+
+In each outer loop, `Δtt` and `Vfir` are created (size `blk_size`) and then copied into their respective extended buffers, `Δtt_ext` and `Vext`.
+
+![tx_view.drawio](link-mdl/tx_view.drawio.svg)
+
+
+
+
+
 ![tt_uniform.drawio](link-mdl/tt_uniform.drawio.svg)
+
+
 
 
 ---
@@ -879,7 +836,7 @@ $$
 
 ***sampler***
 
-
+*TODO* &#128197;
 
 
 
@@ -896,7 +853,7 @@ $$
 ![image-20260329234042295](link-mdl/image-20260329234042295.png)
 
 ```julia
-## pseudocode
+## pseudo-code
 
 ## outter loop block 
 run_blk_iter(trx, ++0, nblk, sim_blk) begin
@@ -1647,6 +1604,29 @@ make install
 function int2bits(num, nbit)
 	return [Bool((num>>k)%2) for k in nbit-1:-1:0]
 end
+```
+
+
+
+### generate PAM symbols
+
+> here *Big Endian*
+
+```julia
+	#generate PAM symbols
+    fill!(So, zero(Float64)) #reset So to all 0
+    for n = 1:bits_per_sym
+        @. So = So + 2^(bits_per_sym-n)*So_bits[n:bits_per_sym:end]
+    end
+```
+
+```julia
+function int2bits(num, nbit)
+    return [Bool((num>>k)%2) for k in nbit-1:-1:0]
+end
+
+
+ Si_bits .= vec(stack(int2bits.(Si, bits_per_sym)))
 ```
 
 

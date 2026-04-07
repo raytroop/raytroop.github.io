@@ -834,9 +834,54 @@ $$
 
 ---
 
-***sampler***
+***sampler & rx Clkgen-PI***
 
-*TODO* &#128197;
+```julia
+@kwdef mutable struct Splr
+    ir::Vector{Float64}
+
+    Vo_conv::Vector = zeros(param.blk_size_osr+lastindex(ir)-1)
+    Vo = @views Vo_conv[1:param.blk_size_osr]
+    Vo_mem = @views Vo_conv[param.blk_size_osr+1:end]
+
+    prev_nui = 16
+    Vext::Vector = zeros(prev_nui*param.osr+param.blk_size_osr)
+    V_prev_nui = @views Vext[end-prev_nui*param.osr+1:end]
+
+	# tt_Vext is constant
+    tt_Vext = -prev_nui/2*param.osr:length(Vext)-prev_nui/2*param.osr-1
+	itp_Vext = nothing
+
+    So = CircularBuffer{Float64}(param.blk_size)
+    So_subblk::Vector = zeros(param.subblk_size)
+end
+
+
+@kwdef mutable struct Clkgen
+    const param::Param
+
+    nphases::Int8
+    rj = 0
+    skews = zeros(nphases)
+
+    pi_res = 8
+    pi_max_code = 2^pi_res-1
+    pi_ui_cover = 4
+    pi_codes_per_ui = 2^pi_res/pi_ui_cover
+    pi_nonlin_lut = zeros(2^pi_res) #introduce INL here
+    pi_code_prev = 0
+    pi_wrap_ui = 0
+    pi_wrap_ui_Δcode = pi_max_code-10
+
+    Φo = CircularBuffer{Float64}(param.blk_size)
+    Φo_subblk::Vector = zeros(param.subblk_size)
+
+end
+```
+
+`pi_ui_cover` models a real-world phase interpolator characteristic: the total number of unit intervals that the PI's full digital code range (0 to 2^`pi_res`−1) can cover.
+
+
 
 
 

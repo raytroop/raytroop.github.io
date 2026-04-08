@@ -336,13 +336,50 @@ end
 - `x, y` (optional) following `do` are the **arguments** the anonymous function receives.
 - `end` closes the block
 
+---
 
+`CircularBuffer`
+
+| Feature            | `Vector` (Standard)             | `CircularBuffer` (DataStructures.jl) |
+| :----------------- | :------------------------------ | :----------------------------------- |
+| **Push/Pop Front** | $O(n)$ (Shifts all elements)    | $O(1)$ (Updates head pointer)        |
+| **Push/Pop Back**  | $O(1)$ (Amortized)              | $O(1)$                               |
+| **Random Access**  | $O(1)$ (Direct)                 | $O(1)$ (With index wrapping logic)   |
+| **Capacity**       | **Dynamic**: Grows as needed    | **Fixed**: Initialized at set size   |
+| **Overflow**       | Reallocates memory              | **Overwrites** the oldest data       |
+| **Memory Layout**  | Contiguous                      | Contiguous (internally wraps)        |
+| **Best Use Case**  | General collections / Appending | Sliding windows / Real-time buffers  |
+
+```julia
+using DataStructures
+
+# Initialize a CircularBuffer of type Int with capacity 3
+cb = CircularBuffer{Int}(3)
+
+# Add elements
+push!(cb, 1)        # [1]
+push!(cb, 2)        # [1, 2]
+append!(cb, [3, 4]) # [2, 3, 4] (1 is overwritten because capacity is 3)
+
+# Add to the front
+pushfirst!(cb, 0)   # [0, 2, 3] (4 is overwritten)
+```
+
+
+
+- **`push!(cb, item)`**: Adds a single item to the back of the buffer. If the buffer is at its capacity, the item at the front (the oldest) is removed to make room.
+- **`append!(cb, collection)`**: Adds multiple items from another collection to the back of the buffer. This is essentially a shorthand for calling `push!` on each element of the collection.
+
+| Feature    | `push!`                            | `append!`                           |
+| :--------- | :--------------------------------- | :---------------------------------- |
+| **Input**  | A single **item**                  | A **collection** of items           |
+| **Action** | Adds one element as a single entry | Unpacks all elements from the input |
 
 ---
 
 ***`using` vs `import`***
 
-that’s the difference between using and import - the former brings all exported names into scope, while the latter only brings NiceStuff (the module identifier) into scope.
+that’s the difference between `using` and `import` - the former brings all exported names into scope, while the latter only brings NiceStuff (the module identifier) into scope.
 
 > [[https://discourse.julialang.org/t/difference-between-include-use-and-import/65918/5](https://discourse.julialang.org/t/difference-between-include-use-and-import/65918/5)]
 

@@ -166,6 +166,14 @@ The root cause of the delay mismatch is related to *how parasitic extraction too
 
 
 
+## High-k Metal Gate (HKMG)
+
+> [[Google AI Mode](https://share.google/aimode/QXRFPfTBeTsXdKPNa)]
+
+![image-20260410003516551](dfm-layout/image-20260410003516551.png)
+
+
+
 
 ## STRAP
 

@@ -532,6 +532,8 @@ noting $\omega_{p1}\lt \omega_z \lt \omega_{p2}$
 
 ## Random offset
 
+> Art Zirger, Random Offset in CMOS IC Design [[https://designers-guide.org/forum/Attachments/mismatch_presentation.pdf](https://designers-guide.org/forum/Attachments/mismatch_presentation.pdf)]
+
 The dependence of offset voltage and current mismatches upon the overdrive voltage is similar to our
 observations for corresponding *noise quantities*
 

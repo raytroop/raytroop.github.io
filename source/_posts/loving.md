@@ -453,6 +453,20 @@ https://www.zhihu.com/question/635670252/answer/67729569430
 
 
 ```
+阿然:
+    This isn't "curiosity is stronger than love", 
+    this is "if you really love someone, you'll do what it takes to make them feel it"
+
+
+---
+https://tinyurl.com/dd4amx5m
+```
+
+
+
+
+
+```
 从这个角度来说，爱情之所以能被推崇至一个极高的位置，在于它并非被动地获得，而是主动地去创造。从这个层面上来说，它太考验一个人的心理素质（身心健康）了。
 
 当我们觉得自己不被爱，不被重视，不讨人喜欢的时候，恰恰说明一个问题：我们不会爱（缺乏爱的能力）。

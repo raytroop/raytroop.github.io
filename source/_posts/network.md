@@ -383,6 +383,10 @@ writeva(hfit, 'channel_32poles.va');
 
 *TODO* &#128197;
 
+## reference impedance conversion
+
+*TODO* &#128197;
+
 ## Reading S-parameters
 
 > teledynelecroy. Reading S-parameters [[https://blog.teledynelecroy.com/2020/05/](https://blog.teledynelecroy.com/2020/05/)]

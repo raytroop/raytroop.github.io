@@ -144,7 +144,11 @@ Cu-pillar bumping is a next-generation flip chip interconnection between chip & 
 
 
 
-## Why Your Symmetric Layouts Are Showing Mismatches in SPICE Simulations
+
+
+
+
+## Symmetric Layouts Are Showing Mismatches in SPICE Simulations
 
 > [[https://www.ansys.com/blog/symmetric-layouts-showing-mismatches-spice-simulations](https://www.ansys.com/blog/symmetric-layouts-showing-mismatches-spice-simulations)]
 
@@ -482,6 +486,14 @@ Gate = (ALD MG stack to set $\Phi_M$)+(metal fill to reduce RG)
 
 ![image-20251213104103450](dfm-layout/image-20251213104103450.png)
 
+###  Layout-dependent aging behaviors
+
+> Xiaoqing Xu, Arm Inc, ICCAD 2017 Tutorial: Standard Cell Design and Optimization Methodology for ASAP7 PDK [[https://developer.arm.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-37-98/0160.iccad2017_5F00_asap7_5F00_library.pdf](https://developer.arm.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-37-98/0160.iccad2017_5F00_asap7_5F00_library.pdf)]
+
+![image-20260409232220531](dfm-layout/image-20260409232220531.png)
+
+
+
 ## Matching
 
 > Aleksandr Sidun. Matching patterns in layout [[https://analoghub.ie/category/Layout/article/layoutMatchingPatterns](https://analoghub.ie/category/Layout/article/layoutMatchingPatterns)]
@@ -668,6 +680,18 @@ potential leakage: **channel leakage (S to D)**; **junction leakage (S/D to bulk
 ![Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP).](dfm-layout/imageurl=%252Fsites%252Fdefault%252Ffiles%252F2022-02%252FFigure%201%20-%20Logic%20standard%20cell%20scaling.jpeg)
 
 *Naoto Horiguchi. Entering the Nanosheet Transistor Era  [[link](https://www.imec-int.com/en/articles/entering-nanosheet-transistor-era-0)]*
+
+
+
+---
+
+> Scotten Jones, Can TSMC Maintain Their Process Technology Lead [[https://semiwiki.com/semiconductor-manufacturers/intel/285192-can-tsmc-maintain-their-process-technology-lead/](https://semiwiki.com/semiconductor-manufacturers/intel/285192-can-tsmc-maintain-their-process-technology-lead/)]
+
+![image-20260409230447038](dfm-layout/image-20260409230447038.png)
+
+
+
+
 
 ### SAC & SAGC
 
@@ -895,6 +919,17 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
 ## MIMCAP dummy
 
 add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
+
+
+
+
+
+##  Track Height of Standard Cell
+
+> Cheng, Chung-Kuan, Byeonggon Kang, Bill Lin and Yucheng Wang. “Invited: Scaling Standard Cell Layout Using Track Height Compression and Design Technology Co-optimization.” *Proceedings of the 2025 International Symposium on Physical Design* (2025) [[https://ispd.cc/ispd2026/slides/2025/protected/2_2_slides.pdf](https://ispd.cc/ispd2026/slides/2025/protected/2_2_slides.pdf)]
+
+![image-20260409231552187](dfm-layout/image-20260409231552187.png)
+
 
 
 ## Inductor shorting check

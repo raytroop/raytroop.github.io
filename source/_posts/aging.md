@@ -234,6 +234,8 @@ HCI model can reproduce the saturation effect if stress time is long enough
 
 ## Gate Oxide Integrity (GOI)
 
+> 藍色天空, 浅谈 Gate Oxide Integrity（GOI）[[https://www.kaixinspace.com/gate-oxide-integrity/](https://www.kaixinspace.com/gate-oxide-integrity/)]
+
 ![image-20250730180005931](aging/image-20250730180005931.png)
 
 

@@ -940,6 +940,12 @@ add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
 
 
 
+---
+
+> 後藤 弘茂 (Hiroshige Goto)2017年2月8日 06:00, TSMCがISSCCで5nmプロセスまでのプロセス技術を展望 [[https://pc.watch.impress.co.jp/docs/column/kaigai/1043026.html](https://pc.watch.impress.co.jp/docs/column/kaigai/1043026.html)]
+
+![img](dfm-layout/4.jpg)
+
 ## Inductor shorting check
 
 LVS can help checking unintended shorting upper/lower curls by via, covering inductor routing with **metal res**

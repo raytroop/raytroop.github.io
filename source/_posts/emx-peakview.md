@@ -788,6 +788,6 @@ Tips on Specifying Ports in EMX
 
 Using 'Cadence pins' as ports with access direction in EMX simulations
 
-EMX Virtuoso interface tutorial [[https://picture.iczhiku.com/resource/eetop/WyIFKleSLTRIuvCb.pdf](https://picture.iczhiku.com/resource/eetop/WyIFKleSLTRIuvCb.pdf)]
+EMX miscellaneous features [[https://picture.iczhiku.com/resource/eetop/WyIFKleSLTRIuvCb.pdf](https://picture.iczhiku.com/resource/eetop/WyIFKleSLTRIuvCb.pdf)]
 
 Cadence Rapid Adoption Kit (RAK). Analysis of a Figure-Eight Inductor with EMX 

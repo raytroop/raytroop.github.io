@@ -140,9 +140,9 @@ Cu-pillar bumping is a next-generation flip chip interconnection between chip & 
 
 > TSMC Ltd.  US12199034B2 Via rail structure [[https://patents.google.com/patent/US12199034B2](https://patents.google.com/patent/US12199034B2)]
 
-*TODO* &#128197;
-
-
+- contact to source/drain MD for resistance reduction
+- fully enclosed by M0
+- electrically **insulated** from MG
 
 
 
@@ -1032,3 +1032,4 @@ A. L. S. Loke, Migrating Analog/Mixed-Signal Designs to FinFET Alvin Loke / Qual
 
 Lattice Semiconductor, 16FFC Process Technology Introduction December 9th, 2021[[pdf](https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/HR1000000009.pdf)]
 
+Cliff Hou, ISSCC 2017: P1:  A Smart Design Paradigm for Smart Chips [[https://youtu.be/tBSrgwUQg9E](https://youtu.be/tBSrgwUQg9E)]

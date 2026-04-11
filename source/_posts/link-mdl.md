@@ -834,7 +834,108 @@ $$
 
 ---
 
-***sampler & rx Clkgen-PI***
+***Clkgen-PI***
+
+```julia
+@kwdef mutable struct Clkgen
+
+    nphases::Int8
+
+    pi_res = 8
+    pi_max_code = 2^pi_res-1
+    pi_ui_cover = 4
+    pi_codes_per_ui = 2^pi_res/pi_ui_cover
+    pi_nonlin_lut = zeros(2^pi_res) #introduce INL here
+    pi_code_prev = 0
+    pi_wrap_ui = 0
+    pi_wrap_ui_Δcode = pi_max_code-10
+
+end
+```
+
+
+
+| Parameter          | Default          | Meaning                          |
+| ------------------ | ---------------- | -------------------------------- |
+| `pi_res`           | `8`              | PI has 8-bit resolution          |
+| `pi_max_code`      | `2^8 - 1 = 255`  | Code range is 0–255              |
+| `pi_ui_cover`      | `4`              | The full 256 codes span **4 UI** |
+| `pi_codes_per_ui`  | `2^8 / 4 = 64`   | **64 codes per UI**              |
+| `pi_wrap_ui_Δcode` | `255 - 10 = 245` | Wrap detection threshold         |
+| `pi_wrap_ui`       | `0`              | Starts with zero wraps           |
+| `pi_code_prev`     | `0`              | Previous PI code starts at 0     |
+
+The margin of **10** (`pi_max_code - 10`) ensures that even if the CDR makes a moderately large step (up to ±10 codes), it won't be mistaken for a wrap. This is safe as long as the CDR loop bandwidth is low enough that per-update code changes stay well below 10
+
+```julia
+function clkgen_pi_itp_top!(clkgen; pi_code)
+
+    Δpi_code = pi_code-pi_code_prev
+    if abs(Δpi_code) > pi_wrap_ui_Δcode
+        pi_wrap_ui -= sign(Δpi_code)*pi_ui_cover
+    end
+
+    Φ0 = osr*(pi_wrap_ui + (pi_code + pi_nonlin_lut[pi_code+1])/pi_codes_per_ui)
+    Φstart = (cur_subblk-1)*subblk_size*osr
+    Φnom = Φstart:osr:Φstart+(subblk_size-1)*osr
+    Φskew = kron(ones(Int(subblk_size/nphases)), skews/tui*osr)
+    Φrj = rj/tui*osr*randn(subblk_size)
+
+    @. clkgen.Φo_subblk = Φ0 + Φnom + Φskew + Φrj
+
+end
+```
+
+How Wrap Detection Works
+
+```
+PI code:   0 ---------> 255 | 0 ---------> 255 | 0 ---> ...
+           ╰── 4 UI ──╯     ╰── 4 UI ──╯
+
+Example wrap-forward:  pi_code: 253 → 2  (Δ = -251, |Δ| > 245)
+  → pi_wrap_ui += pi_ui_cover (+4 UI)
+
+Example wrap-backward: pi_code: 2 → 253  (Δ = +251, |Δ| > 245)
+  → pi_wrap_ui -= pi_ui_cover (-4 UI)
+```
+
+
+
+| Variable     | Role                                                         |
+| ------------ | ------------------------------------------------------------ |
+| `pi_wrap_ui` | Accumulated wrap count in UI — keeps `Φ0` continuous across wraps |
+| `Φ0`         | PI-controlled phase offset (CDR tracking loop output)        |
+
+
+
+```julia
+function cdr_top!(cdr, Sd, Se)
+
+    for n = findall(eslc_nvec.!=0)
+        if Sd_val[n:n+2] in filt_patterns
+            vote = sign(Se[n][1].-0.5)*sign(Sd_val[n]-Sd_val[n+2])
+            ki_accum += ki*vote
+            pd_accum += pd_gain*(kp*vote + ki_accum)
+        end
+    end
+
+    cdr.pd_accum = (pd_accum < 0) ? pi_bnd + pd_accum : (pd_accum >= pi_bnd) ? pd_accum - pi_bnd : pd_accum
+    cdr.pi_code = Int(floor(cdr.pd_accum))
+
+end
+```
+
+Wraps `pd_accum` into `[0, pi_bnd)` (i.e., `[0, 256)` for 8-bit PI), then floors it to produce the integer `pi_code` that feeds back to `clkgen_pi_itp_top!`. This is the **modular accumulator** — the same ***wrapping*** that `pi_wrap_ui` in the clock generator ***unwraps***.
+
+
+
+---
+
+---
+
+***sampler***
+
+
 
 ```julia
 @kwdef mutable struct Splr
@@ -855,31 +956,7 @@ $$
     So = CircularBuffer{Float64}(param.blk_size)
     So_subblk::Vector = zeros(param.subblk_size)
 end
-
-
-@kwdef mutable struct Clkgen
-    const param::Param
-
-    nphases::Int8
-    rj = 0
-    skews = zeros(nphases)
-
-    pi_res = 8
-    pi_max_code = 2^pi_res-1
-    pi_ui_cover = 4
-    pi_codes_per_ui = 2^pi_res/pi_ui_cover
-    pi_nonlin_lut = zeros(2^pi_res) #introduce INL here
-    pi_code_prev = 0
-    pi_wrap_ui = 0
-    pi_wrap_ui_Δcode = pi_max_code-10
-
-    Φo = CircularBuffer{Float64}(param.blk_size)
-    Φo_subblk::Vector = zeros(param.subblk_size)
-
-end
 ```
-
-`pi_ui_cover` models a real-world phase interpolator characteristic: the total number of unit intervals that the PI's full digital code range (0 to 2^`pi_res`−1) can cover.
 
 
 

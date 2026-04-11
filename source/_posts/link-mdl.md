@@ -1133,10 +1133,15 @@ n     │ n%4+1 │ N_per_phi[n%4+1] │ zeros(Bool, ...)
 
 ---
 
-***elastic buffer layer between block size and sub-block size to model frequency offsets of TRX***
-
+***elastic buffer to model frequency offsets of TRX***
 
 *TODO* &#128197;
+
+- TX **Fixed block size**
+- RX sub-block keep **symbol count fixed** but let **sample-time span vary**
+- **dynamic sub-block count**
+
+> A sub-block should usually consume a **fixed number of RX symbols** because the downstream RX logic is organized around symbol-domain operations
 
 
 

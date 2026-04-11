@@ -1145,6 +1145,12 @@ n     │ n%4+1 │ N_per_phi[n%4+1] │ zeros(Bool, ...)
 
 
 
+`f_rx = f_tx * (1 + ppm)`
+
+RX **sample spacing** in TX-grid units `osr_rx = osr_tx / (1 + ppm)`
+
+
+
 ### Sam Palermo's
 
 continuous time filter (channel, ctle); impulse response

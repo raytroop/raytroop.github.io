@@ -82,14 +82,38 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 ## Tline Approximation
 
 > [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf)]
->
-> Eric Bogatin. Pop Quiz: When is an Interconnect Not a Transmission Line? [[https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line](https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line)]
 
 ![image-20250817105056325](xtalk/image-20250817105056325.png)
+
+### N-section LC Model
+
+> Eric Bogatin. Pop Quiz: When is an Interconnect Not a Transmission Line? [[https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line](https://www.signalintegrityjournal.com/blogs/4-eric-bogatin-signal-integrity-journal-technical-editor/post/265-pop-quiz-when-is-an-interconnect-not-a-transmission-line)]
 
 ![image-20250817105203031](xtalk/image-20250817105203031.png)![image-20250817105308602](xtalk/image-20250817105308602.png)
 
 ![image-20260115210350617](xtalk/image-20260115210350617.png)
+
+### RLGC Extraction
+
+> [[Google AI Mode](https://share.google/aimode/ADUTnt4oquG7ll8RX)]
+
+**RLGC** can be extracted from measurements of a transmission line's input impedance under **open-circuit** and **short-circuit** terminations at a specific frequency
+
+![image-20260412110152719](xtalk/image-20260412110152719.png)
+
+---
+
+> Transmission Line [[pdf](http://ael.chungbuk.ac.kr/lectures/undergraduate/em-env/%EA%B0%95%EC%9D%98%EC%9E%90%EB%A3%8C/transmission_line/LN-transmission%20line.pdf)]
+
+![image-20260412110316910](xtalk/image-20260412110316910.png)
+
+
+
+
+
+
+
+
 
 ## Decoupling Capacitor
 

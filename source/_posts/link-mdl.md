@@ -906,7 +906,7 @@ Example wrap-backward: pi_code: 2 → 253  (Δ = +251, |Δ| > 245)
 | `pi_wrap_ui` | Accumulated wrap count in UI — keeps `Φ0` continuous across wraps |
 | `Φ0`         | PI-controlled phase offset (CDR tracking loop output)        |
 
-
+`pi_wrap_ui` accumulates full UI wraps across blocks. Combined with `Φstart = (cur_subblk-1)*subblk_size*osr` (the sub-block offset), this means `Φo_subblk` coordinates are in the **global** sample coordinate system relative to the start of the current block — which is exactly what `tt_Vext`'s centered coordinate system expects
 
 ```julia
 function cdr_top!(cdr, Sd, Se)
@@ -962,9 +962,35 @@ end
 
 
 
----
+This is where the two approaches are **inverted**:
 
----
+|               | **Drv** (TX jitter)           | **Splr** (RX sampling)                    |
+| ------------- | ----------------------------- | ----------------------------------------- |
+| `tt_Vext`     | **Non-uniform** (jittered)    | **Uniform** (fixed)                       |
+| `Vext` values | Uniform voltage samples       | Uniform voltage samples                   |
+| Query points  | `tt_uniform` — **fixed** grid | `Φi` from CDR — **variable** clock phases |
+| Interpolation | Jittered-time → uniform-time  | Uniform-time → CDR-phase                  |
+| Direction     | **Resample onto sim grid**    | **Sample at recovered clock instants**    |
+
+`tt_uniform` is offset by `prev_nui/2 * osr` to land in the **center** of `Vext`, giving `prev_nui/2 = 2` UIs of headroom on each side for jitter excursions.
+
+```julia
+Φ = osr*(pi_wrap_ui + pi_code/pi_codes_per_ui) + Φnom + Φskew + Φrj
+```
+
+These `Φ` values are in the same coordinate system as `tt_Vext`. Because `tt_Vext` is centered (`-8*osr ... 8*osr + blk_size_osr - 1`), the nominal sampling phases at `0, osr, 2*osr, ...` fall right in the center of the buffer
+
+
+
+***Different `prev_nui` Sizes***
+
+|                   | **Drv**                                                 | **Splr**                                                     |
+| ----------------- | ------------------------------------------------------- | ------------------------------------------------------------ |
+| `prev_nui`        | **4**                                                   | **16**                                                       |
+| Headroom per side | 2 UIs                                                   | 8 UIs                                                        |
+| Reason            | TX jitter is bounded (DCD ≪ 1UI, RJ/SJ typically < 1UI) | CDR PI can accumulate large phase offsets over time (`pi_wrap_ui` multiples of 4 UI) |
+
+
 
 ***adaptation and CDR loop***
 

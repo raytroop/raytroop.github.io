@@ -2601,6 +2601,14 @@ We have to dare to be ourselves, however frightening or strange that self may pr
 
 
 ```
+How we spend our days is, of course, how we spend our lives
+
+— Annie Dillard
+```
+
+
+
+```
 人生不能像做菜，把所有的料都準備好了才下鍋。
 
 - 飲食男女

@@ -136,15 +136,19 @@ Cu-pillar bumping is a next-generation flip chip interconnection between chip & 
 
 ![image-20260227210516009](dfm-layout/image-20260227210516009.png)
 
-## VDR (via rail)
+
+
+## VDR (VD Rail)
 
 > TSMC Ltd.  US12199034B2 Via rail structure [[https://patents.google.com/patent/US12199034B2](https://patents.google.com/patent/US12199034B2)]
 
-- contact to source/drain MD for resistance reduction
+- contact to **source MD** for resistance reduction (to VDD or VSS)
 - fully enclosed by M0
 - electrically **insulated** from MG
 
+![image-20260413211254941](dfm-layout/image-20260413211254941.png)
 
+> Even VDR is overlap with MG (PO), they are not electrically connected
 
 
 

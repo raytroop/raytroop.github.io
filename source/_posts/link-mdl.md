@@ -927,6 +927,17 @@ end
 
 Wraps `pd_accum` into `[0, pi_bnd)` (i.e., `[0, 256)` for 8-bit PI), then floors it to produce the integer `pi_code` that feeds back to `clkgen_pi_itp_top!`. This is the **modular accumulator** — the same ***wrapping*** that `pi_wrap_ui` in the clock generator ***unwraps***.
 
+***Sign-Sign Mueller-Muller CDR*** - `cdr_top!`
+
+| pattern | main cursor               | Se (assuming $h_0=\operatorname{dLev}$) | vote                                |
+| ------- | ------------------------- | --------------------------------------- | ----------------------------------- |
+| 0**1**1 | $s_{011}=-h_1+h_0+h_{-1}$ | $\operatorname{sign}({-h_1+h_{-1}})$    | $\operatorname{sign}({h_1-h_{-1}})$ |
+| 1**1**0 | $s_{110}=h_1+h_0-h_{-1}$  | $\operatorname{sign}({h_1-h_{-1}})$     | $\operatorname{sign}({h_1-h_{-1}})$ |
+
+![cdr_adapt.drawio](link-mdl/cdr_adapt.drawio.svg)
+
+
+
 
 
 ---
@@ -1117,31 +1128,7 @@ end
 
 
 
-***Sign-Sign Mueller-Muller CDR*** - `cdr_top!`
 
-| pattern | main cursor               | Se (assuming $h_0=\operatorname{dLev}$) | vote                                |
-| ------- | ------------------------- | --------------------------------------- | ----------------------------------- |
-| 0**1**1 | $s_{011}=-h_1+h_0+h_{-1}$ | $\operatorname{sign}({-h_1+h_{-1}})$    | $\operatorname{sign}({h_1-h_{-1}})$ |
-| 1**1**0 | $s_{110}=h_1+h_0-h_{-1}$  | $\operatorname{sign}({h_1-h_{-1}})$     | $\operatorname{sign}({h_1-h_{-1}})$ |
-
-```julia
-function cdr_top!(cdr, Sd, Se)
-    pi_bnd = 2^pi_res
-    Sd_val = [Sd_prev; [sum(dvec) for dvec in Sd]]
-
-    for n = findall(eslc_nvec.!=0)
-        if Sd_val[n:n+2] in filt_patterns
-            vote = sign(Se[n][1].-0.5)*sign(Sd_val[n]-Sd_val[n+2])
-            ki_accum += ki*vote
-            pd_accum += pd_gain*(kp*vote + ki_accum)
-        end
-    end
-
-    cdr.Sd_prev = Sd_val[end]
-end
-```
-
-![cdr_adapt.drawio](link-mdl/cdr_adapt.drawio.svg)
 
 ***$\operatorname{dLev}$ adaptation***
 $$

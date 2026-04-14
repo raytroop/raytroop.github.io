@@ -231,6 +231,13 @@ $$
 
 
 
+---
+
+Pupalaikis, Peter. (2012). The Relationship Between Discrete-Frequency S-parameters and Continuous-Frequency Responses. [[pdf](https://www.researchgate.net/profile/Peter-Pupalaikis/publication/297707712_The_Relationship_Between_Discrete-Frequency_S-parameters_and_Continuous-Frequency_Responses/links/56e0912d08aee77a15fe9bb7/The-Relationship-Between-Discrete-Frequency-S-parameters-and-Continuous-Frequency-Responses.pdf)]
+
+
+
+
 ## Impulse Response from S-Parameters (channel)
 
 > David Banas. *A comparison of different techniques (i.e. - windowing, vector fitting, etc.) for extracting the impulse response from S-parameters.* [[https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main](https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main)]
@@ -386,6 +393,10 @@ writeva(hfit, 'channel_32poles.va');
 ## reference impedance conversion
 
 *TODO* &#128197;
+
+
+## Port Referencing in S-Parameters
+
 
 ## Reading S-parameters
 

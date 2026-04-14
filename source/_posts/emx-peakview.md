@@ -712,6 +712,12 @@ For accurate results from EM, the **current** in the model needs to flow in the 
 ![img](emx-peakview/areapin.png)
 
 
+## Port Referencing in S-Parameters
+
+> Peter J. Pupalaikis, DesignCon 2026: Port referencing in S-parameters - Critical Insights You Need to Know
+
+*TODO* &#128197;
+
 
 ## same Pin names in EMX
 

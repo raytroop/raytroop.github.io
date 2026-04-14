@@ -134,6 +134,12 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 
 
 
+
+
+
+
+
+
 ## reference
 
 John Swindle, *PCIe 1.1 Phy Design Considerations*
@@ -141,4 +147,6 @@ John Swindle, *PCIe 1.1 Phy Design Considerations*
 Hidehiro Toyoda, Shinji Nishimura, and Masato Shishikura, *PMD architecture with skew compensation mechanism for parallel link* [[https://www.ieee802.org/3/hssg/public/nov06/nishimura_01_1106.pdf](https://www.ieee802.org/3/hssg/public/nov06/nishimura_01_1106.pdf)]
 
 Kamesh Velmail, Samsung, *Challenges, Complexities and Advanced Verification Techniques in Stress Testing of Elastic Buffer in High Speed SERDES IPs* [[pdf](https://dvcon-proceedings.org/wp-content/uploads/challenges-complexities-and-advanced-verification-techniques-in-stress-testing-of-elastic-buffer-in-high-speed-serdes-ips-paper.pdf)]
+
+Marianne Nourzad (Intel), DesignCon 2022. Transmitter Jitter Measurement Methodologies for PAM-4 IOs
 

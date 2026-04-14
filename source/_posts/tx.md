@@ -422,11 +422,20 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 *TODO* &#128197;
 
-### PCIe Transmitter Equalization Preset Measurement
 
-> Christiaan Bil Intel, DesignCon2026, An Experimental Study of PCIe Transmitter Equalization Preset Measurement Methods for 64 and 128 GT/s PAM4 Signaling
+
+
+
+## Linear Fit Pulse Response (LFPR)
+
+> Christiaan Bil (Intel), DesignCon 2026. An Experimental Study of PCIe Transmitter Equalization Preset Measurement Methods for 64 and 128 GT/s PAM4 Signaling
+>
+> Dhruv Gupta, DesignCon 2026. PAM4 measurements through lossy channels – why oscilloscope CDR emulation matters
 
 *TODO* &#128197;
+
+
+
 
 
 ## reference

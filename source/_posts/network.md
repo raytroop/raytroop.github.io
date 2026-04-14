@@ -233,7 +233,11 @@ $$
 
 ---
 
-Pupalaikis, Peter. (2012). The Relationship Between Discrete-Frequency S-parameters and Continuous-Frequency Responses. [[pdf](https://www.researchgate.net/profile/Peter-Pupalaikis/publication/297707712_The_Relationship_Between_Discrete-Frequency_S-parameters_and_Continuous-Frequency_Responses/links/56e0912d08aee77a15fe9bb7/The-Relationship-Between-Discrete-Frequency-S-parameters-and-Continuous-Frequency-Responses.pdf)]
+> Pupalaikis, Peter. (2012). The Relationship Between Discrete-Frequency S-parameters and Continuous-Frequency Responses. [[pdf](https://www.researchgate.net/profile/Peter-Pupalaikis/publication/297707712_The_Relationship_Between_Discrete-Frequency_S-parameters_and_Continuous-Frequency_Responses/links/56e0912d08aee77a15fe9bb7/The-Relationship-Between-Discrete-Frequency-S-parameters-and-Continuous-Frequency-Responses.pdf)]
+
+![image-20260414184847583](network/image-20260414184847583.png)
+
+
 
 
 
@@ -395,7 +399,34 @@ writeva(hfit, 'channel_32poles.va');
 *TODO* &#128197;
 
 
-## Port Referencing in S-Parameters
+
+## Power Wave Equations
+
+> Peter J. Pupalaikis (Ciena). DesignCon 2026: *Port Referencing in S-Parameters – Critical Insights You Need to Know*
+
+![image-20260414191438505](network/image-20260414191438505.png)
+
+
+
+```
+Transmission Line Theory
+        │
+        ▼
+v = v⁺ + v⁻,  i = (v⁺ - v⁻)/Z0      ← Physical decomposition
+        │
+        ▼
+v⁺ = (v + iZ0)/2,  v⁻ = (v - iZ0)/2   ← Solve for forward/backward waves
+        │
+        ▼
+a = v⁺/√Z0,  b = v⁻/√Z0               ← Normalize so |a|² = power
+        │
+        ▼
+v = √Z0·(a+b),  i = (a-b)/√Z0          ← Invert to recover v and i
+```
+
+> ![image-20260414191720936](network/image-20260414191720936.png)
+
+
 
 
 ## Reading S-parameters

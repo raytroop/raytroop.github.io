@@ -1,5 +1,5 @@
 ---
-title: Single-Bit Response (SBR) & Double-Edge Response (DER)
+title: Statistical Signaling Analysis (SSA)
 date: 2023-09-23 11:09:07
 tags:
 categories:
@@ -9,23 +9,25 @@ mathjax: true
 
 Three fast time-domain system simulation techniques:
 
-- **single-bit response method**
-- **double-edge response method**
-- **multiple-edge response method**
+- **single-bit response method** (SBR)
+- **double-edge response method** (DER)
+- **multiple-edge response method** (MER)
+
+![image-20260415235834038](ssa/image-20260415235834038.png)
 
 
 
 ## Single-Bit Response (SBR) Method
 
-![img](sbr-der/Single+Pulse.gif)
+![img](ssa/Single+Pulse.gif)
 
 Overlapping portions of a pulse response from neighboring bits are referred to as intersymbol interference (ISI). A received waveform is formed by *superimposing*, in time, the pulse responses of each bit in the sequence, as illustrated in Figure 9, *assuming **symmetric** positive and negative pulses* are transmitted for 1s and 0s
 
-![image-20240824193208821](sbr-der/image-20240824193208821.png)
+![image-20240824193208821](ssa/image-20240824193208821.png)
 
 To avoid spurious glitches between consecutive ones, rising and falling edge responses shall be **symmetric**. This is the limitation of SBR method.
 
- Let $p(t)$ be the SBR of the channel, $t_s$ be the data sampling phase, $T$ be the bit time, $N_c$ is the number of UI in stored pulse response and $b_m$ be the $m$th transmitted symbol. The voltage seen by the receiver's data sampler at the $m$th data sample is determined by
+Let $p(t)$ be the SBR of the channel, $t_s$ be the data sampling phase, $T$ be the bit time, $N_c$ is the number of UI in stored pulse response and $b_m$ be the $m$th transmitted symbol. The voltage seen by the receiver's data sampler at the $m$th data sample is determined by
 $$
 y_m = \sum_{k=m-N_c+1}^{m}b_kp(t_s+(m-k)T)
 $$
@@ -33,13 +35,13 @@ where $b_k \in [0, 1]$ and $p(t) \ge 0$
 
 We always prepend $Nc-1$ 0s in random bit stream for consistency.
 
-![image-20220429112902281](sbr-der/image-20220429112902281.png)
+![image-20220429112902281](ssa/image-20220429112902281.png)
 
 For computation convenient, the pulse need to be positive. For differential signal and amplitude $V_{peak}$,  the peak to peak is $-V_{peak}$ to $+V_{peak}$. After pulse added by $V_{peak}$, peak to peak is $0$ to $+2V_{peak}$.
 
-![image-20220429154336080](sbr-der/image-20220429154336080.png)
+![image-20220429154336080](ssa/image-20220429154336080.png)
 
-![image-20220429154423247](sbr-der/image-20220429154423247.png)
+![image-20220429154423247](ssa/image-20220429154423247.png)
 
 ```matlab
 hold on;
@@ -74,11 +76,13 @@ xlabel('Time (\times Ts)');
 
 
 
-![image-20220429174330324](sbr-der/image-20220429174330324.png)
+![image-20220429174330324](ssa/image-20220429174330324.png)
 
 
 
-### another SBR example
+---
+
+***another SBR example***
 
 ```matlab
 A = zeros(10,21);
@@ -109,9 +113,9 @@ end
 stem(out)
 ```
 
-![143512636-0878e0fd-fe87-414c-9c73-52577eeb7593](sbr-der/143512636-0878e0fd-fe87-414c-9c73-52577eeb7593.jpg)
+![143512636-0878e0fd-fe87-414c-9c73-52577eeb7593](ssa/143512636-0878e0fd-fe87-414c-9c73-52577eeb7593.jpg)
 
-![143512677-ccefdf22-4e30-4e72-9220-bbe667671e79](sbr-der/143512677-ccefdf22-4e30-4e72-9220-bbe667671e79.png)
+![143512677-ccefdf22-4e30-4e72-9220-bbe667671e79](ssa/143512677-ccefdf22-4e30-4e72-9220-bbe667671e79.png)
 
 ## S-Parameter to Single Bit Response (SBR)
 
@@ -140,13 +144,13 @@ $r(t)$ and $f(t)$ are the rising and falling edge responses,respectively.  $V_{h
 
 We always prepend $Nc$ 0s in random bit stream for consistency.
 
-![image-20220429191941805](sbr-der/image-20220429191941805.png)
+![image-20220429191941805](ssa/image-20220429191941805.png)
 
-![der.drawio](sbr-der/der.drawio.svg)
+![der.drawio](ssa/der.drawio.svg)
 
-![image-20220430010336977](sbr-der/image-20220430010336977.png)
+![image-20220430010336977](ssa/image-20220430010336977.png)
 
-![image-20220430013715680](sbr-der/image-20220430013715680.png)
+![image-20220430013715680](ssa/image-20220430013715680.png)
 
 ```matlab
 figure(1)
@@ -206,8 +210,10 @@ T. C. Carusone, "Introduction to Digital I/O: Constraining I/O Power Consumption
 
 Oh, Kyung Suk Dan, and Xing Chao Chuck Yuan. High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting. Prentice Hall, 2011. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiGPFydIQAYdxVx.pdf)]
 
-Ren, Jihong and Kyung Suk Oh. "Multiple Edge Responses for Fast and Accurate System Simulations." *IEEE Transactions on Advanced Packaging* 31 (2008): 741-748.
+Ren, Jihong and Kyung Suk Oh. "Multiple Edge Responses for Fast and Accurate System Simulations." *IEEE Transactions on Advanced Packaging* 31 (2008) [[https://sci-hub.jp/10.1109/TADVP.2008.2002201](https://sci-hub.jp/10.1109/TADVP.2008.2002201)]
 
 Shi, Rui. "Off-chip wire distribution and signal analysis." (2008). [[pdf](https://escholarship.org/content/qt4mk8x7r2/qt4mk8x7r2.pdf)]
 
 X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 29, no. 7, pp. 1370-1378, July 2021, [[https://sci-hub.ru/10.1109/TVLSI.2021.3082208](https://sci-hub.ru/10.1109/TVLSI.2021.3082208)]
+
+Tingting Pang, DesignCon 2025: *Fast BER Analysis Technique for Next Generation Chiplet Simultaneous Bi-Directional Transceiver*

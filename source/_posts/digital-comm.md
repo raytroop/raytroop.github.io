@@ -13,8 +13,28 @@ mathjax: true
 > Equations for the Raised Cosine and Square-Root Raised Cosine Shapes [[https://engineering.purdue.edu/~ee538/SquareRootRaisedCosine.pdf](https://engineering.purdue.edu/~ee538/SquareRootRaisedCosine.pdf)]
 >
 > Pulse Shaping Filter [[https://wirelesspi.com/pulse-shaping-filter/](https://wirelesspi.com/pulse-shaping-filter/)]
+>
+> [[Google AI Mode](https://share.google/aimode/IKtc0YypCSLqwjILi)]
 
-*TODO* &#128197;
+![image-20260415222452201](digital-comm/image-20260415222452201.png)
+
+| Feature            | Raised Cosine (RC)                                           | Root Raised Cosine (RRC)                                   |
+| :----------------- | :----------------------------------------------------------- | :--------------------------------------------------------- |
+| **ISI Property**   | Satisfies Nyquist ISI criterion (zero crossings at $t = \pm nT$) | **Does not** satisfy ISI criterion on its own              |
+| **Zero Crossings** | Crosses zero at every integer multiple of $T$                | Zero crossings are **not** periodic at $T$                 |
+| **Usage**          | Resulting pulse after the whole system                       | Used at **both** transmitter and receiver (matched filter) |
+| **Decay Rate**     | Faster decay in the time domain                              | Slower decay compared to RC                                |
+| **Peak Value**     | Normalized to 1 at $t=0$                                     | Often normalized so that $\int |h(t)|^2 dt = 1$            |
+
+![image-20260415222534835](digital-comm/image-20260415222534835.png)
+
+
+
+---
+
+***Why Root Raised Cosine (RRC) Used at both transmitter and receiver ?***
+
+![image-20260415223127685](digital-comm/image-20260415223127685.png)
 
 
 

@@ -15,6 +15,10 @@ Three fast time-domain system simulation techniques:
 
 ![image-20260415235834038](ssa/image-20260415235834038.png)
 
+## Symmetric Rising and Falling Edges
+
+![image-20260416000620670](ssa/image-20260416000620670.png)
+
 
 
 ## Single-Bit Response (SBR) Method

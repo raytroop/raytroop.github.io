@@ -383,20 +383,69 @@ writeva(hfit, 'channel_32poles.va');
 
 ## Using S Parameters to Estimate Q
 
+> Jeff Walling. ECE 5984 Using S Parameters to Estimate Q [[https://youtu.be/PXgM6pGIRvk](https://youtu.be/PXgM6pGIRvk)]
+
 *TODO* &#128197;
 
 
 
-> Jeff Walling. ECE 5984 Using S Parameters to Estimate Q [[https://youtu.be/PXgM6pGIRvk](https://youtu.be/PXgM6pGIRvk)]
 
 
 ## Cascading S-Parameters
 
-*TODO* &#128197;
+> Sam Palermo, Lecture 6: S-Parameter Channel Examples [[https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_sparam_channels.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_sparam_channels.pdf)]
+>
+> Cascading S-Parameters in Plain English: Part 3: T-Parameters in Plain English [[http://thinkinitthrough.com/blogs/details/6](http://thinkinitthrough.com/blogs/details/6)]
 
-## reference impedance conversion
 
-*TODO* &#128197;
+
+S-parameters *by definition* require very specific control over the ports. But this breaks down when we chain multiple devices together
+
+![image-20260416221607706](network/image-20260416221607706.png)
+
+### Cascading with ABCD Matrix
+
+> aka. ***transmission matrix***
+
+![image-20260416222708985](network/image-20260416222708985.png)
+
+
+
+---
+
+![image-20260416215440442](network/image-20260416215440442.png)
+
+### Cascading with T-Matrix
+
+> aka. ***scattering transfer parameters***, ***T-Parameters***, ***transmission parameters***
+
+![image-20260416222803411](network/image-20260416222803411.png)
+
+When you cascade two networks by multiplying their T-matrices, you're implicitly assuming that **port 2 of network A and port 1 of network B share the same wave definitions** 
+
+![image-20260416231317349](network/image-20260416231317349.png)
+
+
+
+---
+
+![image-20260416222521366](network/image-20260416222521366.png)
+
+
+
+## S-parameter Renormalization
+
+> [[https://swb.skku.edu/emc/infromation.do?mode=download&articleNo=21913&attachNo=19783](https://swb.skku.edu/emc/infromation.do?mode=download&articleNo=21913&attachNo=19783)]
+
+![image-20260416234339248](network/image-20260416234339248.png)
+
+---
+
+>  Gustavo Blando, S-parameter Renormalization, The Art of Cheating [[https://www.signalintegrityjournal.com/articles/270-s-parameter-renormalization-the-art-of-cheating](https://www.signalintegrityjournal.com/articles/270-s-parameter-renormalization-the-art-of-cheating)]
+
+![image-20260416233512985](network/image-20260416233512985.png)
+
+
 
 
 
@@ -424,7 +473,7 @@ a = v⁺/√Z0,  b = v⁻/√Z0               ← Normalize so |a|² = power
 v = √Z0·(a+b),  i = (a-b)/√Z0          ← Invert to recover v and i
 ```
 
-> ![image-20260414191720936](network/image-20260414191720936.png)
+> **Z0 is a chosen reference impedance** (typically 50Ω), which is an **arbitrary normalization choice**. It does **not** have to equal the characteristic impedance of the transmission line
 
 
 

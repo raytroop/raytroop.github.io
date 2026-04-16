@@ -93,7 +93,7 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ![image-20260115210350617](xtalk/image-20260115210350617.png)
 
-### RLGC Extraction
+### RLGC by Open/Short Circuit
 
 > [[Google AI Mode](https://share.google/aimode/ADUTnt4oquG7ll8RX)]
 
@@ -107,9 +107,11 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ![image-20260412110316910](xtalk/image-20260412110316910.png)
 
+### param. extraction from ABCD matrix
 
+> Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
 
-
+![image-20260416212059482](xtalk/image-20260416212059482.png)
 
 
 

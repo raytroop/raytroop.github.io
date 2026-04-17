@@ -54,6 +54,40 @@ $$
 
 
 
+## Temperature Inversion
+
+> Adam Teman. Digital Integrated Circuits (83-313) Lecture 3: MOSFET Modeling [[pdf](https://uc5ef6957ffc8d70d258dd2b4dc6.dl-eu.dropboxusercontent.com/cd/0/inline2/C-xrnjX50PAf-mHWPvYePfswRmZi_CcwyLe221DB7-AA9Qf1cH93BJYExqRcbDmNYikLPdzcuc5AauX5CQ-3eTiVdS2bHg9i323Ak4VgZLS0-E1Qc47txnmfDj6wlD38oY-C4Aa-qGDzawPd7qCEBqXwPj3Ron9cPYE7wcSVkrduZ793af_9dvccruC9pOcIp7hY5nG8lEGpkcU_rK3NjL3KIMavV3GQhkzwx5SnGHBUaKDqCobhxs5Slmg0_5nhYhaIsXPLHi-R9-NKYmt2zGjEs_x0RIa3dpv-wbcwp_98xiotVbMOHtDFxxwdx2DRpDdJrSFBkkMvAzbFRtFYT3Z7UtcnwYX8dmG2n7qJEMvU_yI05JiEhffR1D9-ha37nH0/file)]
+
+![image-20260417220427008](insight/image-20260417220427008.png)
+
+
+
+![image-20260417221638635](insight/image-20260417221638635.png)
+
+---
+
+![image-20260417221835369](insight/image-20260417221835369.png)
+
+---
+
+---
+
+***Zero Temperature Coefficient (ZTC) Bias Points***
+
+>  M. Coelho *et al*., "Is There a ZTC Biasing Point in the Leading-Edge FET Intrinsic Gain gmrDS?," *2025 9th International Young Engineers Forum on Electrical and Computer Engineering (YEF-ECE)*, Caparica / Lisbon, Portugal, 2025
+>
+>  M. Coelho *et al*., "Analysis of the ZTC Bias Points in the FinFET Gate Capacitance and Transition Frequency," *2025 37th International Conference on Microelectronics (ICM)*, Cairo, Egypt, 2025, pp. 1-6, doi: 10.1109/ICM66518.2025.11322461
+
+there's a specific bias point where the MOSFET transition frequency (fT) becomes almost temperature‑independent
+
+
+
+![image-20231212195536754](insight/image-20231212195536754.png)
+
+
+
+
+
 ## CMRR (Common-Mode Properties)
 
 ![image-20251029215920630](insight/image-20251029215920630.png)
@@ -894,18 +928,6 @@ Defined as the frequency at which the **small-signal current gain** of a device 
 ---
 
 ![image-20250831165407595](insight/image-20250831165407595.png)
-
-##  ZTC Bias Points
-
->  M. Coelho *et al*., "Is There a ZTC Biasing Point in the Leading-Edge FET Intrinsic Gain gmrDS?," *2025 9th International Young Engineers Forum on Electrical and Computer Engineering (YEF-ECE)*, Caparica / Lisbon, Portugal, 2025
->
->  M. Coelho *et al*., "Analysis of the ZTC Bias Points in the FinFET Gate Capacitance and Transition Frequency," *2025 37th International Conference on Microelectronics (ICM)*, Cairo, Egypt, 2025, pp. 1-6, doi: 10.1109/ICM66518.2025.11322461
-
-there's a specific bias point where the MOSFET transition frequency (fT) becomes almost temperature‑independent
-
-
-
-![image-20231212195536754](insight/image-20231212195536754.png)
 
 
 

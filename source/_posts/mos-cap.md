@@ -188,7 +188,9 @@ channel resistance & gate resistance
 
 Aditya Varma Muppala. MOS Varactors | Oscillators 15 | MMIC 27 [[https://youtu.be/LYCLZPQvIz0](https://youtu.be/LYCLZPQvIz0)]
 
-R. L. Bunch and S. Raman, "Large-signal analysis of MOS varactors in CMOS -G/sub m/ LC VCOs," in IEEE Journal of Solid-State Circuits, vol. 38, no. 8, pp. 1325-1332, Aug. 2003, doi: 10.1109/JSSC.2003.814416.
+Adam Teman. Practice 7: CMOS Capacitance [[note](https://uc88e07b4a3835d8c0d3e2786c3e.dl-eu.dropboxusercontent.com/cd/0/inline2/C-zlIcjGeAbVbzJOEmJ9Dj8ZrpuKycgw5wWzDfxM6UOx09dIhQokP7tW3WK2mqCr3jCPl_Gr0yY6UoSnqphm3i5idrIn5NeBDPQKJWYKCc_9t-hGe-rJYLMcXLR8I3u4pf5Ef4X-gm7S1rCQd7sdoyZdIBWFlobeh7EukHXfeRtbH84bucc6ajjqnutC3Mi3h4tpR2wI7CpjJ68Njlb6PFldYrHxvG4KtJzYCw7Zti6dEo5UsN_4imC-z9lX8F7VOxSH4aVchw8yPb2fw5zBjAPYpgJsllythGQWH-jNfH-mRpjC9x_0kg0N1pcdLSsJ4ER0d5W8KyLiPj3c1BeDh34jJwiBQWQbvnlM9r3KDCux-rvURkoTS7MflM7CBrHoVQI/file),[problem](https://uc14eb8b192323ffbf669a703c6f.dl-eu.dropboxusercontent.com/cd/0/inline2/C-wv65-nC7NXNTkeFxsL_zmPCt5EAngIoomakzPv21RMsvDGdbIWJguQyUED6juxd4IxmgGWHrP7p1VSUHyq7Yl5Z1iEDheeZukStHuVSSQHd5CR9LIX8L-xSDYG_JBYJuI4Hb0XzEGbHD0bH7tML4j5GLQEG4CvaOGdHeOmHbZxcajQgnnj6h9qPUSyWyybVGjJErH_yrBRtZS_kKx0ZF72juP4WJ12s-HToW6FIFmvRphJpSiRNECm1tNfmJ7Uv0LLwG9Dqdw2EqJ3u8t0_DZT3hDrI-FkBfTPKOF0i3tBEJmmigiz9XhVY2r9_KhfDaGHOkOjlcrMG6T2YhLju31KOqLGM8KnmofDzINkfs9iPQM1v83rKh_tvzEV-2sa9gs/file)]
+
+R. L. Bunch and S. Raman, "Large-signal analysis of MOS varactors in CMOS -G/sub m/ LC VCOs," in IEEE Journal of Solid-State Circuits, vol. 38, no. 8, pp. 1325-1332, Aug. 2003 [[https://sci-hub.jp/10.1109/JSSC.2003.814416](https://sci-hub.jp/10.1109/JSSC.2003.814416)]
 
 T. Soorapanth, C. P. Yue, D. K. Shaeffer, T. I. Lee and S. S. Wong, "Analysis and optimization of accumulation-mode varactor for RF ICs," 1998 Symposium on VLSI Circuits. Digest of Technical Papers (Cat. No.98CH36215), 1998, pp. 32-33, doi: 10.1109/VLSIC.1998.687993. URL: [http://www-smirc.stanford.edu/papers/VLSI98s-chet.pdf](http://www-smirc.stanford.edu/papers/VLSI98s-chet.pdf)
 

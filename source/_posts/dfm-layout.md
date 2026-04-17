@@ -473,7 +473,7 @@ Since the well implant dopant (acceptor or donor) is the same type as the channe
 
 
 
-### Gate Cut Stress LDE
+### Gate Cut Stress
 
 ![image-20251010202621882](dfm-layout/image-20251010202621882.png)
 

@@ -172,10 +172,17 @@ The root cause of the delay mismatch is related to *how parasitic extraction too
 
 ## High-k Metal Gate (HKMG)
 
+> A.L.S. Loke, September 4, 2017: Analog/Mixed-Signal Design in FinFET Technologies [[https://indico.cern.ch/event/662048/attachments/1518454/2371032/2017_09_CERN_Loke1.pdf](https://indico.cern.ch/event/662048/attachments/1518454/2371032/2017_09_CERN_Loke1.pdf)]
+>
 > [[Google AI Mode](https://share.google/aimode/QXRFPfTBeTsXdKPNa)]
 
 ![image-20260410003516551](dfm-layout/image-20260410003516551.png)
 
+**Atomic Layer Deposition (ALD)** is critical for fabricating advanced FinFETs by enabling conformal, ultra-thin Metal Gate (MG) stacks
+
+---
+
+ polysilicon depletion effect (PDE)
 
 
 
@@ -476,7 +483,11 @@ Since the well implant dopant (acceptor or donor) is the same type as the channe
 
 > M. Hamaguchi et al., "New layout dependency in high-k/Metal Gate MOSFETs," 2011 International Electron Devices Meeting, Washington, DC, USA, 2011 [[https://sci-hub.st/10.1109/IEDM.2011.6131614](https://sci-hub.st/10.1109/IEDM.2011.6131614)]
 >
-> Alvin Loke. 2016 VLSI Circuits Short Courses – 2.2 Migrating Analog/Mixed-Signal Designs to FinFET Alvin Loke / Qualcomm [[pdf](https://picture.iczhiku.com/resource/eetop/sYIFPzErssDRkbnN.pdf)]
+> Alvin Loke. 2016 VLSI Circuits Short Courses – 2.2 Migrating Analog/Mixed-Signal Designs to FinFET Alvin Loke / Qualcomm [[pdf](https://www.researchgate.net/profile/Alvin-Loke-2/publication/304827522_Migrating_analogmixed-signal_designs_to_finFET/links/577bff6808aece6c20fccef3/Migrating-analog-mixed-signal-designs-to-finFET.pdf?_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6InB1YmxpY2F0aW9uIiwicGFnZSI6InB1YmxpY2F0aW9uIn19)]
+>
+> Z. -Y. Li, X. -J. Wang and Y. -L. Jiang, "Metal Boundary Effect Mitigation by HKMG Thermal Process Optimization in FinFET Integration Technology," in IEEE Transactions on Electron Devices, vol. 71, no. 4, pp. 2335-2341, April 2024
+>
+> Scotten Jones, IEDM 2017 – Controlling Threshold Voltage with Work Function Metals [[https://semiwiki.com/semiconductor-services/techinsights/7259-iedm-2017-controlling-threshold-voltage-with-work-function-metals/](https://semiwiki.com/semiconductor-services/techinsights/7259-iedm-2017-controlling-threshold-voltage-with-work-function-metals/)]
 
 Gate = (ALD MG stack to set $\Phi_M$)+(metal fill to reduce RG)
 

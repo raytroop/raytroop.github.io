@@ -144,13 +144,19 @@ $$
 
 ---
 
+> [[https://www.oldfriend.url.tw/Q3D/ansys_ch_Partial_Loop_Inductance.html](https://www.oldfriend.url.tw/Q3D/ansys_ch_Partial_Loop_Inductance.html)]
+
 ![image-20250602120913866](inductance/image-20250602120913866-1751987296814-45.png)
 
 ![img](inductance/30_Par03-1752499681539-2.jpg)
 
-> [[https://www.oldfriend.url.tw/Q3D/ansys_ch_Partial_Loop_Inductance.html](https://www.oldfriend.url.tw/Q3D/ansys_ch_Partial_Loop_Inductance.html)]
 
 
+---
+
+> Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
+
+![image-20260418113018549](inductance/image-20260418113018549.png)
 
 
 

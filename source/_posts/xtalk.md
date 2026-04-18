@@ -7,6 +7,12 @@ categories:
 mathjax: true
 ---
 
+## Hyperbolic Functions
+
+![image-20260418105248415](xtalk/image-20260418105248415.png)
+
+
+
 ## Electromagnetic coupling
 
 **Electric field coupling** (also called **capacitive coupling**) occurs when energy is coupled from one circuit to another through an **electric field**
@@ -107,13 +113,17 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ![image-20260412110316910](xtalk/image-20260412110316910.png)
 
+
+
 ### param. extraction from ABCD matrix
 
 > Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
 
 ![image-20260416212059482](xtalk/image-20260416212059482.png)
 
+for lossless T-line, $\gamma = j\beta$
 
+![image-20260418110304117](xtalk/image-20260418110304117.png)
 
 
 
@@ -133,8 +143,6 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 > Chapter 11 Layout and grounding [[http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf](http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf)]
 
 *TODO* 
-
-
 
 
 

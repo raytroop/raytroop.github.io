@@ -150,6 +150,87 @@ Cu-pillar bumping is a next-generation flip chip interconnection between chip & 
 
 > Even VDR is overlap with MG (PO), they are not electrically connected
 
+## MIM capacitor structure
+
+***HD MIM***: 2-layer MIM between Mtop and Mtop-1
+
+![image-20260418181600781](dfm-layout/image-20260418181600781.png)
+
+***flexable-high-density MiM capacitor (FHD-MIM)***: 2-layer MIM between ALRDL and Mtop
+
+***super-high-density MiM capacitor (SHD-MIM)*** : 3-layer MIM, between ALRDL and Mtop
+
+![img](dfm-layout/Fig.11.png)
+
+**SHP-*MiM*(super-high-performance metal-insulator-metal)**: N2 low-resistance redistribution layer (RDL) and super high-performance metal-insulator-metal (MiM) capacitors to further boost performance
+
+
+
+---
+
+---
+
+***MIMCAP dummy***
+
+add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
+
+
+
+## MOM capacitor structure
+
+> Qualcomm Inc, US10615113B2, Rotated metal-oxide-metal (RTMOM) capacitor [[pdf](https://patentimages.storage.googleapis.com/25/36/56/ebcc34fac0bcd6/US10615113.pdf)]
+
+***Finger Metal-Oxide-Metal capacitor (FMOM)***
+
+![image-20260418183131048](dfm-layout/image-20260418183131048.png)
+
+---
+
+---
+
+***Rotated Metal-Oxide-Metal capacirot (RTMOM)***
+
+Capacitors are not only formed between metal fingers in the same metal layer but also between different layers of metal
+
+![image-20260418184144462](dfm-layout/image-20260418184144462.png)
+
+> [[https://www.scribd.com/document/673418815/crtmom-rf-device-route-guidance-for-RF-application](https://www.scribd.com/document/673418815/crtmom-rf-device-route-guidance-for-RF-application)]
+
+![image-20260418194413941](dfm-layout/image-20260418194413941.png)
+
+![image-20260418195114593](dfm-layout/image-20260418195114593.png)
+
+
+
+---
+
+---
+
+> Yaghoobi, Majid & Yavari, Mohammad & Ghafoorifard, Hassan. (2019). A 17-to-24 GHz Low-Power Variable-Gain Low-Noise Amplifier in 65-nm CMOS for Phased-Array Receivers. Circuits, Systems, and Signal Processing. [[https://sci-hub.jp/10.1007/s00034-019-01169-z](https://sci-hub.jp/10.1007/s00034-019-01169-z)]
+
+five MOM capacitors of **interdigitated parallel wires (IPW)**, **woven**, **parallel stacked wires (PSW)**, **multi-layer sandwich (MLS)**, and **vertical bars (VB)**
+
+![image-20260418091056932](dfm-layout/image-20260418091056932.png)
+
+
+
+---
+
+---
+
+***wo_mx***
+
+Monte Carlo model:
+
+- $C_{pa}=C_{pa1}$, $C_{pb}=C_{pb1}$ for each iteration during *Process Variation*
+- different variation is applied to $C_{ab}$ and $C_{a1b1}$ each iteration during *Mismatch Variation*, though $C_{pa}$, $C_{pb}$, $C_{pa1}$ and $C_{pb1}$ remain constant
+
+![image-20230220230434891](dfm-layout/image-20230220230434891.png)
+
+![image-20230220230331505](dfm-layout/image-20230220230331505.png)
+
+
+
 
 
 ## Symmetric Layouts Are Showing Mismatches in SPICE Simulations
@@ -506,11 +587,25 @@ The overall effect on mobility is dominated by the **longitudinal** component, a
 >
 > Scotten Jones, IEDM 2017 – Controlling Threshold Voltage with Work Function Metals [[https://semiwiki.com/semiconductor-services/techinsights/7259-iedm-2017-controlling-threshold-voltage-with-work-function-metals/](https://semiwiki.com/semiconductor-services/techinsights/7259-iedm-2017-controlling-threshold-voltage-with-work-function-metals/)]
 
-Gate = (ALD MG stack to set $\Phi_M$)+(metal fill to reduce RG)
+The Vt of a MOSFET is determined by:
+
+- Interface charges 
+- Gate dielectric (oxide) thickness
+- Channel doping
+  - The first is that doping the channel reduces mobility and performance. 
+  - Secondly, at very small dimensions there are only a few dopant atoms in the channels and small changes in the number of dopants referred to as random dopant fluctuations (RDF) can lead to variations in Vt
+- ***Work function***
+  - improves mobility in the channel and therefore performance and avoids RDF
+
+
 
 ![image-20251010201413941](dfm-layout/image-20251010201413941.png)
 
 > ![image-20251010201527553](dfm-layout/image-20251010201527553.png)
+>
+> ***Gate = (ALD MG stack to set $\Phi_M$)+(metal fill to reduce RG)***
+>
+> 
 >
 > ![image-20251010202132434](dfm-layout/image-20251010202132434.png)
 
@@ -970,52 +1065,6 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
 
 
 > Kevin Zheng. Metal Resistors – Your Unexpected Friend In Wire Management [[https://circuit-artists.com/metal-resistors-your-unexpected-friend-in-wire-management/](https://circuit-artists.com/metal-resistors-your-unexpected-friend-in-wire-management/)]
-
-
-## MIMCAP dummy
-
-add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
-
-
-
-## MOM capacitor structure
-
-> Qualcomm Inc, US10615113B2, Rotated metal-oxide-metal (RTMOM) capacitor [[pdf](https://patentimages.storage.googleapis.com/25/36/56/ebcc34fac0bcd6/US10615113.pdf)]
-
-Finger Metal-Oxide-Metal capacitor: **FMOM**
-
-Rotated Retal-Oxide-Metal capacirot: **RTMOM**
-
-
-
-
-
----
-
----
-
-> Yaghoobi, Majid & Yavari, Mohammad & Ghafoorifard, Hassan. (2019). A 17-to-24 GHz Low-Power Variable-Gain Low-Noise Amplifier in 65-nm CMOS for Phased-Array Receivers. Circuits, Systems, and Signal Processing. [[https://sci-hub.jp/10.1007/s00034-019-01169-z](https://sci-hub.jp/10.1007/s00034-019-01169-z)]
-
-five MOM capacitors of **interdigitated parallel wires (IPW)**, **woven**, **parallel stacked wires (PSW)**, **multi-layer sandwich (MLS)**, and **vertical bars (VB)**
-
-![image-20260418091056932](dfm-layout/image-20260418091056932.png)
-
-
-
----
-
----
-
-***wo_mx***
-
-Monte Carlo model:
-
-- $C_{pa}=C_{pa1}$, $C_{pb}=C_{pb1}$ for each iteration during *Process Variation*
-- different variation is applied to $C_{ab}$ and $C_{a1b1}$ each iteration during *Mismatch Variation*, though $C_{pa}$, $C_{pb}$, $C_{pa1}$ and $C_{pb1}$ remain constant
-
-![image-20230220230434891](dfm-layout/image-20230220230434891.png)
-
-![image-20230220230331505](dfm-layout/image-20230220230331505.png)
 
 
 

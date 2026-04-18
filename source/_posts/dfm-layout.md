@@ -404,7 +404,7 @@ off transistor split diffusion
 
 
 
-## LDE (Layout Dependent Effects)
+## Layout Dependent Effects (LDE)
 
 > Vladimír Stejskal, Jiří Slezák March, 2016. LOD Effect: Modeling and Implementation [[https://www.mos-ak.org/dresden_2016/presentations/T5_Stejskal_MOS-AK_Dresden_2016.pdf](https://www.mos-ak.org/dresden_2016/presentations/T5_Stejskal_MOS-AK_Dresden_2016.pdf)]
 >
@@ -427,6 +427,9 @@ off transistor split diffusion
 ### Length of Diffusion (LOD)
 
 > ***Shallow Trench Isolation Stress***
+>
+> - PODE LOD
+> - CPODE LOD
 
 **LOD key points:**
 
@@ -473,9 +476,23 @@ Since the well implant dopant (acceptor or donor) is the same type as the channe
 
 
 
-### Gate Cut Stress
+### Cut-Poly Effect (CPO)
 
 ![image-20251010202621882](dfm-layout/image-20251010202621882.png)
+
+
+
+### Poly Pitch Effect (PPE)
+
+> A. Rossoni, T. Brozek and Z. M. Kovacs-Vajna, "Impact of the Gate and Fin Space Variation on Stress Modulation and FinFET Transistor Performance," in *IEEE Transactions on Electron Devices*, vol. 73, no. 3, pp. 1120-1128, March 2026, doi: 10.1109/TED.2025.3648978
+
+![image-20260418082247148](dfm-layout/image-20260418082247148.png)
+
+![image-20260418082341803](dfm-layout/image-20260418082341803.png)
+
+![image-20260418082455270](dfm-layout/image-20260418082455270.png)
+
+The overall effect on mobility is dominated by the **longitudinal** component, as poly spacing variation
 
 
 
@@ -497,7 +514,11 @@ Gate = (ALD MG stack to set $\Phi_M$)+(metal fill to reduce RG)
 >
 > ![image-20251010202132434](dfm-layout/image-20251010202132434.png)
 
+---
 
+![image-20260418072845550](dfm-layout/image-20260418072845550.png)
+
+![image-20260418073008658](dfm-layout/image-20260418073008658.png)
 
 ### SCE (Short-Channel Effect)
 
@@ -630,6 +651,16 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 
 ![image-20221210145232826](dfm-layout/image-20221210145232826.png)
 
+---
+
+> A. Rossoni, T. Brozek, S. Saxena, R. Khamankar, L. Colalongo and Z. M. Kovacs-Vajna, "Stress-Related Local Layout Effects in FinFET Technology and Device Design Sensitivity," in *IEEE Transactions on Electron Devices*, vol. 72, no. 5, pp. 2109-2117, May 2025, doi: 10.1109/TED.2025.3561974
+
+![image-20260418074845244](dfm-layout/image-20260418074845244.png)
+
+
+
+
+
 ![image-20221210150847737](dfm-layout/image-20221210150847737.png)
 
 ![image-20240509205506112](dfm-layout/image-20240509205506112.png)
@@ -698,6 +729,8 @@ potential leakage: **channel leakage (S to D)**; **junction leakage (S/D to bulk
 
 ### Contacted-Poly-Pitch (CPP)
 
+> **Gate *pitch* (GP)**, a.k.a. **CPP (Contacted *Poly Pitch*)**
+>
 > Wider Contacted-Poly-Pitch allows wider MD and VD size, which help reduce MEOL IRdrop
 
 ![Schematic representation of a logic standard cell layout (CPP = contacted poly pitch, FP = fin pitch, MP = metal pitch; cell height = number of metal lines per cell x MP).](dfm-layout/imageurl=%252Fsites%252Fdefault%252Ffiles%252F2022-02%252FFigure%201%20-%20Logic%20standard%20cell%20scaling.jpeg)
@@ -942,6 +975,47 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
 ## MIMCAP dummy
 
 add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
+
+
+
+## MOM capacitor structure
+
+> Qualcomm Inc, US10615113B2, Rotated metal-oxide-metal (RTMOM) capacitor [[pdf](https://patentimages.storage.googleapis.com/25/36/56/ebcc34fac0bcd6/US10615113.pdf)]
+
+Finger Metal-Oxide-Metal capacitor: **FMOM**
+
+Rotated Retal-Oxide-Metal capacirot: **RTMOM**
+
+
+
+
+
+---
+
+---
+
+> Yaghoobi, Majid & Yavari, Mohammad & Ghafoorifard, Hassan. (2019). A 17-to-24 GHz Low-Power Variable-Gain Low-Noise Amplifier in 65-nm CMOS for Phased-Array Receivers. Circuits, Systems, and Signal Processing. [[https://sci-hub.jp/10.1007/s00034-019-01169-z](https://sci-hub.jp/10.1007/s00034-019-01169-z)]
+
+five MOM capacitors of **interdigitated parallel wires (IPW)**, **woven**, **parallel stacked wires (PSW)**, **multi-layer sandwich (MLS)**, and **vertical bars (VB)**
+
+![image-20260418091056932](dfm-layout/image-20260418091056932.png)
+
+
+
+---
+
+---
+
+***wo_mx***
+
+Monte Carlo model:
+
+- $C_{pa}=C_{pa1}$, $C_{pb}=C_{pb1}$ for each iteration during *Process Variation*
+- different variation is applied to $C_{ab}$ and $C_{a1b1}$ each iteration during *Mismatch Variation*, though $C_{pa}$, $C_{pb}$, $C_{pa1}$ and $C_{pb1}$ remain constant
+
+![image-20230220230434891](dfm-layout/image-20230220230434891.png)
+
+![image-20230220230331505](dfm-layout/image-20230220230331505.png)
 
 
 

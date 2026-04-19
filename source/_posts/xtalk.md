@@ -7,6 +7,8 @@ categories:
 mathjax: true
 ---
 
+![image-20260419092048803](xtalk/image-20260419092048803.png)
+
 ## Hyperbolic Functions
 
 ![image-20260418105248415](xtalk/image-20260418105248415.png)

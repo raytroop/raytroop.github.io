@@ -144,6 +144,22 @@ $$
 
 ![image-20250904204007383](link-misc/image-20250904204007383.png)
 
+
+
+---
+
+---
+
+> Mike Dudek Marvell, *Differential-mode to Common-mode and Common-mode to Differential-mode reflection specifications* [[https://www.ieee802.org/3/dj/public/25_07/dudek_3dj_01_2507.pdf](https://www.ieee802.org/3/dj/public/25_07/dudek_3dj_01_2507.pdf)]
+>
+> Ali Ghiasi Ghiasi Quantum LLC, *Differential, Conversion, and Common Mode Return Losses* [[https://www.ieee802.org/3/ck/public/20_07/ghiasi_3ck_03a_0720.pdf](https://www.ieee802.org/3/ck/public/20_07/ghiasi_3ck_03a_0720.pdf)]
+
+*TODO* &#128197;
+
+
+
+
+
 ## Single-Ended & Differential Signaling
 
 > [[https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf](https://web.stanford.edu/class/archive/ee/ee371/ee371.1066/handouts/markChapt.pdf)]

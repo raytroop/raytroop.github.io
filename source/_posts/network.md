@@ -180,6 +180,36 @@ simulator will read sp file's **Z0** parameter
 
 
 
+## Power Wave Equations
+
+> Peter J. Pupalaikis (Ciena). DesignCon 2026: *Port Referencing in S-Parameters – Critical Insights You Need to Know*
+
+![image-20260414191438505](network/image-20260414191438505.png)
+
+
+
+```
+Transmission Line Theory
+        │
+        ▼
+v = v⁺ + v⁻,  i = (v⁺ - v⁻)/Z0      ← Physical decomposition
+        │
+        ▼
+v⁺ = (v + iZ0)/2,  v⁻ = (v - iZ0)/2   ← Solve for forward/backward waves
+        │
+        ▼
+a = v⁺/√Z0,  b = v⁻/√Z0               ← Normalize so |a|² = power
+        │
+        ▼
+v = √Z0·(a+b),  i = (a-b)/√Z0          ← Invert to recover v and i
+```
+
+> **Z0 is a chosen reference impedance** (typically 50Ω), which is an **arbitrary normalization choice**. It does **not** have to equal the characteristic impedance of the transmission line
+
+
+
+
+
 ## Voltage scattering
 
 ![image-20250719072111526](network/image-20250719072111526.png)
@@ -381,16 +411,6 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
-## Using S Parameters to Estimate Q
-
-> Jeff Walling. ECE 5984 Using S Parameters to Estimate Q [[https://youtu.be/PXgM6pGIRvk](https://youtu.be/PXgM6pGIRvk)]
-
-*TODO* &#128197;
-
-
-
-
-
 ## Cascading S-Parameters
 
 > Sam Palermo, Lecture 6: S-Parameter Channel Examples [[https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_sparam_channels.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_sparam_channels.pdf)]
@@ -448,59 +468,6 @@ When you cascade two networks by multiplying their T-matrices, you're implicitly
 
 
 
-
-## Power Wave Equations
-
-> Peter J. Pupalaikis (Ciena). DesignCon 2026: *Port Referencing in S-Parameters – Critical Insights You Need to Know*
-
-![image-20260414191438505](network/image-20260414191438505.png)
-
-
-
-```
-Transmission Line Theory
-        │
-        ▼
-v = v⁺ + v⁻,  i = (v⁺ - v⁻)/Z0      ← Physical decomposition
-        │
-        ▼
-v⁺ = (v + iZ0)/2,  v⁻ = (v - iZ0)/2   ← Solve for forward/backward waves
-        │
-        ▼
-a = v⁺/√Z0,  b = v⁻/√Z0               ← Normalize so |a|² = power
-        │
-        ▼
-v = √Z0·(a+b),  i = (a-b)/√Z0          ← Invert to recover v and i
-```
-
-> **Z0 is a chosen reference impedance** (typically 50Ω), which is an **arbitrary normalization choice**. It does **not** have to equal the characteristic impedance of the transmission line
-
-
-
-
-## Reading S-parameters
-
-> teledynelecroy. Reading S-parameters [[https://blog.teledynelecroy.com/2020/05/](https://blog.teledynelecroy.com/2020/05/)]
->
-> keysight. How to Interpret Ripple in an S Parameters Measurement [[https://docs.keysight.com/kkbopen/how-to-interpret-ripple-in-an-s-parameters-measurement-849642201.html](https://docs.keysight.com/kkbopen/how-to-interpret-ripple-in-an-s-parameters-measurement-849642201.html)]
->
-> You Measured What? Four Must-Know Checks Before Trusting Your Trace S-Parameters [[https://www.signalintegrityjournal.com/articles/4083-you-measured-what-four-must-know-checks-before-trusting-your-trace-s-parameters](https://www.signalintegrityjournal.com/articles/4083-you-measured-what-four-must-know-checks-before-trusting-your-trace-s-parameters)]
-
-*TODO* &#128197;
-
-### Ripple in an S Parameters
-
-![image-20260110134112029](network/image-20260110134112029.png)
-
-![image-20260110134010253](network/image-20260110134010253.png)
-
-
-
-## S11 vs TDR
-
-> [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_04_Quach.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2004_04_Quach.pdf)]
-
-*TODO* &#128197;
 
 
 

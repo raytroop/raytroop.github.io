@@ -36,11 +36,19 @@ mathjax: true
 > [ADS: 1-10] TDR Impedance (Part 2) TDRインピーダンス解析 [[https://youtu.be/ACINktqpM50](https://youtu.be/ACINktqpM50)]
 >
 > ADS `tdr_sp_imped`
+>
+> Samtec, High Speed Characterization Report PCIEC-064-1000-EC-EM-P-85 [[https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf](https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf)]
+>
+> Jim Nadolny, Samtec. Technical Note Transformation of Samtec Connector Test Data For 85 ohm Differential Impedance Applications, [[https://suddendocs.samtec.com/notesandwhitepapers/technical-note_85ohm-reference-z-xform_web.pdf](https://suddendocs.samtec.com/notesandwhitepapers/technical-note_85ohm-reference-z-xform_web.pdf)]
+
+The impedance was mathematically derived from the $S_{ii}$ reflection coefficient S-parameter data using the `tdr_sp_imped()` measurement function within ADS
 
 *TODO* &#128197;
 
 
+## Time-Domain Transmission (TDT)
 
+*TODO* &#128197;
 
 
 ## Reading S-parameters
@@ -91,3 +99,4 @@ Tim Wang-Lee, DesignCon 2026 KEF: Mastering TDR and De-embedding Through Simulat
 
 Csaba SOOS, Signal and Power Integrity Design Practices [[https://indico.cern.ch/event/358837/attachments/714663/1930957/Signal_and_Power_Integrity_Practices.pdf](https://indico.cern.ch/event/358837/attachments/714663/1930957/Signal_and_Power_Integrity_Practices.pdf)]
 
+Sam Palermo, ECEN689: Special Topics in High-Speed Links Circuits and Systems Spring 2012 Lecture 3: Time-Domain Reflectometry & S-Parameter Channel Models [[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee689_tdr_spar.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee689_tdr_spar.pdf)]

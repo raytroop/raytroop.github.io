@@ -256,6 +256,11 @@ That is $C_{-M}  = \frac{1}{\omega^2 M} \approx 10 \times C_E$
 
 
 
+## T-coil w/ inverted mutual coupling
+
+> J. Kim, J. -K. Kim, B. -J. Lee and D. -K. Jeong, "Design Optimization of On-Chip Inductive Peaking Structures for 0.13- μm  CMOS 40-Gb/s Transmitter Circuits," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 12, pp. 2544-2555, Dec. 2009 [[https://sci-hub.st/10.1109/TCSI.2009.2023772](https://sci-hub.st/10.1109/TCSI.2009.2023772)]
+
+*TODO* &#128197;
 
 ## Triple Resonance
 

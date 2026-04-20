@@ -29,26 +29,122 @@ mathjax: true
 
 ![image-20260419165629435](si/image-20260419165629435.png)
 
+![image-20260420215923585](si/image-20260420215923585.png)
+$$
+\color{red}Z_T(t) = Z_0\cdot \frac{1+\Gamma}{1-\Gamma}
+$$
+
+
 ### S11 vs TDR
 
 > Vladimir Dmitriev-Zdorov, Mentor Graphics, DesignCon 2014, *Computation of Time Domain Impedance Profile from S-Parameters: Challenges and Methods* [[link](https://www.researchgate.net/publication/339032423_DesignCon_2014_Computation_of_Time_Domain_Impedance_Profile_from_S-Parameters_Challenges_and_Methods)]
 >
+> Samtec, High Speed Characterization Report PCIEC-064-1000-EC-EM-P-85 [[https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf](https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf)]
+>
+
+
+
+![image-20260420232932030](si/image-20260420232932030.png)
+
+![image-20260420232956757](si/image-20260420232956757.png)
+
+#### w/ IFFT
+
+> 比尔盖子, *Frequency domain S11 conversion to time domain TDR* [[https://electronics.stackexchange.com/a/626063/233816](https://electronics.stackexchange.com/a/626063/233816)]
+>
+> HFSS™ 3D Layout Window Functions and Time Domain Plotting [[https://ansyshelp.ansys.com/public/Views/Secured/Electronics/v252/en/Subsystems/HFSS3DLayout/Content/ReportsandPostProc/WindowFunctionsandTimeDomainPlotting.htm](https://ansyshelp.ansys.com/public/Views/Secured/Electronics/v252/en/Subsystems/HFSS3DLayout/Content/ReportsandPostProc/WindowFunctionsandTimeDomainPlotting.htm)]
+>
+> Time Domain Measurements using Vector Network Analyzer ZVR [[https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/dl_application/application_notes/1ez44/1ez44_0e.pdf](https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/dl_application/application_notes/1ez44/1ez44_0e.pdf)]
+
+***scikit-rf*** `plot_z_time_step`
+
+```
+S₁₁(f)
+   │  (extrapolate_to_dc → uniform grid starting at 0 Hz)
+   ▼
+W(f) · S₁₁(f)                 ← windowed(): half-window, 1 at DC, 0 at f_max,
+                                normalize=False (preserves S(0))
+   │  (np.fft.irfft + fftshift)
+   ▼
+h(t)  – impulse response       ← impulse_response()
+   │  (cumulative_trapezoid)
+   ▼
+Γ_step(t)  ∈ [−1, 1]           ← step_response()
+   │  Z(t) = z0 · (1+Γ)/(1−Γ)   (clamp Γ=1)
+   ▼
+Z(t)  – plotted vs t (in ns)   ← plot_attribute() with attribute='z',
+                                conversion='time_step'
+```
+
+![Graphical illustrations of multiplicy the spectrum of a step function with a rectangular window to produce a finite edge in the time domain](si/windowfunctionsandtimedomainplot3.png)
+
+![image-20260420230505339](si/image-20260420230505339.png)
+
+Window function with $w[0] = 1$ and $w[f_{max}]$=0 ensure $\Gamma(+\infty)$ and $\Gamma(0)$ are correct
+
+
+
+---
+
+---
+
+> Jim Nadolny, Samtec. Technical Note Transformation of Samtec Connector Test Data For 85 ohm Differential Impedance Applications, [[https://suddendocs.samtec.com/notesandwhitepapers/technical-note_85ohm-reference-z-xform_web.pdf](https://suddendocs.samtec.com/notesandwhitepapers/technical-note_85ohm-reference-z-xform_web.pdf)]
+>
 > [ADS: 1-10] TDR Impedance (Part 2) TDRインピーダンス解析 [[https://youtu.be/ACINktqpM50](https://youtu.be/ACINktqpM50)]
 >
 > ADS `tdr_sp_imped`
->
-> Samtec, High Speed Characterization Report PCIEC-064-1000-EC-EM-P-85 [[https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf](https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf)]
->
-> Jim Nadolny, Samtec. Technical Note Transformation of Samtec Connector Test Data For 85 ohm Differential Impedance Applications, [[https://suddendocs.samtec.com/notesandwhitepapers/technical-note_85ohm-reference-z-xform_web.pdf](https://suddendocs.samtec.com/notesandwhitepapers/technical-note_85ohm-reference-z-xform_web.pdf)]
 
-The impedance was mathematically derived from the $S_{ii}$ reflection coefficient S-parameter data using the `tdr_sp_imped()` measurement function within ADS
+![image-20260420235747173](si/image-20260420235747173.png)
+
+---
+
+---
+
+> Peter Goossens, *Transformation of time domain TDR to its frequency domain S11 (Return Loss) using FFT* [[https://www.gquipment.com/blog/transformation-of-time-domain-tdr-to-its-frequency-domain-s11-return-loss-using-fft](https://www.gquipment.com/blog/transformation-of-time-domain-tdr-to-its-frequency-domain-s11-return-loss-using-fft)]
+
+![image-20260420224211467](si/image-20260420224211467.png)
+
+![image-20260420223849838](si/image-20260420223849838.png)
+
+```python
+# Pseudo code, laying out the essential steps only
+# Trace data is in x_values
+sampling_interval = np.mean(np.diff(x_values))
+#  First derivative
+diff_gamma_values = np.gradient(gamma_values)
+# FFT
+fourier_data = fft(diff_gama_values)
+# Get the frequencies corresponding to the FFT result
+frequencies = np.fft.fftfreq(len(diff_gama_values), d=sampling_interval)
+# Calculate the magnitude of the complex Fourier transform data
+magnitude = np.abs(fourier_data)
+# Return loss
+magnitude = 20 * np.log10(magnitude)
+# Plot (frequency, magnitude)
+```
+
+
+
+#### w/ RFE
+
+> ***rational fraction expansion (RFE)***
 
 *TODO* &#128197;
+
+
+
+
 
 
 ## Time-Domain Transmission (TDT)
 
 *TODO* &#128197;
+
+![image-20260420220101203](si/image-20260420220101203.png)
+
+
+
+
 
 
 ## Reading S-parameters

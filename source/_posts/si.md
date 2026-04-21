@@ -31,7 +31,7 @@ mathjax: true
 
 ![image-20260420215923585](si/image-20260420215923585.png)
 $$
-\color{red}Z_T(t) = Z_0\cdot \frac{1+\Gamma}{1-\Gamma}
+\color{red}Z_T(t) = Z_0\cdot \frac{1+\Gamma(t)}{1-\Gamma(t)}
 $$
 
 
@@ -105,6 +105,10 @@ Window function with $w[0] = 1$ and $w[f_{max}]$=0 ensure $\Gamma(+\infty)$ and 
 ![image-20260420224211467](si/image-20260420224211467.png)
 
 ![image-20260420223849838](si/image-20260420223849838.png)
+
+$$
+\color{green} \Gamma(t) \to S_{ii}
+$$
 
 ```python
 # Pseudo code, laying out the essential steps only

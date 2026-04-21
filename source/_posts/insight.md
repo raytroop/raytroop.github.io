@@ -97,14 +97,18 @@ there's a specific bias point where the MOSFET transition frequency (fT) becomes
 ![image-20251029215548157](insight/image-20251029215548157.png)
 
 
+## MOS Noise
 
-## MOS Thermal Noise
+### MOS Thermal Noise
 
 > Michael H. Perrott. Analysis and Design of Analog Integrated Circuits Lecture 14 Noise Spectral Analysis for Circuit Elements [[https://www.cppsim.com/CircuitLectures/Lecture14.pdf](https://www.cppsim.com/CircuitLectures/Lecture14.pdf)]
 
 ![image-20251122135331760](insight/image-20251122135331760.png)
 
-### Legacy Long-Channel Model
+---
+---
+
+***Legacy Long-Channel Model***
 
 ![image-20251028010509047](insight/image-20251028010509047.png)
 $$
@@ -125,8 +129,10 @@ $$
 
 ![image-20251027235211591](insight/image-20251027235211591.png)
 
+---
+---
 
-### Short-Channel Effects
+***Short-Channel Effects***
 
 > Gildenblat, G. S. (2010). Compact modeling : principles, techniques and applications. Springer.
 >
@@ -155,13 +161,22 @@ $$
 
 ![image-20251122145714011](insight/image-20251122145714011.png)
 
-### NF50
+---
+---
+
+***NF50***
 
 *TODO* &#128197;
 
 
 
-### $\gamma$ vs VDS, VGS in simulation
+
+
+
+---
+---
+
+***$\gamma$ vs VDS, VGS in simulation***
 
 > *N28*
 
@@ -179,7 +194,7 @@ $$
 
 
 
-## MOS Flicker Noise
+### MOS Flicker Noise
 
 > T. Noulis, "CMOS process transient noise simulation analysis and benchmarking," 2016 26th International Workshop on Power and Timing Modeling, Optimization and Simulation (PATMOS), Bremen, Germany, 2016 [[https://sci-hub.ru/10.1109/PATMOS.2016.7833428](https://sci-hub.ru/10.1109/PATMOS.2016.7833428)]
 
@@ -234,17 +249,30 @@ Above simulation demonstrate that flicker noise  is ***represented by a drain-so
 
 
 
+---
+
+---
+
+Ma, Mb are ***parallel*** MOS, with width $W_a$ and $W_b$, Since flicker noise current $\overline{I_{D}^2}(\Delta f) = K_f\frac{g_{m}^2}{C_{ox}WL}\frac{\Delta f}{f}$ and $g_{m,tot}=g_{m,a} + g_{m,b}$,  $W_{tot} = W_a + W_b$,  $g_{m,a} = \beta W_a$, $g_{m,b}=\beta W_b$
+$$
+\overline{I_{D,a}^2}(f) =K_f\frac{\beta^2W_a}{C_{ox}L}\frac{\Delta f}{f} \quad \overline{I_{D,b}^2}(f) = K_f\frac{\beta^2W_b}{C_{ox}L}\frac{\Delta f}{f} \quad
+\overline{I_{D,tot}^2}(f) = K_f\frac{\beta^2(W_a+W_b)}{C_{ox}L}\frac{\Delta f}{f} \\
+$$
+
+Then
+$$
+\color{green}\overline{I_{D,tot}^2} \equiv  \overline{I_{D,a}^2} + \overline{I_{D,b}^2}
+$$
 
 
 
-
-## MOS Shot Noise
+### MOS Shot Noise
 
 ![image-20251122114237398](insight/image-20251122114237398.png)
 
 
 
-## Gate-Referred Noise Lemma
+### Gate-Referred Noise Lemma
 
 ![image-20251122235114046](insight/image-20251122235114046.png)
 

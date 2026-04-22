@@ -357,8 +357,9 @@ The quantization noise is ***an infinite sum of input signal odd harmonics***, w
 
 
 
-
 ## ENOB & SQNR
+
+> Qasim Chaudhari, *On Analog-to-Digital Converter (ADC), 6 dB SNR Gain per Bit, Oversampling and Undersampling* [[https://wirelesspi.com/on-analog-to-digital-converter-adc-6-db-snr-gain-per-bit-oversampling-and-undersampling/](https://wirelesspi.com/on-analog-to-digital-converter-adc-6-db-snr-gain-per-bit-oversampling-and-undersampling/)]
 
 The quantization noise power $P_Q$ for a uniform quantizer with step size $\Delta$ is given by
 $$

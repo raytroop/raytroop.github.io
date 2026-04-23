@@ -9,21 +9,33 @@ mathjax: true
 
 
 
-## m-factor circuits Monte Carlo simulation
+## m-factor devices correlation
 
 > community.cadence, *Understanding underlying statistical assumptions in Monte Carlo simulations [[link](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/62906/understanding-underlying-statistical-assumptions-in-monte-carlo-simulations)]*
 >
 > Hesham Omran, *Why Using The Device Multiplier Can Make Your Monte Carlo Simulations Wrong [[https://www.linkedin.com/pulse/why-using-device-multiplier-can-make-your-monte-carlo-hesham-omran/](https://www.linkedin.com/pulse/why-using-device-multiplier-can-make-your-monte-carlo-hesham-omran/)]*
 >
-> cadence support, *How does spectre apply correlation between m-factor devices during Monte Carlo simulation?*
+> cadence support, *How is mismatch applied in array/parallel devices in Spectre Monte Carlo?*
+>
+> —, *How does spectre apply correlation between m-factor devices during Monte Carlo simulation?*
 
 ***nullmfactorcorrelation=no/yes***
 
 ![image-20260423220346517](ade/image-20260423220346517.png)
 
+---
+
+![image-20260423223726201](ade/image-20260423223726201.png)
+
+---
+
 ![image-20260423221217739](ade/image-20260423221217739.png)
 
+---
+
 ![image-20260423221935969](ade/image-20260423221935969.png)
+
+
 
 ## noise analysis
 

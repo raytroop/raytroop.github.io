@@ -11,6 +11,12 @@ mathjax: true
 
 
 
+## Sampling Switch
+
+*TODO* &#128197;
+
+
+
 ## Switched-Capacitor Filter
 
 ***switched-Capacitor Resistor***

@@ -99,7 +99,7 @@ Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions 
 
 ![image-20251102114741833](eq-cdr/image-20251102114741833.png)
 
-> **Toeplitz matrix**: transforms discrete convolution into $y=Ax$, where $x$ is a flattened input vector [[Google AI Mode](a flattened input vector)]
+> **Toeplitz matrix**: transforms discrete convolution into $y=Ax$, where $x$ is a flattened input vector 
 
 ![tx-ffe-coef-conv.drawio](eq-cdr/tx-ffe-coef-conv.drawio.svg)
 

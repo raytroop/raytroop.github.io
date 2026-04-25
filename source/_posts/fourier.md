@@ -305,9 +305,7 @@ The *frequency response* of *discrete-time LTI systems* is always a **periodic f
 
 ### Aliasing
 
-The frequencies $f_{\text{sig}}$ and $Nf_s \pm f_{\text{sig}}$ ($N$ integer), are **indistinguishable** in the **discrete time domain**.
-
-![image-20220626000016184](fourier/image-20220626000016184.png)
+![image-20260425112955664](fourier/image-20260425112955664.png)
 
 Given below sequence
 $$
@@ -339,6 +337,43 @@ x[n] &= Ae^{j\left( kf_s-\Delta f \right)2\pi T_sn} + Ae^{j\left( -kf_s+\Delta f
 > \end{align}$$
 >
 > ![sampling_aliasing.drawio](fourier/sampling_aliasing.drawio.svg)
+
+---
+
+
+
+![image-20260425112858854](fourier/image-20260425112858854.png)
+
+
+
+```python
+from itertools import product
+
+def samplealiasing(fsig, fs=1):
+    fdisp = None
+    N = 0
+
+    while True:
+        for signN, signFsig in product([-1, 1], [-1, 1]):
+            fdisp_n = signN*N*fs + signFsig*fsig
+            if fdisp_n >= 0 and fdisp_n < fs/2:
+                fdisp = fdisp_n
+                print(f"{fsig:.4f} is indistinguishable from {fdisp:.4f}, which is {'+' if signN>0 else '-'}{N} {'+' if signFsig>0 else '-'} {fsig:.4f}")
+                return fdisp
+        N += 1
+        if N > 100:
+            break
+    return None
+
+for i in range(1,6):
+    samplealiasing(0.3125*i)
+
+# 0.3125 is indistinguishable from 0.3125, which is -0 + 0.3125
+# 0.6250 is indistinguishable from 0.3750, which is +1 - 0.6250
+# 0.9375 is indistinguishable from 0.0625, which is +1 - 0.9375
+# 1.2500 is indistinguishable from 0.2500, which is -1 + 1.2500
+# 1.5625 is indistinguishable from 0.4375, which is +2 - 1.5625
+```
 
 
 

@@ -49,24 +49,6 @@ The amplitude of the reference ripple is code-dependent as it is correlated with
 
 
 
-## quantization error & quantization noise
-
-![image-20250910210909363](sar/image-20250910210909363.png)
-
-![image-20250910211207655](sar/image-20250910211207655.png)
-
-![image-20250910211034914](sar/image-20250910211034914.png)
-
----
-
-Notice $e_q\in (0, \Delta)$ and its average is $\Delta/2$. To calculate SNDR, *DC component shall be excluded*
-
-Don't confuse **resolution** $\Delta$ with **Bounded Quantization Noise** $-\Delta/2 \sim  \Delta/2$
-
-![image-20250909233010702](sar/image-20250909233010702.png)
-
-
-
 ## Redundancy
 
 ### decision level

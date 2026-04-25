@@ -7,6 +7,360 @@ categories:
 mathjax: true
 ---
 
+
+
+## Figures of Merit (FoMs)
+
+> B. Murmann, "ADC Performance Survey 1997-2022," [Online]. Available: [[https://github.com/bmurmann/ADC-survey](https://github.com/bmurmann/ADC-survey)]
+>
+> Carsten Wulff, "Advanced Integrated Circuits 2025" [[http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom](http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom)]
+
+
+
+![image-20250825173843550](ad-da/image-20250825173843550.png)
+
+
+
+## Quantization Noise
+
+### Quantization Error
+
+![image-20250910210909363](ad-da/image-20250910210909363.png)
+
+![image-20250910211207655](ad-da/image-20250910211207655.png)
+
+![image-20250910211034914](ad-da/image-20250910211034914.png)
+
+---
+
+Notice $e_q\in (0, \Delta)$ and its average is $\Delta/2$. To calculate SNDR, *DC component shall be excluded*
+
+Don't confuse **resolution** $\Delta$ with **Bounded Quantization Noise** $-\Delta/2 \sim  \Delta/2$
+
+![image-20250909233010702](ad-da/image-20250909233010702.png)
+
+
+
+### Quantization Noise Spectrum
+
+![image-20240825221754959](ad-da/image-20240825221754959.png)
+
+> Quantization noise is less with higher resolution as the input range is divided into a greater number of smaller ranges
+>
+> This error can be considered a quantization noise with **RMS**
+
+![image-20240925235213137](ad-da/image-20240925235213137.png)
+
+### Quantization is NOT Noise
+
+> [[https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization](https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization)]
+>
+> N. Blachman, "The intermodulation and distortion due to quantization of sinusoids," in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 33, no. 6, pp. 1417-1426, December 1985 [[https://sci-hub.st/10.1109/TASSP.1985.1164729](https://sci-hub.st/10.1109/TASSP.1985.1164729)]
+
+
+![image-20250902203709226](ad-da/image-20250902203709226.png)
+
+---
+
+The quantization noise is ***an infinite sum of input signal odd harmonics***, where the amplitude of the harmonics is determined by a sum of a *Bessel function*
+
+**"Quantization noise is white"**, because for a high number of bits, it looks white in the FFT
+
+
+
+![image-20250902203921651](ad-da/image-20250902203921651.png)
+
+
+
+## ADC Linearity (DNL/INL)
+
+![image-20260425095158692](ad-da/image-20260425095158692.png)
+
+ ***missing code***
+
+![image-20260425100334682](ad-da/image-20260425100334682.png)
+
+
+
+---
+
+---
+
+*TODO* &#128197;
+
+- `Endpoint` method
+- `BestFit` method
+
+![image-20241006211529077](ad-da/image-20241006211529077.png)
+
+![image-20241006195931838](ad-da/image-20241006195931838.png)
+
+
+
+
+> INL/DNL Measurements for High-Speed Analog-to Digital Converters (ADCs) [[https://picture.iczhiku.com/resource/eetop/sYKTSqLfukeHSmMB.pdf](https://picture.iczhiku.com/resource/eetop/sYKTSqLfukeHSmMB.pdf)]
+
+
+
+---
+
+---
+
+***Code Density Test***
+
+> Apply a linear ramp to ADC input
+
+![image-20241214100849243](ad-da/image-20241214100849243.png)
+
+
+
+## DAC Linearity (DNL/INL)
+
+
+***DAC DNL***
+
+One difference between ADC and DAC is that *DAC DNL can be less than -1 LSB*
+
+> In a DAC, **DNL < -1LSB** implies **non-monotonicity**
+
+![image-20241006215420568](ad-da/image-20241006215420568.png)
+
+---
+
+---
+
+
+***DAC INL***
+
+![image-20241215101400962](ad-da/image-20241215101400962.png)
+
+> The worst INL of three DAC Architecture is same
+
+![image-20241215110708021](ad-da/image-20241215110708021.png)
+
+- $A = \sum_{j=1}^k I_j$, $B=\sum_{j=k+1}^N I_j$
+- A and B are independent with $\sigma_A^2 = k\sigma_u^2$ and $\sigma_B^2=(N-k)\sigma_u^2$
+
+Therefore
+$$
+\mathrm{Var}\left(\frac{X}{Y}\right)\simeq \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{\mathrm{cov}(X,Y)}{kNI_u^2}\right)
+$$
+and
+$$\begin{align}
+\mathrm{cov}(X,Y) &= E[XY] - E[X]E[Y] = E[A(A+B)] - kNI_u^2 \\
+&= E[A^2]+E[A]E[B] - kNI_u^2= \sigma_A^2+E[A]^2 + k(N-k)I_u^2 - kNI_u^2\\
+&= k\sigma_i^2 + k^2I_u^2+ k(N-k)I_u^2 - kNI_u^2 \\
+&= k\sigma_i^2
+\end{align}$$
+
+Finally,
+$$
+\mathrm{Var}\left(\frac{X}{Y}\right)\simeq \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{k\sigma_i^2}{kNI_u^2}\right) = \frac{k^2}{N^2}\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2
+$$
+i.e.
+$$
+\mathrm{Var(INL(k))} = k^2\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2 = k\left(1- \frac{k}{N}\right)\sigma_u^2
+$$
+
+
+**Standard deviation of INL is maximum at mid-scale (k=N/2)**
+
+>  ![image-20241215114755896](ad-da/image-20241215114755896.png)
+
+
+
+---
+
+![image-20241215101727644](ad-da/image-20241215101727644.png)
+
+
+
+## Spectral Metrics
+
+![image-20260425164053212](ad-da/image-20260425164053212.png)
+
+### SNR, SNDR
+
+![image-20260425164740278](ad-da/image-20260425164740278.png)
+
+
+
+### ENOB
+
+> Qasim Chaudhari, *On Analog-to-Digital Converter (ADC), 6 dB SNR Gain per Bit, Oversampling and Undersampling* [[https://wirelesspi.com/on-analog-to-digital-converter-adc-6-db-snr-gain-per-bit-oversampling-and-undersampling/](https://wirelesspi.com/on-analog-to-digital-converter-adc-6-db-snr-gain-per-bit-oversampling-and-undersampling/)]
+
+The quantization noise power $P_Q$ for a uniform quantizer with step size $\Delta$ is given by
+$$
+P_Q = \frac{\Delta ^2}{12}
+$$
+For a full-scale sinusoidal input signal with an amplitude equal to $V_{FS}/2$, the input signal is given by $x(t) = \frac{V_{FS}}{2}\sin(\omega t)$
+
+Then input signal power $P_s$ is
+$$
+P_s = \frac{V_{FS}^2}{8}
+$$
+Therefore, the **signal-to-quantization noise ratio (SQNR)** is given by
+$$
+\text{SQNR} = \frac{P_s}{P_Q} = \frac{V_{FS}^2/8}{\Delta^2/12}=\frac{V_{FS}^2/8}{V_{FS}^2/(12\times 2^{2N})} = \frac{3\times 2^{2N}}{2}
+$$
+where $N$ is the number of quantization bits
+
+When represented in dBs
+$$
+\text{SQNR(dB)} = 10\log(\frac{P_s}{P_Q}) = 10\log(\frac{3\times 2^{2N}}{2})= 20N\log(2) + 10\log(\frac{3}{2})= 6.02N + 1.76
+$$
+
+---
+
+![image-20250705100706289](ad-da/image-20250705100706289.png)
+
+![image-20250705101619687](ad-da/image-20250705101619687.png)
+
+![image-20250705101635533](ad-da/image-20250705101635533.png)
+
+
+
+---
+
+---
+
+> Dan Boschen, GRCon25: Quantifying Signal Quality: Practical Tools for High-Fidelity Waveform Analysis
+>
+> [[linkedin](https://www.linkedin.com/posts/danboschen_determining-the-effective-number-of-bits-activity-7367534634886246400-tfzu) [GRCon25](https://events.gnuradio.org/event/26/contributions/761/)]
+
+![img](ad-da/1756557137977.jpeg)
+
+
+
+### SDR, THD
+
+![image-20260425165031673](ad-da/image-20260425165031673.png)
+
+
+
+---
+
+---
+
+> Walt Kester. Evaluating High Speed DAC Performance [[https://www.analog.com/media/en/training-seminars/tutorials/mt-013.pdf](https://www.analog.com/media/en/training-seminars/tutorials/mt-013.pdf)]
+
+via other definition
+
+***THD: signal to distortion***
+
+***SINAD: noise and distortion to signal***
+
+![image-20260425165429931](ad-da/image-20260425165429931.png)
+
+![image-20260425165827715](ad-da/image-20260425165827715.png)
+
+### SFDR & INL
+
+![image-20260425164947635](ad-da/image-20260425164947635.png)
+
+![image-20250524172307785](ad-da/image-20250524172307785.png)
+
+> Beware, this is of course only true under the same conditions at which the INL was taken, i.e. typically *low input signal frequency*
+
+
+
+
+### Dynamic Range
+
+![image-20250825215211670](ad-da/image-20250825215211670.png)
+
+---
+
+![image-20250825220134900](ad-da/image-20250825220134900.png)
+
+![image-20250825220536821](ad-da/image-20250825220536821.png)
+
+$$
+\text{SNR} = 10\log\left(\frac{V_\text{in}^2/2}{\Delta^2/12}\right)
+$$
+
+
+
+## Coherent Sampling
+
+![image-20250705085139758](ad-da/image-20250705085139758.png)
+
+---
+
+$$
+\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
+$$
+
+- $f_\text{in}$ and $f_s$ must be ***incommensurate*** ($f_s/f_\text{in}$ is *irrational number*. btw, *co-prime is sufficient but not necessary*)
+
+- $M_C$ and $N_R$ must be ***co-prime***
+
+- Samples must include ***integer #*** of cycles of input signal
+
+
+
+---
+
+An **irreducible ratio** ensures identical code sequences not to be repeated multiple times.
+
+> Given that $\frac{M_C}{N_R}$ is *irreducible*, and $N_R$ is a *power of 2*, an **odd number** for $M_C$ will always produce an **irreducible ratio**
+
+Assuming there is a common factor $k$ between $M_C$ and $N_R$, i.e. $\frac{M_C}{N_R}=\frac{k M_C'}{k N_R'}$
+
+The samples  ($n\in[1, N_R]$)
+
+$$
+y[n] = \sin\left( \omega_{\text{in}} \cdot t_n \right) = \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  = \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
+$$
+
+Then
+
+$$
+y[n+N_R'] = \sin\left( 2\pi (n+N_R')\frac{M_C}{N_R} \right) = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{M_C}{N_R}\right) = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{kM_C'}{kN_R'} \right) = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
+$$
+
+
+
+So,  the samples is repeated $y[n] = y[n+N_R']$
+
+---
+
+$N_R$ & $M_C$ **irreducible ratio** (*mutually prime*)
+
+- *Periodic sampling points* result in *periodic quantization errors*
+- Periodic quantization errors result in *harmonic distortion*
+
+
+
+![image-20250705091742434](ad-da/image-20250705091742434.png)  
+
+> Choosing M/N non-prime repeats the signal quantization periodically and fewer quantization steps are measured. *The quantization repeats periodically and creates a line spectrum that can obscure real frequency lines* (e.g. the red lines in the images below, created by non-linearities of the ADC).
+>
+> [[https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple](https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple)]
+
+
+
+---
+
+
+
+![image-20250705092503925](ad-da/image-20250705092503925.png)
+
+---
+
+![image-20250705103213974](ad-da/image-20250705103213974.png)
+
+
+
+## Offset & Gain Error
+
+![image-20250825151821455](ad-da/image-20250825151821455.png)
+
+![image-20250825152414651](ad-da/image-20250825152414651.png)
+
+
+
+
 ## 1-bit DAC
 
 *TODO* &#128197;
@@ -23,57 +377,15 @@ $\Delta \Sigma$ ADC: Linearity
 
 
 
-## Evaluating DAC
-
-> Walt Kester. Evaluating High Speed DAC Performance [[https://www.analog.com/media/en/training-seminars/tutorials/mt-013.pdf](https://www.analog.com/media/en/training-seminars/tutorials/mt-013.pdf)]
-
-![image-20250921140917517](ad-da/image-20250921140917517.png)
-
-## THD
-
-> EE315B VLSI Data Conversion Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SHKTshjlyaJEWCVx.pdf)]
-
-Harmonics can appear at "arbitrary" frequencies due to **aliasing**
-
-![image-20250924003112739](ad-da/image-20250924003112739.png)
-
-
-
-
-## Dynamic Range
-
-![image-20250825215211670](ad-da/image-20250825215211670.png)
-
----
-
-![image-20250825220134900](ad-da/image-20250825220134900.png)
-
-![image-20250825220536821](ad-da/image-20250825220536821.png)
-
-$$
-\text{SNR} = 10\log\left(\frac{V_\text{in}^2/2}{\Delta^2/12}\right)
-$$
-
-
-## FoMs
-
-> B. Murmann, "ADC Performance Survey 1997-2022," [Online]. Available: [[https://github.com/bmurmann/ADC-survey](https://github.com/bmurmann/ADC-survey)]
->
-> Carsten Wulff, "Advanced Integrated Circuits 2025" [[http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom](http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom)]
-
-
-
-![image-20250825173843550](ad-da/image-20250825173843550.png)
 
 
 
 
 
-## Offset & Gain Error
 
-![image-20250825151821455](ad-da/image-20250825151821455.png)
 
-![image-20250825152414651](ad-da/image-20250825152414651.png)
+
+
 
 
 
@@ -144,13 +456,6 @@ $\Gamma_x$ is  ***no-overload range***
 > E. Swindlehurst et al., "An 8-bit 10-GHz 21-mW Time-Interleaved SAR ADC With Grouped DAC Capacitors and Dual-Path Bootstrapped Switch," IEEE Journal of Solid-State Circuits, vol. 56, no. 8, pp. 2347-2359, 2021, [[https://sci-hub.se/10.1109/JSSC.2021.3057372](https://sci-hub.se/10.1109/JSSC.2021.3057372)]
 
 
-
-
-## SFDR & INL
-
-![image-20250524172307785](ad-da/image-20250524172307785.png)
-
-> Beware, this is of course only true under the same conditions at which the INL was taken, i.e. typically *low input signal frequency*
 
 
 
@@ -279,29 +584,6 @@ where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundan
 
 
 
-## ADC INL/DNL
-
-*TODO* &#128197;
-
-- `Endpoint` method
-- `BestFit` method
-
-![image-20241006211529077](ad-da/image-20241006211529077.png)
-
-![image-20241006195931838](ad-da/image-20241006195931838.png)
-
-
-
-
-> INL/DNL Measurements for High-Speed Analog-to Digital Converters (ADCs) [[https://picture.iczhiku.com/resource/eetop/sYKTSqLfukeHSmMB.pdf](https://picture.iczhiku.com/resource/eetop/sYKTSqLfukeHSmMB.pdf)]
-
-
-
-### Code Density Test
-
-> Apply a linear ramp to ADC input
-
-![image-20241214100849243](ad-da/image-20241214100849243.png)
 
 
 
@@ -323,130 +605,6 @@ where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundan
 
 
 
-## Quantization Noise & its Spectrum
-
-![image-20240825221754959](ad-da/image-20240825221754959.png)
-
-> Quantization noise is less with higher resolution as the input range is divided into a greater number of smaller ranges
->
-> This error can be considered a quantization noise with **RMS**
-
-![image-20240925235213137](ad-da/image-20240925235213137.png)
-
-
-## Quantization is NOT Noise
-
-> [[https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization](https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization)]
->
-> N. Blachman, "The intermodulation and distortion due to quantization of sinusoids," in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 33, no. 6, pp. 1417-1426, December 1985 [[https://sci-hub.st/10.1109/TASSP.1985.1164729](https://sci-hub.st/10.1109/TASSP.1985.1164729)]
-
-
-![image-20250902203709226](ad-da/image-20250902203709226.png)
-
----
-
-The quantization noise is ***an infinite sum of input signal odd harmonics***, where the amplitude of the harmonics is determined by a sum of a *Bessel function*
-
-**"Quantization noise is white"**, because for a high number of bits, it looks white in the FFT
-
-
-
-![image-20250902203921651](ad-da/image-20250902203921651.png)
-
-
-
-
-
-## ENOB & SQNR
-
-> Qasim Chaudhari, *On Analog-to-Digital Converter (ADC), 6 dB SNR Gain per Bit, Oversampling and Undersampling* [[https://wirelesspi.com/on-analog-to-digital-converter-adc-6-db-snr-gain-per-bit-oversampling-and-undersampling/](https://wirelesspi.com/on-analog-to-digital-converter-adc-6-db-snr-gain-per-bit-oversampling-and-undersampling/)]
-
-The quantization noise power $P_Q$ for a uniform quantizer with step size $\Delta$ is given by
-$$
-P_Q = \frac{\Delta ^2}{12}
-$$
-For a full-scale sinusoidal input signal with an amplitude equal to $V_{FS}/2$, the input signal is given by $x(t) = \frac{V_{FS}}{2}\sin(\omega t)$
-
-Then input signal power $P_s$ is
-$$
-P_s = \frac{V_{FS}^2}{8}
-$$
-Therefore, the **signal-to-quantization noise ratio (SQNR)** is given by
-$$
-\text{SQNR} = \frac{P_s}{P_Q} = \frac{V_{FS}^2/8}{\Delta^2/12}=\frac{V_{FS}^2/8}{V_{FS}^2/(12\times 2^{2N})} = \frac{3\times 2^{2N}}{2}
-$$
-where $N$ is the number of quantization bits
-
-When represented in dBs
-$$
-\text{SQNR(dB)} = 10\log(\frac{P_s}{P_Q}) = 10\log(\frac{3\times 2^{2N}}{2})= 20N\log(2) + 10\log(\frac{3}{2})= 6.02N + 1.76
-$$
-
----
-
-![image-20250705100706289](ad-da/image-20250705100706289.png)
-
-![image-20250705101619687](ad-da/image-20250705101619687.png)
-
-![image-20250705101635533](ad-da/image-20250705101635533.png)
-
-
-
-
-## DAC DNL
-
-One difference between ADC and DAC is that *DAC DNL can be less than -1 LSB*
-
-> In a DAC, **DNL < -1LSB** implies **non-monotonicity**
-
-![image-20241006215420568](ad-da/image-20241006215420568.png)
-
-
-
-## DAC INL
-
-![image-20241215101400962](ad-da/image-20241215101400962.png)
-
-> The worst INL of three DAC Architecture is same
-
-![image-20241215110708021](ad-da/image-20241215110708021.png)
-
-- $A = \sum_{j=1}^k I_j$, $B=\sum_{j=k+1}^N I_j$
-- A and B are independent with $\sigma_A^2 = k\sigma_u^2$ and $\sigma_B^2=(N-k)\sigma_u^2$
-
-Therefore
-$$
-\mathrm{Var}\left(\frac{X}{Y}\right)\simeq \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{\mathrm{cov}(X,Y)}{kNI_u^2}\right)
-$$
-and
-$$\begin{align}
-\mathrm{cov}(X,Y) &= E[XY] - E[X]E[Y] = E[A(A+B)] - kNI_u^2 \\
-&= E[A^2]+E[A]E[B] - kNI_u^2= \sigma_A^2+E[A]^2 + k(N-k)I_u^2 - kNI_u^2\\
-&= k\sigma_i^2 + k^2I_u^2+ k(N-k)I_u^2 - kNI_u^2 \\
-&= k\sigma_i^2
-\end{align}$$
-
-Finally,
-$$
-\mathrm{Var}\left(\frac{X}{Y}\right)\simeq \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{k\sigma_i^2}{kNI_u^2}\right) = \frac{k^2}{N^2}\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2
-$$
-i.e.
-$$
-\mathrm{Var(INL(k))} = k^2\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2 = k\left(1- \frac{k}{N}\right)\sigma_u^2
-$$
-
-
-**Standard deviation of INL is maximum at mid-scale (k=N/2)**
-
->  ![image-20241215114755896](ad-da/image-20241215114755896.png)
-
-
-
----
-
-![image-20241215101727644](ad-da/image-20241215101727644.png)
-
-
 
 
 
@@ -466,75 +624,6 @@ $$
 
 
 
-
-## Coherent Sampling
-
-![image-20250705085139758](ad-da/image-20250705085139758.png)
-
----
-
-$$
-\frac{f_{\text{in}}}{f_{\text{s}}}=\frac{M_C}{N_R}
-$$
-
-- $f_\text{in}$ and $f_s$ must be ***incommensurate*** ($f_s/f_\text{in}$ is *irrational number*. btw, *co-prime is sufficient but not necessary*)
-
-- $M_C$ and $N_R$ must be ***co-prime***
-
-- Samples must include ***integer #*** of cycles of input signal
-
-
-
----
-
-An **irreducible ratio** ensures identical code sequences not to be repeated multiple times.
-
-> Given that $\frac{M_C}{N_R}$ is *irreducible*, and $N_R$ is a *power of 2*, an **odd number** for $M_C$ will always produce an **irreducible ratio**
-
-Assuming there is a common factor $k$ between $M_C$ and $N_R$, i.e. $\frac{M_C}{N_R}=\frac{k M_C'}{k N_R'}$
-
-The samples  ($n\in[1, N_R]$)
-
-$$
-y[n] = \sin\left( \omega_{\text{in}} \cdot t_n \right) = \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_s} \right)  = \sin\left( \omega_{\text{in}} \cdot n\frac{1}{f_{\text{in}}}\frac{M_C}{N_R} \right) = \sin\left( 2\pi n\frac{M_C}{N_R} \right)
-$$
-
-Then
-
-$$
-y[n+N_R'] = \sin\left( 2\pi (n+N_R')\frac{M_C}{N_R} \right) = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{M_C}{N_R}\right) = \sin\left( 2\pi n \frac{M_C}{N_R} + 2\pi N_R'\frac{kM_C'}{kN_R'} \right) = \sin\left( 2\pi n \frac{M_C}{N_R}\right)
-$$
-
-
-
-So,  the samples is repeated $y[n] = y[n+N_R']$
-
----
-
-$N_R$ & $M_C$ **irreducible ratio** (*mutually prime*)
-
-- *Periodic sampling points* result in *periodic quantization errors*
-- Periodic quantization errors result in *harmonic distortion*
-
-
-
-![image-20250705091742434](ad-da/image-20250705091742434.png)  
-
-> Choosing M/N non-prime repeats the signal quantization periodically and fewer quantization steps are measured. *The quantization repeats periodically and creates a line spectrum that can obscure real frequency lines* (e.g. the red lines in the images below, created by non-linearities of the ADC).
->
-> [[https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple](https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple)]
-
-
-
----
-
-
-
-![image-20250705092503925](ad-da/image-20250705092503925.png)
-
----
-
-![image-20250705103213974](ad-da/image-20250705103213974.png)
 
 
 

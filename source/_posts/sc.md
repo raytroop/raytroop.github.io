@@ -13,7 +13,13 @@ mathjax: true
 
 ## Sampling Switch
 
+> Kwantae Kim, Integrated Analog Systems D - Lecture 10 (ADC) [[https://youtu.be/IEdbLNJb9wQ](https://youtu.be/IEdbLNJb9wQ)]
+
 *TODO* &#128197;
+
+![image-20260426175351437](sc/image-20260426175351437.png)
+
+
 
 
 

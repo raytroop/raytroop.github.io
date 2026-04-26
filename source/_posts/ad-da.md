@@ -70,9 +70,9 @@ The quantization noise is ***an infinite sum of input signal odd harmonics***, w
 
 ![image-20250902203921651](ad-da/image-20250902203921651.png)
 
-
-
 ## ADC Linearity (DNL/INL)
+
+![image-20260426174704406](ad-da/image-20260426174704406.png)
 
 ![image-20260425095158692](ad-da/image-20260425095158692.png)
 
@@ -428,7 +428,21 @@ plot(f, 20*log10(sn))
 
 
 
-## Offset & Gain Error
+## Offset and Gain Error
+
+> Kwantae Kim, Integrated Analog Systems D - Lecture 10 (ADC) [[https://youtu.be/IEdbLNJb9wQ](https://youtu.be/IEdbLNJb9wQ)]
+
+![image-20260426180449791](ad-da/image-20260426180449791.png)
+
+![image-20260426173822772](ad-da/image-20260426173822772.png)
+
+> ![image-20260426173906024](ad-da/image-20260426173906024.png)
+
+---
+
+---
+
+
 
 ![image-20250825151821455](ad-da/image-20250825151821455.png)
 

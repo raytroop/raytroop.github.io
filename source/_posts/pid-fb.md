@@ -136,6 +136,14 @@ it simply *"latches up"* rather than oscillates
 
 ![image-20251122095709631](pid-fb/image-20251122095709631.png)
 
+## Mason's Gain Rule
+
+***Mason's gain formula (MGF)*** is a method for finding the ***transfer function*** of a ***linear signal-flow graph (SFG)***.
+
+*TODO* &#128197;
+
+
+
 
 
 ## reference

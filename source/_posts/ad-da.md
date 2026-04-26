@@ -281,7 +281,18 @@ $$
 
 
 
-## Coherent Sampling
+### Spectral Leakage
+
+Two ways to deal with spectral leakage: ***Ensure integer number of periods*** or ***Windowing***
+
+![image-20260426075613908](ad-da/image-20260426075613908.png)
+
+
+
+### Coherent Sampling
+
+> Choosing M/N non-prime repeats the signal quantization periodically and fewer quantization steps are measured. *The quantization repeats periodically and creates a line spectrum that can obscure real frequency lines* (e.g. the red lines in the images below, created by non-linearities of the ADC).[[https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple](https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple)]
+>
 
 ![image-20250705085139758](ad-da/image-20250705085139758.png)
 
@@ -296,8 +307,6 @@ $$
 - $M_C$ and $N_R$ must be ***co-prime***
 
 - Samples must include ***integer #*** of cycles of input signal
-
-
 
 ---
 
@@ -321,7 +330,7 @@ $$
 
 
 
-So,  the samples is repeated $y[n] = y[n+N_R']$
+So,  the samples is repeated $\color{red}y[n] = y[n+N_R']$
 
 ---
 
@@ -332,11 +341,78 @@ $N_R$ & $M_C$ **irreducible ratio** (*mutually prime*)
 
 
 
-![image-20250705091742434](ad-da/image-20250705091742434.png)  
+![image-20250705091742434](ad-da/image-20250705091742434.png)
 
-> Choosing M/N non-prime repeats the signal quantization periodically and fewer quantization steps are measured. *The quantization repeats periodically and creates a line spectrum that can obscure real frequency lines* (e.g. the red lines in the images below, created by non-linearities of the ADC).
->
-> [[https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple](https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple)]
+![image-20260426080431593](ad-da/image-20260426080431593.png)
+
+`GCD(2048, 67)=1`
+
+  ![image-20260426083812415](ad-da/image-20260426083812415.png)
+
+```matlab
+N = 2048;
+cycles = 67;
+fs = 1000;
+fx = fs*cycles/N;
+LSB = 2/2^10;
+%generate signal, quantize (mid-tread) and take FFT
+xc = cos(2*pi*fx/fs*[0:N-1]);
+x = round(xc/LSB)*LSB;
+s = abs(fft(x));
+s = s(1:end/2)/N*2;
+% calculate SNR
+sigbin = 1 + cycles;
+noise = [s(1:sigbin-1), s(sigbin+1:end)];
+snr = 10*log10( s(sigbin)^2/sum(noise.^2) );
+
+% frequency vector
+f = [0:N/2-1]/N;
+subplot(1,3,1)
+stem(f, s);
+ 
+% some FFT bins for "noise" to be exactly zero, empty plot
+subplot(1,3,2)
+plot(f, 20*log10(s))
+
+% Use a small offset to avoid -Inf
+subplot(1,3,3)
+plot(f, 20*log10(s + 1e-6))
+ylim([-120, 0])
+```
+
+![image-20260426101717290](ad-da/image-20260426101717290.png)
+
+Periodic Quantization Noise if `N` and `cycles` are ***not mutually prime***, i.e. `cycles=64` then `GCD(2048, 64)=64`, then $N_R' = 2048/64=32$, so quantization noise appear as ***odd harmonics*** $n/32;\space\space n\in \mathbb{Z}^+$ because of ***Half Wave Symmetry***
+
+
+
+![image-20260426112557906](ad-da/image-20260426112557906.png)
+
+```matlab
+N = 2048;
+cycles = 64;
+fs = 1000;
+fx = fs*cycles/N;
+LSB = 2/2^10;
+%generate signal, quantize (mid-tread) and take FFT
+xc = cos(2*pi*fx/fs*[0:N-1]);
+x = round(xc/LSB)*LSB;
+
+% frequency vector
+f = [0:N/2-1]/N;
+nq = x - xc;
+NTn = N / gcd(N, cycles);
+
+subplot(2,1,1)
+plot(nq(1:NTn/2))
+hold on
+plot(nq(1+NTn/2:NTn))
+
+sn  = abs(fft(nq));
+sn = sn(1:end/2)/N*2;
+subplot(2,1,2)
+plot(f, 20*log10(sn))
+```
 
 
 

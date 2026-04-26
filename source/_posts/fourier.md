@@ -399,6 +399,20 @@ inverse CTFT shall integral from $-\infty$ to $+\infty$ to obtain $\delta(t)$ in
 
 
 
+### Half Wave Symmetry
+
+> ECEN 2633 Chapter 16: Fourier Series [[http://www.jazapka.people.ysu.edu/ECEN%202633%20Chapter%2016.pdf](http://www.jazapka.people.ysu.edu/ECEN%202633%20Chapter%2016.pdf)]
+
+![image-20260426112440854](fourier/image-20260426112440854.png)
+
+---
+
+> [[Google AI Mode](https://share.google/aimode/Ds3cYbiKHkvqqqcyF)]
+
+![image-20260426111928680](fourier/image-20260426111928680.png)
+
+
+
 ## spectral sampling
 
 

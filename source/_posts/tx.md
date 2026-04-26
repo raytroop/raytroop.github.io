@@ -414,22 +414,30 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 
 
-## Test Challenges
+## Tx Measurements
 
 > PAM4 Transmitter Test Challenges [[https://harrisburg.psu.edu/files/pdf/16861/2019/05/06/tektronix_penn_state_si_april_12_2019.pdf](https://harrisburg.psu.edu/files/pdf/16861/2019/05/06/tektronix_penn_state_si_april_12_2019.pdf)]
 >
 > PAM4 Signaling in High Speed Serial Technology: Test, Analysis, and Debug [[https://download.tek.com/document/55W_60273_1_HR_Letter.pdf](https://download.tek.com/document/55W_60273_1_HR_Letter.pdf)]
 >
-> Hsinho Wu, Intel. DesignCon 2021: SNDR Analysis & Its Impacts on Link Performance
+> PCIe 7.0 Introduction PCIe 6.0 Anritsu/Tektronix Solution [[https://map-assets.tek.com/map-assets/emea/pdf-files/PCIe7_0_Intro_PCIe_6_0_Solution.pdf](https://map-assets.tek.com/map-assets/emea/pdf-files/PCIe7_0_Intro_PCIe_6_0_Solution.pdf)]
 
 *TODO* &#128197;
 
 
 
+### TX Jitter Measurement
+
+> PCI-SIG, Update-on-PCIe8p0-Scope-bandwidth-study-and-jitter-measurement-Intel-2025-12-18_v3
+
+![image-20260426211026901](tx/image-20260426211026901.png)
 
 
-## Linear Fit Pulse Response (LFPR)
 
+### Linear Fit Pulse Response (LFPR)
+
+> Hsinho Wu, Intel. DesignCon 2021: SNDR Analysis & Its Impacts on Link Performance
+>
 > Christiaan Bil (Intel), DesignCon 2026. An Experimental Study of PCIe Transmitter Equalization Preset Measurement Methods for 64 and 128 GT/s PAM4 Signaling
 >
 > Dhruv Gupta, DesignCon 2026. PAM4 measurements through lossy channels – why oscilloscope CDR emulation matters

@@ -382,7 +382,7 @@ ylim([-120, 0])
 
 ![image-20260426101717290](ad-da/image-20260426101717290.png)
 
-Periodic Quantization Noise if `N` and `cycles` are ***not mutually prime***, i.e. `cycles=64` then `GCD(2048, 64)=64`, then $N_R' = 2048/64=32$, so quantization noise appear as ***odd harmonics*** $n/32;\space\space n\in \mathbb{Z}^+$ because of ***Half Wave Symmetry***
+Periodic Quantization Noise if `N` and `cycles` are ***not mutually prime***, i.e. `cycles=64` then `GCD(2048, 64)=64`, then $N_R' = 2048/64=32$, so quantization noise manifests as ***odd harmonics*** $n/32\mid n = 2k + 1, k \in \mathbb{Z}$ because of ***Half Wave Symmetry***
 
 
 

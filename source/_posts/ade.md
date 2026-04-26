@@ -9,6 +9,14 @@ mathjax: true
 
 
 
+## psf_utils
+
+> PSF Utilities — Read Spectre Data Files [[https://github.com/KenKundert/psf_utils](https://github.com/KenKundert/psf_utils)]
+
+![image-20260426155918499](ade/image-20260426155918499.png)
+
+
+
 ## m-factor devices correlation
 
 > community.cadence, *Understanding underlying statistical assumptions in Monte Carlo simulations [[link](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/62906/understanding-underlying-statistical-assumptions-in-monte-carlo-simulations)]*

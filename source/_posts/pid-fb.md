@@ -136,6 +136,14 @@ it simply *"latches up"* rather than oscillates
 
 ![image-20251122095709631](pid-fb/image-20251122095709631.png)
 
+## Root-Locus Techniques
+
+***closed-loop system***
+
+![image-20260426164543043](pid-fb/image-20260426164543043.png)
+
+
+
 ## Mason's Gain Rule
 
 > Rick Lyons, *Using Mason's Rule to Analyze DSP Networks* [[https://www.dsprelated.com/showarticle/76.php](https://www.dsprelated.com/showarticle/76.php)]

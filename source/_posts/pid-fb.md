@@ -138,6 +138,8 @@ it simply *"latches up"* rather than oscillates
 
 ## Mason's Gain Rule
 
+> Rick Lyons, *Using Mason's Rule to Analyze DSP Networks* [[https://www.dsprelated.com/showarticle/76.php](https://www.dsprelated.com/showarticle/76.php)]
+
 ***Mason's gain formula (MGF)*** is a method for finding the ***transfer function*** of a ***linear signal-flow graph (SFG)***.
 
 *TODO* &#128197;

@@ -34,6 +34,7 @@ $$
 \color{red}Z_T(t) = Z_0\cdot \frac{1+\Gamma(t)}{1-\Gamma(t)}
 $$
 
+![image-20260427221738370](si/image-20260427221738370.png)
 
 ### S11 vs TDR
 
@@ -186,6 +187,18 @@ magnitude = 20 * np.log10(magnitude)
 *TODO* &#128197;
 
 
+
+## oscilloscope bandwidth
+
+> Realtime oscilloscope bandwidth considerations for 25 Gbps PAM4 patterns, [[https://www.ieee802.org/3/cy/public/adhoc/chang_3cy_01_12_20_22.pdf](https://www.ieee802.org/3/cy/public/adhoc/chang_3cy_01_12_20_22.pdf)]
+
+![image-20260427220940809](si/image-20260427220940809.png)
+
+---
+
+---
+
+***Bessel Thomson Filter Bandwidth***
 
 
 

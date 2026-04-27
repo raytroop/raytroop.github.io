@@ -421,6 +421,10 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 > PAM4 Signaling in High Speed Serial Technology: Test, Analysis, and Debug [[https://download.tek.com/document/55W_60273_1_HR_Letter.pdf](https://download.tek.com/document/55W_60273_1_HR_Letter.pdf)]
 >
 > PCIe 7.0 Introduction PCIe 6.0 Anritsu/Tektronix Solution [[https://map-assets.tek.com/map-assets/emea/pdf-files/PCIe7_0_Intro_PCIe_6_0_Solution.pdf](https://map-assets.tek.com/map-assets/emea/pdf-files/PCIe7_0_Intro_PCIe_6_0_Solution.pdf)]
+>
+> Mike Hertz, Teledyne LeCroy: WEBINAR PAM4 Analysis and Measurement Considerations
+>
+> Pegah Alavi (Keysight Technologies) DesignCon 2025: *PCI Express & PAM4: Balancing Silicon and interconnect interdependencies for 128 GT/s*
 
 *TODO* &#128197;
 
@@ -445,6 +449,20 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 *TODO* &#128197;
 
 
+
+### SNDR
+
+![image-20260427232519514](tx/image-20260427232519514.png)
+
+
+
+### RLM Measurement Based on Multi-pulse Extraction
+
+![image-20260427224538461](tx/image-20260427224538461.png)
+
+
+
+![image-20260427224752487](tx/image-20260427224752487.png)
 
 
 

@@ -65,9 +65,7 @@ DFE algorithm is reducing ISI based on the *detected data (symbol)*
 
 Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions from the symbol detector corrupt the filtering of the feedback loop. As a result, the inclusion of the feedforward filter on the front end is crucial in minimizing the probability of error
 
-
-
-![image](https://docs.keysight.com/eesofapps/files/678068404/678068425/1/1629094403000/tabel.png)
+![image-20260427201750201](eq-cdr/image-20260427201750201.png)
 
 - because symbol detection is nonlinear, decision feedback equalization is also *nonlinear*
 - because of the nonlinearity of the DFE response, it must be modeled in the *time domain*  

@@ -1691,6 +1691,10 @@ make install
 
 
 
+## SeaSim
+
+***Seasim (Statistical Eye Analysis Simulator)*** is a **statistical** channel simulation tool provided by the PCI-SIG to help designers evaluate the signal integrity and compliance of PCI Express (PCIe) links
+
 ## other framework
 
 ### pyBERT

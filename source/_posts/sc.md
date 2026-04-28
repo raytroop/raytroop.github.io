@@ -1,5 +1,5 @@
 ---
-title: Switched Capacitor Circuits
+title: Signal Conditioning Circuits
 date: 2024-12-28 15:53:24
 tags:
 categories:

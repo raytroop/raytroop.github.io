@@ -170,7 +170,7 @@ signal_ctle = sp.signal.convolve(signal,h_ctle)
 
 ![image-20260322214151852](link-mdl/image-20260322214151852.png)
 
-`shift_signal` work as simple CDR's phase lock
+`shift_signal` mimic a simple CDR's phase lock
 
 ```python
 def shift_signal(signal, samples_per_symbol):

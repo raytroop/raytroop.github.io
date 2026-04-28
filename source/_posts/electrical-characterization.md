@@ -1,11 +1,13 @@
 ---
-title: Signal Integrity Characterization
+title: Electrical Characterization
 date: 2025-04-19 09:51:01
 tags:
 categories:
 - sipi
 mathjax: true
 ---
+
+![image-20260428215620699](electrical-characterization/image-20260428215620699.png)
 
 
 
@@ -25,16 +27,16 @@ mathjax: true
 >
 > Mike Steinberger, *TDR: Reading the Tea Leaves* [[https://siguys.com/wp-content/uploads/2016/01/TDR_TeaLeaves.pdf](https://siguys.com/wp-content/uploads/2016/01/TDR_TeaLeaves.pdf)]
 
-![image-20260419164454411](si/image-20260419164454411.png)
+![image-20260419164454411](electrical-characterization/image-20260419164454411.png)
 
-![image-20260419165629435](si/image-20260419165629435.png)
+![image-20260419165629435](electrical-characterization/image-20260419165629435.png)
 
-![image-20260420215923585](si/image-20260420215923585.png)
+![image-20260420215923585](electrical-characterization/image-20260420215923585.png)
 $$
 \color{red}Z_T(t) = Z_0\cdot \frac{1+\Gamma(t)}{1-\Gamma(t)}
 $$
 
-![image-20260427221738370](si/image-20260427221738370.png)
+![image-20260427221738370](electrical-characterization/image-20260427221738370.png)
 
 ### S11 vs TDR
 
@@ -45,9 +47,9 @@ $$
 
 
 
-![image-20260420232932030](si/image-20260420232932030.png)
+![image-20260420232932030](electrical-characterization/image-20260420232932030.png)
 
-![image-20260420232956757](si/image-20260420232956757.png)
+![image-20260420232956757](electrical-characterization/image-20260420232956757.png)
 
 #### w/ IFFT
 
@@ -77,9 +79,9 @@ Z(t)  – plotted vs t (in ns)   ← plot_attribute() with attribute='z',
                                 conversion='time_step'
 ```
 
-![Graphical illustrations of multiplicy the spectrum of a step function with a rectangular window to produce a finite edge in the time domain](si/windowfunctionsandtimedomainplot3.png)
+![Graphical illustrations of multiplicy the spectrum of a step function with a rectangular window to produce a finite edge in the time domain](electrical-characterization/windowfunctionsandtimedomainplot3.png)
 
-![image-20260420230505339](si/image-20260420230505339.png)
+![image-20260420230505339](electrical-characterization/image-20260420230505339.png)
 
 Window function with $w[0] = 1$ and $w[f_{max}]$=0 ensure $\Gamma(+\infty)$ and $\Gamma(0)$ are correct
 
@@ -95,7 +97,7 @@ Window function with $w[0] = 1$ and $w[f_{max}]$=0 ensure $\Gamma(+\infty)$ and 
 >
 > ADS `tdr_sp_imped`
 
-![image-20260420235747173](si/image-20260420235747173.png)
+![image-20260420235747173](electrical-characterization/image-20260420235747173.png)
 
 ---
 
@@ -103,9 +105,9 @@ Window function with $w[0] = 1$ and $w[f_{max}]$=0 ensure $\Gamma(+\infty)$ and 
 
 > Peter Goossens, *Transformation of time domain TDR to its frequency domain S11 (Return Loss) using FFT* [[https://www.gquipment.com/blog/transformation-of-time-domain-tdr-to-its-frequency-domain-s11-return-loss-using-fft](https://www.gquipment.com/blog/transformation-of-time-domain-tdr-to-its-frequency-domain-s11-return-loss-using-fft)]
 
-![image-20260420224211467](si/image-20260420224211467.png)
+![image-20260420224211467](electrical-characterization/image-20260420224211467.png)
 
-![image-20260420223849838](si/image-20260420223849838.png)
+![image-20260420223849838](electrical-characterization/image-20260420223849838.png)
 
 $$
 \color{green} \Gamma(t) \to S_{ii}
@@ -145,7 +147,7 @@ magnitude = 20 * np.log10(magnitude)
 
 *TODO* &#128197;
 
-![image-20260420220101203](si/image-20260420220101203.png)
+![image-20260420220101203](electrical-characterization/image-20260420220101203.png)
 
 
 
@@ -168,9 +170,9 @@ magnitude = 20 * np.log10(magnitude)
 
 ### Ripple in an S Parameters
 
-![image-20260110134112029](si/image-20260110134112029.png)
+![image-20260110134112029](electrical-characterization/image-20260110134112029.png)
 
-![image-20260110134010253](si/image-20260110134010253.png)
+![image-20260110134010253](electrical-characterization/image-20260110134010253.png)
 
 
 
@@ -192,7 +194,7 @@ magnitude = 20 * np.log10(magnitude)
 
 > Realtime oscilloscope bandwidth considerations for 25 Gbps PAM4 patterns, [[https://www.ieee802.org/3/cy/public/adhoc/chang_3cy_01_12_20_22.pdf](https://www.ieee802.org/3/cy/public/adhoc/chang_3cy_01_12_20_22.pdf)]
 
-![image-20260427220940809](si/image-20260427220940809.png)
+![image-20260427220940809](electrical-characterization/image-20260427220940809.png)
 
 ---
 
@@ -213,3 +215,5 @@ Tim Wang-Lee, DesignCon 2026 KEF: Mastering TDR and De-embedding Through Simulat
 Csaba SOOS, Signal and Power Integrity Design Practices [[https://indico.cern.ch/event/358837/attachments/714663/1930957/Signal_and_Power_Integrity_Practices.pdf](https://indico.cern.ch/event/358837/attachments/714663/1930957/Signal_and_Power_Integrity_Practices.pdf)]
 
 Sam Palermo, ECEN689: Special Topics in High-Speed Links Circuits and Systems Spring 2012 Lecture 3: Time-Domain Reflectometry & S-Parameter Channel Models [[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee689_tdr_spar.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee689_tdr_spar.pdf)]
+
+Martin Stumpf, Preparing for PCIe® Electrical Measurements Beyond 64 GT/s

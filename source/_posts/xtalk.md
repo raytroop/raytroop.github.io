@@ -172,3 +172,5 @@ How Much Transmission-Line Loss is Too Much? [[http://blog.teledynelecroy.com/20
 
 Raymond Y. Chen, Raymond Y. Chen. Fundamentals of S Fundamentals of S-Parameter Parameter Modeling for Power Distribution Modeling for Power Distribution System (PDS) and SSO Analysis System (PDS) and SSO Analysis [[https://ibis.org/summits/jun05/chen.pdf](https://ibis.org/summits/jun05/chen.pdf)]
 
+Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 9: Noise Sources [[https://people.engr.tamu.edu/spalermo/ecen689/lecture9_ee720_noise_sources.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture9_ee720_noise_sources.pdf)]
+

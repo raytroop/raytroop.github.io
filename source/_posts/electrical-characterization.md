@@ -177,9 +177,11 @@ magnitude = 20 * np.log10(magnitude)
 
 
 
+### high-reflection channel
 
+> Christiaan Bil, Intel. Challenges in Setting Appropriate NUI Value in Measured Step Response-based 32 GT/s Rx Calibration
 
-
+TODO* &#128197;
 
 
 ### Using S Parameters to Estimate Q

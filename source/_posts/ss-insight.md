@@ -15,6 +15,8 @@ mathjax: true
 
 Butterworth, Chebyshev, and Bessel filters are the three primary types of active filters used to shape signal frequency, each representing a specific trade-off between **magnitude flatness**, **roll-off speed**, and **phase linearity**
 
+> **Bessel filter** is often called **Bessel–Thomson filter** or simply **Thomson filter**
+
 ![image-20260428210651188](ss-insight/image-20260428210651188.png)
 
 ![image-20260428203853085](ss-insight/image-20260428203853085.png)

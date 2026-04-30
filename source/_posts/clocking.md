@@ -401,7 +401,7 @@ $$
 f_o = \frac{N}{M}f_r\color{red}\left(1+\frac{\Delta}{N}\right)
 $$
 
-$\frac{\Delta}{N}$ determine measurement accuracy, $\frac{\Delta}{N} \lt 0.1$ if 1% accuracy is need
+$\frac{\Delta}{N}$ determine measurement accuracy, $\frac{\Delta}{N} \lt 0.1$ if 1% accuracy is needed
 
 ## reference
 

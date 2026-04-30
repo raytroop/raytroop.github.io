@@ -385,8 +385,23 @@ $$
 > [How can I experimentally find the bandwidth of my PLL?, [https://dsp.stackexchange.com/a/73654/59253](https://dsp.stackexchange.com/a/73654/59253)]
 
 
+## Ring Oscillators and Process Variations
 
+> Inverter-19 - Ring Oscillators and Process Variations [[https://youtu.be/b1xZU0aD4hA](https://youtu.be/b1xZU0aD4hA)]
 
+we have
+
+$$
+(N+\Delta) T_o  = MT_r\quad \Delta\in [-1,1]
+$$
+
+then,
+
+$$
+f_o = \frac{N}{M}f_r\color{red}\left(1+\frac{\Delta}{N}\right)
+$$
+
+$\frac{\Delta}{N}$ determine measurement accuracy, $\frac{\Delta}{N} \lt 0.1$ if 1% accuracy is need
 
 ## reference
 

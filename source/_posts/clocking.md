@@ -389,6 +389,8 @@ $$
 
 > Inverter-19 - Ring Oscillators and Process Variations [[https://youtu.be/b1xZU0aD4hA](https://youtu.be/b1xZU0aD4hA)]
 
+![ps_ro.drawio](clocking/ps_ro.drawio.svg)
+
 we have
 
 $$

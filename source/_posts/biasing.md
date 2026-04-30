@@ -226,6 +226,35 @@ $$\begin{align}
 
 
 
+---
+
+---
+
+***Current mirror mismatch analysis***
+
+>  Art Zirger, Random Offset in CMOS IC Design [[https://designers-guide.org/forum/Attachments/mismatch_presentation.pdf](https://designers-guide.org/forum/Attachments/mismatch_presentation.pdf)]
+
+{% pdf /pdfs/Current_mirror_mismatch_analysis.pdf %}
+
+![image-20260430211031506](biasing/image-20260430211031506.png)
+
+![image-20260430215506618](biasing/image-20260430215506618.png)
+
+***Another solution is to view the mirror branch as a whole***
+
+In source branch self mismatch $\sigma_{vth,src} = \frac{A_{vt}}{\sqrt{2WL}}$ and mirror branch self-mismatch $\sigma_{vth,mir} = \frac{A_{vt}}{\sqrt{2kWL}}$, then mutual mismatch is
+$$
+\sigma_{vth} = \sqrt{\sigma_{vth,src}^2 + \sigma_{vth,mir}^2} = \sigma_{vth,src}\sqrt{1+\frac{1}{k}}
+$$
+mirror current variation $\sigma_{I_k} = k g_m \sigma_{vth}$, relative variation of mirror current is
+$$
+\frac{\sigma_{I_k}}{I_k} = \frac{k g_m \sigma_{vth}}{kI} = \frac{g_m \sigma_{vth,src}}{I}\sqrt{1+\frac{1}{k}}=\color{red}\frac{\sigma_{I}}{I}\sqrt{1+\frac{1}{k}}
+$$
+
+---
+
+{% pdf /pdfs/mos_mismatch.pdf %}
+
 
 
 ## Biasing current source and global variation Monte Carlo 
@@ -260,6 +289,10 @@ For **global variation**, *all device have same variation*, mirror help reduce v
 > We had better bias mos gate with mirror rather than the *vdc* source while simulating sub-block.
 >
 > This is real situation due to current source are always biased by mirror and *vdc* biasing don't give the right result in global variation Monte Carlo simulation (*542.8n* is too pessimistic, *13.07p* is right result)
+
+
+
+
 
 
 
@@ -305,7 +338,12 @@ $$\begin{align}
 \end{align}$$
 
 
-### Alternative approach for Loop Gain
+
+---
+
+---
+
+***Alternative approach for Loop Gain***
 
 > using derivation of large signal
 

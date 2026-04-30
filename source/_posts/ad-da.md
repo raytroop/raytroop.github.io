@@ -173,6 +173,14 @@ $$
 
 ![image-20241215101727644](ad-da/image-20241215101727644.png)
 
+---
+
+---
+
+***INL/DNL analysis of current steering DAC***
+
+{% pdf /pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf %}
+
 
 
 ## Spectral Metrics
@@ -849,26 +857,6 @@ $$
 ![image-20241215090447383](ad-da/image-20241215090447383.png)
 
 > $C_4$ and $C_1+C_2+C_3$ are independent (can't cancel out) and their variance is two largest ($16\sigma_u^2$, $15\sigma_u^2$, ), the total standard deviation is $\sqrt{16\sigma_u^2+15\sigma_u^2}=\sqrt{31}\sigma_u$
-
-
-
-## INL, DNL of current steering DAC
-
-### MOS mismatch
-
-{% pdf /pdfs/mos_mismatch.pdf %}
-
-
-
-### Current mirror mismatch analysis
-
-{% pdf /pdfs/Current_mirror_mismatch_analysis.pdf %}
-
-
-
-### INL/DNL analysis of current steering DAC
-
-{% pdf /pdfs/INL_DNL_analysis_of_current_steering_DAC.pdf %}
 
 
 

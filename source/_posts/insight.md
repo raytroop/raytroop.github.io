@@ -596,8 +596,26 @@ noting $\omega_{p1}\lt \omega_z \lt \omega_{p2}$
 
 > Art Zirger, Random Offset in CMOS IC Design [[https://designers-guide.org/forum/Attachments/mismatch_presentation.pdf](https://designers-guide.org/forum/Attachments/mismatch_presentation.pdf)]
 
-The dependence of offset voltage and current mismatches upon the overdrive voltage is similar to our
+The dependence of offset voltage and current mismatches upon the **overdrive voltage** is similar to our
 observations for corresponding *noise quantities*
+
+![image-20260430215803421](insight/image-20260430215803421.png)
+
+### current mirror
+
+![image-20240624224944377](insight/image-20240624224944377.png)
+
+![image-20240624225010443](insight/image-20240624225010443.png)
+
+> To minimize current mismatch, the overdrive voltage must be maximized, a trend opposite to that in differential pair.
+>
+> This is because as $V_{GS}-V_{TH}$ increases, threshold mismatch has a lesser effect on the device currents
+>
+> $\Delta I_D= g_m \Delta V_{TH} = \frac{2I_D}{V_{OV}}\Delta V_{TH}$
+
+---
+
+![image-20260430204431088](insight/image-20260430204431088.png)
 
 ### differential pair
 
@@ -645,18 +663,9 @@ That is $\Delta V_R = \frac{I_D}{ g_m} \cdot \frac{\Delta R}{R}$
 
 ---
 
+![image-20260430202959259](insight/image-20260430202959259.png)
 
-### current mirror
 
-![image-20240624224944377](insight/image-20240624224944377.png)
-
-![image-20240624225010443](insight/image-20240624225010443.png)
-
-> To minimize current mismatch, the overdrive voltage must be maximized, a trend opposite to that in differential pair.
->
-> This is because as $V_{GS}-V_{TH}$ increases, threshold mismatch has a lesser effect on the device currents
->
-> $\Delta I_D= g_m \Delta V_{TH} = \frac{2I_D}{V_{OV}}\Delta V_{TH}$
 
 
 

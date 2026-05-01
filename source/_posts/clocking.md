@@ -385,9 +385,12 @@ $$
 > [How can I experimentally find the bandwidth of my PLL?, [https://dsp.stackexchange.com/a/73654/59253](https://dsp.stackexchange.com/a/73654/59253)]
 
 
+
 ## Ring Oscillators and Process Variations
 
 > Inverter-19 - Ring Oscillators and Process Variations [[https://youtu.be/b1xZU0aD4hA](https://youtu.be/b1xZU0aD4hA)]
+>
+> IC_designer, VCO cali [[link](https://www.xiaohongshu.com/explore/69f0c69e0000000036018246?app_platform=ios&app_version=9.27.1&share_from_user_hidden=true&xsec_source=app_share&type=normal&xsec_token=CBhlhhkQaYn8597suoZPVRUdEfoxSX8fxREo1B4KR2zbI=&author_share=1&xhsshare=WeixinSession&shareRedId=OD1EMERJRks2NzUyOTgwNjY6OTc3NjlP&apptime=1777422393&share_id=e42b9eaed44144edaeefbf521f3cdadc)]
 
 ![ps_ro.drawio](clocking/ps_ro.drawio.svg)
 

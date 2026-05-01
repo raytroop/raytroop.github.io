@@ -181,7 +181,13 @@ magnitude = 20 * np.log10(magnitude)
 
 > Christiaan Bil, Intel. Challenges in Setting Appropriate NUI Value in Measured Step Response-based 32 GT/s Rx Calibration
 
-TODO* &#128197;
+![image-20260501074124317](electrical-characterization/image-20260501074124317.png)
+
+![image-20260501074547445](electrical-characterization/image-20260501074547445.png)
+
+![image-20260501074650779](electrical-characterization/image-20260501074650779.png)
+
+
 
 
 ### Using S Parameters to Estimate Q

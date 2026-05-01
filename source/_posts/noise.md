@@ -486,7 +486,15 @@ A random signal $v_n(t)$ is sampled using an ***ideal impulse sampler***
 
 ## ADC SNR & clock jitter
 
-> ***cyclostationary*** random process
+> Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
+>
+> CC Chen, Why Absolute Jitter Matters for ADCs & DACs? [[https://youtu.be/jBgDDFFDq30](https://youtu.be/jBgDDFFDq30)]
+>
+> Thomas Neu, TIPL 4704. Jitter vs SNR for ADCs [[https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf](https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf)]
+>
+> Walt Kester , MT-007: Aperture Time, Aperture Jitter, Aperture Delay Time [[https://www.analog.com/media/en/training-seminars/tutorials/MT-007.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-007.pdf)]
+
+***cyclostationary*** random process
 
 ![image-20250809170358612](noise/image-20250809170358612.png)
 
@@ -504,12 +512,6 @@ $$\begin{align}
 \end{align}$$
 
 
-
-> Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
->
-> CC Chen, Why Absolute Jitter Matters for ADCs & DACs? [[https://youtu.be/jBgDDFFDq30](https://youtu.be/jBgDDFFDq30)]
->
-> Thomas Neu, TIPL 4704. Jitter vs SNR for ADCs [[https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf](https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf)]
 
 ![image-20250525141523199](noise/image-20250525141523199.png)
 

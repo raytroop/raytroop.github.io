@@ -108,6 +108,16 @@ The quantization noise is ***an infinite sum of input signal odd harmonics***, w
 
 
 
+### Sampling Noise in ADC
+
+> Kwantae Kim, *Integrated Analog Systems D - Lecture 12 (ADC)* [[https://youtu.be/NkSitVkPNig](https://youtu.be/NkSitVkPNig)]
+
+![image-20260501170637885](ad-da/image-20260501170637885.png)
+
+In the power domain, $\color{red}v_{nS,RMS}/3 \lt \sigma_{q,RMS}$ ensures that sampling noise power is *nearly an order of magnitude smaller* than the quantization noise
+
+![image-20260501171651963](ad-da/image-20260501171651963.png)
+
 ## ADC Linearity (DNL/INL)
 
 ![image-20260426174704406](ad-da/image-20260426174704406.png)
@@ -231,6 +241,10 @@ $$
 
 
 
+![image-20260501160344805](ad-da/image-20260501160344805.png)
+
+
+
 ### ENOB
 
 > Qasim Chaudhari, *On Analog-to-Digital Converter (ADC), 6 dB SNR Gain per Bit, Oversampling and Undersampling* [[https://wirelesspi.com/on-analog-to-digital-converter-adc-6-db-snr-gain-per-bit-oversampling-and-undersampling/](https://wirelesspi.com/on-analog-to-digital-converter-adc-6-db-snr-gain-per-bit-oversampling-and-undersampling/)]
@@ -327,6 +341,10 @@ $$
 \text{SNR} = 10\log\left(\frac{V_\text{in}^2/2}{\Delta^2/12}\right)
 $$
 
+---
+
+![image-20260501161040714](ad-da/image-20260501161040714.png)
+
 
 
 ### Spectral Leakage
@@ -335,7 +353,7 @@ Two ways to deal with spectral leakage: ***Ensure integer number of periods*** o
 
 ![image-20260426075613908](ad-da/image-20260426075613908.png)
 
-
+![image-20260501161349428](ad-da/image-20260501161349428.png)
 
 ### Coherent Sampling
 
@@ -434,7 +452,9 @@ Periodic Quantization Noise if `N` and `cycles` are ***not mutually prime***, i.
 
 
 
-![image-20260426112557906](ad-da/image-20260426112557906.png)
+
+
+![image-20260501155434170](ad-da/image-20260501155434170.png)
 
 ```matlab
 N = 2048;
@@ -452,9 +472,10 @@ nq = x - xc;
 NTn = N / gcd(N, cycles);
 
 subplot(2,1,1)
-plot(nq(1:NTn/2))
+plot(nq(1:NTn/2), '-s')
 hold on
-plot(nq(1+NTn/2:NTn))
+plot(nq(1+NTn/2:NTn), '-o')
+xticks(1:1:16); grid on
 
 sn  = abs(fft(nq));
 sn = sn(1:end/2)/N*2;
@@ -462,7 +483,9 @@ subplot(2,1,2)
 plot(f, 20*log10(sn))
 ```
 
+---
 
+![image-20260501162130482](ad-da/image-20260501162130482.png)
 
 ---
 
@@ -719,49 +742,6 @@ where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundan
 > ESE 6680: Mixed Signal Design and Modeling "Lec 20: April 10, 2023 Data Converter Testing" [[https://www.seas.upenn.edu/~ese6680/spring2023/handouts/lec20.pdf](https://www.seas.upenn.edu/~ese6680/spring2023/handouts/lec20.pdf)]
 >
 > Degang Chen. "Distortion Analysis" [[https://class.ece.iastate.edu/djchen/ee435/2017/Lecture25.pdf](https://class.ece.iastate.edu/djchen/ee435/2017/Lecture25.pdf)]
-
-
-
-
-
-
-## Bootstrapped Switch
-
-![image-20240825222432796](ad-da/image-20240825222432796.png)
-
-
-
-> A. Abo et al., "A 1.5-V, 10-bit, 14.3-MS/s CMOS Pipeline Analog-to Digital Converter," IEEE J. Solid-State Circuits, pp. 599, May 1999 [[https://sci-hub.se/10.1109/4.760369](https://sci-hub.se/10.1109/4.760369)]
->
-> Dessouky and Kaiser, "Input switch configuration suitable for rail-to-rail operation of switched opamp circuits," Electronics Letters, Jan. 1999. [[https://sci-hub.se/10.1049/EL:19990028](https://sci-hub.se/10.1049/EL:19990028)]
->
-> B. Razavi, "The Bootstrapped Switch [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 7, no. 3, pp. 12-15, Summer 2015 [[https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15Switch.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BRSummer15Switch.pdf)]
->
-> B. Razavi, "The Design of a bootstrapped Sampling Circuit [The Analog Mind]," IEEE Solid-State Circuits Magazine, Volume. 13, Issue. 1, pp. 7-12, Summer 2021. [[http://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_1_2021.pdf](http://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_1_2021.pdf)]
-
-![image-20241108210222043](ad-da/image-20241108210222043.png)
-
-
-
-
-
-
-## Hold Mode Feedthrough
-![image-20240820204720277](ad-da/image-20240820204720277.png)
-
-![image-20240820204959977](ad-da/image-20240820204959977.png)
-
-
-
-> P. Schvan et al., "A 24GS/s 6b ADC in 90nm CMOS," 2008 IEEE International Solid-State Circuits Conference - Digest of Technical Papers, San Francisco, CA, USA, 2008, pp. 544-634
->
-> B. Sedighi, A. T. Huynh and E. Skafidas, "A CMOS track-and-hold circuit with beyond 30 GHz input bandwidth," 2012 19th IEEE International Conference on Electronics, Circuits, and Systems (ICECS 2012), Seville, Spain, 2012, pp. 113-116
->
-> Tania Khanna, ESE 568: Mixed Signal Circuit Design and Modeling [[https://www.seas.upenn.edu/~ese5680/fall2019/handouts/lec11.pdf](https://www.seas.upenn.edu/~ese5680/fall2019/handouts/lec11.pdf)]
-
-
-
-
 
 
 

@@ -51,6 +51,36 @@ Don't confuse **resolution** $\Delta$ with **Bounded Quantization Noise** $-\Del
 
 ![image-20240925235213137](ad-da/image-20240925235213137.png)
 
+
+
+---
+
+
+
+![image-20260501104900735](ad-da/image-20260501104900735.png)
+
+![image-20260501104930194](ad-da/image-20260501104930194.png)
+
+
+
+## ADC Input Noise
+
+> Walt Kester, ADC Input Noise: The Good, The Bad, and The Ugly­. Is No Noise Good Noise? [[link](https://www.analog.com/en/resources/analog-dialogue/articles/adc-input-noise.html)] [[pdf](https://www.analog.com/media/en/analog-dialogue/volume-40/number-1/articles/adc-input-noise.pdf)]
+>
+> —, MT-004: The Good, the Bad, and the Ugly Aspects of ADC Input Noise-Is No Noise Good Noise? [[https://www.analog.com/media/en/training-seminars/tutorials/mt-004.pdf](https://www.analog.com/media/en/training-seminars/tutorials/mt-004.pdf)]
+>
+> Understanding ADC Noise for Small and Large Signal Inputs for Receiver Applications [[https://www.analog.com/en/resources/technical-articles/understanding-adc-noise-for-small-and-large-signal-inputs-for-receiver-applications.html](https://www.analog.com/en/resources/technical-articles/understanding-adc-noise-for-small-and-large-signal-inputs-for-receiver-applications.html)]
+
+
+
+The LSB determines the ADC code resolution, but the minimum reliably detectable input voltage is determined by the total noise floor, including quantization noise
+
+![image-20260501103056383](ad-da/image-20260501103056383.png)
+
+> [[https://share.google/aimode/aA1V4uj3GofKbBojl](https://share.google/aimode/aA1V4uj3GofKbBojl)]
+>
+> ADC quantization noise is considered a "deterministic error" rather than random thermal noise because it correlates with the input signal, creating a saw-tooth error waveform rather than random Gaussian noise. While it cannot be reduced by averaging a static signal, it **can** be reduced through averaging if the signal is oversampled, or if dither (random noise) is added to decorrelate it.
+
 ### Quantization is NOT Noise
 
 > [[https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization](https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization)]
@@ -69,6 +99,14 @@ The quantization noise is ***an infinite sum of input signal odd harmonics***, w
 
 
 ![image-20250902203921651](ad-da/image-20250902203921651.png)
+
+---
+
+> [[https://share.google/aimode/aA1V4uj3GofKbBojl](https://share.google/aimode/aA1V4uj3GofKbBojl)]
+
+![image-20260501103237761](ad-da/image-20260501103237761.png)
+
+
 
 ## ADC Linearity (DNL/INL)
 
@@ -217,6 +255,8 @@ When represented in dBs
 $$
 \text{SQNR(dB)} = 10\log(\frac{P_s}{P_Q}) = 10\log(\frac{3\times 2^{2N}}{2})= 20N\log(2) + 10\log(\frac{3}{2})= 6.02N + 1.76
 $$
+
+the maximum achievable SNR of N-bit ADC — theoretical SNR limit
 
 ---
 

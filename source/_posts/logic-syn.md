@@ -8,6 +8,16 @@ categories:
 
 
 
+## Karnaugh Map
+
+> Pinaki Mazumder; Idongesit E. Ebong, "Lectures on Digital Design Principles," in Lectures on Digital Design Principles , River Publishers, 2023
+
+Combinational Logic Minimization using ***Karnaugh maps (K-maps)***
+
+*TODO* &#128197;
+
+
+
 ## IJTAG
 
 While JTAG connects chips externally, ***IJTAG*** extends it inside the chip — linking embedded instruments (MBIST, sensors, monitors, etc.) through a reconfigurable network.
@@ -118,7 +128,7 @@ If your simulator does not support a distributed $rc$-model, or if the computati
 
 ***wave***
 
-Signal propagates over the wire as a **wave** (rather than **diffusing** as in $rc$ only models)
+Signal propagates over the wire as a **wave** (rather than **diffusing** as in RC only models)
 
 > Signal propagates by alternately transferring energy from capacitive to inductive modes
 

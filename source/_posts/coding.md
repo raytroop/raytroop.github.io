@@ -481,6 +481,24 @@ x[] = 5.0
 
 ## Matlab
 
+***LaTeX code for the expression*** 
+
+```matlab
+title('$c(T) = (\eta - m) \frac{k}{q} \left( T - T_r - T \cdot \ln \frac{T}{T_r} \right) < 0$', 'Interpreter', 'latex');
+
+ylabel('$c(T)$ mV', 'Interpreter', 'latex');
+```
+
+**Dollar Signs (`$`):** Wrapping the equation in `$...$` tells the LaTeX engine to use "inline math mode," which ensures proper spacing and formatting for symbols.
+
+**Interpreter:** Adding `'Interpreter', 'latex'` at the end is the "switch" that tells MATLAB not to use its basic text engine.
+
+![image-20260502005228622](coding/image-20260502005228622.png)
+
+---
+
+---
+
 
 
 

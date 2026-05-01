@@ -1667,8 +1667,6 @@ make install
 >
 > X. Chu, W. Guo, J. Wang, F. Wu, Y. Luo and Y. Li, "Fast and Accurate Estimation of Statistical Eye Diagram for Nonlinear High-Speed Links," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 29, no. 7, pp. 1370-1378, July 2021 [[https://sci-hub.se/10.1109/TVLSI.2021.3082208](https://sci-hub.se/10.1109/TVLSI.2021.3082208)]
 >
-> HSPICE® User Guide: Signal Integrity Modeling and Analysis, Version Q-2020.03, March 2020
->
 > IA Title: Common Electrical I/O (CEI) - Electrical and Jitter Interoperability agreements for 6G+ bps, 11G+ bps, 25G+ bps I/O and 56G+ bps IA # OIF-CEI-04.0 December 29, 2017 [[pdf](https://www.oiforum.com/wp-content/uploads/2019/01/OIF-CEI-04.0.pdf)]
 >
 > J. Park and D. Kim, "Statistical Eye Diagrams for High-Speed Interconnects of Packages: A Review," in *IEEE Access*, vol. 12, pp. 22880-22891, 2024 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10415105)]
@@ -1677,9 +1675,39 @@ make install
 
 ### StatOpt
 
-> Savo Bajic, ECE1392, Integrated Circuits for Digital Communications: **StatOpt in Python** [[https://savobajic.ca/projects/academic/statopt](https://savobajic.ca/projects/academic/statopt/)] [[https://www.eecg.utoronto.ca/~ali/statopt/main.html](https://www.eecg.utoronto.ca/~ali/statopt/main.html)]
+> Jeremy Cosson-Martin, Jhoan Salinas, Savo Bajic, and Ali Sheikholeslami, January 2024, *StatOpt: A Statistical Eye Analysis and Link Optimization Tool* [[https://www.eecg.utoronto.ca/~ali/statopt/main.html](https://www.eecg.utoronto.ca/~ali/statopt/main.html)]
 
-*TODO* &#128197;
+**StatOpt** is a **statistical eye analysis** and **link optimization tool** for wireline communications, developed in both MATLAB and Python 3
+
+The tool uses **statistical methods** to model various wireline effects and to estimate the link performance metrics such as the bit error rate and eye dimensions (eye's horizontal and vertical openings)
+
+![image-20260501205644025](link-mdl/image-20260501205644025.png)
+
+---
+
+---
+
+***Matlab Version of StatOpt***
+
+
+
+
+
+---
+
+---
+
+***Python Version of StatOpt***
+
+> Savo Bajic, ECE1392, Integrated Circuits for Digital Communications: **StatOpt in Python** [[https://savobajic.ca/projects/academic/statopt](https://savobajic.ca/projects/academic/statopt/)]
+>
+> [[https://github.com/savob/statopt-python](https://github.com/savob/statopt-python)]
+>
+> [https://www.eecg.utoronto.ca/~ali/statopt/StatOptPython.html](https://www.eecg.utoronto.ca/~ali/statopt/StatOptPython.html)]
+
+
+
+
 
 
 

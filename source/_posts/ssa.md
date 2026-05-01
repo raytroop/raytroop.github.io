@@ -127,6 +127,14 @@ stem(out)
 
 *TODO* &#128197;
 
+![image-20260501213246648](ssa/image-20260501213246648.png)
+
+![image-20260501213213447](ssa/image-20260501213213447.png)
+
+
+
+![image-20260501213702172](ssa/image-20260501213702172.png)
+
 
 
 ## Double-Edge Response (DER) Method
@@ -205,6 +213,18 @@ xlabel('Time (\times Ts)');
 title('synthesize with step response');
 grid on;
 ```
+
+
+
+## Cross Talk using Convolution
+
+> Charles Moore, *Computing effect of cross talk using Convolution* [[https://grouper.ieee.org/groups/802/3/ap/public/channel_adhoc/moore_c1_0305.pdf](https://grouper.ieee.org/groups/802/3/ap/public/channel_adhoc/moore_c1_0305.pdf)]
+>
+> Huang Chunxing, Statistical Eye Simulation Requirements [[https://ibis.org/summits/oct06a/huang.pdf](https://ibis.org/summits/oct06a/huang.pdf)]
+
+![image-20260501222929928](ssa/image-20260501222929928.png)
+
+
 
 
 

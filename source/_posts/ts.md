@@ -30,7 +30,7 @@ In practice, $V_{BE}$ is *slightly nonlinear*, the magnitude of this nonlinearit
 $$
 V_{curv}(T)=\frac{k}{q}(\eta-\delta)(T-T_r-T\cdot \ln(\frac{T}{T_r}))
 $$
-where $\eta$ = a constant depending on the doping level,  CMOS substrate pnp transistors have a typically value of $\eta \cong 4$
+where $\eta$ = a constant depending on the doping level,  CMOS substrate pnp transistors have a typically value of $\eta \approx 4$
 
 $\delta$ = order of the *temperature dependence of collector current* ($I_c$) 
 
@@ -39,6 +39,27 @@ $\delta$ = order of the *temperature dependence of collector current* ($I_c$)
 Although the temperature dependence of the bias current $I_b$ doesn’t impact the accuracy of $V_{BE}$, it does impact the systematic nonlinearity or curvature of $V_{BE}$, and hence the sensor's *systematic error*. **The curvature in $V_{BE}$ can be reduced by using a PTAT bias current**.
 
 ![image-20221106010909644](ts/image-20221106010909644.png)
+
+---
+
+![image-20260502002207248](ts/image-20260502002207248.png)
+
+![image-20260502002331231](ts/image-20260502002331231.png)
+
+![image-20260502005045075](ts/image-20260502005045075.png)
+
+```matlab
+eta=4; m=1; Tr=300; k_over_q = 1.380649e-23 / 1.620217663e-19;
+
+T=1:1:600;
+cT = (eta - m)*k_over_q *(T - Tr-T.*log(T/Tr))*1e3; % mV
+plot(-40:125, cT(-40+273:125+273)); grid on;
+xlim([-40,125])
+xlabel('temperature ^oC'); ylabel('$c(T)$ mV', 'Interpreter', 'latex');
+title('$c(T) = (\eta - m) \frac{k}{q} \left( T - T_r - T \cdot \ln \frac{T}{T_r} \right) < 0$', 'Interpreter', 'latex');
+```
+
+
 
 ## PTAT bias current
 
@@ -83,11 +104,9 @@ $$
  Since the loop gains in the two V-I converters cannot be expected to *match*, the resulting errors in **both** converters should be reduced to negligible levels.
 
 First, assume $A_{OL2}=\infty$
-$$\begin{align}
-\Delta \alpha &= (1-\frac{A_{OL1}}{1+A_{OL1}})\cdot\frac{R_2}{R_1}\\
-&=\frac{1}{1+A_{OL1}}\cdot\frac{R_2}{R_1}\\
-&\cong \frac{1}{A_{OL1}}\cdot\frac{R_2}{R_1}
-\end{align}$$
+$$
+\Delta \alpha = (1-\frac{A_{OL1}}{1+A_{OL1}})\cdot\frac{R_2}{R_1} =\frac{1}{1+A_{OL1}}\cdot\frac{R_2}{R_1} \approx \frac{1}{A_{OL1}}\cdot\frac{R_2}{R_1}
+$$
 
 We get
 $$
@@ -146,6 +165,8 @@ $$
 
 ### ADC dynamic range
 
+![image-20260501232732794](ts/image-20260501232732794.png)
+
 Take $V_{PTAT}=\alpha \cdot \Delta V_{BE}$ as input and $V_{REF}$ as reference. The output $\mu$ of the ADC will then be
 $$
 \mu =\frac{V_{PTAT}}{V_{VREF}}=\frac{\alpha \cdot \Delta V_{BE}}{V_{BE}+\alpha \cdot \Delta V_{BE}}
@@ -154,9 +175,9 @@ $$
 $$
 D_{out}=A\cdot \mu + B
 $$
-where $A\simeq 600K$ and $B\simeq -273K$
+where $A\approx 600K$ and $B\approx -273K$
 
-While the transfer is simple, it only uses about 30% of the of the ADC (the extremes of the operating range correspond to $\mu \simeq 1/3$ and $\mu \simeq  2/3$). The ratio results in a rather inefficient use of the modulator's *dynamic range*.
+While the transfer is simple, it only uses about 30% of the of the ADC (the extremes of the operating range correspond to $\mu \approx 1/3$ and $\mu \approx  2/3$). The ratio results in a rather inefficient use of the modulator's *dynamic range*.
 
 For a first-order $\Sigma\Delta$ modulator, this means that about **1.5 bits** of resolution are lost
 
@@ -245,10 +266,9 @@ Assuming the opamp is implemented as a **transconductance amplifier**, there are
 
 ​	The change in the integrated current
 
-​	$$\begin{align}
-​	\Delta I_{int} &= \frac{V_{i,ota}}{R_{out}}\\
-​	&= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
-​	\end{align}$$
+$$
+\Delta I_{int} = \frac{V_{i,ota}}{R_{out}}= \frac{I_{int}}{g_{m3}}\cdot \frac{1}{R_{out}}
+$$
 
 2. The finite DC gain $A_{0,3}$, which implies that an overdrive voltage is required to produce the **output voltage** $V_{int}$
 
@@ -267,3 +287,5 @@ EE247 - Analog Digital Interface Integrated Circuits - Fall 2009 [Lecture 24- Ov
 Hecht, Bruce. (2010). SSCS DL Kofi Makinwa Talks About Smart Sensor Design at SSCS-Boston [People]. Solid-State Circuits Magazine, IEEE. 2. 54 - 56. 10.1109/MSSC.2009.935278. 
 
 Randy Geiger. 2011 *Temperature Sensor Design for Power/Thermal Management in Emerging Semiconductor Processes* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2011_07_Geiger.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2011_07_Geiger.pdf)]
+
+Yan Lu; Chi-Seng Lam, "Selected Topics in Power, RF, and Mixed-Signal ICs," in *Selected Topics in Power, RF, and Mixed-Signal ICs* , River Publishers, 2017

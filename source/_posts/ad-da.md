@@ -116,6 +116,10 @@ The quantization noise is ***an infinite sum of input signal odd harmonics***, w
 
 In the power domain, $\color{red}v_{nS,RMS}/3 \lt \sigma_{q,RMS}$ ensures that sampling noise power is *nearly an order of magnitude smaller* than the quantization noise
 
+![image-20260502084730678](ad-da/image-20260502084730678.png)
+
+
+
 ![image-20260501171651963](ad-da/image-20260501171651963.png)
 
 ## ADC Linearity (DNL/INL)
@@ -921,6 +925,8 @@ Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis [[ht
 Ahmed M. A. Ali. ISSCC2021 T5: Calibration Techniques in ADCs [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf)]
 
 Jan Mulder Broadcom. ISSCC2015 T5: High-Speed Current-Steering DACs [[https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/TUTORIALS/ISSCC2015Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/TUTORIALS/ISSCC2015Visuals-T5.pdf)]
+
+Zhang, Milin, Zhihua Wang, Jan van der Spiegel and Franco Maloberti. "Advanced Tutorial on Analog Circuit Design." (2023)
 
 ---
 

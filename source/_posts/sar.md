@@ -1,5 +1,5 @@
 ---
-title: SAR ADC
+title: Successive-Approximation Register (SAR) ADC
 date: 2024-08-20 21:06:29
 tags:
 categories:
@@ -201,6 +201,50 @@ $$
 ### MSB with noise simualtion
 
 ![image-20250924004048876](sar/image-20250924004048876.png)
+
+## SAR ADC Noise Analysis
+
+![image-20260502085013836](sar/image-20260502085013836.png)
+
+### kT/C Noise in sampling
+
+![image-20260502084730678](sar/image-20260502084730678.png)
+
+### DAC Noise in conversion
+
+> T. Miki et al., "A 4.2 mW 50 MS/s 13 bit CMOS SAR ADC With SNR and SFDR Enhancement Techniques," in IEEE Journal of Solid-State Circuits, vol. 50, no. 6, pp. 1372-1381, June 2015 [[https://sci-hub.jp/10.1109/JSSC.2015.2417803](https://sci-hub.jp/10.1109/JSSC.2015.2417803)]
+
+![image-20260502090653788](sar/image-20260502090653788.png)
+
+![image-20260502092242889](sar/image-20260502092242889.png)
+
+### Comparator Noise in conversion
+
+![image-20260502100615163](sar/image-20260502100615163.png)
+
+---
+
+---
+
+***noise analysis for dynamic integrator***
+
+![image-20260502100357196](sar/image-20260502100357196.png)
+
+![image-20260502102147273](sar/image-20260502102147273.png)
+
+---
+
+![image-20260502102432478](sar/image-20260502102432478.png)
+
+![image-20260502100332974](sar/image-20260502100332974.png)
+
+---
+
+***noise analysis for latch phase***
+
+> P. Nuzzo, F. De Bernardinis, P. Terreni and G. Van der Plas, "Noise Analysis of Regenerative Comparators for Reconfigurable ADC Architectures," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 55, no. 6, pp. 1441-1454, July 2008
+
+![image-20260502110023968](sar/image-20260502110023968.png)
 
 
 
@@ -458,3 +502,5 @@ W. Liu, P. Huang and Y. Chiu, "A 12-bit, 45-MS/s, 3-mW Redundant Successive-Appr
 ---
 
 Andrew Yu. Understanding Metastability in SAR ADCs: Part II: Asynchronous [[https://github.com/phonon/sar-adc-metastability](https://github.com/phonon/sar-adc-metastability)] [[pdf](https://sci-hub.jp/10.1109/MSSC.2019.2922890)]
+
+Zhang, Milin, Zhihua Wang, Jan van der Spiegel and Franco Maloberti. "Advanced Tutorial on Analog Circuit Design." (2023)

@@ -213,6 +213,25 @@ def shift_signal(signal, samples_per_symbol):
 ---
 
 `lms_equalizer` performs **offline adaptation** and it fail due to DFE Error Propagation if `reference` is `None`
+$$
+\underbrace{\mathbf{y}_k}_{\text{FFE input}}
+\;\xrightarrow{\;\langle\cdot,\mathbf{w}_{\text{ffe}}\rangle\;}\;
+v^{\text{ffe}}_k
+\;\xrightarrow{\;-\,\langle\mathbf{z}_k,\mathbf{w}_{\text{dfe}}\rangle\;}\;
+v^{\text{dfe}}_k
+\;\xrightarrow{\;Q(\cdot)\;}\;
+z_k
+$$
+
+$$
+\boxed{\;\mathbf{w}_{\text{ffe}}^{(k+1)} = \mathbf{w}_{\text{ffe}}^{(k)} - \mu\, e_k\, \mathbf{y}_k\;}
+$$
+
+$$
+\boxed{\mathbf{w}_{\text{dfe}}^{(k+1)} = \mathbf{w}_{\text{dfe}}^{(k)} + \mu\, e_k\, \mathbf{z}_k}
+$$
+
+
 
 ```python
 def lms_equalizer(y, mu, N, w_ffe, FFE_pre, w_dfe, voltage_levels,
@@ -231,6 +250,11 @@ def lms_equalizer(y, mu, N, w_ffe, FFE_pre, w_dfe, voltage_levels,
         voltage level. `len(reference)` may be less than `len(y)`, in which case
         only the first `len(reference)` updates will be optimized in this manner.
     """
+    
+    e = np.zeros(N)
+    v_ffe = np.zeros(N)		# signal computed after FFE optimization
+    v_dfe = np.zeros(N)		# signal computed after FFE and DFE optimization
+    z = np.zeros(N)			# signal quantized from v_dfe
     min_delay = max(FFE_post, DFE_taps)
     for k in range(min_delay, N - FFE_pre):
         y_k = y[k - FFE_post:k + FFE_pre + 1][::-1]

@@ -578,6 +578,25 @@ grid on; xlabel('Time (Ts)')
 
 
 
+## Latex
+
+In math mode, LaTeX provides several commands to insert horizontal space of specific widths:
+
+| Command  | Width    | Name                |
+| -------- | -------- | ------------------- |
+| `\,`     | 3/18 em  | thin space          |
+| `\:`     | 4/18 em  | medium space        |
+| `\;`     | 5/18 em  | thick space         |
+| `\!`     | −3/18 em | negative thin space |
+| `\quad`  | 1 em     | quad                |
+| `\qquad` | 2 em     | double quad         |
+
+---
+
+---
+
+
+
 ## C++
 
 ***Using g++ only***

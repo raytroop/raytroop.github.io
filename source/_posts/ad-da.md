@@ -15,11 +15,21 @@ mathjax: true
 >
 > Carsten Wulff, "Advanced Integrated Circuits 2025" [[http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom](http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom)]
 
-
+![image-20260503082957057](ad-da/image-20260503082957057.png)
 
 ![image-20250825173843550](ad-da/image-20250825173843550.png)
 
+![image-20260503113513018](ad-da/image-20260503113513018.png)
 
+![image-20260503092050266](ad-da/image-20260503092050266.png)
+
+For Scherier FoM (DR, SNDR)
+
+![image-20260503110815315](ad-da/image-20260503110815315.png)
+
+![image-20260503111053594](ad-da/image-20260503111053594.png)
+
+![image-20260503120427004](ad-da/image-20260503120427004.png)
 
 ## Quantization Noise
 
@@ -239,9 +249,13 @@ $$
 
 ![image-20260425164053212](ad-da/image-20260425164053212.png)
 
-### SNR, SNDR
+### SNR, SNDR (SINAD)
+
+> Understanding Key Parameters for RF-Sampling Data Converters White Paper (WP509) [[https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters](https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters)]
 
 ![image-20260425164740278](ad-da/image-20260425164740278.png)
+
+![image-20260503100924412](ad-da/image-20260503100924412.png)
 
 
 
@@ -308,15 +322,23 @@ the maximum achievable SNR of N-bit ADC — theoretical SNR limit
 
 ---
 
+> Understanding Key Parameters for RF-Sampling Data Converters White Paper (WP509) [[https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters](https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters)]
+
+![image-20260503101042354](ad-da/image-20260503101042354.png)
+
+---
+
+---
+
 > Walt Kester. Evaluating High Speed DAC Performance [[https://www.analog.com/media/en/training-seminars/tutorials/mt-013.pdf](https://www.analog.com/media/en/training-seminars/tutorials/mt-013.pdf)]
 
-via other definition
+via *other* definition
 
 ***THD: signal to distortion***
 
 ***SINAD: noise and distortion to signal***
 
-![image-20260425165429931](ad-da/image-20260425165429931.png)
+![image-20260503102806229](ad-da/image-20260503102806229.png)
 
 ![image-20260425165827715](ad-da/image-20260425165827715.png)
 
@@ -331,9 +353,11 @@ via other definition
 
 
 
-### Dynamic Range
+### Dynamic Range (DR)
 
-![image-20250825215211670](ad-da/image-20250825215211670.png)
+![image-20260503113228361](ad-da/image-20260503113228361.png)
+
+![image-20260503113130108](ad-da/image-20260503113130108.png)
 
 ---
 
@@ -341,13 +365,23 @@ via other definition
 
 ![image-20250825220536821](ad-da/image-20250825220536821.png)
 
-$$
-\text{SNR} = 10\log\left(\frac{V_\text{in}^2/2}{\Delta^2/12}\right)
-$$
+
+
+### Noise Spectral Density (NSD)
+
+> Understanding Key Parameters for RF-Sampling Data Converters White Paper (WP509) [[https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters](https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters)]
+
+![image-20260503102953803](ad-da/image-20260503102953803.png)
+
+![image-20260503103307603](ad-da/image-20260503103307603.png)
+
+![image-20260503103531776](ad-da/image-20260503103531776.png)
 
 ---
 
-![image-20260501161040714](ad-da/image-20260501161040714.png)
+![image-20250902010512726](ad-da/image-20250902010512726.png)
+
+
 
 
 

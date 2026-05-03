@@ -499,7 +499,13 @@ ylabel('$c(T)$ mV', 'Interpreter', 'latex');
 
 ---
 
+***identify class of an object or variable***
 
+```matlab
+x = 42;
+type_name = class(x); % Returns 'double'
+disp(type_name)
+```
 
 
 

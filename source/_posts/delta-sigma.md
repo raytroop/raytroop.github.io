@@ -193,10 +193,95 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 
 
 
+## Performance Metrics
+
+![image-20260503165509578](delta-sigma/image-20260503165509578.png)
+
+- signal-to-noise ratio (SNR)
+- dynamic range (DR)
+- signal-to-(noise + distortion) ratio (SNDR)
+
+![image-20260503165804824](delta-sigma/image-20260503165804824.png)
+
+**DR** by **"SNR Max"** Definition ($\Delta\Sigma$ Specific)
+
+![image-20260503172843146](delta-sigma/image-20260503172843146.png)
+
+
+
 ## Quantizer overload
+
+> M. Neitola, "Lee's Rule Extended," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 64, no. 4, pp. 382-386, April 2017
 
 ![image-20250905062939783](delta-sigma/image-20250905062939783.png)
 
+
+
+---
+
+---
+
+***Maximum Stable Amplitude (MSA)***
+
+![image-20260503133732822](delta-sigma/image-20260503133732822.png)
+
+
+
+![image-20260503140323450](delta-sigma/image-20260503140323450.png)
+
+
+
+```matlab
+% Schreier Delta-Sigma Toolbox required
+OSR   = 64;
+order = 3;
+nlev  = 2;
+H_inf = 1.5;
+
+ntf = synthesizeNTF(order, OSR, 1, H_inf);
+
+N    = 2^14;
+fB   = floor(N/(2*OSR));            % last in-band bin index (0-based)
+fin  = round(fB/3);                 % in-band test tone
+amps = -80:2:0;
+snr  = zeros(size(amps));
+
+w    = ds_hann(N);
+nb = 1;                              % Hann: 2*nb+1 = 3 signal bins
+
+for k = 1:length(amps)
+    A    = 10^(amps(k)/20);
+    u    = A*sin(2*pi*fin/N*(0:N-1));
+    v    = simulateDSM(u, ntf, nlev);
+    spec = fft(v .* w) / (sum(w)/2);
+
+    inband = spec(1:fB+1);          % <-- KEY: only in-band bins
+    snr(k) = calculateSNR(inband, fin, nb);
+end
+
+plot(amps, snr,'-o'); grid on;
+xlabel('Input amplitude (dBFS)');
+ylabel('SNR (dB)');
+title(sprintf('Order=%d, OSR=%d, %d-lev, ||NTF||_\\infty=%.1f',...
+              order, OSR, nlev, H_inf));
+```
+
+```matlab
+function snr = calculateSNR(hwfft,f,nsig)
+
+signalBins = [f-nsig+1:f+nsig+1];
+s = norm(hwfft(signalBins));
+
+noiseBins = 1:length(hwfft);
+noiseBins(signalBins) = [];
+n = norm(hwfft(noiseBins));
+
+snr = dbv(s/n);
+
+end
+```
+
+![image-20260503174009854](delta-sigma/image-20260503174009854.png)
 
 
 
@@ -388,6 +473,9 @@ NTF realizability criterion: No delay-free loops in the modulator
 
 
 
+
+
+
 ## linear settling & GBW of amplifier
 
 *TODO* &#128197;
@@ -521,15 +609,53 @@ $$
 
 
 
+## Schreier Delta-Sigma Toolbox
+
+> Richard Schreier (2026). Delta Sigma Toolbox [[https://www.mathworks.com/matlabcentral/fileexchange/19-delta-sigma-toolbox](https://www.mathworks.com/matlabcentral/fileexchange/19-delta-sigma-toolbox)]
+
+*TODO* &#128197;
+
+***simulateDSM***
+
+```matlab
+function [v,xn,xmax,y] = simulateDSM(u,arg2,nlev,x0)
+%[v,xn,xmax,y] = simulateDSM(u,ABCD,nlev=2,x0=0)
+% or
+%[v,xn,xmax,y] = simulateDSM(u,ntf,nlev=2,x0=0)
+%
+%Compute the output of a general delta-sigma modulator with input u,
+%a structure described by ABCD, an initial state x0 (default zero) and 
+%a quantizer with a number of levels specified by nlev.
+%Multiple quantizers are implied by making nlev an array,
+%and multiple inputs are implied by the number of rows in u.
+%
+%Alternatively, the modulator may be described by an NTF.
+%The NTF is zpk object. (The STF is assumed to be 1.)
+%The structure that is simulated is the block-diagional structure used by
+%zp2ss.m.
+```
+
+
+
+---
+
+---
+
+
+
+
+
 ## reference
 
 Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016). Understanding Delta-Sigma Data Converters. 2nd ed. Wiley. 
 
 Norsworthy, Steven R., Richard Schreier, Gábor C. Temes and Ieee Circuits. “Delta-sigma data converters : theory, design, and simulation.” (1997).
 
-Horowitz, P., & Hill, W. (2015). *The art of electronics* (3rd ed.). Cambridge University Press. [[pdf](https://kolegite.com/EE_library/books_and_lectures/%D0%95%D0%BB%D0%B5%D0%BA%D1%82%D1%80%D0%BE%D0%BD%D0%B8%D0%BA%D0%B0/_The%20Art%20of%20Electronics%203rd%20ed%20%5B2015%5D.pdf)]
+Horowitz, P., & Hill, W. (2015). *The art of electronics* (3rd ed.). Cambridge University Press.
 
-John Rogers, Calvin Plett, and Foster Dai. 2006. Integrated Circuit Design for High-Speed Frequency Synthesis (Artech House Microwave Library). Artech House, Inc., USA. [[pdf](https://picture.iczhiku.com/resource/eetop/WYifyQGopsQZevmN.pdf)]
+John Rogers, Calvin Plett, and Foster Dai. 2006. Integrated Circuit Design for High-Speed Frequency Synthesis (Artech House Microwave Library). Artech House, Inc., USA.
+
+Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025. 
 
 ---
 
@@ -557,5 +683,5 @@ Joshua Reiss. Understanding sigma delta modulation: the solved and unsolved issu
 
 V. Medina, P. Rombouts and L. Hernandez-Corporales, "A Different View of Sigma-Delta Modulators Under the Lens of Pulse Frequency Modulation [Feature]," in *IEEE Circuits and Systems Magazine*, vol. 24, no. 2, pp. 80-97, Secondquarter 2024
 
-
+Carsten Wulff , Oversampling and Sigma-Delta ADCs [[https://analogicus.com/aic2026/oversampling_and_sigma-delta_adcs](https://analogicus.com/aic2026/oversampling_and_sigma-delta_adcs)]
 

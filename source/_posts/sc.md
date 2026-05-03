@@ -230,3 +230,5 @@ R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processi
 Christian-Charles Enz. "High precision CMOS micropower amplifiers" [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
 
 Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://youtu.be/SL3-9ZMwdJQ](https://youtu.be/SL3-9ZMwdJQ)]
+
+Carsten Wulff, Switched-Capacitor Circuits [[https://analogicus.com/aic2026/switched-capacitor_circuits](https://analogicus.com/aic2026/switched-capacitor_circuits)]

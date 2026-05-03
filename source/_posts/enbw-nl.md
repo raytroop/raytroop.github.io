@@ -22,13 +22,10 @@ The problem with sine-wave scaling is that the noise power is, on average, *even
 
 
 
-$$\begin{align}
-\mathrm{SNR} &= \frac{X_\text{sig}^2}{X_\text{n}^2N} \\
-&= \frac{X_\text{sig}^2\cdot \sum_k W_k^2}{X_\text{n}^2N\cdot \sum_k W_k^2} \\
-&= \frac{\sum_\text{nb} X_\text{w,sig}^2}{N X_\text{w,n}^2}
-\end{align}$$
-
-where $\text{nb}$ is number of non-zero FFT bins
+$$
+\mathrm{SNR} = \frac{X_\text{sig}^2}{X_\text{n}^2N} = \frac{X_\text{sig}^2\cdot \sum_k W_k^2}{X_\text{n}^2N\cdot \sum_k W_k^2} = \frac{\sum_\text{nb} X_\text{w,sig}^2}{N X_\text{w,n}^2}
+$$
+where $\text{nb}$ is number of **non-zero FFT bins**
 
 ![image-20250917184729018](enbw-nl/image-20250917184729018.png)
 
@@ -236,20 +233,6 @@ title('2048 point FFT, SNR=61.90dB')
 ```
 
 
-
-
-
-### Noise Spectral Density (NSD)
-
-> Understanding Key Parameters for RF-Sampling Data Converters White Paper (WP509) [[https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters](https://docs.amd.com/v/u/en-US/wp509-rfsampling-data-converters)]
->
-> Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf](https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf)]
-
-![image-20250826005956497](enbw-nl/image-20250826005956497.png)
-
----
-
-![image-20250902010512726](enbw-nl/image-20250902010512726.png)
 
 ### Rectangular Window
 
@@ -464,8 +447,12 @@ where $B_{enbw} = N \frac{\sum_{n}|w[n]|^2}{ \left| \sum_{n} w[n] \right|^2}$ an
 
 
 
+---
 
-### example
+---
+
+
+***example***
 
 ```matlab
 lw = 128;

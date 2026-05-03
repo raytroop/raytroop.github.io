@@ -507,6 +507,75 @@ type_name = class(x); % Returns 'double'
 disp(type_name)
 ```
 
+---
+
+---
+
+***zpk***
+
+Use `zpk` to create zero-pole-gain models
+
+`sys = zpk(zeros,poles,gain)` creates a **continuous-time** zero-pole-gain model with zeros and poles specified as vectors and the scalar value of gain.
+
+`sys = zpk(zeros,poles,gain,ts)` creates a **discrete-time** zero-pole-gain model with sample time ts. Set `ts` to `-1` or `[]` to leave the sample time unspecified.
+
+---
+
+***zpkdata***
+
+Access zero-pole-gain data
+
+```matlab
+[z,p,k] = zpkdata(sys,'v')
+```
+
+the sampling time associated with that ZPK data
+
+```matlab
+Ts = sys_d.Ts; % Returns the sampling interval (1/fs)
+```
+
+
+
+```matlab
+% 1. Define Continuous ZPK Model
+fc = 10;                % Cutoff frequency in Hz
+wc = 2 * pi * fc;       % Cutoff frequency in rad/s
+
+z = [];                 % No zeros
+p = -wc;                % Single pole at -wc
+k = wc;                 % Gain (to ensure DC gain = 1)
+
+sys_c = zpk(z, p, k);
+
+% 2. Convert to Discrete via Bilinear Transformation
+fs = 100;               % Sampling frequency in Hz
+dt = 1/fs;
+
+% 'tustin' flag is the standard name for the bilinear transformation in control theory
+sys_d = c2d(sys_c, dt, 'tustin'); % 'tustin' is the Bilinear method in MATLAB
+
+% Extract zeros, poles, and gain from sys_c
+[zc, pc, kc] = zpkdata(sys_c, 'v');
+[zd, pd, kd] = bilinear(zc, pc, kc, fs);
+sys_dbli = zpk(zd, pd, kd, dt);
+
+
+% 3. Plot and Compare Step Response
+[yc, tc] = step(sys_c, 0:dt/100:dt*10);
+tt = 0:dt:dt*10;
+[yd, ~] = step(sys_d, tt);
+[ydbli, ~] = step(sys_dbli, tt);
+
+plot(tc/dt, yc, LineWidth=2); hold on
+stairs(tt/dt, yd, 'bs--', LineWidth=2); stairs(tt/dt, ydbli, 'r*--', LineWidth=2)
+title(['Step Response Comparison (fc = ', num2str(fc), 'Hz, fs = ', num2str(fs), 'Hz)']);
+legend('Continuous LPF', 'Discrete LPF (c2d tustin)', 'Discrete LPF (zpk Bilinear)');
+grid on; xlabel('Time (Ts)')
+```
+
+![image-20260503212334349](coding/image-20260503212334349.png)
+
 
 
 ## C++

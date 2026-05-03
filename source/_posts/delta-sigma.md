@@ -266,23 +266,6 @@ title(sprintf('Order=%d, OSR=%d, %d-lev, ||NTF||_\\infty=%.1f',...
               order, OSR, nlev, H_inf));
 ```
 
-```matlab
-function snr = calculateSNR(hwfft,f,nsig)
-
-signalBins = [f-nsig+1:f+nsig+1];
-s = norm(hwfft(signalBins));
-
-noiseBins = 1:length(hwfft);
-noiseBins(signalBins) = [];
-n = norm(hwfft(noiseBins));
-
-snr = dbv(s/n);
-
-end
-```
-
-![image-20260503174009854](delta-sigma/image-20260503174009854.png)
-
 
 
 ## $\Delta \Sigma$ vs. $\Delta$ modulation
@@ -615,6 +598,16 @@ $$
 
 *TODO* &#128197;
 
+
+
+***synthesizeNTF***
+
+
+
+---
+
+---
+
 ***simulateDSM***
 
 ```matlab
@@ -641,7 +634,24 @@ function [v,xn,xmax,y] = simulateDSM(u,arg2,nlev,x0)
 
 ---
 
+***calculateSNR***
 
+```matlab
+function snr = calculateSNR(hwfft,f,nsig)
+
+signalBins = [f-nsig+1:f+nsig+1];
+s = norm(hwfft(signalBins));
+
+noiseBins = 1:length(hwfft);
+noiseBins(signalBins) = [];
+n = norm(hwfft(noiseBins));
+
+snr = dbv(s/n);
+
+end
+```
+
+![image-20260503174009854](delta-sigma/image-20260503174009854.png)
 
 
 

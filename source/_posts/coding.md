@@ -595,6 +595,10 @@ In math mode, LaTeX provides several commands to insert horizontal space of spec
 
 ---
 
+`\operatorname{...}` — **math operator** in an upright (roman) font with appropriate mathematical spacing
+$$
+\operatorname{sinc}(x)
+$$
 
 
 ## C++

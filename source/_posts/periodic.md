@@ -162,9 +162,57 @@ $$
 
 
 
-## Periodic small signal analyses
+## Linear Time Varying
 
-### Analysis in Simulator
+The response of a relaxed LTV system at a time $t$ due to an impulse applied at a time $t − \tau$ is denoted by $h(t, \tau)$
+
+The first argument in the impulse response denotes the time of observation. 
+
+The second argument indicates that the system was excited by an impulse launched at a time $\tau$ *prior to* the time of observation.
+
+Thus, the response of an LTV system not only depends on how long before the observation time it was excited by the impulse but also on the observation instant. 
+
+The output $y(t)$ of an initially relaxed LTV system with impulse response $h(t, \tau)$ is given by the convolution integral
+$$
+y(t) = \int_0^{\infty}h(t,\tau)x(t-\tau)d\tau
+$$
+Assuming $x(t) = e^{j2\pi f t}$
+$$
+y(t) = \int_0^{\infty}h(t,\tau)e^{j2\pi f (t-\tau)}d\tau = e^{j2\pi f t}\int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau
+$$
+The (*time-varying*) frequency response can be interpreted as
+$$
+H(j2\pi f, t) = \int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau
+$$
+Linear Periodically Time-Varying (LPTV) Systems, which is a special case of an LTV system whose impulse response satisfies
+$$
+h(t, \tau) = h(t+T_s, \tau)
+$$
+In other words, the response to an impulse remains unchanged if the time at which the output is observed ($t$) and the time at which the impulse is applied (denoted by $t_1$) are both shifted by $T_s$
+$$
+H(j2\pi f, t+T_s) = \int_0^{\infty}h(t+T_s,\tau)e^{-j2\pi f\tau}d\tau = \int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau = H(j2\pi f, t)
+$$
+$H(j2\pi f, t)$ of an LPTV system is periodic with timeperiod $T_s$, it can be expanded as a Fourier series in $t$, resulting in
+$$
+H(j2\pi f, t) = \sum_{k=-\infty}^{\infty} H_k(j2\pi f)e^{j2\pi f_s k t}
+$$
+The coefficients of the Fourier series $H_k(j2\pi f)$ are given by 
+$$
+H_k(j2\pi f) = \frac{1}{T_s}\int_0^{T_s} H(j2\pi f, t) e^{-j2\pi k f_s t}dt
+$$
+
+
+
+
+## Periodic small signal in SpectreRF
+
+> B. Boser,A, 2011EECS 240 Topic 6: Noise Analysis [[https://mixsignal.wordpress.com/wp-content/uploads/2013/06/t06noiseanalysis_simone-1.pdf](https://mixsignal.wordpress.com/wp-content/uploads/2013/06/t06noiseanalysis_simone-1.pdf)]
+>
+> Vishal Saxena, "SpectreRF Periodic Analysis" [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf)]
+>
+> Ashwin Kumar, Lecture 8: Basics of periodic steady-state (pss), pac and pxf simulation demos in Cadence SpectreRF [[https://youtu.be/I9zkt1OTWB0](https://youtu.be/I9zkt1OTWB0)]
+
+### pss, pac and pxf
 
 1.  LPV analyses start by performing a periodic analysis to compute the **periodic operating point** with only the **large clock signal** applied (the LO, the clock, the carrier, etc.). 
 2. The circuit is then **linearized about this time-varying operating point** (expand about the periodic equilibrium point with a Taylor series and discard all but the first-order term)
@@ -182,51 +230,91 @@ $$
 
 
 
+### sampled pac
 
-
-
-
-
-## Linear Time Varying
-
-The response of a relaxed LTV system at a time $t$ due to an impulse applied at a time $t − \tau$ is denoted by $h(t, \tau)$
-
-> The first argument in the impulse response denotes the time of observation. 
+> **Sampled PAC (Spectre RF) Analysis - Strange results ?**  [[https://designers-guide.org/forum/YaBB.pl?num=1590925194](https://designers-guide.org/forum/YaBB.pl?num=1590925194)]
 >
-> The second argument indicates that the system was excited by an impulse launched at a time $\tau$ *prior to* the time of observation.
+> **supply noise sensitivity: PSS+PAC or PSS+PXF** [[https://www.designers-guide.org/forum/YaBB.pl?num=1376500816](https://www.designers-guide.org/forum/YaBB.pl?num=1376500816)]
 >
-> Thus, the response of an LTV system not only depends on how long before the observation time it was excited by the impulse but also on the observation instant. 
->
-> The output $y(t)$ of an initially relaxed LTV system with impulse response $h(t, \tau)$ is given by the convolution integral
-> $$
-> y(t) = \int_0^{\infty}h(t,\tau)x(t-\tau)d\tau
-> $$
-> Assuming $x(t) = e^{j2\pi f t}$
-> $$
-> y(t) = \int_0^{\infty}h(t,\tau)e^{j2\pi f (t-\tau)}d\tau = e^{j2\pi f t}\int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau
-> $$
-> The (*time-varying*) frequency response can be interpreted as
-> $$
-> H(j2\pi f, t) = \int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau
-> $$
-> Linear Periodically Time-Varying (LPTV) Systems, which is a special case of an LTV system whose impulse response satisfies
-> $$
-> h(t, \tau) = h(t+T_s, \tau)
-> $$
-> In other words, the response to an impulse remains unchanged if the time at which the output is observed ($t$) and the time at which the impulse is applied (denoted by $t_1$) are both shifted by $T_s$
-> $$
-> H(j2\pi f, t+T_s) = \int_0^{\infty}h(t+T_s,\tau)e^{-j2\pi f\tau}d\tau = \int_0^{\infty}h(t,\tau)e^{-j2\pi f\tau}d\tau = H(j2\pi f, t)
-> $$
-> $H(j2\pi f, t)$ of an LPTV system is periodic with timeperiod $T_s$, it can be expanded as a Fourier series in $t$, resulting in
-> $$
-> H(j2\pi f, t) = \sum_{k=-\infty}^{\infty} H_k(j2\pi f)e^{j2\pi f_s k t}
-> $$
-> The coefficients of the Fourier series $H_k(j2\pi f)$ are given by 
-> $$
-> H_k(j2\pi f) = \frac{1}{T_s}\int_0^{T_s} H(j2\pi f, t) e^{-j2\pi k f_s t}dt
-> $$
+> **Explanation for sampled PXF analysis** [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/45055/explanation-for-sampled-pxf-analysis/1367253](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/45055/explanation-for-sampled-pxf-analysis/1367253)]
+
+![img](periodic/tb-sh.png)
+
+![img](periodic/plot.jpg)
+
+note: frequency axis is ***output***
+
+![image-20260504151513974](periodic/image-20260504151513974.png)
+
+![image-20260504152448543](periodic/image-20260504152448543.png)
 
 
+
+---
+
+---
+
+> *Which is the difference between "**spectrum**" sweep and "**sideband**" sweep in the PAC Direct Plot Form?*[[https://community.cadence.com/cadence_technology_forums/f/mixed-signal-design/56824/pac-simulation-sideband-sweep-parameter](https://community.cadence.com/cadence_technology_forums/f/mixed-signal-design/56824/pac-simulation-sideband-sweep-parameter)]
+
+![image-20260504195458391](periodic/image-20260504195458391.png)
+
+
+
+### sampled pxf
+
+> Cadence RAK: Deterministic Jitter Measurement using SpectreRF
+
+![image-20260504181711756](periodic/image-20260504181711756.png)
+
+**Sweeptype**:  ***relative + Relative Harmonic*** vs ***absolute*** — Output Frequency Sweep Range (Hz)
+$$
+f_\text{abs} = f_\text{relative} + N_\text{relharmnum}\cdot f_\text{und}
+$$
+![image-20260504181518289](periodic/image-20260504181518289.png)
+
+> note: frequency axis is ***input***
+
+***relative + Relative Harmonic***
+
+```
+pss  pss  fund=2.5G  harms=25  errpreset=conservative
++    annotate=status
+pxf  (  Out1  0  Out1  0  )  pxf  crossingdirection=rise
++    thresholdvalue=1.65  ptvtype=sampled  sweeptype=relative  relharmnum=1
++    start=0  stop=1G  step=10M  maxsideband=1  annotate=status
+```
+
+
+
+***Sweeptype: absolute***
+
+```
+pss  pss  fund=2.5G  harms=25  errpreset=conservative
++    annotate=status
+pxf  (  Out1  0  Out1  0  )  pxf  crossingdirection=rise
++    thresholdvalue=1.65  ptvtype=sampled  sweeptype=absolute  start=2.5G
++    stop=3.5G  step=10M  maxsideband=1  annotate=status
+```
+
+
+
+---
+
+> Frank Wiedmann,  Using sampled pxf analysis to simulate deterministic jitter [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/51605/using-sampled-pxf-analysis-to-simulate-deterministic-jitter](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/51605/using-sampled-pxf-analysis-to-simulate-deterministic-jitter)]
+
+![image-20260504182033946](periodic/image-20260504182033946.png)
+
+![image-20260504184951842](periodic/image-20260504184951842.png)
+
+tran simulation verify higher frequency ripple introduce more jitter at output
+
+![image-20260504185521783](periodic/image-20260504185521783.png)
+
+
+
+sampled pac result support the opinion of  Frank Wiedmann — harmonic 0 (with no additional sidebands) introduce maximum output 
+
+![image-20260504191658639](periodic/image-20260504191658639.png)
 
 
 
@@ -242,15 +330,15 @@ The Value Of RF Harmonic Balance Analyses For Analog Verification: Frequency dom
 
 Shanthi Pavan, "Demystifying Linear Time Varying Circuits"
 
-S. Pavan and G. C. Temes, "Reciprocity and Inter-Reciprocity: A Tutorial— Part I: Linear Time-Invariant Networks," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 70, no. 9, pp. 3413-3421, Sept. 2023, doi: 10.1109/TCSI.2023.3276700.
+—, "Reciprocity and Inter-Reciprocity: A Tutorial— Part I: Linear Time-Invariant Networks," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 70, no. 9, pp. 3413-3421, Sept. 2023, doi: 10.1109/TCSI.2023.3276700.
 
-S. Pavan and G. C. Temes, "Reciprocity and Inter-Reciprocity: A Tutorial—Part II: Linear Periodically Time-Varying Networks," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 70, no. 9, pp. 3422-3435, Sept. 2023, doi: 10.1109/TCSI.2023.3294298.
+—, "Reciprocity and Inter-Reciprocity: A Tutorial—Part II: Linear Periodically Time-Varying Networks," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 70, no. 9, pp. 3422-3435, Sept. 2023, doi: 10.1109/TCSI.2023.3294298.
 
-S. Pavan and R. S. Rajan, "Interreciprocity in Linear Periodically Time-Varying Networks With Sampled Outputs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 61, no. 9, pp. 686-690, Sept. 2014, doi: 10.1109/TCSII.2014.2335393.
+—, "Interreciprocity in Linear Periodically Time-Varying Networks With Sampled Outputs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 61, no. 9, pp. 686-690, Sept. 2014, doi: 10.1109/TCSII.2014.2335393.
 
-Prof. Shanthi Pavan. Introduction to Time - Varying Electrical Network. [[https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9](https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9)]
+—. Introduction to Time - Varying Electrical Network. [[https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9](https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9)]
 
-Shanthi Pavan. EE5323: Advanced Electrical Networks (Jan-May. 2015) [[https://www.ee.iitm.ac.in/vlsi/courses/ee5323/start](https://www.ee.iitm.ac.in/vlsi/courses/ee5323/start)]
+—. EE5323: Advanced Electrical Networks (Jan-May. 2015) [[https://www.ee.iitm.ac.in/vlsi/courses/ee5323/start](https://www.ee.iitm.ac.in/vlsi/courses/ee5323/start)]
 
 R. S. Ashwin Kumar. EE698W: Analog circuits for signal processing [[https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html](https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html)]
 
@@ -271,8 +359,6 @@ RF Harmonic Balance Analysis for Nonlinear Circuits [[https://resources.pcb.cade
 Steer, Michael. Microwave and RF Design (Third Edition, 2019). NC State University, 2019.
 
 Steer, Michael. Harmonic Balance Analysis of Nonlinear RF Circuits - Case Study Index:  CS_AmpHB [[link](https://youtu.be/BM5ZQgfb_sY)]
-
-Vishal Saxena, "SpectreRF Periodic Analysis" URL:[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf)
 
 Josh Carnes,Peter Kurahashi. "Periodic Analyses of Sampled Systems" URL:[https://slideplayer.com/slide/14865977/](https://slideplayer.com/slide/14865977/)
 

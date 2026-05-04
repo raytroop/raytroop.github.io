@@ -217,6 +217,62 @@ $$
 
 
 
+
+
+## simulation setup
+
+### `strobeperiod`
+
+> ADC Verification Rapid Adoption Kit (RAK)
+>
+> Spectre Tech Tips: Using the Spectre Strobe Feature [[https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-using-the-spectre-strobe-feature](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-using-the-spectre-strobe-feature)]
+>
+> FFT in Cadence [[https://www.rfinsights.com/cadence/fft-in-cadence/](https://www.rfinsights.com/cadence/fft-in-cadence/)]
+
+![image-20250928201210762](sc/image-20250928201210762.png)
+
+![image-20250928194734935](sc/image-20250928194734935.png)
+
+![Spectre strobe simulation](sc/Spectre_2D00_strobe_2D00_1.png)
+
+
+
+### PSS spectrum vs. FFT
+
+> Kwantae Kim, Integrated Analog Systems D - Lecture 14S CAD (Linearity and FFT)  [[https://youtu.be/qwJ_tlZTaq8](https://youtu.be/qwJ_tlZTaq8)]
+
+FFT analysis need **sampling**, then **aliasing** occur
+
+![image-20260504094353803](sc/image-20260504094353803.png)
+
+
+
+### Bootstrapped Switch
+
+> Kwantae Kim, Integrated Analog Systems D - Lecture 14S CAD (Linearity and FFT)  [[https://youtu.be/qwJ_tlZTaq8](https://youtu.be/qwJ_tlZTaq8)]
+>
+> Sampled PAC (Spectre RF) Analysis - Strange results ? [[https://designers-guide.org/forum/YaBB.pl?num=1590925194](https://designers-guide.org/forum/YaBB.pl?num=1590925194)]
+
+
+
+![image-20260504100717599](sc/image-20260504100717599.png)
+
+
+
+---
+
+> Vishal Saxena, "SpectreRF Periodic Analysis" [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/SpectreRF%20Periodic%20Analysis.pdf)]
+>
+> [[https://designers-guide.org/forum/YaBB.pl?num=1590925194/1#1](https://designers-guide.org/forum/YaBB.pl?num=1590925194/1#1)]
+
+**PSS + *SampledPAC*** should be suitable to characterize bootstrapped switch
+
+It's the **hold** function that is responsible for the $\operatorname{sinc}()$ behavior
+
+![image-20260504115419636](sc/image-20260504115419636.png)
+
+
+
 ## reference
 
 Boris Murmann. EE315A VLSI Signal Conditioning Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SyIgQJfyzyuDhBXc.pdf)]

@@ -336,3 +336,8 @@ V_{in}^+ -V_{in}^-  &= V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} \\
 
 
 
+### w/ Current–Mirror Load
+
+> S. Pavan, "Revisiting the CMOS Differential Pair With a Current–Mirror Load [CAS Education]," in *IEEE Circuits and Systems Magazine*, vol. 25, no. 2, pp. 74-78, Secondquarter 2025 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11007710)]
+
+*TODO* &#128197;

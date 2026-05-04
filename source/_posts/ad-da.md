@@ -535,6 +535,14 @@ plot(f, 20*log10(sn))
 
 ![image-20250705103213974](ad-da/image-20250705103213974.png)
 
+---
+
+---
+
+> Using FFT in Cadence Spectre [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/f14/Homeworks/fft_calculation.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/f14/Homeworks/fft_calculation.pdf)]
+
+![image-20260504082308071](ad-da/image-20260504082308071.png)
+
 
 
 ## Offset and Gain Error

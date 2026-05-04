@@ -76,6 +76,10 @@ The left testbench is better choice for differential R/C extraction.  because th
 ## `strobeperiod`
 
 > ADC Verification Rapid Adoption Kit (RAK)
+>
+> Spectre Tech Tips: Using the Spectre Strobe Feature [[https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-using-the-spectre-strobe-feature](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-using-the-spectre-strobe-feature)]
+>
+> FFT in Cadence [[https://www.rfinsights.com/cadence/fft-in-cadence/](https://www.rfinsights.com/cadence/fft-in-cadence/)]
 
 ![image-20250928201210762](ade/image-20250928201210762.png)
 

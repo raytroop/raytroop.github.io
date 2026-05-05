@@ -413,6 +413,14 @@ inverse CTFT shall integral from $-\infty$ to $+\infty$ to obtain $\delta(t)$ in
 
 
 
+### Poisson summation formula
+
+> metroidman, fractional N量化噪声对系统相位噪声的影响 两种分析方法 LTI频域法和时域采样DFT法 [[link](https://www.bilibili.com/video/BV1RCw4zREcJ/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+
+![image-20260505132033131](fourier/image-20260505132033131.png)
+
+
+
 ## spectral sampling
 
 

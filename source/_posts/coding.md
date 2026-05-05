@@ -578,6 +578,33 @@ grid on; xlabel('Time (Ts)')
 
 
 
+## Simulink
+
+**Quick Insert** menu
+
+- **Single-click** anywhere on the empty white space of your model canvas.
+- **Type** the name of the block you want (e.g., "Gain", "Scope", or "Triggered Subsystem")
+
+> ![image-20260505170224276](coding/image-20260505170224276.png)
+
+---
+
+---
+
+***Configure Model Layout***
+
+**Rotate Clockwise:** `Ctrl+R`.
+
+**Rotate Counterclockwise:** `Ctrl+Shift+R`.
+
+**Flip Horizontally:** `Ctrl+I`.
+
+**Flip Vertically:** Right-click block \(\rightarrow \) **Rotate & Flip** \(\rightarrow \) **Flip Block** (or apply clockwise rotation twice)
+
+
+
+
+
 ## Latex
 
 In math mode, LaTeX provides several commands to insert horizontal space of specific widths:

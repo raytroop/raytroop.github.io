@@ -283,6 +283,85 @@ $$
 
 
 
+### Frequency & Time-Domian Model for Q-noise
+
+> metroidman, fractional N量化噪声对系统相位噪声的影响 两种分析方法 LTI频域法和时域采样DFT法 [[link](https://www.bilibili.com/video/BV1RCw4zREcJ/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+>
+> 用Simulink Excel Mathematica三种不同工具从零搭建3阶ΣΔ调制器并进行时域和频率分析 [[link](https://www.bilibili.com/video/BV1cAFFzHERD/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+
+***LTI Frequency domain model & analysis***
+
+![image-20260505134611228](ddsm/image-20260505134611228.png)
+
+
+
+![image-20260505104140230](ddsm/image-20260505104140230.png)
+
+> In Mathematica, `/.` is the **ReplaceAll** command
+>
+> **fcw**: **Frequency Control Word**
+
+![image-20260505132857159](ddsm/image-20260505132857159.png)
+
+> note
+>
+> $z=e^{j2\pi f \color{red}T_\text{ref}}$ — model's time tick is reference clock period
+>
+> $\frac{\Phi}{N}(z)$ — relationship between $\Phi$ and $N$
+
+```matlab
+% --- System Parameters ---
+fref = 40e6;
+fcw = 360.123;
+kvco = 2 * pi * 300e6;
+ 
+% Components
+icp = 60e-6; C0 = 40e-12;
+R1 = 14000; C1 = 360e-12;
+R2 = 1000; C2 = 20e-12;
+
+% --- Frequency Vector ---
+f = logspace(2, 9, 1000); 
+s = 1i * 2 * pi * f;
+
+% --- Loop Filter Transfer Function ---
+num_lf = s .* R1 .* C1 + 1;
+den_lf = (s.^3 .* R1 .* R2 .* C0 .* C1 .* C2 + ...
+          s.^2 .* (R1.*C1.*C0 + R1.*C1.*C2 + R2.*C2.*C0 + R2.*C2.*C1) + ...
+          s .* (C0 + C1 + C2));
+loopfilter = num_lf ./ den_lf;
+
+% --- Loop Gain and Noise Transfer Function ---
+loopgain = (icp / (2*pi)) .* loopfilter .* (kvco ./ s) .* (1 / fcw);
+hfra = (loopgain ./ (1 + loopgain)) .* 2*pi./(exp(s./fref) - 1) .* (1 - exp(-s./fref)).^3;
+
+% --- Spectral Density calculation ---
+sfra = 10 * log10((1 / (12 * fref)) .* abs(hfra).^2);
+
+% --- Plot ---
+semilogx(f, sfra, LineWidth=2);
+ylim([-250, -100]); yticks(-250:10:-100); 
+grid on; xlabel('Frequency (Hz)'); ylabel('dB');
+title('Quantization Noise Effects', FontSize=14);
+```
+
+![image-20260505161445944](ddsm/image-20260505161445944.png)
+
+---
+
+---
+
+***Time domain model & DFT analysis***
+
+![image-20260505162601167](ddsm/image-20260505162601167.png)
+
+![image-20260505141430979](ddsm/image-20260505141430979.png)
+
+![image-20260505134433533](ddsm/image-20260505134433533.png)
+
+
+
+
 
 ## Impulse Train Modulator (ITM)
 
@@ -468,7 +547,7 @@ snr_tot = 10*log10(1/(n_if + n_ds + n_ana))
 
 
 
-## MASH 1-1-1 implementaion
+## MASH 1-1-1 Model
 
 > J. W. M. Rogers, F. F. Dai, M. S. Cavin and D. G. Rahn, "A multiband /spl Delta//spl Sigma/ fractional-N frequency synthesizer for a MIMO WLAN transceiver RFIC," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 3, pp. 678-689, March 2005 [[https://sci-hub.se/10.1109/JSSC.2005.843604](https://sci-hub.se/10.1109/JSSC.2005.843604)]
 
@@ -622,6 +701,33 @@ psd_no = 20 * np.log10(np.abs(fft_no) / N + 1e-12)
 ```
 
 ![fig-mash-dither](ddsm/fig-mash-dither-1772863879951-5.png)
+
+---
+
+> 用Simulink Excel Mathematica三种不同工具从零搭建3阶ΣΔ调制器并进行时域和频率分析 [[link](https://www.bilibili.com/video/BV1cAFFzHERD/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+
+***Simulink***
+
+![image-20260505164648813](ddsm/image-20260505164648813.png)
+
+***Excel***
+
+![image-20260505164717508](ddsm/image-20260505164717508.png)
+
+***Mathematica***
+
+![image-20260505164746380](ddsm/image-20260505164746380.png)
+
+The code `fcwit = Table[fcwi[i], {i, 9999}];` is the command that actually **runs the simulation** for a set duration.
+
+Here is the breakdown of what is happening:
+
+- **`Table[..., {i, 9999}]`**: This creates a list by repeating an operation 9,999 times. It acts like a `for` loop in other programming languages.
+- **`fcwi[i]`**: This calls the function you defined earlier. For every value of `i` from 1 to 9,999, it calculates the instantaneous integer division ratio produced by the MASH modulator.
+- **`fcwit = ...`**: It stores all 9,999 results into a single long list (an array) named `fcwit`.
+- **`;` (Semicolon)**: This is important—it suppresses the output. Without it, Mathematica would print all 9,999 numbers on your screen, which would be a huge mess!
+
+
 
 ## reference
 

@@ -53,14 +53,19 @@ t_cheb, y_cheb = signal.step((b_cheb, a_cheb), T=t)
 t_bess, y_bess = signal.step((b_bess, a_bess), T=t)
 ```
 
+![image-20260507005318320](ss-insight/image-20260507005318320.png)
+
 ---
 
-****Butterworth Filters***
+***Butterworth Filters***
 
 > [[https://people.eecs.ku.edu/~demarest/212/Butterworth%20Filters.pdf](https://people.eecs.ku.edu/~demarest/212/Butterworth%20Filters.pdf)]
 
-
 *TODO* &#128197;
+
+![image-20260507004930525](ss-insight/image-20260507004930525.png)
+
+
 
 
 ## Pulse Amplitude Modulation (PAM)

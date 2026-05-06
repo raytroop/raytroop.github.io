@@ -357,9 +357,19 @@ title('Quantization Noise Effects', FontSize=14);
 
 ![image-20260505141430979](ddsm/image-20260505141430979.png)
 
+> `Round` in `In[24]` is **redundant** and likely unnecessary for the logic to function
+>
+> $\phi$ and `phi` is frequency (cycles per second) instead of angular frequency (radians per second)
+
+![image-20260507004159940](ddsm/image-20260507004159940.png)
+
 ![image-20260505134433533](ddsm/image-20260505134433533.png)
 
 
+
+---
+
+![image-20260507000319278](ddsm/image-20260507000319278.png)
 
 
 
@@ -708,7 +718,9 @@ psd_no = 20 * np.log10(np.abs(fft_no) / N + 1e-12)
 
 ***Simulink***
 
-![image-20260505164648813](ddsm/image-20260505164648813.png)
+![image-20260506224056912](ddsm/image-20260506224056912.png)
+
+
 
 ***Excel***
 
@@ -716,7 +728,7 @@ psd_no = 20 * np.log10(np.abs(fft_no) / N + 1e-12)
 
 ***Mathematica***
 
-![image-20260505164746380](ddsm/image-20260505164746380.png)
+![image-20260507002107990](ddsm/image-20260507002107990.png)
 
 The code `fcwit = Table[fcwi[i], {i, 9999}];` is the command that actually **runs the simulation** for a set duration.
 

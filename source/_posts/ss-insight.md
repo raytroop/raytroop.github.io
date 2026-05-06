@@ -217,7 +217,7 @@ by how much the modulated variable of the carrier signal varies around its unmod
 
 
 
-## Summation & Integration 
+## Summation & Integration
 
 |             | impulse response | Transform            | ROC                       |
 | ----------- | ---------------- | -------------------- | ------------------------- |
@@ -327,7 +327,7 @@ When limited to a *finite bandwidth* and viewed in the time domain, thermal nois
 Due to KCL and $u(t)=e^{j\omega t}$ and $y(t)=H(j\omega)e^{j\omega t}$, we have ODE:
 
 $$\begin{align}
-\frac{u(t) - y(t)}{R} = C \frac{dy(t)}{dt} \\
+\frac{u(t) - y(t)}{R} = C \frac{\mathrm{d}y(t)}{\mathrm{d}t} \\
 e^{j\omega t} - H(j\omega) e^{j\omega t} = H(j\omega)\cdot j\omega e^{j\omega t} \\
 \end{align}$$
 
@@ -344,7 +344,7 @@ $$
 
 ## Different Variants of the PSD Definition
 
-In the practice of engineering, it has become customary to use slightly different variants of the PSD definition, depending on the particular application or research field. 
+In the practice of engineering, it has become customary to use slightly different variants of the PSD definition, depending on the particular application or research field.
 
 - **Two-Sided PSD**, $S_x(f)$
 
@@ -359,14 +359,14 @@ In the practice of engineering, it has become customary to use slightly differen
   S'_x(f) = \left\{ \begin{array}{cl}
   0 & : \ f \geq 0 \\
   S_x(f) & : \ f = 0 \\
-  2S_x(f) & : \ f \gt 0 
+  2S_x(f) & : \ f \gt 0
   \end{array} \right.
   $$
-  
 
 
 
-![image-20230603185546658](ss-insight/image-20230603185546658.png)  
+
+![image-20230603185546658](ss-insight/image-20230603185546658.png)
 
 
 
@@ -382,9 +382,9 @@ If $S'_x(f)$ is even symmetrical around a positive frequency $f_0$, then two add
   $$
   S_{SSB,x}(f) =S'_x(f+f_0)
   $$
-  This concept is particularly useful for describing phase or amplitude modulation schemes in wireless communications, where $f_0$ is the carrier frequency. 
+  This concept is particularly useful for describing phase or amplitude modulation schemes in wireless communications, where $f_0$ is the carrier frequency.
 
-  > Note that there is no difference in the values of the one-sided versus the SSB PSD; it is just a pure translation on the frequency axis. 
+  > Note that there is no difference in the values of the one-sided versus the SSB PSD; it is just a pure translation on the frequency axis.
 
 - **Double-Sideband PSD**, $S_{DSB,x}(f)$
 
@@ -395,10 +395,10 @@ If $S'_x(f)$ is even symmetrical around a positive frequency $f_0$, then two add
   S_{DSB,x}(f) = \left\{ \begin{array}{cl}
   0 & : \ f \geq 0 \\
   S_{SSB,x}(f) & : \ f = 0 \\
-  2S_{SSB,x}(f) & : \ f \gt 0 
+  2S_{SSB,x}(f) & : \ f \gt 0
   \end{array} \right.
   $$
-  
+
 
 ![image-20230603222054506](ss-insight/image-20230603222054506.png)
 
@@ -430,7 +430,7 @@ y(t) &= H(j\omega_0)\cdot \frac{1}{2}e^{j\omega_0 t} + H(-j\omega_0)\cdot \frac{
 
 > $\cos(\omega_0 t)$, with frequency same with *pole* **DON'T** have *infinite response*
 >
-> That is,  pole indicate decrease trending 
+> That is,  pole indicate decrease trending
 
 
 

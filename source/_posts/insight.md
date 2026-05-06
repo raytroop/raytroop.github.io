@@ -224,7 +224,7 @@ Above simulation demonstrate that flicker noise  is ***represented by a drain-so
 >
 > ![image-20251129094711959](insight/image-20251129094711959.png)
 >
-> 
+>
 >
 > ---
 >
@@ -359,25 +359,25 @@ $$
 Assuming Target  $T$ ( for example, the total resistance) is  function of $x_1,x_2,...,x_N$, then total variation can be expressed as
 
 $$\begin{align}
-dT  &= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
-&= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot \frac{dx_n}{x_n}
+\mathrm{d}T &= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
+&= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot \frac{\mathrm{d}x_n}{x_n}
 \end{align}$$
 
 Then, we obtain relative variation
 $$\begin{align}
-\frac{dT}{T} &= \sum_{n=1}^N\frac{\partial T}{\partial x_n}\frac{x_n}{T}\cdot \frac{dx_n}{x_n}  \\
-&= \sum_{n=1}^N S_{x_n}^T \cdot \frac{dx_n}{x_n}
+\frac{\mathrm{d}T}{T} &= \sum_{n=1}^N\frac{\partial T}{\partial x_n}\frac{x_n}{T}\cdot \frac{\mathrm{d}x_n}{x_n}  \\
+&= \sum_{n=1}^N S_{x_n}^T \cdot \frac{\mathrm{d}x_n}{x_n}
 \end{align}$$
 
 &#11088; where $S_{x_n}^T=\frac{\partial T}{\partial x_n}\frac{x_n}{T}$ is **relative sensitivity**
 
-> **relative sensitivity** connect $\frac{dx_n}{x_n}$ with total relative variation $\frac{dT}{T}$
+> **relative sensitivity** connect $\frac{\mathrm{d}x_n}{x_n}$ with total relative variation $\frac{\mathrm{d}T}{T}$
 
 
 
-And $dT$ can be expressed as
+And $\mathrm{d}T$ can be expressed as
 $$
-dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{dx_n}{x_n} = \sum_{n=1}^N x_n'\cdot \frac{dx_n}{x_n}
+dT =\sum_{n=1}^N S_{x_n}^T T\cdot \frac{\mathrm{d}x_n}{x_n} = \sum_{n=1}^N x_n'\cdot \frac{\mathrm{d}x_n}{x_n}
 $$
 &#11088; where $x_n'= S_{x_n}^T T$ is the contribution of $x_n$ in $T$
 
@@ -455,7 +455,7 @@ V_i &= \frac{I_{in}R_F}{\frac{R_F}{R_S}+g_mR_F}
 If $R_S \gg R_F$
 $$\begin{align}
 V_o &= \frac{I_{in}}{g_m}(1-g_mR_F) \\
-V_i &= \frac{I_{in}}{g_m} 
+V_i &= \frac{I_{in}}{g_m}
 \end{align}$$
 
 ***linearity***
@@ -654,7 +654,7 @@ $$\begin{align}
 That is $\Delta V_\beta = \frac{I_D}{g_m}\frac{\Delta \beta}{\beta}$
 
 $$
-\Delta V_R \cdot g_m R = I_D \cdot \Delta R 
+\Delta V_R \cdot g_m R = I_D \cdot \Delta R
 $$
 
 That is $\Delta V_R = \frac{I_D}{ g_m} \cdot \frac{\Delta R}{R}$
@@ -731,7 +731,7 @@ high level envelope:
 
 
 
-## Current mirror with source degeneration 
+## Current mirror with source degeneration
 
 ![image-20231103213308081](insight/image-20231103213308081.png)
 
@@ -804,9 +804,9 @@ This analysis just use **harmonic 0** transfer function in pac analysis, which h
 
 ![image-20231021101204165](insight/image-20231021101204165.png)
 
- A quick inspection of this circuit reveals that a **zero** lies at a frequency where the current through $C_{12}$ becomes equal to $g_2V_1$. 
+ A quick inspection of this circuit reveals that a **zero** lies at a frequency where the current through $C_{12}$ becomes equal to $g_2V_1$.
 
-When this occurs, the current through the parallel combination of $C_2$ and $R_2$ becomes zero, creating a zero in the transfer function. 
+When this occurs, the current through the parallel combination of $C_2$ and $R_2$ becomes zero, creating a zero in the transfer function.
 
 In other words, we can write
 
@@ -972,7 +972,7 @@ Defined as the frequency at which the **small-signal current gain** of a device 
 
 ## Miller multiplication of Capacitor
 
-### Positive Cap 
+### Positive Cap
 
 ![image-20231220225508580](insight/image-20231220225508580.png)
 
@@ -1020,7 +1020,7 @@ R_\text{eq} &= \frac{A_i}{1+|A|^2-2A_r}\cdot \frac{1}{\omega C_f}
 
 ![image-20240106161059584](insight/image-20240106161059584.png)
 
-> The `Drain` and `Source` of MOS are determined in *DC operating point*, i.e. large signal. 
+> The `Drain` and `Source` of MOS are determined in *DC operating point*, i.e. large signal.
 
 That is, top of $M_2$ is `drain` and bottom is `source`,
 $$\begin{align}
@@ -1034,11 +1034,11 @@ R_\text{eq2} &= \frac{r_\text{o2}+R_L}{1+g_\text{m2}r_\text{o2}} \\
 
 > The small-signal models of NMOS and PMOS transistors are **identical**
 
-A negative $\Delta V_\text{GS}$ leads to a negative $\Delta I_D$. 
+A negative $\Delta V_\text{GS}$ leads to a negative $\Delta I_D$.
 
 > Recall that $I_D$, in the direction shown here, is negative because the actual current of holes flows from the source to the drain.
 >
-> 
+>
 >
 > ![image-20240106170315177](insight/image-20240106170315177.png)
 
@@ -1136,7 +1136,7 @@ The principal impact of DIBL on circuit design is the degraded output impedance.
 $$
 \frac{g_m}{I_D} = \frac{2}{V_{GS}-V_{TH}}
 $$
-Decrease of gm/Id results from decrease in VT.  
+Decrease of gm/Id results from decrease in VT.
 
 GIDL (**Gate induced drain leakage**) as at weak inversion may results in a weak lateral electric field causing leakage current between drain and bulk, which degrade the efficiency of the transistor (gm/ID).
 
@@ -1213,9 +1213,9 @@ When the rention function is needed, IRTE signal must come from an "always-on" c
 
 ### Internal Pins
 
-There are 3 internal global pins, i.e. **ESD**, **POCCTRL**, **RTE**, in all digital domain cells. 
+There are 3 internal global pins, i.e. **ESD**, **POCCTRL**, **RTE**, in all digital domain cells.
 
-In real application, 
+In real application,
 
 - **ESD pin** is an internal signal and **active** in ESD event happening
 - **POCCTRL** is an internal signal and active in Power-on-control event.
@@ -1282,13 +1282,13 @@ The Analog Designer's Toolbox (ADT) | Invited Talk by IEEE Santa Clara Valley Se
 
 ESSCIRC2023 Circuit Insights Ali Sheikholeslami [[https://youtu.be/2xFIZM5_FPw](https://youtu.be/2xFIZM5_FPw)]
 
-Ali Sheikholeslami, Circuit Intuitions: Thevenin and Norton Equivalent Circuits, Part 3 IEEE Solid-State Circuits Magazine, Vol. 10, Issue 4, pp. 7-8, Fall 2018. 
+Ali Sheikholeslami, Circuit Intuitions: Thevenin and Norton Equivalent Circuits, Part 3 IEEE Solid-State Circuits Magazine, Vol. 10, Issue 4, pp. 7-8, Fall 2018.
 
-—, Circuit Intuitions: Thevenin and Norton Equivalent Circuits, Part 2 IEEE Solid-State Circuits Magazine, Vol. 10, Issue 3, pp. 7-8, Summer 2018. 
+—, Circuit Intuitions: Thevenin and Norton Equivalent Circuits, Part 2 IEEE Solid-State Circuits Magazine, Vol. 10, Issue 3, pp. 7-8, Summer 2018.
 
 —, Circuit Intuitions: Thevenin and Norton Equivalent Circuits, Part 1 IEEE Solid-State Circuits Magazine, Vol. 10, Issue 2, pp. 7-8, Spring 2018.
 
-—, Circuit Intuitions: Miller's Approximation IEEE Solid-State Circuits Magazine, Vol. 7, Issue 4, pp. 7-8, Fall 2015. 
+—, Circuit Intuitions: Miller's Approximation IEEE Solid-State Circuits Magazine, Vol. 7, Issue 4, pp. 7-8, Fall 2015.
 
 —, Circuit Intuitions: Miller's Theorem IEEE Solid-State Circuits Magazine, Vol. 7, Issue 3, pp. 8-10, Summer 2015.
 

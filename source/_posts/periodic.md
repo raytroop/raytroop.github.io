@@ -10,7 +10,7 @@ mathjax: true
 
 ## PSS and HB Overview
 
-The steady-state response is the response that results after any transient effects have dissipated. 
+The steady-state response is the response that results after any transient effects have dissipated.
 
 **The large signal solution is the starting point for small-signal analyses**, including periodic AC, periodic transfer function, periodic noise, periodic stability, and periodic scattering parameter analyses.
 
@@ -70,7 +70,7 @@ One important property of Newton's method is that its speed and reliability of c
 
 1. First, analyzing the **nonlinear device** under large-signal excitation only, where the harmonic-balance method can be applied
 2. Then, the **nonlinear elements** in the device's equivalent circuit are then **linearized** to create **small-signal, linear, time-varying elements**
-3. Finally, a **small-signal analysis** is performed  
+3. Finally, a **small-signal analysis** is performed
 
 #### Element Linearized
 
@@ -80,7 +80,7 @@ Below shows a **nonlinear resistive element**, which has the $I/V$ relationship 
 
 Assuming that $V$ consists of the sum of a large-signal component $V_0$ and a small-signal component $v$, with *Taylor series*
 $$
-f(V_0+v) = f(V_0)+\frac{d}{dV}f(V)|_{V=V_0}\cdot v+\frac{1}{2}\frac{d^2}{dV^2}f(V)|_{V=V_0}\cdot v^2+...
+f(V_0+v) = f(V_0)+\frac{\mathrm{d}}{\mathrm{d}V}f(V)|_{V=V_0}\cdot v+\frac{1}{2}\frac{\mathrm{d}^2}{\mathrm{d}V^2}f(V)|_{V=V_0}\cdot v^2+...
 $$
 The small-signal, incremental current is found by subtracting the large-signal component of the current
 $$
@@ -88,7 +88,7 @@ i(v)=I(V_0+v)-I(V_0)
 $$
 If $v \ll V_0$, $v^2$, $v^3$,... are negligible. Then,
 $$
-i(v) = \frac{d}{dV}f(V)|_{V=V_0}\cdot v
+i(v) = \frac{\mathrm{d}}{\mathrm{d}V}f(V)|_{V=V_0}\cdot v
 $$
 
 
@@ -97,7 +97,7 @@ $V_0$ need not be a *DC* quantity; it can be a **time-varying large-signal volta
 $$
 i(t)=g(t)v(t)
 $$
-where $g(t)=\frac{d}{dV}f(V)|_{V=V_L(t)}$
+where $g(t)=\frac{\mathrm{d}}{\mathrm{d}V}f(V)|_{V=V_L(t)}$
 
 > The *time-varying* conductance $g(t)$, is the derivative of the element's $I/V$ characteristic at the *large-signal voltage*
 >
@@ -105,7 +105,7 @@ where $g(t)=\frac{d}{dV}f(V)|_{V=V_L(t)}$
 > $$
 > v(t) = r(t)i(t)
 > $$
-> where $r(t) = \frac{d}{dI}f_R(I)|_{I=I_L(t)}$
+> where $r(t) = \frac{\mathrm{d}}{\mathrm{d}I}f_R(I)|_{I=I_L(t)}$
 
 A **nonlinear element** excited by *two tones* supports currents and voltages at mixing frequencies $m\omega_1+n\omega_2$, where $m$ and $n$ are integers. If one of those tones, $\omega_1$ has such a **low level** that it does not generate harmonics and the other is a large-signal sinusoid at $\omega_p$, then the mixing frequencies are $\omega=\pm\omega_1+n\omega_p$, which shown in below figure
 
@@ -115,9 +115,9 @@ A more compact representation of the mixing frequencies is
 $$
 \omega_n=\omega_0+n\omega_p
 $$
-which includes only half of the mixing frequencies: 
+which includes only half of the mixing frequencies:
 
-- the negative components of the lower sidebands (**LSB**) 
+- the negative components of the lower sidebands (**LSB**)
 - and the positive components of the upper sidebands (**USB**)
 
 ![image-20220511211336437](periodic/image-20220511211336437.png)
@@ -166,11 +166,11 @@ $$
 
 The response of a relaxed LTV system at a time $t$ due to an impulse applied at a time $t − \tau$ is denoted by $h(t, \tau)$
 
-The first argument in the impulse response denotes the time of observation. 
+The first argument in the impulse response denotes the time of observation.
 
 The second argument indicates that the system was excited by an impulse launched at a time $\tau$ *prior to* the time of observation.
 
-Thus, the response of an LTV system not only depends on how long before the observation time it was excited by the impulse but also on the observation instant. 
+Thus, the response of an LTV system not only depends on how long before the observation time it was excited by the impulse but also on the observation instant.
 
 The output $y(t)$ of an initially relaxed LTV system with impulse response $h(t, \tau)$ is given by the convolution integral
 $$
@@ -196,7 +196,7 @@ $H(j2\pi f, t)$ of an LPTV system is periodic with timeperiod $T_s$, it can be e
 $$
 H(j2\pi f, t) = \sum_{k=-\infty}^{\infty} H_k(j2\pi f)e^{j2\pi f_s k t}
 $$
-The coefficients of the Fourier series $H_k(j2\pi f)$ are given by 
+The coefficients of the Fourier series $H_k(j2\pi f)$ are given by
 $$
 H_k(j2\pi f) = \frac{1}{T_s}\int_0^{T_s} H(j2\pi f, t) e^{-j2\pi k f_s t}dt
 $$
@@ -214,7 +214,7 @@ $$
 
 ### pss, pac and pxf
 
-1.  LPV analyses start by performing a periodic analysis to compute the **periodic operating point** with only the **large clock signal** applied (the LO, the clock, the carrier, etc.). 
+1.  LPV analyses start by performing a periodic analysis to compute the **periodic operating point** with only the **large clock signal** applied (the LO, the clock, the carrier, etc.).
 2. The circuit is then **linearized about this time-varying operating point** (expand about the periodic equilibrium point with a Taylor series and discard all but the first-order term)
 3. and the **small information signal** is applied. The response is calculated using linear time-varying analysis
 
@@ -312,7 +312,7 @@ tran simulation verify higher frequency ripple introduce more jitter at output
 
 
 
-sampled pac result support the opinion of  Frank Wiedmann — harmonic 0 (with no additional sidebands) introduce maximum output 
+sampled pac result support the opinion of  Frank Wiedmann — harmonic 0 (with no additional sidebands) introduce maximum output
 
 ![image-20260504191658639](periodic/image-20260504191658639.png)
 
@@ -344,7 +344,7 @@ R. S. Ashwin Kumar. EE698W: Analog circuits for signal processing [[https://home
 
 Piet Vanassche, Georges Gielen, and Willy Sansen. 2009. Systematic Modeling and Analysis of Telecom Frontends and their Building Blocks (1st. ed.). Springer Publishing Company, Incorporated.
 
-Beffa, Federico. (2023). Weakly Nonlinear Systems. 10.1007/978-3-031-40681-2. 
+Beffa, Federico. (2023). Weakly Nonlinear Systems. 10.1007/978-3-031-40681-2.
 
 Wereley, Norman. (1990). Analysis and control of linear periodically time varying systems.
 
@@ -386,7 +386,7 @@ Nicola Da Dalt and Ali Sheikholeslami. 2018. Understanding Jitter and Phase Nois
 
 Kester, Walt. (2005). Converting Oscillator Phase Noise to Time Jitter.  [[https://www.analog.com/media/en/training-seminars/tutorials/MT-008.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-008.pdf)]
 
-Drakhlis, B.. (2001). Calculate oscillator jitter by using phase-noise analysis: Part 2 of two parts. Microwaves and Rf. 40. 109-119. 
+Drakhlis, B.. (2001). Calculate oscillator jitter by using phase-noise analysis: Part 2 of two parts. Microwaves and Rf. 40. 109-119.
 
 Explanation for sampled PXF analysis. [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/45055/explanation-for-sampled-pxf-analysis/1376140#1376140](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/45055/explanation-for-sampled-pxf-analysis/1376140#1376140)]
 

@@ -37,7 +37,7 @@ To specify the Laplace transform of a signal, both the **algebraic expression** 
 
 where $s$ in the ROC and $\mathfrak{Re}\{s\}=\sigma$
 
-> The formal evaluation of the integral for a general $X(s)$ requires the use of **contour integration** in the complex plane. However, for the class of *rational transforms*, the inverse Laplace transform can be determined without directly evaluating eq. (9.56) by using the technique of **partial fraction expansion** 
+> The formal evaluation of the integral for a general $X(s)$ requires the use of **contour integration** in the complex plane. However, for the class of *rational transforms*, the inverse Laplace transform can be determined without directly evaluating eq. (9.56) by using the technique of **partial fraction expansion**
 
 
 
@@ -87,7 +87,7 @@ For a causal LTI system, the impulse response is zero for $t \lt 0$ and thus is 
 
 
 
-A particularly important difference between the properties of the unilateral and bilateral transforms is the **differentiation property** $\frac{d}{dt}x(t)$
+A particularly important difference between the properties of the unilateral and bilateral transforms is the **differentiation property** $\frac{\mathrm{d}}{\mathrm{d}t}x(t)$
 
 |                                  | Laplace Transform |
 | -------------------------------- | ----------------- |
@@ -212,7 +212,7 @@ $$
 
 
 
-## $s$- and $z$-Domains Connection 
+## $s$- and $z$-Domains Connection
 
 discrete-time systems also can be analyzed by means of the Laplace transform — the $z$-transform is the Laplace transform in disguise and that discrete-time systems can be analyzed as if they were continuous-time systems.
 
@@ -281,7 +281,7 @@ And we know transform of integral $u(t)$ is $\frac{1}{s}$, as expected there is 
 
 ## impulse invariance
 
-> A straightforward and useful relationship between the *continuous-time impulse response* $h_c(t)$ and the *discrete-time impulse response* $h[n]$ 
+> A straightforward and useful relationship between the *continuous-time impulse response* $h_c(t)$ and the *discrete-time impulse response* $h[n]$
 
 
 ![image-20241002133303153](z-laplace/image-20241002133303153.png)
@@ -306,7 +306,7 @@ $$
 
 
 
-- $h[n] = Th_c(nT)$ and $T\to 0$ 
+- $h[n] = Th_c(nT)$ and $T\to 0$
 
   guarantees $y_c(nT) = y_r(nT)$, i.e. *output equivalence* ***only at the sampling instants***
 
@@ -387,7 +387,7 @@ useful functions
 
 
 
-> `freqz` method is straightforward, which apply impulse invariance criteria. Though `fft` is used for signal processing mostly, 
+> `freqz` method is straightforward, which apply impulse invariance criteria. Though `fft` is used for signal processing mostly,
 
 ---
 
@@ -620,7 +620,7 @@ ylabel('mag');
 >
 > For discrete-time systems, the impulse response is the response to a unit area pulse of length `Ts` and height `1/Ts`, where `Ts` is the sample time of the system. (This pulse approaches $\delta(t)$ as `Ts` approaches zero.)
 >
-> 
+>
 >
 > Scale output:
 >
@@ -628,7 +628,7 @@ ylabel('mag');
 
 
 
-### PSD transformation 
+### PSD transformation
 
 If we have power spectrum or power spectrum density of both edge's absolute jitter ($x(n)$) , $P_{\text{xx}}$
 
@@ -691,7 +691,7 @@ $$
 
 > [[https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html](https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html)]
 
-an algebraic transformation between the variables $s$ and $z$ that maps the entire **imaginary**  $j\Omega$-**axis** in the $s$-plane to one revolution of the **unit circle** in the $z$-plane 
+an algebraic transformation between the variables $s$ and $z$ that maps the entire **imaginary**  $j\Omega$-**axis** in the $s$-plane to one revolution of the **unit circle** in the $z$-plane
 
 $$\begin{align}
 z &= \frac{1+s\frac{T_s}{2}}{1-s\frac{T_s}{2}} \\
@@ -708,13 +708,13 @@ where $T_s$ is the sampling period
 
 
 
-- The bilinear transformation avoids the problem of **aliasing** encountered with the use of *impulse invariance*, because it maps the entire imaginary axis of the $s$-plane onto the unit circle in the $z$-plane  
+- The bilinear transformation avoids the problem of **aliasing** encountered with the use of *impulse invariance*, because it maps the entire imaginary axis of the $s$-plane onto the unit circle in the $z$-plane
 
 - *impulse invariance* **cannot** be used to map **highpass** continuous-time designs to high pass discrete-time designs, since highpass continuous-time filters are **not bandlimited**
 
 - Due to nonlinear warping of the frequency axis introduced by the bilinear transformation,  bilinear transformation applied to a continuous-time differentiator **will not** result in a discrete-time differentiator. However, impulse invariance can be applied to **bandlimited continuous-time differentiator**
 
-  > The feature of the frequency response of *discrete-time differentiators* is that it is *linear with frequency*  
+  > The feature of the frequency response of *discrete-time differentiators* is that it is *linear with frequency*
 
 
 
@@ -761,7 +761,7 @@ The simple approximation $z=e^{sT}\approx1+sT$, ~~the *first equal* come from **
 >
 > Lecture 19: Design of IIR Filters [[http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf](http://smartdata.ece.ufl.edu/eee5502/2020_fall/media/2020_eee5502_slides28.pdf)]
 >
-> 
+>
 
 
 
@@ -797,7 +797,7 @@ H_p(s) = \frac{1}{s\tau +  1}
 $$
 The differential equation describing this filter is
 $$
-\tau\frac{dy}{dt} + y = x
+\tau\frac{\mathrm{d}y}{\mathrm{d}t} + y = x
 $$
 then differential equation gives
 
@@ -824,10 +824,10 @@ where $\alpha = \frac{T}{\tau+T}$
 Further, if time constants much longer than the time step $\tau \gg T$
 $$\begin{align}
 \frac{T}{T+\tau}& = \frac{T}{\tau}\cdot \frac{\tau}{T+\tau}\approx \frac{T}{\tau} \\
-\frac{\tau}{T+\tau} &= \frac{\tau - T}{\tau}\cdot\frac{\tau^2}{\tau^2-T^2} \approx \frac{\tau - T}{\tau} = 1- \frac{T}{\tau} 
+\frac{\tau}{T+\tau} &= \frac{\tau - T}{\tau}\cdot\frac{\tau^2}{\tau^2-T^2} \approx \frac{\tau - T}{\tau} = 1- \frac{T}{\tau}
 \end{align}$$
 
-Then the first-order low pass filter 
+Then the first-order low pass filter
 $$
 H_p(z) \approx \frac{ \frac{T}{\tau}}{1 +( \frac{T}{\tau} -1)z^{-1}} = \frac{\beta}{1 +(\beta -1)z^{-1}}
 $$
@@ -941,22 +941,22 @@ n= 0:N-1;
 t= n*Ts;
 x= [1, zeros(1,N-1)];   % impulse
 x= fs*x;              % make impulse response amplitude independent of fs
-y= filter(b,a,x);    % filter the impulse  
+y= filter(b,a,x);    % filter the impulse
 subplot(2,2,1),plot(t,y,'.'),grid,
 xlabel('seconds')
 
 % Continuous-time Impulse response from inverse Laplace transform
 % Blinchikoff and Zverev, p116
-h= exp(-t) - 2/sqrt(3)*exp(-t/2).*cos(sqrt(3)/2*t + pi/6); 
+h= exp(-t) - 2/sqrt(3)*exp(-t/2).*cos(sqrt(3)/2*t + pi/6);
 subplot(2,2,2),plot(t,y,'.',t,h),grid
 title('Impulse Response'),legend('discrete-time filter response', 'continuous-time filter response'),xlabel('seconds')
 
 % find discrete-time step response
 x= ones(1,N);         % step
-y= filter(b,a,x);    % filter the step         
+y= filter(b,a,x);    % filter the step
 % Continuous-time step response. Blinchikoff and Zverev, p116
 t= t+Ts/2;                 % offset t to to align step responses
-h= 1 - exp(-t) - 2/sqrt(3)*exp(-t/2).*sin(sqrt(3)/2*t); 
+h= 1 - exp(-t) - 2/sqrt(3)*exp(-t/2).*sin(sqrt(3)/2*t);
 e= h-y;                    % error of discrete-time response
 subplot(2,2,3),plot(t,y,'.',t,h),grid
 title('Step Response'),legend('discrete-time filter response', 'continuous-time filter response'),xlabel('seconds')
@@ -1068,7 +1068,7 @@ B.P. Lathi, Roger Green. Linear Systems and Signals (The Oxford Series in Electr
 
 B. Razavi, "The z-Transform for Analog Designers [The Analog Mind\]," IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 3, pp. 8-14, Summer 2020. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2020.pdf)]
 
-Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications 
+Jhwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications
 
 Mathuranathan. Digital filter design – Introduction [[https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/](https://www.gaussianwaves.com/2020/02/introduction-to-digital-filter-design/)]
 

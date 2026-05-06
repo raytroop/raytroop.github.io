@@ -7,12 +7,12 @@ categories:
 mathjax: true
 ---
 
-A ***resonant circuit*** refers to an electrical circuit using circuit elements such as an inductor (L) and a capacitor (C) to cause resonance at a specific frequency. 
+A ***resonant circuit*** refers to an electrical circuit using circuit elements such as an inductor (L) and a capacitor (C) to cause resonance at a specific frequency.
 
-There are two types of resonant circuits: 
+There are two types of resonant circuits:
 
 - series resonant circuits
-- parallel resonant circuits 
+- parallel resonant circuits
 
 In a series resonant circuit, the impedance of the circuit reaches its minimum value at resonance, whereas in a parallel resonant circuit, the impedance reaches its maximum value
 
@@ -110,11 +110,11 @@ V(t) = I_pR\cdot \cos\omega_0 t
 $$
 $I_C$, the current flow through $C$
 $$
-\color{red}I_C(t)=C\frac{dV(t)}{dt}=-C\omega_0\cdot I_pR\cdot \sin\omega_0 t
+\color{red}I_C(t)=C\frac{\mathrm{d}V(t)}{\mathrm{d}t}=-C\omega_0\cdot I_pR\cdot \sin\omega_0 t
 $$
 Then, we have voltage between $L$, given $I_L = -I_C$
 $$
-V_L(t) = L\frac{dI_L(t)}{dt} = LC\omega_0^2\cdot I_pR\cdot \cos\omega_0 t = I_pR\cdot \cos\omega_0 t
+V_L(t) = L\frac{\mathrm{d}I_L(t)}{\mathrm{d}t} = LC\omega_0^2\cdot I_pR\cdot \cos\omega_0 t = I_pR\cdot \cos\omega_0 t
 $$
 
 
@@ -132,7 +132,7 @@ I_s(t) = \frac{V_s}{R}\cos\omega_0 t
 $$
 $V_L(t)$ is obtained
 $$
-V_L(t) = L\frac{dI_s(t)}{dt} = -L\omega_0\cdot \frac{V_s}{R}\sin\omega_0 t
+V_L(t) = L\frac{\mathrm{d}I_s(t)}{\mathrm{d}t} = -L\omega_0\cdot \frac{V_s}{R}\sin\omega_0 t
 $$
 Then
 $$
@@ -140,7 +140,7 @@ V_C(t) = V(t) - (V_L(t) + V_R(t)) = -V_L(t)
 $$
 Therefore,  $I_C$ current flow through $C$
 $$
-I_C(t) = C\frac{dV_C(t)}{dt}= LC\omega_0^2\cdot \frac{V_s}{R}\cos\omega_0 t= \frac{V_s}{R}\cos\omega_0 t
+I_C(t) = C\frac{\mathrm{d}V_C(t)}{\mathrm{d}t}= LC\omega_0^2\cdot \frac{V_s}{R}\cos\omega_0 t= \frac{V_s}{R}\cos\omega_0 t
 $$
 voltage potential between $L$ and $C$
 $$

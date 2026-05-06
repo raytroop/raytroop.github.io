@@ -117,11 +117,11 @@ zeta=0.4
 omega_n=3
 k=1
 s=tf('s')
- 
+
 W1=1/(s^2+2*zeta*s+1)
 W2=(1/(k*zeta))*s*W1
 W3=W1+W2
- 
+
 figure(1)
 hold on
 step(W1,'r')
@@ -165,11 +165,11 @@ TF &= \frac{s +\omega_z}{s^2+2\zeta \omega_ns+\omega_n^2} \\
 &= \frac{\omega _z}{\omega _n^2}\cdot \frac{1+s/\omega _z}{1+s^2/\omega_n^2+2\zeta s/\omega_n}
 \end{align}$$
 
-Let $s=j\omega$ and omit factor, 
+Let $s=j\omega$ and omit factor,
 $$
 A_\text{dB}(\omega) = 10\log[1+(\frac{\omega}{\omega _z})^2] - 10\log[1+\frac{\omega^4}{\omega_n^4}+\frac{2\omega^2(2\zeta ^2 -1)}{\omega_n^2}]
 $$
-peaking frequency $\omega_\text{peak}$ can be obtained via $\frac{d A_\text{dB}(\omega)}{d\omega} = 0$
+peaking frequency $\omega_\text{peak}$ can be obtained via $\frac{\mathrm{d} A_\text{dB}(\omega)}{\mathrm{d}\omega} = 0$
 $$
 \omega_\text{peak} = \omega_z \sqrt{\sqrt{(\frac{\omega_n}{\omega_z})^4 - 2(\frac{\omega_n}{\omega_z})^2(2\zeta ^2-1)+1} - 1}
 $$
@@ -329,15 +329,15 @@ vo = R1/Z0 * vm;
 
 ```matlab
 >> partfrac(vm, s)
- 
+
 ans =
- 
+
 1 - (s*(C1*R0 + C1*R1) + 1)/(C0*C1*R0*R1*s^2 + (C0*R0 + C1*R0 + C1*R1)*s + 1)
- 
+
 >> partfrac(vo, s)
- 
+
 ans =
- 
+
 1 - (s*(C0*R0 + C1*R0 + C1*R1) + 1)/(C0*C1*R0*R1*s^2 + (C0*R0 + C1*R0 + C1*R1)*s + 1)
 ```
 
@@ -440,21 +440,21 @@ grid on
 >> vm
 
 vm =
- 
+
           1.024e-44 s^5 + 2.56e-37 s^4 + 1.6e-30 s^3
   -----------------------------------------------------------
   1.024e-44 s^5 + 2.571e-37 s^4 + 1.626e-30 s^3 + 1.6e-25 s^2
- 
+
 Continuous-time transfer function.
 
 >> vo
 
 vo =
- 
+
                  8.194e-52 s^6 + 2.048e-44 s^5 + 1.28e-37 s^4
   ---------------------------------------------------------------------------
   8.194e-52 s^6 + 3.081e-44 s^5 + 3.871e-37 s^4 + 1.638e-30 s^3 + 1.6e-25 s^2
- 
+
 Continuous-time transfer function.
 ```
 
@@ -466,8 +466,8 @@ Continuous-time transfer function.
 
 $$
 \left\{ \begin{array}{cl}
-\frac{V_i - V_m}{R_0} &= C_0\frac{dV_m}{dt} + C_1\frac{dV_o}{dt} \\
-\frac{V_m - V_o}{R_1} &= C_1\frac{dV_o}{dt} \\
+\frac{V_i - V_m}{R_0} &= C_0\frac{\mathrm{d}V_m}{\mathrm{d}t} + C_1\frac{\mathrm{d}V_o}{\mathrm{d}t} \\
+\frac{V_m - V_o}{R_1} &= C_1\frac{\mathrm{d}V_o}{\mathrm{d}t} \\
 V_m(t=0) &= 1 \\
 V_o(t=0) &= 0
 \end{array} \right.
@@ -475,7 +475,7 @@ $$
 
 Take into initial condition account
 $$
-\frac{dV_m}{dt}  \overset{\mathcal{L}}{\longrightarrow} sV_M-V_{m0}
+\frac{\mathrm{d}V_m}{\mathrm{d}t}  \overset{\mathcal{L}}{\longrightarrow} sV_M-V_{m0}
 $$
 where $V_{m0} = 1$
 
@@ -493,7 +493,7 @@ V_O(s) &= \frac{V_I}{s^2R_0C_0R_1C_1+s(R_0C_0+R_1C_1+R_0C_1)+1} + \frac{V_{m0}R_
 with $V_I = \frac{1}{s}$, using inverse Laplace transform
 $$\begin{align}
 V_o(t) &= 1 - \frac{C_1}{C_0+C_1}e^{-t/\tau_0}-\frac{C_0}{C_0+C_1}e^{-t/\tau_1} - \frac{R_1C_0C_1}{R_0(C_0+C_1)^2} \tag{Eq.0} \\
-&= 1 - \frac{C_1}{C_0+C_1}e^{-t/\tau_0}-\frac{C_0}{C_0+C_1}e^{-t/\tau_1} \tag{Eq.1} 
+&= 1 - \frac{C_1}{C_0+C_1}e^{-t/\tau_0}-\frac{C_0}{C_0+C_1}e^{-t/\tau_1} \tag{Eq.1}
 \end{align}$$
 
 

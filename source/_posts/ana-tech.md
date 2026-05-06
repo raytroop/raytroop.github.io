@@ -121,7 +121,7 @@ V_o(t) = 1 - e^{-\omega_T t}
 $$
 
 $$
-\frac{dV_o}{dt} = \omega_Te^{-\omega_T t} = \frac{g_m}{C_L}e^{-\omega_T t} = \frac{g_m}{I_B}\cdot \frac{I_B}{C_L}\cdot e^{-\omega_T t} \gt \frac{I_B}{C_L}
+\frac{\mathrm{d}V_o}{\mathrm{d}t} = \omega_Te^{-\omega_T t} = \frac{g_m}{C_L}e^{-\omega_T t} = \frac{g_m}{I_B}\cdot \frac{I_B}{C_L}\cdot e^{-\omega_T t} \gt \frac{I_B}{C_L}
 $$
 
 where $\frac{g_m}{I_B} e^{-\omega_T t} \gt 1$ at initial response
@@ -189,7 +189,7 @@ $$
 
 ![2diffpair.drawio](ana-tech/2diffpair.drawio.svg)
 
-In differential comparison mode, the feedback loop ensure $V_\text{ip} = V_\text{rp}$, $V_\text{im} = V_\text{rm}$ in the end 
+In differential comparison mode, the feedback loop ensure $V_\text{ip} = V_\text{rp}$, $V_\text{im} = V_\text{rm}$ in the end
 
 > assume input and reference common voltage are **same**
 
@@ -207,7 +207,7 @@ Cons of *(b)*
 
 ![doublepair_cm.drawio](ana-tech/doublepair_cm.drawio.svg)
 
-copy aforementioned formula here for convenience 
+copy aforementioned formula here for convenience
 $$
 V_o = A_v(\overline{V_\text{ip} - V_\text{im}} - \overline{V_\text{rp} - V_\text{rm}})
 $$
@@ -313,7 +313,7 @@ $$
 ![image-20240824132739726](ana-tech/image-20240824132739726.png)
 
 The linear region for CMOS differential pair would be extended by $±I_{SS}R/2$ as all of $I_{SS}/2$ flows
-through $R$. 
+through $R$.
 $$\begin{align}
 V_{in}^+ -V_{in}^-  &= V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} \\
 &= \sqrt{\frac{2I_{SS}}{\mu_nC_{OX}\frac{W}{L}}} + \frac{I_{SS}R}{2}

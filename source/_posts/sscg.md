@@ -57,12 +57,12 @@ The most common modulation techniques are down-spread and center-spread:
 
 Due to $f= K_{vco}V_{ctrl}$, its derivate to $t$ is
 $$
-\frac{df}{dt} = K_{vco}\frac{dV_{ctrl}}{dt}
+\frac{\mathrm{d}f}{\mathrm{d}t} = K_{vco}\frac{\mathrm{d}V_{ctrl}}{\mathrm{d}t}
 $$
 
 For chargepump PLL, $dV_{ctrl} = \frac{\phi_e I_{cp}}{2\pi C}dt$, that is
 $$
-\frac{df}{dt} = K_{vco}  \frac{\phi_e I_{cp}}{2\pi C}
+\frac{\mathrm{d}f}{\mathrm{d}t} = K_{vco}  \frac{\phi_e I_{cp}}{2\pi C}
 $$
 
 
@@ -109,7 +109,7 @@ A data clocked Rx architecture is characterized by requiring the *receiver's CDR
 
 
 
-### Separate Reference Clocks with SSC (SRIS) 
+### Separate Reference Clocks with SSC (SRIS)
 
 > TITLE: Separate Refclk Independent SSC Architecture (SRIS)
 > DATE: Updated 10 January 2013
@@ -141,7 +141,7 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 ![image-20250814011411755](sscg/image-20250814011411755.png)
 
-### Separate Reference Clocks with No SSC (SRNS) 
+### Separate Reference Clocks with No SSC (SRNS)
 
 ![image-20250814011354803](sscg/image-20250814011354803.png)
 

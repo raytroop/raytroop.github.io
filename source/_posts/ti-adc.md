@@ -121,14 +121,14 @@ Frequency-dependent: the *higher* frequency input signal $f_\text{in}$, the *lar
 >
 > In time domain
 > $$
-> \frac{d\sin(\omega t)}{dt} = \omega \cos(\omega t) \propto \omega
+> \frac{\mathrm{d}\sin(\omega t)}{\mathrm{d}t} = \omega \cos(\omega t) \propto \omega
 > $$
 
 
 
 
 
-### Bandwidth Mismatch Errors 
+### Bandwidth Mismatch Errors
 
 ![image-20250621092214162](ti-adc/image-20250621092214162.png)
 

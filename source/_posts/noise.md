@@ -62,11 +62,11 @@ Rxx=1/L*conv(flipud(X),X);
 lags=(-L+1):1:(L-1);
 
 %Alternative method
-%[Rxx,lags] =xcorr(X,'biased'); 
+%[Rxx,lags] =xcorr(X,'biased');
 %The argument 'biased' is used for proper scaling by 1/L
 %Normalize auto-correlation with sample length for proper scaling
 
-plot(lags,Rxx, LineWidth=4); 
+plot(lags,Rxx, LineWidth=4);
 title('Auto-correlation Function of white noise');
 xlabel('Lags')
 ylabel('Correlation')
@@ -391,11 +391,11 @@ Assume for the moment that the switch is *always closed* (that there is no hold 
 
 $v_s[n]$ is the sampled version of $v_{RC}(t)$, i.e. $v_s[n]= v_{RC}(nT_C)$
 $$
-S_s(e^{j\omega}) = \frac{1}{T_C} \sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi k}{T_C})) \cdot d\omega
+S_s(e^{j\omega}) = \frac{1}{T_C} \sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi k}{T_C})) \cdot \mathrm{d}\omega
 $$
-where $\omega \in [-\pi, \pi]$,  furthermore $\frac{d\omega}{T_C}= d\Omega$
+where $\omega \in [-\pi, \pi]$,  furthermore $\frac{\mathrm{d}\omega}{T_C}= \mathrm{d}\Omega$
 $$
-S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s)) \cdot d\Omega
+S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s)) \cdot \mathrm{d}\Omega
 $$
 
 > ![image-20240428215559780](noise/image-20240428215559780.png)
@@ -826,7 +826,7 @@ Much like sinusoidal-steady-state signal analysis, **steady-state noise** analys
 
 #### Time-domain Analysis
 
-The output $y(t)$ of a linear time-invariant (LTI) system $h(t)$ 
+The output $y(t)$ of a linear time-invariant (LTI) system $h(t)$
 $$\begin{align}
 R_{yy}(\tau) &= R_{xx}(\tau)*[h(\tau)*h(-\tau)] \\
 &= S_{xx}(0)\delta(\tau) * [h(\tau)*h(-\tau)] \\
@@ -904,7 +904,7 @@ $$
 
 ---
 
-Because stable systems have impulse responses that decay to *zero* as time goes to *infinity*, **the output noise variance approaches the WSS result as time approaches infinity**  
+Because stable systems have impulse responses that decay to *zero* as time goes to *infinity*, **the output noise variance approaches the WSS result as time approaches infinity**
 
 ![image-20251020221312637](noise/image-20251020221312637.png)
 
@@ -917,11 +917,11 @@ Because stable systems have impulse responses that decay to *zero* as time goes 
 
 
 > $$
-> R_{yy}(0) = \frac{1}{2\pi}\int_{-\infty}^{\infty}|H(\omega)|^2S_{xx}(\omega)d\omega = S \cdot \frac{1}{2\pi}\int_{-\infty}^{\infty}|H(\omega)|^2d\omega \overset{\text{Parseval's Relation}}{=} S\cdot \int_{-\infty}^{\infty}|h(t)|^2dt
+> R_{yy}(0) = \frac{1}{2\pi}\int_{-\infty}^{\infty}|H(\omega)|^2S_{xx}(\omega)\mathrm{d}\omega = S \cdot \frac{1}{2\pi}\int_{-\infty}^{\infty}|H(\omega)|^2\mathrm{d}\omega \overset{\text{Parseval's Relation}}{=} S\cdot \int_{-\infty}^{\infty}|h(t)|^2\mathrm{d}t
 > $$
 
 
-#### Frequency-domain Analysis  
+#### Frequency-domain Analysis
 
 Because the definition of the PSD assumes that the variance of the noise process is independent of time, the PSD of a non-stationary process is not very meaningful
 
@@ -933,7 +933,7 @@ Because the definition of the PSD assumes that the variance of the noise process
 
 
 
-#### Input Referred Noise  
+#### Input Referred Noise
 
 ![image-20251020230435173](noise/image-20251020230435173.png)
 
@@ -995,7 +995,7 @@ As expected, the input referred noise voltage is $kT/C$ noise
 
 ### Lossy Integral
 
-> a noise current integrates onto a capacitor which is *shunted by a finite loss resistance* 
+> a noise current integrates onto a capacitor which is *shunted by a finite loss resistance*
 
 $$
 \frac{V}{I}(s) = \frac{1}{C}\frac{RC}{1+sRC} \overset{\mathcal{L}^{-1}}{\longrightarrow}\frac{1}{C}\cdot e^{-\frac{t}{RC}}

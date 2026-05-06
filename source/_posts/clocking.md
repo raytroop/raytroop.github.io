@@ -128,7 +128,7 @@ real-time digital oscilloscope: measure sampled jitter directly
 
 ![image-20241013212542173](clocking/image-20241013212542173.png)
 
-- Multiplying the frequency of a signal by a factor of N using an **ideal** frequency multiplier increases the phase noise of the multiplied signal by $20\log(N)$ dB. 
+- Multiplying the frequency of a signal by a factor of N using an **ideal** frequency multiplier increases the phase noise of the multiplied signal by $20\log(N)$ dB.
 - Similarly dividing a signal frequency by $N$ reduces the phase noise of the output signal by $20\log(N)$  dB
 
 > The sideband offset from the carrier in the frequency multiplied/divided signal is the same as for the original signal.
@@ -151,7 +151,7 @@ We integrate *SSB* phase noise *L*(f) [dBc/Hz] to obtain rms phase jitter in sec
 
 ![phase jitter.png](clocking/rtaImage.png)
 
-Note that the rms phase jitter in seconds is inversely proportional to f0. When frequency is divided down, the phase noise, *L*(f), goes down by a factor of 20log(N). However, since the frequency goes down by N also, the phase jitter expressed in units of time is constant. 
+Note that the rms phase jitter in seconds is inversely proportional to f0. When frequency is divided down, the phase noise, *L*(f), goes down by a factor of 20log(N). However, since the frequency goes down by N also, the phase jitter expressed in units of time is constant.
 
 Therefore, phase noise curves, related by 20log(N), with the same phase noise shape over the *jitter bandwidth*, are expected to yield the same phase jitter in seconds.
 
@@ -196,7 +196,7 @@ Therefore, phase noise curves, related by 20log(N), with the same phase noise sh
 
 ![image-20251213182452985](clocking/image-20251213182452985.png)
 $$
-f = \frac{d(\omega_0 t + A\sin\omega_mt)}{2\pi dt}=\frac{\omega_0 + A\cdot 2\pi f_m \cos\omega_m t}{2\pi}
+f = \frac{\mathrm{d}(\omega_0 t + A\sin\omega_mt)}{2\pi \mathrm{d}t}=\frac{\omega_0 + A\cdot 2\pi f_m \cos\omega_m t}{2\pi}
 $$
 therefore
 $$
@@ -327,7 +327,7 @@ A:  *TODO* &#128197;
 
 > **Type**: # of integrators within the loop
 >
-> **Order**: # of poles in the *closed-loop* transfer function 
+> **Order**: # of poles in the *closed-loop* transfer function
 >
 > *Type $\leq$ Order*
 
@@ -369,7 +369,7 @@ A *step response test* is an easy way to determine the bandwidth.
 
 ![PLL Step Response Test](clocking/loVQR.png)
 
-a first order loop 
+a first order loop
 $$
 BW = \frac{0.35}{t} \space\space\space\space \text{(first order system)}
 $$

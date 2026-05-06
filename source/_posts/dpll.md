@@ -53,7 +53,7 @@ where $\mu = (1)\times \mathrm{P}(\text{late}|\phi) + (-1)\times \mathrm{P}(\tex
 ![bb-PDF.drawio](dpll/bb-PDF.drawio.svg)
 
 
-> Both jitter and amplitude noise distribution are same, just scaled by slope 
+> Both jitter and amplitude noise distribution are same, just scaled by slope
 
 
 ### Self-Noise Term
@@ -139,7 +139,7 @@ plt.show()
 
 ![image-20250902212931083](dpll/image-20250902212931083.png)
 $$
-\frac{d\sigma_e^2}{dk} =0\space\space\Rightarrow\space\space k=\frac{\left\langle  v,y\right\rangle}{\left\langle y,y \right\rangle}
+\frac{\mathrm{d}\sigma_e^2}{\mathrm{d}k} =0\space\space\Rightarrow\space\space k=\frac{\left\langle  v,y\right\rangle}{\left\langle y,y \right\rangle}
 $$
 
 ![image-20250902231449843](dpll/image-20250902231449843.png)

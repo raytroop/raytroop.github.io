@@ -113,7 +113,7 @@ and *effective output capacitance*
 $$
 C_{out} = C_{dd} + (1+\frac{1}{A_{dm}})C_{gd}+\color{red} (1-\frac{1}{A_{dm}})C_n
 $$
-That is $C_n$ deteriorate the effective output capacitance 
+That is $C_n$ deteriorate the effective output capacitance
 
 For ***common mode input***, *effective input capacitance*
 $$
@@ -143,7 +143,7 @@ Suppose $C_n=C_{gd}$,  effective *differential* input capacitance is *same* with
 >
 > A. Sheikholeslami, "Bandwidth Extension [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 7, no. 2, pp. 8-11, Spring 2015 [[https://www.eecg.utoronto.ca/~ali/papers/mag-spr-15-bandwidth-extention.pdf](https://www.eecg.utoronto.ca/~ali/papers/mag-spr-15-bandwidth-extention.pdf)]
 
-The **Cross-Coupled Pair (XCP)** can operate as an **impedance negator** [a.k.a. a **negative impedance converter** (**NIC**)] 
+The **Cross-Coupled Pair (XCP)** can operate as an **impedance negator** [a.k.a. a **negative impedance converter** (**NIC**)]
 
 A common application is to create a *negative capacitance* that can cancel the *positive capacitance*
 seen at a port, thereby improving the *speed*
@@ -198,9 +198,9 @@ trade-offs between *noise amplification* and *signal equalization*
 
 > ```
 > >> 10e6/2/pi/400/50
-> 
+>
 > ans =
-> 
+>
 > 79.5775
 > ```
 
@@ -272,9 +272,9 @@ That is $C_{-M}  = \frac{1}{\omega^2 M} \approx 10 \times C_E$
 
 ***series resonance $\omega_\text{res}$***
 
-Assuming, $I_\text{in}=\cos\omega_r t$ and $V_\text{out}=g\cos(\omega_r t +\theta)$ 
+Assuming, $I_\text{in}=\cos\omega_r t$ and $V_\text{out}=g\cos(\omega_r t +\theta)$
 
-with $I_\text{in} = C_L\frac{dV_\text{out}}{dt}$, yield $g=\sqrt{\frac{L}{C}}$ and $\theta=- \frac{\pi}{2}$, i.e. $V_\text{out} = \sqrt{\frac{L}{C}}\cos(\omega_r t - \frac{\pi}{2})$
+with $I_\text{in} = C_L\frac{\mathrm{d}V_\text{out}}{\mathrm{d}t}$, yield $g=\sqrt{\frac{L}{C}}$ and $\theta=- \frac{\pi}{2}$, i.e. $V_\text{out} = \sqrt{\frac{L}{C}}\cos(\omega_r t - \frac{\pi}{2})$
 
 ---
 
@@ -295,7 +295,7 @@ A &= \frac{g_mR_L}{1+(g_{\text{m}_{\text{dio}}}+ g_{\text{ds}_\text{tot}})R_L}\c
 That is
 
 $$\begin{align}
-\omega_z &= \frac{1}{R_PC_P} \tag{1} \\ 
+\omega_z &= \frac{1}{R_PC_P} \tag{1} \\
 \omega_n &= \sqrt{\frac{1+(g_{\text{m}_{\text{dio}}}+ g_{\text{ds}_\text{tot}})R_L}{R_LC_LR_PC_P}} = \sqrt{\omega_{p0}\omega_z} \\
 \zeta & = \frac{(1+g_{\text{ds}_\text{tot}}R_L)R_PC_P+C_PR_L+R_LC_L}{R_PC_P} \frac{1}{2 \omega_n}
 \end{align}$$
@@ -379,7 +379,7 @@ Deog-Kyoon Jeong. Topics in IC Design: T-Coil [[pdf](https://ocw.snu.ac.kr/sites
 
 P. Heydari, "Neutralization Techniques for High-Frequency Amplifiers: An Overview," in IEEE Solid-State Circuits Magazine, vol. 9, no. 4, pp. 82-89, Fall 2017 [[https://sci-hub.ru/10.1109/MSSC.2017.2745858](https://sci-hub.ru/10.1109/MSSC.2017.2745858)]
 
-—, "Evolution of Broadband Amplifier Design: From Single-Stage to Distributed Topology," in IEEE Microwave Magazine, vol. 24, no. 9, pp. 18-29, Sept. 2023 
+—, "Evolution of Broadband Amplifier Design: From Single-Stage to Distributed Topology," in IEEE Microwave Magazine, vol. 24, no. 9, pp. 18-29, Sept. 2023
 
 Cowan G. *Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations*. Cambridge University Press; 2024
 

@@ -26,7 +26,7 @@ Magnetic flux $\Phi_B$ measures the total magnetic field ($B$) passing through a
 
 
 
-### Divergence 
+### Divergence
 
 ![image-20260316221847450](em/image-20260316221847450.png)
 
@@ -135,11 +135,11 @@ $$
 
 ![image-20260321093550711](em/image-20260321093550711.png)
 
-### Stoke's theorem 
+### Stoke's theorem
 
 ***line integral -> surface inegral***
 $$
-\oint_{c} \vec{F} \cdot \vec{dl} = \int_{s} (\nabla \times \vec{F}) \cdot \vec{dS}
+\oint_{c} \vec{F} \cdot \vec{\mathrm{d}l} = \int_{s} (\nabla \times \vec{F}) \cdot \vec{\mathrm{d}S}
 $$
 
 
@@ -222,7 +222,7 @@ energy and information are carried by electric and magnetic fields ($E$ and $H$)
 
 
 
-## proximity effect & skin effect 
+## proximity effect & skin effect
 
 - *Skin effect* concentrates current near the ***surface*** of a single conductor, while *proximity effect* concentrates current in ***specific regions*** of multiple conductors due to their interaction
 - *Skin effect* is caused by the conductor's ***own*** magnetic field, while proximity effect is caused by the magnetic field of a ***nearby*** conductor
@@ -255,7 +255,7 @@ By [Lenz's law](https://en.wikipedia.org/wiki/Lenz's_law), an eddy current creat
 
 任何封闭电路中感应电动势大小，等于穿过这一电路磁通量的变化率。
 $$
-\epsilon = -\frac{d\Phi_B}{dt}
+\epsilon = -\frac{\mathrm{d}\Phi_B}{\mathrm{d}t}
 $$
 其中 $\epsilon$是电动势，单位为伏特
 
@@ -273,7 +273,7 @@ $\Phi_B$是通过电路的磁通量，单位为韦伯
 
 当电流$I$随时间变化时，在线圈中产生的自感电动势为
 $$
-\epsilon = -L\frac{dI}{dt}
+\epsilon = -L\frac{\mathrm{d}I}{\mathrm{d}t}
 $$
 
 

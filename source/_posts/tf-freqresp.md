@@ -49,7 +49,7 @@ where $V=Ae^{j\phi}$ is the **phasor**.
 
 
 
-###  Phasor Model of a Resistor
+### Phasor Model of a Resistor
 
 A linear resistor is defined by the equation $v = Ri$
 
@@ -72,9 +72,9 @@ $$
 
 
 
-###  Phasor Model of a Capacitor
+### Phasor Model of a Capacitor
 
-A linear capacitor is defined by the equation $i=C\frac{dv}{dt}$
+A linear capacitor is defined by the equation $i=C\frac{\mathrm{d}v}{\mathrm{d}t}$
 
 Now, assume that the voltage across the capacitor is described with the *phasor* $V$. Then
 $$
@@ -82,7 +82,7 @@ v(t) = \Re\{ V e^{j\omega t}\}
 $$
 $C$ is a real constant
 $$
-i(t) = C\Re\{\frac{d}{dt}V e^{j\omega t}\} = \Re\{j\omega C V e^{j\omega t}\}
+i(t) = C\Re\{\frac{\mathrm{d}}{\mathrm{d}t}V e^{j\omega t}\} = \Re\{j\omega C V e^{j\omega t}\}
 $$
 The *phasor* representation for $i$ is $i(t) = \Re\{Ie^{j\omega t}\}$, that is $I = j\omega C V$
 
@@ -94,7 +94,7 @@ The *phasor* representation for $i$ is $i(t) = \Re\{Ie^{j\omega t}\}$, that is $
 
 ### Phasor Model of an Inductor
 
-A linear inductor is defined by the equation $v=L\frac{di}{dt}$ 
+A linear inductor is defined by the equation $v=L\frac{\mathrm{d}i}{\mathrm{d}t}$ 
 
 Now, assume that the inductor current is described with the *phasor* $I$. Then
 $$
@@ -102,7 +102,7 @@ i(t) = \Re\{ I e^{j\omega t}\}
 $$
 $L$ is a real constant, and so the voltage can be computed to be
 $$
-v(t) = L\Re\{\frac{d}{dt}I e^{j\omega t}\} = \Re\{j\omega L I e^{j\omega t}\}
+v(t) = L\Re\{\frac{\mathrm{d}}{\mathrm{d}t}I e^{j\omega t}\} = \Re\{j\omega L I e^{j\omega t}\}
 $$
 The *phasor* representation for $v$ is $v(t) = \Re\{Ve^{j\omega t}\}$, that is $V = j\omega L I$
 

@@ -26,7 +26,7 @@ mathjax: true
 
 ***Derivatives of Random Processes***
 
-since $x(t)$ is stationary process, and $y(t) = \frac{dx(t)}{dt}$
+since $x(t)$ is stationary process, and $y(t) = \frac{\mathrm{d}x(t)}{\mathrm{d}t}$
 
 Using $R_{yy}(\tau) = h(\tau)*R_{xx}(\tau)*h(-\tau)$
 
@@ -37,7 +37,7 @@ R_{yy}(\tau) &= \mathcal{F}^{-1}[H(j\omega)\Phi_{xx}(j\omega)H(-j\omega)] \\
 
 we obtain the autocorrelation function of the output process as
 $$
-R_{yy}(\tau) = -\frac{d^2}{d\tau^2}R_{xx}(\tau)
+R_{yy}(\tau) = -\frac{\mathrm{d}^2}{\mathrm{d}\tau^2}R_{xx}(\tau)
 $$
 
 
@@ -49,7 +49,7 @@ $$
 
 ## Ergodicity
 
-***ensemble autocorrelation*** and ***temporal autocorrelation (time autocorrelation)*** 
+***ensemble autocorrelation*** and ***temporal autocorrelation (time autocorrelation)***
 
 ![image-20240719230346944](random/image-20240719230346944.png)
 
@@ -307,7 +307,7 @@ $$
 
 
 > why $\overline{R}_{hh}(\tau)  \overset{\Delta}{=} h(\tau)*h(-\tau)$ is autocorrelation ?  the proof is as follows:
-> 
+>
 > $$\begin{align}
 >\overline{R}_{hh}(\tau) &= h(\tau)*h(-\tau) \\
 > &= \int_{-\infty}^{\infty}h(x)h(-(\tau - x))dx \\
@@ -418,7 +418,7 @@ $$
 
 ---
 
-***psd of WSS of WSS random sequences*** 
+***psd of WSS of WSS random sequences***
 
 ![image-20250818202138087](random/image-20250818202138087.png)
 
@@ -521,7 +521,7 @@ S_{X_eX_e}(\omega) &= \lim_{N\to \infty}\frac{1}{2N+1}\cdot \mathrm{E}\{|\sum_{n
 
 > *Dennis Sun*, Introduction to Probability: Lesson 49 Brownian Motion [[https://dlsun.github.io/probability/brownian-motion.html](https://dlsun.github.io/probability/brownian-motion.html)]
 
-*Wiener process (also called Brownian motion*) 
+*Wiener process (also called Brownian motion*)
 
 ![unnamed-chunk-178-1](random/unnamed-chunk-178-1.png)
 

@@ -9,64 +9,6 @@ mathjax: true
 
 
 
-## Butterworth, Chebyshev & Bessel filters
-
-> [[https://analogcircuitdesign.com/butterworth-and-chebyshev-filters/](https://analogcircuitdesign.com/butterworth-and-chebyshev-filters/)]
-
-Butterworth, Chebyshev, and Bessel filters are the three primary types of active filters used to shape signal frequency, each representing a specific trade-off between **magnitude flatness**, **roll-off speed**, and **phase linearity**
-
-> **Bessel filter** is often called **Bessel–Thomson filter** or simply **Thomson filter**
-
-![image-20260428210651188](ss-insight/image-20260428210651188.png)
-
-![image-20260428203853085](ss-insight/image-20260428203853085.png)
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy import signal
-
-# Parameters: 4th order filter with 1kHz cutoff
-order = 4
-w_cutoff = 2 * np.pi * 1000
-w = np.logspace(2, 5, 1000) # Frequency range from 100Hz to 100kHz
-
-# Generate Butterworth coefficients and frequency response
-b_but, a_but = signal.butter(order, w_cutoff, analog=True)
-w_but, h_but = signal.freqs(b_but, a_but, worN=w)
-
-# Generate Chebyshev (1dB ripple) response
-b_cheb, a_cheb = signal.cheby1(order, 1, w_cutoff, analog=True)
-w_cheb, h_cheb = signal.freqs(b_cheb, a_cheb, worN=w)
-
-# Generate Bessel response
-b_bess, a_bess = signal.bessel(order, w_cutoff, analog=True)
-w_bess, h_bess = signal.freqs(b_bess, a_bess, worN=w)
-
-freqs = w / (2 * np.pi)
-
-t = np.linspace(0, 0.005, 1000) # 5ms window
-
-# Calculate Step Responses
-t_but, y_but = signal.step((b_but, a_but), T=t)
-t_cheb, y_cheb = signal.step((b_cheb, a_cheb), T=t)
-t_bess, y_bess = signal.step((b_bess, a_bess), T=t)
-```
-
-![image-20260507005318320](ss-insight/image-20260507005318320.png)
-
----
-
-***Butterworth Filters***
-
-> [[https://people.eecs.ku.edu/~demarest/212/Butterworth%20Filters.pdf](https://people.eecs.ku.edu/~demarest/212/Butterworth%20Filters.pdf)]
-
-*TODO* &#128197;
-
-![image-20260507004930525](ss-insight/image-20260507004930525.png)
-
-
-
 
 ## Pulse Amplitude Modulation (PAM)
 

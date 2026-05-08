@@ -287,9 +287,6 @@ $$
 
 > metroidman, fractional N量化噪声对系统相位噪声的影响 两种分析方法 LTI频域法和时域采样DFT法 [[link](https://www.bilibili.com/video/BV1RCw4zREcJ/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
 >
-> 用Simulink Excel Mathematica三种不同工具从零搭建3阶ΣΔ调制器并进行时域和频率分析 [[link](https://www.bilibili.com/video/BV1cAFFzHERD/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
->
-> Kai Wang, Is there a way to improve the code speed? [[https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed](https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed)]
 
 ***LTI Frequency domain model & analysis***
 
@@ -354,7 +351,7 @@ title('Quantization Noise Effects', FontSize=14);
 
 ***Time domain model & DFT analysis***
 
-![image-20260505162601167](ddsm/image-20260505162601167.png)
+
 
 ![image-20260508010742912](ddsm/image-20260508010742912.png)
 
@@ -376,126 +373,27 @@ title('Quantization Noise Effects', FontSize=14);
 
 ---
 
-**classic PLL module in Matlab**
+**classic PLL module transient response**
 
+![image-20260508211343022](ddsm/image-20260508211343022.png)
 
-```matlab
-% APLL_NoDeadBandFixedN.m
-% Traditional PLL Transient Response Analytic Analysis 锁相环时域建模04
-% https://www.bilibili.com/video/BV1VTktB6Ey2/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249
+![image-20260505162601167](ddsm/image-20260505162601167.png)
 
-
-clear; close all; clc;
-
-% --- Parameters ---
-tr(1) = 3e-6; tref = 25e-9; tdd = 250e-12; 
-ip = 60e-6; in = 60e-6; 
-c0 = 40e-12; c1 = 360e-12; c2 = 20e-12; 
-r1 = 14000; r2 = 1000; 
-f0 = 14.16e9; kvco = 300e6; n = 360;
-m = 2000; 
-
-% --- Symbolic Initializations ---
-ic = zeros(1, m);
-tc = sym('tc', [1 m]); 
-p = sym('p', [1 m]); 
-q = sym('q', [1 m]); 
-s = sym('s', [1 m]); 
-phy = sym('phy', [1 m]); 
-syms f(t) g(t) h(t) vc0(t) vc1(t) vc2(t) t x a b;
-
-% --- Initial State Solution ---
-ode = [r1*c1*diff(vc1,t) + vc1 == vc0, ...
-       r2*c2*diff(vc2,t) + vc2 == vc0, ...
-       c0*diff(vc0,t) + c1*diff(vc1,t) + c2*diff(vc2,t) == 0];
-conds = [vc0(0) == 0, vc1(0) == 0, vc2(0) == 0];
-
-sol = dsolve(ode, conds);
-f(t) = sol.vc0; g(t) = sol.vc1; h(t) = sol.vc2;
-
-% Determine the first rising edge of the divider (t0)
-t0 = vpasolve(mod(0,1)/n + int((f0 + kvco*h)/n, 0, x) == 1, x, [0, inf]);
-
-% --- Case 1: Determine initial charge pump status ---
-if t0 <= tr(1)
-    ic(1) = 0; tc(1) = tr(1);
-    p(1) = f(tc(1)); q(1) = g(tc(1)); s(1) = h(tc(1)); phy(1) = 0;
-elseif t0 > tr(1)
-    ic(1) = ip; tc(1) = tr(1);
-    p(1) = f(tc(1)); q(1) = g(tc(1)); s(1) = h(tc(1)); 
-    phy(1) = int((f0 + kvco*h)/n, 0, tc(1));
-else % t0 < tr(1) variant
-    ic(1) = -in; tc(1) = t0;
-    p(1) = f(tc(1)); q(1) = g(tc(1)); s(1) = h(tc(1)); phy(1) = 0;
-end
-
-fplot(f0 + kvco*h, [0, double(tc(1))]); hold on
-
-% --- Main Loop for subsequent rising edges ---
-for i = 2:m
-    if ic(i-1) == -in
-        ic(i) = 0;
-        % Find nearest reference clock rising edge
-        if tc(i-1) - tr(1) >= 0
-            tc(i) = tr(1) + tref * (floor((tc(i-1) - tr(1)) / tref) + 1);
-        else
-            tc(i) = tr(1);
-        end
-        
-        ode = [r1*c1*diff(vc1,t) + vc1 == vc0, r2*c2*diff(vc2,t) + vc2 == vc0, ...
-               c0*diff(vc0,t) + c1*diff(vc1,t) + c2*diff(vc2,t) == ic(i-1)];
-        conds = [vc0(0) == p(i-1), vc1(0) == q(i-1), vc2(0) == s(i-1)];
-        sol = dsolve(ode, conds); f(t) = sol.vc0; g(t) = sol.vc1; h(t) = sol.vc2;
-        
-        p(i) = f(tc(i) - tc(i-1)); q(i) = g(tc(i) - tc(i-1)); s(i) = h(tc(i) - tc(i-1));
-        phy(i) = phy(i-1) + vpaintegral((f0 + kvco*h)/n, 0, tc(i) - tc(i-1));
-
-    elseif ic(i-1) == ip
-        ic(i) = 0;
-        ode = [r1*c1*diff(vc1,t) + vc1 == vc0, r2*c2*diff(vc2,t) + vc2 == vc0, ...
-               c0*diff(vc0,t) + c1*diff(vc1,t) + c2*diff(vc2,t) == ic(i-1)];
-        conds = [vc0(0) == p(i-1), vc1(0) == q(i-1), vc2(0) == s(i-1)];
-        sol = dsolve(ode, conds); f(t) = sol.vc0; g(t) = sol.vc1; h(t) = sol.vc2;
-        
-        % Find x that satisfies the phase condition
-        tc(i) = tc(i-1) + vpasolve(mod(phy(i-1),1) + int((f0 + kvco*h)/n, 0, x) == 1, x, [0, inf]);
-        p(i) = f(tc(i) - tc(i-1)); q(i) = g(tc(i) - tc(i-1)); s(i) = h(tc(i) - tc(i-1));
-        phy(i) = 0;
-
-    elseif ic(i-1) == 0
-        if tc(i-1) - tr(1) >= 0
-            a = tr(1) + tref * (floor((tc(i-1) - tr(1)) / tref) + 1);
-        else
-            a = tr(1);
-        end
-        
-        ode = [r1*c1*diff(vc1,t) + vc1 == vc0, r2*c2*diff(vc2,t) + vc2 == vc0, ...
-               c0*diff(vc0,t) + c1*diff(vc1,t) + c2*diff(vc2,t) == ic(i-1)];
-        conds = [vc0(0) == p(i-1), vc1(0) == q(i-1), vc2(0) == s(i-1)];
-        sol = dsolve(ode, conds); f(t) = sol.vc0; g(t) = sol.vc1; h(t) = sol.vc2;
-        
-        b = tc(i-1) + vpasolve(mod(phy(i-1),1) + int((f0 + kvco*h)/n, 0, x) == 1, x, [0, inf]);
-        
-        if b == a
-            ic(i) = 0; tc(i) = a;
-            p(i) = f(tc(i) - tc(i-1)); q(i) = g(tc(i) - tc(i-1)); s(i) = h(tc(i) - tc(i-1)); phy(i) = 0;
-        elseif b > a
-            ic(i) = ip; tc(i) = a;
-            p(i) = f(tc(i) - tc(i-1)); q(i) = g(tc(i) - tc(i-1)); s(i) = h(tc(i) - tc(i-1));
-            phy(i) = phy(i-1) + vpaintegral((f0 + kvco*h)/n, 0, tc(i) - tc(i-1));
-        else % b < a
-            ic(i) = -in; tc(i) = b;
-            p(i) = f(tc(i) - tc(i-1)); q(i) = g(tc(i) - tc(i-1)); s(i) = h(tc(i) - tc(i-1)); phy(i) = 0;
-        end
-    end
-    fplot(f0 + kvco*h(t - tc(i-1)), [double(tc(i-1)), double(tc(i))]);
-end
-```
+![image-20260508204250391](ddsm/image-20260508204250391.png)
 
 
 
----
----
+**classic PLL module in Matlab & Simulink**
+
+Kai Wang, *Is there a way to improve the code speed?* [[https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed](https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed)]
+
+
+
+**classic PLL module in Julia**
+
+Julia version (Claude Opus 4.7)  [[https://gist.github.com/raytroop/53f210b2cca18ec77295dc91dbe35818](https://gist.github.com/raytroop/53f210b2cca18ec77295dc91dbe35818)]
+
+
 
 **classic PLL module in Mathematica**
 
@@ -844,7 +742,7 @@ psd_no = 20 * np.log10(np.abs(fft_no) / N + 1e-12)
 
 ---
 
-> 用Simulink Excel Mathematica三种不同工具从零搭建3阶ΣΔ调制器并进行时域和频率分析 [[link](https://www.bilibili.com/video/BV1cAFFzHERD/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+> metroidman, 用Simulink Excel Mathematica三种不同工具从零搭建3阶ΣΔ调制器并进行时域和频率分析 [[link](https://www.bilibili.com/video/BV1cAFFzHERD/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
 
 ***Simulink***
 

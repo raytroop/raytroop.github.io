@@ -288,6 +288,8 @@ $$
 > metroidman, fractional N量化噪声对系统相位噪声的影响 两种分析方法 LTI频域法和时域采样DFT法 [[link](https://www.bilibili.com/video/BV1RCw4zREcJ/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
 >
 > 用Simulink Excel Mathematica三种不同工具从零搭建3阶ΣΔ调制器并进行时域和频率分析 [[link](https://www.bilibili.com/video/BV1cAFFzHERD/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+>
+> Kai Wang, Is there a way to improve the code speed? [[https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed](https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed)]
 
 ***LTI Frequency domain model & analysis***
 
@@ -297,8 +299,7 @@ $$
 
 ![image-20260505104140230](ddsm/image-20260505104140230.png)
 
-> In Mathematica, `/.` is the **ReplaceAll** command
->
+
 > **fcw**: **Frequency Control Word**
 
 ![image-20260505132857159](ddsm/image-20260505132857159.png)
@@ -356,6 +357,27 @@ title('Quantization Noise Effects', FontSize=14);
 ![image-20260505162601167](ddsm/image-20260505162601167.png)
 
 ![image-20260508010742912](ddsm/image-20260508010742912.png)
+
+
+
+![image-20260505141430979](ddsm/image-20260505141430979.png)
+
+> `Round` in `In[24]` is **redundant** and likely unnecessary for the logic to function
+>
+> $\phi$ and `phi` is frequency (cycles per second) instead of angular frequency (radians per second)
+
+![image-20260507004159940](ddsm/image-20260507004159940.png)
+
+![image-20260505134433533](ddsm/image-20260505134433533.png)
+
+
+
+---
+
+---
+
+**classic PLL module in Matlab**
+
 
 ```matlab
 % APLL_NoDeadBandFixedN.m
@@ -472,21 +494,10 @@ end
 
 
 
-
-
-![image-20260505141430979](ddsm/image-20260505141430979.png)
-
-> `Round` in `In[24]` is **redundant** and likely unnecessary for the logic to function
->
-> $\phi$ and `phi` is frequency (cycles per second) instead of angular frequency (radians per second)
-
-![image-20260507004159940](ddsm/image-20260507004159940.png)
-
-![image-20260505134433533](ddsm/image-20260505134433533.png)
-
-
-
 ---
+---
+
+**classic PLL module in Mathematica**
 
 ![image-20260507000319278](ddsm/image-20260507000319278.png)
 

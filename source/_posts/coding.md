@@ -603,6 +603,29 @@ grid on; xlabel('Time (Ts)')
 
 
 
+## Wolfram Mathematica
+
+
+`/.`:  **ReplaceAll** command
+
+
+---
+
+---
+
+`WhenEvent[event,action]`
+
+*Sequential Execution*: If multiple actions are assigned to a single event (e.g., WhenEvent[cond, {action1, action2}]), they are evaluated in order.
+
+---
+
+---
+
+`DiscreteVariables` in NDSolve: handle state variables that only change at specific, discontinuous moments rather than changing continuously with the independent variable (usually time $t$), solution returned will be a piecewise constant
+
+
+
+
 
 
 ## Latex

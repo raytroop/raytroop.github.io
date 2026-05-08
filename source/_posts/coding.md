@@ -577,6 +577,38 @@ grid on; xlabel('Time (Ts)')
 ![image-20260503212334349](coding/image-20260503212334349.png)
 
 
+---
+
+---
+
+> `syms` and `sym` in MATLAB's Symbolic Math Toolbox both create symbolic objects, but they differ in usage and behavior.
+
+`syms`: The command to create symbolic objects.
+
+
+define **symbolic scalar variables**
+
+```matlab
+syms t x a b;
+```
+
+
+
+define **symbolic scalar functions** that depend on the variable `t`
+
+```matlab
+syms f(t) g(t) h(t) vc0(t) vc1(t) vc2(t);
+```
+
+---
+
+create a set of *symbolic row vectors* with `sym`
+
+```matlab
+m=2500;
+ic=zeros(1,m);
+```
+
 
 ## Simulink
 

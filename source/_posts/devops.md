@@ -6,6 +6,23 @@ categories:
 - devops
 ---
 
+
+## Copy a Visio drawing
+
+> Copy a Visio drawing to Word, PowerPoint, or Excel [[https://support.microsoft.com/en-us/office/copy-a-visio-drawing-to-word-powerpoint-or-excel-e301fef0-27cf-4540-9f91-901a824074ee](https://support.microsoft.com/en-us/office/copy-a-visio-drawing-to-word-powerpoint-or-excel-e301fef0-27cf-4540-9f91-901a824074ee)]
+
+1. In Visio, open the file you want to appear in the Word document.
+
+2. *Make sure nothing is selected*, and then, on the Home tab, select `Copy` or press `Ctrl+C`
+
+3. paste
+
+> In **Word**, select where you want the Visio drawing to appear and then select `Paste` or press `Ctrl+V`
+>
+> In **PowerPoint** or **Excel**, On the Home tab, select `Paste > Paste Special`, and then select `Microsoft Visio Drawing Object`
+
+
+
 ## LSF (Platform Load Sharing Facility)
 
 `bjobs`: Displaying Job Status

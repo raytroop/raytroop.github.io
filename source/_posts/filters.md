@@ -116,7 +116,62 @@ grid on; xline(wc, '--r', 'HandleVisibility','off');
 
 
 
+---
 
+`besself`: Bessel *analog* filter design `[b,a] = besself(n, Wo)`
+
+> the transfer function coefficients of an $n$th-order lowpass analog Bessel filter, where `Wo` is the angular frequency up to which the filter's group delay is approximately constant. Larger values of `n` produce a group delay that better approximates a constant up to `Wo`.
+
+`scipy.signal.bessel(N, Wn, btype='low', analog=True, output='ba', norm='phase')`
+
+> `norm='phase'` — The filter is normalized such that the **phase response reaches its midpoint at angular (e.g. rad/s) frequency `Wn`**
+>
+> This is the default, and matches MATLAB's implementation.
+
+```matlab
+octave:8> [b,a] = besself(5,1)
+b = 1
+a =
+
+   1.0000   3.8107   6.7767   6.8864   3.9363   1.0000
+```
+
+```python
+b_bess, a_bess = signal.bessel(5, 1, btype='low', analog=True, norm='phase')
+print(b_bess, a_bess)
+
+# [1.] [1.         3.81070121 6.77667372 6.88636765 3.93628343 1.        ]
+
+```
+
+![bessel_5th_wn1](filters/bessel_5th_wn1.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
+
+order = 5
+cutoff_rad = 1
+
+b_bess, a_bess = signal.bessel(order, cutoff_rad, btype='low', analog=True, norm='phase')
+
+# Frequency response computation (Linear scale)
+w = np.linspace(0, 8 * cutoff_rad, 1000) # Frequency range 0 to 2*fc
+
+# Frequency response for phase
+w_bess, h_bess = signal.freqs(b_bess, a_bess, worN=w)
+
+# Phase Response (unwrapped to avoid 360 degree jumps)
+phase_bess = np.unwrap(np.angle(h_bess))
+
+plt.figure(figsize=(10, 5))
+plt.plot(w_bess, np.degrees(phase_bess), label='Bessel', linewidth=2, linestyle='-')
+plt.axvline(cutoff_rad, color='red', linestyle=':', label='Cutoff')
+plt.title('5th Order Bessel Filter Phase Response w/ Wn=1')
+plt.ylabel('Phase [degrees]'); plt.xlabel('Frequency [rad/s]')
+plt.grid(True); plt.legend()
+```
 
 
 

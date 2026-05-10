@@ -1715,8 +1715,6 @@ The tool uses **statistical methods** to model various wireline effects and to e
 
 
 
-
-
 ---
 
 ---

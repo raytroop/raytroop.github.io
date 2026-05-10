@@ -379,6 +379,8 @@ title('Quantization Noise Effects', FontSize=14);
 
 ![image-20260505162601167](ddsm/image-20260505162601167.png)
 
+> inital state is ***Reset***
+
 ![image-20260508204250391](ddsm/image-20260508204250391.png)
 
 

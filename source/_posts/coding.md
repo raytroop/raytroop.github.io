@@ -418,7 +418,24 @@ y = exp.(sin.(x)) .+ 2 .* x
 
 
 
-### Makie.jl
+---
+
+
+
+`Revise.jl` Context Summary
+
+
+| Context            | Role                                                         | Key Mechanism                                                |
+| :----------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| **REPL**           | Hot-reloads functions and modules without restarting Julia.  | `using Revise` then `using MyPackage`                        |
+| **Scripts**        | Watches standalone `.jl` files for changes on save.          | `includet("path/to/script.jl")`                              |
+| **Pluto.jl**       | Tracks updates to **external** packages used in the notebook. | `using Revise` in a cell (Internal cells are natively reactive). |
+| **Jupyter/IJulia** | Updates package code without needing to restart the kernel.  | `using Revise` in the first cell.                            |
+| **VS Code**        | Powers the integrated "Execute" and "Debugger" workflows.    | Usually auto-enabled by the Julia Extension.                 |
+
+
+
+### Makie.jl & Observables.jl
 
 > Storopoli, Huijzer and Alonso (2021). Julia Data Science. [[https://juliadatascience.github.io/JuliaDataScience/](https://juliadatascience.github.io/JuliaDataScience/)]
 
@@ -467,11 +484,9 @@ x[] = 5.0
 
 
 
-### DifferentialEquations.jl
+### DifferentialEquations.jl & Callback Functions
 
-
-
-**Event Handling and Callback Functions**
+![image-20260510174019169](coding/image-20260510174019169.png)
 
 
 
@@ -663,6 +678,40 @@ ic=zeros(1,m);
 
 
 
+## Markdown
+
+**`> [!NOTE]`**: General useful information
+
+> [!NOTE]
+
+
+
+**`> [!IMPORTANT]`**: Crucial information for user success
+
+> [!IMPORTANT]
+
+
+
+**`> [!WARNING]`**: Urgent information to avoid potential problems
+
+> [!WARNING]
+
+
+
+**`> [!TIP]`**: Helpful advice or better ways to do things
+
+> [!TIP]
+
+
+
+**`> [!CAUTION]`**: Negative consequences or risks of certain actions
+
+> [!CAUTION]
+
+
+
+
+
 
 
 
@@ -687,6 +736,17 @@ In math mode, LaTeX provides several commands to insert horizontal space of spec
 $$
 \operatorname{sinc}(x)
 $$
+
+
+
+## mermaid
+
+*Mermaid is a JavaScript based diagramming and charting tool* that takes Markdown-inspired text definitions and creates diagrams dynamically in the browser
+
+```mermaid
+graph TD;A-->B;A-->C;B-->D;C-->D;
+```
+
 
 
 ## C++

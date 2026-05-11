@@ -70,6 +70,8 @@ legend('ref', 'Low frequency attenuated', 'high frequency attenuated')
 ## group delay
 
 > Andor Bariska. Negative Group Delay [[https://www.dsprelated.com/blogimages/AndorBariska/NGD/ngdblog.pdf](https://www.dsprelated.com/blogimages/AndorBariska/NGD/ngdblog.pdf)]
+>
+> robert bristow-johnson, What is meant by "Group delay" in simple words? [[https://dsp.stackexchange.com/a/64671](https://dsp.stackexchange.com/a/64671)]
 
 ![image-20251113005845859](distortion/image-20251113005845859.png)
 

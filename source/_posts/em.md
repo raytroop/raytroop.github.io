@@ -309,7 +309,11 @@ $$
 
 ![image-20240713142506673](em/image-20240713142506673.png)
 
+---
 
+> Integrated Transformer Models [[https://www.rfinsights.com/concepts/rfic-transformer-model/](https://www.rfinsights.com/concepts/rfic-transformer-model/)]
+
+![image-20260511221602225](em/image-20260511221602225.png)
 
 
 

@@ -235,6 +235,49 @@ The SRF of an inductor is the frequency at which the parasitic capacitance of th
 
 
 
+## RLC inspection
+
+![image-20260512003152012](resonant/image-20260512003152012.png)
+
+For analyzing RLC circuits, **Log-Log is indeed the best choice.**
+
+![image-20260512003526175](resonant/image-20260512003526175.png)
+
+```matlab
+% Parameters
+R = 100; L = 0.1; C = 10e-6;
+f = logspace(1, 4, 1000); % Frequency range: 10Hz to 10kHz
+w = 2 * pi * f;
+
+% Calculations
+fr = 1 / (2 * pi * sqrt(L * C)); % Resonant frequency (approx 159.15 Hz)
+Z_mag = abs(R + 1j*w*L + 1./(1j*w*C)); % Total Impedance Magnitude
+
+% Plotting setup
+plot_funcs = {@plot, @semilogx, @semilogy, @loglog};
+titles = {'Linear Plot', 'Semilog-X', 'Semilog-Y', 'Log-Log'};
+
+for i = 1:4
+    subplot(2,2,i);
+    plot_funcs{i}(f, Z_mag, 'LineWidth', 1.5); 
+    hold on;
+    
+    % Vertical line for Resonant Frequency
+    xline(fr, '--r', sprintf(' f_r = %.2f Hz', fr), ...
+        'LabelVerticalAlignment', 'bottom', 'LineWidth', 1.2);
+    
+    % Horizontal line for Minimum Impedance (Z = R)
+    yline(R, '--g', sprintf(' |Z| = R = %d \\Omega', R), ...
+        'LabelHorizontalAlignment', 'left', 'LineWidth', 1.2);
+    
+    title(titles{i});
+    xlabel('Frequency (Hz)'); ylabel('|Z| (Ohms)');
+    grid on;
+end
+```
+
+
+
 ## reference
 
 Hossein Hashemi, RF Circuits, [[https://youtu.be/0f3yZMvD2Jg](https://youtu.be/0f3yZMvD2Jg)]

@@ -13,7 +13,7 @@ mathjax: true
 
 ### coupling factor
 
-![image-20251023214723225](emx-peakview/image-20251023214723225.png)
+![image-20251023214723225](emx/image-20251023214723225.png)
 
 > note **CTAP** is grounded
 
@@ -25,11 +25,11 @@ where $Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}$
 
 
 
-![image-20251023214042381](emx-peakview/image-20251023214042381.png)
+![image-20251023214042381](emx/image-20251023214042381.png)
 
 > Min-Sun Keel. Design of reliable and energy-efficient high-speed interface circuits. University of Illinois Urbana-Champaign, USA, 2015 [[https://files.core.ac.uk/download/pdf/158312105.pdf](https://files.core.ac.uk/download/pdf/158312105.pdf)]
 >
-> ![image-20251124205353311](emx-peakview/image-20251124205353311.png)
+> ![image-20251124205353311](emx/image-20251124205353311.png)
 
 ```python
 import numpy as np
@@ -78,7 +78,7 @@ plt.show()
 ---
 
 
-![image-20251023213942643](emx-peakview/image-20251023213942643.png)
+![image-20251023213942643](emx/image-20251023213942643.png)
 
 > ```
 > 	   (get_k
@@ -122,7 +122,7 @@ plt.show()
 
 > [[https://wiki.icprophet.com/doku.php?id=wiki#t-coil](https://wiki.icprophet.com/doku.php?id=wiki#t-coil)]
 
-![image-20251206101447859](emx-peakview/image-20251206101447859.png)
+![image-20251206101447859](emx/image-20251206101447859.png)
 
 $$
 k = \frac{L_{tot}-L_1-L_2}{2M} = \frac{\text{im}[Z_{diff}]/2\pi f - \text{im}[Z_{11}]/2\pi f-\text{im}[Z_{22}]/2\pi f}{2\sqrt{\text{im}[Z_{11}]/2\pi f\times \text{im}[Z_{22}]/2\pi f}} = \frac{- \text{im}[Z_{12}] - \text{im}[Z_{21}]}{2\sqrt{\text{im}[Z_{11}]\times \text{im}[Z_{22}]}}
@@ -131,7 +131,7 @@ if $\text{im}[Z_{12}] = \text{im}[Z_{21}]$, then
 $$
 \color{red}k =- \frac{\text{im}[Z_{21}]}{\sqrt{\text{im}[Z_{11}]\times \text{im}[Z_{22}]}}
 $$
-![image-20251206101226005](emx-peakview/image-20251206101226005.png)
+![image-20251206101226005](emx/image-20251206101226005.png)
 
 
 
@@ -139,7 +139,7 @@ $$
 
 > Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
 
-![image-20251121000517142](emx-peakview/image-20251121000517142.png)
+![image-20251121000517142](emx/image-20251121000517142.png)
 
 ---
 
@@ -147,9 +147,9 @@ $$
 >
 > Measuring Self Resonant Frequency [[https://www.coilcraft.com/getmedia/8ef1bd18-d092-40e8-a3c8-929bec6adfc9/doc363_measuringsrf.pdf?srsltid=AfmBOoqdBJ_CTB-N_wOVp2_7zIDXPEwOYLm7S4RLuws1CEcEWZUijblK](https://www.coilcraft.com/getmedia/8ef1bd18-d092-40e8-a3c8-929bec6adfc9/doc363_measuringsrf.pdf?srsltid=AfmBOoqdBJ_CTB-N_wOVp2_7zIDXPEwOYLm7S4RLuws1CEcEWZUijblK)]
 
-![image-20251121002136639](emx-peakview/image-20251121002136639.png)
+![image-20251121002136639](emx/image-20251121002136639.png)
 
-![image-20251121002228554](emx-peakview/image-20251121002228554.png)
+![image-20251121002228554](emx/image-20251121002228554.png)
 
 ### T-coil vs tapped inductor
 
@@ -170,9 +170,9 @@ where $L1_{\text{sim}}$, $L2_{\text{sim}}$ and $k_{\text{sim}}$ come from tcoil 
 >
 > So, the $k_{\text{sim}}$ is negative if routing coil in same direction
 
-![image-20220623013225554](emx-peakview/image-20220623013225554.png)
+![image-20220623013225554](emx/image-20220623013225554.png)
 
-![image-20220623013923263](emx-peakview/image-20220623013923263.png)
+![image-20220623013923263](emx/image-20220623013923263.png)
 
 ```matlab
 % EMX - shield tcoil model
@@ -211,21 +211,23 @@ legend('Tapped inductor model', 'tcoil model calc');
 >
 > —, "Fundamentals of Integrated Transformers: From Principles to Applications," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 4, pp. 86-100, Fall 2020 
 
-![image-20251206083550560](emx-peakview/image-20251206083550560.png)
+![image-20251206083550560](emx/image-20251206083550560.png)
 
-![image-20251206090819816](emx-peakview/image-20251206090819816.png)
+![image-20251206090819816](emx/image-20251206090819816.png)
+
+
 
 ---
 
 > [[https://wiki.icprophet.com/doku.php?id=wiki#%E5%8F%98%E5%8E%8B%E5%99%A8](https://wiki.icprophet.com/doku.php?id=wiki#%E5%8F%98%E5%8E%8B%E5%99%A8)]
 
-| 变压器差分输入、差分输出     | ![image-20251206101920561](emx-peakview/image-20251206101920561.png) |
-| ---------------------------- | ------------------------------------------------------------ |
-| **变压器单端输入、差分输出** | ![image-20251206102009723](emx-peakview/image-20251206102009723.png) |
-| **变压器差分输入、单端输出** | ![image-20251206102047381](emx-peakview/image-20251206102047381.png) |
-| **变压器单端输入、单端输出** | ![image-20251206102150510](emx-peakview/image-20251206102150510.png) |
+| 变压器差分输入、差分输出     | ![image-20251206101920561](emx/image-20251206101920561.png) |
+| ---------------------------- | ----------------------------------------------------------- |
+| **变压器单端输入、差分输出** | ![image-20251206102009723](emx/image-20251206102009723.png) |
+| **变压器差分输入、单端输出** | ![image-20251206102047381](emx/image-20251206102047381.png) |
+| **变压器单端输入、单端输出** | ![image-20251206102150510](emx/image-20251206102150510.png) |
 
-![image-20251206102240524](emx-peakview/image-20251206102240524.png)
+![image-20251206102240524](emx/image-20251206102240524.png)
 
 > the formula is same with T-coil's
 
@@ -237,7 +239,7 @@ legend('Tapped inductor model', 'tcoil model calc');
 
 *Ring Pattern*, *Star Pattern*
 
-![image-20251206005014571](emx-peakview/image-20251206005014571.png)
+![image-20251206005014571](emx/image-20251206005014571.png)
 
 
 
@@ -245,13 +247,13 @@ legend('Tapped inductor model', 'tcoil model calc');
 
 *TODO* &#128197;
 
-![image-20251206005603725](emx-peakview/image-20251206005603725.png)
+![image-20251206005603725](emx/image-20251206005603725.png)
 
 
 
 ### Transmission Zero
 
-![image-20251206103623404](emx-peakview/image-20251206103623404.png)
+![image-20251206103623404](emx/image-20251206103623404.png)
 
 like shunt-peaking, the impedance of $C_o/n$, $L_s$, $r_s$ have resonant peak at resonant frequency, which block signal transmission to **S**
 
@@ -261,13 +263,13 @@ like shunt-peaking, the impedance of $C_o/n$, $L_s$, $r_s$ have resonant peak at
 
 > Mixed-Mode Y/Z-Parameters [[http://zeptoblog.com/2024/03/09/mixed-mode-yz-parameters.html](http://zeptoblog.com/2024/03/09/mixed-mode-yz-parameters.html)]
 
-![image-20260109001415365](emx-peakview/image-20260109001415365.png)
+![image-20260109001415365](emx/image-20260109001415365.png)
 
 ### DE & SE excitation
 
 > Min-Sun Keel. Design of reliable and energy-efficient high-speed interface circuits. University of Illinois Urbana-Champaign, USA, 2015 [[https://files.core.ac.uk/download/pdf/158312105.pdf](https://files.core.ac.uk/download/pdf/158312105.pdf)]
 
-![image-20251120230342210](emx-peakview/image-20251120230342210.png)
+![image-20251120230342210](emx/image-20251120230342210.png)
 
 
 ### differential impedance
@@ -292,7 +294,7 @@ $$
 Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}
 $$
 
-![image-20220330234833756](emx-peakview/image-20220330234833756.png)
+![image-20220330234833756](emx/image-20220330234833756.png)
 
 ```bash
   (define (EMX_differential y11 y12 y21 y22)
@@ -330,15 +332,15 @@ $$
 
 > Inductor EM simulation: 1-port or 2-port? [[https://muehlhaus.com/support/ads-application-notes/inductor-em-ports](https://muehlhaus.com/support/ads-application-notes/inductor-em-ports)]
 
-![image-20251220084731053](emx-peakview/image-20251220084731053.png)
+![image-20251220084731053](emx/image-20251220084731053.png)
 
-![image-20251220083030590](emx-peakview/image-20251220083030590.png)
+![image-20251220083030590](emx/image-20251220083030590.png)
 
-![image-20251220084025043](emx-peakview/image-20251220084025043.png)
+![image-20251220084025043](emx/image-20251220084025043.png)
 
-![image-20251220085006044](emx-peakview/image-20251220085006044.png)
+![image-20251220085006044](emx/image-20251220085006044.png)
 
-> ![image-20251220084559347](emx-peakview/image-20251220084559347.png)
+> ![image-20251220084559347](emx/image-20251220084559347.png)
 
 
 
@@ -500,7 +502,7 @@ $$\begin{align}
 L_{diff} = \frac{Im(Z_{diff})}{2\pi f} \qquad Q_{diff} = \frac{Im(Z_{diff})}{Re(Z_{diff})}
 \end{align}$$
 
-![image-20220331013735370](emx-peakview/image-20220331013735370.png)
+![image-20220331013735370](emx/image-20220331013735370.png)
 
 ### Single-ended cap
 
@@ -549,7 +551,7 @@ C_{12} &= -\frac{Im(Y_{12})}{2\pi f} \qquad Q_{12} = \frac{Im(Y_{12})}{Re(Y_{12}
 
 
 
-![image-20220331020334023](emx-peakview/image-20220331020334023.png)
+![image-20220331020334023](emx/image-20220331020334023.png)
 
 
 
@@ -574,7 +576,7 @@ $$\begin{align}
 C_{diff} = -\frac{1/Im(Z_{diff})}{2\pi f} \qquad Q_{diff} = -\frac{Im(Z_{diff})}{Re(Z_{diff})}
 \end{align}$$
 
-![image-20220331022224865](emx-peakview/image-20220331022224865.png)
+![image-20220331022224865](emx/image-20220331022224865.png)
 
 ### Tline
 
@@ -598,9 +600,9 @@ EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 
 > ~~Note EMX plot the absolute value of $\alpha$ and $\beta$~~
 
-![image-20220630215343377](emx-peakview/image-20220630215343377.png)![image-20220630215418372](emx-peakview/image-20220630215418372.png)
+![image-20220630215343377](emx/image-20220630215343377.png)![image-20220630215418372](emx/image-20220630215418372.png)
 
-![image-20220630215630849](emx-peakview/image-20220630215630849.png)
+![image-20220630215630849](emx/image-20220630215630849.png)
 
 
 
@@ -614,9 +616,9 @@ EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 >
 > usually EMX choose `ac` method
 
-![image-20220501173856442](emx-peakview/image-20220501173856442.png)
+![image-20220501173856442](emx/image-20220501173856442.png)
 
-![image-20220501173930035](emx-peakview/image-20220501173930035.png)
+![image-20220501173930035](emx/image-20220501173930035.png)
 
 > left 2 figures are used for AC simulation, $Y_{nn}$ can be obtained conveniently
 
@@ -626,7 +628,7 @@ EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 
 > Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
 
-![image-20221217141519947](emx-peakview/image-20221217141519947.png)
+![image-20221217141519947](emx/image-20221217141519947.png)
 
 for single-end capicator
 $$\begin{align}
@@ -639,7 +641,7 @@ So, the EMX model and foundary model is consistent.
 
 > O. Hanay, J. Hulsman and R. Negra, "Three-Port S-Parameter based characterization of integrated bridged-T-Coils," *2019 12th German Microwave Conference (GeMiC)*, Stuttgart, Germany, 2019, pp. 268-271 [[https://sci-hub.se/10.23919/GEMIC.2019.8698123](https://sci-hub.se/10.23919/GEMIC.2019.8698123)]
 
-![image-20251121002530468](emx-peakview/image-20251121002530468.png)
+![image-20251121002530468](emx/image-20251121002530468.png)
 
 
 
@@ -649,7 +651,7 @@ EMX process file contain *M0* up to *RDL-AP*
 
 PM, CB2_FC, UBM is in the chip package
 
-![image-20250613235639258](emx-peakview/image-20250613235639258.png)
+![image-20250613235639258](emx/image-20250613235639258.png)
 
 
 > PEX extract up to *RDL-AP* as expected
@@ -660,15 +662,15 @@ PM, CB2_FC, UBM is in the chip package
 
 > quick find routing resistance
 
-![image-20250705231456546](emx-peakview/image-20250705231456546.png)
+![image-20250705231456546](emx/image-20250705231456546.png)
 
-![image-20250705231907284](emx-peakview/image-20250705231907284.png)
+![image-20250705231907284](emx/image-20250705231907284.png)
 
 
 
 > GPDK045 metal resistor model is **not** consistent with its process file on sheet resistance
 >
-> ![image-20250705233530802](emx-peakview/image-20250705233530802.png)
+> ![image-20250705233530802](emx/image-20250705233530802.png)
 
 
 
@@ -684,9 +686,9 @@ PM, CB2_FC, UBM is in the chip package
 
 
 
-![img](emx-peakview/simple_msl_sub-e1564585450781.jpg)
+![img](emx/simple_msl_sub-e1564585450781.jpg)
 
-![image-20251220090704827](emx-peakview/image-20251220090704827.png)
+![image-20251220090704827](emx/image-20251220090704827.png)
 
 
 
@@ -706,7 +708,7 @@ For accurate results from EM, the **current** in the model needs to flow in the 
 
 ***Edge port with user defined location and size***
 
-![img](emx-peakview/create_edge_pin.png)
+![img](emx/create_edge_pin.png)
 
 
 
@@ -714,7 +716,7 @@ For accurate results from EM, the **current** in the model needs to flow in the 
 
 > If we manually control the area pin size, Momentum will equally distribute the injected current across that area
 
-![img](emx-peakview/areapin.png)
+![img](emx/areapin.png)
 
 
 ## Port Referencing in S-Parameters
@@ -728,7 +730,7 @@ For accurate results from EM, the **current** in the model needs to flow in the 
 
 It remains shrouded in myth
 
-![image-20251220123154767](emx-peakview/image-20251220123154767.png)
+![image-20251220123154767](emx/image-20251220123154767.png)
 
 
 
@@ -784,7 +786,7 @@ ParaView
 
 ***Paraview & stimulus***
 
-![image-20251023000524293](emx-peakview/image-20251023000524293.png)
+![image-20251023000524293](emx/image-20251023000524293.png)
 
 ***LVS check***
 

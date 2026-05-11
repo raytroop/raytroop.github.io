@@ -68,6 +68,14 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 ![image-20251213091009754](am-pm/image-20251213091009754.png)
 
+---
+
+> Phasors, Modulation & Sidebands [[https://www.rfinsights.com/concepts/modulation-and-sidebands/](https://www.rfinsights.com/concepts/modulation-and-sidebands/)]
+
+![image-20260511235100264](am-pm/image-20260511235100264.png)
+
+
+
 ## Real & Complex Modulation
 
 > J OHN M. C IOFFI. Complex AWGN and Other Channels [[https://cioffi-group.stanford.edu/ee379a/Lectures/L4.pdf](https://cioffi-group.stanford.edu/ee379a/Lectures/L4.pdf)]

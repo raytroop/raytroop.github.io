@@ -160,6 +160,49 @@ $$
 
 
 
+## CO-Planar Spiral Inductors
+
+> J. H. Mikkelsen, O. K. Jensen and T. Larsen, "Crosstalk coupling effects of CMOS co-planar spiral inductors," Proceedings of the IEEE 2004 Custom Integrated Circuits Conference [[https://sci-hub.jp/10.1109/CICC.2004.1358825](https://sci-hub.jp/10.1109/CICC.2004.1358825)]
+
+![image-20260512011753324](inductance/image-20260512011753324.png)
+
+![image-20260512012935994](inductance/image-20260512012935994.png)
+
+![image-20260512013045872](inductance/image-20260512013045872.png)
+
+
+
+---
+
+> Designer's Tips on RFIC Inductors [[https://www.rfinsights.com/concepts/tips-on-rfic-inductors/](https://www.rfinsights.com/concepts/tips-on-rfic-inductors/)]
+
+![image-20260511215641943](inductance/image-20260511215641943.png)
+
+---
+
+---
+
+> P. Guan et al., "8-Shaped Inductors: An Essential Addition to RFIC Designers' Toolbox," in IEEE Open Journal of the Solid-State Circuits Society, vol. 4, pp. 131-146, 2024 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10668829)]
+
+- **Field picture** 
+- **Partial-inductance picture** 
+
+
+
+![image-20260512013458630](inductance/image-20260512013458630.png)
+
+![image-20260512013323760](inductance/image-20260512013323760.png)
+
+![image-20260512013638832](inductance/image-20260512013638832.png)
+
+---
+
+![image-20260512013712902](inductance/image-20260512013712902.png)
+
+![image-20260512013837084](inductance/image-20260512013837084.png)
+
+![image-20260512013924643](inductance/image-20260512013924643.png)
+
 ## reference
 
 Bogatin, E. (2018). *Signal and power integrity, simplified*. Prentice Hall. [[pdf](https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20Simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf)]

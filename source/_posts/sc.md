@@ -288,3 +288,6 @@ Christian-Charles Enz. "High precision CMOS micropower amplifiers" [[pdf](https:
 Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://youtu.be/SL3-9ZMwdJQ](https://youtu.be/SL3-9ZMwdJQ)]
 
 Carsten Wulff, Switched-Capacitor Circuits [[https://analogicus.com/aic2026/switched-capacitor_circuits](https://analogicus.com/aic2026/switched-capacitor_circuits)]
+
+rfinsights, switched capacitor analysis [[https://www.rfinsights.com/concepts/switched-capacitor-analysis/](https://www.rfinsights.com/concepts/switched-capacitor-analysis/)], [[https://www.rfinsights.com/concepts/switched-capacitor-analysis-with-switch-resistance/](https://www.rfinsights.com/concepts/switched-capacitor-analysis-with-switch-resistance/)]
+

@@ -939,9 +939,9 @@ I believe that the equation $V_{ds}/I_{ds}$ is more appropriate where mos is use
 
 
 
-## Transit Frequency $f_T$
+## transition frequency $f_T$
 
-Defined as the frequency at which the **small-signal current gain** of a device is **unity**
+Defined as the frequency at which the **small-signal *current* gain** of a device is **unity**
 
 ![image-20231213234524075](insight/image-20231213234524075.png)
 
@@ -965,6 +965,14 @@ Defined as the frequency at which the **small-signal current gain** of a device 
 ---
 
 ![image-20250831165407595](insight/image-20250831165407595.png)
+
+## fmax
+
+> Art3, Measuring Fmax for MOS Transistors [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/measuring-fmax-for-mos-transistors](https://community.cadence.com/cadence_blogs_8/b/rf/posts/measuring-fmax-for-mos-transistors)]
+>
+> [[https://www.rfinsights.com/concepts/ft-vs-fmax/](https://www.rfinsights.com/concepts/ft-vs-fmax/)]
+
+*TODO* &#128197;
 
 
 

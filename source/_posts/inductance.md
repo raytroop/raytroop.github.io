@@ -160,7 +160,7 @@ $$
 
 
 
-## CO-Planar Spiral Inductors
+## Co-Planar Spiral Inductors
 
 > J. H. Mikkelsen, O. K. Jensen and T. Larsen, "Crosstalk coupling effects of CMOS co-planar spiral inductors," Proceedings of the IEEE 2004 Custom Integrated Circuits Conference [[https://sci-hub.jp/10.1109/CICC.2004.1358825](https://sci-hub.jp/10.1109/CICC.2004.1358825)]
 

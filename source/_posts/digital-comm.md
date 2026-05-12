@@ -14,7 +14,6 @@ mathjax: true
 >
 > Pulse Shaping Filter [[https://wirelesspi.com/pulse-shaping-filter/](https://wirelesspi.com/pulse-shaping-filter/)]
 >
-> [[Google AI Mode](https://share.google/aimode/IKtc0YypCSLqwjILi)]
 
 ![image-20260415222452201](digital-comm/image-20260415222452201.png)
 
@@ -238,8 +237,6 @@ But the problem here is: "How does the receiver know the ideal sampling instants
 > Eduardo Fuentetaja. "Analysis of the M&M Clock Recovery Algorithm" [[https://edfuentetaja.github.io/sdr/m_m_analysis/](https://edfuentetaja.github.io/sdr/m_m_analysis/)]
 >
 > C.-P. Tzeng, D. Hodges and D. Messerschmitt, "Timing Recovery in Digital Subscriber Loops Using Baud-Rate Sampling," in *IEEE Journal on Selected Areas in Communications*, vol. 4, no. 8, pp. 1302-1311, November 1986 [[pdf](https://people.eecs.berkeley.edu/~messer/PAPERS/IEEE/Nov86-2.pdf)]
->
-> Google AI Mode [[https://share.google/aimode/QVyCXCCXO1URdDnKD](https://share.google/aimode/QVyCXCCXO1URdDnKD)]
 >
 > H. Meyr, M. Moeneclaey, and S. A. Fechtel. "Digital Communication Receivers: Synchronization, Channel Estimation, and Signal Processing." Wiley [[pdf](https://pce-fet.com/common/library/books/17/5233_[Heinrich_Meyr,_Marc_Moeneclaey,_Stefan_A._Fechtel.pdf)]
 >

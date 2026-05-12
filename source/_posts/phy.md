@@ -111,6 +111,10 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 > Vineel Kumar Veludandi. Maximum likelihood sequence estimation (MLSE) using the Viterbi algorithm [[https://github.com/vineel49/mlse](https://github.com/vineel49/mlse)]
 >
 > David Banas, Keysight, DesignCon 2026, *Understanding the Viterbi Decoder*
+>
+> A. C. Singer, N. R. Shanbhag and H. -m. Bae, "Electronic dispersion compensation," in *IEEE Signal Processing Magazine*, vol. 25, no. 6, pp. 110-130, November 2008 [[https://shanbhag.ece.illinois.edu/publications/singer-spm-2008.pdf](https://shanbhag.ece.illinois.edu/publications/singer-spm-2008.pdf)]
+>
+> —, ISSCC2007 T10: Fundamentals of Electronic Dispersion Compensation (EDC)
 
 ![image-20260401214642821](phy/image-20260401214642821.png)
 
@@ -132,9 +136,9 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 
 
 
+## Error-Correcting Codes (ECC)
 
-
-
+> Takayuki Kawahara, ISSCC2007 T5: *Error-Correcting Codes for Memories*
 
 
 

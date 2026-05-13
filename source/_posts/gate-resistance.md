@@ -136,6 +136,10 @@ MOSFET extrinsic parasitic capacitance between gate poly and source / drain diff
 
 Different extraction tools do this differently - some tools connect these parasitic capacitances to the center point of the gate poly, while some other tools connect them to the end points of the gate poly resistors.
 
+---
+
+![image-20260513205825756](gate-resistance/image-20260513205825756.png)
+
 
 
 ## $\Delta$ gate model
@@ -207,7 +211,7 @@ leakage current is determined by $R_s + R_p$, and $R_p \gg R_s$
 &#11088; B. Razavi, Y. Ran, and K. F. Lee, “Impact of Distributed Gate Resistance on the Performance of MOS Devices,”
 IEEE Trans. Circuits and Systems, Part I, pp. 750–754, Nov. 1994.
 
-&#11088; Maxim Ershov, Diakopto. "Gate Resistance in IC design flow", [[link](https://www.linkedin.com/pulse/gate-resistance-ic-design-flow-maxim-ershov), [pdf](https://diakopto.marsdm.com/wp-content/uploads/Gate-Resistance-in-IC-design-flow.pdf)]
+&#11088; Maxim Ershov, Diakopto. "Gate Resistance in IC design flow", [[link](https://www.linkedin.com/pulse/gate-resistance-ic-design-flow-maxim-ershov), [pdf](https://diakopto.marsdm.com/wp-content/uploads/Gate-Resistance-in-IC-design-flow.pdf)], [[https://www.synopsys.com/blogs/chip-design/gate-resistance-ic-design-flow.html](https://www.synopsys.com/blogs/chip-design/gate-resistance-ic-design-flow.html)]
 
 A.J.Sholten et al., "FinFET compact modelling for analogue and RF applications", IEDM'2010 [[https://sci-hub.se/10.1109/IEDM.2010.5703322](https://sci-hub.se/10.1109/IEDM.2010.5703322)]
 

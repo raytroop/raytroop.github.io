@@ -51,6 +51,8 @@ $$
 
 ## Incremental ADC
 
+> Z. Tan, C. -H. Chen, Y. Chae and G. C. Temes, "Incremental Delta-Sigma ADCs: A Tutorial Review," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 67, no. 12, pp. 4161-4173, Dec. 2020 [[https://sci-hub.jp/10.1109/TCSI.2020.3033458](https://sci-hub.jp/10.1109/TCSI.2020.3033458)]
+
 ![image-20250615124340044](im-adc/image-20250615124340044.png)
 
 > ![image-20250615162024564](im-adc/image-20250615162024564.png)

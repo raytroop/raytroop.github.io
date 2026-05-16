@@ -907,7 +907,9 @@ SAGCs require the source/drain contacts to be capped with an insulator that is d
 
 ![image-20260516074126388](dfm-layout/image-20260516074126388.png)
 
-![image-20260516080135996](dfm-layout/image-20260516080135996.png)
+
+
+![image-20260516083623243](dfm-layout/image-20260516083623243.png)
 
 | Layer | Description                             | Type           |
 | ----- | --------------------------------------- | -------------- |

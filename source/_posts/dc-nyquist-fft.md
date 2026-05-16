@@ -179,6 +179,23 @@ ylabel('|P1(f)|')
 
 
 
+---
+
+---
+
+DC and Nyquist bins are special because they have **no mirror twin**:
+
+| Frequency Bin           | Location in FFT | Mirror Twin?                  | Action for Single-Sided Plot    |
+| ----------------------- | --------------- | ----------------------------- | ------------------------------- |
+| **DC (0 Hz)**           | First element   | None                          | **Leave alone** (Multiply by 1) |
+| **Positive Freqs**      | First half      | Has a twin in the second half | **Double it** (Multiply by 2)   |
+| **Nyquist (\(F_s/2\))** | Exact middle    | None (Shared)                 | **Leave alone** (Multiply by 1) |
+| **Negative Freqs**      | Second half     | Discarded entirely            | **Dropped**                     |
+
+Doubling them would double-count their energy and give you an artificially inflated amplitude.
+
+
+
 ## Alternative View
 
 The direct current (DC) bin ($k=0$) and the bin at $k=N/2$, i.e., the bin that corresponds to the Nyquist frequency are **purely real and unique**.
@@ -201,7 +218,7 @@ Power spectrum derived from FFT provide information of samples, i.e. **1**
 
 Moreover, average power of sample [1 -1 1 -1 1 ...] is same with DC [1 1 1 1 ...].
 
-### code
+
 
 ```matlab
 fc = 10;

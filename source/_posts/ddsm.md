@@ -395,7 +395,7 @@ Kai Wang, *Is there a way to improve the code speed?* [[https://www.mathworks.co
 
 Julia version (Claude Opus 4.7)  [[https://gist.github.com/raytroop/53f210b2cca18ec77295dc91dbe35818](https://gist.github.com/raytroop/53f210b2cca18ec77295dc91dbe35818)]
 
-
+![image-20260515202527271](ddsm/image-20260515202527271.png)
 
 **classic PLL module in Mathematica**
 

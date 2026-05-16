@@ -901,6 +901,26 @@ SAGCs require the source/drain contacts to be capped with an insulator that is d
 
 
 
+## MD structure
+
+> Joddy Wang December 9, 2015, FinFET SPICE Modeling [[https://www.mos-ak.org/washington_dc_2015/presentations/T03_Joddy_Wang_MOS-AK_Washington_DC_2015.pdf](https://www.mos-ak.org/washington_dc_2015/presentations/T03_Joddy_Wang_MOS-AK_Washington_DC_2015.pdf)]
+
+![image-20260516074126388](dfm-layout/image-20260516074126388.png)
+
+![image-20260516080135996](dfm-layout/image-20260516080135996.png)
+
+| Layer | Description                             | Type           |
+| ----- | --------------------------------------- | -------------- |
+| MD    | interconnection layer between OD and VC | CAD layer      |
+| VG    | Via Contact hole between MG and M0      | tape-out layer |
+| VD    | Via Contact hole between MD and M0      | tape-out layer |
+
+note: VC={VG OR VD}
+
+![image-20260516074052801](dfm-layout/image-20260516074052801.png)
+
+
+
 ## Native NMOS Blocked Implant (NT_N)
 
 > Principles of VLSI Design CMOS Processing CMPE 413 [[https://redirect.cs.umbc.edu/~cpatel2/links/315/lectures/chap3_lect09_processing2.pdf](https://redirect.cs.umbc.edu/~cpatel2/links/315/lectures/chap3_lect09_processing2.pdf)]

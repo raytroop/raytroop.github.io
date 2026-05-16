@@ -1707,11 +1707,132 @@ The tool uses **statistical methods** to model various wireline effects and to e
 
 ![image-20260501205644025](link-mdl/image-20260501205644025.png)
 
----
+***High-Level Pipeline***
 
----
+```mermaid
+flowchart TD
+    A["User Settings<br/>(GenerateUserSettingsExampleN)"] --> B["Settings Limits<br/>(GenerateSettingsLimits)"]
+    B --> C["Initialize Simulation<br/>(InitializeSimulation)"]
+    C --> D["Check Settings<br/>(CheckSettings)"]
+    D --> E["Fixed Influences<br/>(GenerateFixedInfluence)"]
+    E --> F{"Adaptation Loop<br/>while ~finished"}
 
-***Matlab Version of StatOpt***
+    F --> G["Variable Influences<br/>(GenerateVariableInfluence)"]
+    G --> H["Pulse Response<br/>(GeneratePulseResponse)"]
+    H --> I["ISI Trajectories<br/>(GenerateISI)"]
+    I --> J["PDF Eye Diagram<br/>(GeneratePDF)"]
+    J --> K["BER Contours<br/>(GenerateBER)"]
+    K --> L["Results / Measurements<br/>(GenerateResults)"]
+    L --> M["Adapt Link<br/>(AdaptLink)"]
+    M -->|not finished| F
+    M -->|finished| N["Display Plots<br/>(Display* functions)"]
+```
+
+Every function reads from and writes to two MATLAB structs that flow through the entire pipeline:
+
+| Struct        | Purpose                                                      |
+| ------------- | ------------------------------------------------------------ |
+| `simSettings` | All user-configurable knobs + derived constants. Populated once at startup; mutated only by the adaptation engine. |
+| `simResults`  | Accumulates all computed data: channel responses, jitter/noise PDFs, pulse responses, ISI trajectories, PDF/BER eye diagrams, measurements, and adaptation state. |
+
+
+
+***Fixed Influences (runs once)*** — `GenerateFixedInfluence.m`
+
+Computes channel and impairment data that **does not change** across adaptation iterations:
+
+```mermaid
+flowchart LR
+    A["CreateChannel"] --> B["GenerateTXJitter"]
+    B --> C["GenerateTXDistortion"]
+    C --> D["GenerateRXJitter"]
+    D --> E["GenerateRXDistortion"]
+    E --> F["CombineInfluences"]
+```
+
+
+
+***Variable Influences*** — `GenerateVariableInfluence.m`
+
+omputes impairment sources that **depend on equalization settings** (and thus change during adaptation):
+
+| Sub-function             | What it computes                                             |
+| ------------------------ | ------------------------------------------------------------ |
+| **GenerateCTLE**         | CTLE transfer function from zero/pole specs (cached to avoid recomputation) |
+| **CalculateFFERMS**      | RMS of FFE tap values (needed for noise output-referring)    |
+| **GenerateTXNoise**      | TX noise → attenuated through channel → amplified by CTLE/FFE → Gaussian PDF at RX output |
+| **GenerateChannelNoise** | Thermal noise → amplified by CTLE/FFE → Gaussian PDF         |
+| **GenerateRXNoise**      | RX input-referred noise → amplified by pre-amp/CTLE/FFE → Gaussian PDF |
+| **CombineInfluences**    | Convolves TX + channel + RX noise PDFs into total noise PDF  |
+
+
+
+{% note warning %}
+Noise is **output-referred** — each noise source is propagated through the downstream signal chain (channel, CTLE, FFE) before creating the probability distribution. This is why noise must be recomputed when equalization changes.
+{% endnote %}
+
+
+
+***Pulse Response*** — `GeneratePulseResponse.m`
+
+Builds the end-to-end pulse response through the full signal chain:
+
+```mermaid
+flowchart LR
+    A["ApplyPulse<br/>(ideal pulse)"] --> B["ApplyTXEQ<br/>(FIR pre-emphasis)"]
+    B --> C["ApplyChannel<br/>(convolution with channel IR)"]
+    C --> D["ApplyRXGain<br/>(pre-amplifier)"]
+    D --> E["ApplyRXCTLE<br/>(continuous-time EQ via lsim)"]
+    E --> F["ApplyRXFFE<br/>(FIR equalization)"]
+    F --> G["ApplyRXDFE<br/>(post-cursor subtraction)"]
+    G --> H["LimitLength<br/>(trim to cursor window)"]
+```
+
+
+
+***ISI Generation*** — `GenerateISI.m`
+
+Generates all possible signal trajectories due to inter-symbol interference:
+
+1. **GenerateCursorCombinations** — Enumerates all `M^N` cursor patterns (M = modulation levels, N = cursor count)
+2. **ClassifyTrajectories** — Groups combinations by their main-cursor transition type (e.g., `trans01`, `trans10`)
+3. **SplitPulse** — Slices the pulse response into per-cursor segments
+4. **ApplyCursorCombination** — For each combination, multiplies cursors by data levels and sums → one trajectory per combination
+
+{% note warning %}
+Computational complexity is `O(M^N)` — for PAM-4 with 7 cursors this is `4^7=16384` combinations. Reducing cursor count speeds up simulation at the cost of accuracy
+{% endnote %}
+
+
+
+***PDF Generation*** — `GeneratePDF.m`
+
+Builds the statistical eye diagram by layering impairments onto the ISI distribution:
+
+```mermaid
+flowchart LR
+    A["GenerateHist<br/>(ISI → voltage histograms)"] --> B["ApplyCrossTalk<br/>(vertical convolution)"]
+    B --> C["ApplyDistortion<br/>(voltage remapping)"]
+    C --> D["ApplyJitter<br/>(horizontal convolution)"]
+    D --> E["ApplyNoise<br/>(vertical convolution)"]
+    E --> F["CombinePDFs<br/>(merge all transitions)"]
+```
+
+Each step creates a new named PDF layer (e.g., `PDF.initial`, `PDF.crossTalk`, `PDF.distorted`, `PDF.jitter`, `PDF.noise`, `PDF.final`), enabling intermediate visualization.
+
+
+
+***Adaptation*** — `AdaptLink.m`
+
+If `simSettings.adaption.adapt = false`, sets `finished = true` and the loop exits after one pass.
+
+If enabled, implements a **genetic algorithm** with three modes:
+
+```mermaid
+flowchart LR
+    A["Mode 1: Coarse Search<br/>(±3 increments, N generations)"] --> B["Mode 2: Fine Search<br/>(±1 increment, N generations)"]
+    B --> C["Mode 3: Final Run<br/>(restore full settings, run optimal)"]
+```
 
 
 

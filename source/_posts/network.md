@@ -276,11 +276,15 @@ $$
 
 > David Banas. *A comparison of different techniques (i.e. - windowing, vector fitting, etc.) for extracting the impulse response from S-parameters.* [[https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main](https://github.com/capn-freako/ImpulseResponseFromSparameters/tree/main)]
 >
+> —, Impulse Response from Insertion Loss [[https://www.signalintegrityjournal.com/articles/1847-impulse-response-from-insertion-loss](https://www.signalintegrityjournal.com/articles/1847-impulse-response-from-insertion-loss)]
+>
 > Sam Palermo. ECEN720: High-Speed Links Circuits and Systems Spring 2025 - Lecture 3: Time-Domain Reflectometry & S-Parameter Channel Models [[https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture3_ee720_tdr_spar.pdf)]
 >
 > Troy Beukema (IBM Research, Yorktown Heights, NY). 03-Sep-2009. *Topics in Design and Analysis of High Data Rate SERDES Systems* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_09_Beukema.pdf)]
 >
 > Cadence application note: 7 Habits of Highly Successful S-Parameters, Spectre 21.1
+>
+> Derek Rowell, 2.161 Signal Processing: Continuous and Discrete Fall 2008: *Determining a System’s Causality from its Frequency Response* [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf)]
 
 ![image-20260117130948681](network/image-20260117130948681.png)
 
@@ -289,25 +293,30 @@ $$
 
 ![image-20260117121900710](network/image-20260117121900710.png)
 
+![image-20260516115345005](network/image-20260516115345005.png)
+
+
+---
+
+![image-20260516110313298](network/image-20260516110313298.png)
+
+
+
+Any signal $h(t)$ can be split into even $h_e(t)$ and odd $h_o(t)$ components: **Even component:** $h_e(t) = \frac{h(t) + h(-t)}{2}$, **Odd component:** $h_o(t) = \frac{h(t) - h(-t)}{2}$, then $H_e(f) = \mathcal{Re}\{H(f)\} \quad H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$
+
+Conjugate symmetry ensures the time-domain signal is **real**, but it takes the **Hilbert Transform relations** to ensure it is **causal**
+$$
+H(f) = H_e(f) + H_o(f)
+$$
+
+
+![image-20260516105511969](network/image-20260516105511969.png)
+
+
+
+---
+
 ![image-20260117122328655](network/image-20260117122328655.png)
-
-![image-20260117123153607](network/image-20260117123153607.png)
-
----
-
-![image-20260225211858177](network/image-20260225211858177.png)
-
-
----
-
-
-![image-20260117135705430](network/image-20260117135705430.png)
-
-$H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enclose{circle}{1}$ , $\enclose{circle}{2}$
-
-- $\mathcal{Re}\{H(f)\}$ must be an *even function*
-
-- $\mathcal{Im}\{H(f)\}$ must be an *odd function*
 
 ### Passivity
 
@@ -342,7 +351,7 @@ $H_e(f) = \mathcal{Re}\{H(f)\}$, $H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$ and $\enc
 
 - rational approximation method: `bbspice`, `rational`
 
-
+![image-20260225211858177](network/image-20260225211858177.png)
 
 ![image-20260225213110940](network/image-20260225213110940.png)
 

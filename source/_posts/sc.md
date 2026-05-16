@@ -200,6 +200,192 @@ $$
 
 
 
+## HD3 due to Switch Ron
+
+> Boris Murmann, MEAD2026 [[https://github.com/bmurmann/MEAD2026](https://github.com/bmurmann/MEAD2026)]
+
+***Plain NMOS switch***
+
+[[https://github.com/bmurmann/MEAD2026/blob/main/xschem/tb_track_nmos.sch](https://github.com/bmurmann/MEAD2026/blob/main/xschem/tb_track_nmos.sch)]
+
+[[https://xschem-viewer.com/?file=https%3A%2F%2Fgithub.com%2Fbmurmann%2FMEAD2026%2Fblob%2Fmain%2Fxschem%2Ftb_track_nmos.sch](https://xschem-viewer.com/?file=https%3A%2F%2Fgithub.com%2Fbmurmann%2FMEAD2026%2Fblob%2Fmain%2Fxschem%2Ftb_track_nmos.sch)]
+
+```
+.param vdd=1.2 viq=0.3 vamp=0.2
+.param cl=5p cb=1p w=100u ng=20
+.param ndft=53 npad=5 bin=3 
+.param fclk=500e6 per=1/fclk fin=fclk*bin/ndft
+```
+
+![image-20260516164236222](sc/image-20260516164236222.png)
+
+> sinusoidal source waveform, using parameters: `DC offset = viq`,  `amplitude = vamp`, `frequency = fin`, `delay = 0`
+>
+> Vth is about 0.466, then `vov=vdd-vth-viq = 1.2-0.466-0.3=0.434`
+
+```python
+## https://github.com/bmurmann/MEAD2026/blob/main/tb_track_nmos.ipynb
+
+vov = 0.4344;  vm = 0.20;  c = 5e-12;  gds = 86e-3
+fbw = 1/(2*np.pi*c/gds)
+hd3_calc1 = -20*np.log10((1/2)*fin/fbw*(vm/vov)**2)
+```
+
+$$
+\color{red}HD_3 \approx \frac{1}{2} \cdot \frac{f_{in}}{f_{BW}} \cdot \left(\frac{V_m}{V_{OV}}\right)^2
+$$
+
+Pure `Ron`-modulation distortion. **No bootstrap term, no body-effect term**
+
+---
+
+***Bootstrapped switch — ideal***
+
+[[https://github.com/bmurmann/MEAD2026/blob/main/xschem/tb_track_nmos.sch](https://github.com/bmurmann/MEAD2026/blob/main/xschem/tb_track_nmos.sch)]
+
+```
+.param vdd=1.2 viq=0.3 vamp=0.2
+.param cl=5p cb=1p w=100u ng=20
+.param ndft=53 npad=5 bin=3 
+.param fclk=500e6 per=1/fclk fin=fclk*bin/ndft
+```
+
+![image-20260516164341425](sc/image-20260516164341425.png)
+
+> Vth is about 0.466, then `vov=vdd-vth = 1.2-0.466=0.734`
+
+```python
+## https://github.com/bmurmann/MEAD2026/blob/main/tb_track_nmos.ipynb
+
+cb = 1e-12; cp = 100e-15 + 2e-15; vov = 0.734; gds = 151e-3
+hd3_calc2 = -20*np.log10((1/2)*fin/fbw*(vm/vov)**2 *(cp/cb)**2)
+```
+
+$$
+\color{red}HD_3 \approx \frac{1}{2} \cdot \frac{f_{in}}{f_{BW}} \cdot \left(\frac{V_m}{V_{OV}}\right)^2 \cdot \left(\frac{C_p}{C_B}\right)^2
+$$
+
+Adds the bootstrap parasitic-ratio term. **No body-effect floor**
+
+> ![image-20260516171943692](sc/image-20260516171943692.png)
+>
+> ![image-20260516172007521](sc/image-20260516172007521.png)
+
+
+
+---
+
+***Bootstrapped switch — with body effect***
+
+[[https://github.com/bmurmann/MEAD2026/blob/main/xschem/tb_boot.sch](https://github.com/bmurmann/MEAD2026/blob/main/xschem/tb_boot.sch)]
+
+[[https://xschem-viewer.com/?file=https%3A%2F%2Fgithub.com%2Fbmurmann%2FMEAD2026%2Fblob%2Fmain%2Fxschem%2Ftb_boot.sch](https://xschem-viewer.com/?file=https%3A%2F%2Fgithub.com%2Fbmurmann%2FMEAD2026%2Fblob%2Fmain%2Fxschem%2Ftb_boot.sch)]
+
+```
+.param vdd=1.2 viq=0.3 vamp=0.2
+.param cl=1p cb=1p cp=100f w=100u ng=20
+.param ndft=31 npad=5 bin=5 fclk=500e6 
+.param per=1/fclk fin=fclk*bin/ndft trf=100p
+.param vh=0 rsw=10 roff=1e9 rs=10
+
+foreach i $&bin_vec
+  alterparam bin=$i
+  reset
+  tran 10p $&tstop2 0
+  let lin-tstep = $&per
+  let lin-tstart = 1.25n
+  linearize
+  wrdata tb_boot_track.txt v(vi) v(vo)
+  tran 10p $&tstop2 0
+  let lin-tstep = $&per
+  let lin-tstart = 1.8n
+  linearize
+  wrdata tb_boot.txt v(vi) v(vo)
+  set appendwrite
+  unset set wr_vecnames
+end
+```
+
+![image-20260516170700929](sc/image-20260516170700929.png)
+
+```python
+## https://github.com/bmurmann/MEAD2026/blob/main/tb_boot.ipynb
+
+vdd = 1.2; vt = 0.466; cpss = 100e-15; cpls = 100*1.6e-15 + 100e-15
+cb = 1e-12; cl = 1e-12; vgs = vdd*cb/(cb+cpls)
+vov = vgs - vt; print(vov)
+vm = 0.20; fs = 500e6; fin = bins*fs/ndft
+gds = 151e-3; fbw=1/(2*np.pi*cl/gds)
+hd3_calc = -20*np.log10((1/2)*fin/fbw*(vm/vov)**2 *(cpss/cb+0.11)**2)
+```
+
+$$
+\color{red}HD_3 \approx \frac{1}{2} \cdot \frac{f_{in}}{f_{BW}} \cdot \left(\frac{V_m}{V_{OV}}\right)^2 \cdot \left(\frac{C_{p,ss}}{C_B} + 0.11\right)^2
+$$
+
+
+
+The `+0.11` is the residual `Vt(vin)` body-effect contribution that the bootstrap cannot cancel.
+
+![image-20260516172931239](sc/image-20260516172931239.png)
+
+
+
+---
+
+---
+
+> [[https://github.com/bmurmann/MEAD2026/blob/main/tb_boot_bottom_4.ipynb](https://github.com/bmurmann/MEAD2026/blob/main/tb_boot_bottom_4.ipynb)]
+
+![image-20260516155106298](sc/image-20260516155106298.png)
+
+```python
+### fin, fin +/-N*fs
+
+def get_third_harmonic_bin(i, ndft):
+    """
+    Finds the 3rd harmonic bin for a real-valued signal.
+    i: fundamental bin index
+    nfft: total number of FFT points
+    """
+    # Step 1: Wrap around the sampling frequency
+    wrapped_bin = (3 * i) % ndft	### trim N
+    
+    # Step 2: Fold back if it's above Nyquist
+    if wrapped_bin > ndft // 2:
+        harmonic_bin = ndft - wrapped_bin	### fold back to fs/2
+    else:
+        harmonic_bin = wrapped_bin
+        
+    return int(harmonic_bin)
+
+
+def compute_spectra(bins, v, ndft):
+    sfdr = np.zeros(len(bins))
+    hd3 = np.zeros(len(bins))
+    spec_dbv_out = np.zeros((len(bins), ndft//2+1))
+    for i in bins:
+        y = v[i-1, :]
+        y = y[:-1]
+        
+        ### Coherence sanity check
+        ### With coherent sampling, y[-1] and y[-1-ndft] should be (nearly) equal
+        relative_error = (y[-1]-y[-1-ndft])/y[-1]
+        print(relative_error)
+        
+        y = y[-ndft:]
+        spec = np.fft.rfft(y)
+        spec_dbv = 20*np.log10(np.abs(spec)/(ndft/2))
+        spec_dbv_out[i-1, :] = spec_dbv
+        sfdr[i-1] = spec_dbv[i] - np.max(np.delete(spec_dbv, [0, i]))
+        hd3[i-1] = spec_dbv[i] - spec_dbv[get_third_harmonic_bin(i, ndft)]
+    return sfdr, hd3, spec_dbv_out
+```
+
+
+
+
+
 
 ## Integrator
 

@@ -496,6 +496,35 @@ x[] = 5.0
 
 ## Python
 
+`np.fft.fft` vs `np.fft.rfft`
+
+```python
+import numpy as np
+
+def custom_rfft(x):
+    # Ensure input is a NumPy array
+    x = np.asarray(x)
+
+    # 1. Compute the full standard FFT
+    full_fft = np.fft.fft(x)
+
+    # 2. Calculate the required output length: (n // 2) + 1
+    n = len(x)
+    rfft_len = (n // 2) + 1
+
+    # 3. Slice and return only the unique positive frequencies
+    return full_fft[:rfft_len]
+
+
+# Test data
+even_signal = [1.0, 2.0, 3.0, 4.0]
+odd_signal  = [1.0, 2.0, 3.0, 4.0, 5.0]
+
+# Verification
+print(np.allclose(custom_rfft(even_signal), np.fft.rfft(even_signal)))  # True
+print(np.allclose(custom_rfft(odd_signal), np.fft.rfft(odd_signal)))    # True
+```
+
 
 
 

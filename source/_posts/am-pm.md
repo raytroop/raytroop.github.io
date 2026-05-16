@@ -56,14 +56,12 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 > Dan Boschen. *What information does the Hilbert transform give?* [[https://dsp.stackexchange.com/a/88292/59253](https://dsp.stackexchange.com/a/88292/59253)]
 >
 > Frank R. Kschischang. *The Hilbert Transform* [[https://www.comm.utoronto.ca/frank/notes/hilbert.pdf](https://www.comm.utoronto.ca/frank/notes/hilbert.pdf)]
+>
+> Derek Rowell, 2.161 Signal Processing: Continuous and Discrete Fall 2008: *Determining a System’s Causality from its Frequency Response* [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf)]
 
-![image-20251213091900382](am-pm/image-20251213091900382.png)
+![image-20260516114017482](am-pm/image-20260516114017482.png)
 
-***Interaction with the Fourier Transform***
 
-*TODO* &#128197;
-
----
 
 
 ![image-20251213091009754](am-pm/image-20251213091009754.png)

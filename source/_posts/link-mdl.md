@@ -1249,19 +1249,22 @@ n     │ n%4+1 │ N_per_phi[n%4+1] │ zeros(Bool, ...)
 
 ***elastic buffer to model frequency offsets of TRX***
 
-*TODO* &#128197;
-
-- TX **Fixed block size**
-- RX sub-block keep **symbol count fixed** but let **sample-time span vary**
-- **dynamic sub-block count**
-
-> A sub-block should usually consume a **fixed number of RX symbols** because the downstream RX logic is organized around symbol-domain operations
+{% note warning %}
+~~elastic buffer~~  — an analog waveform window for the RX sampler, not a digital FIFO
+{% endnote %}
 
 
 
-`f_rx = f_tx * (1 + ppm)`
+Define the offset relative to TX $$f_\text{rx} = f_\text{tx}(1 + \text{ppm}\cdot 10^{-6})$$, RX **sample spacing** in TX-grid units
+$$
+\boxed{\text{osr}_\text{rx} = \dfrac{\text{osr}}{1+\text{ppm}\cdot 10^{-6}}}
+$$
 
-RX **sample spacing** in TX-grid units `osr_rx = osr_tx / (1 + ppm)`
+The inner loop's exit condition (ignoring $\phi0$/jitter for a moment) is:
+$$
+n_\text{available} < (\text{subblk}_\text{size} - 1)\cdot\text{osr}_\text{rx} + 1 \approx \text{subblk}_\text{size}\cdot\text{osr}_\text{rx}
+$$
+So **at every exit point** of the inner loop, buffer occupancy is strictly less than one sub-block's worth.
 
 
 

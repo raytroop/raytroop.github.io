@@ -1193,3 +1193,5 @@ A. L. S. Loke, Migrating Analog/Mixed-Signal Designs to FinFET Alvin Loke / Qual
 Lattice Semiconductor, 16FFC Process Technology Introduction December 9th, 2021[[pdf](https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/HR1000000009.pdf)]
 
 Cliff Hou, ISSCC 2017: P1:  A Smart Design Paradigm for Smart Chips [[https://youtu.be/tBSrgwUQg9E](https://youtu.be/tBSrgwUQg9E)]
+
+Noman Hai, How to Think About FinFET Layout (Conceptual Walkthrough) [[https://youtu.be/aI5xJQl1gU8](https://youtu.be/aI5xJQl1gU8)]

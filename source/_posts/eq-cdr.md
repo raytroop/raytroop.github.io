@@ -761,3 +761,4 @@ Aleksey Tyshchenko, SeriaLink Systems Clinton Walker, Alphawave IP. DesignCon 20
 
 **Ali Sheikholeslami** Electronics Group, University of Toronto [[https://www.eecg.utoronto.ca/~ali/](https://www.eecg.utoronto.ca/~ali/)]
 
+J. Liang, A. Sheikholeslami, H. Tamura, Y. Ogata and H. Yamaguchi, "Loop Gain Adaptation for Optimum Jitter Tolerance in Digital CDRs," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 9, pp. 2696-2708, Sept. 2018  [[https://sci-hub.jp/10.1109/JSSC.2018.2839038](https://sci-hub.jp/10.1109/JSSC.2018.2839038)]

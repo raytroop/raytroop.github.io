@@ -1266,6 +1266,49 @@ n_\text{available} < (\text{subblk}_\text{size} - 1)\cdot\text{osr}_\text{rx} + 
 $$
 So **at every exit point** of the inner loop, buffer occupancy is strictly less than one sub-block's worth.
 
+$$
+\Phi_0^{\text{legacy}} = \text{osr}\cdot\bigl(\text{pi\_wrap\_ui} + \text{pi\_code}/\text{pi\_codes\_per\_ui}\bigr)
+$$
+
+
+![image-20260518001512684](link-mdl/image-20260518001512684.png)
+
+```matlab
+% 1. Define Parameters
+fs = 1000;                 % Sampling frequency (Hz)
+t = 0:1/fs:2;              % Time vector (2 seconds duration)
+
+f0 = 5;                    % Starting frequency for chirp / Frequency of constant sine (Hz)
+f1 = 10;                   % Ending frequency for chirp (Hz)
+T = max(t);                % Total duration (seconds)
+k = (f1 - f0) / T;         % Chirp rate (Hz/second)
+
+% 2. Generate Signals
+y_constant = sin(2 * pi * f0 * t);               % Constant frequency sine wave
+y_chirp = sin(2 * pi * f0 * t + pi * k * t.^2);  % Linear chirp signal
+
+dphi = pi * k * t.^2/2/pi;
+
+% 3. Plot and Overlay Curves
+subplot(2,1,1)
+plot(t, y_constant, 'b-', 'LineWidth', 1.5);      % Blue solid line for constant
+hold on;                                          % Keep current plot to overlay next curve
+plot(t, y_chirp, 'r--', 'LineWidth', 1.5);        % Red dashed line for chirp
+hold off;                                         % Release the plot
+title('Comparison: Constant Frequency vs. Linear Chirp');
+xlabel('Time (seconds)');
+ylabel('Amplitude');
+legend('Constant Sine (5 Hz)', 'Linear Chirp (5 to 10 Hz)', 'Location', 'northeast');
+grid on;
+ylim([-1.2 1.2]);
+
+subplot(2,1,2)
+plot(t, dphi, 'g', 'LineWidth', 1.5);
+grid on; xlabel('Time (seconds)'); ylabel('\Delta Cycle');
+```
+
+
+
 
 
 ### Sam Palermo's

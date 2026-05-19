@@ -204,7 +204,7 @@ $$
 
 > Boris Murmann, MEAD2026 [[https://github.com/bmurmann/MEAD2026](https://github.com/bmurmann/MEAD2026)]
 
-In most differential designs, $HD_3$ is of primary concern
+In most differential designs, $HD_3$ is of primary concern, where even harmonics are absent
 
 ***Plain NMOS switch***
 

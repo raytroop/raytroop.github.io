@@ -37,7 +37,23 @@ mathjax: true
 
 
 
+## CTLE transfer function
 
+> Circuit Insights @ ISSCC2025: Circuits for Wireline Communications - Kevin Zheng [[https://youtu.be/8NZl81Dj45M&t=1045](https://youtu.be/8NZl81Dj45M&t=1045)]
+
+![image-20260328182328792](rx-fe/image-20260328182328792.png)
+
+![image-20260328182339762](rx-fe/image-20260328182339762.png)
+
+---
+
+> Why Shunt-peaking or Source Degenerated type Active CTLE? [[https://youtu.be/EFMZG-FIWeo](https://youtu.be/EFMZG-FIWeo)]
+
+![image-20260519232914332](rx-fe/image-20260519232914332.png)
+
+***Shunt Peaking broaden the RC bandwidth***
+
+![image-20260519233200484](rx-fe/image-20260519233200484.png)
 
 ## Equalization Shaping
 

@@ -45,17 +45,6 @@ mathjax: true
 
 
 
-
-## CTLE transfer function
-
-> Circuit Insights @ ISSCC2025: Circuits for Wireline Communications - Kevin Zheng [[https://youtu.be/8NZl81Dj45M&t=1045](https://youtu.be/8NZl81Dj45M&t=1045)]
-
-![image-20260328182328792](rx/image-20260328182328792.png)
-
-![image-20260328182339762](rx/image-20260328182339762.png)
-
-
-
 ## Decision Feedback Equalizer (DFE)
 
 ***speculative DFE*** is also known as ***loop unrolled DFE***, which solve the critical timing on first tap

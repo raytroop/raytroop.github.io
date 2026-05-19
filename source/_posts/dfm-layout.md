@@ -919,9 +919,7 @@ SAGCs require the source/drain contacts to be capped with an insulator that is d
 
 note: VC={VG OR VD}
 
-![image-20260516074052801](dfm-layout/image-20260516074052801.png)
-
-
+![image-20260519192138903](dfm-layout/image-20260519192138903.png)
 
 ## Native NMOS Blocked Implant (NT_N)
 

@@ -200,9 +200,11 @@ $$
 
 
 
-## HD3 due to Switch Ron
+## analytical expression for $HD_3$
 
 > Boris Murmann, MEAD2026 [[https://github.com/bmurmann/MEAD2026](https://github.com/bmurmann/MEAD2026)]
+
+In most differential designs, $HD_3$ is of primary concern
 
 ***Plain NMOS switch***
 

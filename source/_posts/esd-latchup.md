@@ -456,6 +456,7 @@ LAYOUT TEXT "DVSS" x2-coor y2-coor pin-text-layer
 > | **CD (Current Density)**                      | **Check primary, secondary ESD discharge path** |
 > | **P2P (Point-to-Point Resistance)**           | **Check I/O to power-clamp path**               |
 >
+> TOPO check **Total OD area** of NACT or PACT and **Total perimeter** of NACT or PACT
 
 ![image-20260206210251640](esd-latchup/image-20260206210251640.png)
 

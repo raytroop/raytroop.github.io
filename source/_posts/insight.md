@@ -75,6 +75,9 @@ plt.ylim(-40, 5); plt.xlim(1e3, 1e9)
 plt.show()
 ```
 
+![image-20260520182745032](insight/image-20260520182745032.png)
+
+![image-20260520182725684](insight/image-20260520182725684.png)
 
 ## Transmission Gate
 

@@ -21,6 +21,52 @@ mathjax: true
 *TODO* &#128197;
 
 
+## RC High-Pass Filter (R in parallel with $C_p$)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Define circuit parameters
+R = 100e3            # Resistance in ohms
+C = 10e-12           # Main capacitance in Farads
+Cp = 500e-15         # Parasitic capacitance in Farads
+
+# 2. Calculate corner (cutoff) frequency and angular frequency
+fc = 1 / (2 * np.pi * R * (C + Cp))
+wc = 2 * np.pi * fc
+
+# 3. Frequency vector (logarithmic scale from 10 Hz to 1 GHz)
+f = np.logspace(1, 9, 2000)
+w = 2 * np.pi * f
+
+# 4. Transfer function with parasitic capacitance
+# H(s) = (s*C*R) / (1 + s*R*(C + Cp))
+numerator = 1j * w * C * R
+denominator = 1 + 1j * w * R * (C + Cp)
+H_s = numerator / denominator
+
+# Convert to magnitude in decibels (dB)
+magnitude_dB = 20 * np.log10(np.abs(H_s))
+
+# 5. Plotting the frequency response
+plt.figure(figsize=(10, 6))
+plt.semilogx(f, magnitude_dB, 'b', linewidth=2, label='Filter Response')
+
+# 6. Add vertical line for corner frequency
+plt.axvline(x=fc, color='r', linestyle='--', label=f'Corner Freq: {fc/1e6:.2f} MHz')
+
+# Formatting the plot
+plt.title('Bode Plot: RC High-Pass Filter (R in parallel with $C_p$)')
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Gain (dB)')
+plt.grid(True, which="both", ls="-", color='0.85')
+plt.legend(loc='lower right')
+plt.ylim(-40, 5); plt.xlim(1e3, 1e9)
+
+# Show the plot
+plt.show()
+```
 
 
 ## Transmission Gate

@@ -159,7 +159,8 @@ $$
 > Series & Parallel Impedance Parameters and Equivalent Circuits [[https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf](https://assets.testequity.com/te1/Documents/pdf/series-parallel-impedance-parameters-an.pdf)]
 >
 > ES Lecture 35: Non ideal capacitor, Capacitor Q and series RC to parallel RC conversion [[https://youtu.be/CJ_2U5pEB4o](https://youtu.be/CJ_2U5pEB4o)]
-
+>
+> RFInsights, Series to Parallel Conversion using Quality Factor [[https://www.rfinsights.com/concepts/series-to-parallel/](https://www.rfinsights.com/concepts/series-to-parallel/)]
 
 
 ### Non ideal Capacitor

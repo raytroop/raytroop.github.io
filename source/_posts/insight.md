@@ -21,6 +21,13 @@ mathjax: true
 *TODO* &#128197;
 
 
+## two capacitor paradox
+
+> Intuitive examination of the two-capacitors "paradox"l [[https://youtu.be/WNpxV5qAUMU](https://youtu.be/WNpxV5qAUMU)] 
+
+*TODO* &#128197;
+
+
 ## RC High-Pass Filter (R in parallel with $C_p$)
 
 ```python

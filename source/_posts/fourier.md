@@ -375,8 +375,32 @@ for i in range(1,6):
 # 1.5625 is indistinguishable from 0.4375, which is +2 - 1.5625
 ```
 
+another method inspired by [[https://github.com/bmurmann/MEAD2026/blob/main/tb_boot_bottom_4.ipynb](https://github.com/bmurmann/MEAD2026/blob/main/tb_boot_bottom_4.ipynb)]
+
+```python
+# inspired by https://github.com/bmurmann/MEAD2026/blob/main/tb_boot_bottom_4.ipynb
+
+def samplealiasing(fsig, fs=1):
+    fdisp = None
+    fsig_wrap = fsig % fs
+    if fsig_wrap > fs/2:
+        fdisp = fs - fsig_wrap
+    else:
+        fdisp = fsig_wrap
+    print(f"{fsig:.4f} is indistinguishable from {fdisp:.4f}")
+    
+    return fdisp
+
+for i in range(1,6):
+    samplealiasing(0.3125*i)
 
 
+# 0.3125 is indistinguishable from 0.3125
+# 0.6250 is indistinguishable from 0.3750
+# 0.9375 is indistinguishable from 0.0625
+# 1.2500 is indistinguishable from 0.2500
+# 1.5625 is indistinguishable from 0.4375
+```
 
 ### CTFS & CTFT
 

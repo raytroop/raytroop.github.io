@@ -102,6 +102,8 @@ $$
 
 ## Gate Res noise contribution
 
+Representaion of resistor thermal noise by **a current source**
+
 ![gate_Rn.drawio](gate-resistance/gate_Rn.drawio.svg)
 
 > $R_s$: previous stage output impedance
@@ -118,7 +120,11 @@ V_G &= I_n\frac{R_GR_L}{R_S+R_G+R_L} \overset{R_L\to \infty}{\longrightarrow} I_
 
 The above equation show that gate resistance noise don't contribute to previous stage output noise, however contribute to next stage 
 
+---
 
+resistor thermal noise by **a voltage source** give same conclusion
+
+![gate_Rn_Vn.drawio](gate-resistance/gate_Rn_Vn.drawio.svg)
 
 ## Gate resistance in PEX
 

@@ -21,6 +21,10 @@ mathjax: true
 *TODO* &#128197;
 
 
+## MOS as resistor
+
+*TODO* &#128197;
+
 ## two capacitor paradox
 
 > Intuitive examination of the two-capacitors "paradox"l [[https://youtu.be/WNpxV5qAUMU](https://youtu.be/WNpxV5qAUMU)] 

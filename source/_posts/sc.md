@@ -91,6 +91,9 @@ $$
 ![image-20260301145958979](sc/image-20260301145958979.png)
 
 
+## Sinc Droop of ZOH sampler
+
+*TODO* &#128197;
 
 ## Switched-Capacitor Filter
 
@@ -473,7 +476,7 @@ R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processi
 
 Christian-Charles Enz. "High precision CMOS micropower amplifiers" [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
 
-Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://youtu.be/SL3-9ZMwdJQ](https://youtu.be/SL3-9ZMwdJQ)]
+Negar Reiskarimian. CICC 2025 Insight: Switched Capacitor Circuits [[https://youtu.be/SL3-9ZMwdJQ](https://youtu.be/SL3-9ZMwdJQ)] [[dropbox](https://tinyurl.com/298ft6cg)]
 
 Carsten Wulff, Switched-Capacitor Circuits [[https://analogicus.com/aic2026/switched-capacitor_circuits](https://analogicus.com/aic2026/switched-capacitor_circuits)]
 

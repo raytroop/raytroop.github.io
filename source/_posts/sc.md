@@ -206,6 +206,8 @@ $$
 ## analytical expression for $HD_3$
 
 > Boris Murmann, MEAD2026 [[https://github.com/bmurmann/MEAD2026](https://github.com/bmurmann/MEAD2026)]
+>
+> HW #1 - “ICONS 2026: Masterclass Series on Advanced IC Design” Online Course - May 2026 [[https://youtu.be/hS2ZY_UHh_0](https://youtu.be/hS2ZY_UHh_0)]
 
 In most differential designs, $HD_3$ is of primary concern, where even harmonics are absent
 
@@ -312,6 +314,9 @@ end
 ```
 
 ![image-20260516170700929](sc/image-20260516170700929.png)
+
+
+`ss`: small signal; `ls`: large signal; `1.6e-15`: capacitance per M1 MOS (Main Switch) width
 
 ```python
 ## https://github.com/bmurmann/MEAD2026/blob/main/tb_boot.ipynb

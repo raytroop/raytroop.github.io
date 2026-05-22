@@ -105,6 +105,7 @@ A good PSRR is important when an LDO is used as a sub-regulator in cascade with 
 
 ![image-20251005093247027](ldo/image-20251005093247027.png)
 
+In a *PMOS LDO*, we want the gate of the power MOS transistor to track the power supply ripple. This keeps the $V_{GS}$ relatively constant, which in turn ensures a stable supply of current through the transistor
 
 
 ## DC output impedance 

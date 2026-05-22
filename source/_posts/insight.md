@@ -14,6 +14,22 @@ mathjax: true
 *TODO* &#128197;
 
 
+## total sigma and correlation
+
+
+$$
+\sigma_{X+Y} = \sqrt{\sigma_{X}^2 + \sigma_{Y}^2 + 2\rho\sigma_{X}\sigma_{Y}}
+$$
+
+$\rho$: Pearson correlation coefficient between $X$ and $Y$ (ranges from $-1$ to $1$)
+
+$\rho\sigma_{X}\sigma_{Y}$: Covariance between $X$ and $Y$
+
+- Perfect Positive Correlation $\rho = 1$: the variables move exactly together, $\sigma_{total} = \sigma_{X} + \sigma_{Y}$
+
+- Zero Correlation $\rho = 0$: the geometric sum of individual variations, $\sigma_{total} = \sqrt{\sigma_{X}^2 + \sigma_{Y}^2}$
+
+- Perfect Negative Correlation $\rho = -1$: variables offset each other's fluctuations, $\sigma_{total} = \vert{}\sigma_X - \sigma_Y\vert{}$
 
 
 ## Zero-Value Time Constant Analysis

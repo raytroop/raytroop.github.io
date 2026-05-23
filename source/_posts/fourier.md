@@ -443,6 +443,19 @@ inverse CTFT shall integral from $-\infty$ to $+\infty$ to obtain $\delta(t)$ in
 
 ![image-20260505132033131](fourier/image-20260505132033131.png)
 
+---
+
+![image-20260523111503056](fourier/image-20260523111503056.png)
+
+- ***symmetric "samples ↔ samples"*** version
+- **periodization** version
+
+Let's prove the symmetric "samples ↔ samples" formula
+
+![image-20260523111602106](fourier/image-20260523111602106.png)
+
+![image-20260523111632471](fourier/image-20260523111632471.png)
+
 
 
 ## spectral sampling

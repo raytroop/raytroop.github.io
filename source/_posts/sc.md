@@ -93,7 +93,27 @@ $$
 
 ## Sinc Droop of ZOH sampler
 
-*TODO* &#128197;
+![image-20260523103236652](sc/image-20260523103236652.png)
+
+![image-20260523100846991](sc/image-20260523100846991.png)
+
+![image-20260523100508461](sc/image-20260523100508461.png)
+
+![image-20260523103504001](sc/image-20260523103504001.png)
+
+***Time-Domain Argument***
+
+![image-20260523103520754](sc/image-20260523103520754.png)
+
+***Frequency-Domain Argument***
+
+![image-20260523104918329](sc/image-20260523104918329.png)
+
+![image-20260523105008107](sc/image-20260523105008107.png)
+
+![image-20260523105241742](sc/image-20260523105241742.png)
+
+
 
 ## Switched-Capacitor Filter
 

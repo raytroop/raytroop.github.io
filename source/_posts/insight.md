@@ -14,6 +14,26 @@ mathjax: true
 *TODO* &#128197;
 
 
+
+
+
+## Bode's Analysis
+
+![image-20260523135911609](insight/image-20260523135911609.png)
+
+![image-20260523143559219](insight/image-20260523143559219.png)
+
+
+
+> Note that ABCD here does not denote the transmission matrix of a two-port network
+
+![image-20260523150058131](insight/image-20260523150058131.png)
+
+![image-20260523150119043](insight/image-20260523150119043.png)
+
+
+
+
 ## total sigma and correlation
 
 
@@ -37,15 +57,46 @@ $\rho\sigma_{X}\sigma_{Y}$: Covariance between $X$ and $Y$
 *TODO* &#128197;
 
 
+
+
 ## MOS as resistor
 
-*TODO* &#128197;
+MOSFET can be **on** and carry **no current**
+
+![image-20260522234016282](insight/image-20260522234016282.png)
+
+
+
+![image-20260522233918074](insight/image-20260522233918074.png)
+
+
 
 ## two capacitor paradox
 
 > Intuitive examination of the two-capacitors "paradox"l [[https://youtu.be/WNpxV5qAUMU](https://youtu.be/WNpxV5qAUMU)] 
 
-*TODO* &#128197;
+The two-capacitor paradox is a classic puzzle in circuit theory where energy seems to vanish
+
+![image-20260522231549323](insight/image-20260522231549323.png)
+
+1. If there is any resistance $R $ (always true in reality). $R $ dissipates heat
+
+2. If the resistance is genuinely zero,  Then you can't ignore inductance — With pure $LC $, the circuit becomes an oscillator
+
+Two capacitors $C$ in series around the loop give an effective capacitance $C_{eq} = C/2$. With inductance $L$ in the loop, the resonant frequency is
+$$
+\omega_0 = \frac{1}{\sqrt{LC_{eq}}} = \frac{1}{\sqrt{L(C/2)}} = \sqrt{\frac{2}{LC}}
+$$
+
+![download (1)](insight/download%20(1).png)
+$$
+v_1(t) = \frac{V_0}{2}\left(1 + \cos\omega_0 t\right), \qquad
+v_2(t) = \frac{V_0}{2}\left(1 - \cos\omega_0 t\right)
+$$
+the $y$-axis is in units of $V_0$, so the curves run between 0 and 1
+$$
+v_1(t) + v_2(t) = V_0 \quad \text{at all times}
+$$
 
 
 ## RC High-Pass Filter (R in parallel with $C_p$)
@@ -435,14 +486,12 @@ $$
 Assuming Target  $T$ ( for example, the total resistance) is  function of $x_1,x_2,...,x_N$, then total variation can be expressed as
 
 $$\begin{align}
-\mathrm{d}T &= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n \\
-&= \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot \frac{\mathrm{d}x_n}{x_n}
+\mathrm{d}T &= \sum_{n=1}^N\frac{\partial T}{\partial x_n}dx_n = \sum_{n=1}^N\frac{\partial T}{\partial x_n}x_n\cdot \frac{\mathrm{d}x_n}{x_n}
 \end{align}$$
 
 Then, we obtain relative variation
 $$\begin{align}
-\frac{\mathrm{d}T}{T} &= \sum_{n=1}^N\frac{\partial T}{\partial x_n}\frac{x_n}{T}\cdot \frac{\mathrm{d}x_n}{x_n}  \\
-&= \sum_{n=1}^N S_{x_n}^T \cdot \frac{\mathrm{d}x_n}{x_n}
+\frac{\mathrm{d}T}{T} &= \sum_{n=1}^N\frac{\partial T}{\partial x_n}\frac{x_n}{T}\cdot \frac{\mathrm{d}x_n}{x_n} = \sum_{n=1}^N S_{x_n}^T \cdot \frac{\mathrm{d}x_n}{x_n}
 \end{align}$$
 
 &#11088; where $S_{x_n}^T=\frac{\partial T}{\partial x_n}\frac{x_n}{T}$ is **relative sensitivity**
@@ -469,8 +518,7 @@ Here $T= R_1 \parallel R_2 = \frac{R_1R_2}{R_1+R_2}$, and $T|_{R_1=8000, R_2=200
 
 We obtain *relative sensitivity:*
 $$\begin{align}
-S_{R_1}^T & = \frac{R_2}{R_1+R_2} \\
-S_{R_2}^T & = \frac{R_1}{R_1+R_2}
+S_{R_1}^T  = \frac{R_2}{R_1+R_2} \qquad S_{R_2}^T = \frac{R_1}{R_1+R_2}
 \end{align}$$
 
 The contribution of $R_1$ and $R_2$ to $T$

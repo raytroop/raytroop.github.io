@@ -660,6 +660,42 @@ ic=zeros(1,m);
 ```
 
 
+
+---
+
+---
+
+3D surface plot, importing data from a CSV file
+
+```matlab
+clear; clc
+df = readmatrix('/path/to/core_lod_sodab_sab.csv');
+nsab = df(:, 3);
+nsodab = df(:,4);
+
+svtN = df(:,8)*1e3;	% mV
+lvtN = df(:,9)*1e3;
+ulvtN = df(:,10)*1e3;
+elvtN = df(:,11)*1e3;
+
+vth_plot = svtN;
+
+% Uses logical indexing to find rows where nsab is greater than nsodab.
+% set to NaN to filter them out completely
+vth_plot(nsab>nsodab) = NaN;
+
+[nsabq, nsodabq] = meshgrid(linspace(min(nsab), max(nsab), 20), linspace(min(nsodab), max(nsodab), 20));
+
+vth_plotq = griddata(nsab, nsodab, vth_plot, nsabq, nsodabq);
+
+surf(nsabq, nsodabq, vth_plotq);
+xlabel('CPODE(SA/SB)'); ylabel('PODE(SODA/SODB)'); title('svtN (mV)'); view(135,30)
+```
+
+By using `NaN`, the `surf` command will simply not render any polygons over the invalid coordinates. Your 3D plot will sharply truncate exactly at the physical layout boundary rule line ($nsab = nsodab$)
+
+
+
 ## Simulink
 
 **Quick Insert** menu

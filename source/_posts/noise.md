@@ -450,6 +450,14 @@ where $m$ is the duty cycle
 
 ![image-20240427183700971](noise/image-20240427183700971.png)
 
+---
+
+> P. Bruschi [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf)]
+
+![image-20260523093243527](noise/image-20260523093243527.png)
+
+![image-20260523093342636](noise/image-20260523093342636.png)
+
 
 
 ## impulse sampling noise

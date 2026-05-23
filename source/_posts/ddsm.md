@@ -9,6 +9,8 @@ mathjax: true
 
 
 
+The DDSM performs **integer arithmetic** (equivalently, fixed-point with the binary point at the LSB) to realize a fractional value.
+
 ![image-20250906072230725](ddsm/image-20250906072230725.png)
 
 ![image-20250906072050727](ddsm/image-20250906072050727.png)

@@ -10,9 +10,11 @@ mathjax: true
 
 ## Noise Summary
 
-*TODO* &#128197;
+The `% / Total` column in the noise summary table always displays values in $V^{2}$ contribution, regardless of whether `noise unit` option is set to `V` or `V^2`
 
-`% / Total` is alwa
+![image-20260522235415049](ade/image-20260522235415049.png)
+
+
 
 ## psf_utils
 

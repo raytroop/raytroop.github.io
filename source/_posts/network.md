@@ -444,6 +444,24 @@ S-parameters *by definition* require very specific control over the ports. But t
 
 ![image-20260416215440442](network/image-20260416215440442.png)
 
+---
+
+![image-20260523141716393](network/image-20260523141716393.png)
+
+
+
+![image-20260523135702272](network/image-20260523135702272.png)
+
+![image-20260523135815455](network/image-20260523135815455.png)
+
+
+
+
+
+
+
+
+
 ### Cascading with T-Matrix
 
 > aka. ***scattering transfer parameters***, ***T-Parameters***, ***transmission parameters***

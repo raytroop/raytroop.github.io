@@ -171,8 +171,6 @@ $$
 
 ![sq_mod.drawio](precision/sq_mod.drawio.svg)
 
----
-
 The Fourier Series of squarewave $x(t)$ with amplitudes $\pm 1$, period $T_0$
 
 $$
@@ -235,10 +233,9 @@ That is, the input signal **remains the same** after chopping or squarewave up/d
 
 
 Below we justify $A_\text{eff} = A(1-4\tau/T_\text{ch})$
-$$\begin{align}
-V_o(t) &= A + (V_0-A)e^{-t/\tau} \\
-V_o(T/2) &= -V_0
-\end{align}$$
+$$
+V_o(t) = A + (V_0-A)e^{-t/\tau} \qquad V_o(T/2) = -V_0
+$$
 
 then
 $$
@@ -451,6 +448,8 @@ Qinwen Fan, Evolution of precision amplifiers
 Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in CMOS [[https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf](https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf)]
 
 Axel Thomsen, Silicon Laboratories  ISSCC2012 T8: "Managing Offset and Flicker Noise" [[slides](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T8.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/T8%20Transcription.pdf)]
+
+P. Bruschi, Dynamic techniques for the rejection of the offset and low frequency noise [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Lecture_notes/Chap_2_2_Offset_Flicker_Reduction.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Lecture_notes/Chap_2_2_Offset_Flicker_Reduction.pdf)]
 
 ---
 

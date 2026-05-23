@@ -396,7 +396,8 @@ Two ways to deal with spectral leakage: ***Ensure integer number of periods*** o
 ### Coherent Sampling
 
 > Choosing M/N non-prime repeats the signal quantization periodically and fewer quantization steps are measured. *The quantization repeats periodically and creates a line spectrum that can obscure real frequency lines* (e.g. the red lines in the images below, created by non-linearities of the ADC).[[https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple](https://www.dsprelated.com/thread/469/coherent-sampling-very-brief-and-simple)]
->
+
+
 
 ![image-20250705085139758](ad-da/image-20250705085139758.png)
 
@@ -542,6 +543,14 @@ plot(f, 20*log10(sn))
 > Using FFT in Cadence Spectre [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/f14/Homeworks/fft_calculation.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/f14/Homeworks/fft_calculation.pdf)]
 
 ![image-20260504082308071](ad-da/image-20260504082308071.png)
+
+---
+
+> Hideo Okawara's Mixed Signal Lecture Series, DSP-Based Testing - Fundamentals 6 - Spectrum Analysis – FFT [[https://www3.advantest.com/documents/11348/8c5e06b8-85b8-407d-b253-b671ca9ac85c](https://www3.advantest.com/documents/11348/8c5e06b8-85b8-407d-b253-b671ca9ac85c)]
+>
+> —, DSP-Based Testing - Fundamentals 7 - Coherent Condition [[https://www3.advantest.com/documents/11348/7f5f00bb-f5f0-41da-b154-fc1d974ad201](https://www3.advantest.com/documents/11348/7f5f00bb-f5f0-41da-b154-fc1d974ad201)]
+
+![image-20260523205409666](ad-da/image-20260523205409666.png)
 
 
 

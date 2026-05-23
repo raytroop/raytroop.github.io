@@ -695,3 +695,5 @@ V. Medina, P. Rombouts and L. Hernandez-Corporales, "A Different View of Sigma-D
 
 Carsten Wulff , Oversampling and Sigma-Delta ADCs [[https://analogicus.com/aic2026/oversampling_and_sigma-delta_adcs](https://analogicus.com/aic2026/oversampling_and_sigma-delta_adcs)]
 
+PDM Microphones and Sigma-Delta A/D Conversion [[https://tomverbeure.github.io/2020/10/04/PDM-Microphones-and-Sigma-Delta-Conversion.html](https://tomverbeure.github.io/2020/10/04/PDM-Microphones-and-Sigma-Delta-Conversion.html)]
+

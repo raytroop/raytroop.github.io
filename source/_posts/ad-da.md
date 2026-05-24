@@ -552,6 +552,39 @@ plot(f, 20*log10(sn))
 
 ![image-20260523205409666](ad-da/image-20260523205409666.png)
 
+---
+
+> Kwantae Kim, ELEC-E3530 [[https://github.com/KwantaeKim/ELEC-E3530/blob/main/CAD8.ipynb](https://github.com/KwantaeKim/ELEC-E3530/blob/main/CAD8.ipynb)]
+
+```python
+import numpy as np
+from matplotlib.ticker import EngFormatter
+
+def coherent_sampling(fin, Fs, N):
+    """
+    Returns the adjusted input frequency for coherent sampling.
+
+    Parameters:
+        fin  : input frequency (Hz)
+        Fs   : sample rate (Hz)
+        N    : number of samples
+
+    Returns:
+        Adjusted fin (Hz) such that M/N = fin/Fs, where M is the nearest prime to N*fin/Fs.
+    """
+    x = int(np.ceil(N * fin / Fs))
+    primes = [n for n in range(2, x*2) if all(n % i for i in range(2, n))]
+    M = primes[np.argmin(np.abs(np.array(primes) - x))]
+    return Fs * M / N
+
+fmt = EngFormatter(places=6)
+print(f"Adjusted f_in: {fmt(coherent_sampling(10, 100, 2**6))}Hz")
+
+# adjusted f_in: 10.937500Hz
+```
+
+
+
 
 
 ## Offset and Gain Error

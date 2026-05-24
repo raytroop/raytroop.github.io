@@ -238,6 +238,61 @@ that total power will always be the ***same*** for ***any sampling rate*** used 
 
 
 
+### Transient Noise and VerilogA Modeling
+
+> Integrated Analog Systems D - Lecture 15S CAD (Transient Noise and VerilogA Modeling) [[https://youtu.be/YW2nnI3DD_c](https://youtu.be/YW2nnI3DD_c)]
+
+![image-20260524203753033](noise/image-20260524203753033.png)
+
+---
+
+
+
+![image-20260524204336130](noise/image-20260524204336130.png)
+
+![image-20260524210106332](noise/image-20260524210106332.png)
+
+`fs=2*noisefmax` guarantee zero **aliasing** within FFT
+
+![image-20260524205908449](noise/image-20260524205908449.png)
+
+![image-20260524210935425](noise/image-20260524210935425.png)
+
+---
+
+![image-20260524211731802](noise/image-20260524211731802.png)
+
+```verilog
+`include "disciplines.vams"
+`include "constants.vams"
+
+module noise_src(p, n);
+    inout p, n;
+    electrical p, n;
+
+    parameter real nd = 4e-9 from (0:inf);   // noise density [V/sqrt(Hz)]
+    parameter real bw = 1e9   from (0:inf);  // noise bandwidth [Hz]
+    parameter integer seed = 271;
+
+    integer iseed;
+    real nv;
+
+    analog begin
+        @(initial_step) iseed = seed;
+        @(timer(0, 0.5/bw)) nv = nd * $rdist_normal(iseed, 0.0, sqrt(bw));
+        V(p,n) <+ transition(nv, 0, 0.5/bw);
+    end
+endmodule
+```
+
+![image-20260524233845040](noise/image-20260524233845040.png)
+
+![image-20260524233657579](noise/image-20260524233657579.png)
+
+> [[Gist link](https://gist.github.com/raytroop/dba921298532e162f088f496a3f25e02)]
+
+
+
 ## Colored Noise Generation
 
 > Allen B. Downey. *Think DSP - Digital Signal Processing in Python* [[book](http://greenteapress.com/thinkdsp/thinkdsp.pdf) [repo](https://github.com/AllenDowney/ThinkDSP)]

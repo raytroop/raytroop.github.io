@@ -59,7 +59,7 @@ mathjax: true
 
 - Damping Factor ($\zeta$) is defined for *close loop* system
 
-![image-20251025101546484](2nd-sys/image-20251025101546484.png)
+![image-20260524091136018](2nd-sys/image-20260524091136018.png)
 
 > ![image-20251025101113687](2nd-sys/image-20251025101113687.png)
 

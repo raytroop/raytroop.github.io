@@ -102,8 +102,6 @@ subplot(3,1,3); ylabel('Group Delay (sec)'); xlabel('Frequency (rad/s)');
 grid on; xline(wc, '--r', 'HandleVisibility','off');
 ```
 
-
-
 ## Bessel Filters
 
 > Stephen Roberts, Signal Processing & Filter Design B3 option: *Lecture 3 - Transient Response and Transforms* [[https://www.robots.ox.ac.uk/~sjrob/Teaching/SP/l3.pdf](https://www.robots.ox.ac.uk/~sjrob/Teaching/SP/l3.pdf)]
@@ -172,6 +170,96 @@ plt.title('5th Order Bessel Filter Phase Response w/ Wn=1')
 plt.ylabel('Phase [degrees]'); plt.xlabel('Frequency [rad/s]')
 plt.grid(True); plt.legend()
 ```
+
+
+
+## RC LPF
+
+> Kwantae Kim, Integrated Analog Systems D - Lecture 02 (Continuous-Time Filters) [[https://youtu.be/B7-kr5zV3NA](https://youtu.be/B7-kr5zV3NA)]
+>
+> —, Integrated Analog Systems D - Lecture 03 (Continuous-Time Filters) [[https://youtu.be/6GdDiwaKDZw](https://youtu.be/6GdDiwaKDZw)]
+>
+> —, Integrated Analog Systems D - Lecture 05 (Continuous-Time Filters) [[https://youtu.be/LHhEK1RlC6w](https://youtu.be/LHhEK1RlC6w)]
+
+![image-20260524100715080](filters/image-20260524100715080.png)
+
+![image-20260524101628382](filters/image-20260524101628382.png)
+
+![image-20260524101414457](filters/image-20260524101414457.png)
+
+> [[Gist link](https://gist.github.com/raytroop/69a093a3569bc12226d91b5a2022bbe9)]
+
+
+
+---
+
+---
+
+***2nd-Order RC LPF***
+
+***Loading effect** & **limitation***
+
+![image-20260524103229122](filters/image-20260524103229122.png)
+
+![image-20260524104702612](filters/image-20260524104702612.png)
+
+![image-20260524103715322](filters/image-20260524103715322.png)
+
+![image-20260524103833060](filters/image-20260524103833060.png)
+
+**Phase Magin with damping Factor $\zeta$**
+
+![image-20260524103924774](filters/image-20260524103924774.png)
+$$
+\boxed{\phi_\text{PM}\approx 100\cdot \zeta}
+$$
+
+
+---
+
+---
+
+***General 2nd-Order RC LPF***
+
+![image-20260524151528679](filters/image-20260524151528679.png)
+
+![image-20260524151744133](filters/image-20260524151744133.png)
+
+![image-20260524154744621](filters/image-20260524154744621.png)
+
+***Laplace Transform***
+
+![image-20260524152125499](filters/image-20260524152125499.png)
+
+***Stability Analysis***
+
+![image-20260524153121052](filters/image-20260524153121052.png)
+
+![image-20260524152852821](filters/image-20260524152852821.png)
+
+![image-20260524152838122](filters/image-20260524152838122.png)
+
+![image-20260524153009904](filters/image-20260524153009904.png)
+
+
+
+## Active Filters
+
+> Kwantae Kim, Integrated Analog Systems D - Lecture 05 (Continuous-Time Filters) [[https://youtu.be/LHhEK1RlC6w](https://youtu.be/LHhEK1RlC6w)]
+
+![image-20260524163246135](filters/image-20260524163246135.png)
+
+![image-20260524173631125](filters/image-20260524173631125.png)
+
+> [[Gist link](https://gist.github.com/raytroop/022b6cf1eb71dcb4667dc0bff110b413)]
+>
+> ![image-20260524160443441](filters/image-20260524160443441.png)
+
+![image-20260524174730147](filters/image-20260524174730147.png)
+
+
+
+*TODO* &#128197;
 
 
 
@@ -257,6 +345,8 @@ Delay-free Integrator
 ## reference
 
 Boris Murmann. EE315A VLSI Signal Conditioning Circuits
+
+Bill Redman-White, ISSCC 2009 Tutorial: *T1 : Continuous-Time Filters*
 
 Stephen Roberts, Signal Processing & Filter Design B3 option [[https://www.robots.ox.ac.uk/~sjrob/Teaching/sp_course.html](https://www.robots.ox.ac.uk/~sjrob/Teaching/sp_course.html)]
 

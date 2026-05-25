@@ -8,6 +8,27 @@ mathjax: true
 ---
 
 
+
+## Pole Zero (PZ) Analysis
+
+> Pole Zero (PZ) Analysis with Spectre/SpectreX Rapid Adoption Kit (RAK)
+
+![image-20260525202405780](ade/image-20260525202405780.png)
+
+![image-20260525202716251](ade/image-20260525202716251.png)
+
+![image-20260525204321149](ade/image-20260525204321149.png)
+
+![image-20260525204348293](ade/image-20260525204348293.png)
+
+---
+
+![image-20260525201031147](ade/image-20260525201031147.png)
+
+![image-20260525200417622](ade/image-20260525200417622.png)
+
+![image-20260525200504390](ade/image-20260525200504390.png)
+
 ## Noise Summary
 
 The `% / Total` column in the noise summary table always displays values in $V^{2}$ contribution, regardless of whether `noise unit` option is set to `V` or `V^2`

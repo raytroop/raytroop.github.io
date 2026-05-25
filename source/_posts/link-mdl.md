@@ -1672,11 +1672,30 @@ data_channel_dfe=data_channel(channel_delay+dfe_fb_offset:channel_delay+dfe_fb_o
 
 ***SerDes - High-Speed Serial Link Simulator (SystemC-AMS)***
 
+```python
+"""
+Unified Eye Diagram Analyzer
 
+This module provides the unified EyeAnalyzer entry point for eye diagram analysis,
+supporting both statistical and empirical modes.
 
+Statistical Mode:
+- Input: Channel pulse response
+- Use case: Pre-simulation analysis, channel characterization
+- Features: ISI calculation, BER contours, noise/jitter injection
 
+Empirical Mode:
+- Input: Time-domain waveform
+- Use case: Post-simulation analysis, measurement data
+- Features: Eye diagram construction, jitter decomposition
 
+Both modes support NRZ and PAM4 modulation formats.
+"""
 
+class EyeAnalyzer:
+```
+
+> [[Gist link](https://gist.github.com/raytroop/d6f4353a1882e5a1042b0b2e9180f90e)]
 
 
 

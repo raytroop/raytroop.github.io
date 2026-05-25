@@ -322,6 +322,35 @@ plt.grid(which='both');plt.xlabel('Time (s)');plt.show()
 
 
 
+
+
+---
+
+
+
+```
+    x(t) ──┬── R ──┬── y(t)
+           │       │
+           │       C
+           │       │
+           └───────┴── gnd
+```
+
+Three discretizations of the same continuous prototype, all valid first-order LPFs but with different sample-domain behavior $\alpha = \frac{T}{T+\tau}$:
+
+| Form | Difference equation | Transfer function | Notes |
+|---|---|---|---|
+| **Backward Euler** (above) | $y_n = (1-\alpha) y_{n-1} + \alpha\, x_n$ | $\dfrac{\alpha}{1 - (1-\alpha) z^{-1}}$ | Implicit; needs $x_n$ before computing $y_n$ |
+| **Delayed leaky integrator** | $y_n = (1-\alpha) y_{n-1} + \alpha\, x_{n-1}$ | $\dfrac{\alpha z^{-1}}{1 - (1-\alpha) z^{-1}}$ | One extra sample of delay; same magnitude response |
+| **Bilinear (Tustin)** | $y_n = (1-\alpha)y_{n-1} + \tfrac{\alpha}{2}(x_n + x_{n-1})$ | $\dfrac{(\alpha/2)(1 + z^{-1})}{1 - (1-\alpha) z^{-1}}$ | Adds zero at $z = -1$; better frequency-response match |
+| **Forward Euler** | $y_n = (1 - T/\tau)y_{n-1} + (T/\tau)\,x_{n-1}$ | $\dfrac{(T/\tau) z^{-1}}{1 - (1 - T/\tau) z^{-1}}$ | Unstable when $T > 2\tau$ |
+
+Pole magnitude $|1-\alpha| < 1$ always — **backward Euler is unconditionally stable**, unlike forward Euler ($\alpha = T/\tau$), which goes unstable when $T > 2\tau$
+
+All four collapse to the same continuous-time filter as $T \to 0$, but they're not interchangeable at finite $T$ — the delayed leaky integrator in particular adds one sample of group delay that the others don't.
+
+
+
 ## Discrete-Time Integrators
 
 > Qasim Chaudhari. Discrete-Time Integrators [[https://wirelesspi.com/discrete-time-integrators/](https://wirelesspi.com/discrete-time-integrators/)]

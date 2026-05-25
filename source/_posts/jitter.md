@@ -170,6 +170,10 @@ $$
 ## Duty Cycle Distortion – DCD
 
 ![dcd.drawio](jitter/dcd.drawio.svg)
+$$
+\boxed{DJ_{DCD,pp} = 2 \times UI \times \left| DCD\% - 50\% \right|}
+$$
+
 
 | Jitter measurement | Description                                                  |
 | :----------------- | :----------------------------------------------------------- |

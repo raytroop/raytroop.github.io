@@ -229,6 +229,7 @@ trade-offs between *noise amplification* and *signal equalization*
 ![image-20251206000303668](rx-fe/image-20251206000303668.png)
 
 
+$m=\frac{R^2C}{L}$ is the ratio of the RL zero frequency to the original RC pole frequency, and therefore measures how aggressively the zero compensates the intrinsic RC roll-off.
 
 ## T-Coil Peaking
 
@@ -377,11 +378,14 @@ Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers"
 
 Byungsub Kim,  ISSCC 2022, "T11: Basics of Equalization Techniques: Channels, Equalization, and Circuits"
 
+Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
 ---
 
 S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension Techniques for CMOS Amplifiers," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 11, pp. 2424-2439, Nov. 2006 [[pdf](https://people.engr.tamu.edu/spalermo/ecen689_oi/2006_passive_bw_extension_techniques_shekhar_jssc.pdf)]
 
 David J. Allstot Bandwidth Extension Techniques for CMOS Amplifiers [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2007_08_Allstot.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2007_08_Allstot.pdf)]
+
+S. S. Mohan, M. D. M. Hershenson, S. P. Boyd and T. H. Lee, "Bandwidth extension in CMOS with optimized on-chip inductors," in IEEE Journal of Solid-State Circuits, vol. 35, no. 3, pp. 346-355, March 2000 [[http://smirc.stanford.edu/papers/JSSC00MAR-mohan.pdf](http://smirc.stanford.edu/papers/JSSC00MAR-mohan.pdf)]
 
 J. Paramesh and D. J. Allstot, "Analysis of the Bridged T-Coil Circuit Using the Extra-Element Theorem," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 53, no. 12, pp. 1408-1412, Dec. 2006 [[https://sci-hub.st/10.1109/TCSII.2006.885971](https://sci-hub.st/10.1109/TCSII.2006.885971)]
 

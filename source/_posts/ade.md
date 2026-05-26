@@ -21,6 +21,9 @@ mathjax: true
 
 ![image-20260525204348293](ade/image-20260525204348293.png)
 
+
+Note: poles/zeros in simulation log are in `Hz` instead of `rad/s`
+
 ---
 
 ![image-20260525201031147](ade/image-20260525201031147.png)

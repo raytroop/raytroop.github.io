@@ -112,7 +112,7 @@ grid on; xline(wc, '--r', 'HandleVisibility','off');
 
 ![image-20260508000240921](filters/image-20260508000240921.png)
 
-
+![image-20260526212113026](filters/image-20260526212113026.png)
 
 ---
 
@@ -171,7 +171,19 @@ plt.ylabel('Phase [degrees]'); plt.xlabel('Frequency [rad/s]')
 plt.grid(True); plt.legend()
 ```
 
+---
 
+```matlab
+Wn = 1;
+
+[bb, ab] = butter(2, Wn, 's');
+[bs, as] = besself(2, Wn);
+
+pb = roots(ab);
+ps = roots(as);
+```
+
+![image-20260526213845993](filters/image-20260526213845993.png)
 
 ## RC LPF
 
@@ -376,6 +388,16 @@ Delay-free Integrator
 Boris Murmann. EE315A VLSI Signal Conditioning Circuits
 
 Bill Redman-White, ISSCC 2009 Tutorial: *T1 : Continuous-Time Filters*
+
+B. Nikolic, "Tutorial: Filtering in RF Transceivers," *2014 IEEE International Solid-State Circuits Conference Digest of Technical Papers (ISSCC)*, San Francisco, CA, USA, 2014
+
+W. Sansen, "Short Course: Power Limits for Amplifiers and Filters," *2012 IEEE International Solid-State Circuits Conference*, San Francisco, CA, USA, 2012
+
+Antonio Liscidini, 2018 *New Trends in Analog Filters*
+
+M. Babaie, "Tutorial: Role of Current-Mode Passive Mixers and N-Path Filters in RF Receivers," *2023 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2023
+
+---
 
 Stephen Roberts, Signal Processing & Filter Design B3 option [[https://www.robots.ox.ac.uk/~sjrob/Teaching/sp_course.html](https://www.robots.ox.ac.uk/~sjrob/Teaching/sp_course.html)]
 

@@ -55,6 +55,12 @@ mathjax: true
 
 ![image-20260519233200484](rx-fe/image-20260519233200484.png)
 
+![image-20260526210821835](rx-fe/image-20260526210821835.png)
+
+![image-20260526210739466](rx-fe/image-20260526210739466.png)
+
+
+
 ## Equalization Shaping
 
 > PCIe Gen6 Channel and Reference Package S4P Models for Rx Stressed Eye Calibration
@@ -231,6 +237,46 @@ trade-offs between *noise amplification* and *signal equalization*
 
 $m=\frac{R^2C}{L}$ is the ratio of the RL zero frequency to the original RC pole frequency, and therefore measures how aggressively the zero compensates the intrinsic RC roll-off.
 
+> [[Gist link](https://gist.github.com/raytroop/6cfc8ad1945e89d04b91f5b76f5cd02e)]
+
+```python
+# Normalize R = C = 1
+R = 1.0
+C = 1.0
+
+# Frequency sweep
+w = np.logspace(-2, 2, 20000)
+
+# Shunt peaking transfer function
+#
+#        R + sL
+# H(s) = ---------
+#        1 + sRC + s^2 LC
+#
+# normalized low-frequency gain = 1
+#
+def H(jw, L):
+    s = 1j * jw
+    return (R + s*L) / (R + s*R*R*C + s*s*L*R*C)
+
+# Sweep inductance
+Lvals = np.linspace(0.001, 1.5, 300)
+```
+
+
+
+![image-20260526211605905](rx-fe/image-20260526211605905.png)
+
+![image-20260526211624229](rx-fe/image-20260526211624229.png)
+
+## series peaking
+
+![image-20260526230433602](rx-fe/image-20260526230433602.png)
+
+![image-20260526230805917](rx-fe/image-20260526230805917.png)
+
+
+
 ## T-Coil Peaking
 
 > Jri Lee. ISSCC 2009 Tutorial. CMOS Circuit Techniques for High Speed Wireline Transceivers [[http://cc.ee.ntu.edu.tw/~jrilee/course/2009_Tutorial_10.pdf](http://cc.ee.ntu.edu.tw/~jrilee/course/2009_Tutorial_10.pdf)]
@@ -379,6 +425,7 @@ Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers"
 Byungsub Kim,  ISSCC 2022, "T11: Basics of Equalization Techniques: Channels, Equalization, and Circuits"
 
 Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
+
 ---
 
 S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension Techniques for CMOS Amplifiers," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 11, pp. 2424-2439, Nov. 2006 [[pdf](https://people.engr.tamu.edu/spalermo/ecen689_oi/2006_passive_bw_extension_techniques_shekhar_jssc.pdf)]

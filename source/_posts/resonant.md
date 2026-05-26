@@ -292,3 +292,6 @@ How to generate **complex poles without inductor**? [[https://a2d2ic.wordpress.c
 Visvesh Sathe. Resonant Clock Design for a Power-efficient, High-volume x86 -64 Microprocessor [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_05_Sathe.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_05_Sathe.pdf)]
 
 Pozar, David M. *Microwave Engineering*. 4th ed. Wiley, 2012. [[pdf](https://hajaress.wordpress.com/wp-content/uploads/2019/09/microwave_engineering_david_m_pozar_4ed_wiley_2012.pdf)]
+
+RFInsights, A Journey from Resonance to Impedance Matching Chp. 1: Origin of Q-Factor The Deadly Beginnings, [[https://www.rfinsights.com/concepts/quality-factor/](https://www.rfinsights.com/concepts/quality-factor/)]
+

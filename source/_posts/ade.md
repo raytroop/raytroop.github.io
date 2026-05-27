@@ -9,6 +9,22 @@ mathjax: true
 
 
 
+## indq, capq
+
+  ![image-20260527234600570](ade/image-20260527234600570.png)
+
+---
+
+The *inductor with Q* works in all the analyses **except for shooting**.
+
+![image-20260527235635024](ade/image-20260527235635024.png)
+
+---
+
+![image-20260528000326777](ade/image-20260528000326777.png)
+
+
+
 ## Pole Zero (PZ) Analysis
 
 > Pole Zero (PZ) Analysis with Spectre/SpectreX Rapid Adoption Kit (RAK)

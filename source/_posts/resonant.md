@@ -14,7 +14,7 @@ There are two types of resonant circuits:
 - series resonant circuits
 - parallel resonant circuits
 
-In a series resonant circuit, the impedance of the circuit reaches its minimum value at resonance, whereas in a parallel resonant circuit, the impedance reaches its maximum value
+In a **series resonant circuit**, the impedance of the circuit reaches its **minimum value at resonance**, whereas in a **parallel resonant circuit**, the impedance reaches its **maximum value**
 
 ![image-20251027213420942](resonant/image-20251027213420942.png)
 
@@ -46,22 +46,23 @@ In a series resonant circuit, the impedance of the circuit reaches its minimum v
 
 ---
 
-> Prof. M. Green / U.C. Irvine EECS 270C / Winter 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/WhKTaAlgfKwzLxXM.pdf)]
+> Prof. M. Green / U.C. Irvine EECS 270C / Winter 2016 Week5 [[pdf](https://picture.iczhiku.com/resource/eetop/WhKTaAlgfKwzLxXM.pdf)]
 
-![image-20251205232150381](resonant/image-20251205232150381.png)
-$$
-s^2 + \frac{R}{L}s + \frac{1}{LC_L} = s^2 + 2\zeta \omega_n s + \omega_n^2
-$$
-where $\omega_n = \frac{1}{\sqrt{LC_L}}$ and $\zeta=\frac{R}{2}\sqrt{\frac{C_L}{L}}$
+![image-20260528002429825](resonant/image-20260528002429825.png)
 
-Resonant frequency is
+![image-20260528003301835](resonant/image-20260528003301835.png)
+
+
+
+with $L' = \frac{L}{1 - CR_s^2/L}$
+
+resonant frequency in right equivalent circuit 
 $$
-\omega_r = \omega_n \sqrt{1-2\zeta^2} = \frac{1}{\sqrt{LC_L}}\left(1-\frac{C_LR^2}{2L}\right)
+\omega_r^2 = \frac{1}{L'C} = \frac{1}{LC} - \left(\frac{R_s}{L}\right)^2
 $$
-To have no resonant $\zeta^2 >\frac{1}{2}$, i.e
-$$
-\frac{L}{C_LR^2} < \frac{1}{2}
-$$
+which shows that the equivalent circuit preserves the resonant frequency of the original network.
+
+![image-20260528001727247](resonant/image-20260528001727247.png)
 
 
 

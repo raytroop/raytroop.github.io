@@ -21,6 +21,8 @@ The *inductor with Q* works in all the analyses **except for shooting**.
 
 ---
 
+The *capacitor with Q* 
+
 ![image-20260528000326777](ade/image-20260528000326777.png)
 
 

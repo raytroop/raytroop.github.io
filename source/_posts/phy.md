@@ -144,8 +144,9 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 
 Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD) are paired together to maximize data rates in bandwidth-limited, noisy channels like fiber optics, magnetic hard drives, and high-speed backplanes
 
+![image-20260528202037244](phy/image-20260528202037244.png)
 
-*TODO* &#128197;
+
 
 
 

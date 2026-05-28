@@ -135,6 +135,19 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 *TODO* &#128197;
 
 
+### Partial Response
+
+> David Johns, [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf)]
+>
+> Dariush Dabiri , Enabling Improved DSP Based Receivers for 100G Backplane [[https://www.ieee802.org/3/bj/public/sep11/dabiri_01_0911.pdf](https://www.ieee802.org/3/bj/public/sep11/dabiri_01_0911.pdf)]
+
+
+Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD) are paired together to maximize data rates in bandwidth-limited, noisy channels like fiber optics, magnetic hard drives, and high-speed backplanes
+
+
+*TODO* &#128197;
+
+
 
 ## Error-Correcting Codes (ECC)
 

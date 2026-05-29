@@ -9,6 +9,23 @@ mathjax: true
 
 ![image-20260428003937326](tx/image-20260428003937326.png)
 
+
+## SST vs. CML Driver
+
+> Z. Toprak-Deniz et al., "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.st/10.1109/JSSC.2019.2939081](https://sci-hub.st/10.1109/JSSC.2019.2939081)]
+
+
+The source-series terminated (SST) drivers are more power-efficient than their current mode logic (CML) counterparts due to their lower termination power
+
+SST differential output amplitude
+
+$$
+V_{ad,SST} = \frac{V_{DD}}{4R_T}\cdot 2R_T = \boxed{I_{DD}\cdot 2R_T} \qquad V_{ad,CML} = \frac{I_{DD}}{4R_T}\cdot 2R_T = \boxed{\frac{1}{4} I_{DD}\cdot 2R_T}
+$$
+
+To achieve the same differential output amplitude, CML topologies consume $4$ times the current of SST topologies
+
+
 ## 1UI Data Staggering
 
 *TODO* &#128197;

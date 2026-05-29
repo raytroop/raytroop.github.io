@@ -26,6 +26,39 @@ $$
 To achieve the same differential output amplitude, CML topologies consume $4$ times the current of SST topologies
 
 
+## Serialization
+
+> Z. Toprak-Deniz et al., "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.st/10.1109/JSSC.2019.2939081](https://sci-hub.st/10.1109/JSSC.2019.2939081)]
+
+
+
+ ***triple-stacked 4:1 n-type MUX***
+
+![image-20260530063153678](tx/image-20260530063153678.png)
+
+![tripstack4to1MUX.drawio](tx/tripstack4to1MUX.drawio.svg)
+
+***mux timing***
+
+
+
+![mux2-1.drawio](tx/mux2-1.drawio.svg)
+
+
+
+***divider latch timing***
+
+![div2-latch.drawio](tx/div2-latch.drawio.svg)
+
+***Two latches***
+
+![two-latch.drawio](tx/two-latch.drawio.svg)
+
+
+
+
+
+
 ## 1UI Data Staggering
 
 *TODO* &#128197;
@@ -37,9 +70,7 @@ To achieve the same differential output amplitude, CML topologies consume $4$ ti
 
 *TODO* &#128197;
 
-## DAC Driver SNDR
 
-*TODO* &#128197;
 
 ## Eye Linearity vs. RLM (Relative Level Mismatch)
 
@@ -313,26 +344,6 @@ Same with differential ended termination driver.
 > Single-ended termination
 >
 > Differential termination
-
-
-
-## TX Serializer
-
-### mux timing
-
-
-
-![mux2-1.drawio](tx/mux2-1.drawio.svg)
-
-
-
-### divider latch timing
-
-![div2-latch.drawio](tx/div2-latch.drawio.svg)
-
-### Two latches
-
-![two-latch.drawio](tx/two-latch.drawio.svg)
 
 
 

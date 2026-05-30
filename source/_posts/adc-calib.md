@@ -78,6 +78,8 @@ For Scherier FoM (DR, SNDR)
 ![image-20260530172252150](adc-calib/image-20260530172252150.png)
 
 ```python
+## https://github.com/Arcadia-1/ADCToolbox/blob/main/python/src/adctoolbox/examples/02_spectrum/exp_s01_analyze_spectrum_simplest.py
+
 import numpy as np
 import matplotlib.pyplot as plt
 from adctoolbox import analyze_spectrum, amplitudes_to_snr, snr_to_nsd

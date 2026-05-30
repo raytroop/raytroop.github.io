@@ -71,7 +71,52 @@ For Scherier FoM (DR, SNDR)
 
 > L. Jie and Z. Zhang. ADCToolbox [[https://github.com/Arcadia-1/ADCToolbox](https://github.com/Arcadia-1/ADCToolbox)]
 
-*TODO* &#128197;
+
+
+***SNR vs NSD*** — full-scale noise spread over the Nyquist band
+
+![image-20260530172252150](adc-calib/image-20260530172252150.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from adctoolbox import analyze_spectrum, amplitudes_to_snr, snr_to_nsd
+
+N_fft = 2**13
+Fs = 100e6
+Fin = 123/N_fft * Fs  # Coherent frequency
+t = np.arange(N_fft) / Fs
+A = 0.5
+noise_rms = 10e-6
+signal = 0.5 * np.sin(2*np.pi*Fin*t) + np.random.randn(N_fft) * noise_rms
+
+# --- My own manual cross-check (not in exp_s01_analyze_spectrum_simplest.py) ---
+# Hand-derived from first principles to sanity-check the amplitudes_to_snr /
+# snr_to_nsd helpers below:
+#   SNR = 10*log10( signal_power / noise_power ) = 10*log10( (A^2/2) / noise_rms^2 )
+#   NSD = -SNR - 10*log10(Fs/2)  (full-scale noise spread over the Nyquist band)
+snr_theroretical = 10*np.log10(A**2/2/noise_rms**2)
+print(f"Theoretical SNR: {snr_theroretical:.2f} dB")
+nsd_theoretical = -snr_theroretical - 10*np.log10(Fs/2)
+print(f"Theoretical NSD: {nsd_theoretical:.2f} dBFS/Hz")
+# --- end of my addition ---
+
+snr_ref = amplitudes_to_snr(sig_amplitude=A, noise_amplitude=noise_rms)
+nsd_ref = snr_to_nsd(snr_ref, fs=Fs, osr=1)
+
+result = analyze_spectrum(signal, fs=Fs)
+
+print(f"\n[setting] Noise RMS=[{noise_rms*1e6:.2f} uVrms], Theoretical SNR=[{snr_ref:.2f} dB], Theoretical NSD=[{nsd_ref:.2f} dBFS/Hz]")
+print(f"[results] ENoB=[{result['enob']:.2f} b], SNDR=[{result['sndr_dbc']:.2f} dB], SFDR=[{result['sfdr_dbc']:.2f} dB], SNR=[{result['snr_dbc']:.2f} dB], NSD=[{result['nsd_dbfs_hz']:.2f} dBFS/Hz]\n")
+
+plt.show()
+
+# Theoretical SNR: 90.97 dB
+# Theoretical NSD: -167.96 dBFS/Hz
+
+# [setting] Noise RMS=[10.00 uVrms], Theoretical SNR=[90.97 dB], Theoretical NSD=[-167.96 dBFS/Hz]
+# [results] ENoB=[14.82 b], SNDR=[90.99 dB], SFDR=[116.37 dB], SNR=[91.25 dB], NSD=[-168.24 dBFS/Hz]
+```
 
 
 

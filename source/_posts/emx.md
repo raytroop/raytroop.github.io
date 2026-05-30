@@ -833,6 +833,8 @@ LVS issue for circuits with customized devices
 > —, *lumpedmodel* [[https://github.com/VolkerMuehlhaus/lumpedmodel](https://github.com/VolkerMuehlhaus/lumpedmodel)]
 >
 > —, *plot_inductor* [[https://github.com/VolkerMuehlhaus/plot_inductor](https://github.com/VolkerMuehlhaus/plot_inductor)]
+>
+> —, *plot_snp* [[https://github.com/VolkerMuehlhaus/plot_snp](https://github.com/VolkerMuehlhaus/plot_snp)]
 
 
 

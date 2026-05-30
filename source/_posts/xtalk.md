@@ -127,6 +127,64 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ---
 
+> Dr. Muehlhaus Consulting & Software GmbH, *lumpedmodel* [[https://github.com/VolkerMuehlhaus/lumpedmodel](https://github.com/VolkerMuehlhaus/lumpedmodel)]
+
+Transmission line from S2P data into RLGC lumped model
+$$
+\boxed{R= \text{Re}(\gamma Z_c)} \qquad
+\boxed{L= \frac{\text{Im}(\gamma Z_c)}{\omega}} \qquad
+\boxed{G= \text{Re}\left(\frac{\gamma}{Z_c}\right)} \qquad
+\boxed{C= \frac{\text{Im}\left(\frac{\gamma}{Z_c}\right)}{\omega}}
+$$
+
+```python
+# https://github.com/VolkerMuehlhaus/lumpedmodel/blob/main/rlgc_from_s2p/rlgc_from_s2p.py
+
+
+# input data, must be 2-port S2P data
+sub = rf.Network(args.s2p, z0=args.z0_ohm)
+
+# physical length must be supplied by user
+length = args.l_um*1e-6
+
+# target frequency for pi model extraction
+f_target = args.f_ghz*1e9
+
+assert f_target < freq.stop
+
+# get index for exctraction
+f = freq.f
+ftarget_index = rf.find_nearest_index(freq.f, f_target)
+omega = 2*np.pi*f[ftarget_index]
+
+z11=sub.z[0::,0,0]          # z11, the open impedance
+y11=sub.y[0::,0,0]          # 1/y11, the short impedance
+Zline = np.sqrt(z11/y11)    # characteristic impedance of the line
+
+gamma0 = 1/length * np.arctanh(1/(Zline*y11))   # propagation constant
+
+# electrical phase  = β · length        = gamma0.imag * length   ✓
+# attenuation       = α                 = gamma0.real            (no wrap)
+# period=np.pi/2 instead of the default 2π reflects the branch period of arctanh
+gamma_wideband =  gamma0.real + 1j*np.unwrap(gamma0.imag*length, period=np.pi/2)/length
+
+
+gamma_ftarget = gamma_wideband[ftarget_index]
+Zline_ftarget = Zline[ftarget_index]
+
+
+R = (gamma_ftarget*Zline_ftarget).real
+L = (gamma_ftarget*Zline_ftarget).imag / omega
+G = (gamma_ftarget/Zline_ftarget).real
+C = (gamma_ftarget/Zline_ftarget).imag / omega
+```
+
+
+
+
+
+---
+
 > Transmission Line [[pdf](http://ael.chungbuk.ac.kr/lectures/undergraduate/em-env/%EA%B0%95%EC%9D%98%EC%9E%90%EB%A3%8C/transmission_line/LN-transmission%20line.pdf)]
 
 ![image-20260412110316910](xtalk/image-20260412110316910.png)

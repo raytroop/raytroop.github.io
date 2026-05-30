@@ -9,28 +9,6 @@ mathjax: true
 
 
 
-## Figures of Merit (FoMs)
-
-> B. Murmann, "ADC Performance Survey 1997-2022," [Online]. Available: [[https://github.com/bmurmann/ADC-survey](https://github.com/bmurmann/ADC-survey)]
->
-> Carsten Wulff, "Advanced Integrated Circuits 2025" [[http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom](http://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#high-resolution-fom)]
-
-![image-20260503082957057](ad-da/image-20260503082957057.png)
-
-![image-20250825173843550](ad-da/image-20250825173843550.png)
-
-![image-20260503113513018](ad-da/image-20260503113513018.png)
-
-![image-20260503092050266](ad-da/image-20260503092050266.png)
-
-For Scherier FoM (DR, SNDR)
-
-![image-20260503110815315](ad-da/image-20260503110815315.png)
-
-![image-20260503111053594](ad-da/image-20260503111053594.png)
-
-![image-20260503120427004](ad-da/image-20260503120427004.png)
-
 ## Quantization Noise
 
 ### Quantization Error
@@ -586,30 +564,6 @@ print(f"Adjusted f_in: {fmt(coherent_sampling(10, 100, 2**6))}Hz")
 
 
 
-
-## Offset and Gain Error
-
-> Kwantae Kim, Integrated Analog Systems D - Lecture 10 (ADC) [[https://youtu.be/IEdbLNJb9wQ](https://youtu.be/IEdbLNJb9wQ)]
-
-![image-20260426180449791](ad-da/image-20260426180449791.png)
-
-![image-20260426173822772](ad-da/image-20260426173822772.png)
-
-> ![image-20260426173906024](ad-da/image-20260426173906024.png)
-
----
-
----
-
-
-
-![image-20250825151821455](ad-da/image-20250825151821455.png)
-
-![image-20250825152414651](ad-da/image-20250825152414651.png)
-
-
-
-
 ## 1-bit DAC
 
 *TODO* &#128197;
@@ -811,25 +765,7 @@ where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundan
 >
 > sarthak, "Visualising redundancy in a 1.5 bit pipeline ADC“ [[https://electronics.stackexchange.com/a/523489/233816](https://electronics.stackexchange.com/a/523489/233816)]
 
----
 
-
-
-
-
-## Testing
-
-*TODO* &#128197;
-
-
-
-> Kent H. Lundberg "Analog-to-Digital Converter Testing"  [[https://www.mit.edu/~klund/A2Dtesting.pdf](https://www.mit.edu/~klund/A2Dtesting.pdf)]
->
-> Tai-Haur Kuo, Da-Huei Lee "Analog IC Design: ADC Measurement" [[http://msic.ee.ncku.edu.tw/course/aic/202309/ch13%20(20230111).pdf](http://msic.ee.ncku.edu.tw/course/aic/202309/ch13%20(20230111).pdf)] [[http://msic.ee.ncku.edu.tw/course/aic/aic.html](http://msic.ee.ncku.edu.tw/course/aic/aic.html)]
->
-> ESE 6680: Mixed Signal Design and Modeling "Lec 20: April 10, 2023 Data Converter Testing" [[https://www.seas.upenn.edu/~ese6680/spring2023/handouts/lec20.pdf](https://www.seas.upenn.edu/~ese6680/spring2023/handouts/lec20.pdf)]
->
-> Degang Chen. "Distortion Analysis" [[https://class.ece.iastate.edu/djchen/ee435/2017/Lecture25.pdf](https://class.ece.iastate.edu/djchen/ee435/2017/Lecture25.pdf)]
 
 
 
@@ -980,13 +916,13 @@ Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 
 
 ---
 
-Aaron Buchwald, ISSCC2010 T1: "Specifying & Testing ADCs" [[https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Tutorials/T1.pdf](https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Tutorials/T1.pdf)]
+Aaron Buchwald, ISSCC2010 T1: "Specifying & Testing ADCs"
 
 Ahmed M. A. Ali. CICC 2018: High Speed Pipelined ADCs: Fundamentals and Variants [[https://picture.iczhiku.com/resource/eetop/SyIGzGRYsHFehcnX.pdf](https://picture.iczhiku.com/resource/eetop/SyIGzGRYsHFehcnX.pdf)]
 
-John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs" [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf)]
+John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs" 
 
-Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T3.pdf)]
+Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters"
 
 —， "Design and Calibration Techniques for SAR and Pipeline ADCs" [[http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf](http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf)]
 
@@ -994,21 +930,13 @@ Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://www.nishanch
 
 —， Recent Advances in Multistep Nyquist ADC's [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf)]
 
-Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf](https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf)]
-
-—， ISSCC2012 SC3: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/SHORT%20COURSE/SC3Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/SHORT%20COURSE/SC3Visuals.pdf)]
-
-—， A/D Converter Figures of Merit and Performance Trends [[https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/CIRCUIT%20INSIGHTS/Murmann.pdf](https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/CIRCUIT%20INSIGHTS/Murmann.pdf)]
-
 Aaron Buchwald, ISSCC 2008 T2 Pipelined A/D Converters: The Basics [[pdf](https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T02_Pres.pdf)]
 
 Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
 
-Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis [[https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T10/T10Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T10/T10Visuals.pdf)]
+Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis 
 
-Ahmed M. A. Ali. ISSCC2021 T5: Calibration Techniques in ADCs [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T5.pdf)]
-
-Jan Mulder Broadcom. ISSCC2015 T5: High-Speed Current-Steering DACs [[https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/TUTORIALS/ISSCC2015Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/TUTORIALS/ISSCC2015Visuals-T5.pdf)]
+Jan Mulder Broadcom. ISSCC2015 T5: High-Speed Current-Steering DACs 
 
 Zhang, Milin, Zhihua Wang, Jan van der Spiegel and Franco Maloberti. "Advanced Tutorial on Analog Circuit Design." (2023)
 

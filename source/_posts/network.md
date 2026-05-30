@@ -426,7 +426,9 @@ writeva(hfit, 'channel_32poles.va');
 >
 > Cascading S-Parameters in Plain English: Part 3: T-Parameters in Plain English [[http://thinkinitthrough.com/blogs/details/6](http://thinkinitthrough.com/blogs/details/6)]
 
+![image-20260530115244233](network/image-20260530115244233.png)
 
+![image-20260530115333839](network/image-20260530115333839.png)
 
 S-parameters *by definition* require very specific control over the ports. But this breaks down when we chain multiple devices together
 
@@ -436,7 +438,15 @@ S-parameters *by definition* require very specific control over the ports. But t
 
 > aka. ***transmission matrix***
 
+---
+
+
+
 ![image-20260416222708985](network/image-20260416222708985.png)
+
+With load impedance $v_3=i_3 Z_L$, cascade transfer function can be derived
+
+![image-20260530114243553](network/image-20260530114243553.png)
 
 
 
@@ -445,8 +455,6 @@ S-parameters *by definition* require very specific control over the ports. But t
 ![image-20260416215440442](network/image-20260416215440442.png)
 
 ---
-
-![image-20260523141716393](network/image-20260523141716393.png)
 
 
 

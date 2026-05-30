@@ -9,9 +9,27 @@ mathjax: true
 
 ![image-20260419092048803](xtalk/image-20260419092048803.png)
 
-## Hyperbolic Functions
 
-![image-20260418105248415](xtalk/image-20260418105248415.png)
+
+## Transmission Line
+
+![image-20260530103816500](xtalk/image-20260530103816500.png)
+
+
+
+---
+
+***param. extraction from ABCD matrix***
+
+> Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
+
+![image-20260416212059482](xtalk/image-20260416212059482.png)
+
+for lossless T-line, $\gamma = j\beta$
+
+![image-20260418110304117](xtalk/image-20260418110304117.png)
+
+
 
 
 
@@ -103,8 +121,6 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ### RLGC by Open/Short Circuit
 
-> [[Google AI Mode](https://share.google/aimode/ADUTnt4oquG7ll8RX)]
-
 **RLGC** can be extracted from measurements of a transmission line's input impedance under **open-circuit** and **short-circuit** terminations at a specific frequency
 
 ![image-20260412110152719](xtalk/image-20260412110152719.png)
@@ -114,18 +130,6 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 > Transmission Line [[pdf](http://ael.chungbuk.ac.kr/lectures/undergraduate/em-env/%EA%B0%95%EC%9D%98%EC%9E%90%EB%A3%8C/transmission_line/LN-transmission%20line.pdf)]
 
 ![image-20260412110316910](xtalk/image-20260412110316910.png)
-
-
-
-### param. extraction from ABCD matrix
-
-> Chapter 4.5. High Frequency Passive Devices [[https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf](https://www.cambridge.org/il/files/7713/6698/2369/HFIC_chapter_4_passives.pdf)]
-
-![image-20260416212059482](xtalk/image-20260416212059482.png)
-
-for lossless T-line, $\gamma = j\beta$
-
-![image-20260418110304117](xtalk/image-20260418110304117.png)
 
 
 
@@ -145,6 +149,12 @@ for lossless T-line, $\gamma = j\beta$
 > Chapter 11 Layout and grounding [[http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf](http://ieb-srv1.upc.es/gieb/tecniques/doc/EMC/pdfs/ScienceDirect_articles_27Jul2018_12-16-10.699/Chapter-11---Layout-and-grounding_2007_EMC-for-Product-Designers.pdf)]
 
 *TODO* 
+
+
+
+## Hyperbolic Functions
+
+![image-20260418105248415](xtalk/image-20260418105248415.png)
 
 
 

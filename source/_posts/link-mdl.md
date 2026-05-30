@@ -1760,6 +1760,8 @@ make install
 >
 > J. Park and D. Kim, "Statistical Eye Diagrams for High-Speed Interconnects of Packages: A Review," in *IEEE Access*, vol. 12, pp. 22880-22891, 2024 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10415105)]
 
+![image-20260530074617691](link-mdl/image-20260530074617691.png)
+
 
 
 ### StatOpt

@@ -580,27 +580,54 @@ C_{diff} = -\frac{1/Im(Z_{diff})}{2\pi f} \qquad Q_{diff} = -\frac{Im(Z_{diff})}
 
 ### Tline
 
-Open circuit impedance $Z_o$, short circuit impedance $Z_s$ and characteristic impedance $Z_0$
+```skill
+(define (EMX_plot_xline bgui wid what)
+  (EMX_plot_aux bgui wid what 2
+    '("Z0" "gamma*length")
+    '("Ohm" "")
+    (lambda (ys)
+      (letseq ((y11 (nth 0 ys))
+               (y12 (nth 1 ys))
+               (y21 (nth 2 ys))
+               (y22 (nth 3 ys))
+               (det y11*y22-y12*y21)
+               (z11 y22/det)
+               (o z11) ; Open circuit impedance
+               (s 1.0/y11) ; Short circuit impedance
+               (Z0 (sqrt o*s))
+               (gammal (atanh s/Z0)))
+        `(((,(real Z0) ,(imag Z0)) (,(real gammal) ,(imag gammal)))))
+    '(("Re" "Im") ("Re (alpha*l)" "Im (beta*l)"))))
+```
 
-$$\begin{align}
-Z_o = Z_{11} \qquad Z_s = \frac{1}{Y_{11}} \qquad Z_0  = \sqrt{Z_o*Z_s}
-\end{align}$$
+> ![image-20260530101942861](emx/image-20260530101942861.png)
+
+**Open circuit impedance** $Z_o$, **short circuit impedance** $Z_s$ and **characteristic impedance** $Z_0$
+
+$$
+Z_o = Z_{11} \qquad Z_s = \frac{1}{Y_{11}} \qquad \boxed{Z_0  = \sqrt{Z_o*Z_s}} \qquad \boxed{\gamma l = \operatorname{atanh} {\frac{Z_s}{Z_0}}}
+$$
 
 *propagation constant* is given as
+$$
+\gamma \cdot l = \frac{1}{2}\log\left( \frac{Z_0+Z_s}{Z_0-Z_s} \right)
+$$
 
-$$\gamma \cdot l = \frac{1}{2}\log\left( \frac{Z_0+Z_s}{Z_0-Z_s} \right)$$
-
-> $Z_s$ depends on the length of tline [[Google AI Mode](https://share.google/aimode/LzaP3VplJIgHHuifw)]
+> $Z_s$ depends on the length of tline
 
 The relationship between these parameter and geometry of the transmission line
-$$\begin{align}
+$$
 Z_0 = \sqrt{\frac{R+j\omega L}{G+j\omega C}} \qquad \gamma = \sqrt{(G+j\omega C)(R+j\omega L)}
-\end{align}$$
+$$
 EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 
-> ~~Note EMX plot the absolute value of $\alpha$ and $\beta$~~
+> Note EMX plot $\operatorname{Re}\{Z_0\}$ ,$\operatorname{Im}\{Z_0\}$, $\alpha\cdot l$ and $\beta\cdot l$
 
-![image-20220630215343377](emx/image-20220630215343377.png)![image-20220630215418372](emx/image-20220630215418372.png)
+
+
+![image-20260530102835660](emx/image-20260530102835660.png)
+
+![image-20220630215418372](emx/image-20220630215418372.png)
 
 ![image-20220630215630849](emx/image-20220630215630849.png)
 

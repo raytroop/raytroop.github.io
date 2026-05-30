@@ -78,6 +78,79 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 
 
 
+
+## Viterbi-based MLSD
+
+> M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A. Sheikholeslami, "Design and Implementation of an On-Demand Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of Circuits and Systems, vol. 3, pp. 97-108, 2022 [[https://sci-hub.jp/10.1109/OJCAS.2022.3173686]](https://sci-hub.jp/10.1109/OJCAS.2022.3173686)
+>
+> Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing Architecture Using Viterbi Algorithm for ADC-Based Serial Link. Undergraduate Research Scholars Program. Available electronically from [[https://hdl.handle.net/1969.1/166485](https://hdl.handle.net/1969.1/166485)]
+>
+> S. Song, K. D. Choo, T. Chen, S. Jang, M. P. Flynn and Z. Zhang, "A Maximum-Likelihood Sequence Detection Powered ADC-Based Serial Link," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 65, no. 7, pp. 2269-2278, July 2018 [[https://sci-hub.jp/10.1109/TCSI.2017.2775619](https://sci-hub.jp/10.1109/TCSI.2017.2775619)]
+>
+> Vineel Kumar Veludandi. Maximum likelihood sequence estimation (MLSE) using the Viterbi algorithm [[https://github.com/vineel49/mlse](https://github.com/vineel49/mlse)]
+>
+> David Banas, Keysight, DesignCon 2026, *Tutorial – Understanding the Viterbi Decoder*
+>
+> A. C. Singer, N. R. Shanbhag and H. -m. Bae, "Electronic dispersion compensation," in *IEEE Signal Processing Magazine*, vol. 25, no. 6, pp. 110-130, November 2008 [[https://shanbhag.ece.illinois.edu/publications/singer-spm-2008.pdf](https://shanbhag.ece.illinois.edu/publications/singer-spm-2008.pdf)]
+>
+> —, ISSCC2007 T10: Fundamentals of Electronic Dispersion Compensation (EDC)
+
+![image-20260401215526089](phy/image-20260401215526089.png)
+
+**Maximum-Likelihood Sequence Detection** performed by **Viterbi** on the **ISI trellis** induced by the channel
+
+![image-20260401214642821](phy/image-20260401214642821.png)
+
+
+
+### Simple soft-decision voting
+
+![image-20260401223623584](phy/image-20260401223623584.png)
+
+![image-20260401230936331](phy/image-20260401230936331.png)
+
+Simple soft-decision voting can use more information than a slicer, but without a trellis/path-consistency rule, it can create impossible or unstable decision histories.
+
+
+
+### Viterbi Decoder
+
+![image-20260531002612870](phy/image-20260531002612870.png)
+
+
+
+![image-20260531002943187](phy/image-20260531002943187.png)
+
+
+
+![image-20260531002828300](phy/image-20260531002828300.png)
+
+
+
+---
+
+> David Banas, PyBERT  [[https://github.com/capn-freako/PyBERT/blob/master/src/pybert/models/viterbi.py](https://github.com/capn-freako/PyBERT/blob/master/src/pybert/models/viterbi.py)]
+
+
+
+
+
+
+
+
+### Partial Response
+
+> David Johns, Partial Response and Viterbi Detection [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf)]
+>
+> Dariush Dabiri , Enabling Improved DSP Based Receivers for 100G Backplane [[https://www.ieee802.org/3/bj/public/sep11/dabiri_01_0911.pdf](https://www.ieee802.org/3/bj/public/sep11/dabiri_01_0911.pdf)]
+
+
+Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD) are paired together to maximize data rates in bandwidth-limited, noisy channels like fiber optics, magnetic hard drives, and high-speed backplanes
+
+![image-20260528202037244](phy/image-20260528202037244.png)
+
+
+
 ## Feed-Forward Error Correction (FEC)
 
 > Cathy Liu, Broadcom. DesignCon 2024: *200+ Gbps Ethernet Forward Error Correction (FEC) Analysis*
@@ -98,55 +171,13 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 
 
 
+---
+
+> David Banas, PyBERT [[https://github.com/capn-freako/PyBERT/blob/master/src/pybert/models/fec.py](https://github.com/capn-freako/PyBERT/blob/master/src/pybert/models/fec.py)]
 
 
-## MLSD & Viterbi Decoder
-
-> M. Emami Meybodi, H. Gomez, Y. -C. Lu, H. Shakiba and A. Sheikholeslami, "Design and Implementation of an On-Demand Maximum-Likelihood Sequence Estimation (MLSE)," in IEEE Open Journal of Circuits and Systems, vol. 3, pp. 97-108, 2022 [[https://sci-hub.jp/10.1109/OJCAS.2022.3173686]](https://sci-hub.jp/10.1109/OJCAS.2022.3173686)
->
-> Zaman, Arshad Kamruz (2019). A Maximum Likelihood Sequence Equalizing Architecture Using Viterbi Algorithm for ADC-Based Serial Link. Undergraduate Research Scholars Program. Available electronically from [[https://hdl.handle.net/1969.1/166485](https://hdl.handle.net/1969.1/166485)]
->
-> S. Song, K. D. Choo, T. Chen, S. Jang, M. P. Flynn and Z. Zhang, "A Maximum-Likelihood Sequence Detection Powered ADC-Based Serial Link," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 65, no. 7, pp. 2269-2278, July 2018 [[https://sci-hub.jp/10.1109/TCSI.2017.2775619](https://sci-hub.jp/10.1109/TCSI.2017.2775619)]
->
-> Vineel Kumar Veludandi. Maximum likelihood sequence estimation (MLSE) using the Viterbi algorithm [[https://github.com/vineel49/mlse](https://github.com/vineel49/mlse)]
->
-> David Banas, Keysight, DesignCon 2026, *Tutorial – Understanding the Viterbi Decoder*
->
-> A. C. Singer, N. R. Shanbhag and H. -m. Bae, "Electronic dispersion compensation," in *IEEE Signal Processing Magazine*, vol. 25, no. 6, pp. 110-130, November 2008 [[https://shanbhag.ece.illinois.edu/publications/singer-spm-2008.pdf](https://shanbhag.ece.illinois.edu/publications/singer-spm-2008.pdf)]
->
-> —, ISSCC2007 T10: Fundamentals of Electronic Dispersion Compensation (EDC)
-
-![image-20260401214642821](phy/image-20260401214642821.png)
-
-
-
-### MLSD
-
-![image-20260401215526089](phy/image-20260401215526089.png)
-
-![image-20260401223623584](phy/image-20260401223623584.png)
-
-![image-20260401230936331](phy/image-20260401230936331.png)
-
-*symbol decision (N=3)* must change when *symbol 4* is hardened, {-1,-1,**-1**} -> {-1,-1,**1**}, and its Vexp -1.3 -> -0.7. In this way,  **rewind** take affect, weighted sum of hardening function symbol 3 may change and its hard decision may change also. 
-
-### Viterbi Decoder
 
 *TODO* &#128197;
-
-
-### Partial Response
-
-> David Johns, [[https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf](https://www.eecg.utoronto.ca/~johns/ece1392/slides/partial_response.pdf)]
->
-> Dariush Dabiri , Enabling Improved DSP Based Receivers for 100G Backplane [[https://www.ieee802.org/3/bj/public/sep11/dabiri_01_0911.pdf](https://www.ieee802.org/3/bj/public/sep11/dabiri_01_0911.pdf)]
-
-
-Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD) are paired together to maximize data rates in bandwidth-limited, noisy channels like fiber optics, magnetic hard drives, and high-speed backplanes
-
-![image-20260528202037244](phy/image-20260528202037244.png)
-
-
 
 
 
@@ -154,7 +185,7 @@ Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD
 
 > Takayuki Kawahara, ISSCC2007 T5: *Error-Correcting Codes for Memories*
 
-
+*TODO* &#128197;
 
 
 

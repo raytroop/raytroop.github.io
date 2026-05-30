@@ -1917,7 +1917,13 @@ flowchart LR
 
 
 
+### pyBERT
 
+> David Banas. pyBERT: Free software for signal-integrity analysis [[https://github.com/capn-freako/PyBERT](https://github.com/capn-freako/PyBERT)], [[intro](https://youtu.be/OOl5SCQZY8I?)]
+>
+> —. Free yourself from IBIS-AMI models with PyBERT [[https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/](https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/)]
+
+*TODO* &#128197;
 
 
 
@@ -1941,13 +1947,33 @@ flowchart LR
 
 ## other tools
 
-### pyBERT
+### IBIS-AMI
 
-> David Banas. pyBERT: Free software for signal-integrity analysis [[https://github.com/capn-freako/PyBERT](https://github.com/capn-freako/PyBERT)], [[intro](https://youtu.be/OOl5SCQZY8I?)]
->
-> —. Free yourself from IBIS-AMI models with PyBERT [[https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/](https://www.edn.com/free-yourself-from-ibis-ami-models-with-pybert/)]
+**Init mode** — Statistical (Fast) :
 
-*TODO* &#128197;
+```
+Channel
+ ↓
+Impulse response
+ ↓
+Compute DFE taps
+ ↓
+BER
+```
+
+
+
+**GetWave mode** Time-domain (Slow but more realistic):
+
+```
+Bit stream
+ ↓
+DFE adaptation
+ ↓
+CDR tracking
+ ↓
+Output waveform
+```
 
 
 
@@ -1956,6 +1982,8 @@ flowchart LR
 > David Banas. Python implementation of COM, as per IEEE 802.3-22 Annex 93A. [[https://github.com/capn-freako/PyChOpMarg](https://github.com/capn-freako/PyChOpMarg)]
 >
 > CC Chen. Why Channel Operating Margin? [[https://youtu.be/mrXur-WbrR8](https://youtu.be/mrXur-WbrR8)] 
+
+Python implementation of IEEE Ethernet COM (Channel Operating Margin)
 
 *TODO* &#128197;
 

@@ -130,6 +130,8 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 > Dr. Muehlhaus Consulting & Software GmbH, *lumpedmodel* [[https://github.com/VolkerMuehlhaus/lumpedmodel](https://github.com/VolkerMuehlhaus/lumpedmodel)]
 
 Transmission line from S2P data into RLGC lumped model
+
+![plot](xtalk/rlgc_segments.png)
 $$
 \boxed{R= \text{Re}(\gamma Z_c)} \qquad
 \boxed{L= \frac{\text{Im}(\gamma Z_c)}{\omega}} \qquad

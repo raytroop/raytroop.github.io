@@ -465,6 +465,21 @@ print("slicer symbols:  ", slicer[idx_erros[:10]])
 
 
 
+---
+
+---
+
+
+
+![image-20260601071327138](phy/image-20260601071327138.png)
+
+> Proakis, John G., and Masoud Salehi. *Digital Communications. 5th ed. McGraw-Hill, 2008.* [[pdf](https://daskalakispiros.com/files/Ebooks/digital-communication-proakis-salehi-5th-edition.pdf)]
+
+![image-20260601071629821](phy/image-20260601071629821.png)
+
+***whitening filter***
+
+![image-20260601072615963](phy/image-20260601072615963.png)
 
 
 

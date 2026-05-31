@@ -4,6 +4,7 @@ date: 2022-02-07 23:52:42
 tags:
 categories:
 - coding
+mathjax: true
 ---
 
 ## Julia
@@ -525,7 +526,68 @@ print(np.allclose(custom_rfft(even_signal), np.fft.rfft(even_signal)))  # True
 print(np.allclose(custom_rfft(odd_signal), np.fft.rfft(odd_signal)))    # True
 ```
 
+`np.fft.irfft`
 
+Since the discrete Fourier Transform of real input is **Hermitian-symmetric**, the negative frequency terms are taken to be the complex conjugates of the corresponding positive frequency terms
+
+---
+
+- **`scipy.signal.residue`**: \(H(s) = \frac{B(s)}{A(s)} \rightarrow\) Converts numerator/denominator arrays into residues, poles, and a direct polynomial
+- **`scipy.signal.invres`**: \(H(s) \rightarrow\) Converts residues, poles, and a direct polynomial back into numerator/denominator arrays
+
+$$
+H(s) = \frac{s + z}{(s + p_1)(s + p_2)} = \frac{z-p_1}{p_2-p_1}\frac{1}{s + p_1} + \frac{z-p_2}{p_1-p_2}\frac{1}{s + p_2}=\frac{r_1}{s+p_1} + \frac{r_2}{s+p_2}
+$$
+
+```python
+# https://github.com/capn-freako/PyBERT/blob/master/src/pybert/utility/sigproc.p
+
+
+def make_ctle(rx_bw: float, peak_freq: float, peak_mag: float, w: Rvec) -> tuple[Rvec, Cvec]:  # pylint: disable=too-many-arguments  # noqa: F405
+    """
+    Generate the frequency response of a continuous time linear equalizer (CTLE), given the:
+
+        - signal path bandwidth,
+        - peaking specification, and
+        - list of frequencies of interest.
+
+    Args:
+        rx_bw: The natural (or, unequalized) signal path bandwidth (Hz).
+        peak_freq: The location of the desired peak in the frequency response (Hz).
+        peak_mag: The desired relative magnitude of the peak (dB).
+        w: The list of frequencies of interest (rads./s).
+
+            - The zero location is chosen, so as to provide the desired degree of peaking.
+    """
+
+    p2 = -2.0 * pi * rx_bw
+    p1 = -2.0 * pi * peak_freq
+    z = p1 / pow(10.0, peak_mag / 20.0)
+    if p2 != p1:
+        r1 = (z - p1) / (p2 - p1)
+        r2 = 1 - r1
+    else:
+        r1 = -1.0
+        r2 = z - p1
+    b, a = invres([r1, r2], [p1, p2], [])
+    w, H = freqs(b, a, w)
+    H /= max(abs(H))
+
+    return (w, H)
+```
+
+
+
+---
+
+`np.where`
+
+There are actually two distinct call signatures:
+
+| Call                   | Returns                                      | Use                |
+| ---------------------- | -------------------------------------------- | ------------------ |
+| `np.where(cond, a, b)` | array, `a`/`b` chosen element-wise           | **select values**  |
+| `np.where(cond)`       | tuple of index arrays where `cond` is `True` | **find positions** |
 
 
 

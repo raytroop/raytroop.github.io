@@ -1927,6 +1927,72 @@ flowchart LR
 
 
 
+
+
+***CTLE model***
+
+```mermaid
+flowchart TD
+    Start([get_ctle_h]) --> UseFile{self.use_ctle_file?}
+
+    UseFile -->|Yes: load from file| Import["ctle_h = import_channel(ctle_file, ts, f)"]
+    Import --> StepChk{"max(abs(ctle_h)) < 100.0?<br/>(step response?)"}
+    StepChk -->|Yes| Diff["ctle_h = diff(ctle_h)<br/>impulse = d/dt of step"]
+    StepChk -->|No| Norm["ctle_h *= ts<br/>normalize to V/sample"]
+    Diff --> Pad["ctle_h = resize_zero_pad(ctle_h, len_t)"]
+    Norm --> Pad
+    Pad --> Fft["ctle_H = rfft(ctle_h)<br/>(freq-domain; ToDo: needs interp)"]
+    Fft --> Ret([return ctle_h])
+
+    UseFile -->|No: native model| EnaChk{ctle_enable?}
+
+    EnaChk -->|Yes| Make["_, ctle_H = make_ctle(rx_bw, peak_freq, peak_mag, w)<br/>build freq response from EQ params"]
+    Make --> Irfft["_ctle_h = irfft(ctle_H)<br/>back to time domain"]
+    Irfft --> Interp["krnl = interp1d(t_irfft, _ctle_h, fill=0)<br/>ctle_h = krnl(t)<br/>resample onto sim time grid t"]
+    Interp --> Gain["ctle_h *= sum(_ctle_h)/sum(ctle_h)<br/>preserve DC gain after resample"]
+    Gain --> Trim["ctle_h, _ = trim_impulse(ctle_h, ...)<br/>crop negligible tail"]
+    Trim --> Ret
+
+    EnaChk -->|No: bypass| Ident["ctle_h = [1., 0., 0., ...]<br/>unit impulse (pass-through)"]
+    Ident --> Ret
+
+    style StepChk fill:#ffb74d,stroke:#e65100,stroke-width:2px,color:#000
+    style Diff fill:#a5d6a7,stroke:#2e7d32,stroke-width:2px,color:#000
+    style Norm fill:#a5d6a7,stroke:#2e7d32,stroke-width:2px,color:#000
+    style Gain fill:#ffb74d,stroke:#e65100,stroke-width:2px,color:#000
+```
+
+`ctle_h *= sum(_ctle_h) / sum(ctle_h)` : preserve **DC gain** after resample
+
+```python
+def get_ctle_h():
+    "Return the impulse response of the PyBERT native CTLE model."
+    if self.use_ctle_file:
+        # FIXME: The new import_channel() implementation breaks this.
+        ctle_h = import_channel(self.ctle_file, ts, f)
+        if max(abs(ctle_h)) < 100.0:  # step response?
+            ctle_h = diff(ctle_h)  # impulse response is derivative of step response.
+        else:
+            ctle_h *= ts  # Normalize to (V/sample)
+        ctle_h = resize_zero_pad(ctle_h, len_t)
+        ctle_H = rfft(ctle_h)  # ToDo: This needs interpolation first.
+    else:
+        if ctle_enable:
+            _, ctle_H = make_ctle(rx_bw, peak_freq, peak_mag, w)
+            _ctle_h = irfft(ctle_H)
+            krnl = interp1d(t_irfft, _ctle_h, bounds_error=False, fill_value=0)
+            ctle_h = krnl(t)
+            ctle_h *= sum(_ctle_h) / sum(ctle_h)
+            ctle_h, _ = trim_impulse(ctle_h, front_porch=False, min_len=min_len, max_len=max_len)
+        else:
+            ctle_h = array([1.] + [0. for _ in range(min_len - 1)])
+    return ctle_h
+```
+
+
+
+
+
 ### pystateye
 
 > Chris Li. pystateye - A Python Implementation of Statistical Eye Analysis and Visualization [[https://github.com/ChrisZonghaoLi/pystateye](https://github.com/ChrisZonghaoLi/pystateye)]

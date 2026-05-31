@@ -71,6 +71,25 @@ Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions 
 - because of the nonlinearity of the DFE response, it must be modeled in the *time domain*  
 
 
+
+### FFE vs. DFE
+
+**FFE:** convolution with input waveform/symbols. Linear.
+
+**DFE:** convolution with past detected symbols. Recursive and nonlinear because of the slicer.
+
+That is why DFE is not a simple LTI convolution system from input to output.
+
+```
+received sample r[n] ──┬── subtract ──> slicer ──> detected symbol a_hat[n]
+                       ▲                    │
+                       │                    │
+                       └── DFE filter <─────┘
+                          past decisions
+```
+
+
+
 ## FIR Coefficient Selection
 
 > Jose E. Schutt-Aine, Spring 2024 ECE 546 Lecture - 27 Equalization [[http://emlab.uiuc.edu/ece546/Lect_27.pdf](http://emlab.uiuc.edu/ece546/Lect_27.pdf)]

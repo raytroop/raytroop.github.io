@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-
+![ddsm_single_quantizer_vs_mash](ddsm/ddsm_single_quantizer_vs_mash.svg)
 
 The DDSM performs **integer arithmetic** (equivalently, fixed-point with the binary point at the LSB) to realize a fractional value.
 
@@ -21,6 +21,8 @@ The DDSM performs **integer arithmetic** (equivalently, fixed-point with the bin
 
 > ***Noise Cancellation Network***
 
+![image-20260602071603557](ddsm/image-20260602071603557.png)
+
 ![image-20250824092757793](ddsm/image-20250824092757793.png)
 $$\begin{align}
 v[n] = \{0,1,2,...,M-1\} &\space\Rightarrow\space  y[n] = 0 \space\Rightarrow\space  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\} \\
@@ -28,6 +30,8 @@ v[n] = \{M,M+1,M2,...,2M-1\} &\space\Rightarrow\space  y[n] = 1 \space\Rightarro
 \end{align}$$
 
 > ![image-20250823232924985](ddsm/image-20250823232924985.png)
+>
+> $(1 − z^{−1})^3$
 
 For the three stages of the MASH 1-1-1 DDSM
 
@@ -101,7 +105,7 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 
 
-##  stability of DSM 
+##  stability of DSM
 
 ![image-20250908213730155](ddsm/image-20250908213730155.png)
 

@@ -7,50 +7,65 @@ categories:
 mathjax: true
 ---
 
-## Classification
+```
+Delta-Sigma Modulators
+│
+├─ Analog ΔΣ Modulators
+│  │
+│  ├─ Discrete-Time Analog ΔΣ Modulator, DT ΔΣM
+│  │  ├─ Switched-capacitor / switched-current loop filter
+│  │  ├─ Input is sampled before or inside loop filter
+│  │  └─ Very common in ΔΣ ADCs
+│  │
+│  └─ Continuous-Time Analog ΔΣ Modulator, CT ΔΣM
+│     ├─ Continuous-time RC / gm-C / active-RC loop filter
+│     ├─ Feedback DAC is continuous-time
+│     ├─ Quantizer is usually clocked → synchronous CT ΔΣM
+│     └─ Quantizer/comparator may be event-driven → asynchronous CT ΔΣM
+│
+└─ Digital ΔΣ Modulators, DDSM
+   │
+   ├─ Single-quantizer DDSM
+   │  ├─ Output-feedback form
+   │  └─ Error-feedback form, EFM
+   │
+   └─ MASH DDSM
+      └─ Multi-stage noise-shaping modulator
+```
 
-- Continuous-Time (CT) Analog Modulator
-  - Sampled Quantizer: Synchronous Modulator
-  - Unsampled Quantizer: Asynchronous Modulator
-- Discrete-Time (DT) Analog Modulator
-  - The main application is in $\Delta\Sigma$ ADCs
-
-- Discrete-Time Digital Modulators (DDSM)
-  - Single Quantizer DDSMs - output feedback
-  - Error feedback modulators (EFM) - error feedback
-  - **M**ulti st**A**ge noise **SH**aping (**MASH**)
 
 
-![image-20250903210531360](delta-sigma/image-20250903210531360.png)
+![image-20250903210531360](dsm/image-20250903210531360.png)
 
 ---
 
 
 
-![image-20250611074830238](delta-sigma/image-20250611074830238.png)
+![image-20250611074830238](dsm/image-20250611074830238.png)
 
 
 
 
 
-> *"**Quantizers**" and "**truncators**", and "**integrators**" and "**accumulators**" are used in **delta-sigma ADCs** and **DACs**, respectively*
+> *"**Quantizers**" and "**truncators**",  "**integrators**" and "**accumulators**" are used in **delta-sigma ADCs** and **DACs**, respectively*
 >
 > P. Kiss, J. Arias and Dandan Li, "Stable high-order delta-sigma DACS," *2003 IEEE International Symposium on Circuits and Systems (ISCAS)*, Bangkok, 2003 [[https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf](https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf)]
 
 
 
-
 ## Oversampling
-
-![image-20250611232612319](delta-sigma/image-20250611232612319.png)
-
-
 
 > David Johns and Ken Martin. Oversampling Converters [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
 
+![image-20260601223915205](dsm/image-20260601223915205.png)
+
+
+
+
+
 ---
 
-![Over Sampling](delta-sigma/tmx9o.png)
+![Over Sampling](dsm/tmx9o.png)
 
 Nyquist sampling theorem @signal: no aliasing, signal remain the same
 
@@ -64,19 +79,17 @@ noise folding @noise: *same* total noise power spread over a wider frequency
 
 ---
 
-![image-20250629215715378](delta-sigma/image-20250629215715378.png)
-
-![image-20250629215830077](delta-sigma/image-20250629215830077.png)
+![image-20250629215830077](dsm/image-20250629215830077.png)
 
 
 
 ## Noise Shaping
 
-![image-20250629232343017](delta-sigma/image-20250629232343017.png)
+![image-20250629232343017](dsm/image-20250629232343017.png)
 
 
 
-![image-20250629232453811](delta-sigma/image-20250629232453811.png)
+![image-20250629232453811](dsm/image-20250629232453811.png)
 
 ```matlab
 [h1, w1] = freqz([1 -1], 1);
@@ -94,7 +107,7 @@ title('NTF of MOD1 & MOD2')
 
 ---
 
-![image-20250824151828263](delta-sigma/image-20250824151828263.png)
+![image-20250824151828263](dsm/image-20250824151828263.png)
 
 
 
@@ -104,7 +117,7 @@ title('NTF of MOD1 & MOD2')
 
 ***without the delta-sigma loop***
 
-![image-20250823220900699](delta-sigma/image-20250823220900699.png)
+![image-20250823220900699](dsm/image-20250823220900699.png)
 
 > $10\log (2) \approx 3$dB
 
@@ -112,7 +125,7 @@ title('NTF of MOD1 & MOD2')
 
 ***first order delta-sigma modulator***
 
-![image-20250823220842529](delta-sigma/image-20250823220842529.png)
+![image-20250823220842529](dsm/image-20250823220842529.png)
 
 > $30\log (2) \approx 9$dB
 
@@ -120,7 +133,7 @@ title('NTF of MOD1 & MOD2')
 
 ***second order delta-sigma modulator***
 
-![image-20250823220922480](delta-sigma/image-20250823220922480.png)
+![image-20250823220922480](dsm/image-20250823220922480.png)
 
 > $50\log (2) \approx 15$dB
 
@@ -128,7 +141,7 @@ title('NTF of MOD1 & MOD2')
 
 ---
 
-![image-20250823224500839](delta-sigma/image-20250823224500839.png)
+![image-20250823224500839](dsm/image-20250823224500839.png)
 
 ```matlab
 OSR= linspace(1,16,16);
@@ -153,7 +166,7 @@ legend('Oversampling Only', '1st \Delta\Sigma', '2nd \Delta\Sigma', fontsize=16)
 
 > TI. ADC12EU050 Continuous-Time Sigma-Delta ADCs [[https://www.ti.com/lit/an/snaa098/snaa098.pdf](https://www.ti.com/lit/an/snaa098/snaa098.pdf)]
 
-![image-20250906192735041](delta-sigma/image-20250906192735041.png)
+![image-20250906192735041](dsm/image-20250906192735041.png)
 
 where $N$ is the number of bits in the output, $M$ is known as the over-sampling ratio, $L$ is loop orders
 
@@ -163,25 +176,27 @@ where $N$ is the number of bits in the output, $M$ is known as the over-sampling
 
 ***without the delta-sigma loop***
 
-![image-20250921132712308](delta-sigma/image-20250921132712308.png)
+![image-20260601202545209](dsm/image-20260601202545209.png)
 
-> ![image-20250921102250022](delta-sigma/image-20250921102250022.png)
->
-> ![image-20250921124756085](delta-sigma/image-20250921124756085.png)
+![image-20250921132712308](dsm/image-20250921132712308.png)
+
+![image-20250921102250022](dsm/image-20250921102250022.png)
+
+> ![image-20250921124756085](dsm/image-20250921124756085.png)
 
 
 
 ***High-Order $\Delta\Sigma$ Modulators***
 
-![image-20250921133840404](delta-sigma/image-20250921133840404.png)
+![image-20250921133840404](dsm/image-20250921133840404.png)
 
-![image-20250921134001793](delta-sigma/image-20250921134001793.png)
+![image-20250921134001793](dsm/image-20250921134001793.png)
 
-![image-20250921134051906](delta-sigma/image-20250921134051906.png)
+![image-20250921134051906](dsm/image-20250921134051906.png)
 
-> ![image-20250921134312753](delta-sigma/image-20250921134312753.png)
+![image-20250921134312753](dsm/image-20250921134312753.png)
 
-
+![image-20250629215715378](dsm/image-20250629215715378.png)
 
 
 
@@ -189,23 +204,23 @@ where $N$ is the number of bits in the output, $M$ is known as the over-sampling
 
 The *greater* the number of quantizer levels, the *smaller* quantization error
 
-![image-20250824081318669](delta-sigma/image-20250824081318669.png)
+![image-20250824081318669](dsm/image-20250824081318669.png)
 
 
 
 ## Performance Metrics
 
-![image-20260503165509578](delta-sigma/image-20260503165509578.png)
+![image-20260503165509578](dsm/image-20260503165509578.png)
 
 - signal-to-noise ratio (SNR)
 - dynamic range (DR)
 - signal-to-(noise + distortion) ratio (SNDR)
 
-![image-20260503165804824](delta-sigma/image-20260503165804824.png)
+![image-20260503165804824](dsm/image-20260503165804824.png)
 
 **DR** by **"SNR Max"** Definition ($\Delta\Sigma$ Specific)
 
-![image-20260503172843146](delta-sigma/image-20260503172843146.png)
+![image-20260503172843146](dsm/image-20260503172843146.png)
 
 
 
@@ -213,7 +228,7 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 
 > M. Neitola, "Lee's Rule Extended," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 64, no. 4, pp. 382-386, April 2017
 
-![image-20250905062939783](delta-sigma/image-20250905062939783.png)
+![image-20250905062939783](dsm/image-20250905062939783.png)
 
 
 
@@ -223,11 +238,11 @@ The *greater* the number of quantizer levels, the *smaller* quantization error
 
 ***Maximum Stable Amplitude (MSA)***
 
-![image-20260503133732822](delta-sigma/image-20260503133732822.png)
+![image-20260503133732822](dsm/image-20260503133732822.png)
 
 
 
-![image-20260503140323450](delta-sigma/image-20260503140323450.png)
+![image-20260503140323450](dsm/image-20260503140323450.png)
 
 
 
@@ -281,26 +296,25 @@ spectrum of the modulated signal but leave the quantization noise unchanged at t
 
 ## *output* vs. *error*-feedback
 
-The ***error-feedback architecture*** is problematic for **analog** implementation, since it is sensitive to variations of its parameters (subtractor realization)
+The ***error-feedback architecture*** is problematic for **analog** implementation, since it is sensitive to variations of its parameters (**subtractor** realization)
 
-- The error-feedback structure is thus of limited utility in $\Delta \Sigma$ **ADCs**
-- The error-feedback structure is very useful and applied in ***digital*** loops required in $\Delta \Sigma$ **DACs**
+![image-20260601204357195](dsm/image-20260601204357195.png)
 
+---
 
+***ADC***
 
-### ADC
+![image-20250618203604863](dsm/image-20250618203604863.png)
 
-![image-20250618203604863](delta-sigma/image-20250618203604863.png)
+![image-20250618203636417](dsm/image-20250618203636417.png)
 
-![image-20250618203636417](delta-sigma/image-20250618203636417.png)
+---
 
-###  DAC
-
-![image-20250617223537672](delta-sigma/image-20250617223537672.png)
-
-
+***DAC***
 
 > P. Kiss, J. Arias and Dandan Li, "Stable high-order delta-sigma DACS," *2003 IEEE International Symposium on Circuits and Systems (ISCAS)*, Bangkok, 2003 [[https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf](https://www.ele.uva.es/~jesus/analog/tcasi2003.pdf)]
+
+![image-20250617223537672](dsm/image-20250617223537672.png)
 
 
 
@@ -310,7 +324,7 @@ The ***error-feedback architecture*** is problematic for **analog** implementati
 
 *output-feedback*
 
-![img](delta-sigma/1751369853966.jpeg)
+![img](dsm/1751369853966.jpeg)
 
 > [[https://www.linkedin.com/posts/danboschen_signalprocessing-dsp-pythonforengineers-activity-7345777588746788866-SprG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw](https://www.linkedin.com/posts/danboschen_signalprocessing-dsp-pythonforengineers-activity-7345777588746788866-SprG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 
@@ -372,7 +386,7 @@ endmodule
 
 ## Time and Frequency Domain
 
-![image-20250627193435726](delta-sigma/image-20250627193435726.png)
+![image-20250627193435726](dsm/image-20250627193435726.png)
 
 > $M \gt N$
 >
@@ -382,15 +396,19 @@ endmodule
 
 > Chun-Hsien Su ( 蘇純賢). Fundamentals of Sigma-Delta Data Converters,July, 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/sHkHraReEayHQvCx.pdf)]
 
-![image-20250809235244362](delta-sigma/image-20250809235244362.png)
+![image-20250809235244362](dsm/image-20250809235244362.png)
 
-![image-20250809235311542](delta-sigma/image-20250809235311542.png)
+![image-20250809235311542](dsm/image-20250809235311542.png)
 
-### ADC
+---
 
-![image-20250611234653738](delta-sigma/image-20250611234653738.png)
+---
 
-![image-20250612000925089](delta-sigma/image-20250612000925089.png)
+***ADC***
+
+![image-20250611234653738](dsm/image-20250611234653738.png)
+
+![image-20250612000925089](dsm/image-20250612000925089.png)
 
 > hackaday. Tearing Into Delta Sigma ADC’s [[https://hackaday.com/2016/07/07/tearing-into-delta-sigma-adcs-part-1/ ](https://hackaday.com/2016/07/07/tearing-into-delta-sigma-adcs-part-1/ )]
 
@@ -398,15 +416,17 @@ endmodule
 
 ---
 
-![image-20250617234727838](delta-sigma/image-20250617234727838.png)
+![image-20250617234727838](dsm/image-20250617234727838.png)
 
+---
 
+---
 
-### DAC
+***DAC***
 
- an ***interpolation filter*** effectively ***up-samples its low-rate input*** and ***lowpass-filters the resulting high-rate data*** to produce a high-rate output <u>*devoid of images*</u>
+an ***interpolation filter*** effectively ***up-samples its low-rate input*** and ***lowpass-filters the resulting high-rate data*** to produce a high-rate output <u>*devoid of images*</u>
 
-![image-20250612000423191](delta-sigma/image-20250612000423191.png)
+![image-20250612000423191](dsm/image-20250612000423191.png)
 
 > P.E. Allen -CMOS Analog Circuit Design: Lecture 39 – Oversampling ADCs – Part I (6/26/14)  [[https://aicdesign.org/wp-content/uploads/2018/08/lecture39-140626.pdf](https://aicdesign.org/wp-content/uploads/2018/08/lecture39-140626.pdf)]
 >
@@ -416,7 +436,7 @@ endmodule
 
 ---
 
-![image-20250720201944707](delta-sigma/image-20250720201944707.png)
+![image-20250720201944707](dsm/image-20250720201944707.png)
 
 > David Johns and Ken Martin. Oversampling Converters [[https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf](https://www.eecg.toronto.edu/~johns/ece1371/slides/14_oversampling.pdf)]
 
@@ -424,7 +444,7 @@ endmodule
 
 ---
 
-![image-20250627194351778](delta-sigma/image-20250627194351778.png)
+![image-20250627194351778](dsm/image-20250627194351778.png)
 
 > [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/Intro_to_Delta_Sigma_Data_Converters.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/Intro_to_Delta_Sigma_Data_Converters.pdf)]
 
@@ -436,7 +456,7 @@ endmodule
 
 Any such **physically feasible device** will take **a finite time** to operate – in other words, the *quantized output* will only be available a *small time* after the quantizer has "looked" at the input - *insert a one-sample delay*
 
-![image-20250617231014547](delta-sigma/image-20250617231014547.png)
+![image-20250617231014547](dsm/image-20250617231014547.png)
 
 > there **cannot** be a *"delay free loop"* is a common idea in sequential digital state machine design
 
@@ -444,7 +464,7 @@ Any such **physically feasible device** will take **a finite time** to operate �
 
 ---
 
-![image-20241128232040924](delta-sigma/image-20241128232040924.png)
+![image-20241128232040924](dsm/image-20241128232040924.png)
 
 > Both integrator and quantizer are delay free  
 
@@ -452,7 +472,7 @@ NTF realizability criterion: No delay-free loops in the modulator
 
 
 
-> ![image-20241128233022231](delta-sigma/image-20241128233022231.png)
+> ![image-20241128233022231](dsm/image-20241128233022231.png)
 
 
 
@@ -475,11 +495,13 @@ Switched capacitor has been the common realization technique of *discrete-time (
 
 ***MOD2***: *second*-order noise-shaped converter ($\Delta\Sigma$ modulator)
 
+---
 
+---
 
-### MOD1
+***MOD1***
 
-![image-20241005120659945](delta-sigma/image-20241005120659945.png)
+![image-20241005120659945](dsm/image-20241005120659945.png)
 $$
 V(z) = U(z) +(1-z^{-1})E(z)
 $$
@@ -492,7 +514,7 @@ $$
 
 ---
 
-![image-20241005202024498](delta-sigma/image-20241005202024498.png)
+![image-20241005202024498](dsm/image-20241005202024498.png)
 $$\begin{align}
 v[1] &= u  - (0) + e[1] \\
 v[2] &= 2u - (v[1]) + e[2] \\
@@ -516,21 +538,25 @@ v[n] &= nu - \sum_{k=1}^{n-1}v[k] + e[n] \\
 
 ---
 
-![image-20250524215712688](delta-sigma/image-20250524215712688.png)
+![image-20250524215712688](dsm/image-20250524215712688.png)
 
 Dout, the low frequency component of ADC out is same with Vin
 
+---
 
+---
 
-### MOD2
+***MOD2***
 
 > [[https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/2nd_Higher_Order.pdf](https://web.engr.oregonstate.edu/~temes/ece627/Lecture_Notes/2nd_Higher_Order.pdf)]
 
-![image-20241005160203074](delta-sigma/image-20241005160203074.png)
+![image-20241005160203074](dsm/image-20241005160203074.png)
 
+---
 
+---
 
-### MOD1 with DC Excitation
+***MOD1 with DC Excitation***
 
 *TODO* &#128197;
 
@@ -540,13 +566,13 @@ Dout, the low frequency component of ADC out is same with Vin
 
 ## Mismatch Shaping
 
-![image-20241112220458335](delta-sigma/image-20241112220458335.png)
+![image-20241112220458335](dsm/image-20241112220458335.png)
 
 
 
 ### Data-Weighted Averaging (DWA)
 
-![image-20241113000942025](delta-sigma/image-20241113000942025.png)
+![image-20241113000942025](dsm/image-20241113000942025.png)
 $$\begin{align}
 \sum_{i=0}^{n}v[i] + e_\text{DAC}[n] &= y[n] \\
 \sum_{i=0}^{n-1}v[i] + e_\text{DAC}[n-1] &= y[n-1]
@@ -567,7 +593,7 @@ $$
 
 **Element Rotation:**
 
-![image-20241112233059745](delta-sigma/image-20241112233059745.png)
+![image-20241112233059745](dsm/image-20241112233059745.png)
 
 
 
@@ -651,7 +677,7 @@ snr = dbv(s/n);
 end
 ```
 
-![image-20260503174009854](delta-sigma/image-20260503174009854.png)
+![image-20260503174009854](dsm/image-20260503174009854.png)
 
 
 

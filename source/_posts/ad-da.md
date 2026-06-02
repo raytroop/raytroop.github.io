@@ -71,8 +71,6 @@ The LSB determines the ADC code resolution, but the minimum reliably detectable 
 
 ### Quantization is NOT Noise
 
-> [[https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization](https://analogicus.com/aic2025/2025/02/20/Lecture-6-Oversampling-and-Sigma-Delta-ADCs.html#quantization)]
->
 > N. Blachman, "The intermodulation and distortion due to quantization of sinusoids," in IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 33, no. 6, pp. 1417-1426, December 1985 [[https://sci-hub.st/10.1109/TASSP.1985.1164729](https://sci-hub.st/10.1109/TASSP.1985.1164729)]
 
 
@@ -80,17 +78,29 @@ The LSB determines the ADC code resolution, but the minimum reliably detectable 
 
 ---
 
+> Carsten Wulff, Oversampling and Sigma-Delta ADCs [[https://analogicus.com/aic2026/oversampling_and_sigma-delta_adcs](https://analogicus.com/aic2026/oversampling_and_sigma-delta_adcs)] [[video](https://youtu.be/fdczPHW4jis)] [[slides](https://analogicus.com/aic2024/assets/slides/l06_adc.pdf)]
+>
+> N. Blachman, "The intermodulation and distortion due to quantization of sinusoids," in *IEEE Transactions on Acoustics, Speech, and Signal Processing*, vol. 33, no. 6, pp. 1417-1426, December 1985 
+
 The quantization noise is ***an infinite sum of input signal odd harmonics***, where the amplitude of the harmonics is determined by a sum of a *Bessel function*
 
 **"Quantization noise is white"**, because for a high number of bits, it looks white in the FFT
 
+![image-20260602220757703](ad-da/image-20260602220757703.png)
+
+ The quantization noise is **odd harmonics of the input signal** [[Gist](https://gist.github.com/raytroop/97db3b35727cfd99a9811b63acd8a7fd)]
+
+![l6_quant](ad-da/l6_quant.svg)
 
 
-![image-20250902203921651](ad-da/image-20250902203921651.png)
+
+![img](ad-da/Bessel.svg)
+
+> [[Gist](https://gist.github.com/raytroop/40d5e33969af63812fba5aa4d0bbda44)]
+
+![n_impact](ad-da/n_impact.png)
 
 ---
-
-> [[https://share.google/aimode/aA1V4uj3GofKbBojl](https://share.google/aimode/aA1V4uj3GofKbBojl)]
 
 ![image-20260501103237761](ad-da/image-20260501103237761.png)
 

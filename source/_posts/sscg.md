@@ -15,8 +15,6 @@ mathjax: true
 
 ![image-20250913192820120](sscg/image-20250913192820120.png)
 
----
-
 
 
 ## SSC modulation profile
@@ -111,10 +109,8 @@ A data clocked Rx architecture is characterized by requiring the *receiver's CDR
 
 ### Separate Reference Clocks with SSC (SRIS)
 
-> TITLE: Separate Refclk Independent SSC Architecture (SRIS)
-> DATE: Updated 10 January 2013
-> AFFECTED DOCUMENT: PCI Express Base Spec. Rev. 3.0
-> SPONSOR: Intel, HP, AMD
+> TITLE: Separate Refclk Independent SSC Architecture (SRIS) DATE: Updated 10 January 2013
+> AFFECTED DOCUMENT: PCI Express Base Spec. Rev. 3.0 SPONSOR: Intel, HP, AMD
 
 ![image-20250719183242222](sscg/image-20250719183242222.png)
 $$\begin{align}

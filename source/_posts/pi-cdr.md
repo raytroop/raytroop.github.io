@@ -230,12 +230,17 @@ A **constant Output amplitude** is desired because the *swing-dependent delay ch
 
 
 
-
 ## PI vs. PLL based CDR
+
+> PCI Express Jitter Modeling Revision 1.0RD July 14, 2004
 
 ![image-20250816121744921](pi-cdr/image-20250816121744921.png)
 
-> PCI Express Jitter Modeling Revision 1.0RD July 14, 2004
+![image-20260602202522018](pi-cdr/image-20260602202522018.png)
+$$
+H_1 - \left[H_1(1-H_3) + H_2H_3\right] = (H_1-H_2)H_3
+$$
+
 
 
 

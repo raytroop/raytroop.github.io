@@ -459,6 +459,7 @@ $$
 
 The noise in $S_{RC}$ is a *stationary process* and so is *uncorrelated* over $f$ allowing the $N$ rectangles to be combined by simply summing their noise powers
 
+To implement a zero-order hold involves convolving the sequence vs with a pulse of unit height with a width of $(1–m)T_c$ and the highlighted $T_c$ bridge **sequence to impulse**
 
 ![image-20240428225949327](noise/image-20240428225949327.png)
 

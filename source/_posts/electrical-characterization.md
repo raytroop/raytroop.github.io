@@ -44,7 +44,7 @@ $$
 >
 > Samtec, High Speed Characterization Report PCIEC-064-1000-EC-EM-P-85 [[https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf](https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf)]
 >
-
+>  Tim Wang Lee, Ph.D., Keysight Technologies, *When Frequency Shapes Time: How S-Parameter Properties Shape Simulated TDR Behavior* [[https://www.signalintegrityjournal.com/articles/4287-when-frequency-shapes-time-how-s-parameter-properties-shape-simulated-tdr-behavior](https://www.signalintegrityjournal.com/articles/4287-when-frequency-shapes-time-how-s-parameter-properties-shape-simulated-tdr-behavior)]
 
 
 ![image-20260420232932030](electrical-characterization/image-20260420232932030.png)

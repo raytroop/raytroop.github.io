@@ -2047,6 +2047,8 @@ Output waveform
 
 > David Banas. Python implementation of COM, as per IEEE 802.3-22 Annex 93A. [[https://github.com/capn-freako/PyChOpMarg](https://github.com/capn-freako/PyChOpMarg)]
 >
+> —, COM: A Link Designer's Field Guide [[https://www.signalintegrityjournal.com/articles/3578-com-a-link-designers-field-guide](https://www.signalintegrityjournal.com/articles/3578-com-a-link-designers-field-guide)]
+>
 > CC Chen. Why Channel Operating Margin? [[https://youtu.be/mrXur-WbrR8](https://youtu.be/mrXur-WbrR8)] 
 
 Python implementation of IEEE Ethernet COM (Channel Operating Margin)

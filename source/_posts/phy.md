@@ -49,6 +49,17 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 ![image-20260402232626604](phy/image-20260402232626604.png)
 
 
+
+---
+
+> T3S02_PCIe Retimer Latency
+
+![image-20260604072254491](phy/image-20260604072254491.png)
+
+![image-20260604072304996](phy/image-20260604072304996.png)
+
+
+
 ## Lane-to-Lane Skew
 
 *TODO* &#128197;

@@ -832,15 +832,7 @@ It divides the process into several comparison stages, the number of which is pr
 
 ## R-2R & C-2C
 
-*TODO* &#128197;
 
-Conceptually, area goes up *linearly* with number of bit slices
-
- drawback of the R-2R DAC 
-
-
-
----
 
 $N_b$ bit binary + $N_t$ bit thermometer DAC
 
@@ -874,6 +866,12 @@ V_o &= V_B\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R}+\sum_{n=0}^{2^{N
 RVB equivalent R
 
 ![image-20241214190045688](ad-da/image-20241214190045688.png)
+
+---
+
+
+
+
 
 
 

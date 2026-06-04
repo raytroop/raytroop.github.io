@@ -468,7 +468,7 @@ To implement a zero-order hold involves convolving the sequence vs with a pulse 
 where $m$ is the duty cycle
 
 $$
-\color{purple}\overline{v_c^2} = \overline{v_s^2} = \frac{kT}{f_c}
+\color{purple}\overline{v_c^2} = \overline{v_s^2} = \frac{kT}{C}
 $$
 
 > Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF [[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)]

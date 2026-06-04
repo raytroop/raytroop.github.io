@@ -544,6 +544,9 @@ Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD
 *TODO* &#128197;
 
 
+## PCIe® Retimer Latency
+
+*TODO* &#128197;
 
 ## reference
 

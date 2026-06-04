@@ -459,13 +459,17 @@ $$
 
 The noise in $S_{RC}$ is a *stationary process* and so is *uncorrelated* over $f$ allowing the $N$ rectangles to be combined by simply summing their noise powers
 
-To implement a zero-order hold involves convolving the sequence vs with a pulse of unit height with a width of $(1–m)T_c$ and the highlighted $T_c$ bridge **sequence to impulse**
+To implement a zero-order hold involves convolving the sequence vs with a pulse of unit height with a width of $(1-m)T_c$ and the highlighting $T_c$ bridge **sequence to impulse**
 
 ![image-20240428225949327](noise/image-20240428225949327.png)
 
 ![image-20240425220400924](noise/image-20240425220400924.png)
 
 where $m$ is the duty cycle
+
+$$
+\color{purple}\overline{v_c^2} = \overline{v_s^2} = \frac{kT}{f_c}
+$$
 
 > Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF [[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)]
 >

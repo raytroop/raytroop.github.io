@@ -50,16 +50,6 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 
 
 
----
-
-> T3S02_PCIe Retimer Latency
-
-![image-20260604072254491](phy/image-20260604072254491.png)
-
-![image-20260604072304996](phy/image-20260604072304996.png)
-
-
-
 ## Lane-to-Lane Skew
 
 *TODO* &#128197;
@@ -507,11 +497,13 @@ Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD
 
 
 
-## Feed-Forward Error Correction (FEC)
+## FEC (Feed-Forward Error Correction)
 
 > Cathy Liu, Broadcom. DesignCon 2024: *200+ Gbps Ethernet Forward Error Correction (FEC) Analysis*
 >
 > —, Broadcom, DesignCon 2026 *What is FEC and how do I use it in 200G/400G/800G/1.6T Ethernet?*
+>
+> 
 
 *TODO* &#128197;
 
@@ -529,24 +521,38 @@ Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD
 
 ---
 
-> David Banas, PyBERT [[https://github.com/capn-freako/PyBERT/blob/master/src/pybert/models/fec.py](https://github.com/capn-freako/PyBERT/blob/master/src/pybert/models/fec.py)]
+***Reed-Solomon (RS) codes***
+
+RS is a forward error-correction (**FEC**) algorithm used to correct data corruption after it has been received
 
 
 
-*TODO* &#128197;
 
 
-
-## Error-Correcting Codes (ECC)
+## ECC (Error Control Coding)
 
 > Takayuki Kawahara, ISSCC2007 T5: *Error-Correcting Codes for Memories*
+>
+> 
 
 *TODO* &#128197;
+
+
+
+
 
 
 ## PCIe® Retimer Latency
 
-*TODO* &#128197;
+> Jay Li, Product Marketing Director, kandou, *T3S02_PCIe Retimer Latency*
+
+![image-20260604204510926](phy/image-20260604204510926.png)
+
+![image-20260604072254491](phy/image-20260604072254491.png)
+
+![image-20260604072304996](phy/image-20260604072304996.png)
+
+
 
 ## reference
 

@@ -226,7 +226,7 @@ that total power will always be the ***same*** for ***any sampling rate*** used 
 
 ![image-20260205181758905](noise/image-20260205181758905.png)
 
-### White noise in CONTINUOUS-time blocks
+### White noise in continuous-time blocks
 
 > MathWorks Support Team. [[https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112](https://www.mathworks.com/matlabcentral/answers/100763-why-have-a-band-limited-white-noise-generator-block-instead-of-just-a-white-noise-generator-block#answer_110112)]
 
@@ -430,6 +430,20 @@ ACGN(1:1000) = []; % DISCARDING TRANSIENT SAMPLES
 
 ## sampling bandlimited white noise
 
+> Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF [[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)]
+>
+> Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
+>
+> Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and Modeling URL: [https://www.seas.upenn.edu/~ese568/fall2019/](https://www.seas.upenn.edu/~ese568/fall2019/)
+>
+> Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann Publishers Inc., San Francisco, CA, USA.
+>
+> R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processing. Wiley-Interscience, 1986
+>
+> Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits  [[http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf](http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf)]
+>
+> Christian-Charles Enz. High precision CMOS micropower amplifiers [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
+
 The **aliasing of the noise**, or **noise folding**, plays an important role in switched-capacitor as it does in all switched-capacitor filters
 
 ![image-20240425215938141](noise/image-20240425215938141.png)
@@ -457,11 +471,9 @@ $$
 
 ![image-20240425220033340](noise/image-20240425220033340.png)
 
-The noise in $S_{RC}$ is a *stationary process* and so is *uncorrelated* over $f$ allowing the $N$ rectangles to be combined by simply summing their noise powers
+![image-20260604210651691](noise/image-20260604210651691.png)
 
-To implement a zero-order hold involves convolving the sequence vs with a pulse of unit height with a width of $(1-m)T_c$ and the highlighting $T_c$ bridge **sequence to impulse**
-
-![image-20240428225949327](noise/image-20240428225949327.png)
+To implement a zero-order hold involves convolving the **sequence** $v_s$ with a pulse of unit height with a width of $(1-m)T_c$ and the highlighting $T_c$ bridge **sequence to impulse**
 
 ![image-20240425220400924](noise/image-20240425220400924.png)
 
@@ -471,23 +483,11 @@ $$
 \color{purple}\overline{v_c^2} = \overline{v_s^2} = \frac{kT}{C}
 $$
 
-> Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF [[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)]
->
-> Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
->
-> Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and Modeling URL: [https://www.seas.upenn.edu/~ese568/fall2019/](https://www.seas.upenn.edu/~ese568/fall2019/)
->
-> Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann Publishers Inc., San Francisco, CA, USA.
->
-> R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processing. Wiley-Interscience, 1986
->
-> Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits  [[http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf](http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf)]
->
-> Christian-Charles Enz. High precision CMOS micropower amplifiers [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
+
 
 ---
 
-*Below analysis focusing on sampled noise*
+*Below analysis focusing on **sampled noise*** $v_s$
 
 > Boris Murmann. Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 / tutorials [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T8.pdf), [transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T9.pdf)]
 >
@@ -501,8 +501,8 @@ $$
 
 
 
-> - Calculate autocorrelation function of noise at the output of the RC filter
-> - Calculate the spectrum by taking the **discrete** time Fourier transform of the autocorrelation function
+- Calculate autocorrelation function of noise at the output of the RC filter
+- Calculate the spectrum by taking the **discrete** time Fourier transform of the autocorrelation function
 
 ---
 
@@ -512,7 +512,7 @@ $$
 
 ---
 
-> P. Bruschi [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf)]
+> P. Bruschi, Microelectronic System Design, [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf)]
 
 ![image-20260523093243527](noise/image-20260523093243527.png)
 

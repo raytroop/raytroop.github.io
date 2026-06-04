@@ -152,9 +152,23 @@ $$
 
 
 
-## divide-by-1.5 circuit
+## Frequency Dividers
 
 *TODO* &#128197;
+
+
+
+
+
+### divide-by-1.5 circuit
+
+> US9065449B2 High-speed divide-by-1.5 circuit with 50 percent duty cycle [[https://patents.google.com/patent/US9065449B2](https://patents.google.com/patent/US9065449B2)] 
+
+divide-by-3 circuit  + frequency doubler circuit
+
+![image-20260604215120255](clock-dist/image-20260604215120255.png)
+
+---
 
 
 

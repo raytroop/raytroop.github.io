@@ -11,6 +11,29 @@ mathjax: true
 
 phasor in ***time domain*** as time elapses
 
+---
+
+> A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 45-59, 2025 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10818782)]
+
+The oscillation $\color{red}V_0\cos\omega_0 t$ is represented by the horizontal phasor of magnitude $\color{red}V_0$
+
+![image-20260604230542185](am-pm/image-20260604230542185.png)
+
+***AM***
+$$
+e^{j\omega_0 t}(V_0 + V_{AM}e^{jy_A}+V_{AM}e^{-jy_A}) = V_0 e^{j\omega_0 t}\cdot \left(1+\frac{2V_{AM}}{V_0}\cos y_A\right)
+$$
+modulate amplitude of the oscillation sinusoidally with frequency $\omega_m$ and depth $m=\frac{2V_A}{V_0}$
+
+***PM***
+$$
+e^{j\omega_0 t}(V_0 + V_{PM}e^{jy_P}-V_{PM}e^{-jy_P})=V_0e^{j\omega_0 t}\left(1 + j\frac{2V_{PM}}{V_0}\sin y_P\right) \approx V_0e^{j\omega_0 t}\cdot e^{j\frac{2V_{PM}}{V_0}\sin y_P}
+$$
+modulate the phase of the oscillation with an index of approximately $\frac{2V_{PM}}{V_0}$ rad
+
+---
+
+
 ![image-20251105222421572](am-pm/image-20251105222421572.png)
 
 > "**I**" is the in-phase or real axis and "**Q**" is the quadrature or imaginary axis
@@ -42,26 +65,6 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 ---
 
 > ![image-20251105225355996](am-pm/image-20251105225355996.png)
-
----
-
-> A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 45-59, 2025 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10818782)]
-
-The oscillation $\color{red}V_0\cos\omega_0 t$ is represented by the horizontal phasor of magnitude $\color{red}V_0$
-
-![image-20260604230542185](am-pm/image-20260604230542185.png)
-
-***AM***
-$$
-e^{j\omega_0 t}(V_0 + V_{AM}e^{jy_A}+V_{AM}e^{-jy_A}) = V_0 e^{j\omega_0 t}\cdot \left(1+\frac{2V_{AM}}{V_0}\cos y_A\right)
-$$
-modulate amplitude of the oscillation sinusoidally with frequency $\omega_m$ and depth $m=\frac{2V_A}{V_0}$
-
-***PM***
-$$
-e^{j\omega_0 t}(V_0 + V_{PM}e^{jy_P}-V_{PM}e^{-jy_P})=V_0e^{j\omega_0 t}\left(1 + j\frac{2V_{PM}}{V_0}\sin y_P\right) \approx V_0e^{j\omega_0 t}\cdot e^{j\frac{2V_{PM}}{V_0}\sin y_P}
-$$
-modulate the phase of the oscillation with an index of approximately $\frac{2V_{PM}}{V_0}$ rad
 
 
 

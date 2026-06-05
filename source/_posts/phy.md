@@ -496,6 +496,19 @@ Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD
 ![image-20260528202037244](phy/image-20260528202037244.png)
 
 
+## Flit (flow control unit)
+
+*TODO* &#128197;
+
+
+## FBER (First Bit Error Rate)
+
+*TODO* &#128197;
+
+```
+FBER is like BER except that, for example, a 10-bit burst error counts as one FBER but would count as 10 BER.
+The FEC in Flit Mode can correct up to a single 16-bit burst error in any given Flit.
+```
 
 ## FEC (Feed-Forward Error Correction)
 
@@ -503,7 +516,18 @@ Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD
 >
 > —, Broadcom, DesignCon 2026 *What is FEC and how do I use it in 200G/400G/800G/1.6T Ethernet?*
 >
-> 
+> Leslie A. Rusch , GEL7114 Digital Communications, Module 5 - Error Correcting Codes [[https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module5_en_1by1_1.pdf](https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module5_en_1by1_1.pdf)]
+
+
+```
+Steve Glaser, How to understand FBER?
+
+Note that the PCIe FEC is weak as compared to Ethernet.
+This is intentional. Stronger FEC codes incur higher latency penalty (because they cover more bits and require more computation).
+PCIe Links are short and replays are quick. The tradeoff was made that additional delay due to an occasional replay was preferable to a constant delay due to a more powerful FEC. 
+The PCIe FEC's purpose is to reduce the replay rate to an acceptable level, not eliminate replays. 
+Ethernet has longer Links with longer replay times. That motivates their different tradeoff.
+```
 
 *TODO* &#128197;
 

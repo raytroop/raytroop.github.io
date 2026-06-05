@@ -361,7 +361,11 @@ and $\phi _e(\infty) = 0$
 
 
 
-## PLL bandwidth test
+## PLL Characterization
+
+***PLL bandwidth test***
+
+> [How can I experimentally find the bandwidth of my PLL?, [https://dsp.stackexchange.com/a/73654/59253](https://dsp.stackexchange.com/a/73654/59253)]
 
 A *step response test* is an easy way to determine the bandwidth.
 
@@ -382,7 +386,6 @@ $$
 BW = \frac{0.33}{t}\space\space\space\space \text{(second order system, damping factor = 0.7)}
 $$
 
-> [How can I experimentally find the bandwidth of my PLL?, [https://dsp.stackexchange.com/a/73654/59253](https://dsp.stackexchange.com/a/73654/59253)]
 
 
 

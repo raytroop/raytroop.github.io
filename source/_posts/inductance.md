@@ -234,6 +234,20 @@ $$
 
 ![inductor_terminal_voltage_back_emf_schematic](inductance/inductor_terminal_voltage_back_emf_schematic.png)
 
+### mutual inductance
+
+$$
+M_{12}=M_{21}=M \qquad \frac{N_1\Phi_{12}}{i_2}=\frac{N_2\Phi_{21}}{i_1}
+=
+M
+$$
+
+Important: this **does not mean**
+$$
+\Phi_{12} = \Phi_{21}
+$$
+
+
 
 
 ### $k$ vs. $M$

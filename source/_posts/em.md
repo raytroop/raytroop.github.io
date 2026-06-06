@@ -180,6 +180,18 @@ $$
 
 ![image-20260321145115368](em/image-20260321145115368.png)
 
+---
+
+![image-20260606103617639](em/image-20260606103617639.png)
+
+### Lenz's law
+
+![image-20260606095246832](em/image-20260606095246832.png)
+
+
+
+
+
 ### Ampère's law with Maxwell's correction
 
 ***displacement current***

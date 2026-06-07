@@ -367,6 +367,16 @@ legend('wt - Laplace','wt - convolution integral','wt - convolution sum')
 
 
 
+---
+
+> Jri Lee,【【鳌中堂笔记·抢先体验版】 锁相环08】[[bilibili link](https://www.bilibili.com/video/BV1wA7r6PEjq/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+
+![image-20260607110036196](z-laplace/image-20260607110036196.png)
+
+
+
+
+
 ## Transfer function from sampled impulse response
 
 > continuous-time filter designs to discrete-time designs through techniques such as ***impulse invariance***
@@ -1074,4 +1084,4 @@ Mathuranathan. Digital filter design – Introduction [[https://www.gaussianwave
 
 Daniel Boschen, "Fast Track to Designing FIR Filters with Python" [[https://events.gnuradio.org/event/24/contributions/598/attachments/186/485/Boschen%20FIR%20Filter%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/598/attachments/186/485/Boschen%20FIR%20Filter%20Presentation.pdf)]
 
-Daniel Boschen, "Quick Start on Control Loops with Python" [[https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf)]
+Daniel Boschen, "Quick Start on Control Loops with Python" [[https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf)]【【鳌中堂笔记·抢先体验版】 锁相环08】[[bilibili link](https://www.bilibili.com/video/BV1wA7r6PEjq/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]

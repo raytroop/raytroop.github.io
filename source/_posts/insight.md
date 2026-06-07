@@ -52,6 +52,7 @@ $\rho\sigma_{X}\sigma_{Y}$: Covariance between $X$ and $Y$
 - Perfect Negative Correlation $\rho = -1$: variables offset each other's fluctuations, $\sigma_{total} = \vert{}\sigma_X - \sigma_Y\vert{}$
 
 
+
 ## Zero-Value Time Constant Analysis
 
 *TODO* &#128197;
@@ -71,7 +72,7 @@ MOSFET can be **on** and carry **no current**
 
 
 
-## two capacitor paradox
+## Two capacitor paradox
 
 > Intuitive examination of the two-capacitors "paradox"l [[https://youtu.be/WNpxV5qAUMU](https://youtu.be/WNpxV5qAUMU)] 
 
@@ -547,11 +548,13 @@ R_2'  &= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
 
 ## common gate amplifiers
 
+> [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_analog-analogdesign-rfdesign-activity-7126946716938878976-GeW6?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_analog-analogdesign-rfdesign-activity-7126946716938878976-GeW6?utm_source=share&utm_medium=member_desktop)]
+
 ![No alt text provided for this image](insight/1699196508319.jpeg)
 
 
 
-> [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_analog-analogdesign-rfdesign-activity-7126946716938878976-GeW6?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_analog-analogdesign-rfdesign-activity-7126946716938878976-GeW6?utm_source=share&utm_medium=member_desktop)]
+
 
 
 
@@ -865,42 +868,7 @@ high level envelope:
 
 > Razavi 2nd, problem 14.15
 
-## STB and PSTB in Spectre/RF
 
-> F. Wiedmann, "Loop gain simulation, [[https://sites.google.com/site/frankwiedmann/loopgain](https://sites.google.com/site/frankwiedmann/loopgain)]
->
-> M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17, no. 1, pp. 31-41, Jan. 2001 [[https://kenkundert.com/docs/cd2001-01.pdf](https://kenkundert.com/docs/cd2001-01.pdf)]
->
-> Open loop gain analysis and "STB" method  [[https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux](https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux )]
->
-> 刘堃. Middlebrook环路测量方法讨论，STB原理 [[https://bbs.eetop.cn/thread-985438-1-1.html](https://bbs.eetop.cn/thread-985438-1-1.html)]
-
-![image-20251122095447868](insight/image-20251122095447868.png)
-
-### STB analysis
-
-Spectre **stb**'s "loopgain" is negative of "T" in paper
-$$
-T = \frac{2(AD-BC) - A + D}{2(AD-BC)-A+D-1}
-$$
-
-AC simulation testbench, shown as below,
-
-![stb_pstb.drawio](insight/stb_pstb.drawio.svg)
-
-1. $I_{inj}$ = 0, $V_{inj}$ = 1
-
-   B = if, D = ve
-
-2. $I_{inj}$ = 1, $V_{inj}$ = 0
-
-   A = if, C = ve
-
-### PSTB analysis
-
-Spectre **pstb** is similar to stb, just set **pac** as **1** instead of  **ac** in current source and voltage source.
-
-This analysis just use **harmonic 0** transfer function in pac analysis, which has limitation.
 
 
 
@@ -1050,16 +1018,6 @@ I believe that the equation $V_{ds}/I_{ds}$ is more appropriate where mos is use
 ![image-20231021232912529](insight/image-20231021232912529.png)
 
 
-
-
-
-## gm/ID Intuition
-
-
-
-![image-20230103220933081](insight/image-20230103220933081.png)
-
-> small gm/ID for High ro,  or high Early voltage $V_A$
 
 
 

@@ -341,3 +341,29 @@ V_{in}^+ -V_{in}^-  &= V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} \\
 > S. Pavan, "Revisiting the CMOS Differential Pair With a Current–Mirror Load [CAS Education]," in *IEEE Circuits and Systems Magazine*, vol. 25, no. 2, pp. 74-78, Secondquarter 2025 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11007710)]
 
 *TODO* &#128197;
+
+
+
+## Gm/ID Approach in Transistor Sizing
+
+> Hesham Omran, The Analog Designer's Toolbox (ADT) | Invited Talk by IEEE Santa Clara Valley Section CAS Society [[https://youtu.be/FT6kKC5OdE0](https://youtu.be/FT6kKC5OdE0)]
+>
+> Jespers, P. G. A., & Murmann, B. (2017). *Systematic Design of Analog CMOS Circuits: Using Pre-Computed Lookup Tables*. Cambridge: Cambridge University Press.
+>
+> Boris Murmann, February 26, 2016, Systematic Design of Analog Circuits Using Pre-Computed Lookup Tables [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/20160226toronto_sscs.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/20160226toronto_sscs.pdf)]
+
+![image-20230103220933081](ana-tech/image-20230103220933081.png)
+
+small gm/ID for High ro,  or high Early voltage $V_A$
+
+
+
+## C/ID Approach in Transistor Sizing
+
+> Armin Tajalli, 27 August 2024, *Algorithmic Analog Design C/ID: A Design Oriented FET Modeling and Design Approach* [[https://lcas.ece.utah.edu/wp-content/uploads/sites/91/2024/10/Introduction-to-CID-Algorithm-in-Circuit-Design.pdf](https://lcas.ece.utah.edu/wp-content/uploads/sites/91/2024/10/Introduction-to-CID-Algorithm-in-Circuit-Design.pdf)]
+>
+> —, CICC 2026 Circuit Insights, *C over ID Approach in Transistor Sizing*
+
+![image-20260607141930767](ana-tech/image-20260607141930767.png)
+
+*TODO* &#128197;

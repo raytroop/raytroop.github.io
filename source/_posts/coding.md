@@ -758,6 +758,43 @@ By using `NaN`, the `surf` command will simply not render any polygons over the 
 
 
 
+---
+
+---
+
+
+
+- `[num_cell, den_cell] = tfdata(sys)`
+
+  returns **cell arrays** to accommodate **Multi-Input Multi-Output (MIMO)** systems
+
+- `[num, den] = tfdata(sys, 'v')` 
+
+   returns **row vectors** to accommodate **Single-Input Single-Output (SISO)** system
+
+Using `'v'` simplifies data handling for single systems by eliminating the need to extract data from cells using curly braces `{}`
+
+```matlab
+% Create a transfer function model
+s = tf('s');
+sys = (s + 2) / (s^2 + 3*s + 2);
+
+% Default output (returns cell arrays)
+[num_cell, den_cell] = tfdata(sys); 
+% num_cell 1×1 cell array is {[0 1 2]}, num_cell{1} is [0 1 2]
+% den_cell 1×1 cell array is {[1 3 2]}, den_cell{1} is [1 3 2]
+
+
+% Using the 'v' option (returns numerical row vectors)
+[num, den] = tfdata(sys, 'v');       
+% num is [0 1 2]
+% den is [1 3 2]
+```
+
+
+
+
+
 ## Simulink
 
 **Quick Insert** menu
@@ -863,6 +900,50 @@ In math mode, LaTeX provides several commands to insert horizontal space of spec
 $$
 \operatorname{sinc}(x)
 $$
+
+---
+
+---
+
+`\textcolor` (Argument-Based)
+
+- **How it works:** It takes exactly two arguments: `\textcolor{color}{content}`.
+- **Scope:** It limits the color strictly to the content inside the second set of curly braces.
+- **Spacing:** It automatically preserves proper mathematical spacing around the colored elements.
+- **Best for:** Coloring individual variables, specific numbers, or small terms.
+
+`\color` (Switch-Based)
+
+- **How it works:** It acts as a toggle switch: `\color{color}`.
+- **Scope:** It colors **everything** that follows it until it hits the end of the current environment or a closing curly brace `}`.
+- **Spacing:** It can sometimes disrupt standard mathematical spacing if not enclosed in braces.
+- **Best for:** Coloring large sections, full equations, or entire document blocks.
+
+
+
+Using `\textcolor` (Precise Targeting): takes the content as an argument
+
+```latex
+\textcolor{red}{E} = \textcolor{blue}{mc^2}
+```
+
+
+$$
+\textcolor{red}{E} = \textcolor{blue}{mc^2}
+$$
+
+
+Using `\color` (The "Bleeding" Switch): changes the color of **everything** after it If you do not isolate it
+
+```latex
+{\color{red}{E}} = \color{blue}mc^2
+```
+
+$$
+{\color{red}{E}} = \color{blue}mc^2
+$$
+
+To make `\color` behave like `\textcolor`, you must manually wrap the command and the target character inside a hidden group using extra curly braces `{ ... }`
 
 
 

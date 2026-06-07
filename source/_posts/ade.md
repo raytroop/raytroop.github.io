@@ -58,6 +58,49 @@ The `% / Total` column in the noise summary table always displays values in $V^{
 
 
 
+
+
+## STB and PSTB in Spectre/RF
+
+> F. Wiedmann, "Loop gain simulation, [[https://sites.google.com/site/frankwiedmann/loopgain](https://sites.google.com/site/frankwiedmann/loopgain)]
+>
+> M. Tian, V. Visvanathan, J. Hantgan and K. Kundert, "Striving for small-signal stability," in IEEE Circuits and Devices Magazine, vol. 17, no. 1, pp. 31-41, Jan. 2001 [[https://kenkundert.com/docs/cd2001-01.pdf](https://kenkundert.com/docs/cd2001-01.pdf)]
+>
+> Open loop gain analysis and "STB" method  [[https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux](https://www.linkedin.com/pulse/open-loop-gain-analysis-stb-method-jean-francois-debroux )]
+>
+> 刘堃. Middlebrook环路测量方法讨论，STB原理 [[https://bbs.eetop.cn/thread-985438-1-1.html](https://bbs.eetop.cn/thread-985438-1-1.html)]
+
+![image-20251122095447868](ade/image-20251122095447868.png)
+
+### STB analysis
+
+Spectre **stb**'s "loopgain" is negative of "T" in paper
+$$
+T = \frac{2(AD-BC) - A + D}{2(AD-BC)-A+D-1}
+$$
+
+AC simulation testbench, shown as below,
+
+![stb_pstb.drawio](ade/stb_pstb.drawio.svg)
+
+1. $I_{inj}$ = 0, $V_{inj}$ = 1
+
+   B = if, D = ve
+
+2. $I_{inj}$ = 1, $V_{inj}$ = 0
+
+   A = if, C = ve
+
+### PSTB analysis
+
+Spectre **pstb** is similar to stb, just set **pac** as **1** instead of  **ac** in current source and voltage source.
+
+This analysis just use **harmonic 0** transfer function in pac analysis, which has limitation.
+
+
+
+
+
 ## psf_utils
 
 > PSF Utilities — Read Spectre Data Files [[https://github.com/KenKundert/psf_utils](https://github.com/KenKundert/psf_utils)]
@@ -208,7 +251,7 @@ Layout XL里面的黄色框框
 
 
 
-## Hide Color
+## Hide Muti-Pattern Color
 
 ![image-20250719231256086](ade/image-20250719231256086.png)
 
@@ -218,7 +261,7 @@ Layout XL里面的黄色框框
 
 ## noiseon & noiseoff
 
-Options -> Analog...
+`Options` -> `Analog...`
 
 ![image-20250607115137576](ade/image-20250607115137576.png)
 

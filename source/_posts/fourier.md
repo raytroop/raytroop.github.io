@@ -106,10 +106,10 @@ DTFT and rearranging terms
 
 ### Discrete Fourier Transform (DFT)
 
-> Two steps are needed to change the DTFT sum into a computable form: 
->
-> 1. the continuous frequency variable $\hat{\omega}$ must be sampled
-> 2. the limits on the DTFT sum must be finite
+Two steps are needed to change the DTFT sum into a computable form: 
+
+1. the continuous frequency variable $\hat{\omega}$ must be sampled
+2. the limits on the DTFT sum must be finite
 
 $$\begin{align}
 X[k] &= \sum_{n=0}^{N-1}x[n]e^{-j(2\pi/N)kn}\space\space\space k=0,1,...,N-1 \\
@@ -122,12 +122,16 @@ Part of the proof is given by the following step:
 
 ![image-20240830222204470](fourier/image-20240830222204470.png)
 
+---
 
-
-*DFT  $X[k]$ is a **sampled** version of the DTFT $X(e^{j\hat{\omega}})$, where $\hat{\omega_k} = \frac{2\pi k}{N}$*
-
-
-
+*DFT $X[k]$ is a **sampled** version of the DTFT $X(e^{j\hat{\omega}})$, with the $k$-th sampled digital frequency, $\hat{\omega}_k = \frac{2\pi k}{N}$*
+$$
+\boxed{X[k] = X(e^{j\hat{\omega}})\bigg|_{\hat{\omega}=\hat{\omega}_k},
+\qquad
+\hat{\omega}_k = \frac{2\pi k}{N},
+\qquad
+k=0,1,\dots,N-1}
+$$
 
 
 ### impulse train
@@ -455,6 +459,14 @@ Let's prove the symmetric "samples ↔ samples" formula
 ![image-20260523111602106](fourier/image-20260523111602106.png)
 
 ![image-20260523111632471](fourier/image-20260523111632471.png)
+
+
+
+### angular frequency $\omega$ vs Hz-frequency $f$
+
+***Multiplication property***
+
+![image-20260606211927725](fourier/image-20260606211927725.png)
 
 
 

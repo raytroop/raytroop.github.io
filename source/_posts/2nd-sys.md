@@ -95,12 +95,10 @@ grid on; xlabel('Phase Margin, ^o'); ylabel('Damping ratio, \zeta')
 ## Zeros & Non-Minimum Phase Zeros
 
 > Influence of Zeros and Non-Minimum Phase Zeros of Transfer Functions on Dynamical System Behavior [[https://aleksandarhaber.com/effect-of-zeros-of-transfer-functions-on-dynamical-system-behavior/](https://aleksandarhaber.com/effect-of-zeros-of-transfer-functions-on-dynamical-system-behavior/)]
->
-> The *zeros in the right half of the complex plane* are called ***nonminimum phase zeros***. Systems with nonminimum phase zeros are called ***nonminimum phase systems***
+
+The *zeros in the right half of the complex plane* are called ***nonminimum phase zeros***. Systems with nonminimum phase zeros are called ***nonminimum phase systems***
 
 ***Zero close to the real pole attenuates the effect of that pole on the system response***
-
-
 
 ---
 

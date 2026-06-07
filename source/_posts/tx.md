@@ -455,7 +455,9 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 >
 > Mike Hertz, Teledyne LeCroy: WEBINAR PAM4 Analysis and Measurement Considerations
 >
-> Pegah Alavi (Keysight Technologies) DesignCon 2025: *PCI Express & PAM4: Balancing Silicon and interconnect interdependencies for 128 GT/s*
+> Brandon Gore, Samtec, DesignCon 2025, Transmitter Power Spectral Density Noise Impact for 200 Gb/s PAM 4 per lane [[pdf](https://suddendocs.samtec.com/notesandwhitepapers/samtec-dc25-paper-transmitter-power-spectral-density-noise-impact-for-200g-pam4-per-lane.pdf)] [[slides](https://suddendocs.samtec.com/notesandwhitepapers/samtec-dc25-ppt-transmitter-power-spectral-density-noise-impact-for-200g-pam4-per-lane.pdf)]
+
+
 
 *TODO* &#128197;
 
@@ -482,6 +484,14 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 
 ### SNDR
+
+> Marianne Nourzad, July 2nd, 2020 PCI-SIG ® EWG Meeting, *PCIE Gen6 TX SNDR Methodology Discussion*
+>
+> Pegah Alavi (Keysight Technologies) DesignCon 2025: *PCI Express & PAM4: Balancing Silicon and interconnect interdependencies for 128 GT/s*
+>
+> Rick Eads, Pegah Alavi, Randy Garrett, Keysight Technologies) DesignCon 2025, *The Road to PCIe 7.0: Advanced Testing Challenges at 64 GBaud PAM4*  [[https://www.keysight.com/us/en/assets/9925-01141/seminar-materials/KEF-DesignCon-2025-PCIe-Eads-Presentation.pdf](https://www.keysight.com/us/en/assets/9925-01141/seminar-materials/KEF-DesignCon-2025-PCIe-Eads-Presentation.pdf)]
+
+![image-20260607090715624](tx/image-20260607090715624.png)
 
 ![image-20260427232519514](tx/image-20260427232519514.png)
 

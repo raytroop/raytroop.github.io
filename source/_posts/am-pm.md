@@ -70,7 +70,7 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 
 
-## Analytic Signal & Hilbert Transform
+## Hilbert Transform & Analytic Signal
 
 > Mathuranathan. *Understanding Analytic Signal and Hilbert Transform* [[https://www.gaussianwaves.com/2017/04/analytic-signal-hilbert-transform-and-fft/](https://www.gaussianwaves.com/2017/04/analytic-signal-hilbert-transform-and-fft/)]
 >
@@ -80,7 +80,12 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 >
 > Derek Rowell, 2.161 Signal Processing: Continuous and Discrete Fall 2008: *Determining a System’s Causality from its Frequency Response* [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf)]
 
-![image-20260516114017482](am-pm/image-20260516114017482.png)
+![image-20260607072156543](am-pm/image-20260607072156543.png)
+
+> In frequency domain
+> $$
+> \boxed{\mathcal{H}\{X(\omega)\} = \frac{1}{\pi\omega} * X(\omega)} \qquad \boxed{\mathcal{H}\{x(f)\} = \frac{1}{\pi f} * x(f)}
+> $$
 
 
 

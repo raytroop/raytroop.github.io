@@ -232,8 +232,6 @@ that total power will always be the ***same*** for ***any sampling rate*** used 
 
 ![white_noise_sampling.drawio](noise/white_noise_sampling.drawio.svg)
 
----
-
 ![image-20260111215146609](noise/image-20260111215146609.png)
 
 

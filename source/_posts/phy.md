@@ -578,6 +578,22 @@ RS is a forward error-correction (**FEC**) algorithm used to correct data corrup
 
 
 
+## PCI Express Standards Information
+
+**CLB**: Compliance Load Board (System Board)
+
+**CBB**: Compliance Base Board (Add-in Card)
+
+**NCB (Non-ChangeBar)**: A clean version of the official specification document that contains the full text of the updated standard
+
+**CB (ChangeBar)**: A version that highlights only the changes and additions made from the previous version of the specification. The added or modified lines typically have a vertical bar (a changebar) in the margin for easy scanning
+
+**Base Specification:** The PCI Express Base describes the architecture, interconnect attributes, fabric management, and the programming interface required to design and build systems and peripherals that are compliant with the PCI Express Specification.
+
+**CEM (Card Electromechanical) Specification:** The PCI Express CEM specifications define an implementation for small form factor PCI Express cards
+
+
+
 ## reference
 
 John Swindle, *PCIe 1.1 Phy Design Considerations*

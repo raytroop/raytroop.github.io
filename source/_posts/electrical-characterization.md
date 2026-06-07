@@ -21,7 +21,22 @@ mathjax: true
 
 
 
-### VtStep vs TDR
+There are two primary approaches for obtaining a TDR response: 
+
+1. Measurement in the **time domain using a sampling scope** 
+2. Simulation from measured **frequency-domain S-parameters** (Not every SI lab is equipped with a TDR instrument, but most have a VNA)
+
+![image-20260606181317936](electrical-characterization/image-20260606181317936.png)
+
+
+
+### Why TDR Impedance?
+
+![image-20260606175604915](electrical-characterization/image-20260606175604915.png)
+
+
+
+### Measured time domain TDR
 
 > Abhargava, *TDR Analysis using Agilent ADS* [[https://abhargava.wordpress.com/wp-content/uploads/2014/01/performing-tdr-analysis-using-agilent-ads.pdf](https://abhargava.wordpress.com/wp-content/uploads/2014/01/performing-tdr-analysis-using-agilent-ads.pdf)]
 >
@@ -38,13 +53,12 @@ $$
 
 ![image-20260427221738370](electrical-characterization/image-20260427221738370.png)
 
-### S11 vs TDR
+### S-parameter-converted TDR
 
 > Vladimir Dmitriev-Zdorov, Mentor Graphics, DesignCon 2014, *Computation of Time Domain Impedance Profile from S-Parameters: Challenges and Methods* [[link](https://www.researchgate.net/publication/339032423_DesignCon_2014_Computation_of_Time_Domain_Impedance_Profile_from_S-Parameters_Challenges_and_Methods)]
 >
 > Samtec, High Speed Characterization Report PCIEC-064-1000-EC-EM-P-85 [[https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf](https://suddendocs.samtec.com/testreports/hsc-report_pciec-85_web.pdf)]
 >
->  Tim Wang Lee, Ph.D., Keysight Technologies, *When Frequency Shapes Time: How S-Parameter Properties Shape Simulated TDR Behavior* [[https://www.signalintegrityjournal.com/articles/4287-when-frequency-shapes-time-how-s-parameter-properties-shape-simulated-tdr-behavior](https://www.signalintegrityjournal.com/articles/4287-when-frequency-shapes-time-how-s-parameter-properties-shape-simulated-tdr-behavior)]
 
 
 ![image-20260420232932030](electrical-characterization/image-20260420232932030.png)
@@ -140,6 +154,31 @@ magnitude = 20 * np.log10(magnitude)
 
 
 
+### S-Parameter Properties Shape Simulated TDR
+
+> Tim Wang Lee, Ph.D., Keysight Technologies, *When Frequency Shapes Time: How S-Parameter Properties Shape Simulated TDR Behavior* [[https://www.signalintegrityjournal.com/articles/4287-when-frequency-shapes-time-how-s-parameter-properties-shape-simulated-tdr-behavior](https://www.signalintegrityjournal.com/articles/4287-when-frequency-shapes-time-how-s-parameter-properties-shape-simulated-tdr-behavior)]
+
+![image-20260606182231703](electrical-characterization/image-20260606182231703.png)
+
+In principle, both methods should yield identical impedance profiles. In practice, differences in S-parameter quality, bandwidth, and simulation setup can lead to noticeable discrepancies. The poor quality of the S-parameter data and improper simulation parameters caused the two traces to differ
+
+![image-20260606180207608](electrical-characterization/image-20260606180207608.png)
+
+![image-20260606181817488](electrical-characterization/image-20260606181817488.png)
+
+
+
+---
+
+Non-causal data — Early arrival, pre-ringing
+
+![image-20260606191108954](electrical-characterization/image-20260606191108954.png)
+$$
+\boxed{S(t) = \int_{-\infty}^{t} h(\tau) d\tau, \text{ with } S(\infty) = H(0)}
+$$
+pure phase manipulation (linear phase  or nonlinear phase) preserves the total area, and the TDR settles to the same final impedance on the flat sections
+
+![noncausal_precursor_to_tdr_dip_bump](electrical-characterization/noncausal_precursor_to_tdr_dip_bump.svg)
 
 
 

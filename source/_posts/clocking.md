@@ -361,32 +361,6 @@ and $\phi _e(\infty) = 0$
 
 
 
-## PLL Characterization
-
-***PLL bandwidth test***
-
-> [How can I experimentally find the bandwidth of my PLL?, [https://dsp.stackexchange.com/a/73654/59253](https://dsp.stackexchange.com/a/73654/59253)]
-
-A *step response test* is an easy way to determine the bandwidth.
-
-*Sum a small step into the control voltage* of your oscillator (VCO or NCO), and measure the *90% to 10%* fall time of the corrected response at the output of the loop filter as shown in this block diagram
-
-![PLL Step Response Test](clocking/loVQR.png)
-
-a first order loop
-$$
-BW = \frac{0.35}{t} \space\space\space\space \text{(first order system)}
-$$
-Where $BW$ is the 3 dB bandwidth in Hz and $𝑡$​ is the 10%/90% rise or fall time.
-
-
-
-For second order loops with a typical damping factor of *0.7* this relationship is closer to:
-$$
-BW = \frac{0.33}{t}\space\space\space\space \text{(second order system, damping factor = 0.7)}
-$$
-
-
 
 
 ## Ring Oscillators and Process Variations
@@ -410,6 +384,61 @@ f_o = \frac{N}{M}f_r\color{red}\left(1+\frac{\Delta}{N}\right)
 $$
 
 $\frac{\Delta}{N}$ determine measurement accuracy, $\frac{\Delta}{N} \lt 0.01$ if 1% accuracy is needed
+
+
+
+## PLL Characterization
+
+### PLL bandwidth by step stimulus
+
+> [How can I experimentally find the bandwidth of my PLL?, [https://dsp.stackexchange.com/a/73654/59253](https://dsp.stackexchange.com/a/73654/59253)]
+
+A *step response test* is an easy way to determine the bandwidth.
+
+*Sum a small step into the control voltage* of your oscillator (VCO or NCO), and measure the *90% to 10%* fall time of the corrected response at the output of the loop filter as shown in this block diagram
+
+![PLL Step Response Test](clocking/loVQR.png)
+
+a first order loop
+$$
+BW = \frac{0.35}{t} \space\space\space\space \text{(first order system)}
+$$
+Where $BW$ is the 3 dB bandwidth in Hz and $𝑡$​ is the 10%/90% rise or fall time.
+
+
+
+For second order loops with a typical damping factor of *0.7* this relationship is closer to:
+$$
+BW = \frac{0.33}{t}\space\space\space\space \text{(second order system, damping factor = 0.7)}
+$$
+
+### PLL BW and peaking by Clock Recovery Method
+
+> Rick Eads Principal Planner, Keysight Technologies, PLL Characterization Techniques for High Precision Measurement
+>
+> John Calvin, Jitter Transfer Function (JTF) analysis Version 1.0 Presented to IEEE P802.3dj Task Force 11/11/2024 [[https://grouper.ieee.org/groups/802/3/dj/public/24_11/calvin_3dj_01_2411.pdf](https://grouper.ieee.org/groups/802/3/dj/public/24_11/calvin_3dj_01_2411.pdf)]
+>
+> Michael Schnecker, Clock Recovery Methods for Jitter Analysis [[https://cdn.teledynelecroy.com/files/whitepapers/wp_clock_recovery.pdf](https://cdn.teledynelecroy.com/files/whitepapers/wp_clock_recovery.pdf)]
+>
+> —, DesignCon 2009 Jitter Transfer Measurement in Clock Circuits [[https://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf](https://cdn.teledynelecroy.com/files/whitepapers/designcon2009_lecroy_jitter_transfer_measurement_in_clock_circuits.pdf)]
+>
+> N1076B/7A/7B/8A DCA-M Optical and electric clock data recovery solutions [[https://www.keysight.com/us/en/assets/7018-05291/data-sheets/5992-1620.pdf](https://www.keysight.com/us/en/assets/7018-05291/data-sheets/5992-1620.pdf)]
+
+![image-20260605235349257](clocking/image-20260605235349257.png)
+
+![image-20260605234322865](clocking/image-20260605234322865.png)
+
+![image-20260606003011877](clocking/image-20260606003011877.png)
+
+---
+
+![image-20260606115941333](clocking/image-20260606115941333.png)
+
+![image-20260606120046162](clocking/image-20260606120046162.png)
+
+![image-20260606120401248](clocking/image-20260606120401248.png)
+
+
 
 ## reference
 

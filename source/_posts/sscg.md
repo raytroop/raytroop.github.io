@@ -143,6 +143,18 @@ where $H_3(s)$ is similar to $NTF_{VCO}$, $1-H_3(s)$ is similar to $NTF_{REF}$
 
 
 
+### Refclk Jitter Filter Analysis
+
+> Greg Richmond Skyworks, Inc. July 27, 2023, 128GTps (Gen7) Refclk Jitter Filter Analysis
+
+![image-20260605231416117](sscg/image-20260605231416117.png)
+
+![image-20260605231534909](sscg/image-20260605231534909.png)
+
+![image-20260605231554054](sscg/image-20260605231554054.png)
+
+
+
 ## SSC on digital CDR
 
 > Gerry Talbot, "Impact of SSC on CDR" , April 12th, 2012,  PCI Express EWG

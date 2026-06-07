@@ -298,25 +298,40 @@ $$
 
 ---
 
+
+
 ![image-20260516110313298](network/image-20260516110313298.png)
 
-
-
-Any signal $h(t)$ can be split into even $h_e(t)$ and odd $h_o(t)$ components: **Even component:** $h_e(t) = \frac{h(t) + h(-t)}{2}$, **Odd component:** $h_o(t) = \frac{h(t) - h(-t)}{2}$, then $H_e(f) = \mathcal{Re}\{H(f)\} \quad H_o(f) = j\cdot\mathcal{Im}\{H(f)\}$
-
-Conjugate symmetry ensures the time-domain signal is **real**, but it takes the **Hilbert Transform relations** to ensure it is **causal**
+***Kramers–Kronig / Hilbert-transform causality relation*** — Magnitude/real part and phase/imaginary part cannot be chosen independently. 
 $$
-H(f) = H_e(f) + H_o(f)
+\boxed{H_I(\omega) = -\mathcal{H}\{H_R(\omega)\}} \qquad \boxed{H_R(\omega) = \mathcal{H}\{H_I(\omega)\}}
 $$
+where $H_R(\omega) = \operatorname{Re}\{H(\omega)\}$ and $H_I(\omega) = \operatorname{Im}\{H(\omega)\}$
 
+> *Conjugate symmetry* only ensures the time-domain signal is **real**
 
-![image-20260516105511969](network/image-20260516105511969.png)
+***Hz-domain formula***
+
+![image-20260606220948330](network/image-20260606220948330.png)
+
+***angular frequency formula***
+
+![image-20260606221831217](network/image-20260606221831217.png)
 
 
 
 ---
 
-![image-20260117122328655](network/image-20260117122328655.png)
+***single pole low pass filter***
+
+![image-20260607082748766](network/image-20260607082748766.png)
+
+
+
+
+
+
+
 
 ### Passivity
 

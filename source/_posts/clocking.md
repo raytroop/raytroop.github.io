@@ -157,6 +157,8 @@ Therefore, phase noise curves, related by 20log(N), with the same phase noise sh
 
 > Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025, *Lecture 10: Fractional-N Frequency Synthesizers* [[https://people.engr.tamu.edu/spalermo/ecen620/lecture10_ee620_fracn_freq_synth.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture10_ee620_fracn_freq_synth.pdf)]
 
+![image-20260609073055225](clocking/image-20260609073055225.png)
+
 with $M_{ref}$, the number of reference clock cycles
 $$
 A\cdot \frac{T_{ref}}{N} + B\cdot \frac{T_{ref}}{N+1} = M_{ref} T_{ref} \qquad N_{vco} = A +B

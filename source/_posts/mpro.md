@@ -3,7 +3,7 @@ title: multipath ring oscillator (MPRO)
 date: 2024-12-16 16:20:13
 tags:
 categories:
-- analog
+- osc
 mathjax: true
 ---
 

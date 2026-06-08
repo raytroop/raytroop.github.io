@@ -3,7 +3,7 @@ title: Clocking
 date: 2024-05-11 09:36:14
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 

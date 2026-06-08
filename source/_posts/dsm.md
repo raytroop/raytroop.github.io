@@ -1,9 +1,9 @@
 ---
-title: Delta-Sigma Modulator
+title: Delta-Sigma Modulator (DSM)
 date: 2024-09-08 16:48:32
 tags:
 categories:
-- analog
+- dsp
 mathjax: true
 ---
 

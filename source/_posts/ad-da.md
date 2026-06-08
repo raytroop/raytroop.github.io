@@ -88,7 +88,7 @@ The quantization noise is ***an infinite sum of input signal odd harmonics***, w
 
 ![image-20260602220757703](ad-da/image-20260602220757703.png)
 
- The quantization noise is **odd harmonics of the input signal** [[Gist](https://gist.github.com/raytroop/97db3b35727cfd99a9811b63acd8a7fd)]
+ The quantization noise is **odd harmonics of the input signal** [[Gist link](https://gist.github.com/raytroop/97db3b35727cfd99a9811b63acd8a7fd)]
 
 ![l6_quant](ad-da/l6_quant.svg)
 
@@ -96,7 +96,7 @@ The quantization noise is ***an infinite sum of input signal odd harmonics***, w
 
 ![img](ad-da/Bessel.svg)
 
-> [[Gist](https://gist.github.com/raytroop/40d5e33969af63812fba5aa4d0bbda44)]
+> [[Gist link](https://gist.github.com/raytroop/40d5e33969af63812fba5aa4d0bbda44)]
 
 ![n_impact](ad-da/n_impact.png)
 

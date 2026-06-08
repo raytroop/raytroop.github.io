@@ -3,7 +3,7 @@ title: Oscillators Phase Noise
 date: 2024-10-16 12:16:48
 tags:
 categories:
-- noise
+- osc
 mathjax: true
 ---
 

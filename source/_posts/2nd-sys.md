@@ -554,3 +554,5 @@ grid on;
 Katsuhiko Ogata, Modern Control Engineering, 5th edition [[pdf](https://mechfamily-ju.com/storage/images/files/file_17314308026pQTy.pdf)]
 
 C. T. Chuang, "Analysis of the settling behavior of an operational amplifier," in *IEEE Journal of Solid-State Circuits*, vol. 17, no. 1, pp. 74-80, Feb. 1982 [[https://sci-hub.se/10.1109/JSSC.1982.1051689](https://sci-hub.se/10.1109/JSSC.1982.1051689)]
+
+Jason Sachs, Second-Order Systems, Part I: Boing!! [[https://www.embeddedrelated.com/showarticle/671.php](https://www.embeddedrelated.com/showarticle/671.php)]

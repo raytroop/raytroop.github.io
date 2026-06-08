@@ -3,7 +3,7 @@ title: Digital Delta-Sigma Modulators (DDSM)
 date: 2024-09-09 18:54:55
 tags:
 categories:
-- analog
+- dsp
 mathjax: true
 ---
 

@@ -3,7 +3,7 @@ title: Oscillator Phase Noise Models
 date: 2024-12-26 12:36:49
 tags:
 categories:
-- analog
+- osc
 mathjax: true
 ---
 

@@ -3,7 +3,7 @@ title: Clock Distribution Techniques
 date: 2022-05-16 00:39:22
 tags:
 categories:
-- noise
+- link
 mathjax: true
 ---
 

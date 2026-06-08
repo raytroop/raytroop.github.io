@@ -3,7 +3,7 @@ title: LC Oscillator
 date: 2025-10-10 21:04:49
 tags:
 categories:
-- analog
+- osc
 mathjax: true
 ---
 

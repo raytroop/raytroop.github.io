@@ -3,7 +3,7 @@ title: Injection Locked Oscillators
 date: 2024-12-25 21:12:08
 tags:
 categories:
-- analog
+- osc
 mathjax: true
 ---
 

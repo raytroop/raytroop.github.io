@@ -3,7 +3,7 @@ title: Charge Pump PLL
 date: 2025-06-01 08:57:16
 tags:
 categories:
-- analog
+- link
 mathjax: true
 ---
 

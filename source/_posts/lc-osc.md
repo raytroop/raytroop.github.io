@@ -55,7 +55,7 @@ An **8-shaped (figure-8) inductor** is a specialized on-chip, high-Q component u
 
 
 
-## LC Tank
+## LC Tank Losses & Q
 
 ![image-20251010004537960](lc-osc/image-20251010004537960.png)
 
@@ -66,8 +66,11 @@ An **8-shaped (figure-8) inductor** is a specialized on-chip, high-Q component u
 > ![image-20251011002306877](lc-osc/image-20251011002306877.png)
 
 
+---
 
-### Definitions of Q
+---
+
+***Definitions of Q***
 
 ![image-20251012100732881](lc-osc/image-20251012100732881.png)
 

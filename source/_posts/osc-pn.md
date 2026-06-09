@@ -23,6 +23,12 @@ mathjax: true
 >
 > If the *narrow angle* condition is not satisfied, however, the two definitions differ
 
+---
+
+> Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025, Lecture 7: Voltage-Controlled Oscillators[[https://people.engr.tamu.edu/spalermo/ecen620/lecture07_ee620_vcos.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture07_ee620_vcos.pdf)]
+
+![image-20260609234730501](osc-pn/image-20260609234730501.png)
+
 
 
 ## Phase Noise Profile

@@ -3,7 +3,7 @@ title: ADC Calibration & Characterization
 date: 2024-08-19 14:50:27
 tags:
 categories:
-- analog
+- adc-dac
 mathjax: true
 ---
 

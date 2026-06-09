@@ -68,6 +68,14 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 
 
+## Single Sideband Modulation (SSB)
+
+![image-20251104003558243](am-pm/image-20251104003558243.png)
+
+
+
+![image-20251104003840236](am-pm/image-20251104003840236.png)
+
 
 
 ## Hilbert Transform & Analytic Signal
@@ -151,6 +159,8 @@ where $X_{I,PM,USB}(t)=\cos(\omega_m t)$ and $X_{Q,PM,USB}(t)=\sin(\omega_m t)$;
 
 
 
+
+
 ## Amplitude Noise
 
 > Deog-Kyoon Jeong. Topics in IC Design: 1.1 Introduction to Jitter [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%201%20-%20Jitter%20and%20Phase%20Noise.pdf)]
@@ -162,9 +172,20 @@ with $x(t) = A_0\sin (2\pi f_0 t +\phi _0)$, then $y(t) = x(t) + n_v(t)$
 $$\begin{align}
 R_y(\tau) &= \mathrm{E}[y(t)y(t+\tau)] \\
 &= \mathrm{E}[x(t)x(t+\tau)] + \mathrm{E}[x(t)]\mathrm{E}[n_v(t+\tau)] + \mathrm{E}[x(t+\tau)]\mathrm{E}[n_v(t)] + \mathrm{E}[n_v(t)n_v(t+\tau)]\\
-&= \mathrm{E}[x(t)x(t+\tau)] + \mathrm{E}[n_v(t)n_v(t+\tau)] \\
-&= R_x(\tau) + R_{n_v}(\tau)
+&= \mathrm{E}[x(t)x(t+\tau)] + \mathrm{E}[n_v(t)n_v(t+\tau)] = R_x(\tau) + R_{n_v}(\tau)
 \end{align}$$
+
+
+
+---
+
+> P.E. Allen - 2003. ECE 6440 - Frequency Synthesizers: Lecture 160 – Phase Noise - II [[https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L160-PhNoII(2UP).pdf](https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L160-PhNoII(2UP).pdf)]
+
+![image-20250609213352109](am-pm/image-20250609213352109.png)
+
+![image-20250609213403991](am-pm/image-20250609213403991.png)
+
+
 
 
 
@@ -217,29 +238,27 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 ---
 
+***Asymmetrical Linear System***
+
+> Golara, S. (2015). Identifying Mechanisms of AM-PM Distortion in Large Signal Amplifiers. UCLA [[https://escholarship.org/uc/item/4jp786z8](https://escholarship.org/uc/item/4jp786z8)]
+
+
+
+![image-20251010234110656](am-pm/image-20251010234110656.png)
+
+---
+
+> Bob Nelson. Phase Noise 101: Basics, Applications and Measurements [[https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf])https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf]
+
+![image-20251104003200956](am-pm/image-20251104003200956.png)
+
+
+
+---
+
 > Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005. [[pdf](https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf)]
 
 ![image-20251105231301581](am-pm/image-20251105231301581.png)
-
-
-## PSD of Narrowband FM Signal
-
-> Chembiyan T. Jitter and Phase Noise in Phase Locked Loops [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_jitter-and-phase-noise-activity-7031985595304345600-uSx3)]
-
-$$
-y(t) = A\cos(2\pi f_0t+\phi_n(t)) \approx A \cos(2\pi f_0 t) - A \phi_n (t)\sin(2\pi f_0 t)
-$$
-
-
-![image-20241228020953646](am-pm/image-20241228020953646.png)
-$$
-R_x(\tau) = \frac{A^2}{2}\cos(2\pi f_0\tau) +  \frac{A^2}{2}R_\phi(\tau)\cos(2\pi f_0\tau)
-$$
-The PSD of the signal $x(t)$ is given by
-$$
-S_x(f) = \mathcal{F}\{R_x(\tau)\} = \frac{P_c}{2}\left[\delta(f+f_0)+\delta(f-f_0)\right]+\frac{P_c}{2}\left[S_\phi(f+f_0)+S_\phi(f-f_0)\right]
-$$
-where $P_c = A^2/2$ is the carrier power of the signal
 
 
 
@@ -260,7 +279,7 @@ Phase Noise and Frequency Noise are not two different noise sources, they are ar
 
 ## Equipartition theorem
 
-> [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf)]
+> Carlo Samori, Phase Noise in LC Oscillators: From Basic Concepts to Advanced Topologies [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf)]
 >
 > Enrico Rubiola. The Measurement of AM-PM Noise, and the Origin of Noise in Oscillators [[https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf](https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf)]
 
@@ -269,6 +288,37 @@ Phase Noise and Frequency Noise are not two different noise sources, they are ar
 ![image-20251104233701576](am-pm/image-20251104233701576.png)
 
 Stationary noise can also be decomposed into AM and PM components, but there will always be ***equal amounts of both***.
+
+
+
+## Narrowband FM Signal PSD
+
+> Chembiyan T. Jitter and Phase Noise in Phase Locked Loops [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_jitter-and-phase-noise-activity-7031985595304345600-uSx3)]
+
+$$
+y(t) = A\cos(2\pi f_0t+\phi_n(t)) \approx A \cos(2\pi f_0 t) - A \phi_n (t)\sin(2\pi f_0 t)
+$$
+
+
+![image-20241228020953646](am-pm/image-20241228020953646.png)
+$$
+R_x(\tau) = \frac{A^2}{2}\cos(2\pi f_0\tau) +  \frac{A^2}{2}R_\phi(\tau)\cos(2\pi f_0\tau)
+$$
+The PSD of the signal $x(t)$ is given by
+$$
+S_x(f) = \mathcal{F}\{R_x(\tau)\} = \frac{P_c}{2}\left[\delta(f+f_0)+\delta(f-f_0)+S_\phi(f+f_0)+S_\phi(f-f_0)\right]
+$$
+where $P_c = A^2/2$ is the carrier power of the signal
+
+
+
+---
+
+> Nicola Da Dalt , Understanding Jitter and Phase Noise: 3.1.3 Voltage to Excess Phase Transformations: Random Noise
+
+![image-20260609222603714](am-pm/image-20260609222603714.png)
+
+
 
 
 
@@ -311,51 +361,7 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 
 
-
-
-
-
-## timeaverage Pnoise simulation result
-
-> Ken Kundert. Re: Question about phase noise simulation result [[https://designers-guide.org/forum/YaBB.pl?num=1309258199/15#15](https://designers-guide.org/forum/YaBB.pl?num=1309258199/15#15)]
->
-> Spectre Circuit Simulator RF Analysis Theory — Measuring AM, PM and FM Conversion
-
-![image-20251104004721935](am-pm/image-20251104004721935.png)
-
----
-
-| noise profile       | sidebands    | contribution       |
-| ------------------- | ------------ | ------------------ |
-| **stationary**      | uncorrelated | $S_{AM} = S_{PM}$  |
-| **cyclostationary** | correlated   | $S_{AM} \gt S_{PM}$ or $S_{AM} \lt S_{PM}$ |
-
-***sine wave + white noise***
-
-![image-20251111231609124](am-pm/image-20251111231609124.png)
-
-> equal amounts of AM and PM noise in both USB and LSB
-
-***sine wave + AM***
-
-
-
-![image-20251112002405912](am-pm/image-20251112002405912.png)
-
-
-
----
-
-
-> 肥肥牛是只虎. PSS+Pnoise仿真：基本设置 [[https://mp.weixin.qq.com/s/etyQ2UkfisPkvbc44XFw4w](https://mp.weixin.qq.com/s/etyQ2UkfisPkvbc44XFw4w)]
-
-![image-20251104004017859](am-pm/image-20251104004017859.png)
-
----
-
-![image-20251104010500397](am-pm/image-20251104010500397.png)
-
-### AM & PM Noise Separation
+## AM & PM Noise Separation
 
 > Ken Kundert. Introduction to RF Simulation and its Application [[https://designers-guide.org/analysis/rf-sim.pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
 
@@ -395,33 +401,45 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 > $\phi_c=0$ in above simulation
 
+---
 
+> Ken Kundert. Re: Question about phase noise simulation result [[https://designers-guide.org/forum/YaBB.pl?num=1309258199/15#15](https://designers-guide.org/forum/YaBB.pl?num=1309258199/15#15)]
+>
+> Spectre Circuit Simulator RF Analysis Theory — Measuring AM, PM and FM Conversion
 
-## Single Sideband Modulation (SSB)
-
-![image-20251104003558243](am-pm/image-20251104003558243.png)
-
-
-
-![image-20251104003840236](am-pm/image-20251104003840236.png)
-
-
-
-
-
-## Asymmetrical Linear System
-
-> Golara, S. (2015). Identifying Mechanisms of AM-PM Distortion in Large Signal Amplifiers. UCLA [[https://escholarship.org/uc/item/4jp786z8](https://escholarship.org/uc/item/4jp786z8)]
-
-
-
-![image-20251010234110656](am-pm/image-20251010234110656.png)
+![image-20251104004721935](am-pm/image-20251104004721935.png)
 
 ---
 
-> Bob Nelson. Phase Noise 101: Basics, Applications and Measurements [[https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf])https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf]
+| noise profile       | sidebands    | contribution                               |
+| ------------------- | ------------ | ------------------------------------------ |
+| **stationary**      | uncorrelated | $S_{AM} = S_{PM}$                          |
+| **cyclostationary** | correlated   | $S_{AM} \gt S_{PM}$ or $S_{AM} \lt S_{PM}$ |
 
-![image-20251104003200956](am-pm/image-20251104003200956.png)
+***sine wave + white noise***
+
+![image-20251111231609124](am-pm/image-20251111231609124.png)
+
+> equal amounts of AM and PM noise in both USB and LSB
+
+***sine wave + AM***
+
+
+
+![image-20251112002405912](am-pm/image-20251112002405912.png)
+
+
+
+---
+
+
+> 肥肥牛是只虎. PSS+Pnoise仿真：基本设置 [[https://mp.weixin.qq.com/s/etyQ2UkfisPkvbc44XFw4w](https://mp.weixin.qq.com/s/etyQ2UkfisPkvbc44XFw4w)]
+
+![image-20251104004017859](am-pm/image-20251104004017859.png)
+
+---
+
+![image-20251104010500397](am-pm/image-20251104010500397.png)
 
 
 
@@ -450,9 +468,11 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 ![Figure 8 thumb_rev](am-pm/Figure8_REV.jpg)
 
+---
 
+---
 
-### additive & parametric noise
+***additive & parametric noise***
 
 > Enrico Rubiola. The Measurement of AM-PM Noise, and the Origin of Noise in Oscillators [[https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf](https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf)]
 >
@@ -469,6 +489,7 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 ![image-20251104010925436](am-pm/image-20251104010925436.png)
 
 ![image-20251105231715117](am-pm/image-20251105231715117.png)
+
 
 
 ## Phase Noise Measurement 
@@ -499,12 +520,6 @@ print(n_tot)    # -137.8755739720566
 ```
 
 ![image-20251105233926270](am-pm/image-20251105233926270.png)
-
-
-
-## Modulation index in Virtuoso
-
-![image-20251111225036664](am-pm/image-20251111225036664.png)
 
 
 

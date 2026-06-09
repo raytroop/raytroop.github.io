@@ -3,7 +3,7 @@ title: Decimation and Interpolation Filters
 date: 2025-06-21 18:54:55
 tags:
 categories:
-- analog
+- dsp
 mathjax: true
 ---
 

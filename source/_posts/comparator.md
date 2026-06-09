@@ -3,7 +3,7 @@ title: Clocked Comparators
 date: 2024-09-02 21:52:39
 tags:
 categories:
-- analog
+- adc-dac
 mathjax: true
 ---
 

@@ -66,8 +66,13 @@ An alternate view of **phase noise aliasing during the sampling process**
 
 ![image-20250720090755239](pn-jitter/image-20250720090755239.png)
 
-
 ## Phase Noise Aliasing & Integration Limits
+
+> Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation,"[[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
+>
+> *G. Giust, "Phase Noise Aliases as TIE Jitter," Signal Integrity Journal, July 23, 2018* [[https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter](https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter)]
+
+
 
 These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 
@@ -78,11 +83,7 @@ These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 
 ![image-20250523221143537](pn-jitter/image-20250523221143537.png)
 
-*temporal autocorrelation* and *Wiener-Khinchin theorem* is more appropriate to arise *rms value* 
-
-> Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation,"[[https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
->
-> *G. Giust, "Phase Noise Aliases as TIE Jitter," Signal Integrity Journal, July 23, 2018* [[https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter](https://www.signalintegrityjournal.com/articles/912-phase-noise-aliases-as-tie-jitter)]
+*temporal autocorrelation* and *Wiener-Khinchin theorem* is more appropriate to arise *rms value*
 
 
 
@@ -100,7 +101,9 @@ These two types of measurements deliver the **same rms jitter** of $f_{CK}$
 
 
 
-## timeaverage noise (phase-noise) & sampled noise (edge-phase noise or jitter) spectrum
+## timeaverage noise & sampled noise spectrum
+
+***timeaverage noise (phase-noise) & sampled noise (edge-phase noise or jitter) spectrum***
 
 ![image-20250530203348622](pn-jitter/image-20250530203348622.png)
 
@@ -341,6 +344,8 @@ In the conclusion, *`Edge Phase Noise(dBc)` is preferred for phase noise evaluat
 
 
 ## Modeling Oscillators with Arbitrary Phase Noise Profiles
+
+> Tawna, Modeling Oscillators with Arbitrary Phase Noise Profiles [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles](https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles)]
 
 *TODO* &#128197;
 

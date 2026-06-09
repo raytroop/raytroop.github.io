@@ -1,5 +1,5 @@
 ---
-title: Clocking
+title: Clocking Miscellaneous
 date: 2024-05-11 09:36:14
 tags:
 categories:
@@ -172,53 +172,6 @@ $$
 
 
 
-
-
-## excess phase around n-th harmonic
-
-![image-20250523222041505](clocking/image-20250523222041505.png)
-
-
-> $\Delta t$ is same for any n-th harmonic
-
-
-
-## Spurious Tones
-
-***S**pur-to-**C**arrier **R**atio* (**SCR**)
-
-![image-20250523222846691](clocking/image-20250523222846691.png)
-
-
-
-> Nicola Da Dalt, ISSCC 2012: Jitter Basic and Advanced Concepts, Statistics and Applications [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf)]
-
----
-
-![image-20250529220609357](clocking/image-20250529220609357.png)
-
-
-
-> P.E. Allen - 2003 ECE 6440 - Frequency Synthesizers: Lecture 150 – Phase Noise-I [[https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L150-PhaseNoise-I(2UP).pdf](https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L150-PhaseNoise-I(2UP).pdf)]
-
----
-
-
-
-![image-20251213182452985](clocking/image-20251213182452985.png)
-$$
-f = \frac{\mathrm{d}(\omega_0 t + A\sin\omega_mt)}{2\pi \mathrm{d}t}=\frac{\omega_0 + A\cdot 2\pi f_m \cos\omega_m t}{2\pi}
-$$
-therefore
-$$
-\Delta f_{pk} = Af_m
-$$
-and
-$$
-P_{spur} = 10\log\left(\frac{\Delta f_{pk}}{2f_m}\right)^2= 10\log\left(\frac{A}{2}\right)^2
-$$
-
-
 ## Reference Spur
 
 **spurs** are carrier or clock frequency spectral imperfections measured in the frequency domain just like phase noise. However, unlike phase noise they are *discrete* frequency components.
@@ -240,12 +193,6 @@ $$
   - **Ref. spur**: PFD/charge pump/analog loop filter non-idealities, clock coupling
 
 
-
-
-
-## Fractional Spur
-
-*TODO* &#128197;
 
 
 

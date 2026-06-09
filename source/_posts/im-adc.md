@@ -3,7 +3,7 @@ title: ADC in Instrument & Measurement (I&M)
 date: 2025-06-12 00:23:04
 tags:
 categories:
-- analog
+- adc-dac
 mathjax: true
 ---
 

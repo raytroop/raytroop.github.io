@@ -3,7 +3,7 @@ title: Successive-approximation ADC
 date: 2024-08-20 21:06:29
 tags:
 categories:
-- analog
+- adc-dac
 mathjax: true
 ---
 

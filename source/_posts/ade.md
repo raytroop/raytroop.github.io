@@ -9,6 +9,10 @@ mathjax: true
 
 
 
+## Modulation index in Virtuoso
+
+![image-20251111225036664](ade/image-20251111225036664.png)
+
 ## indq, capq
 
   ![image-20260527234600570](ade/image-20260527234600570.png)

@@ -13,6 +13,76 @@ mathjax: true
 
 ![image-20250816003816639](jitter/image-20250816003816639.png)
 
+## Voltage to Excess Phase Transformations
+
+### Excess phase as Random Noise
+
+![image-20260609230802209](jitter/image-20260609230802209.png)
+
+***excess phase around $n$-th harmonic***
+
+![image-20260609222319329](jitter/image-20260609222319329.png)
+
+![image-20250523222041505](jitter/image-20250523222041505.png)
+
+
+> $\Delta t$ is same for any n-th harmonic
+
+![image-20260609224913582](jitter/image-20260609224913582.png)
+
+### Excess phase as deterministic periodic signal
+
+> Nicola Da Dalt, ISSCC 2012: Jitter Basic and Advanced Concepts, Statistics and Applications
+
+![image-20260609231247931](jitter/image-20260609231247931.png)
+
+![image-20260609231317481](jitter/image-20260609231317481.png)
+
+> ***Jacobi-Anger expansions with Bessel functions***
+>
+> ![image-20260609233706065](jitter/image-20260609233706065.png)
+>
+> ***Bessel function***
+>
+> ![image-20260609233914850](jitter/image-20260609233914850.png)
+
+---
+
+Spurious Tones in Spectrum & ***S**pur-to-**C**arrier **R**atio* (**SCR**)
+
+
+
+![image-20250523222846691](jitter/image-20250523222846691.png)
+
+
+
+---
+
+![image-20250529220609357](jitter/image-20250529220609357.png)
+
+
+
+> P.E. Allen - 2003 ECE 6440 - Frequency Synthesizers: Lecture 150 – Phase Noise-I [[https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L150-PhaseNoise-I(2UP).pdf](https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L150-PhaseNoise-I(2UP).pdf)]
+
+---
+
+
+
+![image-20251213182452985](jitter/image-20251213182452985.png)
+$$
+f = \frac{\mathrm{d}(\omega_0 t + A\sin\omega_mt)}{2\pi \mathrm{d}t}=\frac{\omega_0 + A\cdot 2\pi f_m \cos\omega_m t}{2\pi}
+$$
+therefore
+$$
+\Delta f_{pk} = Af_m
+$$
+and
+$$
+P_{spur} = 10\log\left(\frac{\Delta f_{pk}}{2f_m}\right)^2= 10\log\left(\frac{A}{2}\right)^2
+$$
+
+
+
 ## Phase Noise to Jitter
 
 > Note that $L(f )$ is defined over positive frequencies only $(f \ge 0)$

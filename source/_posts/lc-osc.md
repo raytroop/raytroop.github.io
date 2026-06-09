@@ -170,10 +170,6 @@ Qtot_calc_L0 = vp_p2p_sim*pi/2/I0/(w0*L0);   % 16.6006
 Qtot_calc_C0 = vp_p2p_sim*pi/2/I0*(w0*C0);   % 16.6006
 ```
 
----
-
-![image-20251028210311777](lc-osc/image-20251028210311777.png)
-
 ### CMOS Realization
 
 ![image-20251027223323689](lc-osc/image-20251027223323689.png)

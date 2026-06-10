@@ -89,16 +89,6 @@ $$
 
 ![image-20250902231037546](jitter/image-20250902231037546.png)
 
-> for simple PLL
->
-> For small $N$: $\sigma_{p(N)}^2 \approx \frac{\mathcal{L}_0 f_{3dB}}{2\pi f_0^2} \cdot \frac{2\pi f_{3dB}N}{f_0}=\frac{\mathcal{L}_0f_{3dB}^2}{f_0^3}=\sigma_{PER}^2$
->
-> For large $N$:  $\sigma_{p(N)}^2 \approx \frac{\mathcal{L}_0f_{3dB}^2}{f_0^3} \cdot \frac{f_0}{2\pi f_{3dB}}=\sigma_{PER}^2\cdot \frac{f_0}{2\pi f_{3dB}}$
->
-> | Free Running  OSC                                      | OSC in  simple PLL                                           |
-> | ------------------------------------------------------ | ------------------------------------------------------------ |
-> | $\mathcal{L}(f) = \frac{\mathcal{L}_0 f_{3dB}^2}{f^2}$ | $\mathcal{L}(f) = \frac{\mathcal{L}_0 f_{3dB}^2}{f^2 + f_{3dB}^2}$ |
-
 
 
 ---
@@ -117,18 +107,16 @@ where $\theta = 2\pi f N/f_0$
 
 As EQ(3.44), EQ(3.45)
 
-the autocorrelation is the inverse Fouer transform of the PSD
+the autocorrelation is the inverse Fourier transform of the PSD
 
 $$
-R_{\varphi}(t) = \int_{-\infty}^{+\infty} S_{\varphi} (f) e^{j2\pi f t} df
+R_{\varphi}(t) = \int_{-\infty}^{+\infty} S_{\varphi} (f) e^{j2\pi f t}df
 $$
 
 Then,
-$$\begin{align}
-R_{\varphi}(0) &= \int_{-\infty}^{+\infty} S_{\varphi} (f)  df \\
-R_{\varphi}(NT_0) &= \int_{-\infty}^{+\infty} S_{\varphi} (f)   e^{j2\pi f NT_0} df
-\end{align}$$
-
+$$
+R_{\varphi}(0) = \int_{-\infty}^{+\infty} S_{\varphi} (f)  df \qquad R_{\varphi}(NT_0) = \int_{-\infty}^{+\infty} S_{\varphi} (f)   e^{j2\pi f NT_0} df
+$$
 Thus, yield EQ(3.48)
 
 ![image-20250903184827248](jitter/image-20250903184827248.png)
@@ -152,6 +140,17 @@ Thus, yield EQ(3.48)
 ![image-20251218232426501](jitter/image-20251218232426501.png)
 
 ---
+
+Given Simple PLL $\frac{\mathcal{L}_0}{1 + (f / f_{3dB})^2}$ and $\sigma_{p(N)}^2=\frac{\mathcal{L}_0 f_{3dB}}{2\pi f_0^2} \left(1 - \exp\left(-2\pi f_{3dB} N / f_0\right)\right)$
+
+|           | $1 - \exp\left(-2\pi f_{3dB} N / f_0\right)$ | $\sigma_{\mathbf{p}(N)}^2$                     |
+| --------- | -------------------------------------------- | ---------------------------------------------- |
+| small $N$ | $\frac{2\pi f_{3dB} N} {f_0}$                | $\sigma_{PER}^2\cdot N$                        |
+| large $N$ | $1$                                          | $\sigma_{PER}^2\cdot \frac{f_0}{2\pi f_{3dB}}$ |
+
+where $\sigma_{\mathbf{p}}^2 = \frac{\mathcal{L}_0 f_{3dB}^2}{f_0^3}$
+
+
 
 ![image-20250901233626772](jitter/image-20250901233626772.png)
 

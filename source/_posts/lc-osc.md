@@ -197,6 +197,8 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 ![image-20251026121829983](lc-osc/image-20251026121829983.png)
 
+
+
 ## Cross-coupled Differential-pair
 
 ![image-20251027224751015](lc-osc/image-20251027224751015.png)
@@ -204,6 +206,12 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 
 ?? Triode MOS noise
+
+
+
+## conduction angle
+
+*TODO* &#128197;
 
 
 

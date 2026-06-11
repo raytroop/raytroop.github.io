@@ -66,6 +66,22 @@ Lvals = np.linspace(0.001, 1.5, 300)
 
 ![image-20260608225657252](rx-fe/image-20260608225657252.png)
 
+
+
+---
+
+
+
+![image-20260611225858681](rx-fe/image-20260611225858681.png)
+
+![image-20260611225951811](rx-fe/image-20260611225951811.png)
+
+[[Gist link](https://gist.github.com/raytroop/ea3aa0bc844e7116a27d22e2ff441fab)]
+
+![shunt_chatgpt](rx-fe/shunt_chatgpt.svg)
+
+![image-20260611233156089](rx-fe/image-20260611233156089.png)
+
 ## series peaking
 
 ![image-20260526230433602](rx-fe/image-20260526230433602.png)

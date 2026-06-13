@@ -3,7 +3,7 @@ title: JTAG and Boundary Scan
 date: 2023-11-28 22:00:32
 tags:
 categories:
-- analog
+- phy
 mathjax: true
 ---
 

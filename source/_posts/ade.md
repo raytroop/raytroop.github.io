@@ -9,6 +9,14 @@ mathjax: true
 
 
 
+## layout porting
+
+streamout in old process -> streamin in new process with layermap, format in below
+
+![image-20260612223413474](ade/image-20260612223413474.png)
+
+
+
 ## Modulation index in Virtuoso
 
 ![image-20251111225036664](ade/image-20251111225036664.png)

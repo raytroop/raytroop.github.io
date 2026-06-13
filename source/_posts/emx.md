@@ -117,6 +117,8 @@ plt.show()
 > 		    `((,l11 ,l22) (,q11 ,q22) (,k))))
 > 		'(("L1" "L2") ("Q1" "Q2") ("k")))))
 > ```
+> 
+> In recent versions (specifically EMX2024 and later), `(k (if ((abs kk) < 2.0) kk 0.0)))` was updated to `(k (if ((abs kk) < 2.0) -kk 0.0)))` to ensure the **correct sign** for `k`
 
 ---
 

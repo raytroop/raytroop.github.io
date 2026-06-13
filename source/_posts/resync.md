@@ -3,7 +3,7 @@ title: Resynchronization & metastability
 date: 2025-08-14 21:11:08
 tags:
 categories:
-- analog
+- digital
 mathjax: true
 ---
 

@@ -7,11 +7,25 @@ categories:
 mathjax: true
 ---
 
-
-
-![image-20251214093632951](cp-pll/image-20251214093632951.png)
+![image-20260613070841886](cp-pll/image-20260613070841886.png)
 
 > Mehmet Soyuer. *Monolithic Phase-Locked Loops for Clocking* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf)]
+
+
+
+## PFD Deadzone
+
+> Sam Palermo, "Lecture 4: Phase Detector Circuit" [[https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf)]
+
+Dead zone induced by *incomplete settling* of charge-pump currents
+
+This situation can be avoided by adding *additional delay to the AND gate* in the PFD
+
+![image-20241222190011244](cp-pll/image-20241222190011244.png)
+
+
+
+
 
 ## PFD/CP Modelling
 
@@ -132,20 +146,6 @@ Vice versa, if If Up pulse arrives $\Delta T$ after the Dn pulse, the steady-sta
 
 
 
-## PFD Deadzone
-
-Dead zone induced by *incomplete settling* of charge-pump currents
-
-> This situation can be avoided by adding *additional delay to the AND gate* in the PFD
-
-![image-20241222190011244](cp-pll/image-20241222190011244.png)
-
-
-
-> Sam Palermo, "Lecture 4: Phase Detector Circuit" [[https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf)]
-
-
-
 ## LPF leakage
 
 ![image-20241222192007824](cp-pll/image-20241222192007824.png)
@@ -209,4 +209,4 @@ Chembiyan T. Chargepump PLL Basics- From A Control Theoretic Viewpoint [[linkedi
 
 ---
 
-Xiang Gao Credo Semiconductor. ISSCC2018 T1: Low-Jitter PLLs for Wireless Transceivers [[https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T1/T1Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T1/T1Visuals.pdf)]
+Xiang Gao Credo Semiconductor. ISSCC2018 T1: Low-Jitter PLLs for Wireless Transceivers

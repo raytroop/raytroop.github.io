@@ -7,11 +7,65 @@ categories:
 mathjax: true
 ---
 
-## Cycle Slips and Hangup
 
+
+## PD & PFD
+
+> Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 Lecture 4: Phase Detector Circuits [[https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf)]
+>
+> Michael Perrott, 6.976 High Speed Communication Circuits and Systems *Lecture 15 Integer-N Frequency Synthesizers* [[https://rfic.eecs.berkeley.edu/courses/ee242/pdf/perrott_lec15.pdf](https://rfic.eecs.berkeley.edu/courses/ee242/pdf/perrott_lec15.pdf)]
+>
+> Mehmet Soyuer. *Monolithic Phase-Locked Loops for Clocking* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf)]
+>
 > Qasim Chaudhari. What are Cycle Slips and Hangup in Phase Locked Loops?  [[https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/](https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/)]
 
-*TODO* &#128197;
+
+
+![image-20260613083929737](clocking-misc/image-20260613083929737.png)
+
+###  XOR Phase Detector
+
+![image-20260613083621395](clocking-misc/image-20260613083621395.png)
+
+
+
+---
+
+**Cycle Slipping**
+
+![image-20260613085103536](clocking-misc/image-20260613085103536.png)
+
+![image-20260613085238609](clocking-misc/image-20260613085238609.png)
+
+### Tristate PFD
+
+![image-20260613083646800](clocking-misc/image-20260613083646800.png)
+
+![image-20260613083715144](clocking-misc/image-20260613083715144.png)
+
+![image-20260613085340899](clocking-misc/image-20260613085340899.png)
+
+PFD requires periodic edges on both inputs
+
+In a CDR, one input is random NRZ data, and a long run of identical bits has no transitions at all
+
+The PFD's state machine interprets those missing edges as a huge phase/frequency error and pumps the loop away from lock
+
+
+
+### frequency acquisition
+
+![image-20260613095817926](clocking-misc/image-20260613095817926.png)
+
+![image-20260613101004088](clocking-misc/image-20260613101004088.png)
+
+> [[Gist link](https://gist.github.com/raytroop/ede1eca4ccea67da05b29ec1fdd78f34)]
+
+![image-20260613101030913](clocking-misc/image-20260613101030913.png)
+
+![image-20260613101049573](clocking-misc/image-20260613101049573.png)
+
+>  beat period: $2\pi\cdot T_{beat,per}\cdot \Delta f = 2\pi \to T_{beat,per}=\frac{1}{\Delta f}$
 
 
 
@@ -21,15 +75,15 @@ mathjax: true
 >
 > Taekwang Jang SSCS DL talk : Ultra-low noise Phase-locked Loop Technique
 
-![image-20251008190134196](clocking/image-20251008190134196.png)
+![image-20251008190134196](clocking-misc/image-20251008190134196.png)
 
 > K. J. Wang, A. Swaminathan and I. Galton, "Spurious Tone Suppression Techniques Applied to a Wide-Bandwidth 2.4 GHz Fractional-N PLL," in *IEEE Journal of Solid-State Circuits*, vol. 43, no. 12, pp. 2787-2797, Dec. 2008 [[https://sci-hub.se/10.1109/JSSC.2008.2005716](https://sci-hub.se/10.1109/JSSC.2008.2005716)]
 >
-> ![image-20251008190318146](clocking/image-20251008190318146.png)
+> ![image-20251008190318146](clocking-misc/image-20251008190318146.png)
 
-![image-20251008180157404](clocking/image-20251008180157404.png)
+![image-20251008180157404](clocking-misc/image-20251008180157404.png)
 
-![image-20251008180225932](clocking/image-20251008180225932.png)
+![image-20251008180225932](clocking-misc/image-20251008180225932.png)
 
 
 
@@ -37,7 +91,7 @@ mathjax: true
 
 > Gunnman, Kiran, and Mohammad Vahidfar. *Selected Topics in RF, Analog and Mixed Signal Circuits and Systems*. Aalborg: River Publishers, 2017
 
-![image-20240803225130324](clocking/image-20240803225130324.png)
+![image-20240803225130324](clocking-misc/image-20240803225130324.png)
 
 > Large values of N lowers the loop BW which is bad for jitter
 
@@ -67,7 +121,7 @@ mathjax: true
 
 > Enrico Rubiola. Phase Noise and Jitter in Digital Electronics [[https://rubiola.org/pdf-slides/2016T-EFTF--Noise-in-digital-electronics.pdf](https://rubiola.org/pdf-slides/2016T-EFTF--Noise-in-digital-electronics.pdf)]
 
-![image-20250724072155205](clocking/image-20250724072155205.png)
+![image-20250724072155205](clocking-misc/image-20250724072155205.png)
 
 
 
@@ -94,9 +148,9 @@ real-time digital oscilloscope: measure sampled jitter directly
 
  **type-I PLLs**
 
-![image-20241222152826102](clocking/image-20241222152826102.png)
+![image-20241222152826102](clocking-misc/image-20241222152826102.png)
 
-![image-20241222152916367](clocking/image-20241222152916367.png)
+![image-20241222152916367](clocking-misc/image-20241222152916367.png)
 
  frequency divider weakens the feedback and ***increases** the phase margin*
 
@@ -106,7 +160,7 @@ real-time digital oscilloscope: measure sampled jitter directly
 
 **type-II PLLs**
 
-![image-20241222153430163](clocking/image-20241222153430163.png)
+![image-20241222153430163](clocking-misc/image-20241222153430163.png)
 
  frequency divider weakens the feedback and ***decrease** the phase margin*
 
@@ -121,7 +175,7 @@ real-time digital oscilloscope: measure sampled jitter directly
 >
 > [[Phase Noise Theory: Ideal Frequency Multipliers and Dividers]](http://www.ko4bb.com/~bruce/IdealFreqMultDiv.html)
 
-![image-20241013212542173](clocking/image-20241013212542173.png)
+![image-20241013212542173](clocking-misc/image-20241013212542173.png)
 
 - Multiplying the frequency of a signal by a factor of N using an **ideal** frequency multiplier increases the phase noise of the multiplied signal by $20\log(N)$ dB.
 - Similarly dividing a signal frequency by $N$ reduces the phase noise of the output signal by $20\log(N)$  dB
@@ -138,13 +192,13 @@ If the carrier frequency of a clock is divided down by a factor of $N$ then we e
 
 
 
-![20log(N).png](clocking/rtaImage-1720945161770-5.png)
+![20log(N).png](clocking-misc/rtaImage-1720945161770-5.png)
 
 #### What About Phase Jitter?
 
 We integrate *SSB* phase noise *L*(f) [dBc/Hz] to obtain rms phase jitter in seconds as follows for “brick wall” integration from f1 to f2 offset frequencies in Hz and where f0 is the carrier or clock frequency.
 
-![phase jitter.png](clocking/rtaImage.png)
+![phase jitter.png](clocking-misc/rtaImage.png)
 
 Note that the rms phase jitter in seconds is inversely proportional to f0. When frequency is divided down, the phase noise, *L*(f), goes down by a factor of 20log(N). However, since the frequency goes down by N also, the phase jitter expressed in units of time is constant.
 
@@ -157,7 +211,7 @@ Therefore, phase noise curves, related by 20log(N), with the same phase noise sh
 
 > Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025, *Lecture 10: Fractional-N Frequency Synthesizers* [[https://people.engr.tamu.edu/spalermo/ecen620/lecture10_ee620_fracn_freq_synth.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture10_ee620_fracn_freq_synth.pdf)]
 
-![image-20260609073055225](clocking/image-20260609073055225.png)
+![image-20260609073055225](clocking-misc/image-20260609073055225.png)
 
 with $M_{ref}$, the number of reference clock cycles
 $$
@@ -215,7 +269,7 @@ $$
 
   > [[https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf)]
   >
-  > ![image-20250602100424369](clocking/image-20250602100424369.png)
+  > ![image-20250602100424369](clocking-misc/image-20250602100424369.png)
 
 - if a small reference frequency is chosen, t*he reference spur in the output phase noise is located at a smaller offset frequency*
 
@@ -225,11 +279,11 @@ $$
 
 1. ***Dither Feedback Divider Ratio by a delta-sigma modulator***
 
-![image-20241003105023092](clocking/image-20241003105023092.png)
+![image-20241003105023092](clocking-misc/image-20241003105023092.png)
 
 2. ***Frequency Accumulation***
 
-![image-20241003105059989](clocking/image-20241003105059989.png)
+![image-20241003105059989](clocking-misc/image-20241003105059989.png)
 
 
 
@@ -241,7 +295,7 @@ A:  *TODO* &#128197;
 
 
 
-![image-20240901105919333](clocking/image-20240901105919333.png)
+![image-20240901105919333](clocking-misc/image-20240901105919333.png)
 
 
 
@@ -268,7 +322,7 @@ A:  *TODO* &#128197;
 
 ## clock edge impact
 
-![clock2clock.drawio](clocking/clock2clock.drawio.svg)
+![clock2clock.drawio](clocking-misc/clock2clock.drawio.svg)
 
 > ck1 is div2 of ck0
 
@@ -310,11 +364,11 @@ and $\phi _e(\infty) = 0$
 
 > Daniel Boschen. GRCon24 - Quick Start on Control Loops with Python Workshop [[https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf)]
 
-![image-20250831230607689](clocking/image-20250831230607689.png)
+![image-20250831230607689](clocking-misc/image-20250831230607689.png)
 
-![image-20250831230637667](clocking/image-20250831230637667.png)
+![image-20250831230637667](clocking-misc/image-20250831230637667.png)
 
-![image-20250831230937353](clocking/image-20250831230937353.png)
+![image-20250831230937353](clocking-misc/image-20250831230937353.png)
 
 
 
@@ -327,7 +381,7 @@ and $\phi _e(\infty) = 0$
 >
 > IC_designer, VCO cali [[link](https://www.xiaohongshu.com/explore/69f0c69e0000000036018246?app_platform=ios&app_version=9.27.1&share_from_user_hidden=true&xsec_source=app_share&type=normal&xsec_token=CBhlhhkQaYn8597suoZPVRUdEfoxSX8fxREo1B4KR2zbI=&author_share=1&xhsshare=WeixinSession&shareRedId=OD1EMERJRks2NzUyOTgwNjY6OTc3NjlP&apptime=1777422393&share_id=e42b9eaed44144edaeefbf521f3cdadc)]
 
-![ps_ro.drawio](clocking/ps_ro.drawio.svg)
+![ps_ro.drawio](clocking-misc/ps_ro.drawio.svg)
 
 we have
 
@@ -355,7 +409,7 @@ A *step response test* is an easy way to determine the bandwidth.
 
 *Sum a small step into the control voltage* of your oscillator (VCO or NCO), and measure the *90% to 10%* fall time of the corrected response at the output of the loop filter as shown in this block diagram
 
-![PLL Step Response Test](clocking/loVQR.png)
+![PLL Step Response Test](clocking-misc/loVQR.png)
 
 a first order loop
 $$
@@ -382,19 +436,19 @@ $$
 >
 > N1076B/7A/7B/8A DCA-M Optical and electric clock data recovery solutions [[https://www.keysight.com/us/en/assets/7018-05291/data-sheets/5992-1620.pdf](https://www.keysight.com/us/en/assets/7018-05291/data-sheets/5992-1620.pdf)]
 
-![image-20260605235349257](clocking/image-20260605235349257.png)
+![image-20260605235349257](clocking-misc/image-20260605235349257.png)
 
-![image-20260605234322865](clocking/image-20260605234322865.png)
+![image-20260605234322865](clocking-misc/image-20260605234322865.png)
 
-![image-20260606003011877](clocking/image-20260606003011877.png)
+![image-20260606003011877](clocking-misc/image-20260606003011877.png)
 
 ---
 
-![image-20260606115941333](clocking/image-20260606115941333.png)
+![image-20260606115941333](clocking-misc/image-20260606115941333.png)
 
-![image-20260606120046162](clocking/image-20260606120046162.png)
+![image-20260606120046162](clocking-misc/image-20260606120046162.png)
 
-![image-20260606120401248](clocking/image-20260606120401248.png)
+![image-20260606120401248](clocking-misc/image-20260606120401248.png)
 
 
 

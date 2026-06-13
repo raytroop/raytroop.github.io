@@ -3,7 +3,7 @@ title: Physical Layer (PHY)
 date: 2026-03-31 20:44:28
 tags:
 categories:
-- link
+- phy
 mathjax: true
 ---
 

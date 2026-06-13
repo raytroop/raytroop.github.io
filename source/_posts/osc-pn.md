@@ -217,33 +217,35 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 
 ## Hajimiri's  Model- LTV ISF
 
-![image-20251122143723827](osc-pn/image-20251122143723827.png)
+![image-20260613113055683](osc-pn/image-20260613113055683.png)
+
+
 
 ---
 
 ![image-20250629065454831](osc-pn/image-20250629065454831.png)
 
-![image-20250629073305626](osc-pn/image-20250629073305626.png)
 
-### ISF model
 
-![image-20251008184336891](osc-pn/image-20251008184336891.png)
+![image-20260613191539886](osc-pn/image-20260613191539886.png)
 
-![image-20251008184349072](osc-pn/image-20251008184349072.png)
+Decompose the horizontal kick $\Delta\vec r=(\Delta x,0) $ and $\Delta x=\Delta v_C/A_0$, with tangential direction $\hat t=(-\sin\theta,\cos\theta)$ and radial direction  $\hat r=(\cos\theta,\sin\theta)$
+$$
+\Delta \phi = \arctan\left(\frac{\Delta\vec r\cdot \hat t}{1 + \Delta\vec r\cdot \hat r}\right) = \arctan\left(\frac{-\Delta x \sin \theta}{1 + \Delta x \cos \theta}\right)\approx -\frac{\Delta v_C}{A_0} \sin(\omega_0 \tau)
+$$
+![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential.svg)
 
 > C. Livanelioglu, L. He, J. Gong, S. Arjmandpour, G. Atzeni and T. Jang, "19.10 A 4.6GHz 63.3fsrms PLL-XO Co-Design Using a Self-Aligned Pulse-Injection Driver Achieving −255.2dB FoMJ Including the XO Power and Noise," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025
 >
-> ![image-20251008185243498](osc-pn/image-20251008185243498.png)
->
-> ![image-20251008185406867](osc-pn/image-20251008185406867.png)
+> ![image-20260613112714291](osc-pn/image-20260613112714291.png)
+
+
 
 ---
 
-![image-20250626210829173](osc-pn/image-20250626210829173.png)
-
-
-
 > [[https://adityamuppala.github.io/assets/Notes_YouTube/Oscillators_ISF_model.pdf](https://adityamuppala.github.io/assets/Notes_YouTube/Oscillators_ISF_model.pdf)]
+
+![image-20260613112435961](osc-pn/image-20260613112435961.png)
 
 
 
@@ -251,7 +253,9 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 
 
 
-#### Periodic ISF: Noise Folding
+###  white-noise Folding
+
+![image-20250629073305626](osc-pn/image-20250629073305626.png)
 
 ![image-20250629080632902](osc-pn/image-20250629080632902.png)
 
@@ -327,22 +331,21 @@ That is
 | $P_{SBC}(\Delta \omega)$ | $10\log(\frac{I_0^2C_0^2}{16q_\text{max}^2\Delta \omega^2})$ | $10\log(\frac{I_m^2C_m^2}{16q_\text{max}^2\Delta \omega^2})$ | $10\log(\frac{I_m^2C_m^2}{16q_\text{max}^2\Delta \omega^2})$ |
 
 $$\begin{align}
-\mathcal{L}\{\Delta \omega\} &= 10\log\left(\frac{I_0^2C_0^2}{16q_\text{max}^2\Delta \omega^2} +  2\frac{I_m^2C_m^2}{16q_\text{max}^2\Delta \omega^2}\right) \\
-&= 10\log\left(\frac{\overline{i_n^2/\Delta f}\cdot \frac{C_0^2}{2} }{4q_\text{max}^2\Delta \omega^2} + \frac{\overline{i_n^2/\Delta f}\cdot\sum_{m=1}^\infty C_m^2 }{4q_\text{max}^2\Delta \omega^2}\right) \\
-&= 10\log \frac{\overline{i_n^2/\Delta f}(C_0^2/2+\sum_{m=1}^\infty C_m^2)}{4q_\text{max}^2\Delta \omega^2} \\
-&= 10\log \frac{\overline{i_n^2/\Delta f}\cdot \Gamma_\text{rms}^2}{2q_\text{max}^2\Delta \omega^2}
+\mathcal{L}\{\Delta \omega\} &= 10\log\left(\frac{I_0^2C_0^2}{16q_\text{max}^2\Delta \omega^2} +  2\frac{I_m^2C_m^2}{16q_\text{max}^2\Delta \omega^2}\right) = 10\log\left(\frac{\overline{i_n^2/\Delta f}\cdot \frac{C_0^2}{2} }{4q_\text{max}^2\Delta \omega^2} + \frac{\overline{i_n^2/\Delta f}\cdot\sum_{m=1}^\infty C_m^2 }{4q_\text{max}^2\Delta \omega^2}\right) \\
+&= 10\log \frac{\overline{i_n^2/\Delta f}(C_0^2/2+\sum_{m=1}^\infty C_m^2)}{4q_\text{max}^2\Delta \omega^2} = 10\log \frac{\overline{i_n^2/\Delta f}\cdot \Gamma_\text{rms}^2}{2q_\text{max}^2\Delta \omega^2}
 \end{align}$$
 
 
-#### ISF & $1/f$-noise up-conversion
 
-*TODO* &#128197;
+### $1/f$-noise up-conversion
 
 ![image-20250626211817628](osc-pn/image-20250626211817628.png)
 
+![image-20260613185337303](osc-pn/image-20260613185337303.png)
 
 
-### ISF Simulation
+
+### ISF Simulation Method
 
 ![image-20241113232703941](osc-pn/image-20241113232703941.png)
 
@@ -616,7 +619,9 @@ S. Levantino and P. Maffezzoni, "Computing the Perturbation Projection Vector of
 
 ---
 
-Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
+Bae, Woorham, and Deog-Kyoon Jeong. *Analysis and Design of CMOS Clocking Circuits for Low Phase Noise*. Institution of Engineering and Technology, 2020.
+
+Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated frequency synthesizers for wireless systems*. Cambridge University Press, 2007.
 
 Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005. *The Designer's Guide to High-Purity Oscillators* [[pdf](https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf)]
 

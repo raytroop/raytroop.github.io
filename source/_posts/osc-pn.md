@@ -173,7 +173,7 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 ![image-20250815234653864](osc-pn/image-20250815234653864.png)
 
-## Leeson's Model - LTI
+## Leeson's Model — LTI
 
 > M.H. Perrott [[https://www.cppsim.com/PLL_Lectures/day2_am.pdf](https://www.cppsim.com/PLL_Lectures/day2_am.pdf)]
 >
@@ -181,31 +181,17 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 Leeson's model is outcome of ***linearized*** VCO noise analysis
 
-![image-20250920125120068](osc-pn/image-20250920125120068.png)
+![image-20260614183453498](osc-pn/image-20260614183453498.png)
 
 
 
-![image-20250920170108939](osc-pn/image-20250920170108939.png)
+![image-20260614183309639](osc-pn/image-20260614183309639.png)
 
-> $$
-> Q = R_p\omega_0 C_p = \frac{R_p}{\omega_0 L}
-> $$
->
-> where $\omega_0 = \frac{1}{\sqrt{L_pC_p}}$
->
-> ![image-20250920170331118](osc-pn/image-20250920170331118.png)
->
-> [[https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf](https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf)]
+Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are **independent** and **symmetric**
 
-![image-20250920171147163](osc-pn/image-20250920171147163.png)
+![two_offset_folding_into_pm_sidebands](osc-pn/two_offset_folding_into_pm_sidebands.svg)
 
-![image-20250920171411886](osc-pn/image-20250920171411886.png)
 
----
-
-> Carlo Samori, ISSCC2016 T1: Understanding Phase Noise in LC VCOs
-
-![image-20251104233318469](osc-pn/image-20251104233318469.png)
 
 ---
 
@@ -215,7 +201,7 @@ Leeson's model is outcome of ***linearized*** VCO noise analysis
 
 
 
-## Hajimiri's  Model- LTV ISF
+## Hajimiri's Model — LTV ISF
 
 ![image-20260613113055683](osc-pn/image-20260613113055683.png)
 
@@ -377,9 +363,13 @@ $$\begin{align}
 
 
 
+## Murphy's Model — LTV in Frequency Domain
 
 
-## Demir's Model - NLTV PPV
+
+
+
+## Demir's Model — NLTV PPV
 
 ![image-20251122143914081](osc-pn/image-20251122143914081.png)
 

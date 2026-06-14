@@ -470,6 +470,46 @@ Let's prove the symmetric "samples ↔ samples" formula
 
 
 
+###  sinc function & unit rectangular pulse
+
+![image-20241002143413907](fourier/image-20241002143413907.png)
+
+![image-20250628181534951](fourier/image-20250628181534951.png)
+
+where $W$ is sampling frequency in Hz
+
+![sinc.drawio](fourier/sinc.drawio.svg)
+
+
+
+> ![image-20241002143219224](fourier/image-20241002143219224.png)
+
+---
+
+ sinc function is *square integrable* but **not** *absolutely integrable*
+
+
+
+### periodic pulse function
+
+> Some Comments about the Pulse Function [[https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html#PulseUncertainty](https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html#PulseUncertainty)]
+>
+> Fourier Transform of a Periodic Signal Described by a Fourier Series [[https://lpsa.swarthmore.edu/Fourier/Xforms/FXPeriodic.html##section7](https://lpsa.swarthmore.edu/Fourier/Xforms/FXPeriodic.html##section7)]
+
+Consider the periodic pulse function $x_T(t) = \Pi_T \left( \frac{t}{T_p} \right)$
+
+![Pi5(t_2)](fourier/Pi5(t_2).svg)
+
+Fourier Series Coefficients is
+$$
+c_n = \frac{T_p}{T} \operatorname{sinc} \left( \frac{n T_p}{T} \right)
+$$
+ The Fourier Transform of the function is
+$$
+X_T(\omega) = \sum_{n=-\infty}^{+\infty} c_n 2\pi \delta(\omega - n\omega_0)
+$$
+
+
 ## spectral sampling
 
 

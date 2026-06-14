@@ -201,7 +201,11 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 
 
 
-## Hajimiri's Model — LTV ISF
+## Hajimiri's ISF— LTV in Time Domain
+
+> A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 [[paper](https://people.engr.tamu.edu/spalermo/ecen620/general_pn_theory_hajimiri_jssc_1998.pdf)], [[slides](http://www-smirc.stanford.edu/papers/Orals98s-ali.pdf)]
+>
+> —, "Corrections to "A General Theory of Phase Noise in Electrical Oscillators"" [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=678662](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=678662)]
 
 ![image-20260613113055683](osc-pn/image-20260613113055683.png)
 
@@ -365,11 +369,31 @@ $$\begin{align}
 
 ## Murphy's Model — LTV in Frequency Domain
 
+> C. Samori, A. L. Lacaita, F. Villa and F. Zappa, "Spectrum folding and phase noise in LC tuned oscillators," in *IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing*, vol. 45, no. 7, pp. 781-790, July 1998 [[https://sci-hub.ru/10.1109/82.700925](https://sci-hub.ru/10.1109/82.700925)]
+>
+> D. Murphy, J. J. Rael and A. A. Abidi, "Phase Noise in LC Oscillators: A Phasor-Based Analysis of a General Result and of Loaded  Q ," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 57, no. 6, pp. 1187-1203, June 2010 [[https://sci-hub.ru/10.1109/TCSI.2009.2030110](https://sci-hub.ru/10.1109/TCSI.2009.2030110)]
 
+![image-20260615005115044](osc-pn/image-20260615005115044.png)
+
+![image-20260615005234730](osc-pn/image-20260615005234730.png)
+
+A reference pulse train centered at $t=0$ would have plain positive coefficients ($\tfrac{T_w}{T_0}$, with $\operatorname{sinc} \approx 1$).
+$$
+c_n = \frac{1}{2}\cdot \frac{T_w}{T_0/2}\operatorname{sinc}\left(\frac{nT_w}{T_0/2}\right)=\frac{T_w}{T_0}\operatorname{sinc}\left(\frac{2nT_w}{T_0}\right)
+$$
+The real injection sits at $t=T_0/4$, and since the pulse-train period is $P=T_0/2$, that offset is exactly $P/2$ — a half-period shift. Every coefficient therefore picks up $(-1)^m$ — $e^{j2m\omega_0\cdot T_0/4}=e^{jm\pi}$
+$$
+c_{2m} = \underbrace{(-1)^m}_{\text{position}}\,
+         \underbrace{\frac{T_w}{T_0}}_{\text{area / period}}\,
+         \underbrace{\operatorname{sinc}\!\left(\frac{2mT_w}{T_0}\right)}_{\to\,1 \text{ as } T_w \ll T_0}
+$$
+![image-20260615005921381](osc-pn/image-20260615005921381.png)
 
 
 
 ## Demir's Model — NLTV PPV
+
+> A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in oscillators: a unifying theory and numerical methods for characterization," in *IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications*, vol. 47, no. 5, pp. 655-674, May 2000 [[https://sci-hub.se/10.1109/81.847872](https://sci-hub.se/10.1109/81.847872)]
 
 ![image-20251122143914081](osc-pn/image-20251122143914081.png)
 
@@ -543,14 +567,6 @@ Finally, we obtain
 
 ## References
 
-A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 [[paper](https://people.engr.tamu.edu/spalermo/ecen620/general_pn_theory_hajimiri_jssc_1998.pdf)], [[slides](http://www-smirc.stanford.edu/papers/Orals98s-ali.pdf)]
-
-—, "Corrections to "A General Theory of Phase Noise in Electrical Oscillators"" [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=678662](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=678662)]
-
-A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in oscillators: a unifying theory and numerical methods for characterization," in *IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications*, vol. 47, no. 5, pp. 655-674, May 2000 [[https://sci-hub.se/10.1109/81.847872](https://sci-hub.se/10.1109/81.847872)]
-
-D. Murphy, J. J. Rael and A. A. Abidi, "Phase Noise in LC Oscillators: A Phasor-Based Analysis of a General Result and of Loaded  Q ," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 57, no. 6, pp. 1187-1203, June 2010 [[https://sci-hub.ru/10.1109/TCSI.2009.2030110](https://sci-hub.ru/10.1109/TCSI.2009.2030110)]
-
 Godone, A. & Micalizio, Salvatore & Levi, Filippo. (2008). RF spectrum of a carrier with a random phase modulation of arbitrary slope. [[https://sci-hub.se/10.1088/0026-1394/45/3/008](https://sci-hub.se/10.1088/0026-1394/45/3/008)]
 
 F. L. Traversa, M. Bonnin and F. Bonani, "The Complex World of Oscillator Noise: Modern Approaches to Oscillator (Phase and Amplitude) Noise Analysis," in *IEEE Microwave Magazine*, vol. 22, no. 7, pp. 24-32, July 2021 [[https://iris.polito.it/retrieve/handle/11583/2903596/e384c433-b8f5-d4b2-e053-9f05fe0a1d67/MM%20noise%20-%20v5.pdf](https://iris.polito.it/retrieve/handle/11583/2903596/e384c433-b8f5-d4b2-e053-9f05fe0a1d67/MM%20noise%20-%20v5.pdf)]
@@ -575,7 +591,7 @@ Pietro Andreani. ISSCC 2011 T1: Integrated LC oscillators
 
 C. Samori, ISSCC2016 T1 "Tutorial: Understanding Phase Noise in LC VCOs"
 
-—, "Understanding Phase Noise in LC VCOs: A Key Problem in RF Integrated Circuits," in *IEEE Solid-State Circuits Magazine*, vol. 8, no. 4, pp. 81-91, Fall 2016 [[https://sci-hub.se/10.1109/MSSC.2016.2573979](https://sci-hub.se/10.1109/MSSC.2016.2573979)]
+—, "Understanding Phase Noise in LC VCOs: A Key Problem in RF Integrated Circuits," in *IEEE Solid-State Circuits Magazine*, vol. 8, no. 4, pp. 81-91, Fall 2016 [[https://sci-hub.ru/10.1109/MSSC.2016.2573979](https://sci-hub.ru/10.1109/MSSC.2016.2573979)]
 
 —, Phase Noise in LC Oscillators: From Basic Concepts to Advanced Topologies [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf)]
 

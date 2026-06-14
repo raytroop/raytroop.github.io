@@ -175,26 +175,6 @@ by how much the modulated variable of the carrier signal varies around its unmod
 
 
 
-##  sinc function
-
-![image-20241002143413907](ss-insight/image-20241002143413907.png)
-
-![image-20250628181534951](ss-insight/image-20250628181534951.png)
-
-where $W$ is sampling frequency in Hz
-
-![sinc.drawio](ss-insight/sinc.drawio.svg)
-
-
-
-> ![image-20241002143219224](ss-insight/image-20241002143219224.png)
-
----
-
- sinc function is *square integrable* but **not** *absolutely integrable*
-
-
-
 ## frequency convention
 
 - radian frequency $\omega_0$ in **rad/s**

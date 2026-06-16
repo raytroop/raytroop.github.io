@@ -3,7 +3,7 @@ title: AM & PM
 date: 2024-05-24 21:40:09
 tags:
 categories:
-- dsp
+- osc
 mathjax: true
 ---
 
@@ -497,6 +497,8 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 > Phase Noise Measurement Solutions [[https://www.keysight.com/vn/en/assets/7018-02528/technical-overviews/5990-5729.pdf](https://www.keysight.com/vn/en/assets/7018-02528/technical-overviews/5990-5729.pdf)]
 >
 > Greg Bonaguide. Advances in Phase Noise Measurement Techniques [[https://ieee.li/pdf/viewgraphs/advances_in_phase_noise_measurement_techniques.pdf](https://ieee.li/pdf/viewgraphs/advances_in_phase_noise_measurement_techniques.pdf)]
+>
+> U. L. Rohde, A. K. Poddar and A. M. Apte, "Getting Its Measure: Oscillator Phase Noise Measurement Techniques and Limitations," in *IEEE Microwave Magazine*, vol. 14, no. 6, pp. 73-86, Sept.-Oct. 2013 [[https://sci-hub.jp/10.1109/MMM.2013.2269860](https://sci-hub.jp/10.1109/MMM.2013.2269860)]
 
 
 The three most widely adopted techniques are **direct spectrum**, **phase detector**, and **two-channel cross-correlation**. 

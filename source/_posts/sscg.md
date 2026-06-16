@@ -3,7 +3,7 @@ title: Spread Spectrum Clocking (SSC)
 date: 2025-08-30 22:17:12
 tags:
 categories:
-- dsp
+- link
 mathjax: true
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Oscillators Phase Noise
+title: Oscillator Phase Noise
 date: 2024-10-16 12:16:48
 tags:
 categories:
@@ -7,7 +7,11 @@ categories:
 mathjax: true
 ---
 
+![image-20260616221239668](osc-pn/image-20260616221239668.png)
 
+> Poddar, Ajay & Rohde, Ulrich & Apte, Anisha. (2013). How Low Can They Go?: Oscillator Phase Noise Model, Theoretical, Experimental Validation, and Phase Noise Measurements. Microwave Magazine, IEEE. [[http://time.kinali.ch/rohde/noise/how_low_can_they_go-2013-poddar_rohde_apte.pdf](http://time.kinali.ch/rohde/noise/how_low_can_they_go-2013-poddar_rohde_apte.pdf)]
+>
+> F. L. Traversa, M. Bonnin and F. Bonani, "The Complex World of Oscillator Noise: Modern Approaches to Oscillator (Phase and Amplitude) Noise Analysis," in *IEEE Microwave Magazine*, vol. 22, no. 7, pp. 24-32, July 2021 [[https://iris.polito.it/retrieve/handle/11583/2903596/e384c433-b8f5-d4b2-e053-9f05fe0a1d67/MM%20noise%20-%20v5.pdf](https://iris.polito.it/retrieve/handle/11583/2903596/e384c433-b8f5-d4b2-e053-9f05fe0a1d67/MM%20noise%20-%20v5.pdf)]
 
 ## Phase Noise Definition
 
@@ -206,6 +210,8 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 > A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 [[paper](https://people.engr.tamu.edu/spalermo/ecen620/general_pn_theory_hajimiri_jssc_1998.pdf)], [[slides](http://www-smirc.stanford.edu/papers/Orals98s-ali.pdf)]
 >
 > —, "Corrections to "A General Theory of Phase Noise in Electrical Oscillators"" [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=678662](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=678662)]
+>
+> Thomas H. Lee. Linearity, Time-Variation, Phase Modulation and Oscillator Phase Noise [[https://class.ece.iastate.edu/djchen/ee507/PhaseNoiseTutorialLee.pdf](https://class.ece.iastate.edu/djchen/ee507/PhaseNoiseTutorialLee.pdf)]
 
 ![image-20260613113055683](osc-pn/image-20260613113055683.png)
 
@@ -225,7 +231,9 @@ Decompose the horizontal kick $\Delta\vec r=(\Delta x,0) $ and $\Delta x=\Delta 
 $$
 \Delta \phi = \arctan\left(\frac{\Delta\vec r\cdot \hat t}{1 + \Delta\vec r\cdot \hat r}\right) = \arctan\left(\frac{-\Delta x \sin \theta}{1 + \Delta x \cos \theta}\right)\approx -\frac{\Delta v_C}{A_0} \sin(\omega_0 \tau)
 $$
-![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential.svg)
+![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential-1781624282026-1.svg)
+
+
 
 > C. Livanelioglu, L. He, J. Gong, S. Arjmandpour, G. Atzeni and T. Jang, "19.10 A 4.6GHz 63.3fsrms PLL-XO Co-Design Using a Self-Aligned Pulse-Injection Driver Achieving −255.2dB FoMJ Including the XO Power and Noise," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025
 >
@@ -245,9 +253,19 @@ $$
 
 
 
-###  white-noise Folding
+###  White-noise Folding
+
+ [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265)]
+
+![image-20260616235441690](osc-pn/image-20260616235441690.png)
+
+> ![image-20260617001436232](osc-pn/image-20260617001436232.png)
+
+
 
 ![image-20250629073305626](osc-pn/image-20250629073305626.png)
+
+
 
 ![image-20250629080632902](osc-pn/image-20250629080632902.png)
 
@@ -329,13 +347,27 @@ $$\begin{align}
 
 
 
+----
+
+![image-20260617004658323](osc-pn/image-20260617004658323.png)
+
+
+
+
+
 ### $1/f$-noise up-conversion
 
-![image-20250626211817628](osc-pn/image-20250626211817628.png)
+![image-20260617004812519](osc-pn/image-20260617004812519.png)
 
-![image-20260613185337303](osc-pn/image-20260613185337303.png)
+![image-20260617005703943](osc-pn/image-20260617005703943.png)
 
+### Cyclostationary Noise Sources
 
+**Effective ISF**, **Noise Modulating Function (NMF)**
+
+![image-20260617010019682](osc-pn/image-20260617010019682.png)
+
+![image-20260617010125436](osc-pn/image-20260617010125436.png)
 
 ### ISF Simulation Method
 
@@ -395,9 +427,11 @@ $$
 
 Consequently, excess noise arises solely from the components at $\omega_0\pm \omega_m$, since all other spectral components lie outside the tank bandwidth and are therefore suppressed by the resonator's frequency-selective filtering
 
-## Demir's Model — NLTV PPV
+## Demir's Model — NLTV
 
 > A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in oscillators: a unifying theory and numerical methods for characterization," in *IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications*, vol. 47, no. 5, pp. 655-674, May 2000 [[https://sci-hub.se/10.1109/81.847872](https://sci-hub.se/10.1109/81.847872)]
+
+Demir's theory is essentially Floquet theory applied to the limit cycle of an autonomous oscillator, and the PPV is one specific Floquet vector
 
 ![image-20251122143914081](osc-pn/image-20251122143914081.png)
 
@@ -419,7 +453,7 @@ Consequently, excess noise arises solely from the components at $\omega_0\pm \om
 
 > [[https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf](https://adityamuppala.github.io/assets/Notes_YouTube/MMIC_Limit_Cycles.pdf)]
 
-> ***Nonlinear*** Dynamics
+***Nonlinear*** Dynamics
 
  ![image-20250622202023590](osc-pn/image-20250622202023590.png)
 
@@ -582,7 +616,19 @@ Finally, we obtain
 >
 > M. Shahmohammadi, M. Babaie and R. B. Staszewski, "25.4 A 1/f noise upconversion reduction technique applied to Class-D and Class-F oscillators," 2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers, San Francisco, CA, USA, 2015 [[https://sci-hub.ru/10.1109/ISSCC.2015.7063117](https://sci-hub.ru/10.1109/ISSCC.2015.7063117)]
 >
-> —, "A 1/f Noise Upconversion Reduction Technique for Voltage-Biased RF CMOS Oscillators," in IEEE Journal of Solid-State Circuits, vol. 51, no. 11, pp. 2610-2624, Nov. 2016 [[pdf](https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf)]
+> —, "A 1/f Noise Upconversion Reduction Technique for Voltage-Biased RF CMOS Oscillators," in IEEE Journal of Solid-State Circuits, vol. 51, no. 11, pp. 2610-2624, Nov. 2016 [[https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf](https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf)]
+
+![image-20260616224300853](osc-pn/image-20260616224300853.png)
+
+![image-20260616225535546](osc-pn/image-20260616225535546.png)
+
+> *Yunbo Huang, **Zunsong Yang\***, et al., "A 7.0-to-8.6GHz Balanced Class-F-1 VCO with a Trifilar Transformer-Based Tank Achieving 194.5dBc/Hz FoM," IEEE MTT-S Radio Frequency Integrated Circuits (**RFIC**), June 2026*
+
+
+
+
+
+
 
 
 ---
@@ -598,10 +644,6 @@ Finally, we obtain
 ## References
 
 Godone, A. & Micalizio, Salvatore & Levi, Filippo. (2008). RF spectrum of a carrier with a random phase modulation of arbitrary slope. [[https://sci-hub.se/10.1088/0026-1394/45/3/008](https://sci-hub.se/10.1088/0026-1394/45/3/008)]
-
-F. L. Traversa, M. Bonnin and F. Bonani, "The Complex World of Oscillator Noise: Modern Approaches to Oscillator (Phase and Amplitude) Noise Analysis," in *IEEE Microwave Magazine*, vol. 22, no. 7, pp. 24-32, July 2021 [[https://iris.polito.it/retrieve/handle/11583/2903596/e384c433-b8f5-d4b2-e053-9f05fe0a1d67/MM%20noise%20-%20v5.pdf](https://iris.polito.it/retrieve/handle/11583/2903596/e384c433-b8f5-d4b2-e053-9f05fe0a1d67/MM%20noise%20-%20v5.pdf)]
-
-Poddar, Ajay & Rohde, Ulrich & Apte, Anisha. (2013). How Low Can They Go?: Oscillator Phase Noise Model, Theoretical, Experimental Validation, and Phase Noise Measurements. Microwave Magazine, IEEE. [[http://time.kinali.ch/rohde/noise/how_low_can_they_go-2013-poddar_rohde_apte.pdf](http://time.kinali.ch/rohde/noise/how_low_can_they_go-2013-poddar_rohde_apte.pdf)]
 
 ---
 
@@ -635,7 +677,7 @@ Aditya Varma Muppala. Oscillators [[https://youtube.com/playlist?list=PL9Trid0A4
 
 P.E. Allen - 2003. ECE 6440 - Frequency Synthesizers: Lecture 160 – Phase Noise - II [[https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L160-PhNoII(2UP).pdf](https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L160-PhNoII(2UP).pdf)]
 
-Thomas H. Lee. Linearity, Time-Variation, Phase Modulation and Oscillator Phase Noise [[https://class.ece.iastate.edu/djchen/ee507/PhaseNoiseTutorialLee.pdf](https://class.ece.iastate.edu/djchen/ee507/PhaseNoiseTutorialLee.pdf)]
+
 
 ---
 

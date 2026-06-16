@@ -151,6 +151,16 @@ $$
 
 
 
+### Bandwidth
+
+> Frequency response: Resonance, Bandwidth, Q factor [[https://ocw.mit.edu/courses/6-071j-introduction-to-electronics-signals-and-measurement-spring-2006/5bcec4bfba5f2e99754b77509e9e7ab4_resonance_qfactr.pdf](https://ocw.mit.edu/courses/6-071j-introduction-to-electronics-signals-and-measurement-spring-2006/5bcec4bfba5f2e99754b77509e9e7ab4_resonance_qfactr.pdf)]
+
+![image-20260617004026875](resonant/image-20260617004026875.png)
+
+![image-20260617003852339](resonant/image-20260617003852339.png)
+
+
+
 ## Non ideal capacitor & inductor
 
 > Tank Circuits/Impedances [[https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf](https://stanford.edu/class/ee133/handouts/lecturenotes/lecture5_tank.pdf)]

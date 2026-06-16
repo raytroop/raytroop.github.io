@@ -3,7 +3,7 @@ title: Systems, Modulation and Noise
 date: 2024-05-25 14:33:57
 tags:
 categories:
-- dsp
+- noise
 mathjax: true
 ---
 

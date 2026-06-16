@@ -213,6 +213,8 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 
 ---
 
+Consider the **ideal parallel *LC* network** — pure sinusoid wave
+
 ![image-20250629065454831](osc-pn/image-20250629065454831.png)
 
 

@@ -252,6 +252,17 @@ $$
 
 ### Parseval's Relation
 
+***CTFS***
+
+with $f(x) = \sum_{n=-\infty}^{\infty} c_n e^{i \frac{2n\pi x}{T}$
+
+$$
+\frac{1}{T} \int_{0}^{T} \vert{}f(x)\vert{}^2 \, dx = \sum_{n=-\infty}^{\infty} \vert{}c_n\vert{}^2
+$$
+
+---
+
+
 ***CTFT***:
 
 ![image-20240830230835764](fourier/image-20240830230835764.png)

@@ -30,8 +30,12 @@ ICOVL helps achieve the same overlay performance for large dies as small dies, w
 ---
 
 > 数字IC后端设计实现篇之TSMC 12nm TCD cell（Dummy TCD Cell）应该怎么加？ [[https://blog.csdn.net/weixin_37584728/article/details/144565647](https://blog.csdn.net/weixin_37584728/article/details/144565647)]
+>
+> TCD (Test-key Critical Dimension) Cell [[https://vlsibasic.blogspot.com/2017/01/tcd-cell.html](https://vlsibasic.blogspot.com/2017/01/tcd-cell.html)]
 
-FEOL Dummy TCD: improve Critical Dimension Uniformity
+The fabrication of these smaller elements is a big challenge due to critical dimension uniformity (CDU) which impacts the device performance and its characteristics.
+
+FEOL Dummy TCD: improving CDU
 
 BEOL Dummy TCD: Metal/Via mask CD control
 
@@ -41,6 +45,10 @@ BEOL Dummy TCD: Metal/Via mask CD control
 2. 而且还需要给TCD Cell添加好blockage和routing blockage
 
 
+
+TCD structures are placed to monitor these various processes variation on the die
+
+![img](dfm-layout/TCD+Final.png)
 
 ## Wafer Acceptance Test (WAT)
 

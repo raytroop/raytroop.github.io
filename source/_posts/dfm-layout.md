@@ -9,6 +9,39 @@ mathjax: true
 
 
 
+## ICOVL & DTCD
+
+> 东华博客, ICOVL Cell [[http://www.truevue.org/p/938](http://www.truevue.org/p/938)]
+
+**In-Chip Overlay (ICOVL)**, **Dummy Test-key Critical Dimension (DTCD)**
+
+![在这里插入图片描述](dfm-layout/8846a9ee19314e49bb826b67e684bc34.png)
+
+---
+
+**In Chip Overlay Cell**，简称**ICOVL**单元，用于大的芯片设计中，检测工艺PO和OD（即栅）以及CO和PO（孔栅间距，或者栅的孔）的mask之间的重叠关系，可以减少mask对准上的错误
+
+两个ICOVL Overlay Cell可以分开使用，也可以组合使用。组合时cell中间的空间可以放其他cell，也可走线。一般ICOVL Cell的pitch大于2mm。 Design Rule中给出根据floorplan的大小和形状放OVL的规则
+
+![image-20260617214321697](dfm-layout/image-20260617214321697.png)
+
+ICOVL helps achieve the same overlay performance for large dies as small dies, while effectively mitigating wafer misalignment
+
+---
+
+> 数字IC后端设计实现篇之TSMC 12nm TCD cell（Dummy TCD Cell）应该怎么加？ [[https://blog.csdn.net/weixin_37584728/article/details/144565647](https://blog.csdn.net/weixin_37584728/article/details/144565647)]
+
+FEOL Dummy TCD: improve Critical Dimension Uniformity
+
+BEOL Dummy TCD: Metal/Via mask CD control
+
+![image-20260617212434311](dfm-layout/image-20260617212434311.png)
+
+1. FEOL TCD cell的poly方向必须和标准单元，memory的poly方向一致，而且是垂直方向
+2. 而且还需要给TCD Cell添加好blockage和routing blockage
+
+
+
 ## Wafer Acceptance Test (WAT)
 
 > 温德通. 集成电路制造工艺与工程应用. 机械工业出版社 2018

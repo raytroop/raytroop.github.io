@@ -355,13 +355,24 @@ $$\begin{align}
 
 
 
-### $1/f$-noise up-conversion
+### $1/f$-noise Upconversion
 
 ![image-20260617004812519](osc-pn/image-20260617004812519.png)
 
 ![image-20260617005703943](osc-pn/image-20260617005703943.png)
 
+
+---
+
+Suppose $c_0\neq 0$, corresponding phase noise in response to injected noise $i_n(t)$ is equal to:
+
+$$
+\phi_{n,c_0} = \int_{-\infty}^t c_0 i_n(\tau) d\tau \qquad \boxed{S_{\phi n,c_0}(f) = \frac{c_0^2}{\omega^2}S_i(f)= \frac{\mathcal{\Gamma}_\text{dc}^2}{\omega^2}S_i(f)}
+$$
+
 ### Cyclostationary Noise Sources
+
+Cyclostationary noise can be viewed as stationary noise, $i_{n0}(t)$, multiplied by a periodic envelope, $\alpha(\omega_0 t)$.
 
 **Effective ISF**, **Noise Modulating Function (NMF)**
 

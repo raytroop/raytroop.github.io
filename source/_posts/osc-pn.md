@@ -69,7 +69,7 @@ mathjax: true
 
 ---
 
-***flicker noise*** — 1/f^3$ Phase Noise Profile
+***flicker noise*** — $1/f^3$ Phase Noise Profile
 $$
 S_{\phi n} = \frac{K}{f}\left(\frac{K_{VCO}}{2\pi f}\right)^2 \propto \frac{1}{f^3}
 $$
@@ -259,7 +259,9 @@ $$
 
 ![image-20260616235441690](osc-pn/image-20260616235441690.png)
 
-> ![image-20260617001436232](osc-pn/image-20260617001436232.png)
+> 
+>
+> ![image-20260617230516572](osc-pn/image-20260617230516572.png)
 
 
 

@@ -199,13 +199,25 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 
 
-## Cross-coupled Differential-pair
+## Cross-coupled Pair
 
 ![image-20251027224751015](lc-osc/image-20251027224751015.png)
 
 
 
 ?? Triode MOS noise
+
+
+
+---
+
+
+
+![image-20260618064000970](lc-osc/image-20260618064000970.png)
+
+phase noise is independent of the transconductance of the transistors
+
+![image-20260618063842453](lc-osc/image-20260618063842453.png)
 
 
 
@@ -245,7 +257,11 @@ where $f_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the reso
 
 
 
-## varactor simulation
+
+
+## oscillator simulation
+
+### varactor simulation
 
 Three methods:
 

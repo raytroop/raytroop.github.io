@@ -3,7 +3,7 @@ title: Resonant Circuits
 date: 2025-06-06 20:38:14
 tags:
 categories:
-- analog
+- osc
 mathjax: true
 ---
 

@@ -52,6 +52,12 @@ mathjax: true
 
 
 
+---
+
+> Dr. Vishal Saxena, ECE518 Memory/Clock Synchronization IC Design: Oscillator Phase Noise [[https://www.eecis.udel.edu/~vsaxena/courses/ece504/Handouts/Oscillator%20Phase%20Noise.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece504/Handouts/Oscillator%20Phase%20Noise.pdf)]
+
+![image-20260618063335225](comm/image-20260618063335225.png)
+
 
 
 ## Sampling of WSS process

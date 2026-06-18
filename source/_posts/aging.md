@@ -3,7 +3,7 @@ title: Device Aging & Reliability
 date: 2022-12-11 20:54:29
 tags:
 categories:
-- analog
+- dfm
 mathjax: true
 ---
 

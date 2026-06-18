@@ -3,7 +3,7 @@ title: Layout and DFM
 date: 2022-11-19 12:52:45
 tags:
 categories:
-- analog
+- dfm
 mathjax: true
 ---
 
@@ -35,7 +35,7 @@ ICOVL helps achieve the same overlay performance for large dies as small dies, w
 
 The fabrication of these smaller elements is a big challenge due to critical dimension uniformity (CDU) which impacts the device performance and its characteristics.
 
-FEOL Dummy TCD: improving CDU
+FEOL/MEOL Dummy TCD: improving CDU
 
 BEOL Dummy TCD: Metal/Via mask CD control
 

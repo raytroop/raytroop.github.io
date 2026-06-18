@@ -3,7 +3,7 @@ title: Gate Resistance
 date: 2023-07-09 10:23:12
 tags:
 categories:
-- analog
+- dfm
 mathjax: true
 ---
 

@@ -3,7 +3,7 @@ title: MOS Capacitor
 date: 2022-09-24 00:29:21
 tags:
 categories:
-- analog
+- dfm
 mathjax: true
 ---
 

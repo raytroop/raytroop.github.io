@@ -3,7 +3,7 @@ title: Process Variation & RC corner
 date: 2022-03-02 00:05:56
 tags:
 categories:
-- analog
+- dfm
 mathjax: true
 ---
 

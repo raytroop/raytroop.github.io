@@ -218,19 +218,23 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 
 ---
 
-Consider the **ideal parallel *LC* network** — pure sinusoid wave
 
 ![image-20250629065454831](osc-pn/image-20250629065454831.png)
 
 
+Consider the **ideal parallel *LC* network** — pure sinusoid wave
 
-![image-20260613191539886](osc-pn/image-20260613191539886.png)
+![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential-1781624282026-1.svg)
 
 Decompose the horizontal kick $\Delta\vec r=(\Delta x,0) $ and $\Delta x=\Delta v_C/A_0$, with tangential direction $\hat t=(-\sin\theta,\cos\theta)$ and radial direction  $\hat r=(\cos\theta,\sin\theta)$
 $$
 \Delta \phi = \arctan\left(\frac{\Delta\vec r\cdot \hat t}{1 + \Delta\vec r\cdot \hat r}\right) = \arctan\left(\frac{-\Delta x \sin \theta}{1 + \Delta x \cos \theta}\right)\approx -\frac{\Delta v_C}{A_0} \sin(\omega_0 \tau)
 $$
-![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential-1781624282026-1.svg)
+
+![image-20260613191539886](osc-pn/image-20260613191539886.png)
+
+
+Therefore, the ISF of an ideal parallel LC resonator can be expressed as $\boxed{\Gamma(\omega \tau)=-\sin(\omega_0 \tau)}$
 
 
 

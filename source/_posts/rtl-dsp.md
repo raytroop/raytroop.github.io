@@ -3,7 +3,7 @@ title: VLSI Digital Signal Processing
 date: 2025-11-11 07:29:09
 tags:
 categories:
-- link
+- phy
 mathjax: true
 ---
 
@@ -15,28 +15,56 @@ mathjax: true
 
 ***integers***
 
-![image-20260207093700537](vlsi-dsp/image-20260207093700537.png)
+![image-20260207093700537](rtl-dsp/image-20260207093700537.png)
 
 ***rational number***
 
-![image-20260207094834081](vlsi-dsp/image-20260207094834081.png)
+![image-20260207094834081](rtl-dsp/image-20260207094834081.png)
 
-![image-20260206230528138](vlsi-dsp/image-20260206230528138.png)
+![image-20260206230528138](rtl-dsp/image-20260206230528138.png)
 
 
 ### 2's Complement
 
 > [[https://bpb-us-w2.wpmucdn.com/sites.coecis.cornell.edu/dist/4/81/files/2019/06/4740_lecture23ALU-circuits.pdf](https://bpb-us-w2.wpmucdn.com/sites.coecis.cornell.edu/dist/4/81/files/2019/06/4740_lecture23ALU-circuits.pdf)]
 
-![image-20260207085804825](vlsi-dsp/image-20260207085804825.png)
+![image-20260207085804825](rtl-dsp/image-20260207085804825.png)
 
 > Google AI Mode [[https://share.google/aimode/KsxxgDF0vAdhAIgm0](https://share.google/aimode/KsxxgDF0vAdhAIgm0)]
 
-![image-20260207094125000](vlsi-dsp/image-20260207094125000.png)
+![image-20260207094125000](rtl-dsp/image-20260207094125000.png)
+
+
+
+---
+
+---
+
+***2's complement negative number***
+
+> Flip all bits then Add **1**
+
+N-bit signed number
+$$
+A = -M_{N-1}2^{N-1}+\sum_{k=0}^{N-2}M_k2^k
+$$
+Flip all bits
+$$\begin{align}
+A_{flip} &= -(1-M_{N-1})2^{N-1} +\sum_{k=0}^{N-2}(1-M_k)2^k \\
+&= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k -2^{N-1}+\sum_{k=0}^{N-2}2^k \\
+&= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k -1
+\end{align}$$
+
+Add **1**
+$$
+A_- = A_{flip}+1 = M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k = -A
+$$
+
+
 
 ### Fixed Point Number
 
-![image-20260207095601437](vlsi-dsp/image-20260207095601437.png)
+![image-20260207095601437](rtl-dsp/image-20260207095601437.png)
 
 
 
@@ -47,15 +75,15 @@ mathjax: true
 >
 > IEEE Standard for Floating-Point Arithmetic [[https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf](https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf)]
 
-![image-20260207101850895](vlsi-dsp/image-20260207101850895.png)
+![image-20260207101850895](rtl-dsp/image-20260207101850895.png)
 
-![image-20260207104005414](vlsi-dsp/image-20260207104005414.png)
+![image-20260207104005414](rtl-dsp/image-20260207104005414.png)
 
 |                                      |                                |                                                              |
 | ------------------------------------ | ------------------------------ | ------------------------------------------------------------ |
-| **32-bit floating-point version 1**  | store *implicit leading one*   | ![image-20260207102121844](vlsi-dsp/image-20260207102121844.png) |
-| **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](vlsi-dsp/image-20260207102147689.png) |
-| **IEEE 754 floating point notation** | *biased exponent*              | ![image-20260207102210468](vlsi-dsp/image-20260207102210468.png) |
+| **32-bit floating-point version 1**  | store *implicit leading one*   | ![image-20260207102121844](rtl-dsp/image-20260207102121844.png) |
+| **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](rtl-dsp/image-20260207102147689.png) |
+| **IEEE 754 floating point notation** | *biased exponent*              | ![image-20260207102210468](rtl-dsp/image-20260207102210468.png) |
 
 > [[https://share.google/aimode/yY2R2EQCTsP9BlMNx](https://share.google/aimode/yY2R2EQCTsP9BlMNx)]
 
@@ -64,7 +92,7 @@ mathjax: true
 | **Single Precision (32-bit)** | 8             | **127**        | -126 to +127        |
 | **Double Precision (64-bit)** | 11            | **1023**       | -1022 to +1023      |
 
-![image-20260207103557952](vlsi-dsp/image-20260207103557952.png)
+![image-20260207103557952](rtl-dsp/image-20260207103557952.png)
 
 
 
@@ -88,6 +116,120 @@ mathjax: true
 
 
 
+
+
+
+
+## RTL module
+
+> MakerCode RTL Challenge [[https://github.com/Weiyet/MakerCode_RTLChallenge](https://github.com/Weiyet/MakerCode_RTLChallenge)]
+
+***decimation_filter***
+
+Filter Equation
+
+```
+filtered[n] = (1*x[n] + 3*x[n-1] + 3*x[n-2] + 1*x[n-3]) / 8
+y[k] = filtered[k*DECIMATION_FACTOR]
+```
+
+```bash
+iverilog -g2012 -o sim.vvp solution.sv tb.sv
+
+vvp sim.vvp +VCDFILE=output.vcd
+
+
+```
+
+
+
+```verilog
+module decimation_filter #(
+    parameter DATA_WIDTH = 8,
+    parameter DECIMATION_FACTOR = 4
+)(
+    input  wire                       clk,
+    input  wire                       reset,
+    input  wire signed [DATA_WIDTH-1:0]    data_in,
+    input  wire                       data_valid_in,
+    output wire signed [DATA_WIDTH-1:0]    data_out,
+    output wire                       data_valid_out
+);
+
+    localparam COUNTER_WIDTH = $clog2(DECIMATION_FACTOR);
+    
+    // FIR filter coefficients: [1, 3, 3, 1] (normalized by 8)
+    reg signed [DATA_WIDTH-1:0] x1, x2, x3;
+    reg signed [DATA_WIDTH+3:0] filtered;
+    reg [COUNTER_WIDTH-1:0] sample_counter;
+    reg valid_out_reg;
+    reg signed [DATA_WIDTH-1:0] output_reg;
+    
+    always @(posedge clk) begin
+        if (reset) begin
+            x1 <= {DATA_WIDTH{1'b0}};
+            x2 <= {DATA_WIDTH{1'b0}};
+            x3 <= {DATA_WIDTH{1'b0}};
+            sample_counter <= {COUNTER_WIDTH{1'b0}};
+            valid_out_reg <= 1'b0;
+            output_reg <= {DATA_WIDTH{1'b0}};
+        end else if (data_valid_in) begin
+            // Update delay line
+            x3 <= x2;
+            x2 <= x1;
+            x1 <= data_in;
+            
+            // Apply FIR filter: (1*x[n] + 3*x[n-1] + 3*x[n-2] + 1*x[n-3]) / 8
+            filtered = data_in + (x1 << 1) + x1 + (x2 << 1) + x2 + x3;
+            
+            // Increment sample counter
+            if (sample_counter == DECIMATION_FACTOR - 1) begin
+                sample_counter <= {COUNTER_WIDTH{1'b0}};
+                valid_out_reg <= 1'b1;
+                output_reg <= filtered >>> 3;  // Divide by 8
+            end else begin
+                sample_counter <= sample_counter + 1'b1;
+                valid_out_reg <= 1'b0;
+            end
+        end else begin
+            valid_out_reg <= 1'b0;
+        end
+    end
+    
+    assign data_out = output_reg;
+    assign data_valid_out = valid_out_reg;
+
+endmodule
+```
+
+Line 34 uses **non-blocking** assignment:
+
+```systemverilog
+x1 <= data_in;   // line 34: scheduled, NOT applied yet
+...
+filtered = data_in + (x1<<1) + x1 + ...;  // line 37: x1 still holds OLD value
+```
+
+Non-blocking assignments don't take effect until the **end** of the current time step (after all the blocking statements in the block have run). So at line 37:
+
+- `x1` still holds its **previous** value — i.e. the sample from the *last* `data_valid_in` cycle, which is `x[n-1]`.
+- `data_in` is the **current** sample, `x[n]`.
+
+They are different values. That's deliberate and necessary for the FIR math to be correct:
+
+```
+filtered = 1*x[n]   + 3*x[n-1] + 3*x[n-2] + 1*x[n-3]
+         = data_in  + 3*x1     + 3*x2     + 1*x3
+```
+
+| Symbol    | Value at line 37 | Filter tap |
+| --------- | ---------------- | ---------- |
+| `data_in` | x[n] (current)   | coeff 1    |
+| `x1`      | x[n-1]           | coeff 3    |
+| `x2`      | x[n-2]           | coeff 3    |
+| `x3`      | x[n-3]           | coeff 1    |
+
+![image-20260619230018566](rtl-dsp/image-20260619230018566.png)
 
 
 

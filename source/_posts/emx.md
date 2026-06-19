@@ -172,7 +172,7 @@ where $L1_{\text{sim}}$, $L2_{\text{sim}}$ and $k_{\text{sim}}$ come from tcoil 
 >
 > So, the $k_{\text{sim}}$ is negative if routing coil in same direction
 
-![image-20220623013225554](emx/image-20220623013225554.png)
+![image-20260619193536112](emx/image-20260619193536112.png)
 
 ![image-20220623013923263](emx/image-20220623013923263.png)
 
@@ -841,6 +841,112 @@ LVS issue for circuits with customized devices
 
 
 *TODO* &#128197;
+
+
+
+## gsim
+
+> Electromagnetic simulation for photonics and electronics, powered by GDSFactory+ [[https://github.com/gdsfactory/gsim](https://github.com/gdsfactory/gsim)]
+>
+> —, [[https://gdsfactory.github.io/gsim/nbs/palace_inductor/](https://gdsfactory.github.io/gsim/nbs/palace_inductor/)]
+
+***Analytical RLC Model Fit of Inductor***
+
+![RLC circuit](emx/images.jpeg)
+
+The total impedance and total admittance:
+
+$$
+Z(f) = \frac{1}{j2\pi f C + \frac{1}{R + j2\pi f L}}
+$$
+
+
+Defining $\tilde\omega = \omega/\omega_0$ with *undamped* resonance $\omega_0 = 1/\sqrt{LC}$ , $L = QR/\omega_0$
+
+$$
+z(\tilde\omega, Q) = \frac{1 + j\tilde\omega Q}{1 - \tilde\omega^2 + j\tilde\omega/Q} \qquad Z(f) = R \cdot z(f/f_0, Q)
+$$
+
+The ***loss function*** measures the total squared error between the model and the simulated data across all frequencies:
+$$
+\mathcal{L}(f_0, Q, R) = \sum_k \left| Z_\text{sim}(f_k) - R \cdot z(f_k/f_0, Q) \right|^2
+$$
+
+```python
+def z_rlc(w, Q):
+    return (1 + 1j * w * Q) / (1 - w**2 + 1j * w / Q)
+
+f_jnp = jnp.array(f_sim, dtype=jnp.float64)
+Z_target = jnp.array(Z_sim, dtype=jnp.complex128)
+
+@jax.jit
+def loss_fn(param):
+    z_fit = param[2] * z_rlc(f_jnp / param[0], param[1])
+    z_err = Z_target - z_fit
+    return jnp.real(jnp.sum(z_err * jnp.conj(z_err)))
+```
+
+
+
+***initial guesses***
+
+```python
+absZ = np.abs(Z_sim)
+f0_ini = float(f_sim[np.argmax(absZ)])     # peak of |Z| -> resonance
+R_ini  = float(Z_sim.real[0])              # low-frequency resistance
+mask   = absZ > np.max(absZ) / np.sqrt(2)  # -3 dB bandwidth
+Q_ini  = f0_ini / np.ptp(f_sim[mask]) if mask.sum() > 1 else 5.0
+par_ini = jnp.array([f0_ini, Q_ini, R_ini])
+```
+
+`f0_ini / np.ptp(f_sim[mask])` i.e. $\mathbf{BW}= \omega_0/Q$
+
+
+
+***Optimization***
+
+```python
+par = par_ini
+for step in range(1000):
+    loss, grads = vg_fn(par)
+    if step % 200 == 0:
+        print(
+            f"step {step:4d}: f0={float(par[0]) / 1e9:.4f} GHz  Q={float(par[1]):.3f}  R={float(par[2]):.4f}  loss={float(loss):.3e}"
+        )
+    updates, opt_state = optimizer.update(grads, opt_state)
+    par = optax.apply_updates(par, updates)
+
+f0_fit, Q_fit, R_fit = float(par[0]), float(par[1]), float(par[2])
+```
+
+
+
+***Recover L & C***
+$$
+L = \frac{Q \cdot R}{\omega_0}, \quad C = \frac{1}{L\omega_0^2}
+$$
+
+
+```python
+w0 = 2 * np.pi * f0_fit
+tau = Q_fit / w0
+L_fit = tau * R_fit
+C_fit = 1 / (L_fit * w0**2)
+```
+
+
+
+![image-20260619203919002](emx/image-20260619203919002.png)
+
+![image-20260619205641832](emx/image-20260619205641832.png)
+
+---
+
+suppose R = 4.0 Ω, L = 112pH, and C = 7.0 fF
+
+![image-20260619204453137](emx/image-20260619204453137.png)
+
+![image-20260619205739324](emx/image-20260619205739324.png)
 
 
 

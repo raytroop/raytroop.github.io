@@ -328,9 +328,7 @@ $$
 
 > Integrated Transformer Models [[https://www.rfinsights.com/concepts/rfic-transformer-model/](https://www.rfinsights.com/concepts/rfic-transformer-model/)]
 
-![image-20260511221602225](inductance/image-20260511221602225.png)
-
-
+![image-20260619192653284](inductance/image-20260619192653284.png)
 
 
 

@@ -7,6 +7,55 @@ categories:
 mathjax: true
 ---
 
+
+
+## Icarus Verilog (iverilog)
+
+1. compile a SystemVerilog design and testbench file
+
+```bash
+iverilog -g2012 -o simulation_output.vvp design.sv testbench.sv
+```
+
+
+
+2. After successful compilation, you can run the simulation using the `vvp` runtime engine:
+
+```bash
+vvp sim.vvp +VCDFILE=output.vcd
+```
+
+`+VCDFILE=output.vcd`: This is the custom plusarg.
+
+`"$value$plusargs("VCDFILE=%s", filename)"`: The simulator searches for `+VCDFILE=`. It extracts the string after the `=` sign and saves it into the `filename` variable.
+
+`$dumpfile(filename)`: This opens a VCD file named `output.vcd`.
+
+`$dumpvars(0, DUT)`: This dumps all signals inside the module instance named `DUT` and everything below it
+
+```verilog
+string filename;
+
+initial begin
+   if ($value$plusargs("VCDFILE=%s",filename)) begin
+      $dumpfile(filename);
+      $dumpvars(0, DUT);
+   end
+end
+```
+
+
+
+3. open `vcd` file with `gtkwave`
+
+```bash
+gtkwave output.vcd
+```
+
+
+
+
+
 ## questasim sim flow
 
 > A Short Intro to ModelSim Verilog Simulator [[https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator](https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator)]
@@ -2009,29 +2058,6 @@ assign acc_stat = (acc_w[10-1 +: 2] == 2'b01) ? {1'b0, {(10-1){1'b1}}} : // up s
 > `2'b10`: underflow, down saturation
 
 
-
-###  2's complement negative number
-
-1. Flip all bits
-2. Add **1**.
-
-N-bit signed number
-$$
-A = -M_{N-1}2^{N-1}+\sum_{k=0}^{N-2}M_k2^k
-$$
-Flip all bits
-$$\begin{align}
-A_{flip} &= -(1-M_{N-1})2^{N-1} +\sum_{k=0}^{N-2}(1-M_k)2^k \\
-&= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k -2^{N-1}+\sum_{k=0}^{N-2}2^k \\
-&= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k -1
-\end{align}$$
-
-Add **1**
-$$\begin{align}
-A_- &= A_{flip}+1 \\
-&= M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k \\
-&= -A
-\end{align}$$
 
 
 

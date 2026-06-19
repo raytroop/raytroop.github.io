@@ -947,6 +947,70 @@ To make `\color` behave like `\textcolor`, you must manually wrap the command an
 
 
 
+---
+
+---
+
+**Set-Builder** Notation and **Conditional Probability**
+
+```latex
+P(A \mid B)
+```
+
+$$
+P(A \mid B)
+$$
+
+```latex
+\left\{ x \in \mathbb{R} \mid x > 0 \right\}
+```
+
+$$
+\left\{ x \in \mathbb{R} \mid x > 0 \right\}
+$$
+
+
+
+---
+
+---
+
+**evaluation bar**
+
+```latex
+\bigg\rvert_{…}
+```
+
+
+$$
+\frac{df}{dx}\bigg\rvert_{x=0}
+$$
+
+```latex
+\left. \right|
+```
+
+$$
+\left. \frac{df}{dx}\right|_{x=0}
+$$
+
+
+
+
+
+---
+
+---
+
+***math alphabet commands***
+
+| Blackboard Bold        | Roman/Upright          | Bold face              | Calligraphic/Script      |
+| ---------------------- | ---------------------- | ---------------------- | ------------------------ |
+| `\mathbb`              | `\mathrm`              | `\mathbf`              | `\mathcal`               |
+| $\mathbb{F}\mathbb{L}$ | $\mathrm{F}\mathrm{L}$ | $\mathbf{F}\mathbf{L}$ | $\mathcal{F}\mathcal{L}$ |
+
+
+
 ## mermaid
 
 *Mermaid is a JavaScript based diagramming and charting tool* that takes Markdown-inspired text definitions and creates diagrams dynamically in the browser

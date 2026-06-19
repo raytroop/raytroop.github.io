@@ -55,15 +55,13 @@ An **8-shaped (figure-8) inductor** is a specialized on-chip, high-Q component u
 
 
 
-## LC Tank Losses & Q
+## LC Tank Q
 
 ![image-20251010004537960](lc-osc/image-20251010004537960.png)
 
 
 
-
-
-> ![image-20251011002306877](lc-osc/image-20251011002306877.png)
+![image-20260619143617541](lc-osc/image-20260619143617541.png)
 
 
 ---
@@ -74,20 +72,22 @@ An **8-shaped (figure-8) inductor** is a specialized on-chip, high-Q component u
 
 ![image-20251012100732881](lc-osc/image-20251012100732881.png)
 
-Assuming RLC oscillator waveform is $V_0\sin\omega_0 t$ and $\omega_0 = \frac{1}{\sqrt{LC}}$ is resonance frequency. suppose the current through $R$ is cancelled out by additional $-R$
+Assuming **RLC** oscillator waveform is $V(t)=V_0\sin\omega_0 t$, $\omega_0 = \frac{1}{\sqrt{LC}}$ is resonant frequency
 
 Energy stored
 $$
-E_t = \frac{1}{2}LI_0^2 = \frac{1}{2}L(C\omega_0V_0)^2=\frac{1}{2}LC^2\omega_0^2 V_0^2 = \frac{1}{2}CV_0^2
+E_t = \frac{1}{2}LI_0^2 = \frac{1}{2}CV_0^2
 $$
 Energy Dissipated per Cycle
 $$
 E_d = \frac{V_0^2}{2R}\frac{2\pi}{\omega_0}
 $$
-For $Q_4$
+For $Q_4$, with $I_0=C\omega_0V_0$
 $$
-Q_4  = 2\pi\frac{E_s}{E_d} = R\omega_0C = \frac{R}{\omega_0L}
+\boxed{Q_4  = 2\pi\frac{E_s}{E_d} = R\omega_0C = \frac{R}{\omega_0L}}
 $$
+
+which holds **at resonance**
 
 ![image-20251012100816733](lc-osc/image-20251012100816733.png)
 
@@ -106,13 +106,9 @@ $$
 Q_3 = \frac{E_{pL} - E_{pC}}{E_d} = \left(\frac{1}{L\omega^2}-C\right)R\omega=\frac{R}{L\omega}\left(1 - \frac{\omega^2}{\omega^2_{SR}}\right)
 $$
 
-> ![image-20251012100931217](lc-osc/image-20251012100931217.png)
+![image-20251012100931217](lc-osc/image-20251012100931217.png)
 
----
 
-> Makarov, Sergey & Ludwig, Reinhold & Bitar, Joyce. (2016). Practical Electrical Engineering. 10.1007/978-3-319-21173-2.  [[pdf](https://weblibrary.mila.edu.my/upload/ebook/engineering/2016_Book_PracticalElectricalEngineering.pdf)]
-
-*TODO* &#128197;
 
 ---
 

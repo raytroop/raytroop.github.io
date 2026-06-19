@@ -9,6 +9,40 @@ mathjax: true
 
 
 
+## convolution, cross-correlation & autocorrelation
+
+> [[https://upload.wikimedia.org/wikipedia/commons/2/21/Comparison_convolution_correlation.svg](https://upload.wikimedia.org/wikipedia/commons/2/21/Comparison_convolution_correlation.svg)]
+
+![img](ss-insight/500px-Comparison_convolution_correlation.svg.png)
+
+
+
+## Hilbert Transform
+
+> Mathuranathan. *Understanding Analytic Signal and Hilbert Transform* [[https://www.gaussianwaves.com/2017/04/analytic-signal-hilbert-transform-and-fft/](https://www.gaussianwaves.com/2017/04/analytic-signal-hilbert-transform-and-fft/)]
+>
+> Dan Boschen. *What information does the Hilbert transform give?* [[https://dsp.stackexchange.com/a/88292/59253](https://dsp.stackexchange.com/a/88292/59253)]
+>
+> Frank R. Kschischang. *The Hilbert Transform* [[https://www.comm.utoronto.ca/frank/notes/hilbert.pdf](https://www.comm.utoronto.ca/frank/notes/hilbert.pdf)]
+>
+> Derek Rowell, 2.161 Signal Processing: Continuous and Discrete Fall 2008: *Determining a System’s Causality from its Frequency Response* [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf)]
+
+![image-20260607072156543](ss-insight/image-20260607072156543.png)
+
+> In frequency domain
+> $$
+> \boxed{\mathcal{H}\{X(\omega)\} = \frac{1}{\pi\omega} * X(\omega)} \qquad \boxed{\mathcal{H}\{x(f)\} = \frac{1}{\pi f} * x(f)}
+> $$
+
+
+
+
+![image-20260619081200833](ss-insight/image-20260619081200833.png)
+
+
+
+
+
 
 ## Pulse Amplitude Modulation (PAM)
 

@@ -321,6 +321,18 @@ $$
 
 
 
+
+
+
+
+---
+
+> 俞思辰, Analog and Digital PLL Phase Noise Model [[https://bbs.eetop.cn/thread-996183-1-1.html](https://bbs.eetop.cn/thread-996183-1-1.html)]
+
+![image-20260619134758155](ddsm/image-20260619134758155.png)
+
+
+
 ### Frequency & Time-Domian Model for Q-noise
 
 > metroidman, fractional N量化噪声对系统相位噪声的影响 两种分析方法 LTI频域法和时域采样DFT法 [[link](https://www.bilibili.com/video/BV1RCw4zREcJ/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]

@@ -7,17 +7,27 @@ categories:
 mathjax: true
 ---
 
-## Phasor Diagram
+## Rotaing Phasor
 
-phasor in ***time domain*** as time elapses
+**phasor** in ***time domain*** as time elapses
+
+![image-20251105225355996](am-pm/image-20251105225355996.png)
+
+
+
+![image-20260619111109416](am-pm/image-20260619111109416.png)
+
+![image-20260619110417243](am-pm/image-20260619110417243.png)
 
 ---
 
 > A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 45-59, 2025 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10818782)]
+>
+> —, 30 January, SSCS Technical Webinars, [[https://resourcecenter.sscs.ieee.org/education/webinars/sscs_edu_web_abidi_013026](https://resourcecenter.sscs.ieee.org/education/webinars/sscs_edu_web_abidi_013026)]
 
 The oscillation $\color{red}V_0\cos\omega_0 t$ is represented by the horizontal phasor of magnitude $\color{red}V_0$
 
-![image-20260604230542185](am-pm/image-20260604230542185.png)
+![image-20260619072804925](am-pm/image-20260619072804925.png)
 
 ***AM***
 $$
@@ -46,10 +56,8 @@ modulate the phase of the oscillation with an index of approximately $\frac{2V_{
 
 ![image-20251105224322467](am-pm/image-20251105224322467.png)
 $$\begin{align}
-x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
-& = \cos(\omega_0 t) + 2k \cos(\omega_m t) \cos(\omega_0 t) \\
-&=\mathcal{Re}\{e^{j\omega_0t}+k(e^{j\omega_0t}e^{j\omega_mt}+e^{j\omega_0t}e^{-j\omega_mt})\}\\
-&=\mathcal{Re}\{e^{j\omega_0t}(\color{red}1+k(e^{j\omega_mt}+e^{-j\omega_mt})\color{black})\}
+x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t)  = \cos(\omega_0 t) + 2k \cos(\omega_m t) \cos(\omega_0 t) \\
+&=\mathcal{Re}\{e^{j\omega_0t}+k(e^{j\omega_0t}e^{j\omega_mt}+e^{j\omega_0t}e^{-j\omega_mt})\} =\mathcal{Re}\{e^{j\omega_0t}(\color{red}1+k(e^{j\omega_mt}+e^{-j\omega_mt})\color{black})\}
 \end{align}$$
 
 ![image-20251105230141244](am-pm/image-20251105230141244.png)
@@ -64,47 +72,25 @@ x(t)&= (1+2k\cos(\omega_m t)) \cos(\omega_0 t) \\
 
 ---
 
-> ![image-20251105225355996](am-pm/image-20251105225355996.png)
+> Phasors, Modulation & Sidebands [[https://www.rfinsights.com/concepts/modulation-and-sidebands/](https://www.rfinsights.com/concepts/modulation-and-sidebands/)]
+
+![image-20260511235100264](am-pm/image-20260511235100264.png)
 
 
 
 ## Single Sideband Modulation (SSB)
 
+> Phase Noise 101: Basics, Applications and Measurements [[https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf](https://www.qsl.net/ab4oj/test/docs/20180720_KEE7_PhaseNoise.pdf)]
+>
+> Marcelino Lazaro, Communication Theory, Chapter 2 Analog Modulations [[https://ocw.uc3m.es/pluginfile.php/7097/mod_page/content/15/OCW-CT-C2.pdf](https://ocw.uc3m.es/pluginfile.php/7097/mod_page/content/15/OCW-CT-C2.pdf)] [[video](https://youtu.be/gYZmRD9yIFs)]
+
 ![image-20251104003558243](am-pm/image-20251104003558243.png)
 
 
 
-![image-20251104003840236](am-pm/image-20251104003840236.png)
+![image-20260619103248132](am-pm/image-20260619103248132.png)
 
-
-
-## Hilbert Transform & Analytic Signal
-
-> Mathuranathan. *Understanding Analytic Signal and Hilbert Transform* [[https://www.gaussianwaves.com/2017/04/analytic-signal-hilbert-transform-and-fft/](https://www.gaussianwaves.com/2017/04/analytic-signal-hilbert-transform-and-fft/)]
->
-> Dan Boschen. *What information does the Hilbert transform give?* [[https://dsp.stackexchange.com/a/88292/59253](https://dsp.stackexchange.com/a/88292/59253)]
->
-> Frank R. Kschischang. *The Hilbert Transform* [[https://www.comm.utoronto.ca/frank/notes/hilbert.pdf](https://www.comm.utoronto.ca/frank/notes/hilbert.pdf)]
->
-> Derek Rowell, 2.161 Signal Processing: Continuous and Discrete Fall 2008: *Determining a System’s Causality from its Frequency Response* [[https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf](https://ocw.mit.edu/courses/2-161-signal-processing-continuous-and-discrete-fall-2008/142cd928b3b3959721198872ab97b647_causality.pdf)]
-
-![image-20260607072156543](am-pm/image-20260607072156543.png)
-
-> In frequency domain
-> $$
-> \boxed{\mathcal{H}\{X(\omega)\} = \frac{1}{\pi\omega} * X(\omega)} \qquad \boxed{\mathcal{H}\{x(f)\} = \frac{1}{\pi f} * x(f)}
-> $$
-
-
-
-
-![image-20251213091009754](am-pm/image-20251213091009754.png)
-
----
-
-> Phasors, Modulation & Sidebands [[https://www.rfinsights.com/concepts/modulation-and-sidebands/](https://www.rfinsights.com/concepts/modulation-and-sidebands/)]
-
-![image-20260511235100264](am-pm/image-20260511235100264.png)
+![image-20260619103308475](am-pm/image-20260619103308475.png)
 
 
 
@@ -153,12 +139,6 @@ where $X_{I,PM,USB}(t)=\cos(\omega_m t)$ and $X_{Q,PM,USB}(t)=\sin(\omega_m t)$;
 
 ![image-20251116232032760](am-pm/image-20251116232032760.png)
 
----
-
-![image-20251116190237879](am-pm/image-20251116190237879.png)
-
-
-
 
 
 ## Amplitude Noise
@@ -186,6 +166,20 @@ R_y(\tau) &= \mathrm{E}[y(t)y(t+\tau)] \\
 ![image-20250609213403991](am-pm/image-20250609213403991.png)
 
 
+
+## PM & FM
+
+> Dan Boschen What is the difference between phase noise and frequency noise? [[https://dsp.stackexchange.com/a/38230/59253](https://dsp.stackexchange.com/a/38230/59253)]
+
+Phase Noise and Frequency Noise are not two different noise sources, they are artifacts of the same noise, it is just a matter of what units you want to use
+
+![image-20251106205014601](am-pm/image-20251106205014601.png)
+
+
+
+---
+
+![image-20251106001007275](am-pm/image-20251106001007275.png)
 
 
 
@@ -262,19 +256,7 @@ Therefore, sideband is **asymmetric** if $\omega_{pm} = \omega_{am}$ **same**
 
 
 
-## PM & FM
 
-> Dan Boschen What is the difference between phase noise and frequency noise? [[https://dsp.stackexchange.com/a/38230/59253](https://dsp.stackexchange.com/a/38230/59253)]
-
-Phase Noise and Frequency Noise are not two different noise sources, they are artifacts of the same noise, it is just a matter of what units you want to use
-
-![image-20251106205014601](am-pm/image-20251106205014601.png)
-
-
-
----
-
-![image-20251106001007275](am-pm/image-20251106001007275.png)
 
 
 ## Equipartition theorem
@@ -361,33 +343,84 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 
 
+
+
+## AN-PN Conversion
+
+> G. Giust, Influence of Noise Processes on Jitter and Phase Noise Measurements [[https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements](https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements)]
+>
+> —. "Methodologies for PCIe5 Refclk Jitter Analysis,", PCI-SIG Electrical Workgroup Meeting (Jan. 19, 2018)
+>
+> —. How to Identify the Source of Phase Jitter through Phase Noise Plots [[https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots](https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots)]
+>
+> AN10072 Determine the Dominant Source of Phase Noise, by Inspection [[https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection](https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection)]
+
+- AM alone doesn't introduce jitter (e.g., doesn't change zero-crossings) nor impact phase
+
+- AM changes slew rate, and so influences the conversion of amplitude noise to jitter when amplitude noise (BB) is present
+
+
+![image-20250719122931298](am-pm/image-20250719122931298.png)
+
+
+
+![Figure 8 thumb_rev](am-pm/Figure8_REV.jpg)
+
+---
+
+---
+
+***additive & parametric noise***
+
+> Enrico Rubiola. The Measurement of AM-PM Noise, and the Origin of Noise in Oscillators [[https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf](https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf)]
+>
+> —, February 7, 2025. Phase Noise - Art, Science and Experimental Methods [[https://rubiola.org/pdf-lectures/Scient-Instrum-Files/!-Phase-noise.pdf](https://rubiola.org/pdf-lectures/Scient-Instrum-Files/!-Phase-noise.pdf)]
+
+![image-20251116190237879](am-pm/image-20251116190237879.png)
+
+![image-20251110234817907](am-pm/image-20251110234817907.png)
+
+![image-20251110233928508](am-pm/image-20251110233928508.png)
+
+![image-20251104010027135](am-pm/image-20251104010027135.png)
+
+![image-20251105002402811](am-pm/image-20251105002402811.png)
+
+![image-20251104010925436](am-pm/image-20251104010925436.png)
+
+![image-20251105231715117](am-pm/image-20251105231715117.png)
+
+
+
 ## AM & PM Noise Separation
 
 > Ken Kundert. Introduction to RF Simulation and its Application [[https://designers-guide.org/analysis/rf-sim.pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
+>
+> [[https://designers-guide.org/analysis/am-pm-conv.pdf](https://designers-guide.org/analysis/am-pm-conv.pdf)]
 
 ![image-20251117235457764](am-pm/image-20251117235457764.png)
 
 ![Separation.drawio](am-pm/Separation.drawio.svg)
 
-> For AM & ***pacphase=90deg***, complex exponentials with frequency $\omega_m$
-> $$
-> \alpha_+(t) = je^{j\omega_m t} = e^{j(\omega_mt+\pi/2)}
-> $$
-> where $A_+=j$
->
-> Then, the complex exponentials with frequency $-\omega_m$ shall be
-> $$
-> \alpha_-(t) = [\alpha_+(t)]^* = -je^{-j\omega_m t} = e^{-j(\omega_mt+\pi/2)}
-> $$
-> where $A_-=A_+^* =-j$
->
-> ![image-20251125214622501](am-pm/image-20251125214622501.png)
+For AM & ***pacphase=90deg***, complex exponentials with frequency $\omega_m$
+$$
+\alpha_+(t) = je^{j\omega_m t} = e^{j(\omega_mt+\pi/2)}
+$$
+where $A_+=j$
+
+Then, the complex exponentials with frequency $-\omega_m$ shall be
+$$
+\alpha_-(t) = [\alpha_+(t)]^* = -je^{-j\omega_m t} = e^{-j(\omega_mt+\pi/2)}
+$$
+where $A_-=A_+^* =-j$
+
+![image-20251125214622501](am-pm/image-20251125214622501.png)
 
 ![image-20251118000021345](am-pm/image-20251118000021345.png)
 
-> [[https://designers-guide.org/analysis/am-pm-conv.pdf](https://designers-guide.org/analysis/am-pm-conv.pdf)]
->
-> ![image-20251117233740882](am-pm/image-20251117233740882.png)
+---
+
+![image-20251117233740882](am-pm/image-20251117233740882.png)
 
 ---
 
@@ -445,53 +478,6 @@ If the narrowband noise $n(t)$ is Gaussian and its power spectral density $S_N (
 
 
 
-
-
-## AN-PN Conversion
-
-> G. Giust, Influence of Noise Processes on Jitter and Phase Noise Measurements [[https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements](https://www.signalintegrityjournal.com/articles/800-influence-of-noise-processes-on-jitter-and-phase-noise-measurements)]
->
-> —. "Methodologies for PCIe5 Refclk Jitter Analysis,", PCI-SIG Electrical Workgroup Meeting (Jan. 19, 2018)
->
-> —. How to Identify the Source of Phase Jitter through Phase Noise Plots [[https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots](https://www.sitime.com/company/newsroom/blog/how-identify-source-phase-jitter-through-phase-noise-plots)]
->
-> AN10072 Determine the Dominant Source of Phase Noise, by Inspection [[https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection](https://www.sitime.com/support/resource-library/application-notes/an10072-determine-dominant-source-phase-noise-inspection)]
-
-- AM alone doesn't introduce jitter (e.g., doesn't change zero-crossings) nor impact phase
-
-- AM changes slew rate, and so influences the conversion of amplitude noise to jitter when amplitude noise (BB) is present
-
-
-![image-20250719122931298](am-pm/image-20250719122931298.png)
-
-
-
-![Figure 8 thumb_rev](am-pm/Figure8_REV.jpg)
-
----
-
----
-
-***additive & parametric noise***
-
-> Enrico Rubiola. The Measurement of AM-PM Noise, and the Origin of Noise in Oscillators [[https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf](https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf)]
->
-> —, February 7, 2025. Phase Noise - Art, Science and Experimental Methods [[https://rubiola.org/pdf-lectures/Scient-Instrum-Files/!-Phase-noise.pdf](https://rubiola.org/pdf-lectures/Scient-Instrum-Files/!-Phase-noise.pdf)]
-
-![image-20251110234817907](am-pm/image-20251110234817907.png)
-
-![image-20251110233928508](am-pm/image-20251110233928508.png)
-
-![image-20251104010027135](am-pm/image-20251104010027135.png)
-
-> ![image-20251105002402811](am-pm/image-20251105002402811.png)
-
-![image-20251104010925436](am-pm/image-20251104010925436.png)
-
-![image-20251105231715117](am-pm/image-20251105231715117.png)
-
-
-
 ## Phase Noise Measurement 
 
 > Phase Noise Measurement Solutions [[https://www.keysight.com/vn/en/assets/7018-02528/technical-overviews/5990-5729.pdf](https://www.keysight.com/vn/en/assets/7018-02528/technical-overviews/5990-5729.pdf)]
@@ -529,6 +515,8 @@ print(n_tot)    # -137.8755739720566
 
 Ken Kundert, Measuring AM, PM & FM Conversion with SpectreRF [[https://designers-guide.org/analysis/am-pm-conv.pdf](https://designers-guide.org/analysis/am-pm-conv.pdf)]
 
+Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise [[https://designers-guide.org/theory/cyclo-preso.pdf](https://designers-guide.org/theory/cyclo-preso.pdf)], [[https://designers-guide.org/theory/cyclo-paper.pdf](https://designers-guide.org/theory/cyclo-paper.pdf)]
+
 ---
 
 Dan Boschen. Creating uneven sidebands with AM + PM modulation? [[https://dsp.stackexchange.com/a/61670/59253](https://dsp.stackexchange.com/a/61670/59253)]
@@ -539,8 +527,14 @@ Dan Boschen. Creating uneven sidebands with AM + PM modulation? [[https://dsp.st
 
 Timing 201 #1: The Case of the Phase Noise That Wasn't - Part 1 [[https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?](https://community.silabs.com/s/share/a5U1M000000knpiUAA/timing-201-1-the-case-of-the-phase-noise-that-wasnt-part-1?)]
 
+Application Notes: *Spectrum Analysis Amplitude and Frequency Modulation* [[https://www.keysight.com/us/en/assets/7018-06742/application-notes/5954-9130.pdf](https://www.keysight.com/us/en/assets/7018-06742/application-notes/5954-9130.pdf)]
+
 ---
 
-Noise in mixers, oscillators, samplers, and logic: an introduction to cyclostationary noise [[https://designers-guide.org/theory/cyclo-preso.pdf](https://designers-guide.org/theory/cyclo-preso.pdf)], [[https://designers-guide.org/theory/cyclo-paper.pdf](https://designers-guide.org/theory/cyclo-paper.pdf)]
-
 Haykin, Simon S., and Michael Moher. *Communication Systems*. 5th ed. John Wiley & Sons, 2009.
+
+Marcelino Lazaro, Communication Theory: Bachelor in Telecommunication Technologies Engineering [[https://ocw.uc3m.es/file.php/326/Bibliography/OCW-CT-Book.pdf](https://ocw.uc3m.es/file.php/326/Bibliography/OCW-CT-Book.pdf)]
+
+L.W. Couch, *Digital and Analog Communication* *Systems*, 8th Edition, Pearson, 2013. [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]
+
+Sklar, Bernard, and Fredric J. Harris. 2021. *Digital Communications: Fundamentals and Applications*. 3rd ed. New York: Pearson

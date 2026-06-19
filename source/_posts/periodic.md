@@ -18,6 +18,11 @@ The steady-state response is the response that results after any transient effec
 
 ![image-20231028163033255](periodic/image-20231028163033255.png)
 
+![image-20260618184130556](periodic/image-20260618184130556.png)
+
+![image-20260618184420260](periodic/image-20260618184420260.png)
+
+
 
 ## Harmonic Balance Analysis
 

@@ -171,7 +171,6 @@ $$
 >
 > ES Lecture 35: Non ideal capacitor, Capacitor Q and series RC to parallel RC conversion [[https://youtu.be/CJ_2U5pEB4o](https://youtu.be/CJ_2U5pEB4o)]
 >
-> RFInsights, Series to Parallel Conversion using Quality Factor [[https://www.rfinsights.com/concepts/series-to-parallel/](https://www.rfinsights.com/concepts/series-to-parallel/)]
 
 
 ### Non ideal Capacitor
@@ -182,18 +181,17 @@ $$
 
 ![image-20251009211423154](resonant/image-20251009211423154.png)
 
-> ![image-20251009211708604](resonant/image-20251009211708604.png)
-
 $$
 Q_s = \frac{X_s}{R_s} = X_p\frac{Q_p^2}{Q_p^2+1}\cdot \frac{Q_p^2+1}{R_p} =\frac{Q_p^2}{R_p/X_p}=Q_p
 $$
 
 
 So long as $Q_s\gg 1$
-$$\begin{align}
-R_p &\approx Q_s^2R_s \\
-C_p &\approx C_s
-\end{align}$$
+$$
+\boxed{R_p \approx Q_s^2R_s \qquad C_p \approx C_s}
+$$
+
+![image-20260619145726643](resonant/image-20260619145726643.png)
 
 
 ---
@@ -214,10 +212,84 @@ C_p &\approx C_s
 ![image-20231224163740411](resonant/image-20231224163740411.png)
 
 So long as $Q_s\gg 1$
-$$\begin{align}
-R_p &\approx Q_s^2R_s \\
-L_p &\approx L_s
-\end{align}$$
+$$
+\boxed{R_p \approx Q_s^2R_s \qquad L_p \approx L_s}
+$$
+
+
+
+### Q by general definition
+
+> RFInsights, Series to Parallel Conversion using Quality Factor [[https://www.rfinsights.com/concepts/series-to-parallel/](https://www.rfinsights.com/concepts/series-to-parallel/)]
+
+![image-20260619150655292](resonant/image-20260619150655292.png)
+
+***Parallel C, R:***
+$$
+Q=2\pi\cdot \frac{\frac{1}{2}CV_0^2}{\frac{V_0^2}{2R}\cdot \frac{2\pi}{\omega}}=R\cdot \omega C
+$$
+
+
+***Series C, R:***
+$$
+Q = 2\pi \cdot \left. \frac{\frac{1}{2}CV_0^2}{\frac{I_0^2}{2}R\cdot \frac{2\pi}{\omega}} \right|_{I_0=\omega CV_0} = \frac{1}{R\cdot\omega C}
+$$
+
+
+![image-20260619161140199](resonant/image-20260619161140199.png)
+
+***Series L, R:***
+$$
+Q=2\pi\cdot \frac{\frac{1}{2}LI_0^2}{\frac{I_0^2}{2}R\cdot \frac{2\pi}{\omega}}=\frac{\omega L}{R}
+$$
+
+
+***Parallel L, R:***
+$$
+Q = 2\pi \cdot \left. \frac{\frac{1}{2}LI_0^2}{\frac{V_0^2}{2R}R\cdot \frac{2\pi}{\omega}} \right|_{V_0=\omega LI_0} = \frac{R}{\omega L}
+$$
+
+## Series/Parallel RLC tank
+
+> Makarov, Sergey & Ludwig, Reinhold & Bitar, Joyce. (2016). Practical Electrical Engineering. 10.1007/978-3-319-21173-2.  [[pdf](https://weblibrary.mila.edu.my/upload/ebook/engineering/2016_Book_PracticalElectricalEngineering.pdf)]
+
+###  Series Resonant RLC
+
+The **series RLC resonator** is a **voltage divider**,  driven by an alternating **voltage** source $v_s(t)=V_m\cos\omega t$
+
+![image-20260619163323279](resonant/image-20260619163323279.png)
+
+---
+
+![image-20260619164058914](resonant/image-20260619164058914.png)
+
+***The ideal LC circuit never exists in practice***
+
+---
+
+***Resonance Condition & Quality Factor Q***
+
+![image-20260619172617128](resonant/image-20260619172617128.png)
+
+![image-20260619172848440](resonant/image-20260619172848440.png)
+
+---
+
+***bandwidth $B$ of the series resonant RLC circuit — half-power bandwidth.***
+
+![image-20260619174310426](resonant/image-20260619174310426.png)
+
+![image-20260619174321807](resonant/image-20260619174321807.png)
+
+![image-20260619174637248](resonant/image-20260619174637248.png)
+
+### Parallel Resonant RLC
+
+The **parallel RLC resonator** is a **current divider circuit**, driven by an alternating **current** source $i_s(t)=I_m\cos\omega t$
+
+![image-20260619181019444](resonant/image-20260619181019444.png)
+
+![image-20260619181038704](resonant/image-20260619181038704.png)
 
 
 

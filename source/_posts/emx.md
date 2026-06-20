@@ -850,6 +850,34 @@ LVS issue for circuits with customized devices
 >
 > —, [[https://gdsfactory.github.io/gsim/nbs/palace_inductor/](https://gdsfactory.github.io/gsim/nbs/palace_inductor/)]
 
+***Extract Differential Impedance***
+
+compute the differential impedance $Z_\text{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}$, which is the impedance seen between the two ports of the inductor under differential excitation
+
+```python
+import numpy as np
+import skrf as rf
+
+f = results.freq * 1e9  # GHz -> Hz
+w = 2 * np.pi * f
+
+ports = results.port_names
+n = len(ports)
+
+S = np.zeros((len(f), n, n), dtype=complex)
+for i, pi in enumerate(ports):
+    for j, pj in enumerate(ports):
+        S[:, i, j] = results[(pi, pj)].complex
+
+ntwk = rf.Network(f=f, s=S, f_unit="hz")
+Z = ntwk.z
+
+Z_sim = Z[:, 0, 0] - Z[:, 0, 1] - Z[:, 1, 0] + Z[:, 1, 1]
+f_sim = f
+```
+
+
+
 ***Analytical RLC Model Fit of Inductor***
 
 ![RLC circuit](emx/images.jpeg)

@@ -736,17 +736,14 @@ v_t (t) = v_i(t)\cdot m_t(t)
 $$
 
 where  $v_i(t)$ is input *white* noise, whose autocorrelation is $A\delta(\tau)$, and $m_t(t)$ is periodically operating switch, then autocorrelation of $v_t(t)$
-$$\begin{align}
-R_t (t_1, t_2) &= E[v_t(t_1)\cdot v_t(t_2)] \\
-&= R_i(t_1, t_2)\cdot  m_t(t_1)m_t(t_2)
-\end{align}$$
+$$
+R_t (t_1, t_2) = E[v_t(t_1)\cdot v_t(t_2)] = R_i(t_1, t_2)\cdot  m_t(t_1)m_t(t_2)
+$$
 
 Then
-$$\begin{align}
-R_t(t, t-\tau) &= R_i(\tau)\cdot m_t(t)m_t(t-\tau) \\
-& = A\delta(\tau) \cdot m_t(t)m_t(t-\tau) \\
-& = A\delta(\tau) \cdot m_t(t)
-\end{align}$$
+$$
+R_t(t, t-\tau) = R_i(\tau)\cdot m_t(t)m_t(t-\tau) = A\delta(\tau) \cdot m_t(t)m_t(t-\tau) = A\delta(\tau) \cdot m_t(t)
+$$
 Because $m_t(t)=m_t(t+T)$, $R_t(t, t-\tau)$ is is periodic in the variable $t$ with period $T$
 
 The time-averaged ACF is denoted as $\tilde{R_t}(\tau)$
@@ -756,7 +753,7 @@ $$
 $$
 That is,
 $$
-S_t(f) = m\cdot S_{A}(f)
+\boxed{S_t(f) = m\cdot S_{A}(f)}
 $$
 
 
@@ -767,6 +764,30 @@ $$
 ![image-20241118212242823](noise/image-20241118212242823.png)
 
 > ![image-20241116170450589](noise/image-20241116170450589.png)
+
+
+
+---
+
+---
+
+***alternative method, inspired by Claude***
+
+![white_modulation.drawio](noise/white_modulation.drawio.svg)
+$$
+\boxed{S_O=H*S_I=S_I\sum_{m=-\infty}^{\infty}|c_m|^2}
+$$
+with CTFS's Parseval's Relation — $\frac{1}{T} \int_{0}^{T} \vert{}f(x)\vert{}^2 \, dx = \sum_{n=-\infty}^{\infty} \vert{}c_n\vert{}^2$
+$$
+\sum_{m=-\infty}^{\infty}|c_m|^2 = \mathcal{D}\cdot \mathcal{h}^2
+$$
+where $\mathcal{D}$ is **duty cycle** and $\mathcal{h}$ is **height of periodic pulse**
+
+Then, Two-sided PSD is
+$$
+\boxed{S_O=S_I\cdot \mathcal{D}\cdot \textcolor{blue}{\mathcal{h}^2}}
+$$
+
 
 
 
@@ -793,6 +814,9 @@ The DC value of $m_{tac}(\tau)$ can be calculated as below
 
 Therefore, time-average power spectral density and total power are *scaled by $m^2$ in fundamental frequency sideband*
 
+$$
+\boxed{S_t(f) = m^2\cdot S_{A}(f)}
+$$
 
 
 ---

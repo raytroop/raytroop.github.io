@@ -57,7 +57,7 @@ An **8-shaped (figure-8) inductor** is a specialized on-chip, high-Q component u
 
 ## LC Tank Q
 
-![image-20251010004537960](lc-osc/image-20251010004537960.png)
+![image-20260620145624711](lc-osc/image-20260620145624711.png)
 
 
 
@@ -115,6 +115,20 @@ $$
 > EEE 211 ANALOG ELECTRONICS [[https://www.ee.bilkent.edu.tr/~eee211/LectureNotes/Chapter%20-%2004.pdf](https://www.ee.bilkent.edu.tr/~eee211/LectureNotes/Chapter%20-%2004.pdf)]
 
 ![image-20251213164211248](lc-osc/image-20251213164211248.png)
+
+---
+
+---
+
+***Tank Impedance Near Resonance***
+
+![image-20260620150838359](lc-osc/image-20260620150838359.png)
+
+![image-20260620151219168](lc-osc/image-20260620151219168.png)
+$$
+\boxed{|Z(\omega_0\pm \omega_m)|^2 \cong \frac{1}{(2\omega_m C)^2}}\qquad\qquad \boxed{|Z(\omega_0\pm \omega_m)|^2 \cong R^2\left(\frac{\omega_0}{2Q\omega_m}\right)^2}
+$$
+
 
 
 

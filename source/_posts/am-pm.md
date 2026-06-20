@@ -27,7 +27,23 @@ mathjax: true
 
 The oscillation $\color{red}V_0\cos\omega_0 t$ is represented by the horizontal phasor of magnitude $\color{red}V_0$
 
-![image-20260619072804925](am-pm/image-20260619072804925.png)
+![image-20260620165420109](am-pm/image-20260620165420109.png)
+$$
+\boxed{\color{blue}\begin{equation}
+\left.
+\begin{aligned}
+C_{+} &= V_{AM} + V_{PM} \\
+C_{-} &= \overline{V}_{AM} - \overline{V}_{PM}
+\end{aligned}
+\right\}
+\quad\Longrightarrow\quad
+\begin{aligned}
+V_{AM} &= \tfrac{1}{2}\left(C_{+} + \overline{C}_{-}\right) \\
+V_{PM} &= \tfrac{1}{2}\left(C_{+} - \overline{C}_{-}\right)
+\end{aligned}
+\end{equation}}
+$$
+
 
 ***AM***
 $$
@@ -40,6 +56,12 @@ $$
 e^{j\omega_0 t}(V_0 + V_{PM}e^{jy_P}-V_{PM}e^{-jy_P})=V_0e^{j\omega_0 t}\left(1 + j\frac{2V_{PM}}{V_0}\sin y_P\right) \approx V_0e^{j\omega_0 t}\cdot e^{j\frac{2V_{PM}}{V_0}\sin y_P}
 $$
 modulate the phase of the oscillation with an index of approximately $\frac{2V_{PM}}{V_0}$ rad
+
+
+
+
+
+
 
 ---
 

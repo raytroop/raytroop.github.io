@@ -424,6 +424,18 @@ Cyclostationary noise can be viewed as stationary noise, $i_{n0}(t)$, multiplied
 >
 > D. Murphy, J. J. Rael and A. A. Abidi, "Phase Noise in LC Oscillators: A Phasor-Based Analysis of a General Result and of Loaded  Q ," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 57, no. 6, pp. 1187-1203, June 2010 [[https://sci-hub.ru/10.1109/TCSI.2009.2030110](https://sci-hub.ru/10.1109/TCSI.2009.2030110)]
 
+
+
+The differential pair plays two distinct roles. Toward its own noise it acts as a sampling gate — each transistor contributes only within the short conduction windows at the zero crossings — and the resulting injection is almost purely phase-modulating. 
+
+Toward the tail noise it acts as a single-balanced mixer, commutating the upstream current with a square wave and folding it as a single sideband that splits equally into AM and PM
+
+
+
+### Diff. Pair Noise
+
+> For diff. pair noise, the diff. pair is its own ***noise gate***
+
 ![image-20260615005115044](osc-pn/image-20260615005115044.png)
 
 ![image-20260615005234730](osc-pn/image-20260615005234730.png)
@@ -440,9 +452,46 @@ c_{2m} = \underbrace{(-1)^m}_{\text{position}}\,
 $$
 ![image-20260615005921381](osc-pn/image-20260615005921381.png)
 
-
-
 Consequently, excess noise arises solely from the components at $\omega_0\pm \omega_m$, since all other spectral components lie outside the tank bandwidth and are therefore suppressed by the resonator's frequency-selective filtering
+
+![image-20260620203920911](osc-pn/image-20260620203920911.png)
+
+
+
+With *Cyclostationary Noise (Modulated Noise) [[https://raytroop.github.io/2024/04/27/noise/#cyclostationary-noise-modulated-noise](https://raytroop.github.io/2024/04/27/noise/#cyclostationary-noise-modulated-noise)]*
+
+For one MOS, Two-Sided PSD is
+$$
+S_O = S_I \cdot \mathcal{D}\cdot \mathcal{h}^2 = 2kT\gamma g_m\cdot \frac{2T_W}{T_0}\cdot\frac{1}{4} = \frac{T_W}{2T_0}\cdot 2kT\gamma g_m
+$$
+yield **One-Sided PSD** of **one MOS**
+$$
+S_O' = \textcolor{blue}{\frac{T_W}{2T_0}}\cdot 4kT\gamma g_m
+$$
+![image-20260620204007657](osc-pn/image-20260620204007657.png)
+
+The **single-tone analysis** establishes that the differential-pair current is injected as **almost pure phase noise**, while **summing the white-noise power over all harmonics** of the gating function ($\overline{H^2}=T_W/2T_0 $) sets its **magnitude**; together these yield the differential-pair contribution to the oscillator phase noise.
+
+ 
+
+### Tail Noise
+
+> For the tail noise, the **diff. pair is a mixer**
+
+![image-20260620171318943](osc-pn/image-20260620171318943.png)
+$$
+V_{AM} = \tfrac{1}{2}\big(C_+ + \overline{C}_-\big) = \tfrac{1}{2}\Big(\tfrac{c_1^* i}{2} + \tfrac{c_3^* i}{2}\Big)\qquad
+V_{PM} = \tfrac{1}{2}\big(C_+ - \overline{C}_-\big) = \tfrac{1}{2}\Big(\tfrac{c_1^* i}{2} - \tfrac{c_3^* i}{2}\Big)
+$$
+$V_{AM}\approx V_{PM}$ for a square wave $|c_1|=3|c_3|$ — modulated tail noise is divided into ***AM and phase noise almost equally***
+$$
+S_{I,PN} = S_{nI,T} \cdot \mathcal{D}\cdot \mathcal{h}^2 \cdot \frac{1}{2} = S_{nI,T} \cdot 1 \cdot \frac{1}{4}\cdot \frac{1}{2} = \boxed{\frac{1}{8}\cdot S_{nI,T}}
+$$
+The commutation folds  tail noise as **a (near) single sideband**, which is equivalent to equal AM and PM — and only the PM half counts toward phase noise
+
+![image-20260620234423406](osc-pn/image-20260620234423406.png)
+
+
 
 ## Demir's Model — NLTV
 

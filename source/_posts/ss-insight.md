@@ -303,7 +303,7 @@ $$
 
 
 
-## Different Variants of the PSD Definition
+## PSD Definition Variants
 
 In the practice of engineering, it has become customary to use slightly different variants of the PSD definition, depending on the particular application or research field.
 

@@ -775,7 +775,7 @@ $$
 
 ![white_modulation.drawio](noise/white_modulation.drawio.svg)
 $$
-\boxed{S_O=H*S_I=S_I\sum_{m=-\infty}^{\infty}|c_m|^2}
+\boxed{S_O=H^2*S_I=S_I\sum_{m=-\infty}^{\infty}|c_m|^2}
 $$
 with CTFS's Parseval's Relation — $\frac{1}{T} \int_{0}^{T} \vert{}f(x)\vert{}^2 \, dx = \sum_{n=-\infty}^{\infty} \vert{}c_n\vert{}^2$
 $$

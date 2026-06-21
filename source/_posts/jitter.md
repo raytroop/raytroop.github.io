@@ -33,6 +33,10 @@ mathjax: true
 ### Excess phase as deterministic periodic signal
 
 > Nicola Da Dalt, ISSCC 2012: Jitter Basic and Advanced Concepts, Statistics and Applications
+>
+> C. Samori, "Tutorial: Understanding Phase Noise in LC VCOs," *2016 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2016
+
+![image-20260621101558719](jitter/image-20260621101558719.png)
 
 ![image-20260609231247931](jitter/image-20260609231247931.png)
 
@@ -80,6 +84,8 @@ and
 $$
 P_{spur} = 10\log\left(\frac{\Delta f_{pk}}{2f_m}\right)^2= 10\log\left(\frac{A}{2}\right)^2
 $$
+
+
 
 
 

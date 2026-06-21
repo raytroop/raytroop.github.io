@@ -116,72 +116,13 @@ $$
 
 
 
-## Lorentzian spectrum
 
-![image-20240720134811859](osc-pn/image-20240720134811859.png)
-
-We typically use the two spectra, $S_{\phi n}(f)$ and $S_{out}(f)$, interchangeably, but we must resolve these inconsistencies. **voltage spectrum**  is called **Lorentzian spectrum**
-
----
-
-The periodic signal $x(t)$ can be expanded in Fourier series as:
-
-![image-20240720141514040](osc-pn/image-20240720141514040.png)
-
-Assume that the signal is subject to *excess phase noise*, which is modeled by adding a **time-dependent** noise component $\alpha(t)$. The noisy signal can be written $x(t+\alpha(t))$, the added excess phase $\phi(t)= \frac{\alpha(t)}{\omega_0}$
-
-> ![image-20250103211650043](osc-pn/image-20250103211650043.png)
-
-
-
-The autocorrelation of the noisy signal is by definition:
-
-![image-20240720141525576](osc-pn/image-20240720141525576.png)
-
-The *autocorrelation averaged over time* results in:
-
-![image-20240720141659415](osc-pn/image-20240720141659415.png)
-
-By taking the Fourier transform of the autocorrelation, the spectrum of the signal $x(t + \alpha(t))$​ can be expressed as
-
-![image-20240720141813256](osc-pn/image-20240720141813256.png)
-
-It is also interesting to note how the integral in *Equation 9.80* around each harmonic is equal to the power of the harmonic itself $|X_n|^2$
-
-The integral $S_x(f)$ around harmonic is
-$$\begin{align}
-P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\omega_0^4n^4c^2+(\omega +n\omega_0)^2}df \\
-&= |X_n|^2\int_{\Delta f=-\infty}^{\infty}\frac{2\beta}{\beta^2+(2\pi\cdot\Delta f)^2}d\Delta f \\
-&= |X_n|^2\frac{1}{\pi}\arctan(\frac{2\pi \Delta f}{\beta})|_{-\infty}^{\infty} \\
-&= |X_n|^2
-\end{align}$$
-
-
-
-***The phase noise does not affect the total power in the signal, it only affects its distribution***
-
-- Without phase noise, $S_v(f)$ is a series of impulse functions at the harmonics of $f_o$.
-- With phase noise, the impulse functions spread, becoming fatter and shorter but retaining the *same total power*
-
-
-
-> ![image-20250626213351673](osc-pn/image-20250626213351673.png)
->
-> [[https://community.cadence.com/cadence_technology_forums/f/rf-design/51484/comparing-transient-noise-pnoise-and-pnoise-with-lorentian-approximation-of-a-ring-oscillator/1382911](https://community.cadence.com/cadence_technology_forums/f/rf-design/51484/comparing-transient-noise-pnoise-and-pnoise-with-lorentian-approximation-of-a-ring-oscillator/1382911)]
-
-
-
----
-
-![image-20250815232359572](osc-pn/image-20250815232359572.png)
-
-![image-20250815234653864](osc-pn/image-20250815234653864.png)
 
 ## Leeson's Model — LTI
 
-> M.H. Perrott [[https://www.cppsim.com/PLL_Lectures/day2_am.pdf](https://www.cppsim.com/PLL_Lectures/day2_am.pdf)]
+> M.H. Perrott, Short Course On Phase-Locked Loops and Their Applications Day 2, AM Lecture Basic *Building Blocks Voltage-Controlled Oscillators* [[https://www.cppsim.com/PLL_Lectures/day2_am.pdf](https://www.cppsim.com/PLL_Lectures/day2_am.pdf)]
 >
-> —. [[https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/ceb3d539691d5393a29af71ae98afb62_lec12.pdf](https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/ceb3d539691d5393a29af71ae98afb62_lec12.pdf)]
+> —, 6.976 High Speed Communication Circuits and Systems *Lecture 12 Noise in Voltage Controlled Oscillators* [[https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/ceb3d539691d5393a29af71ae98afb62_lec12.pdf](https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/ceb3d539691d5393a29af71ae98afb62_lec12.pdf)]
 
 Leeson's model is outcome of ***linearized*** VCO noise analysis
 
@@ -215,27 +156,8 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 
 ![image-20260613113055683](osc-pn/image-20260613113055683.png)
 
+![image-20260621160607012](osc-pn/image-20260621160607012.png)
 
-
----
-
-
-![image-20250629065454831](osc-pn/image-20250629065454831.png)
-
-
-Consider the **ideal parallel *LC* network** — pure sinusoid wave
-
-![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential-1781624282026-1.svg)
-
-Decompose the horizontal kick $\Delta\vec r=(\Delta x,0) $ and $\Delta x=\Delta v_C/A_0$, with tangential direction $\hat t=(-\sin\theta,\cos\theta)$ and radial direction  $\hat r=(\cos\theta,\sin\theta)$
-$$
-\Delta \phi = \arctan\left(\frac{\Delta\vec r\cdot \hat t}{1 + \Delta\vec r\cdot \hat r}\right) = \arctan\left(\frac{-\Delta x \sin \theta}{1 + \Delta x \cos \theta}\right)\approx -\frac{\Delta v_C}{A_0} \sin(\omega_0 \tau)
-$$
-
-![image-20260613191539886](osc-pn/image-20260613191539886.png)
-
-
-Therefore, the ISF of an ideal parallel LC resonator can be expressed as $\boxed{\Gamma(\omega \tau)=-\sin(\omega_0 \tau)}$
 
 
 
@@ -257,23 +179,39 @@ Therefore, the ISF of an ideal parallel LC resonator can be expressed as $\boxed
 
 
 
+### Pure sinusoidal voltage
+
+Consider the **ideal parallel *LC* network** — pure sinusoid wave
+
+![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential-1781624282026-1.svg)
+
+Decompose the horizontal kick $\Delta\vec r=(\Delta x,0) $ and $\Delta x=\Delta v_C/A_0$, with tangential direction $\hat t=(-\sin\theta,\cos\theta)$ and radial direction  $\hat r=(\cos\theta,\sin\theta)$
+$$
+\Delta \phi = \arctan\left(\frac{\Delta\vec r\cdot \hat t}{1 + \Delta\vec r\cdot \hat r}\right) = \arctan\left(\frac{-\Delta x \sin \theta}{1 + \Delta x \cos \theta}\right)\approx -\frac{\Delta v_C}{A_0} \sin(\omega_0 \tau)
+$$
+
+![image-20260613191539886](osc-pn/image-20260613191539886.png)
+
+
+Therefore, the **ISF of an ideal parallel LC resonator** can be expressed as $\boxed{\Gamma(\omega \tau)=-\sin(\omega_0 \tau)}$, which is independent of peak voltage value $A_0$ 
+
+![image-20260621113647576](osc-pn/image-20260621113647576.png)
+
+
+
+
+
 ###  White-noise Folding
 
  [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265)]
 
 ![image-20260616235441690](osc-pn/image-20260616235441690.png)
 
-> 
->
-> ![image-20260617230516572](osc-pn/image-20260617230516572.png)
+![image-20260621105213052](osc-pn/image-20260621105213052.png)
+
+![image-20260621110835891](osc-pn/image-20260621110835891.png)
 
 
-
-![image-20250629073305626](osc-pn/image-20250629073305626.png)
-
-
-
-![image-20250629080632902](osc-pn/image-20250629080632902.png)
 
 When performing the ***phase noise computation integral***, there will be a negligible contribution from all terms, other than $n=m$
 
@@ -320,7 +258,7 @@ $$
 >
 >  L. Lu, Z. Tang, P. Andreani, A. Mazzanti and A. Hajimiri, "Comments on “Comments on “A General Theory of Phase Noise in Electrical Oscillators””," in *IEEE Journal of Solid-State Circuits*, vol. 43, no. 9, pp. 2170-2170, Sept. 2008 [[https://sci-hub.se/10.1109/JSSC.2008.2005028](https://sci-hub.se/10.1109/JSSC.2008.2005028)]
 
-![image-20250629104527666](osc-pn/image-20250629104527666.png)
+![image-20260621105113715](osc-pn/image-20260621105113715.png)
 
 > ![image-20250629081831223](osc-pn/image-20250629081831223.png)
 
@@ -376,45 +314,29 @@ $$
 \phi_{n,c_0} = \int_{-\infty}^t c_0 i_n(\tau) d\tau \qquad \boxed{S_{\phi n,c_0}(f) = \frac{c_0^2}{\omega^2}S_i(f)= \frac{\mathcal{\Gamma}_\text{dc}^2}{\omega^2}S_i(f)}
 $$
 
+
+
 ### Cyclostationary Noise Sources
 
 Cyclostationary noise can be viewed as stationary noise, $i_{n0}(t)$, multiplied by a periodic envelope, $\alpha(\omega_0 t)$.
 
-**Effective ISF**, **Noise Modulating Function (NMF)**
+***Effective ISF* — *ISF* multiplied with *Noise Modulating Function (NMF)***
 
 ![image-20260617010019682](osc-pn/image-20260617010019682.png)
 
 ![image-20260617010125436](osc-pn/image-20260617010125436.png)
 
-### ISF Simulation Method
-
-![image-20241113232703941](osc-pn/image-20241113232703941.png)
 
 
+### Diff. Pair Noise with ISF
 
-#### PSS + PXF Method
+![image-20260621114354471](osc-pn/image-20260621114354471.png)
 
-> Hu, Yizhe. (2019). A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF). 10.13140/RG.2.2.32151.60323. [[link](https://www.researchgate.net/publication/331072119_A_Simulation_Technique_of_Impulse_Sensitivity_Function_ISF_Based_on_Periodic_Transfer_Function_PXF)]
+Given $\Gamma_{MOS}$ shown as above slide
+$$
+F_{rms,MOS}^2 = \frac{1/4\cdot T_\text{w}}{T_0/2} = \frac{T_\text{w}}{2T_0}
+$$
 
-
-
-*TODO* &#128197;
-
-
-
-#### Transient Method
-
-> David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
-
-![image-20241016211020230](osc-pn/image-20241016211020230.png)
-
-![image-20241016211101204](osc-pn/image-20241016211101204.png)
-
-![image-20241016211115630](osc-pn/image-20241016211115630.png)
-
-
-
-> To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
 
 
 
@@ -527,6 +449,67 @@ Demir's theory is essentially Floquet theory applied to the limit cycle of an au
 ![image-20250920101927173](osc-pn/image-20250920101927173.png)
 
 
+
+### Lorentzian spectrum
+
+![image-20240720134811859](osc-pn/image-20240720134811859.png)
+
+We typically use the two spectra, $S_{\phi n}(f)$ and $S_{out}(f)$, interchangeably, but we must resolve these inconsistencies. **voltage spectrum**  is called **Lorentzian spectrum**
+
+---
+
+The periodic signal $x(t)$ can be expanded in Fourier series as:
+
+![image-20240720141514040](osc-pn/image-20240720141514040.png)
+
+Assume that the signal is subject to *excess phase noise*, which is modeled by adding a **time-dependent** noise component $\alpha(t)$. The noisy signal can be written $x(t+\alpha(t))$, the added excess phase $\phi(t)= \frac{\alpha(t)}{\omega_0}$
+
+> ![image-20250103211650043](osc-pn/image-20250103211650043.png)
+
+
+
+The autocorrelation of the noisy signal is by definition:
+
+![image-20240720141525576](osc-pn/image-20240720141525576.png)
+
+The *autocorrelation averaged over time* results in:
+
+![image-20240720141659415](osc-pn/image-20240720141659415.png)
+
+By taking the Fourier transform of the autocorrelation, the spectrum of the signal $x(t + \alpha(t))$​ can be expressed as
+
+![image-20240720141813256](osc-pn/image-20240720141813256.png)
+
+It is also interesting to note how the integral in *Equation 9.80* around each harmonic is equal to the power of the harmonic itself $|X_n|^2$
+
+The integral $S_x(f)$ around harmonic is
+$$\begin{align}
+P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\omega_0^4n^4c^2+(\omega +n\omega_0)^2}df \\
+&= |X_n|^2\int_{\Delta f=-\infty}^{\infty}\frac{2\beta}{\beta^2+(2\pi\cdot\Delta f)^2}d\Delta f \\
+&= |X_n|^2\frac{1}{\pi}\arctan(\frac{2\pi \Delta f}{\beta})|_{-\infty}^{\infty} \\
+&= |X_n|^2
+\end{align}$$
+
+
+
+***The phase noise does not affect the total power in the signal, it only affects its distribution***
+
+- Without phase noise, $S_v(f)$ is a series of impulse functions at the harmonics of $f_o$.
+- With phase noise, the impulse functions spread, becoming fatter and shorter but retaining the *same total power*
+
+
+
+> ![image-20250626213351673](osc-pn/image-20250626213351673.png)
+>
+> [[https://community.cadence.com/cadence_technology_forums/f/rf-design/51484/comparing-transient-noise-pnoise-and-pnoise-with-lorentian-approximation-of-a-ring-oscillator/1382911](https://community.cadence.com/cadence_technology_forums/f/rf-design/51484/comparing-transient-noise-pnoise-and-pnoise-with-lorentian-approximation-of-a-ring-oscillator/1382911)]
+
+
+
+---
+
+![image-20250815232359572](osc-pn/image-20250815232359572.png)
+
+![image-20250815234653864](osc-pn/image-20250815234653864.png)
 
 
 
@@ -708,13 +691,50 @@ Finally, we obtain
 ![image-20250808205658082](osc-pn/image-20250808205658082.png)
 
 
+
+
+
+## ISF & PPV simulation
+
+> David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
+>
+> Hu, Yizhe. (2019). A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF). 10.13140/RG.2.2.32151.60323. [[link](https://www.researchgate.net/publication/331072119_A_Simulation_Technique_of_Impulse_Sensitivity_Function_ISF_Based_on_Periodic_Transfer_Function_PXF)]
+>
+> Aditya Varma Muppala, ISF Simulation in Cadence Using Transient Analysis | Oscillators 07 | MMIC 12 [[https://youtu.be/yiMn2rCtTXY](https://youtu.be/yiMn2rCtTXY)]
+>
+> Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
+
+### ISF using Transient Analysis
+
+![image-20241016211020230](osc-pn/image-20241016211020230.png)
+
+![image-20241016211101204](osc-pn/image-20241016211101204.png)
+
+![image-20241016211115630](osc-pn/image-20241016211115630.png)
+
+
+
+> To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
+
+
+
+### ISF using PSS + PXF
+
+*TODO* &#128197;
+
+
+
+### PPV using PSS + PXF
+
+*TODO* &#128197;
+
+
+
+
+
+
+
 ## References
-
-Godone, A. & Micalizio, Salvatore & Levi, Filippo. (2008). RF spectrum of a carrier with a random phase modulation of arbitrary slope. [[https://sci-hub.se/10.1088/0026-1394/45/3/008](https://sci-hub.se/10.1088/0026-1394/45/3/008)]
-
----
-
----
 
 Jun Yin. ISSCC 2025 T10: mm-Wave Oscillator Design
 
@@ -743,8 +763,6 @@ Antonio Liscidini, ESSCIRC 2019 Tutorials: Phase Noise in Wireless Applications 
 Aditya Varma Muppala. Oscillators [[https://youtube.com/playlist?list=PL9Trid0A4Da2fOmYTEjhAnUkGPxyiH7H6&si](https://youtube.com/playlist?list=PL9Trid0A4Da2fOmYTEjhAnUkGPxyiH7H6)]
 
 P.E. Allen - 2003. ECE 6440 - Frequency Synthesizers: Lecture 160 – Phase Noise - II [[https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L160-PhNoII(2UP).pdf](https://pallen.ece.gatech.edu/Academic/ECE_6440/Summer_2003/L160-PhNoII(2UP).pdf)]
-
-
 
 ---
 
@@ -791,3 +809,5 @@ Matt Charnley. **Differential Equations: An Introduction for Engineers** [[link]
 Strogatz, S.H. (2015). **Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering (2nd ed.)**. CRC Press [[https://www.biodyn.ro/course/literatura/Nonlinear_Dynamics_and_Chaos_2018_Steven_H._Strogatz.pdf](https://www.biodyn.ro/course/literatura/Nonlinear_Dynamics_and_Chaos_2018_Steven_H._Strogatz.pdf)]
 
 Cadence Blog, "Resonant Frequency vs. Natural Frequency in Oscillator Circuits" [[link](https://resources.pcb.cadence.com/blog/2019-resonant-frequency-vs-natural-frequency-in-oscillator-circuits)]
+
+Godone, A. & Micalizio, Salvatore & Levi, Filippo. (2008). RF spectrum of a carrier with a random phase modulation of arbitrary slope. [[https://sci-hub.se/10.1088/0026-1394/45/3/008](https://sci-hub.se/10.1088/0026-1394/45/3/008)]

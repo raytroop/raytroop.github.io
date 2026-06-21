@@ -318,11 +318,11 @@ where $P_c = A^2/2$ is the carrier power of the signal
 
 ---
 
+---
+
 > Nicola Da Dalt , Understanding Jitter and Phase Noise: 3.1.3 Voltage to Excess Phase Transformations: Random Noise
 
-![image-20260609222603714](am-pm/image-20260609222603714.png)
-
-
+![image-20260621100923112](am-pm/image-20260621100923112.png)
 
 
 

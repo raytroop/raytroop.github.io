@@ -42,6 +42,135 @@ mathjax: true
 
 
 
+### conduction angle
+
+*TODO* &#128197;
+
+
+
+
+
+
+
+
+
+## Class-B Oscillators
+
+
+
+### Output Amplitude
+
+> Edgar Sanchez-Sinencio. ECEN 665, OSCILLATORS [[https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf](https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf)]
+
+
+
+---
+
+---
+
+***NMOS Realization — single pair***
+
+![image-20260622230057948](lc-osc/image-20260622230057948.png)
+
+*common mode current don't contribute to output amplitude*
+
+---
+
+![image-20251026105512862](lc-osc/image-20251026105512862.png)
+
+> ![image-20251026122015538](lc-osc/image-20251026122015538.png)
+
+---
+
+
+
+![image-20251026121057564](lc-osc/image-20251026121057564.png)
+
+```matlab
+L0 = 1e-9 * 2;
+RL0 = 0.25133 * 2;
+C0 = 6.333e-12 / 2;
+RC0 = 0.50264 * 2;
+
+w0 = 1/sqrt(L0*C0);   % 12.566 Grad/s
+
+QL = w0*L0/RL0;       % 50
+QC = 1/(w0*C0)/RC0;   % 25
+
+RLp0 = QL^2 * RL0;
+RCp0 = QC^2 * RC0;
+Rp = RLp0 * RCp0 / (RLp0 + RCp0);  % 418.8576 Ohm
+Qtot_by_L = Rp/(w0*L0);    % 16.6664
+Qtot_by_C = Rp*(w0*C0);    % 16.6664
+
+I0 = 0.5e-3;
+vp_p = 2/pi * I0 * Rp/2;     % 66.6633 mV
+
+%%%% compute Qtot from simulation waveform
+vp_p2p_sim = 132.8e-3;
+Qtot_calc_L0 = vp_p2p_sim*pi/2/I0/(w0*L0);   % 16.6006
+Qtot_calc_C0 = vp_p2p_sim*pi/2/I0*(w0*C0);   % 16.6006
+```
+
+---
+
+---
+
+***CMOS Realization — double pair***
+
+![image-20260622230206044](lc-osc/image-20260622230206044.png)
+
+Owing to switch-off PMOS eliminating common mode current, all $I_T$ is differentially flowing in the tank
+
+![image-20260622225133737](lc-osc/image-20260622225133737.png)
+
+
+
+
+
+---
+
+![image-20251026122550988](lc-osc/image-20251026122550988.png)
+
+
+
+> ![image-20251026122231321](lc-osc/image-20251026122231321.png)
+
+
+---
+
+---
+
+***current limited vs voltage limited***
+
+![image-20260622205909171](lc-osc/image-20260622205909171.png)
+
+![image-20251026121829983](lc-osc/image-20251026121829983.png)
+
+
+
+### Class-B Power/Current Efficiency
+
+> Z. Wang, S. Diao, L. He, X. Jiang and F. Lin, "Analysis of Current Efficiency for CMOS Class-B LC Oscillators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 62, no. 5, pp. 1345-1352, May 2015 [[https://sci-hub.jp/10.1109/TCSI.2015.2411792](https://sci-hub.jp/10.1109/TCSI.2015.2411792)]
+>
+> L. Bertulessi, S. Levantino and C. Samori, "Analysis of power efficiency in high-performance class-B oscillators," *2016 12th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME)*, Lisbon, Portugal, 2016 [[https://sci-hub.jp/10.1109/PRIME.2016.7519525](https://sci-hub.jp/10.1109/PRIME.2016.7519525)]
+
+*TODO* &#128197;
+
+
+
+### Current-biased & voltage-biased
+
+> S. Gallucci *et al*., "A Low-Noise Digital PLL With an Adaptive Common-Mode Resonance Tuning Technique for Voltage-Biased Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 60, no. 12, pp. 4572-4586, Dec. 2025
+
+*TODO* &#128197;
+
+![image-20260106224228115](lc-osc/image-20260106224228115.png)
+
+
+
+
+
 ## 8-shaped inductor
 
 > NXP BV, US8183971B2, *8-shaped inductor* [[pdf](https://patentimages.storage.googleapis.com/41/b1/ff/e53534a029c34d/US8183971.pdf)]
@@ -168,118 +297,6 @@ $$
 
 
 
-## Output Amplitude
-
-> Edgar Sanchez-Sinencio. ECEN 665, OSCILLATORS [[https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf](https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf)]
-
-
-
-### NMOS Realization
-
-![image-20251027223026549](lc-osc/image-20251027223026549.png)
-
-*common mode current don't contribute to output amplitude*
-
----
-
-![image-20251026105512862](lc-osc/image-20251026105512862.png)
-
-> ![image-20251026122015538](lc-osc/image-20251026122015538.png)
-
----
-
-
-
-![image-20251026121057564](lc-osc/image-20251026121057564.png)
-
-```matlab
-L0 = 1e-9 * 2;
-RL0 = 0.25133 * 2;
-C0 = 6.333e-12 / 2;
-RC0 = 0.50264 * 2;
-
-w0 = 1/sqrt(L0*C0);   % 12.566 Grad/s
-
-QL = w0*L0/RL0;       % 50
-QC = 1/(w0*C0)/RC0;   % 25
-
-RLp0 = QL^2 * RL0;
-RCp0 = QC^2 * RC0;
-Rp = RLp0 * RCp0 / (RLp0 + RCp0);  % 418.8576 Ohm
-Qtot_by_L = Rp/(w0*L0);    % 16.6664
-Qtot_by_C = Rp*(w0*C0);    % 16.6664
-
-I0 = 0.5e-3;
-vp_p = 2/pi * I0 * Rp/2;     % 66.6633 mV
-
-%%%% compute Qtot from simulation waveform
-vp_p2p_sim = 132.8e-3;
-Qtot_calc_L0 = vp_p2p_sim*pi/2/I0/(w0*L0);   % 16.6006
-Qtot_calc_C0 = vp_p2p_sim*pi/2/I0*(w0*C0);   % 16.6006
-```
-
-### CMOS Realization
-
-![image-20251027223323689](lc-osc/image-20251027223323689.png)
-
-Owing to switch-off PMOS eliminating common mode current, all $I_T$ is differentially flowing in the tank.
-
-![image-20251028211854604](lc-osc/image-20251028211854604.png)
-
----
-
-![image-20251026122550988](lc-osc/image-20251026122550988.png)
-
-
-
-> ![image-20251026122231321](lc-osc/image-20251026122231321.png)
-
-### current limited vs voltage limited
-
-![image-20251027215143039](lc-osc/image-20251027215143039.png)
-
-![image-20251027215225227](lc-osc/image-20251027215225227.png)
-
-![image-20251026121829983](lc-osc/image-20251026121829983.png)
-
-
-
-## Cross-coupled Pair
-
-![image-20251027224751015](lc-osc/image-20251027224751015.png)
-
-
-
-?? Triode MOS noise
-
-
-
----
-
-
-
-![image-20260618064000970](lc-osc/image-20260618064000970.png)
-
-phase noise is independent of the transconductance of the transistors
-
-![image-20260618063842453](lc-osc/image-20260618063842453.png)
-
-
-
-## conduction angle
-
-*TODO* &#128197;
-
-
-
-## Current-biased & voltage-biased DCO
-
-> S. Gallucci *et al*., "A Low-Noise Digital PLL With an Adaptive Common-Mode Resonance Tuning Technique for Voltage-Biased Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 60, no. 12, pp. 4572-4586, Dec. 2025
-
-*TODO* &#128197;
-
-![image-20260106224228115](lc-osc/image-20260106224228115.png)
-
 
 
 ## LC-VCO Temperature Sensitivities
@@ -359,7 +376,7 @@ Jun Yin. ISSCC 2025  T10:  mm-Wave Oscillator Design
 
 ---
 
-Razavi, Behzad. RF Microelectronics. 2nd ed. Prentice Hall, 2012. [[pdf](https://picture.iczhiku.com/resource/eetop/WYKgsQqKzSDpFmbM.pdf)]
+Razavi, Behzad. RF Microelectronics. 2nd ed. Prentice Hall, 2012.
 
 Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated frequency synthesizers for wireless systems*. Cambridge University Press, 2007
 

@@ -150,9 +150,11 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 
 > A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 [[paper](https://people.engr.tamu.edu/spalermo/ecen620/general_pn_theory_hajimiri_jssc_1998.pdf)], [[slides](http://www-smirc.stanford.edu/papers/Orals98s-ali.pdf)]
 >
-> —, "Corrections to "A General Theory of Phase Noise in Electrical Oscillators"" [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=678662](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=678662)]
+> —, RFIC 2024 Technical Lecture: *Noise in Oscillators from Understanding to Design*
 >
 > Thomas H. Lee. Linearity, Time-Variation, Phase Modulation and Oscillator Phase Noise [[https://class.ece.iastate.edu/djchen/ee507/PhaseNoiseTutorialLee.pdf](https://class.ece.iastate.edu/djchen/ee507/PhaseNoiseTutorialLee.pdf)]
+>
+> Aditya Varma Muppala, [[https://adityamuppala.github.io/assets/Notes_YouTube/Oscillators_ISF_model.pdf](https://adityamuppala.github.io/assets/Notes_YouTube/Oscillators_ISF_model.pdf)]
 
 ![image-20260613113055683](osc-pn/image-20260613113055683.png)
 
@@ -160,28 +162,17 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 
 
 
+![image-20260623012755556](osc-pn/image-20260623012755556.png)
 
-> C. Livanelioglu, L. He, J. Gong, S. Arjmandpour, G. Atzeni and T. Jang, "19.10 A 4.6GHz 63.3fsrms PLL-XO Co-Design Using a Self-Aligned Pulse-Injection Driver Achieving −255.2dB FoMJ Including the XO Power and Noise," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025
->
-> ![image-20260613112714291](osc-pn/image-20260613112714291.png)
-
-
-
----
-
-> [[https://adityamuppala.github.io/assets/Notes_YouTube/Oscillators_ISF_model.pdf](https://adityamuppala.github.io/assets/Notes_YouTube/Oscillators_ISF_model.pdf)]
-
-![image-20260613112435961](osc-pn/image-20260613112435961.png)
-
-
-
-![image-20250629080430980](osc-pn/image-20250629080430980.png)
+![image-20260621110835891](osc-pn/image-20260621110835891.png)
 
 
 
 ### Pure sinusoidal voltage
 
 Consider the **ideal parallel *LC* network** — pure sinusoid wave
+
+Suppose a current pulse with area $q$ suddenly changes the charge across the capacitor, its voltage changes by $\Delta v_c=\Delta q/C$
 
 ![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential-1781624282026-1.svg)
 
@@ -195,31 +186,15 @@ $$
 
 Therefore, the **ISF of an ideal parallel LC resonator** can be expressed as $\boxed{\Gamma(\omega \tau)=-\sin(\omega_0 \tau)}$, which is independent of peak voltage value $A_0$ 
 
-![image-20260621113647576](osc-pn/image-20260621113647576.png)
+![image-20260622231558562](osc-pn/image-20260622231558562.png)
 
-
-
-
+![image-20260623014318589](osc-pn/image-20260623014318589.png)
 
 ###  White-noise Folding
 
- [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265)]
+![image-20260623011047045](osc-pn/image-20260623011047045.png)
 
-![image-20260616235441690](osc-pn/image-20260616235441690.png)
-
-![image-20260621105213052](osc-pn/image-20260621105213052.png)
-
-![image-20260621110835891](osc-pn/image-20260621110835891.png)
-
-
-
-When performing the ***phase noise computation integral***, there will be a negligible contribution from all terms, other than $n=m$
-
-![image-20250629083344136](osc-pn/image-20250629083344136.png)
-
-> ![image-20250629083453955](osc-pn/image-20250629083453955.png)
-
-Given $i(t) = I_m \cos[(m\omega_0 +\Delta \omega)t]$,
+Suppose a low frequency sinusoidal perturbation current $i(t) = I_m \cos[(m\omega_0 +\Delta \omega)t]$,
 
 $$\begin{align}
 \phi(t) &= \frac{1}{q_\text{max}}\left[\frac{C_0}{2}\int_{-\infty}^t I_m\cos((m\omega_0 +\Delta \omega)\tau)d\tau + \sum_{n=1}^\infty C_n\int_{-\infty}^t I_m\cos((m\omega_0 +\Delta \omega)\tau)\cos(n\omega_0\tau)d\tau\right] \\
@@ -235,18 +210,17 @@ $$
 \phi(t) \approx \frac{I_mC_m}{2q_\text{max}\Delta \omega}\sin(\Delta\omega t)
 $$
 
+When performing the ***phase noise computation integral***, there will be a negligible contribution from all terms, other than $n=m$
 
-> $m\omega_0 +\Delta \omega \ge 0$
->
-> ![image-20250629105156403](osc-pn/image-20250629105156403.png)
+![image-20260623011353874](osc-pn/image-20260623011353874.png)
+
+> apply equation (18) derived from ***sinusoidal*** to ***white noise***
+
+![image-20260623011536856](osc-pn/image-20260623011536856.png)
+
+> ![image-20260621101558719](osc-pn/image-20260621101558719.png)
 
 
-
-![image-20250629100444702](osc-pn/image-20250629100444702.png)
-
-> A. Hajimiri and T. H. Lee, "A general theory of phase noise in electrical oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 2, pp. 179-194, Feb. 1998 [[pdf](https://people.engr.tamu.edu/spalermo/ecen620/general_pn_theory_hajimiri_jssc_1998.pdf)]
->
-> ![image-20250629102112814](osc-pn/image-20250629102112814.png)
 
 ---
 
@@ -254,13 +228,16 @@ $$
 
 >  A. Hajimiri and T. H. Lee, "Corrections to "A General Theory of Phase Noise in Electrical Oscillators"," in *IEEE Journal of Solid-State Circuits*, vol. 33, no. 6, pp. 928-928, June 1998 [[https://sci-hub.se/10.1109/4.678662](https://sci-hub.se/10.1109/4.678662)]
 >
->  Ali Hajimiri. Phase Noise in Oscillators [[http://www-smirc.stanford.edu/papers/Orals98s-ali.pdf](http://www-smirc.stanford.edu/papers/Orals98s-ali.pdf)]
->
 >  L. Lu, Z. Tang, P. Andreani, A. Mazzanti and A. Hajimiri, "Comments on “Comments on “A General Theory of Phase Noise in Electrical Oscillators””," in *IEEE Journal of Solid-State Circuits*, vol. 43, no. 9, pp. 2170-2170, Sept. 2008 [[https://sci-hub.se/10.1109/JSSC.2008.2005028](https://sci-hub.se/10.1109/JSSC.2008.2005028)]
 
-![image-20260621105113715](osc-pn/image-20260621105113715.png)
+Noise power around the frequency $\color{blue}n\omega_0 + \Delta\omega$ causes two equal sidebands at $\omega_0 \pm \Delta\omega$. However, the 
+noise power at $\color{blue}n\omega_0 - \Delta\omega$ has a similar effect as  mentioned in the paper. Therefore, twice the power of noise at  $n\omega_0 + \Delta\omega$ should be taken into account
 
-> ![image-20250629081831223](osc-pn/image-20250629081831223.png)
+![image-20260623010902374](osc-pn/image-20260623010902374.png)
+
+![image-20260623010700154](osc-pn/image-20260623010700154.png)
+
+
 
 
 
@@ -291,15 +268,25 @@ $$\begin{align}
 
 
 
-----
+---
+
+---
+
+ [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265)]
+
+![image-20260616235441690](osc-pn/image-20260616235441690.png)
+
+![image-20260621105213052](osc-pn/image-20260621105213052.png)
+
+
 
 ![image-20260617004658323](osc-pn/image-20260617004658323.png)
 
 
 
-
-
 ### $1/f$-noise Upconversion
+
+![image-20260623020547145](osc-pn/image-20260623020547145.png)
 
 ![image-20260617004812519](osc-pn/image-20260617004812519.png)
 
@@ -395,6 +382,14 @@ $$
 The **single-tone analysis** establishes that the differential-pair current is injected as **almost pure phase noise**, while **summing the white-noise power over all harmonics** of the gating function ($\overline{H^2}=T_W/2T_0 $) sets its **magnitude**; together these yield the differential-pair contribution to the oscillator phase noise.
 
  
+
+---
+
+phase noise is independent of the transconductance of the transistors
+
+![img](osc-pn/image-20260618063842453.png)
+
+
 
 ### Tail Noise
 

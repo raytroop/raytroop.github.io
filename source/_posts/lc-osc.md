@@ -7,6 +7,41 @@ categories:
 mathjax: true
 ---
 
+
+## LC Oscillator Structures
+
+### Class-C CMOS Oscillator
+
+> A. Mazzanti and P. Andreani, "Class-C Harmonic CMOS VCOs, With a General Result on Phase Noise," in IEEE Journal of Solid-State Circuits, vol. 43, no. 12, pp. 2716-2729, Dec. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2004867](https://sci-hub.ru/10.1109/JSSC.2008.2004867)]
+
+
+*TODO* &#128197;
+
+
+### Class-D CMOS Oscillator
+
+> L. Fanori and P. Andreani, "A 2.5-to-3.3GHz CMOS Class-D VCO," 2013 IEEE International Solid-State Circuits Conference Digest of Technical Papers, San Francisco, CA, USA, 2013 [[https://sci-hub.red/10.1109/ISSCC.2013.6487763](https://sci-hub.red/10.1109/ISSCC.2013.6487763)]
+>
+> —, "Class-D CMOS Oscillators," in IEEE Journal of Solid-State Circuits, vol. 48, no. 12, pp. 3105-3119, Dec. 2013 [[https://sci-hub.red/10.1109/JSSC.2013.2271531](https://sci-hub.red/10.1109/JSSC.2013.2271531)]
+>
+> —, "A Class-D CMOS DCO with an on-chip LDO," ESSCIRC 2014 - 40th European Solid State Circuits Conference (ESSCIRC), Venice Lido, Italy, 2014 [[https://sci-hub.red/10.1109/ESSCIRC.2014.6942090](https://sci-hub.red/10.1109/ESSCIRC.2014.6942090)]
+
+
+*TODO* &#128197;
+
+
+### Class-F CMOS Oscillator
+
+> Huijung Kim, Seonghan Ryu, Yujin Chung, Jinsung Choi and Bumman Kim, "A low phase-noise CMOS VCO with harmonic tuned LC tank," in IEEE Transactions on Microwave Theory and Techniques, vol. 54, no. 7, pp. 2917-2924, July 2006 [[https://sci-hub.ru/10.1109/tmtt.2006.877439](https://sci-hub.ru/10.1109/tmtt.2006.877439)]
+>
+> M. Babaie and R. B. Staszewski, "Third-harmonic injection technique applied to a 5.87-to-7.56GHz 65nm CMOS Class-F oscillator with 192dBc/Hz FOM," 2013 IEEE International Solid-State Circuits Conference Digest of Technical Papers, San Francisco, CA, USA, 2013 [[https://sci-hub.ru/10.1109/ISSCC.2013.6487764](https://sci-hub.ru/10.1109/ISSCC.2013.6487764)]
+>
+> —, "A Class-F CMOS Oscillator," in IEEE Journal of Solid-State Circuits, vol. 48, no. 12, pp. 3120-3133, Dec. 2013 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6576263](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6576263)]
+
+*TODO* &#128197;
+
+
+
 ## 8-shaped inductor
 
 > NXP BV, US8183971B2, *8-shaped inductor* [[pdf](https://patentimages.storage.googleapis.com/41/b1/ff/e53534a029c34d/US8183971.pdf)]

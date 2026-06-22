@@ -703,6 +703,14 @@ Finally, we obtain
 > Aditya Varma Muppala, ISF Simulation in Cadence Using Transient Analysis | Oscillators 07 | MMIC 12 [[https://youtu.be/yiMn2rCtTXY](https://youtu.be/yiMn2rCtTXY)]
 >
 > Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
+>
+> S. Galeone and M. P. Kennedy, "A comparison of simulation strategies for estimating phase noise in oscillators," 2017 13th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME), Giardini Naxos - Taormina, Italy, 2017 
+>
+> PPV values from pss/pnoise simulation in spectreRF [[https://community.cadence.com/cadence_technology_forums/f/rf-design/35062/ppv-values-from-pss-pnoise-simulation-in-spectrerf](https://community.cadence.com/cadence_technology_forums/f/rf-design/35062/ppv-values-from-pss-pnoise-simulation-in-spectrerf)]
+>
+> ISF Function Extraction in Cadence Virtuoso [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/43969/isf-function-extraction-in-cadence-virtuoso](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/43969/isf-function-extraction-in-cadence-virtuoso)]
+
+
 
 ### ISF using Transient Analysis
 

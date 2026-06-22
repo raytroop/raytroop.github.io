@@ -146,11 +146,7 @@ Frequency-dependent: the *higher* frequency input signal $f_\text{in}$, the *lar
 >
 > B. Razavi, "Problem of timing mismatch in interleaved ADCs," *Proceedings of the IEEE 2012 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2012 [[pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf)]
 
----
 
-> H. Wei, P. Zhang, B. Datta Sahoo and B. Razavi, "An 8-Bit 4-GS/s 120-mW CMOS ADC," *Proceedings of the IEEE 2013 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2013 [[pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf)]
->
-> —, "An 8 Bit 4 GS/s 120 mW CMOS ADC," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 8, pp. 1751-1761, Aug. 2014 [[pdf](https://sci-hub.jp/10.1109/JSSC.2014.2313571)]
 
 ***Binary-Search Calibration Method & its limitations***
 
@@ -180,11 +176,23 @@ An autocorrelation-based background timing-skew calibration method, which uses t
 
 
 
----
+
+
+### MAD (Mean Absolute Difference) vs. correlation
+
+> H. Wei, P. Zhang, B. Datta Sahoo and B. Razavi, "An 8-Bit 4-GS/s 120-mW CMOS ADC," *Proceedings of the IEEE 2013 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2013 [[pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf)]
+>
+> —, "An 8 Bit 4 GS/s 120 mW CMOS ADC," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 8, pp. 1751-1761, Aug. 2014 [[pdf](https://sci-hub.jp/10.1109/JSSC.2014.2313571)]
+>
+> M. Gu, Y. Tao, X. He, Y. Zhong, L. Jie and N. Sun, "A 1-GS/s 11-b Time-Interleaved SAR ADC With Robust, Fast, and Accurate Autocorrelation-Based Background Timing-Skew Calibration," in IEEE Journal of Solid-State Circuits, vol. 60, no. 2, pp. 421-431, Feb. 2025
+
+*TODO* &#128197;
 
 approximate the **absolute value operation** by **a squaring function**
 
 ![image-20260328212413965](ti-adc/image-20260328212413965.png)
+
+
 
 ## Overlapping versus Non-overlapping track time
 

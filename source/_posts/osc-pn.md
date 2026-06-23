@@ -406,7 +406,7 @@ S_{I,PN} = S_{nI,T} \cdot \mathcal{D}\cdot \mathcal{h}^2 \cdot \frac{1}{2} = S_{
 $$
 The commutation folds  tail noise as **a (near) single sideband**, which is equivalent to equal AM and PM — and only the PM half counts toward phase noise
 
-noise at $2\omega_0/pm\omega_m$ dominate phase noise due to $|c_1|, |c_3| \gg |c_{2m+1}| \space\space\space\space \forall m>1$
+noise at $2\omega_0 \pm\omega_m$ dominate phase noise due to $|c_1|, |c_3| \gg |c_{2m+1}| \space\space\space\space \forall m>1$
 
 ![image-20260620234423406](osc-pn/image-20260620234423406.png)
 

@@ -324,7 +324,7 @@ $$
 F_{rms,MOS}^2 = \frac{1/4\cdot T_\text{w}}{T_0/2} = \frac{T_\text{w}}{2T_0}
 $$
 
-
+![diff_pair_isf_20260623.PNG](osc-pn/diff_pair_isf_20260623.PNG)
 
 
 ## Murphy's Model — LTV in Frequency Domain
@@ -405,6 +405,8 @@ $$
 S_{I,PN} = S_{nI,T} \cdot \mathcal{D}\cdot \mathcal{h}^2 \cdot \frac{1}{2} = S_{nI,T} \cdot 1 \cdot \frac{1}{4}\cdot \frac{1}{2} = \boxed{\frac{1}{8}\cdot S_{nI,T}}
 $$
 The commutation folds  tail noise as **a (near) single sideband**, which is equivalent to equal AM and PM — and only the PM half counts toward phase noise
+
+noise at $2\omega_0/pm\omega_m$ dominate phase noise due to $|c_1|, |c_3| \gg |c_{2m+1}| \space\space\space\space \forall m>1$
 
 ![image-20260620234423406](osc-pn/image-20260620234423406.png)
 

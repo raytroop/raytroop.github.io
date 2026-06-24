@@ -284,7 +284,7 @@ $$\begin{align}
 
 
 
-### $1/f$-noise Upconversion
+### 1/f-noise Upconversion
 
 ![image-20260623020547145](osc-pn/image-20260623020547145.png)
 
@@ -313,6 +313,30 @@ Cyclostationary noise can be viewed as stationary noise, $i_{n0}(t)$, multiplied
 
 ![image-20260617010125436](osc-pn/image-20260617010125436.png)
 
+For Colpitts Oscilaltor, $\Gamma_\text{eff}(x)$ is different from $\Gamma(x)$, however  $\Gamma_\text{eff}(x)$ and $\Gamma(x)$ are almost identical for ring osciallator
+
+
+
+### alternative derivation
+
+> Michael Perrott August 12, 2008, Short Course On Phase-Locked Loops and Their Applications Day 2, AM Lecture *Basic Building Blocks Voltage-Controlled Oscillators* [[https://www.cppsim.com/PLL_Lectures/day2_am.pdf](https://www.cppsim.com/PLL_Lectures/day2_am.pdf)]
+
+![image-20260624205523543](osc-pn/image-20260624205523543.png)
+
+***White Noise Input***
+
+![image-20260624210533972](osc-pn/image-20260624210533972.png)
+
+***1/f Noise in Input Current***
+
+![image-20260624210650690](osc-pn/image-20260624210650690.png)
+
+***Current Noise Modulation***
+
+![image-20260624211311029](osc-pn/image-20260624211311029.png)
+
+![image-20260624211359445](osc-pn/image-20260624211359445.png)
+
 
 
 ### Diff. Pair Noise with ISF
@@ -325,6 +349,35 @@ F_{rms,MOS}^2 = \frac{1/4\cdot T_\text{w}}{T_0/2} = \frac{T_\text{w}}{2T_0}
 $$
 
 ![diff_pair_isf_20260623.PNG](osc-pn/diff_pair_isf_20260623.PNG)
+
+---
+
+![image-20260624201443189](osc-pn/image-20260624201443189.png)
+
+![image-20260624201510173](osc-pn/image-20260624201510173.png)
+
+
+
+
+
+
+
+### ISF calculating
+
+*TODO* &#128197;
+
+***A. Direct Measurement of Impulse Response***
+
+***B. Closed-Form Formula for the ISF***
+
+***C. Calculation of ISF Based on the First Derivative***
+
+![image-20260624205015362](osc-pn/image-20260624205015362.png)
+
+
+
+
+
 
 
 ## Murphy's Model — LTV in Frequency Domain
@@ -409,6 +462,12 @@ The commutation folds  tail noise as **a (near) single sideband**, which is equi
 noise at $2\omega_0 \pm\omega_m$ dominate phase noise due to $|c_1|, |c_3| \gg |c_{2m+1}| \space\space\space\space \forall m>1$
 
 ![image-20260620234423406](osc-pn/image-20260620234423406.png)
+
+---
+
+> E. Hegazi, H. Sjoland and A. Abidi, "A filtering technique to lower oscillator phase noise," *2001 IEEE International Solid-State Circuits Conference. Digest of Technical Papers. ISSCC (Cat. No.01CH37177)*, San Francisco, CA, USA, 2001 [[paper](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/D23_4.pdf), [slides](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/SS23_4.pdf)]
+
+![image-20260624165720693](osc-pn/image-20260624165720693.png)
 
 
 
@@ -649,47 +708,6 @@ Finally, we obtain
 
 
 
-## Common-Mode Resonance
-
-> E. Hegazi, H. Sjoland and A. Abidi, "A filtering technique to lower oscillator phase noise," *2001 IEEE International Solid-State Circuits Conference. Digest of Technical Papers. ISSCC (Cat. No.01CH37177)*, San Francisco, CA, USA, 2001 [[paper](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/D23_4.pdf), [slides](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/SS23_4.pdf)]
->
-> —, "A filtering technique to lower LC oscillator phase noise," in *IEEE Journal of Solid-State Circuits*, vol. 36, no. 12, pp. 1921-1930, Dec. 2001 [[https://people.engr.tamu.edu/spalermo/ecen620/filtering_tech_lc_osc_hegazi_jssc_2001.pdf](https://people.engr.tamu.edu/spalermo/ecen620/filtering_tech_lc_osc_hegazi_jssc_2001.pdf)]
->
-> A. Bevilacqua and P. Andreani, "An Analysis of  1/f  Noise to Phase Noise Conversion in CMOS Harmonic Oscillators," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 59, no. 5, pp. 938-945, May 2012
->
-> D. Murphy, H. Darabi and H. Wu, "Implicit Common-Mode Resonance in LC Oscillators," in IEEE Journal of Solid-State Circuits, vol. 52, no. 3, pp. 812-821, March 2017, [[https://sci-hub.st/10.1109/JSSC.2016.2642207](https://sci-hub.st/10.1109/JSSC.2016.2642207)]
->
-> —, "25.3 A VCO with implicit common-mode resonance," 2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers, San Francisco, CA, USA, 2015 [[https://sci-hub.st/10.1109/ISSCC.2015.7063116](https://sci-hub.st/10.1109/ISSCC.2015.7063116)]
->
-> M. Shahmohammadi, M. Babaie and R. B. Staszewski, "25.4 A 1/f noise upconversion reduction technique applied to Class-D and Class-F oscillators," 2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers, San Francisco, CA, USA, 2015 [[https://sci-hub.ru/10.1109/ISSCC.2015.7063117](https://sci-hub.ru/10.1109/ISSCC.2015.7063117)]
->
-> —, "A 1/f Noise Upconversion Reduction Technique for Voltage-Biased RF CMOS Oscillators," in IEEE Journal of Solid-State Circuits, vol. 51, no. 11, pp. 2610-2624, Nov. 2016 [[https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf](https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf)]
-
-![image-20260616224300853](osc-pn/image-20260616224300853.png)
-
-![image-20260616225535546](osc-pn/image-20260616225535546.png)
-
-> *Yunbo Huang, **Zunsong Yang\***, et al., "A 7.0-to-8.6GHz Balanced Class-F-1 VCO with a Trifilar Transformer-Based Tank Achieving 194.5dBc/Hz FoM," IEEE MTT-S Radio Frequency Integrated Circuits (**RFIC**), June 2026*
-
-
-
-
-
-
-
-
----
-
----
-
-> S. Gallucci *et al*., "A Low-Noise Digital PLL With an Adaptive Common-Mode Resonance Tuning Technique for Voltage-Biased Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 60, no. 12, pp. 4572-4586, Dec. 2025
-> P. Liu et al., "A 128Gb/s ADC/DAC Based PAM-4 Transceiver with >45dB Reach in 3nm FinFET," 2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits), Kyoto, Japan, 2025
-
-![image-20250808205658082](osc-pn/image-20250808205658082.png)
-
-
-
-
 
 ## ISF & PPV simulation
 
@@ -775,9 +793,7 @@ P.E. Allen - 2003. ECE 6440 - Frequency Synthesizers: Lecture 160 – Phase Nois
 
 ***ISF, PPV, and Flicker-Noise Analysis***
 
-Y. Hu, T. Siriburanon and R. B. Staszewski, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
 
-—, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)]
 
 S. Levantino, P. Maffezzoni, F. Pepe, A. Bonfanti, C. Samori and A. L. Lacaita, "Efficient Calculation of the Impulse Sensitivity Function in Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 59, no. 10, pp. 628-632, Oct. 2012 [[https://sci-hub.se/10.1109/TCSII.2012.2208679](https://sci-hub.se/10.1109/TCSII.2012.2208679)]
 

@@ -796,16 +796,6 @@ That is $\Delta V_R = \frac{I_D}{ g_m} \cdot \frac{\Delta R}{R}$
 
 
 
-## Effect of Feedback on Noise
-
-> Feedback does **not improve** the noise performance of circuits.
-
-![image-20240508205903213](insight/image-20240508205903213.png)
-
->The input-referred noise voltage and current remain the same if the feedback network introduces no noise.
-
-
-
 ## RC charge & discharge
 
 - charge:

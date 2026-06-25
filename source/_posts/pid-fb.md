@@ -108,6 +108,17 @@ $$
 > Saurabh Saxena, IIT Madras. CICC2022 Clocking for Serial Links - Frequency and Jitter Requirements, Phase-Locked Loops, Clock and Data Recovery
 
 
+
+## Effect of Feedback on Noise
+
+Feedback does **not improve** the noise performance of circuits.
+
+![image-20240508205903213](pid-fb/image-20240508205903213.png)
+
+The input-referred noise voltage and current remain the same if the feedback network introduces no noise
+
+
+
 ## derivative control
 
 > Introduction: PID Controller Design. [[https://ctms.engin.umich.edu/CTMS/?example=Introduction&section=ControlPID](https://ctms.engin.umich.edu/CTMS/?example=Introduction&section=ControlPID)]

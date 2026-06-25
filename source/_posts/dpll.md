@@ -217,49 +217,63 @@ loop latency is represented as $e^{-sD}$ in linear model
 
 ## DT & CT Spectral Density
 
+> Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 *Lecture 9: Digital PLLs* [[https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf)]
+
+
+
+***DT to CT***
+
+![image-20260625221638670](dpll/image-20260625221638670.png)
+
+![image-20260625221753608](dpll/image-20260625221753608.png)
+
+Here, $\boxed{S_x(e^{j2\pi fT}) = S_d(e^{j2\pi fT})\cdot \textcolor{blue}{ f_s}}$,   For example, the quantization noise spectrum is given by $S_x(e^{j2\pi fT}) = \frac{1}{12f_s}\cdot f_s = \frac{1}{12}$. To convert the sequence spectrum into a continuous impulse train spectrum, we multiply by $\color{blue}\frac{1}{T^2}$
+$$
+S_y(f) = S_x(e^{j2\pi fT}) \cdot \textcolor{blue}{\frac{1}{f_s}\cdot \frac{1}{T^2}\cdot |H(f)|^2 } = S_x(e^{j2\pi fT}) \cdot \textcolor{blue}{\frac{1}{T}|H(f)|^2}
+$$
+
+
+![image-20260625222247558](dpll/image-20260625222247558.png)
+
 ![image-20250512230604969](dpll/image-20250512230604969.png)
 
 ---
 
-[[Sampling of WSS process of Systems, Modulation and Noise](https://raytroop.github.io/2024/05/25/comm/#sampling-of-wss-process)]
-
-![image-20250512233058520](dpll/image-20250512233058520.png)
-
-That is
-$$
-P_{x_s x_s} (f)= \frac{1}{T_s}P_{xx}(f)
-$$
-In going from *discrete* time to *continuous* time,  we must add a scale factor $1/T$, the sample period
-
-
-
 ---
 
-![image-20250513211531981](dpll/image-20250513211531981.png)
+
+
+
+
+![image-20260625233049546](dpll/image-20260625233049546.png)
 
 
 
 
 
+![image-20260625234115193](dpll/image-20260625234115193.png)
 
+![image-20260625233852702](dpll/image-20260625233852702.png)
+
+![image-20260625234008676](dpll/image-20260625234008676.png)
+
+![image-20260625233243905](dpll/image-20260625233243905.png)
 
 ## reference
 
-Sam Palermo, ECEN620 2024 Lecture 9: Digital PLLs [[https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf)]
+Topics in IC (Wireline Transceiver Design) [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf)]
 
-Topics in IC(Wireline Transceiver Design) [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf)]
-
-Michael H. Perrott, ISSCC 2008 Tutorial on Digital Phase-Locked Loops [[https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T05_Pres.pdf](https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T05_Pres.pdf)]
+Michael H. Perrott, ISSCC 2008 Tutorial on Digital Phase-Locked Loops 
 
 —, CICC 2009 Tutorial on Digital Phase-Locked Loops [[https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf](https://www.cppsim.com/PLL_Lectures/digital_pll_cicc_tutorial_perrott.pdf)]
 
 Robert Bogdan Staszewski,  CICC 2020:  Beyond All-Digital PLL for RF and Millimeter-Wave Frequency Synthesis [[link](https://www.researchgate.net/profile/Yizhe-Hu/publication/342702810_Beyond_All-Digital_PLL_for_RF_and_Millimeter-Wave_Frequency_Synthesis/links/5f02305692851c52d619ce21/Beyond-All-Digital-PLL-for-RF-and-Millimeter-Wave-Frequency-Synthesis.pdf)]
 
-Akihide Sai, ISSCC 2023 T5: All-digital PLLs From Fundamental Concepts to Future Trends [[https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T5.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T5.pdf)]
+Akihide Sai, ISSCC 2023 T5: All-digital PLLs From Fundamental Concepts to Future Trends 
 
 Mike Shuo-Wei Chen, CICC 2020 ES2-3: Low-Spur PLL Architectures and Techniques [[https://youtu.be/sgPDchYhN-4](https://youtu.be/sgPDchYhN-4)]
 
-S. Levantino, "Digital phase-locked loops," 2018 IEEE Custom Integrated Circuits Conference (CICC), San Diego, CA, USA, 2018 [[slides](https://picture.iczhiku.com/resource/eetop/sHkGfpEDIeeEIXVc.pdf)]
+S. Levantino, "Digital phase-locked loops," 2018 IEEE Custom Integrated Circuits Conference (CICC), San Diego, CA, USA, 2018
 
 Saurabh Saxena, IIT Madras. Phase-Locked Loops: Noise Analysis in Digital PLL [[https://youtu.be/mddtxcqfiKU](https://youtu.be/mddtxcqfiKU)]
 
@@ -271,9 +285,9 @@ Y. Hu, T. Siriburanon and R. B. Staszewski, "Multirate Timestamp Modeling for Ul
 
 Neil Robertson. Digital PLL's -- Part 1 [[https://www.dsprelated.com/showarticle/967.php](https://www.dsprelated.com/showarticle/967.php)]
 
-Neil Robertson. Digital PLL's -- Part 2 [[https://www.dsprelated.com/showarticle/973.php](https://www.dsprelated.com/showarticle/973.php)]
+—. Digital PLL's -- Part 2 [[https://www.dsprelated.com/showarticle/973.php](https://www.dsprelated.com/showarticle/973.php)]
 
-Neil Robertson. Digital PLL's -- Part 3 [[https://www.dsprelated.com/showarticle/1177.php](https://www.dsprelated.com/showarticle/1177.php)]
+—. Digital PLL's -- Part 3 [[https://www.dsprelated.com/showarticle/1177.php](https://www.dsprelated.com/showarticle/1177.php)]
 
 Daniel Boschen. GRCon24 - Quick Start on Control Loops with Python Workshop [[video](https://youtu.be/RxQWk1PjJLQ), [slides](https://events.gnuradio.org/event/24/contributions/599/)]
 

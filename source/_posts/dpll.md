@@ -214,12 +214,20 @@ loop latency is represented as $e^{-sD}$ in linear model
 > CC Chen. Circuit Image: Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8](https://youtu.be/Jyy18865jv8)]
 
 
+## Impulse Train Modulator (ITM)
+
+*TODO* &#128197;
+
+
 
 ## DT & CT Spectral Density
 
 > Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 *Lecture 9: Digital PLLs* [[https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf)]
 >
 > Michael Perrott, Short Course On Phase-Locked Loops and Their Applications Day 4, AM Lecture *Digital Frequency Synthesizers* [[https://www.cppsim.com/PLL_Lectures/day4_am.pdf](https://www.cppsim.com/PLL_Lectures/day4_am.pdf)]
+>
+> Hsu, Chun-Ming, Ph. D. Massachusetts Institute of Technology. "Techniques for high-performance digital frequency synthesis and phase control." 2008. [[http://hdl.handle.net/1721.1/45870](http://hdl.handle.net/1721.1/45870)]
+
 
 
 *TODO* &#128197;

@@ -250,9 +250,9 @@ $\frac{1}{T}$ of CT-DT comes from CT to sampled sequence to impulse train
 
 ![image-20260625221753608](dpll/image-20260625221753608.png)
 
-Here, $\boxed{S_x(e^{j2\pi fT}) = S_d(e^{j2\pi fT})\cdot \textcolor{blue}{ f_s}}$,   For example, the quantization noise spectrum is given by $S_x(e^{j2\pi fT}) = \frac{1}{12f_s}\cdot f_s = \frac{1}{12}$. To convert the sequence spectrum into a continuous impulse train spectrum, we multiply by $\color{blue}\frac{1}{T^2}$
+Here, $\boxed{S_x(e^{j2\pi fT}) = S_d(f)\cdot \textcolor{blue}{\frac{1}{T}}}$,   For example, the quantization noise spectrum is given by $S_x(e^{j2\pi fT}) = \frac{1}{12f_s}\cdot \frac{1}{T} = \frac{1}{12}$. To convert the sequence spectrum into a continuous impulse train spectrum, we multiply by $\color{blue}\frac{1}{T^2}$
 $$
-S_y(f) = S_x(e^{j2\pi fT}) \cdot \textcolor{blue}{\frac{1}{f_s}\cdot \frac{1}{T^2}\cdot |H(f)|^2 } = S_x(e^{j2\pi fT}) \cdot \textcolor{blue}{\frac{1}{T}|H(f)|^2}
+S_y(f) = S_x(e^{j2\pi fT}) \cdot \textcolor{blue}{T\cdot \frac{1}{T^2}\cdot |H(f)|^2 } = S_x(e^{j2\pi fT}) \cdot \textcolor{blue}{\frac{1}{T}|H(f)|^2}
 $$
 
 

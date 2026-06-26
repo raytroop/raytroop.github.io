@@ -218,7 +218,22 @@ loop latency is represented as $e^{-sD}$ in linear model
 ## DT & CT Spectral Density
 
 > Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 *Lecture 9: Digital PLLs* [[https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf)]
+>
+> Michael Perrott, Short Course On Phase-Locked Loops and Their Applications Day 4, AM Lecture *Digital Frequency Synthesizers* [[https://www.cppsim.com/PLL_Lectures/day4_am.pdf](https://www.cppsim.com/PLL_Lectures/day4_am.pdf)]
 
+
+*TODO* &#128197;
+
+??
+
+$T$ of DT-CT comes from ZOH approximation of impulse train
+
+$\frac{1}{T}$ of CT-DT comes from CT to sampled sequence to impulse train
+
+
+---
+
+---
 
 
 ***DT to CT***

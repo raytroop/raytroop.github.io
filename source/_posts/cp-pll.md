@@ -37,9 +37,11 @@ This situation can be avoided by adding *additional delay to the AND gate* in th
 
 ---
 
-![image-20250807230740496](cp-pll/image-20250807230740496.png)
+---
 
 > Deog-Kyoon Jeong. Topics in IC Design 2.1 Introduction to Phase-Locked Loop [[pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%202%20-%20Charge-Pump%20PLL%2C%20Freuqency%20Synthesizers%2C%20and%20SSCG.pdf)]
+
+![image-20250807230740496](cp-pll/image-20250807230740496.png)
 
 
 
@@ -53,21 +55,21 @@ This situation can be avoided by adding *additional delay to the AND gate* in th
 
 ---
 
-Saurabh Saxena,Phase Locked Loops: Noise Simulations for CP-PLL Blocks [[https://youtu.be/Q1libz-XqRw](https://youtu.be/Q1libz-XqRw)]
+---
+
+> Saurabh Saxena,Phase Locked Loops: Noise Simulations for CP-PLL Blocks [[https://youtu.be/Q1libz-XqRw](https://youtu.be/Q1libz-XqRw)]
 
 ![image-20250726183455160](cp-pll/image-20250726183455160.png)
 
 ---
 
-![image-20240928013058435](cp-pll/image-20240928013058435.png)
-
-
+---
 
 > Michael H. Perrott, PLL Design Using the PLL Design Assistant Program. [[https://designers-guide.org/forum/Attachments/pll_manual.pdf](https://designers-guide.org/forum/Attachments/pll_manual.pdf)]
 >
 > M.H. Perrott, M.D. Trott, C.G. Sodini, "A Modeling Approach for Sigma-Delta Fractional-N Frequency Synthesizers Allowing Straightforward Noise Analysis", JSSC, vol 38, no 8, pp 1028-1038, Aug 2002. [[https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf](https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf)]
 
-
+![image-20240928013058435](cp-pll/image-20240928013058435.png)
 
 
 
@@ -188,6 +190,10 @@ $$
 ## PFD/CP Simulation
 
 *TODO* &#128197;
+
+
+
+
 
 
 

@@ -453,20 +453,6 @@ Julia version (Claude Opus 4.7)  [[https://gist.github.com/raytroop/53f210b2cca1
 
 
 
-## Impulse Train Modulator (ITM)
-
-> M. H. Perrott, M. D. Trott and C. G. Sodini, "A modeling approach for /spl Sigma/-/spl Delta/ fractional-N frequency synthesizers allowing straightforward noise analysis," in *IEEE Journal of Solid-State Circuits*, vol. 37, no. 8, pp. 1028-1038, Aug. 2002 [[https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf](https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf)]
-
-![image-20250913130430564](ddsm/image-20250913130430564.png)
-
----
-
-![image-20250913130708018](ddsm/image-20250913130708018.png)
-
-![image-20250913130847600](ddsm/image-20250913130847600.png)
-
-
-
 ## $\Delta\Sigma$ DAC
 
 ### LPF (RC Filter)

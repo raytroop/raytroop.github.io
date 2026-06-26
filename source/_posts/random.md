@@ -289,6 +289,8 @@ $$
 
 ![image-20240827221945277](random/image-20240827221945277.png)
 
+![image-20260626215802650](random/image-20260626215802650.png)
+
 ### CT Deterministic Autocorrelation Function
 
 > Topic 6 Random Processes and Signals [[https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf](https://www.robots.ox.ac.uk/~dwm/Courses/2TF_2021/N6.pdf)]
@@ -561,6 +563,28 @@ S_{X_eX_e}(\omega) &= \lim_{N\to \infty}\frac{1}{2N+1}\cdot \mathrm{E}\{|\sum_{n
 
 
 
+## Sampling & recovery of random process 
+
+![image-20260626235923375](random/image-20260626235923375.png)
+
+![image-20260627000120723](random/image-20260627000120723.png)
+
+---
+
+***Appendix 3-A. Power Spectrum of A Cyclostationary Process***
+
+![image-20260627000841168](random/image-20260627000841168.png)
+
+---
+
+***power spectral density of random pulse sequence using (3.84)***
+
+![image-20260627002041157](random/image-20260627002041157.png)
+
+
+
+
+
 ## reference
 
 L.W. Couch, Digital and Analog Communication Systems, 8th Edition, 2013 [[pdf](https://rizkia.staff.telkomuniversity.ac.id/files/2016/02/Digital-and-Analog-Communication-Systems-Leon-W.-Couch.pdf)]
@@ -572,6 +596,8 @@ R. Ziemer and W. Tranter, Principles of Communications, Seventh Edition, 2013 [[
 Stark H, Woods JW. *Probability, Statistics, and Random Processes for Engineers*, 4th ed. 2012 [[pdf](https://picture.iczhiku.com/resource/eetop/WYKgHqkPkiWRYmVN.pdf)]
 
 Kuchler, Ryan J. *Theory of multirate statistical signal processing and applications*. Monterey, California.: Naval Postgraduate School, 2005. [[pdf](https://apps.dtic.mil/sti/pdfs/ADA439362.pdf)]
+
+J. R. Barry, E. A. Lee, and D. G. Messerschmitt, Digital Communication, 3rd ed., Boston, MA: Kluwer Academic Publishers, 2003.
 
 ---
 

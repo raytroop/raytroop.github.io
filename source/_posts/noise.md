@@ -21,6 +21,8 @@ mathjax: true
 
 ![image-20251214183435273](noise/image-20251214183435273.png)
 
+![image-20260626205035373](noise/image-20260626205035373.png)
+
 ---
 
 > Mathuranathan. White Noise : Simulation and Analysis using Matlab [[https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/](https://www.gaussianwaves.com/2013/11/simulation-and-analysis-of-white-noise-in-matlab/)]

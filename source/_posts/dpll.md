@@ -214,9 +214,6 @@ loop latency is represented as $e^{-sD}$ in linear model
 > CC Chen. Circuit Image: Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8](https://youtu.be/Jyy18865jv8)]
 
 
-## Impulse Train Modulator (ITM)
-
-*TODO* &#128197;
 
 
 
@@ -224,33 +221,53 @@ loop latency is represented as $e^{-sD}$ in linear model
 
 > Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 *Lecture 9: Digital PLLs* [[https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture09_ee620_digital_PLLs.pdf)]
 >
-> Michael Perrott, Short Course On Phase-Locked Loops and Their Applications Day 4, AM Lecture *Digital Frequency Synthesizers* [[https://www.cppsim.com/PLL_Lectures/day4_am.pdf](https://www.cppsim.com/PLL_Lectures/day4_am.pdf)]
+> Michael Perrott, August 14, 2008. Short Course On Phase-Locked Loops and Their Applications Day 4, AM Lecture *Digital Frequency Synthesizers* [[https://www.cppsim.com/PLL_Lectures/day4_am.pdf](https://www.cppsim.com/PLL_Lectures/day4_am.pdf)]
+>
+> —, "A modeling approach for Sigma Delta fractional-N frequency synthesizers allowing straightforward noise analysis," in *IEEE Journal of Solid-State Circuits*, vol. 37, no. 8, pp. 1028-1038, Aug. 2002 [[https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf](https://www.cppsim.com/Publications/JNL/perrott_jssc02.pdf)]
+>
+> —. "Techniques for high data rate modulation and low power operation of fractional-N frequency synthesizers." 1997. [[https://www.cppsim.com/Publications/Theses/perrott_phdthesis.pdf](https://www.cppsim.com/Publications/Theses/perrott_phdthesis.pdf)]
 >
 > Hsu, Chun-Ming, Ph. D. Massachusetts Institute of Technology. "Techniques for high-performance digital frequency synthesis and phase control." 2008. [[http://hdl.handle.net/1721.1/45870](http://hdl.handle.net/1721.1/45870)]
+>
+> J. R. Barry, E. A. Lee, and D. G. Messerschmitt, Digital Communication, 3rd ed., Boston, MA: Kluwer Academic Publishers, 2003.
 
 
-
-*TODO* &#128197;
-
-??
-
-$T$ of DT-CT comes from ZOH approximation of impulse train
 
 $\frac{1}{T}$ of CT-DT comes from CT to sampled sequence to impulse train
 
+$T$ of DT-CT comes from ZOH approximation of impulse train
+
+![ct_dt_ct.drawio](dpll/ct_dt_ct.drawio.svg)
+
+### Divider Sampling Operation & ITM
+
+***Impulse Train Modulator (ITM)***
+
+![image-20260626221809983](dpll/image-20260626221809983.png)
+
+The **double outline of the box** in the figure is meant to serve as a reminder that a **sampling operation** is taking place
+
+![image-20260626214746157](dpll/image-20260626214746157.png)
+
+
 
 ---
 
----
+![image-20250913130708018](dpll/image-20250913130708018.png)
+
+![image-20250913130847600](dpll/image-20250913130847600.png)
 
 
-***DT to CT***
+
+
+
+### DT -> CT
 
 ![image-20260625221638670](dpll/image-20260625221638670.png)
 
 ![image-20260625221753608](dpll/image-20260625221753608.png)
 
-Here, $\boxed{S_x(e^{j2\pi fT}) = S_d(f)\cdot \textcolor{blue}{\frac{1}{T}}}$,   For example, the quantization noise spectrum is given by $S_x(e^{j2\pi fT}) = \frac{1}{12f_s}\cdot \frac{1}{T} = \frac{1}{12}$. To convert the sequence spectrum into a continuous impulse train spectrum, we multiply by $\color{blue}\frac{1}{T^2}$
+$\boxed{S_x(e^{j2\pi fT}) = S_d(f)\cdot \textcolor{blue}{\frac{1}{T}}=S_c(f)\cdot \textcolor{blue}{\frac{1}{T}}}$,   For example, the quantization noise spectrum is given by $S_x(e^{j2\pi fT}) = \frac{1}{12f_s}\cdot \frac{1}{T} = \frac{1}{12}$. To convert the sequence spectrum into a continuous impulse train spectrum, we multiply by $\color{blue}\frac{1}{T^2}$
 $$
 S_y(f) = S_x(e^{j2\pi fT}) \cdot \textcolor{blue}{T\cdot \frac{1}{T^2}\cdot |H(f)|^2 } = S_x(e^{j2\pi fT}) \cdot \textcolor{blue}{\frac{1}{T}|H(f)|^2}
 $$
@@ -260,13 +277,9 @@ $$
 
 ![image-20250512230604969](dpll/image-20250512230604969.png)
 
----
+![image-20260626232513174](dpll/image-20260626232513174.png)
 
----
-
-
-
-
+### CT -> DT -> CT
 
 ![image-20260625233049546](dpll/image-20260625233049546.png)
 
@@ -281,6 +294,10 @@ $$
 ![image-20260625234008676](dpll/image-20260625234008676.png)
 
 ![image-20260625233243905](dpll/image-20260625233243905.png)
+
+
+
+
 
 ## reference
 

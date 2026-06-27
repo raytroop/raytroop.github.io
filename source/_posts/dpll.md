@@ -239,7 +239,7 @@ loop latency is represented as $e^{-sD}$ in linear model
 - $\color{red}\frac{1}{T}$ originates from DT **spectrum** to CT impulse **spectrum** is **implicit** in frequency-domain model
 - $\color{red}T$ of DT-CT originates from **ZOH approximation** following impulse train, which is **explicit** in frequency-domain model
 
-
+![image-20260627090001371](dpll/image-20260627090001371.png)
 
 ### Divider Sampling Operation & ITM
 

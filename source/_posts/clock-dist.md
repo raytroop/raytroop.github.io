@@ -38,6 +38,8 @@ mathjax: true
 > G. Li, W. Lee, D. Cui, B. Zhang, A. Momtaz and J. Cao, "Standing wave based clock distribution technique with application to a 10 × 11 Gbps transceiver in 28 nm CMOS," *2015 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Xiamen, China, 2015, pp. 1-4 [[https://sci-hub.se/10.1109/ASSCC.2015.7387451](https://sci-hub.se/10.1109/ASSCC.2015.7387451)]
 >
 > T. Ali *et al*., "6.4 A 180mW 56Gb/s DSP-Based Transceiver for High Density IOs in Data Center Switches in 7nm FinFET Technology," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 118-120 [[https://sci-hub.se/10.1109/ISSCC.2019.8662523](https://sci-hub.se/10.1109/ISSCC.2019.8662523)]
+>
+> hai-kun,『讲电路』传输线和驻波在时钟分布网络中的应用 [[https://zhuanlan.zhihu.com/p/30055007](https://zhuanlan.zhihu.com/p/30055007)]
 
 *TODO* &#128197;
 
@@ -59,7 +61,7 @@ mathjax: true
 
 > Chembiyan T, A General Theory of Cascaded PLL Design [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_theory-of-cascaded-pll-activity-7331339385952448512-ZwxN?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 >
-> Nicola Da Dalt, ISSCC 2012 T5: JITTER basic and advanced concepts, statistics and applications [[https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T5.pdf)]
+> Nicola Da Dalt, ISSCC 2012 T5: JITTER basic and advanced concepts, statistics and applications
 >
 > —. ESSCIRC 2019 Tutorials: Jitter in Wireline and Data Converter Applications [[https://youtu.be/aapkfCeHTrQ](https://youtu.be/aapkfCeHTrQ)]
 
@@ -381,7 +383,7 @@ A **sampled pxf** analysis can be used to simulate the *deterministic jitter* of
 
 Article (20500632) Title: How to simulate Random and Deterministic Jitters
 
-Spectre Tech Tips: Measuring Noise in Digital Circuits - Analog/Custom Design - Cadence Blogs - Cadence Community [https://community.cadence.com/cadence_blogs_8/b/cic/posts/s . . .](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-measuring-noise-in-digital-circuits)
+Spectre Tech Tips: Measuring Noise in Digital Circuits - Analog/Custom Design - Cadence Blogs - Cadence Community [[https://community.cadence.com/cadence_blogs_8/b/cic/posts/s . . .](https://community.cadence.com/cadence_blogs_8/b/cic/posts/spectre-tech-tips-measuring-noise-in-digital-circuits)]
 
 Cadence RAK: Deterministic Jitter Measurement using SpectreRF
 
@@ -391,9 +393,9 @@ supply noise sensitivity: PSS+PAC or PSS+PX [[https://designers-guide.org/forum/
 
 ---
 
-J. Kim et al., "A 112 Gb/s PAM-4 56 Gb/s NRZ Reconfigurable Transmitter With Three-Tap FFE in 10-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 54, no. 1, pp. 29-42, Jan. 2019, doi: 10.1109/JSSC.2018.2874040
+J. Kim et al., "A 112 Gb/s PAM-4 56 Gb/s NRZ Reconfigurable Transmitter With Three-Tap FFE in 10-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 54, no. 1, pp. 29-42, Jan. 2019, [[https://sci-hub.ru/10.1109/JSSC.2018.2874040](https://sci-hub.ru/10.1109/JSSC.2018.2874040)]
 
-— et al., "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 57, no. 1, pp. 6-20, Jan. 2022, doi: 10.1109/JSSC.2021.3108969
+— et al., "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 57, no. 1, pp. 6-20, Jan. 2022, [[https://sci-hub.ru/10.1109/JSSC.2021.3108969](https://sci-hub.ru/10.1109/JSSC.2021.3108969)]
 
 ---
 
@@ -409,7 +411,7 @@ Low-Jitter CMOS Clock Distribution [[https://youtu.be/LMT-T41Y64U](https://youtu
 
 Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC3.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC3.pdf)]
 
-Phillip Restle. ISSCC2021 SC4: Processor Clock Generation, Distribution, and Clock Sensor/Management Loops [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC4.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC4.pdf)]
+Phillip Restle. ISSCC2021 SC4: Processor Clock Generation, Distribution, and Clock Sensor/Management Loops
 
 Jihwan Kim,Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
 

@@ -309,9 +309,9 @@ Carusone, Tony Chan, David Johns, and Kenneth Martin. *Analog integrated circuit
 
 Pavan Kumar Hanumolu. CICC 2015. "Low Dropout Regulators" [[https://uofi.app.box.com/v/CICC15-LDO](https://uofi.app.box.com/v/CICC15-LDO)]
 
-Mingoo Seok. ISSCC 2020 T7: "Basics of Digital Low-Dropout (LDO) Integrated Voltage Regulator" [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T7Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T7Visuals.pdf)]
+Mingoo Seok. ISSCC 2020 T7: "Basics of Digital Low-Dropout (LDO) Integrated Voltage Regulator"
 
-Yan Lu, ISSCC2021 T10: "Fundamentals of Fully Integrated Voltage Regulators" [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf)]
+Yan Lu, ISSCC2021 T10: "Fundamentals of Fully Integrated Voltage Regulators"
 
 —,  (Tsinghua U.) Preview - “Precision Low-Dropout Regulators” Online Course (2025) [[https://youtu.be/IgWTou7Ikbs](https://youtu.be/IgWTou7Ikbs)]
 

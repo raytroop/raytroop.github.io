@@ -69,6 +69,12 @@ The PFD's state machine interprets those missing edges as a huge phase/frequency
 
 
 
+---
+
+---
+
+![image-20260627101018275](clocking-misc/image-20260627101018275.png)
+
 ## OSPLL (Reference Oversampling PLL)
 
 > J. -H. Seol, K. Choo, D. Blaauw, D. Sylvester and T. Jang, "Reference Oversampling PLL Achieving −256-dB FoM and −78-dBc Reference Spur," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 10, pp. 2993-3007, Oct. 2021 [[https://sci-hub.se/10.1109/JSSC.2021.3089930](https://sci-hub.se/10.1109/JSSC.2021.3089930)]

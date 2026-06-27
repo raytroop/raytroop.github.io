@@ -519,7 +519,7 @@ Jihwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Comm
 
 —, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
 
-Friedel Gerfers, ISSCC2021 T6: Basics of DAC-based Wireline Transmitters [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T6.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T6.pdf)]
+Friedel Gerfers, ISSCC2021 T6: Basics of DAC-based Wireline Transmitters
 
 Tod Dickson, IBM. High-Speed CMOS Serial Transmitters for 56-112Gb/s Electrical Interconnects [[https://www.youtube.com/watch?v=g1pcZabsRNc](https://www.youtube.com/watch?v=g1pcZabsRNc)]
 
@@ -527,9 +527,9 @@ B. Razavi, "Design Techniques for High-Speed Wireline Transmitters," in IEEE Ope
 
 ---
 
-Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T8.pdf)]
+Yvain Thonnart, CEA-LIST. ISSCC2021 T8: On-Chip Interconnects: Basic Concepts, Designs and Future Opportunities
 
-Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/SHORT%20COURSE/ISSCC2021-SC3.pdf](https://www.nishanchettri.com/isscc-slides/2021 ISSCC/SHORT COURSE/ISSCC2021-SC3.pdf)]
+Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems
 
 Sam Palermo. High-Performance SERDES Design" Online Course (2025):  Current-Mode DAC TX [[https://youtu.be/A2VsvCPDWxk](https://youtu.be/A2VsvCPDWxk)]
 

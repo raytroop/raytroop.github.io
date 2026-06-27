@@ -301,13 +301,13 @@ Pisati, et.al., "Sub-250mW 1-to-56Gb/s Continuous-Range PAM-4 42.5dB IL ADC/DAC-
 
 ## reference
 
-John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs" [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T5Visuals.pdf)]
+John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs"
 
 Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
 
-Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis [[https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T10/T10Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T10/T10Visuals.pdf)]
+Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis
 
-ISSCC2015 F1: High-Speed Interleaved ADCs [[https://picture.iczhiku.com/resource/eetop/wykrheUfrWasiMVX.pdf](https://picture.iczhiku.com/resource/eetop/wykrheUfrWasiMVX.pdf)]
+ISSCC2015 F1: High-Speed Interleaved ADCs
 
 Poulton, Ken. ISSCC2009  "Time-Interleaved ADCs, Past and Future" [(slides)](http://poulton.net/papers.public/2009_isscc_se0604_interleaving.pdf)
 

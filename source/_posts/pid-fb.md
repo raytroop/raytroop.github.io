@@ -175,7 +175,7 @@ Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. Feedback Control of D
 
 Dawson, Joel L. *A Guide to Feedback Theory*. Cambridge: Cambridge University Press, 2021. [[pdf](http://103.203.175.90:81/fdScript/RootOfEBooks/E%20Book%20collection%20-%202024%20-%20A/RARE%20BOOKS/A%20Guide%20to%20Feedback%20Theory%20by%20Dawson,%20Joel%20L.pdf)]
 
-Yan Lu, ISSCC2021 T10: Fundamentals of Fully Integrated Voltage Regulators [[https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T10.pdf)]
+Yan Lu, ISSCC2021 T10: Fundamentals of Fully Integrated Voltage Regulators
 
 Jens Anders (University of Stuttgart, DE). ESSERC2025 Circuits Insights: The Magic of Feedback in Analog Circuit Design [[https://youtu.be/NyXuA6WZ8Hg](https://youtu.be/NyXuA6WZ8Hg)]
 

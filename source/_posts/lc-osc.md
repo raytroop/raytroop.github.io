@@ -318,9 +318,7 @@ where $f_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the reso
 
 ## PN Reduction Techniques
 
-> Y. Hu, T. Siriburanon and R. B. Staszewski, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
->
-> —, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
+> Y. Hu, T. Siriburanon and R. B. Staszewski, , "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
 
 
 
@@ -407,7 +405,13 @@ $$
 
 ### Narrowing of conduction angle
 
+> Y. Hu, T. Siriburanon and R. B. Staszewski, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
+
 *TODO* &#128197;
+
+
+
+
 
 
 
@@ -476,8 +480,24 @@ Jun Yin. ISSCC 2025  T10:  mm-Wave Oscillator Design
 
 Razavi, Behzad. RF Microelectronics. 2nd ed. Prentice Hall, 2012.
 
+—. Design of CMOS Phase-Locked Loops: From Circuit Level to Architecture Level. Cambridge University Press; 2020. 
+
 Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated frequency synthesizers for wireless systems*. Cambridge University Press, 2007
 
 M. Babaie, M. Shahmohammadi, R. B. Staszewski, (2019) "*RF CMOS Oscillators for Modern Wireless Applications"* River Publishers [[https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf](https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf)]
 
 Manetakis, K. (2023). *Topics in LC Oscillators: Principles, phase noise, pulling, inductor design*. Springer Nature Switzerland Springer. [[eetop link](https://bbs.eetop.cn/thread-974577-1-1.html)]
+
+Luong HC, Yin J. *Transformer-Based Design Techniques for Oscillators and Frequency Dividers*. Springer; 2015.
+
+Hajimiri, A., & Lee, T. H. (1999). The design of low noise oscillators. Norwell, MA: Kluwer
+
+Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005. *The Designer's Guide to High-Purity Oscillators*
+
+---
+
+hai-kun, 片上电感的版图优化方法 [[https://zhuanlan.zhihu.com/p/37479700](https://zhuanlan.zhihu.com/p/37479700)]
+
+—, 电磁场仿真与片上电感的优化讲座实录 [[https://zhuanlan.zhihu.com/p/37942671](https://zhuanlan.zhihu.com/p/37942671)]
+
+—, 片上变压器的应用与设计 （二）多峰值谐振腔 [[https://zhuanlan.zhihu.com/p/45799676](https://zhuanlan.zhihu.com/p/45799676)]

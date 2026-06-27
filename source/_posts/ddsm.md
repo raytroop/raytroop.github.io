@@ -211,7 +211,6 @@ Generally speaking, $N \propto k$ and $N \propto \frac{1}{m}$, especially $N_{mi
 
 > 7.4.1 Delta-Sigma Modulator [[https://iic-jku.github.io/radio-frequency-integrated-circuits/rfic.html#sec-pll-delta-sigma](https://iic-jku.github.io/radio-frequency-integrated-circuits/rfic.html#sec-pll-delta-sigma)]
 >
-> Google AI Mode [[https://share.google/aimode/FTiU7YPjm3tnqEk7t](https://share.google/aimode/FTiU7YPjm3tnqEk7t)]
 
 ![image-20260307120539781](ddsm/image-20260307120539781.png)
 

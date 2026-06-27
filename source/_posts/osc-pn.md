@@ -102,9 +102,11 @@ $$
 
 ---
 
+> Ali Sheikholeslami ISSCC 2008 T5: Basics of Chip-to-Chip and Backplane Signaling
+
 ![image-20250524082246710](osc-pn/image-20250524082246710.png)
 
-> Ali Sheikholeslami ISSCC 2008 T5: Basics of Chip-to-Chip and Backplane Signaling [[https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T10_Pres.pdf](https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T10_Pres.pdf)]
+
 
 
 
@@ -336,6 +338,24 @@ For Colpitts Oscilaltor, $\Gamma_\text{eff}(x)$ is different from $\Gamma(x)$, h
 ![image-20260624211311029](osc-pn/image-20260624211311029.png)
 
 ![image-20260624211359445](osc-pn/image-20260624211359445.png)
+
+
+
+### another alternative derivation
+
+
+
+![image-20260627184837586](osc-pn/image-20260627184837586.png)
+
+
+
+![image-20260627185121907](osc-pn/image-20260627185121907.png)
+
+![another_isf.drawio](osc-pn/another_isf.drawio.svg)
+$$
+S_{\phi,USB} = \frac{S_n^{''}}{q_\text{max}^2\Delta\omega^2}\left(a_0^2+\sum_{k\neq0}a_k^2\right)=\frac{S_n^{''}}{q_\text{max}^2\Delta\omega^2}\left(\frac{c_0^2}{4}+\sum_{k=1}^\infty \frac{c_k^2}{2}\right)=\frac{S_n^{'}}{4q_\text{max}^2\Delta\omega^2}\left(\frac{c_0^2}{2}+\sum_{k=1}^\infty c_k^2\right)
+$$
+where $S_n^{''}$ is two sided PSD,  $S_n^{}$ is one sided PSD
 
 
 
@@ -715,6 +735,8 @@ Finally, we obtain
 >
 > Hu, Yizhe. (2019). A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF). 10.13140/RG.2.2.32151.60323. [[link](https://www.researchgate.net/publication/331072119_A_Simulation_Technique_of_Impulse_Sensitivity_Function_ISF_Based_on_Periodic_Transfer_Function_PXF)]
 >
+> —, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
+>
 > Aditya Varma Muppala, ISF Simulation in Cadence Using Transient Analysis | Oscillators 07 | MMIC 12 [[https://youtu.be/yiMn2rCtTXY](https://youtu.be/yiMn2rCtTXY)]
 >
 > Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
@@ -807,7 +829,7 @@ Bae, Woorham, and Deog-Kyoon Jeong. *Analysis and Design of CMOS Clocking Circui
 
 Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated frequency synthesizers for wireless systems*. Cambridge University Press, 2007.
 
-Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005. *The Designer's Guide to High-Purity Oscillators* [[pdf](https://picture.iczhiku.com/resource/eetop/whkgGLPAHoORYxbC.pdf)]
+Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005. *The Designer's Guide to High-Purity Oscillators*
 
 A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]
 

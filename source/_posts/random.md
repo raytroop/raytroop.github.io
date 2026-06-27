@@ -565,6 +565,8 @@ S_{X_eX_e}(\omega) &= \lim_{N\to \infty}\frac{1}{2N+1}\cdot \mathrm{E}\{|\sum_{n
 
 ## Sampling & recovery of random process 
 
+![ct_dt_ct.drawio](random/ct_dt_ct.drawio.svg)
+
 ![image-20260626235923375](random/image-20260626235923375.png)
 
 ![image-20260627000120723](random/image-20260627000120723.png)

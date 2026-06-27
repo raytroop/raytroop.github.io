@@ -233,11 +233,13 @@ loop latency is represented as $e^{-sD}$ in linear model
 
 
 
-$\frac{1}{T}$ of CT-DT comes from CT to sampled sequence to impulse train
+![psd_ct_dt.drawio](dpll/psd_ct_dt.drawio.svg)
 
-$T$ of DT-CT comes from ZOH approximation of impulse train
+- $\color{red}\frac{1}{T}$ of CT-DT originates from CT to sampled sequence to impulse train Fourier transform, which is **explicit** in frequency-domain model
+- $\color{red}\frac{1}{T}$ originates from DT **spectrum** to CT impulse **spectrum** is **implicit** in frequency-domain model
+- $\color{red}T$ of DT-CT originates from **ZOH approximation** following impulse train, which is **explicit** in frequency-domain model
 
-![ct_dt_ct.drawio](dpll/ct_dt_ct.drawio.svg)
+
 
 ### Divider Sampling Operation & ITM
 

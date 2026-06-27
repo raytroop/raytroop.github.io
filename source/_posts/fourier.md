@@ -133,6 +133,13 @@ $$
 k=0,1,\dots,N-1}
 $$
 
+### DTFT vs DFT
+
+> Schuller, Gerald. 2026. Multirate Signal Processing with Examples in Python. Cham: Springer Nature Switzerland.
+
+![image-20260627081612130](fourier/image-20260627081612130.png)
+
+
 
 ### impulse train
 

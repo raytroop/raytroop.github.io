@@ -7,6 +7,47 @@ categories:
 mathjax: true
 ---
 
+## Oscillator Figure of Merit (FoM)
+
+> M. Garampazzi *et al*., "An Intuitive Analysis of Phase Noise Fundamental Limits Suitable for Benchmarking LC Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 3, pp. 635-645, March 2014 [[https://sci-hub.jp/10.1109/JSSC.2014.2301760](https://sci-hub.jp/10.1109/JSSC.2014.2301760)]
+
+*TODO* &#128197;
+
+![image-20260628233827483](lc-osc/image-20260628233827483.png)
+
+---
+
+![image-20260628232405697](lc-osc/image-20260628232405697.png)
+
+![image-20260628232540546](lc-osc/image-20260628232540546.png)
+
+```matlab
+Sphi_1M = -47; % dBc/Hz
+Sphi_100M = -104; % dBc/Hz
+Pdc = 57e-6; % W
+f0 = 22.6e9; % Hz
+
+FoM_1M = 10*log10(1/(10^(Sphi_1M/10)*Pdc*1e3)*(f0/1e6)^2);  % 146.5234
+FoM_100M = 10*log10(1/(10^(Sphi_100M/10)*Pdc*1e3)*(f0/100e6)^2);  % 163.5234
+```
+
+
+
+---
+
+
+
+![image-20260628235109522](lc-osc/image-20260628235109522.png)
+
+
+
+---
+
+
+
+![image-20260628233941012](lc-osc/image-20260628233941012.png)
+
+
 
 ## LC Oscillator Structures
 
@@ -14,9 +55,13 @@ mathjax: true
 
 > A. Mazzanti and P. Andreani, "Class-C Harmonic CMOS VCOs, With a General Result on Phase Noise," in IEEE Journal of Solid-State Circuits, vol. 43, no. 12, pp. 2716-2729, Dec. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2004867](https://sci-hub.ru/10.1109/JSSC.2008.2004867)]
 
-
 *TODO* &#128197;
 
+![image-20260628230233699](lc-osc/image-20260628230233699.png)
+
+![image-20260628230309404](lc-osc/image-20260628230309404.png)
+
+![image-20260628230338937](lc-osc/image-20260628230338937.png)
 
 ### Class-D CMOS Oscillator
 
@@ -27,6 +72,8 @@ mathjax: true
 > —, "A Class-D CMOS DCO with an on-chip LDO," ESSCIRC 2014 - 40th European Solid State Circuits Conference (ESSCIRC), Venice Lido, Italy, 2014 [[https://sci-hub.red/10.1109/ESSCIRC.2014.6942090](https://sci-hub.red/10.1109/ESSCIRC.2014.6942090)]
 
 *TODO* &#128197;
+
+
 
 
 ### Class-F CMOS Oscillator
@@ -41,7 +88,43 @@ mathjax: true
 
 
 
+### Class-F<sub>2</sub> CMOS Oscillator
 
+*TODO* &#128197;
+
+
+
+### Class-F<sub>3</sub> CMOS Oscillator
+
+*TODO* &#128197;
+
+
+
+### Class-F<sub>23</sub> CMOS Oscillator
+
+*TODO* &#128197;
+
+
+
+### Class-F<sup>-1</sup> CMOS Oscillator
+
+> C. -C. Lim, J. Yin, P. -I. Mak, H. Ramiah and R. P. Martins, "An inverse-class-F CMOS VCO with intrinsic-high-Q 1st- and 2nd-harmonic resonances for 1/f2-to-1/f3 phase-noise suppression achieving 196.2dBc/Hz FOM," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018 [[paper](https://ime.um.edu.mo/wp-content/uploads/presentations/25bad4fd3e900415db6f2fc2ebf49cc7.pdf)]
+>
+> —, "An Inverse-Class-F CMOS Oscillator With Intrinsic-High-Q First Harmonic and Second Harmonic Resonances," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 12, pp. 3528-3539, Dec. 2018 [[https://sci-hub.jp/10.1109/JSSC.2018.2875099](https://sci-hub.jp/10.1109/JSSC.2018.2875099)]
+>
+> X. Meng, H. Li, P. Chen, J. Yin, P. -I. Mak and R. P. Martins, "Analysis and Design of a 15.2-to-18.2-GHz Inverse-Class-F VCO With a Balanced Dual-Core Topology Suppressing the Flicker Noise Upconversion," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 70, no. 12, pp. 5110-5123, Dec. 2023
+
+*TODO* &#128197;
+
+![image-20260628211546255](lc-osc/image-20260628211546255.png)
+
+![image-20260628211840210](lc-osc/image-20260628211840210.png)
+
+Higher $Q_\text{CM}$ is preferred for better FoM
+
+![image-20260628220728497](lc-osc/image-20260628220728497.png)
+
+![image-20260628224754490](lc-osc/image-20260628224754490.png)
 
 
 
@@ -363,6 +446,8 @@ For a **periodic** LC oscillation, t**he average stored energy must balance** be
 > *Yunbo Huang, **Zunsong Yang\***, et al., "A 7.0-to-8.6GHz Balanced Class-F-1 VCO with a Trifilar Transformer-Based Tank Achieving 194.5dBc/Hz FoM," IEEE MTT-S Radio Frequency Integrated Circuits (**RFIC**), June 2026*
 
 ![image-20260624232255477](lc-osc/image-20260624232255477.png)
+
+![image-20260628213410194](lc-osc/image-20260628213410194.png)
 
 ![image-20260624225518182](lc-osc/image-20260624225518182.png)
 

@@ -872,10 +872,31 @@ sys = (s + 2) / (s^2 + 3*s + 2);
 
 > [!CAUTION]
 
+---
 
 
 
+**subscript and superscript**
 
+1. *HTML Tags (Universal Compatibility)*
+
+   **Subscript syntax:** `text<sub>subscript</sub>`
+
+   **Superscript syntax:** `text<sup>superscript</sup>`
+
+```html
+H<sub>2</sub>O
+```
+
+H<sub>2</sub>O
+
+```html
+X<sup>2</sup>
+```
+
+X<sup>2</sup>
+
+2. *LaTeX Math Blocks*
 
 
 

@@ -587,9 +587,29 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 ![image-20250815234653864](osc-pn/image-20250815234653864.png)
 
+## Razavi's PN Analysis
+
+![image-20260628111202330](osc-pn/image-20260628111202330.png)
 
 
-## Phase Perturbation
+
+![image-20260628111723352](osc-pn/image-20260628111723352.png)
+
+![image-20260628113608943](osc-pn/image-20260628113608943.png)
+
+![image-20260628114309467](osc-pn/image-20260628114309467.png)
+
+$R_{nI}(\tau) = R_{nQ}(\tau)$ demonstrate **spectra** of $n_I $ and $n_Q $ to be **equal** 
+
+$R_{nInQ}(\tau)=-R_{nQnI}(\tau)$ demonstrate  $n_I $ and $n_Q $ are **uncorrelated**
+
+
+
+
+
+
+
+## Chembiyan's Phase Perturbation
 
 > Chembiyan T, "Brownian Motion And The Oscillator Phase Noise" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_vco-perturbed-by-a-brownian-motion-activity-6994691057045159936-nqaN?utm_source=share&utm_medium=member_desktop)]
 >

@@ -322,6 +322,20 @@ where $f_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the reso
 
 
 
+### Groszkowski's Effect
+
+> credits to *GPT-5.5 High*
+
+![image-20260628142136377](lc-osc/image-20260628142136377.png)
+
+**Groszkowski’s effect** is an oscillator **frequency shift caused by harmonic content** in the oscillation waveform/current.
+
+For a **periodic** LC oscillation, t**he average stored energy must balance** between $C$ and $L$
+
+![image-20260628161501243](lc-osc/image-20260628161501243.png)![image-20260628161612592](lc-osc/image-20260628161612592.png)
+
+![image-20260628161802633](lc-osc/image-20260628161802633.png)
+
 
 
 ### Symmetrising waveform (2nd harmonic resonance)

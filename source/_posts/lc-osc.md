@@ -59,9 +59,11 @@ FoM_100M = 10*log10(1/(10^(Sphi_100M/10)*Pdc*1e3)*(f0/100e6)^2);  % 163.5234
 
 ![image-20260628230233699](lc-osc/image-20260628230233699.png)
 
-![image-20260628230309404](lc-osc/image-20260628230309404.png)
+![image-20260629212724673](lc-osc/image-20260629212724673.png)
 
-![image-20260628230338937](lc-osc/image-20260628230338937.png)
+
+
+
 
 ### Class-D CMOS Oscillator
 
@@ -125,6 +127,44 @@ Higher $Q_\text{CM}$ is preferred for better FoM
 ![image-20260628220728497](lc-osc/image-20260628220728497.png)
 
 ![image-20260628224754490](lc-osc/image-20260628224754490.png)
+
+
+
+### Colpitts oscillator
+
+> John Rogers, Calvin Plett, and Foster Dai. 2006. Integrated Circuit Design for High-Speed Frequency Synthesis (Artech House Microwave Library). Artech House, Inc., USA.
+>
+> Jri Lee, "Communication Integrated Circuits.", [[https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf](https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf)]
+
+Start-up conditions
+$$
+\boxed{g_mR_p \geq 4}
+$$
+
+
+![image-20260629210706105](lc-osc/image-20260629210706105.png)
+
+This type of oscillator could be operated with only **one transistor**. In modern times, the abundance of transistors and the desire for differential circuits favors a symmetric Colpitts oscillators
+
+![image-20260629215259428](lc-osc/image-20260629215259428.png)
+
+---
+
+***common-source Colpitts***
+
+![image-20260629220159439](lc-osc/image-20260629220159439.png)
+
+![image-20260629215656588](lc-osc/image-20260629215656588.png)
+
+---
+
+***common-gate Colpitts***
+
+![image-20260629222410775](lc-osc/image-20260629222410775.png)
+
+![image-20260629222453708](lc-osc/image-20260629222453708.png)
+
+*TODO* &#128197;
 
 
 
@@ -243,9 +283,7 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 
 
-## Colpitts oscillator
 
-*TODO* &#128197;
 
 
 
@@ -549,9 +587,25 @@ Three methods:
 
 ![image-20251026155120102](lc-osc/image-20251026155120102.png)
 
+###  Harmonic Balance simulation
 
+> Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation," *2022 IEEE International Symposium on Circuits and Systems (ISCAS)*, Austin, TX, USA, 2022 [[http://seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](http://seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
+>
+> Tawna, PNOISE Noise Type Time Average vs. Sampled Jitter [[https://community.cadence.com/cadence_technology_forums/f/rf-design/65882/pnoise-noise-type-time-average-vs-sampled-jitter/1408176](https://community.cadence.com/cadence_technology_forums/f/rf-design/65882/pnoise-noise-type-time-average-vs-sampled-jitter/1408176)]
+>
+> How can I set the stop frequency for a sampled pnoise/hbnoise analysis to be half the PSS
+> fundamental?
+>
+> The mathematics behind choosing the upper frequency when simulating pnoise jitter on an
+> oscillator
 
+`Oversample` and `Number of Harmonics` setting 
 
+![image-20260630071814003](lc-osc/image-20260630071814003.png)
+
+![image-20260630071826778](lc-osc/image-20260630071826778.png)
+
+![image-20260630073158768](lc-osc/image-20260630073158768.png)
 
 ## reference
 

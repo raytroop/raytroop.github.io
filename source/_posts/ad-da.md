@@ -120,6 +120,170 @@ In the power domain, $\color{red}v_{nS,RMS}/3 \lt \sigma_{q,RMS}$ ensures that s
 
 ![image-20260501171651963](ad-da/image-20260501171651963.png)
 
+## ADC SNR & clock jitter
+
+> Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
+>
+> CC Chen, Why Absolute Jitter Matters for ADCs & DACs? [[https://youtu.be/jBgDDFFDq30](https://youtu.be/jBgDDFFDq30)]
+>
+> Thomas Neu, TIPL 4704. Jitter vs SNR for ADCs [[https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf](https://www.ti.com/content/dam/videos/external-videos/en-us/2/3816841626001/5529003238001.mp4/subassets/TIPL-4704-Jitter-vs-SNR.pdf)]
+>
+> Walt Kester , MT-007: Aperture Time, Aperture Jitter, Aperture Delay Time [[https://www.analog.com/media/en/training-seminars/tutorials/MT-007.pdf](https://www.analog.com/media/en/training-seminars/tutorials/MT-007.pdf)]
+
+***cyclostationary*** random process
+
+![image-20250809170358612](ad-da/image-20250809170358612.png)
+
+---
+
+![image-20250525134220901](ad-da/image-20250525134220901.png)
+
+![image-20250525135503671](ad-da/image-20250525135503671.png)
+
+$$\begin{align}
+\text{SNR}_\text{ADC}[\text{dB}] &= -20\cdot \log \sqrt{\left(10^{-\frac{\text{SNR}_\text{Quantization Noise}}{20}}\right)^2 + \left(10^{-\frac{\text{SNR}_\text{Jitter}}{20}}\right)^2} \\
+&= -10\cdot \log \left(\left(10^{-\frac{\text{SNR}_\text{Quantization Noise}}{20}}\right)^2 + \left(10^{-\frac{\text{SNR}_\text{Jitter}}{20}}\right)^2\right) \\
+&= -10\cdot \log \left(\left(10^{-\frac{10\log(\frac{3\times2^{2N}}{2})}{20}}\right)^2 + \left(10^{-\frac{-20\log{(2\pi f_\text{in}\sigma_\text{jitter})}}{20}}\right)^2\right) \\
+&= -10\cdot \log \left( \frac{2}{3\times 2^{2N}} + (2\pi f_\text{in}\sigma_\text{jitter})^2 \right)
+\end{align}$$
+
+
+
+![image-20250525141523199](ad-da/image-20250525141523199.png)
+
+![image-20250525143507747](ad-da/image-20250525143507747.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+N = 12  # ADC bit
+fin = 100e6 # the frequency of the sinusoidal input signal
+jrms = np.linspace(0, 10, 1000)*1e-12 #ps
+
+# ADC (SNR) with Quantization Noise & Jitter degradation
+SNR_ADC = -10 * np.log10(10**(-np.log10(3*2**(2*N)/2)) + (2*np.pi*fin*jrms)**2)
+ENOB = (SNR_ADC - 1.76) / 6.02
+
+plt.plot(jrms*1e12, ENOB, label='100 MHZ input')
+plt.plot([0, 10], [12, 12], '--', label='12-bit limit')
+plt.plot([0, 10], [6, 6], '--', label='6-bit limit')
+
+plt.xscale('linear')
+plt.xlim([0, 10])
+plt.ylim([5, 15])
+plt.xlabel('RMS Jitter (ps)')
+plt.ylabel('Effective Number of Bits (ENOB')
+plt.grid(which='both')
+plt.title('ENOB vs. RMS Clock Jitter (100 MHz)')
+plt.legend()
+plt.show()
+```
+
+---
+
+> Chun-Hsien Su (蘇純賢).  Design of Oversampled Sigma-Delta Data Converters. July, 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIHwgULoQJZLNCV.pdf)]
+
+![image-20250809182751263](ad-da/image-20250809182751263.png)
+
+---
+
+> Chembian Thambidurai, "SNR of an ADC in the presence of clock jitter" [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd/](https://www.linkedin.com/posts/chembiyan-t-0b34b910_adcsnrjitter-activity-7171178121021304833-f2Wd/)]
+
+Unlike the quantization noise and the thermal noise, the impact of the clock jitter on the ADC performance depends on the input signal properties like its PSD
+
+![image-20241123205352661](ad-da/image-20241123205352661.png)
+
+The error between *the ideal sampled signal* and *the sampling with clock jitter* can be treated as noise and it results in the degradation of the SNR of the ADC
+
+![image-20241124004634365](ad-da/image-20241124004634365.png)
+
+
+
+***For sinusoid input:***
+
+![image-20241210235817281](ad-da/image-20241210235817281.png)
+
+
+
+![image-20241222140258960](ad-da/image-20241222140258960.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+ENOB = 8
+fin = np.logspace(8, 11, 60)
+
+# quantization noise: SNR = 6.02*ENOB + 1.76 dB
+Ps_PnQ = 10**((6.02*ENOB + 1.76)/10)
+PnQ = 1/Ps_PnQ
+
+# jitter noise: SNR = 6 - 20log10(2*pi*fin*Jrms) dB @ref. Chembiyan T
+Jrms_list = [25e-15, 50e-15, 100e-15, 250e-15, 500e-15, 1000e-15]
+for Jrms in Jrms_list:
+    # Ps_PnJ_lcl = 10**((6-20*np.log10(2*np.pi*fin*Jrms))/10)     # ref. Chembiyan T
+    Ps_PnJ_lcl = 10**((0 - 20 * np.log10(2 * np.pi * fin * Jrms)) / 10)  # ref. Nicola Da Dalt
+    PnJ_lcl = 1/Ps_PnJ_lcl
+    SNR_lcl = 10*np.log10(1/(PnQ+PnJ_lcl))
+    plt.plot(fin, SNR_lcl, label=r'$\sigma_{jitter}$'+'='+str(int(Jrms*1e15))+'fs')
+
+plt.xscale('log')
+plt.ylim([0, 55])
+plt.xlabel(r'$f_{in}$ [Hz]')
+plt.ylabel(r'SNR [dB]')
+plt.grid(which='both')
+# plt.title(r'ref. Chembiyan T')
+plt.title(r'ref. Nicola Da Dalt')
+plt.legend()
+plt.show()
+```
+
+> K. Tyagi and B. Razavi, "Performance Bounds of ADC-Based Receivers Due to Clock Jitter," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 70, no. 5, pp. 1749-1753, May 2023 [[https://www.seas.ucla.edu/brweb/papers/Journals/KT_TCAS_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/KT_TCAS_2023.pdf)]
+>
+> N. Da Dalt, M. Harteneck, C. Sandner and A. Wiesbauer, "On the jitter requirements of the sampling clock for analog-to-digital converters," in *IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications*, vol. 49, no. 9, pp. 1354-1360, Sept. 2002 [[https://sci-hub.se/10.1109/TCSI.2002.802353](https://sci-hub.se/10.1109/TCSI.2002.802353)]
+>
+> M. Shinagawa, Y. Akazawa and T. Wakimoto, "Jitter analysis of high-speed sampling systems," in IEEE Journal of Solid-State Circuits, vol. 25, no. 1, pp. 220-224, Feb. 1990 [[https://sci-hub.se/10.1109/4.50307](https://sci-hub.se/10.1109/4.50307)]
+>
+> ![image-20241210232716862](ad-da/image-20241210232716862.png)
+>
+> Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
+
+---
+
+> 待学芯. ADC量化结果反推采样时钟抖动（Jitter） [[https://mp.weixin.qq.com/s/55xfVQMe_N8zUGpI8ZvmsQ](https://mp.weixin.qq.com/s/55xfVQMe_N8zUGpI8ZvmsQ)]
+>
+> —. 关于时钟抖动(Jitter)与ADC的一些讨论 [[https://mp.weixin.qq.com/s/GW1keHhfq7zrd036lyG0CQ](https://mp.weixin.qq.com/s/GW1keHhfq7zrd036lyG0CQ)]
+
+![image-20250811210300829](ad-da/image-20250811210300829.png)
+
+
+
+## DAC SNR & clock jitter
+
+> Boris Murmann ISSCC 2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications [[pdf](https://www.nishanchettri.com/isscc-slides/2022%20ISSCC/SHORT%20COURSE/SC1.pdf)]
+>
+> S. Kim, K. -Y. Lee and M. Lee, "Modeling Random Clock Jitter Effect of High-Speed Current-Steering NRZ and RZ DAC," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 65, no. 9, pp. 2832-2841, Sept. 2018 [[https://sci-hub.se/10.1109/TCSI.2018.2821198](https://sci-hub.se/10.1109/TCSI.2018.2821198)]
+>
+> Martin Clara. High-Performance D/A-Converters - Application to Digital Transceivers, 2013  [[pdf](https://picture.iczhiku.com/resource/eetop/SYIrysQLKgUtfxbB.pdf)]
+>
+> Chun-Hsien Su (蘇純賢). Design of Oversampled Sigma-Delta Data Converters. July, 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIHwgULoQJZLNCV.pdf)]
+
+ampling Jitter Effects for *ADC/DAC*
+
+- In both DAC or ADC cases, doubling the timing jitter doubles the noise level
+- Also, doubling the frequency or amplitude doubles the jitter induced noise - ***SNR is not improved***
+
+![image-20250810213544751](ad-da/image-20250810213544751.png)
+
+![image-20250810213615814](ad-da/image-20250810213615814.png)
+
+
+
+
+
+
+
 ## ADC Linearity (DNL/INL)
 
 ![image-20260426174704406](ad-da/image-20260426174704406.png)
@@ -926,7 +1090,7 @@ Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 
 
 Aaron Buchwald, ISSCC2010 T1: "Specifying & Testing ADCs"
 
-Ahmed M. A. Ali. CICC 2018: High Speed Pipelined ADCs: Fundamentals and Variants [[https://picture.iczhiku.com/resource/eetop/SyIGzGRYsHFehcnX.pdf](https://picture.iczhiku.com/resource/eetop/SyIGzGRYsHFehcnX.pdf)]
+Ahmed M. A. Ali. CICC 2018: High Speed Pipelined ADCs: Fundamentals and Variants 
 
 John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs" 
 

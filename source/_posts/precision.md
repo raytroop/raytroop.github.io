@@ -53,6 +53,8 @@ mathjax: true
 
 ### Residual Noise of Auto-zeroing
 
+> P. Bruschi, Dynamic techniques for the rejection of the offset and low frequency noise [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Lecture_notes/Chap_2_2_Offset_Flicker_Reduction.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Lecture_notes/Chap_2_2_Offset_Flicker_Reduction.pdf)] [[slides](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/04_AZ_CDS_CHS_Catania_2023-2024_v2.pdf)]
+
 ![image-20240826212343905](precision/image-20240826212343905.png)
 
 ---
@@ -275,6 +277,10 @@ $$\begin{align}
 &\approx 2f_{ch}V_o\tau 
 \end{align}$$
 
+
+
+![image-20260630000850210](precision/image-20260630000850210.png)
+
 ### Chopping Simulation
 
 > EE 501: CMOS Analog Integrated Circuit Design — Chopping for Offset reduction [[https://class.ece.iastate.edu/djchen/ee501/2016/Chopper_design_EE501.pptx](https://class.ece.iastate.edu/djchen/ee501/2016/Chopper_design_EE501.pptx)]
@@ -431,11 +437,13 @@ legend('$\Delta V_{os}[0]$ decaying','$V_{os0}$ decaying','$\Delta V_{os}[n]$', 
 
 ## reference
 
+P. Bruschi, Dynamic techniques for the rejection of the offset and low frequency noise [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Lecture_notes/Chap_2_2_Offset_Flicker_Reduction.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Lecture_notes/Chap_2_2_Offset_Flicker_Reduction.pdf)] [[slides](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/04_AZ_CDS_CHS_Catania_2023-2024_v2.pdf)]
+
 C. C. Enz and G. C. Temes, "Circuit techniques for reducing the effects of op-amp imperfections: autozeroing, correlated double sampling, and chopper stabilization," in Proceedings of the IEEE, vol. 84, no. 11, pp. 1584-1614, Nov. 1996, doi: 10.1109/5.542410. [[http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf](http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Articles/Offset_canc_Enz_Temes_96.pdf)]
 
-R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processing. Wiley-Interscience, 1986 [[pdf](https://picture.iczhiku.com/resource/eetop/SHkTDjaejpdzPCBv.pdf)]
+R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processing. Wiley-Interscience, 1986
 
-Christian-Charles Enz. "High precision CMOS micropower amplifiers" [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
+Christian-Charles Enz. "High precision CMOS micropower amplifiers"
 
 Kofi Makinwa. Precision Analog Circuit Design: Coping with Variability, [[https://youtu.be/nA_DZtRqrTQ](https://youtu.be/nA_DZtRqrTQ)] [[https://youtu.be/uwRpP20Lprc](https://youtu.be/uwRpP20Lprc)]
 
@@ -445,11 +453,9 @@ Kofi Makinwa. Precision Analog Circuit Design: Coping with Variability, [[https:
 
 Qinwen Fan, Evolution of precision amplifiers
 
-Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in CMOS [[https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf](https://picture.iczhiku.com/resource/eetop/sYkywlkpwIQEKcxb.pdf)]
+Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in CMOS 
 
-Axel Thomsen, Silicon Laboratories  ISSCC2012 T8: "Managing Offset and Flicker Noise" [[slides](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/ISSCC2012Visuals-T8.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2012%20ISSCC/TUTORIALS/T8%20Transcription.pdf)]
-
-P. Bruschi, Dynamic techniques for the rejection of the offset and low frequency noise [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Lecture_notes/Chap_2_2_Offset_Flicker_Reduction.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Lecture_notes/Chap_2_2_Offset_Flicker_Reduction.pdf)]
+Axel Thomsen, Silicon Laboratories  ISSCC2012 T8: "Managing Offset and Flicker Noise"
 
 ---
 

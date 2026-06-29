@@ -428,128 +428,6 @@ ACGN(1:1000) = []; % DISCARDING TRANSIENT SAMPLES
 
 
 
-## sampling bandlimited white noise
-
-> Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF [[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)]
->
-> Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
->
-> Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and Modeling URL: [https://www.seas.upenn.edu/~ese568/fall2019/](https://www.seas.upenn.edu/~ese568/fall2019/)
->
-> Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann Publishers Inc., San Francisco, CA, USA.
->
-> R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processing. Wiley-Interscience, 1986
->
-> Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits  [[http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf](http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf)]
->
-> Christian-Charles Enz. High precision CMOS micropower amplifiers [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
-
-The **aliasing of the noise**, or **noise folding**, plays an important role in switched-capacitor as it does in all switched-capacitor filters
-
-![image-20240425215938141](noise/image-20240425215938141.png)
-
-Assume for the moment that the switch is *always closed* (that there is no hold phase), the single-sided noise density would be
-
-![image-20240428182816109](noise/image-20240428182816109.png)
-
----
-
-![image-20240428180635082](noise/image-20240428180635082.png)
-
-
-
-$v_s[n]$ is the sampled version of $v_{RC}(t)$, i.e. $v_s[n]= v_{RC}(nT_C)$
-$$
-S_s(e^{j\omega}) = \frac{1}{T_C} \sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi k}{T_C})) \cdot \mathrm{d}\omega
-$$
-where $\omega \in [-\pi, \pi]$,  furthermore $\frac{\mathrm{d}\omega}{T_C}= \mathrm{d}\Omega$
-$$
-S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s)) \cdot \mathrm{d}\Omega
-$$
-
-> ![image-20240428215559780](noise/image-20240428215559780.png)
-
-![image-20240425220033340](noise/image-20240425220033340.png)
-
-![image-20260604210651691](noise/image-20260604210651691.png)
-
-To implement a zero-order hold involves convolving the **sequence** $v_s$ with a pulse of unit height with a width of $(1-m)T_c$ and the highlighting $T_c$ bridge **sequence to impulse**
-
-![image-20240425220400924](noise/image-20240425220400924.png)
-
-where $m$ is the duty cycle
-
-$$
-\color{purple}\overline{v_c^2} = \overline{v_s^2} = \frac{kT}{C}
-$$
-
-
-
----
-
-*Below analysis focusing on **sampled noise*** $v_s$
-
-> Boris Murmann. Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 / tutorials [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T8.pdf), [transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T9.pdf)]
->
-> —. EE315A VLSI Signal Conditioning Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SyIgQJfyzyuDhBXc.pdf)]
->
-> —. EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
-
-![image-20250810085721440](noise/image-20250810085721440.png)
-
-![image-20260212234532530](noise/image-20260212234532530.png)
-
-
-
-- Calculate autocorrelation function of noise at the output of the RC filter
-- Calculate the spectrum by taking the **discrete** time Fourier transform of the autocorrelation function
-
----
-
-> Bernhard E. Boser . Advanced Analog Integrated Circuits Switched Capacitor Gain Stages [[https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf](https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf)]
-
-![image-20240427183700971](noise/image-20240427183700971.png)
-
----
-
-> P. Bruschi, Microelectronic System Design, [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf)]
-
-![image-20260523093243527](noise/image-20260523093243527.png)
-
-![image-20260523093342636](noise/image-20260523093342636.png)
-
-
-
-## impulse sampling noise
-
-> Chembian Thambidurai, "Noise, Sampling and Zeta Functions" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_sampling-noise-signals-activity-7018929654627520512-QYr0)]
-
-A random signal $v_n(t)$ is sampled using an ***ideal impulse sampler***
-
-![image-20241201165157743](noise/image-20241201165157743.png)
-
-![image-20260225220015404](noise/image-20260225220015404.png)
-
-> ![image-20260225221746857](noise/image-20260225221746857.png)
-
-![image-20260225220034823](noise/image-20260225220034823.png)
-
-![image-20260225221607463](noise/image-20260225221607463.png)
-
-***Sampling coloured noise***
-
-![image-20260225224020057](noise/image-20260225224020057.png)
-
-***converging PSD***
-
-![image-20260225224308880](noise/image-20260225224308880.png)
-
-***integrated power of the sampled signal in the Nyquist band***
-
-![image-20260225225239293](noise/image-20260225225239293.png)
-
-![image-20260225221938521](noise/image-20260225221938521.png)
-
 
 
 ## ADC SNR & clock jitter
@@ -710,6 +588,130 @@ ampling Jitter Effects for *ADC/DAC*
 > Martin Clara. High-Performance D/A-Converters - Application to Digital Transceivers, 2013  [[pdf](https://picture.iczhiku.com/resource/eetop/SYIrysQLKgUtfxbB.pdf)]
 >
 > Chun-Hsien Su (蘇純賢). Design of Oversampled Sigma-Delta Data Converters. July, 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIHwgULoQJZLNCV.pdf)]
+
+
+## impulse sampling noise
+
+> Chembian Thambidurai, "Noise, Sampling and Zeta Functions" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_sampling-noise-signals-activity-7018929654627520512-QYr0)]
+
+A random signal $v_n(t)$ is sampled using an ***ideal impulse sampler***
+
+![image-20241201165157743](noise/image-20241201165157743.png)
+
+![image-20260225220015404](noise/image-20260225220015404.png)
+
+> ![image-20260225221746857](noise/image-20260225221746857.png)
+
+![image-20260225220034823](noise/image-20260225220034823.png)
+
+![image-20260225221607463](noise/image-20260225221607463.png)
+
+***Sampling coloured noise***
+
+![image-20260225224020057](noise/image-20260225224020057.png)
+
+***converging PSD***
+
+![image-20260225224308880](noise/image-20260225224308880.png)
+
+***integrated power of the sampled signal in the Nyquist band***
+
+![image-20260225225239293](noise/image-20260225225239293.png)
+
+![image-20260225221938521](noise/image-20260225221938521.png)
+
+
+## sampling bandlimited white noise
+
+> Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF [[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)]
+>
+> Pavan, Schreier and Temes, "Understanding Delta-Sigma Data Converters, Second Edition" ISBN 978-1-119-25827-8
+>
+> Tania Khanna, ESE568 Fall 2019, Mixed Signal Circuit Design and Modeling URL: [https://www.seas.upenn.edu/~ese568/fall2019/](https://www.seas.upenn.edu/~ese568/fall2019/)
+>
+> Matt Pharr, Wenzel Jakob, and Greg Humphreys. 2016. Physically Based Rendering: From Theory to Implementation (3rd. ed.). Morgan Kaufmann Publishers Inc., San Francisco, CA, USA.
+>
+> R. Gregorian and G. C. Temes. Analog MOS Integrated Circuits for Signal Processing. Wiley-Interscience, 1986
+>
+> Trevor Caldwell, Lecture 9 Noise in Switched-Capacitor Circuits  [[http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf](http://individual.utoronto.ca/trevorcaldwell/course/NoiseSC.pdf)]
+>
+> Christian-Charles Enz. High precision CMOS micropower amplifiers [[pdf](https://picture.iczhiku.com/resource/eetop/wYItQFykkAQDFccB.pdf)]
+
+The **aliasing of the noise**, or **noise folding**, plays an important role in switched-capacitor as it does in all switched-capacitor filters
+
+![image-20240425215938141](noise/image-20240425215938141.png)
+
+Assume for the moment that the switch is *always closed* (that there is no hold phase), the single-sided noise density would be
+
+![image-20240428182816109](noise/image-20240428182816109.png)
+
+---
+
+![image-20240428180635082](noise/image-20240428180635082.png)
+
+
+
+$v_s[n]$ is the sampled version of $v_{RC}(t)$, i.e. $v_s[n]= v_{RC}(nT_C)$
+$$
+S_s(e^{j\omega}) = \frac{1}{T_C} \sum_{k=-\infty}^{\infty}S_{RC}(j(\frac{\omega}{T_C}-\frac{2\pi k}{T_C})) \cdot \mathrm{d}\omega
+$$
+where $\omega \in [-\pi, \pi]$,  furthermore $\frac{\mathrm{d}\omega}{T_C}= \mathrm{d}\Omega$
+$$
+S_s(j\Omega) = \sum_{k=-\infty}^{\infty}S_{RC}(j(\Omega-k\Omega_s)) \cdot \mathrm{d}\Omega
+$$
+
+> ![image-20240428215559780](noise/image-20240428215559780.png)
+
+![image-20240425220033340](noise/image-20240425220033340.png)
+
+![image-20260604210651691](noise/image-20260604210651691.png)
+
+To implement a zero-order hold involves convolving the **sequence** $v_s$ with a pulse of unit height with a width of $(1-m)T_c$ and the highlighting $T_c$ bridge **sequence to impulse**
+
+![image-20240425220400924](noise/image-20240425220400924.png)
+
+where $m$ is the duty cycle
+
+$$
+\color{purple}\overline{v_c^2} = \overline{v_s^2} = \frac{kT}{C}
+$$
+
+
+
+---
+
+*Below analysis focusing on **sampled noise*** $v_s$
+
+> Boris Murmann. Noise Analysis in Switched-Capacitor Circuits, ISSCC 2011 / tutorials [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T8.pdf), [transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T9.pdf)]
+>
+> —. EE315A VLSI Signal Conditioning Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SyIgQJfyzyuDhBXc.pdf)]
+>
+> —. EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
+
+![image-20250810085721440](noise/image-20250810085721440.png)
+
+![image-20260212234532530](noise/image-20260212234532530.png)
+
+
+
+- Calculate autocorrelation function of noise at the output of the RC filter
+- Calculate the spectrum by taking the **discrete** time Fourier transform of the autocorrelation function
+
+---
+
+> Bernhard E. Boser . Advanced Analog Integrated Circuits Switched Capacitor Gain Stages [[https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf](https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M05%20SC%20Gain%20Stages.pdf)]
+
+![image-20240427183700971](noise/image-20240427183700971.png)
+
+---
+
+> P. Bruschi, Microelectronic System Design, [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/05_Switches_and_caps.pdf)]
+
+![image-20260523093243527](noise/image-20260523093243527.png)
+
+![image-20260523093342636](noise/image-20260523093342636.png)
+
+
 
 
 

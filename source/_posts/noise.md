@@ -673,14 +673,19 @@ $$
 
 >![image-20241117205422217](noise/image-20241117205422217.png)
 
----
 
 
-### Switched-Capacitor Track signal
+### Track signal in Switched-Capacitor
 
 ![image-20241118213830893](noise/image-20241118213830893.png)
 
 ![image-20241116165632847](noise/image-20241116165632847.png)
+$$
+\color{blue}\boxed{\text{switch thermal noise is modulated by the clock first, then shaped by the RC low-pass}}
+$$
+![image-20260630222904433](noise/image-20260630222904433.png)
+
+
 
 ---
 

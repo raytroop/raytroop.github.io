@@ -191,6 +191,30 @@ The idea is that sample waveform with ideal clock, subtract DC offset, then fft(
 
 
 
+###  Harmonic Balance simulation
+
+> Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation," *2022 IEEE International Symposium on Circuits and Systems (ISCAS)*, Austin, TX, USA, 2022 [[http://seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](http://seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
+>
+> Tawna, PNOISE Noise Type Time Average vs. Sampled Jitter [[https://community.cadence.com/cadence_technology_forums/f/rf-design/65882/pnoise-noise-type-time-average-vs-sampled-jitter/1408176](https://community.cadence.com/cadence_technology_forums/f/rf-design/65882/pnoise-noise-type-time-average-vs-sampled-jitter/1408176)]
+>
+> How can I set the stop frequency for a sampled pnoise/hbnoise analysis to be half the PSS
+> fundamental?
+>
+> The mathematics behind choosing the upper frequency when simulating pnoise jitter on an
+> oscillator
+
+`Oversample` and `Number of Harmonics` setting 
+
+![image-20260630071814003](pn-jitter/image-20260630071814003.png)
+
+![image-20260630071826778](pn-jitter/image-20260630071826778.png)
+
+![image-20260630073158768](pn-jitter/image-20260630073158768.png)
+
+
+
+
+
 ## Pnoise Sampled(jitter): Sampled Phase Option
 
 - Identical to **noisetype=timedomain** in old GUI

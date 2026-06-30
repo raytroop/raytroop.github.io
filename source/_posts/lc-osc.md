@@ -78,6 +78,12 @@ FoM_100M = 10*log10(1/(10^(Sphi_100M/10)*Pdc*1e3)*(f0/100e6)^2);  % 163.5234
 
 
 
+
+
+
+
+
+
 ### Class-F CMOS Oscillator
 
 > Huijung Kim, Seonghan Ryu, Yujin Chung, Jinsung Choi and Bumman Kim, "A low phase-noise CMOS VCO with harmonic tuned LC tank," in IEEE Transactions on Microwave Theory and Techniques, vol. 54, no. 7, pp. 2917-2924, July 2006 [[https://sci-hub.ru/10.1109/tmtt.2006.877439](https://sci-hub.ru/10.1109/tmtt.2006.877439)]
@@ -457,6 +463,54 @@ For a **periodic** LC oscillation, t**he average stored energy must balance** be
 
 ![image-20260628161802633](lc-osc/image-20260628161802633.png)
 
+### Tank current Harmonics
+
+![image-20260625000444851](lc-osc/image-20260625000444851.png)
+
+Due to **MOS nonlinearity**
+
+![image-20260625000555644](lc-osc/image-20260625000555644.png)
+
+with $\boxed{x(t) = \sin(\omega_0 t)}$
+$$
+y_{\sin}(t) = \alpha_1 \sin(\omega_0 t)+ \alpha_2\frac{1-\cos(2\omega_0t)}{2} + \alpha_3 \frac{3\sin(\omega_0 t) -\sin(3\omega_0 t)}{4} +\alpha_4\frac{3-4\cos(2\omega_0 t)+\cos(4\omega_0 t)}{8}
+$$
+
+and using $\cos \theta = \sin(\theta + \pi/2)$
+
+$$
+y_{\sin}(t) = \underbrace{\frac{\alpha_2}{2} + \frac{3\alpha_4}{8}}_{\text{DC}}
++ \underbrace{\left(\alpha_1 + \frac{3\alpha_3}{4}\right)\sin(\omega_0 t)}_{\omega_0}
+- \underbrace{\frac{\alpha_2 + \alpha_4}{2}\,\sin\!\left(2\omega_0 t + \textcolor{blue}{\frac{\pi}{2}}\right)}_{2\omega_0}
+- \underbrace{\frac{\alpha_3}{4}\,\sin(3\omega_0 t)}_{3\omega_0}
++ \underbrace{\frac{\alpha_4}{8}\,\sin\!\left(4\omega_0 t + \textcolor{blue}{\frac{\pi}{2}}\right)}_{4\omega_0}
+$$
+
+with $\boxed{x(t) = \cos(\omega_0 t)}$
+$$
+y_{\cos}(t) = \underbrace{\frac{\alpha_2}{2}+\frac{3\alpha_4}{8}}_{\text{DC}}
++ \underbrace{\left(\alpha_1+\frac{3\alpha_3}{4}\right)\cos(\omega_0 t)}_{\omega_0}
++ \underbrace{\frac{\alpha_2+\alpha_4}{2}\cos(2\omega_0 t)}_{2\omega_0}
++ \underbrace{\frac{\alpha_3}{4}\cos(3\omega_0 t)}_{3\omega_0}
++ \underbrace{\frac{\alpha_4}{8}\cos(4\omega_0 t)}_{4\omega_0}
+$$
+They're the same waveform; one is the other shifted in time by a quarter of the fundamental period:
+$$
+y_{\cos}(t) = y_{\sin}\!\left(t + \frac{T}{4}\right), \qquad T = \frac{2\pi}{\omega_0}
+$$
+
+![image-20260630234839714](lc-osc/image-20260630234839714.png)
+
+![image-20260630235022053](lc-osc/image-20260630235022053.png)
+
+given $\Delta t$ is constant
+$$
+\boxed{\Delta t = \frac{\Delta\Phi_N}{N\omega_0} \implies \Delta\Phi_N = N\Delta\Phi_0 \quad (\Delta t = \text{constant})}
+$$
+![image-20260630235825289](lc-osc/image-20260630235825289.png)
+
+
+
 
 
 ### Symmetrising waveform (2nd harmonic resonance)
@@ -490,40 +544,6 @@ For a **periodic** LC oscillation, t**he average stored energy must balance** be
 ![image-20260624225518182](lc-osc/image-20260624225518182.png)
 
 ![image-20260624233933194](lc-osc/image-20260624233933194.png)
-
----
-
-![image-20260625000444851](lc-osc/image-20260625000444851.png)
-
-![image-20260625000555644](lc-osc/image-20260625000555644.png)
-
-with $\boxed{x(t) = \sin(\omega_0 t)}$
-$$
-y_{\sin}(t) = \alpha_1 \sin(\omega_0 t)+ \alpha_2\frac{1-\cos(2\omega_0t)}{2} + \alpha_3 \frac{3\sin(\omega_0 t) -\sin(3\omega_0 t)}{4} +\alpha_4\frac{3-4\cos(2\omega_0 t)+\cos(4\omega_0 t)}{8}
-$$
-
-and using $\cos \theta = \sin(\theta + \pi/2)$
-
-$$
-y_{\sin}(t) = \underbrace{\frac{\alpha_2}{2} + \frac{3\alpha_4}{8}}_{\text{DC}}
-+ \underbrace{\left(\alpha_1 + \frac{3\alpha_3}{4}\right)\sin(\omega_0 t)}_{\omega_0}
-- \underbrace{\frac{\alpha_2 + \alpha_4}{2}\,\sin\!\left(2\omega_0 t + \textcolor{blue}{\frac{\pi}{2}}\right)}_{2\omega_0}
-- \underbrace{\frac{\alpha_3}{4}\,\sin(3\omega_0 t)}_{3\omega_0}
-+ \underbrace{\frac{\alpha_4}{8}\,\sin\!\left(4\omega_0 t + \textcolor{blue}{\frac{\pi}{2}}\right)}_{4\omega_0}
-$$
-
-with $\boxed{x(t) = \cos(\omega_0 t)}$
-$$
-y_{\cos}(t) = \underbrace{\frac{\alpha_2}{2}+\frac{3\alpha_4}{8}}_{\text{DC}}
-+ \underbrace{\left(\alpha_1+\frac{3\alpha_3}{4}\right)\cos(\omega_0 t)}_{\omega_0}
-+ \underbrace{\frac{\alpha_2+\alpha_4}{2}\cos(2\omega_0 t)}_{2\omega_0}
-+ \underbrace{\frac{\alpha_3}{4}\cos(3\omega_0 t)}_{3\omega_0}
-+ \underbrace{\frac{\alpha_4}{8}\cos(4\omega_0 t)}_{4\omega_0}
-$$
-They're the same waveform; one is the other shifted in time by a quarter of the fundamental period:
-$$
-y_{\cos}(t) = y_{\sin}\!\left(t + \frac{T}{4}\right), \qquad T = \frac{2\pi}{\omega_0}
-$$
 
 
 
@@ -587,25 +607,9 @@ Three methods:
 
 ![image-20251026155120102](lc-osc/image-20251026155120102.png)
 
-###  Harmonic Balance simulation
 
-> Y. Zhao and B. Razavi, "Phase Noise Integration Limits for Jitter Calculation," *2022 IEEE International Symposium on Circuits and Systems (ISCAS)*, Austin, TX, USA, 2022 [[http://seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf](http://seas.ucla.edu/brweb/papers/Conferences/YZ_ISCAS_22.pdf)]
->
-> Tawna, PNOISE Noise Type Time Average vs. Sampled Jitter [[https://community.cadence.com/cadence_technology_forums/f/rf-design/65882/pnoise-noise-type-time-average-vs-sampled-jitter/1408176](https://community.cadence.com/cadence_technology_forums/f/rf-design/65882/pnoise-noise-type-time-average-vs-sampled-jitter/1408176)]
->
-> How can I set the stop frequency for a sampled pnoise/hbnoise analysis to be half the PSS
-> fundamental?
->
-> The mathematics behind choosing the upper frequency when simulating pnoise jitter on an
-> oscillator
 
-`Oversample` and `Number of Harmonics` setting 
 
-![image-20260630071814003](lc-osc/image-20260630071814003.png)
-
-![image-20260630071826778](lc-osc/image-20260630071826778.png)
-
-![image-20260630073158768](lc-osc/image-20260630073158768.png)
 
 ## reference
 

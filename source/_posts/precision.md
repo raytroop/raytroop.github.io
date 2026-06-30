@@ -60,6 +60,26 @@ mathjax: true
 ---
 
 
+$$
+\color{blue}\boxed{
+v_{\rm out}(t)=v_t(t)+v_h(t)
+}
+$$
+where:
+$$
+\boxed{
+v_t(t):\ \text{track-phase noise, RC low-pass shaped}
+}
+$$
+and
+$$
+\boxed{
+v_h(t):\ \text{sampled/held } kT/C \text{ noise, pulse-shape sinc shaped}
+}
+$$
+![image-20260630233528220](precision/image-20260630233528220.png)
+
+![image-20260630233445210](precision/image-20260630233445210.png)
 
 ![image-20240826213958740](precision/image-20240826213958740.png)
 

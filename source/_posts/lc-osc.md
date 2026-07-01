@@ -75,7 +75,10 @@ FoM_100M = 10*log10(1/(10^(Sphi_100M/10)*Pdc*1e3)*(f0/100e6)^2);  % 163.5234
 
 *TODO* &#128197;
 
-
+|                           | Class-B                         | Class-D                         |
+| ------------------------- | ------------------------------- | ------------------------------- |
+| **oscillation amplitude** | I<sub>dd</sub> & LC-tank losses | V<sub>DD</sub>                  |
+| **current consumption**   |                                 | V<sub>DD</sub> & LC-tank losses |
 
 
 

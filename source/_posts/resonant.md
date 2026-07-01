@@ -293,6 +293,12 @@ The **parallel RLC resonator** is a **current divider circuit**, driven by an al
 
 
 
+## Loaded Q
+
+**unloaded Q**, **external Q**, **loaded Q**
+
+![image-20260701223025684](resonant/image-20260701223025684.png)
+
 
 
 ## SRF (Self-Resonant Frequency)
@@ -364,6 +370,8 @@ end
 
 ## reference
 
+Pozar, David M. *Microwave Engineering*. 4th ed. Wiley, 2012. [[pdf](https://hajaress.wordpress.com/wp-content/uploads/2019/09/microwave_engineering_david_m_pozar_4ed_wiley_2012.pdf)]
+
 Hossein Hashemi, RF Circuits, [[https://youtu.be/0f3yZMvD2Jg](https://youtu.be/0f3yZMvD2Jg)]
 
 Resonant Circuits: Resonant Frequency and Q Factor [[https://techweb.rohm.com/product/circuit-design/electric-circuit-design/18332/](https://techweb.rohm.com/product/circuit-design/electric-circuit-design/18332/)]
@@ -373,8 +381,6 @@ J. Nako, G. Tsirimokou, C. Psychalinos and A. S. Elwakil, "Approximation of Firs
 How to generate **complex poles without inductor**? [[https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/](https://a2d2ic.wordpress.com/2020/02/19/basics-on-active-rc-low-pass-filters/)]
 
 Visvesh Sathe. Resonant Clock Design for a Power-efficient, High-volume x86 -64 Microprocessor [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_05_Sathe.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2012_05_Sathe.pdf)]
-
-Pozar, David M. *Microwave Engineering*. 4th ed. Wiley, 2012. [[pdf](https://hajaress.wordpress.com/wp-content/uploads/2019/09/microwave_engineering_david_m_pozar_4ed_wiley_2012.pdf)]
 
 RFInsights, A Journey from Resonance to Impedance Matching Chp. 1: Origin of Q-Factor The Deadly Beginnings, [[https://www.rfinsights.com/concepts/quality-factor/](https://www.rfinsights.com/concepts/quality-factor/)]
 

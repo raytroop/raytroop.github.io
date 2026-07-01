@@ -447,22 +447,6 @@ where $f_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the reso
 
 > Y. Hu, T. Siriburanon and R. B. Staszewski, , "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
 
-
-
-### Groszkowski's Effect
-
-> credits to *GPT-5.5 High*
-
-![image-20260628142136377](lc-osc/image-20260628142136377.png)
-
-**Groszkowski’s effect** is an oscillator **frequency shift caused by harmonic content** in the oscillation waveform/current.
-
-For a **periodic** LC oscillation, t**he average stored energy must balance** between $C$ and $L$
-
-![image-20260628161501243](lc-osc/image-20260628161501243.png)![image-20260628161612592](lc-osc/image-20260628161612592.png)
-
-![image-20260628161802633](lc-osc/image-20260628161802633.png)
-
 ### Tank current Harmonics
 
 ![image-20260625000444851](lc-osc/image-20260625000444851.png)
@@ -509,6 +493,22 @@ $$
 $$
 ![image-20260630235825289](lc-osc/image-20260630235825289.png)
 
+
+
+
+### Groszkowski's Effect
+
+> credits to *GPT-5.5 High*
+
+![image-20260628142136377](lc-osc/image-20260628142136377.png)
+
+**Groszkowski’s effect** is an oscillator **frequency shift caused by harmonic content** in the oscillation waveform/current.
+
+For a **periodic** LC oscillation, t**he average stored energy must balance** between $C$ and $L$
+
+![image-20260628161501243](lc-osc/image-20260628161501243.png)![image-20260628161612592](lc-osc/image-20260628161612592.png)
+
+![image-20260628161802633](lc-osc/image-20260628161802633.png)
 
 
 

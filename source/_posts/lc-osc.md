@@ -47,6 +47,26 @@ FoM_100M = 10*log10(1/(10^(Sphi_100M/10)*Pdc*1e3)*(f0/100e6)^2);  % 163.5234
 
 ![image-20260628233941012](lc-osc/image-20260628233941012.png)
 
+![image-20260702225804712](lc-osc/image-20260702225804712.png)
+
+```matlab
+kB= 1.380649e-23; T=300;
+Vdd = 0.8; L = 200e-12; C = 200e-15;
+Qt = 12.5; V0 = 0.94; Idc =4e-3;
+PN_1M = -104.62;   % instead of -104
+FoM   = 187.58;    % instead of 187.4
+
+f0 = 1/2/pi/sqrt(L*C);
+Rp = 2*pi*f0*L*Qt; Iw0 = V0/Rp;
+eta_V = V0/2/Vdd; % 0.5875
+eta_I = Iw0/Idc; % 0.5945
+
+% noise factor by PN
+F = 10^(PN_1M/10)/(kB*T)/Rp/(f0/1e6)^2*V0^2*Qt^2; % 4.5960
+% noise factor by FoM
+FF = Qt^2*eta_I*eta_V*2/1e3/(kB*T)/10^(FoM/10); % 4.6006
+```
+
 
 
 ## LC Oscillator Structures
@@ -516,7 +536,7 @@ For a **periodic** LC oscillation, t**he average stored energy must balance** be
 
 
 
-### Symmetrising waveform (2nd harmonic resonance)
+### Harmonic Shaping
 
 > E. Hegazi, H. Sjoland and A. Abidi, "A filtering technique to lower oscillator phase noise," *2001 IEEE International Solid-State Circuits Conference. Digest of Technical Papers. ISSCC (Cat. No.01CH37177)*, San Francisco, CA, USA, 2001 [[paper](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/D23_4.pdf), [slides](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/SS23_4.pdf)]
 >
@@ -533,16 +553,28 @@ For a **periodic** LC oscillation, t**he average stored energy must balance** be
 > —, "A 1/f Noise Upconversion Reduction Technique for Voltage-Biased RF CMOS Oscillators," in IEEE Journal of Solid-State Circuits, vol. 51, no. 11, pp. 2610-2624, Nov. 2016 [[https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf](https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf)]
 >
 > Michael Perrott August 12, 2008, Short Course On Phase-Locked Loops and Their Applications Day 2, AM Lecture *Basic Building Blocks Voltage-Controlled Oscillators* [[https://www.cppsim.com/PLL_Lectures/day2_am.pdf](https://www.cppsim.com/PLL_Lectures/day2_am.pdf)]
+>
+> *Yunbo Huang, Zunsong Yang*, et al., "A 7.0-to-8.6GHz Balanced Class-F-1 VCO with a Trifilar Transformer-Based Tank Achieving 194.5dBc/Hz FoM," IEEE MTT-S Radio Frequency Integrated Circuits (**RFIC**), June 2026
+
+
 
 ![image-20260616224300853](lc-osc/image-20260616224300853.png)
 
-![image-20260616225535546](lc-osc/image-20260616225535546.png)
+![image-20260703010100402](lc-osc/image-20260703010100402.png)
 
-> *Yunbo Huang, **Zunsong Yang\***, et al., "A 7.0-to-8.6GHz Balanced Class-F-1 VCO with a Trifilar Transformer-Based Tank Achieving 194.5dBc/Hz FoM," IEEE MTT-S Radio Frequency Integrated Circuits (**RFIC**), June 2026*
+![image-20260703010402952](lc-osc/image-20260703010402952.png)
+
+![image-20260703010336285](lc-osc/image-20260703010336285.png)
+
+![image-20260703003532335](lc-osc/image-20260703003532335.png)
+
+
+
+---
 
 ![image-20260624232255477](lc-osc/image-20260624232255477.png)
 
-![image-20260628213410194](lc-osc/image-20260628213410194.png)
+
 
 ![image-20260624225518182](lc-osc/image-20260624225518182.png)
 

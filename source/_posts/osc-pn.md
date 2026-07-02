@@ -146,6 +146,12 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 
 ![image-20251122144811362](osc-pn/image-20251122144811362.png)
 
+---
+
+![image-20260702211009442](osc-pn/image-20260702211009442.png)
+
+***1/f noise Upconversion*** & ***Thermal noise Upconversion*** 
+
 
 
 ## Hajimiri's ISF— LTV in Time Domain
@@ -376,9 +382,22 @@ $$
 
 ![image-20260624201510173](osc-pn/image-20260624201510173.png)
 
+---
 
+---
 
+> P. Andreani, X. Wang, "On the Phase-Noise and Phase-Error Performances of Multiphase LC CMOS VCOs," IEEE Journal of Solid-State Circuits, vol. 39, pp. 1883-1893, Nov. 2004. [[https://backend.orbit.dtu.dk/ws/files/4109919/Wang.pdf](https://backend.orbit.dtu.dk/ws/files/4109919/Wang.pdf)]
+>
+> P. Andreani, X. Wang, L. Vandi, A. Frad, "A study of phase noise in Colpitts and LC-tank CMOS oscillators," IEEE Journal of Solid-State Circuits, vol. 40, pp. 1107-1118, May 2005. [[https://backend.orbit.dtu.dk/ws/files/3976825/Andreani.pdf](https://backend.orbit.dtu.dk/ws/files/3976825/Andreani.pdf)]
+>
+> A. Bevilacqua, P. Andreani, "An Analysis of 1/f Noise to Phase Noise Conversion in CMOS Harmonic Oscillators," IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 59, no. 5, pp. 938-945, May 2012 [[https://sci-hub.jp/10.1109/TCSI.2012.2190564](https://sci-hub.jp/10.1109/TCSI.2012.2190564)]
 
+For Class-B with **an Ideal Current Source**
+
+-  the noise factor is $1+\gamma_n$
+-  −gm transistors (M1,2) do not contribute to 1/f noise upconversion
+
+![image-20260702212831279](osc-pn/image-20260702212831279.png)
 
 
 
@@ -479,7 +498,7 @@ S_{I,PN} = S_{nI,T} \cdot \mathcal{D}\cdot \mathcal{h}^2 \cdot \frac{1}{2} = S_{
 $$
 The commutation folds  tail noise as **a (near) single sideband**, which is equivalent to equal AM and PM — and only the PM half counts toward phase noise
 
-Noise at $\boxed{2\omega_0 \pm\omega_m}$ dominate phase noise due to $|c_1|, |c_3| \gg |c_{2m+1}| \space\space\space\space \forall m>1$
+***Noise around DC and  $\boxed{2\omega_0 \pm\omega_m}$ dominate phase noise due to $|c_1|, |c_3| \gg |c_{2m+1}| \space\space\space\space \forall m>1$***
 
 ![image-20260620234423406](osc-pn/image-20260620234423406.png)
 
@@ -488,6 +507,12 @@ Noise at $\boxed{2\omega_0 \pm\omega_m}$ dominate phase noise due to $|c_1|, |c_
 > E. Hegazi, H. Sjoland and A. Abidi, "A filtering technique to lower oscillator phase noise," *2001 IEEE International Solid-State Circuits Conference. Digest of Technical Papers. ISSCC (Cat. No.01CH37177)*, San Francisco, CA, USA, 2001 [[paper](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/D23_4.pdf), [slides](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/SS23_4.pdf)]
 
 ![image-20260624165720693](osc-pn/image-20260624165720693.png)
+
+---
+
+> J. J. Rael and A. A. Abidi, "Physical processes of phase noise in differential LC oscillators," IEEE Custom Integrated Circuits Conference (CICC), 2000 [[https://people.engr.tamu.edu/spalermo/ecen620/physical_processes_pn_diff_lc_osc_rael_cicc_2000.pdf](https://people.engr.tamu.edu/spalermo/ecen620/physical_processes_pn_diff_lc_osc_rael_cicc_2000.pdf)]
+
+![image-20260702220509880](osc-pn/image-20260702220509880.png)
 
 
 

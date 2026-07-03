@@ -124,6 +124,10 @@ Vice versa, if If Up pulse arrives $\Delta T$ after the Dn pulse, the steady-sta
 
 
 
+## off-state leakage
+
+*TODO* &#128197;
+
 ### Incomplete Settling
 
 *TODO* &#128197;

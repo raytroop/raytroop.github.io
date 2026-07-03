@@ -179,6 +179,73 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 
 
 
+
+## Differential pair
+
+> Todd Brooks, Broadcom "Input Programmable Gain Amplifier (PGA) Design for ADC Signal Conditioning" [[https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt](https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt)]
+
+
+
+### virtual ground?
+
+![image-20260703224921011](ana-tech/image-20260703224921011.png)
+$$
+\color{blue}V_P = V_{CM} - V_{TH} - \frac{1}{2}
+\sqrt{
+-(2\Delta V)^2
++
+4V_{ov,eq}^2
+}
+$$
+![image-20260703225321502](ana-tech/image-20260703225321502.png)
+
+### nonlinearity
+
+![image-20260703220740683](ana-tech/image-20260703220740683.png)
+
+
+
+
+
+
+
+
+
+### Resistive Degeneration
+
+*Resistive degeneration* in differential pairs serves as one major technique for linear amplifier
+
+![image-20240824132739726](ana-tech/image-20240824132739726.png)
+
+The linear region for CMOS differential pair would be extended by $±I_{SS}R/2$ as all of $I_{SS}/2$ flows
+through $R$.
+$$
+V_{in}^+ -V_{in}^-  = V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} = \sqrt{\frac{2I_{SS}}{\mu_nC_{OX}\frac{W}{L}}} + \frac{I_{SS}R}{2}
+$$
+
+
+
+
+> Jri Lee, "Communication Integrated Circuits." [https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf](https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf)
+>
+> Figure 14.12, Design of Analog CMOS Integrated Circuits, Second Edition [[https://electrovolt.ir/wp-content/uploads/2014/08/Design-of-Analog-CMOS-Integrated-Circuit-2nd-Edition-ElectroVolt.ir_.pdf](https://electrovolt.ir/wp-content/uploads/2014/08/Design-of-Analog-CMOS-Integrated-Circuit-2nd-Edition-ElectroVolt.ir_.pdf)]
+
+
+
+### Biasing Tradeoffs in Resistive-Degenerated Diff Pair
+
+![image-20241027095520556](ana-tech/image-20241027095520556.png)
+
+
+
+
+
+### w/ Current–Mirror Load
+
+> S. Pavan, "Revisiting the CMOS Differential Pair With a Current–Mirror Load [CAS Education]," in *IEEE Circuits and Systems Magazine*, vol. 25, no. 2, pp. 74-78, Secondquarter 2025 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11007710)]
+
+*TODO* &#128197;
+
 ## Double Differential pair
 
 $V_\text{ip}$ and $V_\text{im}$ are input, $V_\text{rp}$ and $V_\text{rm}$ are reference voltage
@@ -289,58 +356,6 @@ We obtain
 $$
 \sigma_{vos,DE} = 2\sigma_{vos,SE}
 $$
-
-
-
-## Input Differential pair
-
-> Todd Brooks, Broadcom "Input Programmable Gain Amplifier (PGA) Design for ADC Signal Conditioning" [[https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt](https://classes.engr.oregonstate.edu/eecs/spring2021/ece627/Lecture%20Notes/OSU%20Classroom%20Presentaton%20042511.ppt)]
-
-### DM Distortion
-
-![image-20241027095213326](ana-tech/image-20241027095213326.png)
-
-### CM Distortion
-
-![image-20241027095248946](ana-tech/image-20241027095248946.png)
-
-
-
-### Resistive Degeneration
-
-*Resistive degeneration* in differential pairs serves as one major technique for linear amplifier
-
-![image-20240824132739726](ana-tech/image-20240824132739726.png)
-
-The linear region for CMOS differential pair would be extended by $±I_{SS}R/2$ as all of $I_{SS}/2$ flows
-through $R$.
-$$\begin{align}
-V_{in}^+ -V_{in}^-  &= V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} \\
-&= \sqrt{\frac{2I_{SS}}{\mu_nC_{OX}\frac{W}{L}}} + \frac{I_{SS}R}{2}
-\end{align}$$
-
-
-
-
-> Jri Lee, "Communication Integrated Circuits." [https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf](https://cc.ee.ntu.edu.tw/~jrilee/publications/Comm_IC.pdf)
->
-> Figure 14.12, Design of Analog CMOS Integrated Circuits, Second Edition [[https://electrovolt.ir/wp-content/uploads/2014/08/Design-of-Analog-CMOS-Integrated-Circuit-2nd-Edition-ElectroVolt.ir_.pdf](https://electrovolt.ir/wp-content/uploads/2014/08/Design-of-Analog-CMOS-Integrated-Circuit-2nd-Edition-ElectroVolt.ir_.pdf)]
-
-
-
-### Biasing Tradeoffs in Resistive-Degenerated Diff Pair
-
-![image-20241027095520556](ana-tech/image-20241027095520556.png)
-
-
-
-
-
-### w/ Current–Mirror Load
-
-> S. Pavan, "Revisiting the CMOS Differential Pair With a Current–Mirror Load [CAS Education]," in *IEEE Circuits and Systems Magazine*, vol. 25, no. 2, pp. 74-78, Secondquarter 2025 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11007710)]
-
-*TODO* &#128197;
 
 
 

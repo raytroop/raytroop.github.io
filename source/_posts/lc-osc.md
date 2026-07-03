@@ -466,6 +466,24 @@ where $f_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the reso
 
 
 
+## Automatic Amplitude Control (AAC)
+
+**peak detector**, **envelope detector**
+
+![image-20260703230442199](lc-osc/image-20260703230442199.png)
+
+The digital AAC regulates the amplitude without increasing the amplitude modulation noise
+
+---
+
+
+
+![image-20260703234109027](lc-osc/image-20260703234109027.png)
+
+![image-20260703234240260](lc-osc/image-20260703234240260.png)
+
+
+
 ## PN Reduction Techniques
 
 > Y. Hu, T. Siriburanon and R. B. Staszewski, , "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]

@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-## Oscillator Figure of Merit (FoM)
+## Figure of Merit (FoM)
 
 > M. Garampazzi *et al*., "An Intuitive Analysis of Phase Noise Fundamental Limits Suitable for Benchmarking LC Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 3, pp. 635-645, March 2014 [[https://sci-hub.jp/10.1109/JSSC.2014.2301760](https://sci-hub.jp/10.1109/JSSC.2014.2301760)]
 
@@ -70,6 +70,8 @@ FF = Qt^2*eta_I*eta_V*2/1e3/(kB*T)/10^(FoM/10); % 4.6006
 
 
 ## LC Oscillator Structures
+
+![image-20260704141326842](lc-osc/image-20260704141326842.png)
 
 ### Class-C CMOS Oscillator
 
@@ -314,11 +316,19 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 
 
+## On-Chip Inductors and Transformer
+
+> hai-kun, 片上电感的版图优化方法 [[https://zhuanlan.zhihu.com/p/37479700](https://zhuanlan.zhihu.com/p/37479700)]
+>
+> —, 电磁场仿真与片上电感的优化讲座实录 [[https://zhuanlan.zhihu.com/p/37942671](https://zhuanlan.zhihu.com/p/37942671)]
+>
+> —, 片上变压器的应用与设计 （二）多峰值谐振腔 [[https://zhuanlan.zhihu.com/p/45799676](https://zhuanlan.zhihu.com/p/45799676)]
+>
+> Sunderarajan S. Mohan, Modeling, Design and Optimization of On-Chip Inductors and Transformers [[http://www-smirc.stanford.edu/papers/Orals99s-mohan.pdf](http://www-smirc.stanford.edu/papers/Orals99s-mohan.pdf)]
 
 
 
-
-## 8-shaped inductor
+### 8-shaped inductor
 
 > NXP BV, US8183971B2, *8-shaped inductor* [[pdf](https://patentimages.storage.googleapis.com/41/b1/ff/e53534a029c34d/US8183971.pdf)]
 >
@@ -342,12 +352,115 @@ An **8-shaped (figure-8) inductor** is a specialized on-chip, high-Q component u
 
 ![image-20260511230451153](lc-osc/image-20260511230451153.png)
 
+### Transformer
+
+![image-20260704084245309](lc-osc/image-20260704084245309.png)
+
+![image-20260704084318506](lc-osc/image-20260704084318506.png)
+
+
+
+## On-Chip Capacitor
+
+***monolithic C-V characteristic***
+
+![image-20260704112319127](lc-osc/image-20260704112319127.png)
+
+![image-20260704112305594](lc-osc/image-20260704112305594.png)
+
+
+
+### MOS varactor
+
+characterized by by ***quality factor*** and ***capacitance ratio factor***
+
+ ***tuning range***
+
+![image-20260704114222117](lc-osc/image-20260704114222117.png)
+$$
+\Delta\omega_0 = \frac{\partial \omega_0}{\partial C}\cdot \Delta C = -\frac{\Delta C}{2C}\cdot \omega_0
+$$
+For tuning range, use the magnitude:
+$$
+TR_{\text{approx}}
+\approx
+\frac{1}{2}\frac{C_{\max}-C_{\min}}{C_{\text{avg}}}
+$$
+where $C_{\text{avg}}=\frac{C_{\max}+C_{\min}}{2}$ 
+
+
+
+Therefore:
+$$
+TR_{\text{approx}}
+\approx
+\frac{1}{2}
+\frac{C_{\max}-C_{\min}}
+{(C_{\max}+C_{\min})/2}
+$$
+Now divide numerator and denominator by $C_{\min}$:
+$$
+TR_{\text{approx}}
+=
+\frac{C_{\max}/C_{\min}-1}
+{C_{\max}/C_{\min}+1}
+$$
+Since $k=\frac{C_{\max}}{C_{\min}}$
+
+we get
+$$
+\boxed{
+TR_{\text{approx}}
+=
+\frac{k-1}{k+1}
+}
+$$
+
+
+---
+
+---
+
+
+
+ ***capacitance ratio factor***
+
+![image-20260704120348631](lc-osc/image-20260704120348631.png)
+
+![image-20260704121431043](lc-osc/image-20260704121431043.png)
 
 
 
 
 
-## Capacitor Bank
+---
+
+---
+
+***quality factor***
+
+![image-20260704125526693](lc-osc/image-20260704125526693.png)
+
+Two resistances, both in series with the variable capacitance:
+
+- **R<sub>Ch</sub>** is the **channel resistance** of the accumulation layer
+- **R<sub>P</sub>** is the **gate resistance** due to the finite polysilicon conductivity
+
+![image-20260704130606102](lc-osc/image-20260704130606102.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Capacitor Bank
 
 > B. Sadhu and R. Harjani, "Capacitor bank design for wide tuning range LC VCOs: 850MHz-7.1GHz (157%)," Proceedings of 2010 IEEE International Symposium on Circuits and Systems, Paris, France, 2010 [[https://sci-hub.st/10.1109/ISCAS.2010.5537040](https://sci-hub.st/10.1109/ISCAS.2010.5537040)]
 
@@ -696,18 +809,13 @@ Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated fre
 
 M. Babaie, M. Shahmohammadi, R. B. Staszewski, (2019) "*RF CMOS Oscillators for Modern Wireless Applications"* River Publishers [[https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf](https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf)]
 
-Manetakis, K. (2023). *Topics in LC Oscillators: Principles, phase noise, pulling, inductor design*. Springer Nature Switzerland Springer. [[eetop link](https://bbs.eetop.cn/thread-974577-1-1.html)]
+Luong, H. C., & Yin, J. (2016). *Transformer-based design techniques for oscillators and frequency dividers*. Springer International Publishing
 
-Luong HC, Yin J. *Transformer-Based Design Techniques for Oscillators and Frequency Dividers*. Springer; 2015.
+Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020. 
+
+Manetakis, K. (2023). *Topics in LC Oscillators: Principles, phase noise, pulling, inductor design*. Springer Nature Switzerland Springer. [[eetop link](https://bbs.eetop.cn/thread-974577-1-1.html)]
 
 Hajimiri, A., & Lee, T. H. (1999). The design of low noise oscillators. Norwell, MA: Kluwer
 
 Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005. *The Designer's Guide to High-Purity Oscillators*
 
----
-
-hai-kun, 片上电感的版图优化方法 [[https://zhuanlan.zhihu.com/p/37479700](https://zhuanlan.zhihu.com/p/37479700)]
-
-—, 电磁场仿真与片上电感的优化讲座实录 [[https://zhuanlan.zhihu.com/p/37942671](https://zhuanlan.zhihu.com/p/37942671)]
-
-—, 片上变压器的应用与设计 （二）多峰值谐振腔 [[https://zhuanlan.zhihu.com/p/45799676](https://zhuanlan.zhihu.com/p/45799676)]

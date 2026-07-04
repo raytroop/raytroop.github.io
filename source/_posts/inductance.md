@@ -257,16 +257,6 @@ So Fig. 2.3 has exactly the same two-port equations as the original coupled indu
 
 
 
-### Transformer Layout
-
-![image-20260704084245309](inductance/image-20260704084245309.png)
-
-![image-20260704084318506](inductance/image-20260704084318506.png)
-
-
-
-
-
 ### Electromotive Force (EMF) $\mathcal{E}$
 
 ***back emf***

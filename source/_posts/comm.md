@@ -15,7 +15,50 @@ mathjax: true
 
 ![image-20260212215230196](comm/image-20260212215230196.png)
 
-### modulated with a random cosine
+
+
+
+
+| Case                                         | Signal                             | Carrier phase                                        | Ensemble ACF                                                 | Stationarity                 | PSD / averaged PSD                                           |
+| -------------------------------------------- | ---------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------ |
+| **Oscillator with small random phase noise** | $v(t)=A\sin(\omega_0t+\varphi(t))$ | fixed carrier $\omega_0t$, small random $\varphi(t)$ | $\displaystyle R_v(t,\tau)$ contains terms like $\cos(2\omega_0t+\omega_0\tau)$ | **Cyclostationary**, not WSS | Time-averaged: $\displaystyle S_v(f)=\frac{A^2}{4}\left[\delta(f-f_0)+\delta(f+f_0)+S_\varphi(f-f_0)+S_\varphi(f+f_0)\right]$ |
+| **Random process × random-phase cosine**     | $Y(t)=X(t)\cos(\Omega_c t+\Theta)$ | $\Theta\sim U[0,2\pi)$                               | $\displaystyle R_{YY}(\tau)=\frac{R_{XX}(\tau)}{2}\cos(\Omega_c\tau)$ | **WSS**, if $X(t)$ is WSS    | $\displaystyle P_{YY}(\Omega)=\frac{P_{XX}(\Omega+\Omega_c)+P_{XX}(\Omega-\Omega_c)}{4}$ |
+| **Random process × deterministic cosine**    | $S(t)=m(t)\cos(\Omega_c t+\phi_0)$ | fixed $\phi_0$                                       | $\displaystyle R_{SS}(t,\tau)=\frac{R_{mm}(\tau)}{2}\left[\cos(\Omega_c\tau)+\cos(2\Omega_c t+\Omega_c\tau+2\phi_0)\right]$ | **Cyclostationary**, not WSS | Time-averaged: $\displaystyle \tilde P_{SS}(\Omega)=\frac{P_{mm}(\Omega+\Omega_c)+P_{mm}(\Omega-\Omega_c)}{4}$ |
+
+
+
+### modulated with small perturbation
+
+> Nicola Da Dalt , Understanding Jitter and Phase Noise: 3.1.3 Voltage to Excess Phase Transformations: Random Noise
+
+Given $\color{blue}\phi(t)\ll 1$, the autocorrelation still depends on absolute time $t$. Therefore $v(t)$ is **cyclostationary**, and they must take a **time average over one carrier period**.
+
+![image-20260621100923112](comm/image-20260621100923112.png)
+
+---
+
+> Chembiyan T. Jitter and Phase Noise in Phase Locked Loops [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_jitter-and-phase-noise-activity-7031985595304345600-uSx3)]
+
+$$
+y(t) = A\cos(2\pi f_0t+\phi_n(t)) \approx A \cos(2\pi f_0 t) - A \phi_n (t)\sin(2\pi f_0 t)
+$$
+
+
+![image-20241228020953646](comm/image-20241228020953646.png)
+$$
+R_x(\tau) = \frac{A^2}{2}\cos(2\pi f_0\tau) +  \frac{A^2}{2}R_\phi(\tau)\cos(2\pi f_0\tau)
+$$
+The PSD of the signal $x(t)$ is given by
+$$
+S_x(f) = \mathcal{F}\{R_x(\tau)\} = \frac{P_c}{2}\left[\delta(f+f_0)+\delta(f-f_0)+S_\phi(f+f_0)+S_\phi(f-f_0)\right]
+$$
+where $P_c = A^2/2$ is the carrier power of the signal
+
+
+
+### modulated with full-cycle random
+
+Given $\color{blue}\Theta\sim U[0,2\pi]$, after ensemble averaging, the autocorrelation becomes **WSS**
 
 ![image-20241107202647998](comm/image-20241107202647998.png)
 
@@ -23,9 +66,13 @@ mathjax: true
 
 > Haykin, Simon S., and Michael Moher. *Communication Systems*. 5th ed. John Wiley & Sons, 2009. - *Mixing of a Random Process with a Sinusoidal Process*
 
-![image-20251116154457428](comm/image-20251116154457428.png)
+![image-20260704095301335](comm/image-20260704095301335.png)
 
-### modulated with a deterministic cosine
+
+
+### modulated with deterministic cosine
+
+the carrier phase/time origin is fixed, not randomized, it not WSS but **cyclostationary**
 
 ![image-20241107202947949](comm/image-20241107202947949.png)
 
@@ -43,6 +90,8 @@ mathjax: true
 ![image-20241002231615792](comm/image-20241002231615792.png)
 
 ![image-20241002231639299](comm/image-20241002231639299.png)
+
+
 
 ### Quadrature-Modulated Processes
 

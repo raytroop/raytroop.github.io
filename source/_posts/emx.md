@@ -213,13 +213,7 @@ legend('Tapped inductor model', 'tcoil model calc');
 >
 > —, "Fundamentals of Integrated Transformers: From Principles to Applications," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 4, pp. 86-100, Fall 2020 
 
-![image-20251206083550560](emx/image-20251206083550560.png)
 
-![image-20251206090819816](emx/image-20251206090819816.png)
-
-
-
----
 
 > [[https://wiki.icprophet.com/doku.php?id=wiki#%E5%8F%98%E5%8E%8B%E5%99%A8](https://wiki.icprophet.com/doku.php?id=wiki#%E5%8F%98%E5%8E%8B%E5%99%A8)]
 
@@ -231,11 +225,21 @@ legend('Tapped inductor model', 'tcoil model calc');
 
 ![image-20251206102240524](emx/image-20251206102240524.png)
 
-> the formula is same with T-coil's
+> the formula is same with T-coil's, except k
+
+---
+
+> Luong, H. C., & Yin, J. (2016). *Transformer-based design techniques for oscillators and frequency dividers*. Springer International Publishing
+
+![image-20260704084701048](emx/image-20260704084701048.png)
 
 
 
+---
 
+![image-20251206083550560](emx/image-20251206083550560.png)
+
+![image-20251206090819816](emx/image-20251206090819816.png)
 
 ### PGS (Patterned ground Shields)
 

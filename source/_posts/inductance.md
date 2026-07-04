@@ -228,6 +228,45 @@ $$
 
 
 
+### ideal transformer
+
+![image-20260704081621683](inductance/image-20260704081621683.png)
+
+For an ideal **N:1** transformer,
+$$
+\boxed{V_1 = N V_2} \qquad \boxed{I_1 = -\frac{I_2}{N}}
+$$
+The **minus sign comes from power conservation**
+$$
+V_1 I_1 + V_2 I_2 = 0
+$$
+so
+$$
+N V_2 I_1 + V_2 I_2 = 0
+$$
+therefore
+$$
+I_1 = -\frac{I_2}{N}
+$$
+
+---
+
+
+
+So Fig. 2.3 has exactly the same two-port equations as the original coupled inductors
+
+
+
+### Transformer Layout
+
+![image-20260704084245309](inductance/image-20260704084245309.png)
+
+![image-20260704084318506](inductance/image-20260704084318506.png)
+
+
+
+
+
 ### Electromotive Force (EMF) $\mathcal{E}$
 
 ***back emf***
@@ -337,6 +376,8 @@ Bogatin, E. (2018). *Signal and power integrity, simplified*. Prentice Hall. [[p
 Paul, Clayton R. *Inductance: Loop and Partial*. Hoboken, N.J. : [Piscataway, N.J.]: Wiley ; IEEE, 2010. [[pdf](https://picture.iczhiku.com/resource/eetop/sHkGlwJeEepldVnx.pdf)]
 
 Spartaco Caniggia. Signal Integrity and Radiated Emission of High‐Speed Digital Systems. Wiley 2008
+
+Luong, H. C., & Yin, J. (2016). *Transformer-based design techniques for oscillators and frequency dividers*. Springer International Publishing
 
 ---
 

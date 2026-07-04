@@ -295,37 +295,6 @@ Stationary noise can also be decomposed into AM and PM components, but there wil
 
 
 
-## Narrowband FM Signal PSD
-
-> Chembiyan T. Jitter and Phase Noise in Phase Locked Loops [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_jitter-and-phase-noise-activity-7031985595304345600-uSx3)]
-
-$$
-y(t) = A\cos(2\pi f_0t+\phi_n(t)) \approx A \cos(2\pi f_0 t) - A \phi_n (t)\sin(2\pi f_0 t)
-$$
-
-
-![image-20241228020953646](am-pm/image-20241228020953646.png)
-$$
-R_x(\tau) = \frac{A^2}{2}\cos(2\pi f_0\tau) +  \frac{A^2}{2}R_\phi(\tau)\cos(2\pi f_0\tau)
-$$
-The PSD of the signal $x(t)$ is given by
-$$
-S_x(f) = \mathcal{F}\{R_x(\tau)\} = \frac{P_c}{2}\left[\delta(f+f_0)+\delta(f-f_0)+S_\phi(f+f_0)+S_\phi(f-f_0)\right]
-$$
-where $P_c = A^2/2$ is the carrier power of the signal
-
-
-
----
-
----
-
-> Nicola Da Dalt , Understanding Jitter and Phase Noise: 3.1.3 Voltage to Excess Phase Transformations: Random Noise
-
-![image-20260621100923112](am-pm/image-20260621100923112.png)
-
-
-
 ## Narrowband Noise
 
 ![image-20251116151034742](am-pm/image-20251116151034742.png)

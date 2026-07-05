@@ -11,9 +11,15 @@ mathjax: true
 
 > M. Garampazzi *et al*., "An Intuitive Analysis of Phase Noise Fundamental Limits Suitable for Benchmarking LC Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 3, pp. 635-645, March 2014 [[https://sci-hub.jp/10.1109/JSSC.2014.2301760](https://sci-hub.jp/10.1109/JSSC.2014.2301760)]
 
-*TODO* &#128197;
 
-![image-20260628233827483](lc-osc/image-20260628233827483.png)
+
+![image-20260705080627584](lc-osc/image-20260705080627584.png)
+
+In general, FOM varies with carrier offset, but when reported as a **single number** it is assumed that FOM was calculated using measurements from the **thermal noise region** where the FOM plateaus
+
+![image-20260705080936604](lc-osc/image-20260705080936604.png)
+
+
 
 ---
 
@@ -46,6 +52,10 @@ FoM_100M = 10*log10(1/(10^(Sphi_100M/10)*Pdc*1e3)*(f0/100e6)^2);  % 163.5234
 
 
 ![image-20260628233941012](lc-osc/image-20260628233941012.png)
+$$
+\boxed{\eta = \frac{V_0^2/(2R_P)}{V_{DD} I_B} = \frac{V_0}{2V_{DD}} \frac{V_0}{R_P I_B}=\frac{V_0}{2V_{DD}} \frac{I_{\omega_0}}{I_B}=\eta_V \eta_I}
+$$
+
 
 ![image-20260702225804712](lc-osc/image-20260702225804712.png)
 
@@ -311,6 +321,308 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 *TODO* &#128197;
 
 ![image-20260106224228115](lc-osc/image-20260106224228115.png)
+
+
+
+## G<sub>eff</sub> in nonlinear oscillator
+
+***effective or large signal conductance***
+
+![image-20260705174217090](lc-osc/image-20260705174217090.png)
+
+***Power Conservation Requirements***
+
+![image-20260705174707189](lc-osc/image-20260705174707189.png)
+
+![image-20260705174426162](lc-osc/image-20260705174426162.png)
+
+
+
+
+
+---
+
+---
+
+***Derivation of $I_{nr}[k]$ Using Fourier Series and Fourier Transform***
+
+Let
+
+$$
+v_{nr}(t)=\sum_{l=-\infty}^{\infty}V_{nr}[l]e^{jl\omega_0 t}
+$$
+
+$$
+g_{nr}(t)=\sum_{m=-\infty}^{\infty}G_{nr}[m]e^{jm\omega_0 t}
+$$
+
+and
+
+$$
+i_{nr}(t)=\sum_{k=-\infty}^{\infty}I_{nr}[k]e^{jk\omega_0 t}.
+$$
+
+The starting equation is
+
+$$
+\frac{d i_{nr}(t)}{dt}
+=
+g_{nr}(t)\frac{d v_{nr}(t)}{dt}.
+$$
+
+---
+
+***Method 1: Directly Using Fourier Series***
+
+Differentiate $v_{nr}(t)$:
+
+$$
+\frac{d v_{nr}(t)}{dt}
+=
+\sum_l jl\omega_0 V_{nr}[l]e^{jl\omega_0 t}
+$$
+
+Multiply by $g_{nr}(t)$:
+
+$$
+g_{nr}(t)\frac{d v_{nr}(t)}{dt}
+=
+\left(\sum_m G_{nr}[m]e^{jm\omega_0 t}\right)
+\left(\sum_l jl\omega_0 V_{nr}[l]e^{jl\omega_0 t}\right)
+$$
+
+$$
+=
+\sum_m\sum_l
+jl\omega_0 V_{nr}[l]G_{nr}[m]
+e^{j(l+m)\omega_0 t}
+$$
+
+For the $k$-th harmonic,
+
+$$
+l+m=k
+$$
+
+so
+
+$$
+m=k-l.
+$$
+
+Therefore,
+
+$$
+\left[g_{nr}(t)\frac{d v_{nr}(t)}{dt}\right]_k
+=
+\sum_l jl\omega_0 V_{nr}[l]G_{nr}[k-l]
+$$
+
+But
+
+$$
+\frac{d i_{nr}(t)}{dt}
+=
+\sum_k jk\omega_0 I_{nr}[k]e^{jk\omega_0 t}
+$$
+
+so the $k$-th coefficient is
+
+$$
+jk\omega_0 I_{nr}[k].
+$$
+
+Therefore, for $k\neq 0$,
+
+$$
+jk\omega_0 I_{nr}[k]
+=
+\sum_l jl\omega_0 V_{nr}[l]G_{nr}[k-l]
+$$
+
+so
+
+$$
+\boxed{
+I_{nr}[k]
+=
+\sum_{l=-\infty}^{\infty}
+\frac{l}{k}
+V_{nr}[l]G_{nr}[k-l],
+\qquad k\neq 0
+}
+$$
+
+The $l/k$ comes from
+
+$$
+\frac{jl\omega_0}{jk\omega_0}
+=
+\frac{l}{k}.
+$$
+
+---
+
+***Method 2: Indirectly Using Fourier Transform***
+
+Use the continuous-time Fourier transform of a periodic signal:
+
+$$
+x(t)=\sum_k X[k]e^{jk\omega_0 t}
+$$
+
+has Fourier transform
+
+$$
+X(\omega)=2\pi\sum_k X[k]\delta(\omega-k\omega_0).
+$$
+
+So
+
+$$
+V_{nr}(\omega)
+=
+2\pi\sum_l V_{nr}[l]\delta(\omega-l\omega_0)
+$$
+
+and
+
+$$
+G_{nr}(\omega)
+=
+2\pi\sum_m G_{nr}[m]\delta(\omega-m\omega_0).
+$$
+
+Now,
+
+$$
+\frac{d v_{nr}(t)}{dt}
+\quad \Longleftrightarrow \quad
+j\omega V_{nr}(\omega).
+$$
+
+Therefore,
+
+$$
+j\omega V_{nr}(\omega)
+=
+2\pi\sum_l jl\omega_0 V_{nr}[l]\delta(\omega-l\omega_0).
+$$
+
+Since
+
+$$
+\frac{d i_{nr}(t)}{dt}
+=
+g_{nr}(t)\frac{d v_{nr}(t)}{dt},
+$$
+
+multiplication in time becomes convolution in frequency:
+
+$$
+\mathcal{F}\left\{
+g_{nr}(t)\frac{d v_{nr}(t)}{dt}
+\right\}
+=
+\frac{1}{2\pi}
+G_{nr}(\omega)*
+\left(j\omega V_{nr}(\omega)\right).
+$$
+
+Substitute the impulse-train spectra:
+
+$$
+=
+\frac{1}{2\pi}
+\left(
+2\pi\sum_m G_{nr}[m]\delta(\omega-m\omega_0)
+\right)
+*
+\left(
+2\pi\sum_l jl\omega_0 V_{nr}[l]\delta(\omega-l\omega_0)
+\right)
+$$
+
+$$
+=
+2\pi
+\sum_m\sum_l
+jl\omega_0
+G_{nr}[m]V_{nr}[l]
+\delta(\omega-(m+l)\omega_0).
+$$
+
+For the $k$-th harmonic,
+
+$$
+m+l=k
+$$
+
+so
+
+$$
+m=k-l.
+$$
+
+Thus,
+
+$$
+\mathcal{F}\left\{
+g_{nr}(t)\frac{d v_{nr}(t)}{dt}
+\right\}
+=
+2\pi
+\sum_k
+\left[
+\sum_l jl\omega_0 V_{nr}[l]G_{nr}[k-l]
+\right]
+\delta(\omega-k\omega_0).
+$$
+
+But
+
+$$
+\frac{d i_{nr}(t)}{dt}
+\quad \Longleftrightarrow \quad
+j\omega I_{nr}(\omega).
+$$
+
+Since
+
+$$
+I_{nr}(\omega)
+=
+2\pi\sum_k I_{nr}[k]\delta(\omega-k\omega_0),
+$$
+
+we get
+
+$$
+j\omega I_{nr}(\omega)
+=
+2\pi\sum_k jk\omega_0 I_{nr}[k]\delta(\omega-k\omega_0).
+$$
+
+Equating the $k$-th impulse coefficient:
+
+$$
+jk\omega_0 I_{nr}[k]
+=
+\sum_l jl\omega_0 V_{nr}[l]G_{nr}[k-l].
+$$
+
+Therefore,
+
+$$
+\boxed{
+I_{nr}[k]
+=
+\sum_l
+\frac{l}{k}
+V_{nr}[l]G_{nr}[k-l],
+\qquad k\neq 0
+}
+$$
 
 
 
@@ -798,6 +1110,8 @@ C. Samori, "Tutorial: Understanding Phase Noise in LC VCOs," *2016 IEEE Internat
 —, Phase Noise in LC Oscillators: From Basic Concepts to Advanced Topologies [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf)]
 
 Jun Yin. ISSCC 2025  T10:  mm-Wave Oscillator Design
+
+J. Bank, "A harmonic-oscillator design methodology based on describing functions," Ph.D. dissertation, Dept. Signals Syst., Sch. Elect. Eng., Chalmers Univ. Techn., Chalmers, Sweden, 2006. [[https://publications.lib.chalmers.se/records/fulltext/17376.pdf](https://publications.lib.chalmers.se/records/fulltext/17376.pdf)]
 
 ---
 

@@ -223,7 +223,7 @@ If the comparator can not generate a well-defined logical output in half of the 
 
 
 
-## Math Background
+## Mathematical Preliminaries
 
 ### Relating $\Phi$ and erf
 

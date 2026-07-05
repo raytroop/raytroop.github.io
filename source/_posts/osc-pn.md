@@ -120,7 +120,7 @@ $$
 
 
 
-## Leeson's Model — LTI
+## Leeson's model — LTI
 
 > M.H. Perrott, Short Course On Phase-Locked Loops and Their Applications Day 2, AM Lecture Basic *Building Blocks Voltage-Controlled Oscillators* [[https://www.cppsim.com/PLL_Lectures/day2_am.pdf](https://www.cppsim.com/PLL_Lectures/day2_am.pdf)]
 >
@@ -150,7 +150,7 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 
 ![image-20260702211009442](osc-pn/image-20260702211009442.png)
 
-***1/f noise Upconversion*** & ***Thermal noise Upconversion*** 
+***1/f noise Upconversion*** & ***Thermal noise Upconversion***
 
 
 
@@ -192,7 +192,7 @@ $$
 ![image-20260613191539886](osc-pn/image-20260613191539886.png)
 
 
-Therefore, the **ISF of an ideal parallel LC resonator** can be expressed as $\boxed{\Gamma(\omega \tau)=-\sin(\omega_0 \tau)}$, which is independent of peak voltage value $A_0$ 
+Therefore, the **ISF of an ideal parallel LC resonator** can be expressed as $\boxed{\Gamma(\omega \tau)=-\sin(\omega_0 \tau)}$, which is independent of peak voltage value $A_0$
 
 ![image-20260622231558562](osc-pn/image-20260622231558562.png)
 
@@ -238,7 +238,7 @@ When performing the ***phase noise computation integral***, there will be a negl
 >
 >  L. Lu, Z. Tang, P. Andreani, A. Mazzanti and A. Hajimiri, "Comments on “Comments on “A General Theory of Phase Noise in Electrical Oscillators””," in *IEEE Journal of Solid-State Circuits*, vol. 43, no. 9, pp. 2170-2170, Sept. 2008 [[https://sci-hub.se/10.1109/JSSC.2008.2005028](https://sci-hub.se/10.1109/JSSC.2008.2005028)]
 
-Noise power around the frequency $\color{blue}n\omega_0 + \Delta\omega$ causes two equal sidebands at $\omega_0 \pm \Delta\omega$. However, the 
+Noise power around the frequency $\color{blue}n\omega_0 + \Delta\omega$ causes two equal sidebands at $\omega_0 \pm \Delta\omega$. However, the
 noise power at $\color{blue}n\omega_0 - \Delta\omega$ has a similar effect as  mentioned in the paper. Therefore, twice the power of noise at  $n\omega_0 + \Delta\omega$ should be taken into account
 
 ![image-20260623010902374](osc-pn/image-20260623010902374.png)
@@ -435,7 +435,7 @@ For Class-B with **an Ideal Current Source**
 
 
 
-The differential pair plays two distinct roles. Toward its own noise it acts as a sampling gate — each transistor contributes only within the short conduction windows at the zero crossings — and the resulting injection is almost purely phase-modulating. 
+The differential pair plays two distinct roles. Toward its own noise it acts as a sampling gate — each transistor contributes only within the short conduction windows at the zero crossings — and the resulting injection is almost purely phase-modulating.
 
 Toward the tail noise it acts as a single-balanced mixer, commutating the upstream current with a square wave and folding it as a single sideband that splits equally into AM and PM
 
@@ -484,7 +484,7 @@ $$
 
 The **single-tone analysis** establishes that the differential-pair current is injected as **almost pure phase noise**, while **summing the white-noise power over all harmonics** of the gating function ($\overline{H^2}=T_W/2T_0 $) sets its **magnitude**; together these yield the differential-pair contribution to the oscillator phase noise.
 
- 
+
 
 ---
 
@@ -637,11 +637,17 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 ![image-20260628114309467](osc-pn/image-20260628114309467.png)
 
-$R_{nI}(\tau) = R_{nQ}(\tau)$ demonstrate **spectra** of $n_I $ and $n_Q $ to be **equal** 
+$R_{nI}(\tau) = R_{nQ}(\tau)$ demonstrate **spectra** of $n_I $ and $n_Q $ to be **equal**
 
 $R_{nInQ}(\tau)=-R_{nQnI}(\tau)$ demonstrate  $n_I $ and $n_Q $ are **uncorrelated**
 
 
+
+
+
+## Bank's General Result
+
+> J. Bank, "A harmonic-oscillator design methodology based on describing functions," Ph.D. dissertation, Dept. Signals Syst., Sch. Elect. Eng., Chalmers Univ. Techn., Chalmers, Sweden, 2006. [[https://publications.lib.chalmers.se/records/fulltext/17376.pdf](https://publications.lib.chalmers.se/records/fulltext/17376.pdf)]
 
 
 
@@ -799,7 +805,7 @@ Finally, we obtain
 >
 > Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
 >
-> S. Galeone and M. P. Kennedy, "A comparison of simulation strategies for estimating phase noise in oscillators," 2017 13th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME), Giardini Naxos - Taormina, Italy, 2017 
+> S. Galeone and M. P. Kennedy, "A comparison of simulation strategies for estimating phase noise in oscillators," 2017 13th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME), Giardini Naxos - Taormina, Italy, 2017
 >
 > PPV values from pss/pnoise simulation in spectreRF [[https://community.cadence.com/cadence_technology_forums/f/rf-design/35062/ppv-values-from-pss-pnoise-simulation-in-spectrerf](https://community.cadence.com/cadence_technology_forums/f/rf-design/35062/ppv-values-from-pss-pnoise-simulation-in-spectrerf)]
 >
@@ -835,7 +841,7 @@ Finally, we obtain
 
 
 
-## Mathematical Background
+## Mathematical Preliminaries
 
 > Jiří Lebl. **Notes on Diffy Qs: Differential Equations for Engineers** [[link](https://www.jirka.org/diffyqs/)]
 >
@@ -889,7 +895,7 @@ Jaeha Kim. Lecture 8. Special Topics: Design Trade -Offs in LC -Tuned Oscillator
 
 Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated frequency synthesizers for wireless systems*. Cambridge University Press, 2007.
 
-Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020. 
+Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
 
 Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005. *The Designer's Guide to High-Purity Oscillators*
 

@@ -211,6 +211,8 @@ This type of oscillator could be operated with only **one transistor**. In moder
 
 ## Class-B Oscillators
 
+![image-20260705232625233](lc-osc/image-20260705232625233.png)
+
 
 
 ### Output Amplitude
@@ -1131,5 +1133,5 @@ Manetakis, K. (2023). *Topics in LC Oscillators: Principles, phase noise, pullin
 
 Hajimiri, A., & Lee, T. H. (1999). The design of low noise oscillators. Norwell, MA: Kluwer
 
-Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005. *The Designer's Guide to High-Purity Oscillators*
+Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005.
 

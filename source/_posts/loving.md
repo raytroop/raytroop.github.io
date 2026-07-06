@@ -2830,7 +2830,7 @@ https://www.bilibili.com/video/BV1wQ4y1E7SW/?share_source=copy_web&vd_source=5a0
 ```
 病态自卑者难以停止内心挣扎的原因有两点：一是难以放弃对理想化自我的追求；二是无法接受真实的自己。
 
-— 走出抑郁症
+— 王宇：走出抑郁症
 ```
 
 

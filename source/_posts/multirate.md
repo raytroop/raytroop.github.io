@@ -398,12 +398,8 @@ LG_{fr} &= K_{BB}\cdot \frac{1-z^{-M}}{1-z^{-1}}\cdot \frac{1}{M}\cdot \frac{1}{
 
 
 
-> J. Stonick. ISSCC 2011 "DPLL-Based Clock and Data Recovery" [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T5.pdf)]
->
-> J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006  [[https://sci-hub.se/10.1109/JSSC.2006.875292](https://sci-hub.se/10.1109/JSSC.2006.875292)]
->
-> J. Sonntag and J. Stonick, "A digital clock and data recovery architecture for multi-gigabit/s binary links," *Proceedings of the IEEE 2005 Custom Integrated Circuits Conference, 2005.*. [[https://sci-hub.se/10.1109/CICC.2005.1568725](https://sci-hub.se/10.1109/CICC.2005.1568725)]
->
+
+
 > Y. Xia *et al*., "A 10-GHz Low-Power Serial Digital Majority Voter Based on Moving Accumulative Sign Filter in a PS-/PI-Based CDR," in *IEEE Transactions on Microwave Theory and Techniques*, vol. 68, no. 12 [[https://sci-hub.se/10.1109/TMTT.2020.3029188](https://sci-hub.se/10.1109/TMTT.2020.3029188)]
 >
 > J. Liang, A. Sheikholeslami, "On-Chip Jitter Measurement and Mitigation Techniques for Clock and Data Recovery Circuits" [[https://tspace.library.utoronto.ca/bitstream/1807/91138/3/Liang_Joshua_201706_PhD_thesis.pdf](https://tspace.library.utoronto.ca/bitstream/1807/91138/3/Liang_Joshua_201706_PhD_thesis.pdf)]
@@ -459,6 +455,16 @@ $\frac{1}{T}$ & $T$ come from *CT-DT* & *DT-CT*
 
 ## Sonntag JSSC 2006
 
+> J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006  [[https://sci-hub.se/10.1109/JSSC.2006.875292](https://sci-hub.se/10.1109/JSSC.2006.875292)]
+>
+> —, "A digital clock and data recovery architecture for multi-gigabit/s binary links," *Proceedings of the IEEE 2005 Custom Integrated Circuits Conference, 2005.*. [[https://sci-hub.se/10.1109/CICC.2005.1568725](https://sci-hub.se/10.1109/CICC.2005.1568725)]
+>
+> J. Stonick. ISSCC 2011 tutorials, T5: "DPLL-Based Clock and Data Recovery"
+
+
+
+### Phase transfer function
+
 ![image-20241129222258061](multirate/image-20241129222258061.png)
 
 ![image-20241129223706720](multirate/image-20241129223706720.png)
@@ -511,15 +517,29 @@ ylabel('frequency response', 'FontSize',10)
 
 
 
-> **Full View**
->
-> ![image-20241129223734870](multirate/image-20241129223734870.png)
+---
+
+***Full View***
+
+![image-20241129223734870](multirate/image-20241129223734870.png)
+
+
+
+### Offsets in Phase Slicer
+
+***dead zone***, p<sub>n</sub> always 0 whether early or late!!!
+
+![image-20260706205916894](multirate/image-20260706205916894.png)
+
+
+
+*TODO* &#128197;
 
 
 
 ### Kpd, Kb, Kv
 
-> ![image-20260113223907845](multirate/image-20260113223907845.png)
+![image-20260113223907845](multirate/image-20260113223907845.png)
 
 ![image-20241130162850467](multirate/image-20241130162850467.png)
 

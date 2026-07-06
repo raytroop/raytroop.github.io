@@ -83,6 +83,8 @@ FF = Qt^2*eta_I*eta_V*2/1e3/(kB*T)/10^(FoM/10); % 4.6006
 
 ![image-20260704141326842](lc-osc/image-20260704141326842.png)
 
+![image-20260706215907304](lc-osc/image-20260706215907304.png)
+
 ### Class-C CMOS Oscillator
 
 > A. Mazzanti and P. Andreani, "Class-C Harmonic CMOS VCOs, With a General Result on Phase Noise," in IEEE Journal of Solid-State Circuits, vol. 43, no. 12, pp. 2716-2729, Dec. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2004867](https://sci-hub.ru/10.1109/JSSC.2008.2004867)]
@@ -213,17 +215,15 @@ This type of oscillator could be operated with only **one transistor**. In moder
 
 ![image-20260705232625233](lc-osc/image-20260705232625233.png)
 
+active element provides a negative conductance only when the input voltage is small
 
+For larger voltages, one of the transistors in the differential pair will be off, while the other will be on, and the conductance drops to zero
 
 ### Output Amplitude
 
 > Edgar Sanchez-Sinencio. ECEN 665, OSCILLATORS [[https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf](https://people.engr.tamu.edu/s-sanchez/665%20Oscillators.pdf)]
 
 
-
----
-
----
 
 ***NMOS Realization — single pair***
 
@@ -334,7 +334,7 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 ***Power Conservation Requirements***
 
-![image-20260705174707189](lc-osc/image-20260705174707189.png)
+![image-20260706211355815](lc-osc/image-20260706211355815.png)
 
 ![image-20260705174426162](lc-osc/image-20260705174426162.png)
 
@@ -625,6 +625,12 @@ V_{nr}[l]G_{nr}[k-l],
 \qquad k\neq 0
 }
 $$
+
+
+
+## C<sub>eff</sub> effective nonlinear capacitance
+
+*TODO* &#128197;
 
 
 
@@ -1093,8 +1099,6 @@ Three methods:
 
 ## reference
 
-A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]
-
 Pietro Andreani. ISSCC 2011 T1: Integrated LC oscillators
 
 —. ISSCC 2017 F2: Integrated Harmonic Oscillators
@@ -1103,7 +1107,9 @@ Pietro Andreani. ISSCC 2011 T1: Integrated LC oscillators
 
 —. ESSCIRC 2019 Tutorials: RF Harmonic Oscillators Integrated in Silicon Technologies [[https://youtu.be/k1I9nP9eEHE](https://youtu.be/k1I9nP9eEHE)]
 
-—. "Harmonic Oscillators in CMOS—A Tutorial Overview," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 2-17, 2021 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265)]
+—. "Harmonic Oscillators in CMOS—A Tutorial Overview," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 2-17, 2021 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265)]
+
+A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]
 
 C. Samori, "Tutorial: Understanding Phase Noise in LC VCOs," *2016 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2016
 

@@ -326,7 +326,7 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 
 
-## G<sub>eff</sub> in nonlinear oscillator
+## G<sub>eff</sub> - large signal conductance
 
 ***effective or large signal conductance***
 
@@ -628,11 +628,61 @@ $$
 
 
 
-## C<sub>eff</sub> effective nonlinear capacitance
+## Frequency Modulation Effects
+
+![image-20260707223019331](lc-osc/image-20260707223019331.png)
+
+### C<sub>eff</sub> - large signal capacitance
+
+> E. Hegazi and A. A. Abidi, "Varactor characteristics, oscillator tuning curves, and AM-FM conversion," in *IEEE Journal of Solid-State Circuits*, vol. 38, no. 6, pp. 1033-1039, June 2003 [[https://sci-hub.jp/10.1109/JSSC.2003.811968](https://sci-hub.jp/10.1109/JSSC.2003.811968)]
 
 *TODO* &#128197;
 
+![line_integral_zero_vs_ellipse_area](lc-osc/line_integral_zero_vs_ellipse_area.svg)
 
+
+$$
+\boxed{\oint i_{nr}\,dv_{nr}
+=
+\int_0^T i_{nr}(t)\frac{dv_{nr}(t)}{dt}\,dt}
+$$
+It is the **signed area-related quantity** swept in the $i$-$v$ plane **over one period**, which is used as a *memory detector* — a one-line mathematical test for whether an element's behavior depends on its history
+
+
+
+![image-20260707225520383](lc-osc/image-20260707225520383.png)
+
+![image-20260707225605933](lc-osc/image-20260707225605933.png)
+
+
+
+### Groszkowski's Effect
+
+> credits to *GPT-5.5 High*
+
+![image-20260628142136377](lc-osc/image-20260628142136377.png)
+
+**Groszkowski's effect** is an oscillator **frequency shift caused by harmonic content** in the oscillation waveform/current
+
+For a **periodic** LC oscillation, t**he average stored energy must balance** between $C$ and $L$
+
+**average energy balance** $\overline{W_L}=\overline{W_C}$, or equivalently
+$$
+\sum L I_n^2 = \sum C V_n^2
+$$
+$I_n$ here is the **reactive tank current harmonic**, not directly the transistor current harmonic $I_{Hn}$ in the slide
+
+![image-20260628161501243](lc-osc/image-20260628161501243.png)![image-20260628161612592](lc-osc/image-20260628161612592.png)
+
+![image-20260628161802633](lc-osc/image-20260628161802633.png)
+
+---
+
+---
+
+
+
+![image-20260707222643057](lc-osc/image-20260707222643057.png)
 
 
 
@@ -968,21 +1018,6 @@ $$
 ![image-20260630235825289](lc-osc/image-20260630235825289.png)
 
 
-
-
-### Groszkowski's Effect
-
-> credits to *GPT-5.5 High*
-
-![image-20260628142136377](lc-osc/image-20260628142136377.png)
-
-**Groszkowski’s effect** is an oscillator **frequency shift caused by harmonic content** in the oscillation waveform/current.
-
-For a **periodic** LC oscillation, t**he average stored energy must balance** between $C$ and $L$
-
-![image-20260628161501243](lc-osc/image-20260628161501243.png)![image-20260628161612592](lc-osc/image-20260628161612592.png)
-
-![image-20260628161802633](lc-osc/image-20260628161802633.png)
 
 
 

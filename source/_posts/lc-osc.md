@@ -81,6 +81,8 @@ FF = Qt^2*eta_I*eta_V*2/1e3/(kB*T)/10^(FoM/10); % 4.6006
 
 ## LC Oscillator Structures
 
+![image-20260708231041696](lc-osc/image-20260708231041696.png)
+
 ![image-20260704141326842](lc-osc/image-20260704141326842.png)
 
 ![image-20260706215907304](lc-osc/image-20260706215907304.png)
@@ -326,7 +328,13 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 
 
-## G<sub>eff</sub> - large signal conductance
+## Startup Behavior
+
+![image-20260708232713198](lc-osc/image-20260708232713198.png)
+
+Note that the gnr frequency is twice of oscillator voltage frequency
+
+### G<sub>eff</sub> - large signal conductance
 
 ***effective or large signal conductance***
 
@@ -339,6 +347,65 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 ![image-20260705174426162](lc-osc/image-20260705174426162.png)
 
 
+
+```verilog
+`include "constants.vams"
+`include "disciplines.vams"
+
+module gnr (p, n, gnr_t);
+
+  inout p, n;
+  output gnr_t;
+  electrical p, n, gnr_t;
+
+  // defaults reproduce the figure
+  parameter real isat = 5.0e-3  from (0:inf);  // saturation current  [A]
+  parameter real g0   = 20.0e-3 from (0:inf);  // |g_nr(0)|           [S]
+
+  real v0;     // characteristic voltage isat/g0 (= 0.25 V)
+  real th;     // tanh(v/v0)
+  real gnr_val; // instantaneous conductance g_nr(t) [S].
+
+  analog begin
+    v0    = isat / g0;
+    th    = tanh( V(p,n) / v0 );
+    gnr_val = -g0 * (1.0 - th*th);      // = -g0 * sech^2(v/v0)
+
+    I(p,n) <+ -isat * th;
+    V(gnr_t) <+ gnr_val;
+  end
+
+endmodule
+```
+
+
+
+![image-20260709022801787](lc-osc/image-20260709022801787.png)
+
+![image-20260709022618132](lc-osc/image-20260709022618132.png)
+
+steady gnr_t FFT
+
+```
+DC        = -6.0406321676e-3 V
+H2 amp    =  7.9122327000e-3 V, phase = -2.231713338 rad
+H4 amp    =  3.7233519535e-3 V, phase = -1.354877521 rad
+H6 amp    =  1.4945186476e-3 V, phase = -0.507155511 rad
+H8 amp    =  5.5046866446e-4 V, phase =  0.317740928 rad
+H10 amp   =  1.9272868496e-4 V, phase =  1.124954668 rad
+```
+
+Geff 1/Rp=10mS
+
+```
+>> -6.0406321676 - 7.9122327000/2*cos(-2.231713338/180*pi)
+
+ans =
+
+   -9.9937
+```
+
+As $\vert{}Gnr[2]\vert{}$ is comparable in magnitude to $\vert{}Gnr[0]\vert{}$, $\vert{}Gnr[2]\vert{}$ must be retained
 
 
 

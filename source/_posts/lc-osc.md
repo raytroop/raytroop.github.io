@@ -346,11 +346,19 @@ Note that the gnr frequency is twice of oscillator voltage frequency
 
 ***Power Conservation Requirements***
 
-![image-20260706211355815](lc-osc/image-20260706211355815.png)
+![image-20260709182504400](lc-osc/image-20260709182504400.png)
 
-![image-20260705174426162](lc-osc/image-20260705174426162.png)
+![image-20260709182645358](lc-osc/image-20260709182645358.png)
 
+![image-20260709182751262](lc-osc/image-20260709182751262.png)
 
+Since the Fourier transform of a real and even function is also real and even, the derivation above assumes that $V_{\text{osc}}(t)$ is real and even, which implies that **$g_{\text{nr}}(t)$ is likewise real and even** — $G_\text{nr}$ is **real and even**
+
+---
+
+---
+
+***[[credits to Claude Fable 5](https://gist.github.com/raytroop/d0aaa3c9fc1a1fe9c1a62e5319e56771)]***
 
 ```verilog
 `include "constants.vams"
@@ -388,31 +396,19 @@ endmodule
 
 ![image-20260709022618132](lc-osc/image-20260709022618132.png)
 
-steady gnr_t FFT
+![image-20260709214300022](lc-osc/image-20260709214300022.png)
 
-```
-DC        = -6.0406321676e-3 V
-H2 amp    =  7.9122327000e-3 V, phase = -2.231713338 rad
-H4 amp    =  3.7233519535e-3 V, phase = -1.354877521 rad
-H6 amp    =  1.4945186476e-3 V, phase = -0.507155511 rad
-H8 amp    =  5.5046866446e-4 V, phase =  0.317740928 rad
-H10 amp   =  1.9272868496e-4 V, phase =  1.124954668 rad
-```
+For a symmetric signal $g_\text{nr}(t)$, the phase angle $\theta$ is absorbed into the phase shift, transforming the second-harmonic component as:
+$$
+h_{2}(t)=\mathcal{Re}\{2Ae^{j(2\omega _{0}t+\theta )}\}\rightarrow h_{2}(t)=2A\cos (2\omega _{0}t)
+$$
 
-Geff 1/Rp=-10mS
+This yields $G_\text{nr}[2] = G_\text{nr}[-2] = A = 3.956$. Consequently, the effective gain is evaluated as:
+$$
+G_{\text{eff}}=G_{\text{nr}}[0]-G_{\text{nr}}[2]=-9.9968 \approx -\frac{1}{R_p}
+$$
 
-```
->> -6.0406321676 - 7.9122327000/2*cos(-2.231713338/180*pi)
-
-ans =
-
-   -9.9937
-```
-
-As $\vert{}Gnr[2]\vert{}$ is comparable in magnitude to $\vert{}Gnr[0]\vert{}$, $\vert{}Gnr[2]\vert{}$ must be retained
-
-
-> In PSS with above verilogA model, DC is same with FFT of transient waveform, but phase of H2 is different from transient FFT's and Geff is -9mS i.e. 10% error
+Because the magnitude of $G_\text{nr}[2]$ is comparable to that of $G_\text{nr}[0]$, $G_\text{nr}[2]$ must be retained
 
 ---
 

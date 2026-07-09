@@ -445,6 +445,25 @@ inverse CTFT shall integral from $-\infty$ to $+\infty$ to obtain $\delta(t)$ in
 
 
 
+### Fourier Transform Symmetry
+
+> Lance Williams, CS 530: Geometric and Probabilistic Methods in Computer Science "Fourier Transform Symmetries" [[https://www.cs.unm.edu/~williams/cs530/symmetry.pdf](https://www.cs.unm.edu/~williams/cs530/symmetry.pdf)]
+
+| $f(t)$    | $\mathcal{F}(s) = \int_{-\infty}^{\infty} f(t)e^{-j2\pi st} \, dt$ |
+| --------- | ------------------------------------------------------------ |
+| odd       | odd                                                          |
+| even      | even                                                         |
+| real odd  | imaginary                                                    |
+| real even | real                                                         |
+
+![image-20260709210717751](fourier/image-20260709210717751.png)
+
+![image-20260709210954471](fourier/image-20260709210954471.png)
+
+![image-20260709211059380](fourier/image-20260709211059380.png)
+
+
+
 ### Half Wave Symmetry
 
 > ECEN 2633 Chapter 16: Fourier Series [[http://www.jazapka.people.ysu.edu/ECEN%202633%20Chapter%2016.pdf](http://www.jazapka.people.ysu.edu/ECEN%202633%20Chapter%2016.pdf)]

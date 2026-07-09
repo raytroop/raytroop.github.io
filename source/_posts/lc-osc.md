@@ -87,8 +87,12 @@ FF = Qt^2*eta_I*eta_V*2/1e3/(kB*T)/10^(FoM/10); % 4.6006
 
 ![image-20260706215907304](lc-osc/image-20260706215907304.png)
 
-### Class-C CMOS Oscillator
+### Class-C / Tail current-shaping CMOS Oscillator
 
+> B. Soltanian and P. Kinget, "A tail current-shaping technique to reduce phase noise in LC VCOs," Proceedings of the IEEE 2005 Custom Integrated Circuits Conference, 2005., San Jose, CA, USA, 2005 [[https://sci-hub.ru/10.1109/CICC.2005.1568734](https://sci-hub.ru/10.1109/CICC.2005.1568734)]
+>
+> —, "Tail Current-Shaping to Improve Phase Noise in LC Voltage-Controlled Oscillators," in IEEE Journal of Solid-State Circuits, vol. 41, no. 8, pp. 1792-1802, Aug. 2006 [[https://sci-hub.ru/10.1109/JSSC.2006.877273](https://sci-hub.ru/10.1109/JSSC.2006.877273)]
+>
 > A. Mazzanti and P. Andreani, "Class-C Harmonic CMOS VCOs, With a General Result on Phase Noise," in IEEE Journal of Solid-State Circuits, vol. 43, no. 12, pp. 2716-2729, Dec. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2004867](https://sci-hub.ru/10.1109/JSSC.2008.2004867)]
 
 *TODO* &#128197;
@@ -408,6 +412,7 @@ ans =
 As $\vert{}Gnr[2]\vert{}$ is comparable in magnitude to $\vert{}Gnr[0]\vert{}$, $\vert{}Gnr[2]\vert{}$ must be retained
 
 
+> In PSS with above verilogA model, DC is same with FFT of transient waveform, but phase of H2 is different from transient FFT's and Geff is -9mS i.e. 10% error
 
 ---
 

@@ -7,6 +7,128 @@ categories:
 mathjax: true
 ---
 
+
+
+## Ordinary Differential Equations (ODEs)
+
+### Dirac delta function in ODEs
+
+Integrate across the impulse to find the jump
+$$
+\underbrace{\text{zero state} + \delta(t)\text{ input}}_{t=0^-} \quad\Longrightarrow\quad \underbrace{\text{zero input} + \text{new ICs at }t=0^+}_{t>0}
+$$
+
+
+![image-20260710230815001](coding/image-20260710230815001.png)
+
+![image-20260711003430785](coding/image-20260711003430785.png)
+
+```python
+import numpy as np
+import scipy.integrate as spi
+import matplotlib.pyplot as plt
+
+
+L, C, R = 2.533e-9, 10e-12, 100.0
+
+def rhs(t, y):
+    il , dil = y
+    dildt = dil
+    ddildt = -(1/(R*C))*dil - (1/(L*C))*il
+    return [dildt, ddildt]
+
+sol = spi.solve_ivp(rhs, (0, 10e-9), [0, 1/(L*C)],
+                    t_eval=np.linspace(0, 10e-9, 2001),
+                    rtol=1e-10, atol=1e-4)   # error drops to ~1e-10
+
+plt.plot(sol.t, sol.y[0])
+plt.title('RLC Circuit Response')
+plt.xlabel('Time (s)')
+plt.ylabel('Current (A)')
+plt.grid()
+plt.show()
+```
+
+![image-20260710235118022](coding/image-20260710235118022.png)
+
+### Doublet function in ODEs
+
+![image-20260711004412242](coding/image-20260711004412242.png)
+
+![image-20260711004554172](coding/image-20260711004554172.png)
+
+
+
+![image-20260711010924471](coding/image-20260711010924471.png)
+
+```python
+import numpy as np
+import scipy.integrate as spi
+import matplotlib.pyplot as plt
+
+
+RC = 1.0
+T_START = 0.0
+T_STOP = 20.0
+NUM_SAMPLES = 2001
+
+
+def wien_bridge_rhs(t, state):
+    """Return the state derivative for the normalized Wien bridge response."""
+    del t
+    vo, dvo = state
+    ddvo = -(3.0 / RC) * dvo - vo / RC**2
+    return [dvo, ddvo]
+
+
+def analytic_response(t):
+    """Closed-form voltage response for the same initial conditions."""
+    sqrt_5 = np.sqrt(5.0)
+    s1 = (-3.0 + sqrt_5) / (2.0 * RC)
+    s2 = (-3.0 - sqrt_5) / (2.0 * RC)
+    return (s1 * np.exp(s1 * t) - s2 * np.exp(s2 * t)) / sqrt_5
+
+
+def main():
+    t_eval = np.linspace(T_START, T_STOP, NUM_SAMPLES)
+    initial_state = [1.0 / RC, -3.0 / RC**2]
+
+    sol = spi.solve_ivp(
+        wien_bridge_rhs,
+        (T_START, T_STOP),
+        initial_state,
+        t_eval=t_eval,
+        rtol=1e-10,
+        atol=1e-8,
+    )
+
+    fig, ax = plt.subplots(figsize=(8, 4.8), constrained_layout=True)
+    ax.plot(sol.t, sol.y[0], linewidth=3.0, label="Numerical solution")
+    ax.plot(t_eval, analytic_response(t_eval), "--", linewidth=3.0, label="Analytic response")
+
+    ax.set_title("Wien Bridge Natural Response")
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("Output voltage, $v_o$ (V)")
+    ax.grid(True, which="both", linestyle=":", linewidth=0.8, alpha=0.8)
+    ax.legend(frameon=False)
+
+    plt.show()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+
+
+
+
+## Differential Equations (PDEs)
+
+*TODO* &#128197;
+
+
+
 ## Julia
 
 ***create a new project***
@@ -595,6 +717,19 @@ There are actually two distinct call signatures:
 `scipy.integrate.solve_ivp` 
 
 Solve an **i**nitial **v**alue **p**roblem for a system of ODEs
+
+`rtol` and `atol` are the error tolerances for `scipy.integrate.solve_ivp`.
+
+`rtol` is relative tolerance: allowed error scales with the size of the solution.
+
+`atol` is absolute tolerance: allowed error floor when the solution is near zero.
+
+SciPy roughly controls local error using:
+
+```
+error < atol + rtol * abs(y)
+```
+
 
 
 ## Matlab

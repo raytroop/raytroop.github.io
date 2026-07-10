@@ -65,6 +65,20 @@ x(t)&= \frac{1}{2\pi}\int_{-\infty}^{+\infty}X(j\omega)e^{j\omega t}d\omega
 
 
 
+
+
+---
+
+> Fourier Xform of Periodic Functions [[https://lpsa.swarthmore.edu/Fourier/Xforms/FXPeriodic.html](https://lpsa.swarthmore.edu/Fourier/Xforms/FXPeriodic.html)]
+
+***Fourier Transform of Fourier Series Representation***
+$$
+\boxed{x_T(t) = \sum_{n=-\infty}^{+\infty} c_n e^{j n \omega_0 t}\qquad X_T(\omega) = 2\pi \sum_{n=-\infty}^{+\infty} c_n \delta(\omega - n \omega_0)}
+$$
+
+
+
+
 ### Discrete-Time Fourier Transform (DTFT)
 
 
@@ -218,6 +232,17 @@ where $\alpha$ is scaling ratio
 
 
 
+
+
+### doublet functions
+
+![image-20260711000834823](fourier/image-20260711000834823.png)
+
+
+
+
+
+
 ### Multiplication
 
 > aka *Modulation or Windowing Theorem*
@@ -261,7 +286,7 @@ $$
 
 ***CTFS***
 
-with $f(x) = \sum_{n=-\infty}^{\infty} c_n e^{i \frac{2n\pi x}{T}}$
+with $f(x) = \sum_{n=-\infty}^{\infty} c_n e^{j \frac{2n\pi x}{T}}$
 
 $$
 \frac{1}{T} \int_{0}^{T} \vert{}f(x)\vert{}^2 \, dx = \sum_{n=-\infty}^{\infty} \vert{}c_n\vert{}^2

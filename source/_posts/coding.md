@@ -590,6 +590,12 @@ There are actually two distinct call signatures:
 | `np.where(cond)`       | tuple of index arrays where `cond` is `True` | **find positions** |
 
 
+---
+
+`scipy.integrate.solve_ivp` 
+
+Solve an **i**nitial **v**alue **p**roblem for a system of ODEs
+
 
 ## Matlab
 

@@ -52,6 +52,16 @@ For instance
 
 
 
+## Magnetic Coupling
+
+> Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
+
+![image-20260711102418048](xtalk/image-20260711102418048.png)
+
+
+
+![shield_ground_loop_faraday_induction](xtalk/shield_ground_loop_faraday_induction.svg)
+
 ## relative dielectric constant vs permittivity
 
 

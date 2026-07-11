@@ -148,35 +148,319 @@ $$
 
 
 
+## Polarization $\mathbf P$ & magnetization $\mathbf M$
+
+***Electric Fields in Matter*** & ***Magnetic Fields in Matter***
+
+
+
+*TODO* &#128197;
+
+
+
+## Electric Fields
+
+### Electric field intensity $\mathbf E$ & Electric flux density $\mathbf D$
+
+
+$$
+\boxed{
+\underbrace{\varepsilon_0\mathbf E}_{\text{contains free + bound charge effects}}
++
+\underbrace{\mathbf P}_{\text{cancels bound-charge divergence}}
+=
+\underbrace{\mathbf D}_{\text{free-charge Gauss law}}
+}.
+$$
+Start from Gauss’s law for the actual electric field:
+$$
+\nabla\cdot(\varepsilon_0\mathbf E)
+=
+\rho_{\text{free}}+\rho_{\text{bound}}.
+$$
+Polarization satisfies
+$$
+\rho_{\text{bound}}=-\nabla\cdot\mathbf P.
+$$
+Therefore,
+$$
+\nabla\cdot(\varepsilon_0\mathbf E)
+=
+\rho_{\text{free}}-\nabla\cdot\mathbf P.
+$$
+Move the polarization term to the left:
+$$
+\nabla\cdot(\varepsilon_0\mathbf E+\mathbf P)
+=
+\rho_{\text{free}}.
+$$
+Define
+$$
+\mathbf D=\varepsilon_0\mathbf E+\mathbf P.
+$$
+
+
+---
+
+***Electric field intensity $\mathbf E$***
+
+Gauss's law for $\mathbf E$ is
+$$
+\boxed{
+\nabla\cdot\mathbf E
+=
+\frac{\rho_{\text{total}}}{\varepsilon_0}
+}
+$$
+where
+$$
+\rho_{\text{total}}
+=
+\rho_{\text{free}}+\rho_{\text{bound}}.
+$$
+Therefore, $\mathbf E$ is determined by all charges:
+
+- externally supplied free charges,
+- polarization-induced bound charges.
+
+In integral form,
+$$
+\oint_S \mathbf E\cdot d\mathbf S
+=
+\frac{Q_{\text{total,enclosed}}}{\varepsilon_0}.
+$$
+
+---
+
+***Electric flux density $\mathbf D$***
+
+Gauss's law for $\mathbf D$ is
+$$
+\boxed{
+\nabla\cdot\mathbf D=\rho_{\text{free}}
+}
+$$
+or
+$$
+\boxed{
+\oint_S\mathbf D\cdot d\mathbf S
+=
+Q_{\text{free,enclosed}}
+}
+$$
+Thus, $\mathbf D$ is constructed so that dielectric bound charge is absorbed into the constitutive relation
+$$
+\mathbf D=\varepsilon_0\mathbf E+\mathbf P.
+$$
+It therefore relates directly only to free charge
+
+
+
+### Gauss's law for $\mathbf{E}$ & Gauss's law for $\mathbf{D}$
+
+$$
+\boxed{
+\begin{aligned}
+\nabla\cdot\mathbf E
+&=\frac{\rho_{\text{total}}}{\varepsilon_0},
+\\[4pt]
+\nabla\cdot\mathbf D
+&=\rho_{\text{free}}.
+\end{aligned}
+}
+$$
+
+So when a textbook writes
+$$
+\oint_S\mathbf D\cdot d\mathbf S
+=
+\int_V\rho_v\,dV,
+$$
+the symbol $\rho_v$ normally means
+$$
+\boxed{\rho_v=\rho_{v,\text{free}}}.
+$$
+But when it writes
+$$
+\oint_S\mathbf E\cdot d\mathbf S
+=
+\frac{1}{\varepsilon_0}\int_V\rho_v\,dV,
+$$
+then $\rho_v$ means the **total volume-charge density**, unless the context explicitly assumes vacuum or no polarization
+
+
+
 ## Magnetostatics
 
 ***Magnetostatics*** is the study of magnetic fields in systems where the **currents are steady** (not changing with time)
 
 ![image-20260321111009923](em/image-20260321111009923.png)
 
-### Magnetic Field Intensity($H$) & Magnetic Flux Density($B$)
-
-*TODO* &#128197;
 
 
+### Relationship between $\mathbf B$ and $\mathbf H$
+
+The central distinction is
+$$
+\boxed{
+\mathbf H\text{ tracks the free-current excitation, while }
+\mathbf B\text{ is the resulting total magnetic flux density.}
+}
+$$
+
+
+The general macroscopic relation is
+$$
+\boxed{
+\mathbf B=\mu_0\left(\mathbf H+\mathbf M\right)
+}
+$$
+where
+
+- $\mathbf M$ is the magnetization density of the material,
+- $\mu_0\mathbf H$ represents the part separated from material magnetization,
+- $\mu_0\mathbf M$ is the contribution caused by magnetic dipoles inside the material.
+
+Therefore,
+$$
+\boxed{
+\mathbf H=\frac{\mathbf B}{\mu_0}-\mathbf M
+}.
+$$
+In vacuum
+
+There is no material magnetization:
+$$
+\mathbf M=0.
+$$
+Hence,
+$$
+\boxed{\mathbf B=\mu_0\mathbf H}.
+$$
+In a linear, isotropic material
+
+If
+$$
+\mathbf M=\chi_m\mathbf H,
+$$
+then
+$$
+\mathbf B
+=
+\mu_0(1+\chi_m)\mathbf H.
+$$
+Define
+$$
+\mu_r=1+\chi_m,
+\qquad
+\mu=\mu_0\mu_r.
+$$
+Then
+$$
+\boxed{\mathbf B=\mu\mathbf H}.
+$$
+
+
+---
 
 
 
-## Magnetic Potential
+Suppose a coil carries a free current $I$.
 
-### Magnetic Scalar Potential
+The free current produces an $\mathbf H$ field. If a magnetic material is placed inside the coil, the material becomes magnetized:
+$$
+I_{\mathrm{free}}
+\longrightarrow
+\mathbf H
+\longrightarrow
+\mathbf M.
+$$
+The resulting total magnetic flux density is
+$$
+\mathbf B=\mu_0(\mathbf H+\mathbf M).
+$$
+Therefore:
+$$
+\boxed{
+\mathbf H
+\text{ is related to the applied free current}
+}
+$$
+while
+$$
+\boxed{
+\mathbf B
+\text{ includes both the applied field and the material response}.
+}
+$$
+For the same coil current, $\mathbf H$ may remain approximately the same, but inserting a high-permeability core can greatly increase $\mathbf B$.
 
-*TODO* &#128197;
 
-### Magnetic Vector Potential
 
-*TODO* &#128197;
+
+
+### Magnetic field intensity $\mathbf H$
+
+It is introduced to describe magnetic fields in matter while separating the material’s magnetization from externally supplied, or free, currents.
+
+The Maxwell–Ampère law is
+$$
+\boxed{
+\nabla\times\mathbf H
+=
+\mathbf J_{\mathrm{free}}
++
+\frac{\partial\mathbf D}{\partial t}
+}
+$$
+or, in integral form,
+$$
+\boxed{
+\oint_C\mathbf H\cdot d\mathbf l
+=
+I_{\mathrm{free}}
++
+\int_S\frac{\partial\mathbf D}{\partial t}\cdot d\mathbf S
+}.
+$$
+Thus, the circulation of $\mathbf H$ is associated with free current.
+
+
+
+### Magnetic Flux Density $\mathbf B$
+
+$\mathbf B$ determines the magnetic force on a moving charge.
+
+It also defines magnetic flux:
+$$
+\boxed{\Phi_B=\int_S\mathbf B\cdot d\mathbf S}
+$$
+and appears in Faraday's law:
+$$
+\oint_C\mathbf E\cdot d\mathbf l
+=
+-\frac{d}{dt}
+\int_S\mathbf B\cdot d\mathbf S.
+$$
+Gauss's law for magnetism is
+$$
+\boxed{\nabla\cdot\mathbf B=0}
+$$
+or
+$$
+\boxed{\oint_S\mathbf B\cdot d\mathbf S=0}.
+$$
+This is universally valid because magnetic monopoles have not been observed.
 
 
 
 ## Electrodynamics
 
 ### Faraday's Law
+
+![image-20260711164849672](em/image-20260711164849672.png)
+
+---
 
 ![image-20260321145115368](em/image-20260321145115368.png)
 
@@ -192,11 +476,13 @@ $$
 
 
 
-### Ampère's law with Maxwell's correction
-
-***displacement current***
+### Ampère's law w/ Maxwell's correction
 
 ![image-20260321164106898](em/image-20260321164106898.png)
+
+
+
+
 
 ---
 
@@ -204,13 +490,87 @@ $$
 
 ![image-20260321164637168](em/image-20260321164637168.png)
 
+![image-20260711164921757](em/image-20260711164921757.png)
+
 ---
 
-> [[Google AI Mode](https://share.google/aimode/LLoGCyUvLnsbjhu4R)]
 
-![image-20260321165601743](em/image-20260321165601743.png)
 
-![image-20260321165747417](em/image-20260321165747417.png)
+$$
+\boxed{
+\begin{aligned}
+\oint\mathbf H\cdot d\mathbf l
+&=
+I+\int\frac{\partial\mathbf D}{\partial t}\cdot d\mathbf S,
+\\[4pt]
+\nabla\times\mathbf B
+&=
+\mu_0\mathbf J+
+\mu_0\varepsilon_0\frac{\partial\mathbf E}{\partial t}
+\end{aligned}
+}
+$$
+are equivalent in vacuum
+$$
+\boxed{
+\begin{aligned}
+\mathbf H,\mathbf D\text{ form}
+&\rightarrow \mathbf J_{\mathrm{free}},\\
+\mathbf B,\mathbf E\text{ form}
+&\rightarrow \mathbf J_{\mathrm{total}}.
+\end{aligned}
+}
+$$
+
+
+If
+$$
+\mathbf B=\mu\mathbf H,
+\qquad
+\mathbf D=\varepsilon\mathbf E,
+$$
+with constant $\mu$ and $\varepsilon$, then
+$$
+\boxed{
+\oint_C\mathbf B\cdot d\mathbf l
+=
+\mu I_{\mathrm{free}}
++
+\mu\varepsilon
+\int_S
+\frac{\partial\mathbf E}{\partial t}\cdot d\mathbf S
+}
+$$
+
+
+### Gauss’s law for magnetism
+
+The universally valid equation is
+$$
+\boxed{\oint_S \mathbf B\cdot d\mathbf S=0}
+$$
+or
+$$
+\nabla\cdot\mathbf B=0.
+$$
+This expresses that magnetic field lines have no beginning or end—there are no observed magnetic monopoles
+
+
+
+---
+
+
+$$
+\boxed{
+\oint_S\mathbf B\cdot d\mathbf S=0
+\text{ always, while }
+\oint_S\mathbf H\cdot d\mathbf S=0
+\text{ only under additional conditions.}
+}
+$$
+i.e. $\mathbf B=\mu\mathbf H$
+
+
 
 ## Field Inside and Outside a Current-Carrying Wire
 

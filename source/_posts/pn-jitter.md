@@ -7,6 +7,8 @@ categories:
 mathjax: true
 ---
 
+In general, **phase noise** refers **only to the random fluctuations** of the phase or the zero crossings, whereas **jitter** may contain a **deterministic (periodic)** component
+
 
 
 ## Phase Noise on $log$ scale

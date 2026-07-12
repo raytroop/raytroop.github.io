@@ -9,6 +9,38 @@ mathjax: true
 
 
 
+## Noise Analysis
+
+
+
+The `% / Total` column in the noise summary table always displays values in $V^{2}$ contribution, regardless of whether `noise unit` option is set to `V` or `V^2`
+
+![image-20260522235415049](ade/image-20260522235415049.png)
+
+
+
+---
+
+---
+
+`result browser`  of instance show **noise contribution**, which is same with `noise summary`
+
+![image-20251122221347841](ade/image-20251122221347841.png)
+
+
+
+---
+
+---
+
+**res isnoisy** default **yes**
+
+![image-20251122233106948](ade/image-20251122233106948.png)
+
+![image-20251122232744311](ade/image-20251122232744311.png)
+
+
+
 ## layout porting
 
 streamout in old process -> streamin in new process with layermap, format in below
@@ -61,14 +93,6 @@ Note: poles/zeros in simulation log are in `Hz` instead of `rad/s`
 ![image-20260525200417622](ade/image-20260525200417622.png)
 
 ![image-20260525200504390](ade/image-20260525200504390.png)
-
-## Noise Summary
-
-The `% / Total` column in the noise summary table always displays values in $V^{2}$ contribution, regardless of whether `noise unit` option is set to `V` or `V^2`
-
-![image-20260522235415049](ade/image-20260522235415049.png)
-
-
 
 
 
@@ -148,20 +172,6 @@ This analysis just use **harmonic 0** transfer function in pac analysis, which h
 ![image-20260423221935969](ade/image-20260423221935969.png)
 
 
-
-## noise analysis
-
-note `result browser` show noise contribution, which is same with `noise summary`
-
-![image-20251122221347841](ade/image-20251122221347841.png)
-
-
-
-## res isnoisy
-
-![image-20251122233106948](ade/image-20251122233106948.png)
-
-![image-20251122232744311](ade/image-20251122232744311.png)
 
 
 

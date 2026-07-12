@@ -11,9 +11,7 @@ mathjax: true
 
 > M. Garampazzi *et al*., "An Intuitive Analysis of Phase Noise Fundamental Limits Suitable for Benchmarking LC Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 3, pp. 635-645, March 2014 [[https://sci-hub.jp/10.1109/JSSC.2014.2301760](https://sci-hub.jp/10.1109/JSSC.2014.2301760)]
 
-
-
-![image-20260705080627584](lc-osc/image-20260705080627584.png)
+![image-20260712003208439](lc-osc/image-20260712003208439.png)
 
 In general, FOM varies with carrier offset, but when reported as a **single number** it is assumed that FOM was calculated using measurements from the **thermal noise region** where the FOM plateaus
 

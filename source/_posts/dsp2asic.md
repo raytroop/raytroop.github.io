@@ -1,5 +1,5 @@
 ---
-title: VLSI Digital Signal Processing 
+title: DSP to ASIC
 date: 2025-11-11 07:29:09
 tags:
 categories:
@@ -15,24 +15,24 @@ mathjax: true
 
 ***integers***
 
-![image-20260207093700537](rtl-dsp/image-20260207093700537.png)
+![image-20260207093700537](dsp2asic/image-20260207093700537.png)
 
 ***rational number***
 
-![image-20260207094834081](rtl-dsp/image-20260207094834081.png)
+![image-20260207094834081](dsp2asic/image-20260207094834081.png)
 
-![image-20260206230528138](rtl-dsp/image-20260206230528138.png)
+![image-20260206230528138](dsp2asic/image-20260206230528138.png)
 
 
 ### 2's Complement
 
 > [[https://bpb-us-w2.wpmucdn.com/sites.coecis.cornell.edu/dist/4/81/files/2019/06/4740_lecture23ALU-circuits.pdf](https://bpb-us-w2.wpmucdn.com/sites.coecis.cornell.edu/dist/4/81/files/2019/06/4740_lecture23ALU-circuits.pdf)]
 
-![image-20260207085804825](rtl-dsp/image-20260207085804825.png)
+![image-20260207085804825](dsp2asic/image-20260207085804825.png)
 
 > Google AI Mode [[https://share.google/aimode/KsxxgDF0vAdhAIgm0](https://share.google/aimode/KsxxgDF0vAdhAIgm0)]
 
-![image-20260207094125000](rtl-dsp/image-20260207094125000.png)
+![image-20260207094125000](dsp2asic/image-20260207094125000.png)
 
 
 
@@ -64,7 +64,7 @@ $$
 
 ### Fixed Point Number
 
-![image-20260207095601437](rtl-dsp/image-20260207095601437.png)
+![image-20260207095601437](dsp2asic/image-20260207095601437.png)
 
 
 
@@ -75,15 +75,15 @@ $$
 >
 > IEEE Standard for Floating-Point Arithmetic [[https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf](https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf)]
 
-![image-20260207101850895](rtl-dsp/image-20260207101850895.png)
+![image-20260207101850895](dsp2asic/image-20260207101850895.png)
 
-![image-20260207104005414](rtl-dsp/image-20260207104005414.png)
+![image-20260207104005414](dsp2asic/image-20260207104005414.png)
 
 |                                      |                                |                                                              |
 | ------------------------------------ | ------------------------------ | ------------------------------------------------------------ |
-| **32-bit floating-point version 1**  | store *implicit leading one*   | ![image-20260207102121844](rtl-dsp/image-20260207102121844.png) |
-| **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](rtl-dsp/image-20260207102147689.png) |
-| **IEEE 754 floating point notation** | *biased exponent*              | ![image-20260207102210468](rtl-dsp/image-20260207102210468.png) |
+| **32-bit floating-point version 1**  | store *implicit leading one*   | ![image-20260207102121844](dsp2asic/image-20260207102121844.png) |
+| **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](dsp2asic/image-20260207102147689.png) |
+| **IEEE 754 floating point notation** | *biased exponent*              | ![image-20260207102210468](dsp2asic/image-20260207102210468.png) |
 
 > [[https://share.google/aimode/yY2R2EQCTsP9BlMNx](https://share.google/aimode/yY2R2EQCTsP9BlMNx)]
 
@@ -92,7 +92,7 @@ $$
 | **Single Precision (32-bit)** | 8             | **127**        | -126 to +127        |
 | **Double Precision (64-bit)** | 11            | **1023**       | -1022 to +1023      |
 
-![image-20260207103557952](rtl-dsp/image-20260207103557952.png)
+![image-20260207103557952](dsp2asic/image-20260207103557952.png)
 
 
 
@@ -229,7 +229,7 @@ filtered = 1*x[n]   + 3*x[n-1] + 3*x[n-2] + 1*x[n-3]
 | `x2`      | x[n-2]           | coeff 3    |
 | `x3`      | x[n-3]           | coeff 1    |
 
-![image-20260619230018566](rtl-dsp/image-20260619230018566.png)
+![image-20260619230018566](dsp2asic/image-20260619230018566.png)
 
 
 
@@ -276,3 +276,6 @@ A. Antoniou, "On the roots of digital signal processing. Part I," in *IEEE Circu
 —, "Feature - On the roots of digital signal processing - Part II," in *IEEE Circuits and Systems Magazine*, vol. 7, no. 4, pp. 8-19, Fourth Quarter 2007
 
 Hideo Okawara's Mixed Signal Lecture Series [[https://tomverbeure.github.io/2024/01/06/Hideo-Okawara-Mixed-Signal-Lecture-Series.html](https://tomverbeure.github.io/2024/01/06/Hideo-Okawara-Mixed-Signal-Lecture-Series.html)]
+
+Jeffrey Walling, DSP to ASIC Block [[https://youtube.com/playlist?list=PLP4ZmM6GPueNEdnLhgkdr8_X8dSizUwMs](https://youtube.com/playlist?list=PLP4ZmM6GPueNEdnLhgkdr8_X8dSizUwMs)]
+

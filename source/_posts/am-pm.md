@@ -502,7 +502,22 @@ print(n_tot)    # -137.8755739720566
 
 ![image-20251105233926270](am-pm/image-20251105233926270.png)
 
+### Direct-spectrum method
 
+> Paul Denisowski, Test & measurement expert, Phase noise and spectrum analyzer resolution bandwidth [[https://www.rohde-schwarz.com/us/products/test-and-measurement/analyzers/signal-and-spectrum-analyzers/spectrum-analysis-method-for-measuring-phase-noise_258374.html](https://www.rohde-schwarz.com/us/products/test-and-measurement/analyzers/signal-and-spectrum-analyzers/spectrum-analysis-method-for-measuring-phase-noise_258374.html)]
+
+two measurements are made: **the power of the carrier** and **the power spectral density (PSD) of the oscillator noise at a specified offset frequency** and referenced to the carrier power
+
+
+
+A swept spectrum analyzer never displays the true PSD; it displays the **input spectrum convolved with the RBW filter**
+
+- The carrier is measured once with a comfortably wide RBW — a CW peak level is independent of RBW as long as the line fits inside the filter
+-  then each offset region is measured in segments with its own narrow, offset-scaled RBW, normalized to 1 Hz
+
+---
+
+The classical definition is convenient when measuring phase noise with a spectrum analyzer, but it **combines both amplitude and phase noise effects**. It also has limitations for signals that have high phase noise.
 
 ## reference
 

@@ -156,6 +156,10 @@ $$
 
 *TODO* &#128197;
 
+![image-20260711192703566](em/image-20260711192703566.png)
+
+
+
 
 
 ## Electric Fields
@@ -636,3 +640,5 @@ David Smith, Electromagnetic Theory for Complete Idiot, 2021
 谢处方、饶克谨、杨显清等.《电磁场与电磁波》（第五版），高等教育出. 版社，2019.
 
 Scott Hughes. Spring 2005 8.022: Electricity & Magnetism [[https://web.mit.edu/sahughes/www/8.022/](https://web.mit.edu/sahughes/www/8.022/)]
+
+Aditya Varma Muppala, EE 210 - Applied Electromagnetic Theory [[https://adityamuppala.github.io/teaching210/](https://adityamuppala.github.io/teaching210/)]

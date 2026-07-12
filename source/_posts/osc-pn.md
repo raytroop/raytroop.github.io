@@ -172,6 +172,14 @@ Assuming voltage noise tone $(\omega_0+\omega_m)$  and $(\omega_0-\omega_m)$ are
 
 ![image-20260623012755556](osc-pn/image-20260623012755556.png)
 
+The **peak magnitude** of the ISF,
+$$
+\Gamma_{\max}=\max_\theta |\Gamma(\theta)|,
+$$
+can be **greater than 1, equal to 1, or less than 1**.
+
+A value $\Gamma>1$ therefore does **not** mean "more than 100%." It simply means that the oscillator has relatively high phase sensitivity at that particular phase.
+
 ![image-20260621110835891](osc-pn/image-20260621110835891.png)
 
 
@@ -197,6 +205,8 @@ Therefore, the **ISF of an ideal parallel LC resonator** can be expressed as $\b
 ![image-20260622231558562](osc-pn/image-20260622231558562.png)
 
 ![image-20260623014318589](osc-pn/image-20260623014318589.png)
+
+
 
 ###  White-noise Folding
 
@@ -509,21 +519,36 @@ S_{I,PN} = S_{nI,T} \cdot \mathcal{D}\cdot \mathcal{h}^2 \cdot \frac{1}{2} = S_{
 $$
 The commutation folds  tail noise as **a (near) single sideband**, which is equivalent to equal AM and PM — and only the PM half counts toward phase noise
 
-***Noise around DC and  $\boxed{2\omega_0 \pm\omega_m}$ dominate phase noise due to $|c_1|, |c_3| \gg |c_{2m+1}| \space\space\space\space \forall m>1$***
+***Noise around $\boxed{2\omega_0 \pm\omega_m}$ dominate phase noise due to $|c_1|, |c_3| \gg |c_{2m+1}| \space\space\space\space \forall m>1$***
 
 ![image-20260620234423406](osc-pn/image-20260620234423406.png)
+
+
+
+
 
 ---
 
 > E. Hegazi, H. Sjoland and A. Abidi, "A filtering technique to lower oscillator phase noise," *2001 IEEE International Solid-State Circuits Conference. Digest of Technical Papers. ISSCC (Cat. No.01CH37177)*, San Francisco, CA, USA, 2001 [[paper](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/D23_4.pdf), [slides](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/SS23_4.pdf)]
 
-![image-20260624165720693](osc-pn/image-20260624165720693.png)
+![image-20260711204714462](osc-pn/image-20260711204714462.png)
+
+In the first-order, **noise around DC (flicker)** is upconverted as a pair of correlated, symmetric sidebands around the carrier — which is **pure AM**
+
+![flicker_upconversion_spectrum](osc-pn/flicker_upconversion_spectrum.png)
+
+
 
 ---
 
 > J. J. Rael and A. A. Abidi, "Physical processes of phase noise in differential LC oscillators," IEEE Custom Integrated Circuits Conference (CICC), 2000 [[https://people.engr.tamu.edu/spalermo/ecen620/physical_processes_pn_diff_lc_osc_rael_cicc_2000.pdf](https://people.engr.tamu.edu/spalermo/ecen620/physical_processes_pn_diff_lc_osc_rael_cicc_2000.pdf)]
 
 ![image-20260702220509880](osc-pn/image-20260702220509880.png)
+
+*practical outcome* once second-order conversion effects are included
+
+- flicker near DC &#8594; AM/bias modulation &#8594; converted to FM &#8594; 1/f<sup>3</sup> PN (the purple arrow in its spectrum)
+- while thermal noise at 2f<sub>osc</sub> &#8594; direct PN &#8594;  1/f<sup>2</sup> PN (the blue arrow)
 
 
 
@@ -795,15 +820,13 @@ Finally, we obtain
 
 ## ISF & PPV simulation
 
-> David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
+> Hu, Yizhe, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
 >
-> Hu, Yizhe. (2019). A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF). 10.13140/RG.2.2.32151.60323. [[link](https://www.researchgate.net/publication/331072119_A_Simulation_Technique_of_Impulse_Sensitivity_Function_ISF_Based_on_Periodic_Transfer_Function_PXF)]
+> —. (2019). A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF). 10.13140/RG.2.2.32151.60323. [[link](https://www.researchgate.net/publication/331072119_A_Simulation_Technique_of_Impulse_Sensitivity_Function_ISF_Based_on_Periodic_Transfer_Function_PXF)]
 >
-> —, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
+> S. Levantino, P. Maffezzoni, F. Pepe, A. Bonfanti, C. Samori and A. L. Lacaita, "Efficient Calculation of the Impulse Sensitivity Function in Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 59, no. 10, pp. 628-632, Oct. 2012, [[https://sci-hub.jp/10.1109/TCSII.2012.2208679](https://sci-hub.jp/10.1109/TCSII.2012.2208679)]
 >
-> Aditya Varma Muppala, ISF Simulation in Cadence Using Transient Analysis | Oscillators 07 | MMIC 12 [[https://youtu.be/yiMn2rCtTXY](https://youtu.be/yiMn2rCtTXY)]
->
-> Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
+> S. Levantino and P. Maffezzoni, "Computing the Perturbation Projection Vector of Oscillators via Frequency Domain Analysis," in IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, vol. 31, no. 10, pp. 1499-1507, Oct. 2012, [[https://sci-hub.jp/10.1109/TCAD.2012.2194493](https://sci-hub.jp/10.1109/TCAD.2012.2194493)]
 >
 > S. Galeone and M. P. Kennedy, "A comparison of simulation strategies for estimating phase noise in oscillators," 2017 13th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME), Giardini Naxos - Taormina, Italy, 2017
 >
@@ -815,30 +838,211 @@ Finally, we obtain
 
 ### ISF using Transient Analysis
 
-![image-20241016211020230](osc-pn/image-20241016211020230.png)
+> David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
 
-![image-20241016211101204](osc-pn/image-20241016211101204.png)
+an injected current impulse with charge $\Delta q=\int i(t)\,dt$, produces the permanent phase shift
+$$
+\Delta\phi
+=
+\Gamma(\omega_0\tau)\frac{\Delta q}{q_{\max}}.
+$$
+Therefore,
+$$
+\Gamma(\omega_0\tau)
+=
+\Delta\phi \frac{q_{\max}}{\Delta q}.
+$$
 
-![image-20241016211115630](osc-pn/image-20241016211115630.png)
+
+---
+
+---
+
+![image-20260712130019636](osc-pn/image-20260712130019636.png)
+$$
+\boxed{
+\text{Same injected charge}
+\quad\Longrightarrow\quad
+\Delta\phi\propto\frac{\Gamma}{q_{\max}}
+}
+$$
+So:
+
+- To compare **actual robustness against equal charge impulses**, compare $\Delta\phi/\Delta q$
+- To compare the formal dimensionless ISFs, multiply each simulated phase response by its own $q_{\max}/\Delta q$
+
+---
+
+---
+
+> Aditya Varma Muppala, ISF Simulation in Cadence Using Transient Analysis | Oscillators 07 | MMIC 12 [[https://youtu.be/yiMn2rCtTXY](https://youtu.be/yiMn2rCtTXY)]
+>
+
+$$
+h_{\phi}(t,{\tau})
+=
+\frac{\Gamma(\omega_0{\tau})}{q_{\max}}
+u(t-\tau)
+$$
+
+Therefore,
+$$
+\boxed{
+\Gamma(\omega_0{\tau})
+=
+\frac{\Delta t}{T_0}
+\cdot 2\pi
+\cdot
+\frac{q_{\max}}{\Delta q}
+}
+$$
+
+1. $\Delta q$ should be:
+   - not too small $\rightarrow$ numerical error
+   - not too large $\rightarrow$ nonlinearity
+2. $\Delta t$ should be measured after the amplitude settles down
+    (steady-state solution).
+3. The impulse should be injected after the oscillator stabilizes.
+4. The simulation step size used to measure $\Delta t$ should be small.
+5. The transient-simulation error tolerance should be small.
+
+Use `cross` function to find zero crossing when impulse is off. Set significant digits to 16 and note down the value.
+$$
+T_{i=0}
+=
+15.62239156\times10^{-9}
+=
+15.622\times10^{-9}
++
+0.39156\times10^{-12}
+$$
+
+- Subtract it from the `cross` output. ADE output truncates it, so break it up into different unit scales.
+- Check that the output is approximately zero before running sweeps.
+
+![image-20260712152742440](osc-pn/image-20260712152742440.png)
 
 
 
-> To compare the ring oscillator and VCO the **total injected charge** to both should be the **same**
+***Oscillator Injection Linearity***
 
+![image-20260712175756081](osc-pn/image-20260712175756081.png)
+
+***time shift by sweeping current pulse delay***
+
+![image-20260712172056648](osc-pn/image-20260712172056648.png)
+
+
+
+---
+
+> Aditya Varma Muppala, Noise Modulation Function (**NMF**) Simulation in Cadence | Oscillators 08 | MMIC 13 [[https://youtu.be/CvcLG9cSreg](https://youtu.be/CvcLG9cSreg)] [[code](https://drive.google.com/file/d/1kShP5BChj7fnRMTs2qAHs-InUnsp5-r7/view?usp=sharing)]
+
+
+
+![image-20260712162600802](osc-pn/image-20260712162600802.png)
+$$
+\boxed{I_n(t)=4kT\gamma \cdot \textcolor{red}{g_m(t)} = 4kT\gamma \cdot \textcolor{red}{\alpha (t)g_{m,0}}}
+$$
 
 
 ### ISF using PSS + PXF
 
-*TODO* &#128197;
-
-
-
-### PPV using PSS + PXF
+> Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
 
 *TODO* &#128197;
 
 
 
+
+
+### PPV using PSS inbuilt solver
+
+> Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
+
+*TODO* &#128197;
+
+
+
+
+
+
+
+## flicker noise In circuit-noise analysis
+
+its power spectral density is approximately
+$$
+S_{i,1/f}(f)=\frac{K}{|f|}.
+$$
+**A large amount of its power lies at low frequencies.** Therefore, compared with a GHz oscillation period $T_0$, the flicker-noise value changes very little during one cycle.
+
+For a flicker-noise component at frequency $f_m$,
+$$
+f_m T_0\ll 1
+$$
+implies
+$$
+i_{1/f}(t+T_0)\approx i_{1/f}(t).
+$$
+Thus, if the noise current is positive at $t_0$, it will probably remain positive throughout the following oscillator cycle:
+$$
+i_{1/f}(t_0+\tau)\approx i_{1/f}(t_0),
+\qquad 0\leq \tau<T_0.
+$$
+In circuit-noise analysis, the underlying flicker-noise source is commonly treated as approximately **wide-sense stationary**:
+$$
+R_x(t_1,t_2)=R_x(t_1-t_2).
+$$
+This is reasonable when the device bias is constant and the measurement interval is finite.
+
+The phase perturbations may cancel or leave a nonzero residual:
+$$
+\Delta\phi_{\text{cycle}}
+\propto
+\int_{0}^{T_0}
+\Gamma(\omega_0 t)\,
+i_{1/f,\mathrm{cyclo}}(t)\,dt.
+$$
+Since the low-frequency noise is almost constant over $T_0$,
+$$
+\Delta\phi_{\text{cycle}}
+\approx
+x_{1/f}(t_0)
+\int_{0}^{T_0}
+\Gamma(\omega_0 t)a(t)\,dt
+$$
+Therefore, flicker-noise upconversion depends on whether the phase-delay and phase-advance contributions cancel over one period. A nonzero weighted average produces low-frequency fluctuations in oscillator frequency, which commonly appear as the $1/f^3$ phase-noise region.
+
+Define
+
+$$
+\Gamma_{\mathrm{eff,DC}}\equiv \frac{1}{T_0}\int_0^{T_0}\Gamma(\omega_0t)a(t)\,dt
+$$
+
+Then
+$$
+\Delta\phi_{\text{cycle}}
+\approx
+\frac{x_{1/f}(t_0)}{q_{\max}}
+\Gamma_{\mathrm{eff,DC}}T_0.
+$$
+If $x_{1/f}$ is already normalized by $q_{\max}$, the $1/q_{\max}$ factor can be omitted.
+
+Therefore,
+$$
+\boxed{\Gamma_{\mathrm{eff,DC}}=0
+\quad\Longrightarrow\quad
+\Delta\phi_{\text{cycle}}\approx 0}
+$$
+for quasistatic flicker noise. Physically, the phase-delay contribution on one edge exactly cancels the phase-advance contribution on the other edge.nce,
+$$
+\boxed{
+\Gamma_{\mathrm{eff,DC}}=0
+\Rightarrow
+\text{no first-order direct }1/f\text{-to-}1/f^3
+\text{ phase-noise upconversion from that source.}
+}
+$$
 
 
 ## Mathematical Preliminaries

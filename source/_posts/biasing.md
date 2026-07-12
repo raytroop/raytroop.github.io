@@ -17,6 +17,22 @@ mathjax: true
 
 
 
+## noise in current mirror
+
+Noise of ref MOS is amplified by the current mirror's gain
+
+![image-20260712093027006](biasing/image-20260712093027006.png)
+
+Due to M0 is biased by current source, we probe gate voltage instead of current
+
+![image-20260712090157565](biasing/image-20260712090157565.png)
+
+`result browser`  of instance show **noise contribution**, which is same with `noise summary`
+
+![image-20260712092100874](biasing/image-20260712092100874.png)
+
+
+
 ## current mirror with source follower
 
 ![icurrent_sf.drawio](biasing/icurrent_sf.drawio.svg)

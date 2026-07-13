@@ -654,7 +654,7 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 ![image-20250815234653864](osc-pn/image-20250815234653864.png)
 
-## Razavi's PN Analysis
+## Razavi's PN
 
 ![image-20260628111202330](osc-pn/image-20260628111202330.png)
 
@@ -674,11 +674,27 @@ $R_{nInQ}(\tau)=-R_{nQnI}(\tau)$ demonstrate  $n_I $ and $n_Q $ are **uncorrelat
 
 
 
+
+
+## Abidi's PN
+
+> A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]
+>
+> A. Mirzaei and A. A. Abidi, "The Spectrum of a Noisy Free-Running Oscillator Explained by Random Frequency Pulling," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 57, no. 3, pp. 642-653, March 2010 [[https://sci-hub.jp/10.1109/TCSI.2009.2024970](https://sci-hub.jp/10.1109/TCSI.2009.2024970)]
+>
+> J. J. Rael and A. A. Abidi, "Physical processes of phase noise in differential LC oscillators," IEEE Custom Integrated Circuits Conference (CICC), 2000 [[https://people.engr.tamu.edu/spalermo/ecen620/physical_processes_pn_diff_lc_osc_rael_cicc_2000.pdf](https://people.engr.tamu.edu/spalermo/ecen620/physical_processes_pn_diff_lc_osc_rael_cicc_2000.pdf)]
+
+
+
+![image-20260712235956996](osc-pn/image-20260712235956996.png)
+
+
+
 ## Bank's General Result
 
 > J. Bank, "A harmonic-oscillator design methodology based on describing functions," Ph.D. dissertation, Dept. Signals Syst., Sch. Elect. Eng., Chalmers Univ. Techn., Chalmers, Sweden, 2006. [[https://publications.lib.chalmers.se/records/fulltext/17376.pdf](https://publications.lib.chalmers.se/records/fulltext/17376.pdf)]
 
-
+*TODO* &#128197;
 
 
 
@@ -1078,8 +1094,6 @@ Pietro Andreani. ISSCC 2011 T1: Integrated LC oscillators
 —. ESSCIRC 2019 Tutorials: RF Harmonic Oscillators Integrated in Silicon Technologies [[https://youtu.be/k1I9nP9eEHE](https://youtu.be/k1I9nP9eEHE)]
 
 —. "Harmonic Oscillators in CMOS—A Tutorial Overview," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 2-17, 2021 [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9530265)]
-
-A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]
 
 C. Samori, ISSCC2016 T1 "Tutorial: Understanding Phase Noise in LC VCOs"
 

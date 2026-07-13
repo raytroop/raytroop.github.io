@@ -330,15 +330,15 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 
 
-## Startup Behavior
+## Startup & Geff
+
+***effective or large signal conductance***
 
 ![image-20260708232713198](lc-osc/image-20260708232713198.png)
 
 Note that the gnr frequency is twice of oscillator voltage frequency
 
-### G<sub>eff</sub> - large signal conductance
-
-***effective or large signal conductance***
+---
 
 ![image-20260705174217090](lc-osc/image-20260705174217090.png)
 

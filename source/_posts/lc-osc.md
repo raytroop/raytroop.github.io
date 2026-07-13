@@ -408,6 +408,77 @@ $$
 
 Because the magnitude of $G_\text{nr}[2]$ is comparable to that of $G_\text{nr}[0]$, $G_\text{nr}[2]$ must be retained
 
+![gnr_fourier_verification](lc-osc/gnr_fourier_verification.png)
+
+
+
+---
+
+***[[credits to Claude Fable 6, GPT 5.6 Sol](https://gist.github.com/raytroop/72608dac30e7b2da6d86745d9ac10e3e)]***
+
+![image-20260714020421092](lc-osc/image-20260714020421092.png)
+
+The implemented equation is
+
+$$
+i(v)=-g_{m0}v\,e^{s x^2}\left[\max(1-x^2,0)\right]^2, \qquad x=\frac{v}{v_{\mathrm{zero}}}
+$$
+
+where $s$ is `shape`.
+
+Parameter meanings:
+
+- `v`: differential voltage in volts.
+- `gm0`: magnitude of the small-signal negative conductance in siemens.
+- `vzero`: voltage where current reaches zero.
+- `shape`: dimensionless parameter controlling where the current peak occurs.
+
+At $v=0$, $\left.\frac{di}{dv}\right|_{v=0}=-g_{m0}$
+
+```python
+VPK, IPK, VZERO = 0.45, 20.73e-3, 0.65
+vzero = VZERO
+xpk = VPK/vzero
+shape = 2.0/(1.0 - xpk*xpk) - 1.0/(2.0*xpk*xpk)
+gm0 = IPK/(VPK*np.exp(shape*xpk*xpk)*(1.0 - xpk*xpk)**2)
+
+
+
+gm0, vzero, shape = 44.447e-3, 650e-3, 2.79770
+
+def f(v):                                       # i_nr(v)
+    x = np.asarray(v)/vzero
+    window = np.maximum(1.0 - x*x, 0.0)
+    ex = np.exp(shape*np.minimum(x*x, 1.0))
+    return -gm0*np.asarray(v)*ex*window*window
+
+def gd(v):                                      # g_nr(v) = di/dv
+    x = np.asarray(v)/vzero
+    window = np.maximum(1.0 - x*x, 0.0)
+    inside = np.abs(x) < 1.0
+    ex = np.exp(shape*np.minimum(x*x, 1.0))
+    value = -gm0*ex * (
+        window*window*(1.0 + 2.0*shape*x*x) - 4.0*x*x*window)
+    return np.where(inside, value, 0.0)
+
+
+# ---- one-cycle FFT sweep (pure sinusoid) ---------------------------------------
+Nfft = 8192
+th_fft = 2*np.pi*np.arange(Nfft)/Nfft    # one cycle; do not duplicate 2*pi
+
+def fft_series(A):
+    gq = gd(A*np.cos(th_fft))
+    C = np.fft.fft(gq)/Nfft              # C[k]: complex Fourier coefficient
+    C0 = C[0].real
+    C2mag = abs(C[2])
+    Geff_fft = C0 - C2mag
+    return C0, C2mag, Geff_fft
+```
+
+![image-20260714021830115](lc-osc/image-20260714021830115.png)
+
+
+
 ---
 
 ---

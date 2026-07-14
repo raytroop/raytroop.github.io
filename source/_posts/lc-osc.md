@@ -795,9 +795,50 @@ It is the **signed area-related quantity** swept in the $i$-$v$ plane **over one
 
 ### Groszkowski's Effect
 
+![image-20260628142136377](lc-osc/image-20260628142136377.png)
+
+
+indirect injection of flicker noise from the tail current source was analyzed by "Groszkowski effect" (different from the ISF theory). However it **fails** to explain the $1/f$ noise upconversion from the cross-coupled pair
+
+The Groszkowski effect relies on AM-to-FM conversion: **nonlinearities** make the oscillation frequency amplitude-dependent, so amplitude fluctuations are converted into frequency fluctuation
+
+$$
+\delta \omega
+=
+\frac{\partial \omega_0}{\partial A}\,
+\delta A.
+$$
+
+Thus, the flicker noise from the tail current source is converted into phase noise through the following sequence:
+
+$$
+\text{Tail }1/f\ \text{noise}
+\;\rightarrow\;
+\text{amplitude fluctuation}
+\;\rightarrow\;
+\text{frequency shift}
+\;\rightarrow\;
+\text{phase noise}.
+$$
+
+The oscillator phase is perturbed directly for for the cross-coupled pair
+
+$$
+\text{Cross-coupled }1/f\ \text{noise}
+\;\rightarrow\;
+\text{direct timing error}
+\;\rightarrow\;
+\text{phase noise}.
+$$
+
+Unlike the Groszkowski effect, this mechanism **does not rely on amplitude-to-frequency conversion**
+
+
+---
+
+
 > credits to *GPT-5.5 High*
 
-![image-20260628142136377](lc-osc/image-20260628142136377.png)
 
 **Groszkowski's effect** is an oscillator **frequency shift caused by harmonic content** in the oscillation waveform/current
 

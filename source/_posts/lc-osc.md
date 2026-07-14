@@ -414,7 +414,7 @@ Because the magnitude of $G_\text{nr}[2]$ is comparable to that of $G_\text{nr}[
 
 ---
 
-***[[credits to Claude Fable 6, GPT 5.6 Sol](https://gist.github.com/raytroop/72608dac30e7b2da6d86745d9ac10e3e)]***
+***[[credits to Claude Fable 5, GPT 5.6 Sol](https://gist.github.com/raytroop/72608dac30e7b2da6d86745d9ac10e3e)]***
 
 ![image-20260714020421092](lc-osc/image-20260714020421092.png)
 

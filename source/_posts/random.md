@@ -47,6 +47,24 @@ $$
 
 
 
+
+
+---
+
+***autocorrelation of a complex process***
+
+ Start from the definition of the (ensemble) autocorrelation of a complex process:
+$$
+R_n(\tau) = \big\langle\, n(t+\tau)\,\overline{n(t)}\,\big\rangle,
+$$
+where $\langle\cdot\rangle$ averages over the random phases. Substituting $n(t) = \sum_i N[i]e^{ji\omega_0 t}$ gives a double sum:
+$$
+R_n(\tau) = \sum_i \sum_k \big\langle N[i]\,\overline{N[k]}\big\rangle\, e^{j(i-k)\omega_0 t}\, e^{ji\omega_0 \tau}.
+$$
+Everything hinges on the correlation matrix $\langle N[i]\overline{N[k]}\rangle$, and there are two cases.
+
+
+
 ## Ergodicity
 
 ***ensemble autocorrelation*** and ***temporal autocorrelation (time autocorrelation)***

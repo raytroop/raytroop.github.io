@@ -70,6 +70,18 @@ Given $\color{blue}\Theta\sim U[0,2\pi]$, after ensemble averaging, the autocorr
 
 
 
+---
+
+***sinewaves discrete approximate for continuous white noise***
+
+> A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]
+
+
+
+
+
+
+
 ### modulated with deterministic cosine
 
 the carrier phase/time origin is fixed, not randomized, it not WSS but **cyclostationary**

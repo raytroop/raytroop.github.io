@@ -182,6 +182,16 @@ A value $\Gamma>1$ therefore does **not** mean "more than 100%." It simply means
 
 ![image-20260621110835891](osc-pn/image-20260621110835891.png)
 
+![image-20260716002214469](osc-pn/image-20260716002214469.png)
+
+
+
+**$\psi(t)$ is literally the instantaneous frequency deviation.** Check the dimensions: $i(t)/q_{max}$ has units of A/C = 1/s, and $\Gamma$ is dimensionless, so $\psi(t) = \Gamma(\omega_0 t)\,i(t)/q_{max}$ is in rad/s. The diagram is saying $d\phi/dt = \psi(t)$, i.e. $\phi(t) = \int_{-\infty}^{t}\psi(\tau)d\tau$. An ideal integrator has transfer function $1/j\Delta\omega$, so in power spectra:
+$$
+S_\phi(\Delta\omega) = \frac{S_\psi(\Delta\omega)}{\Delta\omega^2}
+$$
+That single block is the origin of *every* $1/\Delta\omega^2$ factor in phase noise theory — including the $(\omega_0/2Q\Delta\omega)^2$ term in Leeson's equation
+
 
 
 ### Pure sinusoidal voltage
@@ -408,10 +418,14 @@ $$
 
 For Class-B with **an Ideal Current Source**
 
--  the noise factor is $1+\gamma_n$
--  −gm transistors (M1,2) do not contribute to 1/f noise upconversion
+-  noise factor is $\boxed{1+\gamma_n}$
+-  -gm transistors (M1,2) do **not** contribute to $1/f$ noise upconversion
 
 ![image-20260702212831279](osc-pn/image-20260702212831279.png)
+
+![class_b_flicker_isf_cancellation](osc-pn/class_b_flicker_isf_cancellation.svg)
+
+Note the contrast with **thermal noise**: **white noise is uncorrelated between the two crossings**, so the two kicks don't cancel — their variances add. That's why the same commutation mechanism gives you the full $\gamma_n$ term in $F = 1+\gamma_n$ for the $1/f^2$ region, yet contributes nothing in $1/f^3$
 
 
 
@@ -492,7 +506,7 @@ S_O' = \textcolor{blue}{\frac{T_W}{2T_0}}\cdot 4kT\gamma g_m
 $$
 ![image-20260620204007657](osc-pn/image-20260620204007657.png)
 
-The **single-tone analysis** establishes that the differential-pair current is injected as **almost pure phase noise**, while **summing the white-noise power over all harmonics** of the gating function ($\overline{H^2}=T_W/2T_0 $) sets its **magnitude**; together these yield the differential-pair contribution to the oscillator phase noise.
+The **single-tone analysis** establishes that the differential-pair current is injected as **almost pure phase noise**, while **summing the white-noise power over all harmonics** of the gating function ($\overline{H^2}=T_W/2T_0$) sets its **magnitude**; together these yield the differential-pair contribution to the oscillator phase noise.
 
 
 
@@ -533,7 +547,7 @@ The commutation folds  tail noise as **a (near) single sideband**, which is equi
 
 ![image-20260711204714462](osc-pn/image-20260711204714462.png)
 
-In the first-order, **noise around DC (flicker)** is upconverted as a pair of correlated, symmetric sidebands around the carrier — which is **pure AM**
+In the first-order, **noise around DC (flicker)** is **upconverted** as a pair of correlated, symmetric sidebands around the carrier — which is **pure AM**
 
 ![flicker_upconversion_spectrum](osc-pn/flicker_upconversion_spectrum.png)
 
@@ -693,8 +707,16 @@ $R_{nInQ}(\tau)=-R_{nQnI}(\tau)$ demonstrate  $n_I $ and $n_Q $ are **uncorrelat
 ## Bank's General Result
 
 > J. Bank, "A harmonic-oscillator design methodology based on describing functions," Ph.D. dissertation, Dept. Signals Syst., Sch. Elect. Eng., Chalmers Univ. Techn., Chalmers, Sweden, 2006. [[https://publications.lib.chalmers.se/records/fulltext/17376.pdf](https://publications.lib.chalmers.se/records/fulltext/17376.pdf)]
+>
+> A. Mazzanti and A. Bevilacqua, "On the Phase Noise Performance of Transformer-Based CMOS Differential-Pair Harmonic Oscillators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 62, no. 9, pp. 2334-2341, Sept. 2015  [[https://sci-hub.jp/10.1109/TCSI.2015.2451915](https://sci-hub.jp/10.1109/TCSI.2015.2451915)]
 
-*TODO* &#128197;
+
+
+![image-20260715223505523](osc-pn/image-20260715223505523.png)
+
+
+
+![image-20260715223627399](osc-pn/image-20260715223627399.png)
 
 
 

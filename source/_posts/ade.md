@@ -9,6 +9,12 @@ mathjax: true
 
 
 
+## undo sorting in ADE
+
+![image-20260715220657033](ade/image-20260715220657033.png) 
+
+
+
 ## Noise Analysis
 
 

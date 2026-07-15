@@ -1185,7 +1185,11 @@ $$
 y_{\cos}(t) = y_{\sin}\!\left(t + \frac{T}{4}\right), \qquad T = \frac{2\pi}{\omega_0}
 $$
 
-![image-20260630234839714](lc-osc/image-20260630234839714.png)
+
+
+![image-20260715205418465](lc-osc/image-20260715205418465.png)
+
+![image-20260715205521806](lc-osc/image-20260715205521806.png)
 
 ![image-20260630235022053](lc-osc/image-20260630235022053.png)
 

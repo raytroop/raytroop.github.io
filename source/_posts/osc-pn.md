@@ -429,7 +429,7 @@ Note the contrast with **thermal noise**: **white noise is uncorrelated between 
 
 
 
-### ISF calculating
+### Closed-Form Formula for the ISF
 
 > S. Levantino, P. Maffezzoni, F. Pepe, A. Bonfanti, C. Samori and A. L. Lacaita, "Efficient Calculation of the Impulse Sensitivity Function in Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 59, no. 10, pp. 628-632, Oct. 2012 [[https://sci-hub.se/10.1109/TCSII.2012.2208679](https://sci-hub.se/10.1109/TCSII.2012.2208679)]
 >
@@ -437,14 +437,18 @@ Note the contrast with **thermal noise**: **white noise is uncorrelated between 
 
 *TODO* &#128197;
 
-***A. Direct Measurement of Impulse Response***
 
-***B. Closed-Form Formula for the ISF***
+calculate the **equivalent time shift** due to the perturbation impulse in $n$-dimensional state-space trajectory of An $n$th-order system 
+
+Note that the oscillator does not necessarily traverse the limit cycle with a constant velocity
+
+
+---
+
 
 ***C. Calculation of ISF Based on the First Derivative***
 
 ![image-20260624205015362](osc-pn/image-20260624205015362.png)
-
 
 
 

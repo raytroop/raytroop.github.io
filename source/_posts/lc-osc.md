@@ -1336,6 +1336,8 @@ C. Samori, "Tutorial: Understanding Phase Noise in LC VCOs," *2016 IEEE Internat
 
 Jun Yin. ISSCC 2025  T10:  mm-Wave Oscillator Design
 
+Peter Kinget, ISSCC 2010 short course, Transistor-Level Design of Critical PLL Circuits
+
 J. Bank, "A harmonic-oscillator design methodology based on describing functions," Ph.D. dissertation, Dept. Signals Syst., Sch. Elect. Eng., Chalmers Univ. Techn., Chalmers, Sweden, 2006. [[https://publications.lib.chalmers.se/records/fulltext/17376.pdf](https://publications.lib.chalmers.se/records/fulltext/17376.pdf)]
 
 ---

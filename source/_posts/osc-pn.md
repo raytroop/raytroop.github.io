@@ -431,16 +431,17 @@ Note the contrast with **thermal noise**: **white noise is uncorrelated between 
 
 ### Closed-Form Formula for the ISF
 
-> S. Levantino, P. Maffezzoni, F. Pepe, A. Bonfanti, C. Samori and A. L. Lacaita, "Efficient Calculation of the Impulse Sensitivity Function in Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 59, no. 10, pp. 628-632, Oct. 2012 [[https://sci-hub.se/10.1109/TCSII.2012.2208679](https://sci-hub.se/10.1109/TCSII.2012.2208679)]
+ If several impulses land on different nodes **at the same instant**, write $\Delta \vec X = \sum_i \Delta v_i\,\hat e_i$ (with $\Delta v_i = \Delta q_i/C_i$) and the dot product distributes:
+$$
+\Delta\phi = \omega_0\,\frac{\big(\sum_i \Delta v_i \hat e_i\big)\cdot \dot{\vec X}}{\lVert\dot{\vec X}\rVert^{2}} \;=\; \sum_i \omega_0\,\frac{\Delta v_i\, \dot v_i}{\lVert\dot{\vec X}\rVert^{2}} \;=\; \sum_i \Delta\phi_i,
+$$
+where each term is exactly eq. (34) for node $i$ — or in normalized form, $\Delta\phi = \sum_i \Gamma_i(\omega_0 t)\,\Delta q_i/q_{\max,i}$. That's why the paper can treat the effect of a whole group of impulses as a single perturbation vector: per-node contributions superpose.
+
+> quietly assumes the normal component contributes *zero* phase shift, i.e., that surfaces of equal phase (isochrons) cross the limit cycle orthogonally
 >
-> Hu, Yizhe. (2019). A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF). 10.13140/RG.2.2.32151.60323. [[link](https://www.researchgate.net/publication/331072119_A_Simulation_Technique_of_Impulse_Sensitivity_Function_ISF_Based_on_Periodic_Transfer_Function_PXF)]
-
-*TODO* &#128197;
+> Real oscillators violate this to varying degrees (amplitude-to-phase conversion), which is why the paper ranks direct impulse-injection simulation as the most accurate
 
 
-calculate the **equivalent time shift** due to the perturbation impulse in $n$-dimensional state-space trajectory of An $n$th-order system 
-
-Note that the oscillator does not necessarily traverse the limit cycle with a constant velocity
 
 
 ---

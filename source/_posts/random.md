@@ -425,6 +425,25 @@ $$
 
 > ![image-20250809234318422](random/image-20250809234318422.png)
 
+---
+
+> Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
+
+A wide-sense cyclostationary process becomes wide-sense stationary when its time origin is shifted by an **independent random variable uniformly distributed over one period**
+$$
+\boxed{
+v(t)\text{ wide-sense cyclostationary}
+\quad
+\xrightarrow[\Theta\sim\mathcal U(0,T)]{v_s(t)=v(t-\Theta)}
+\quad
+v_s(t)\text{ wide-sense stationary}.
+}
+$$
+![image-20260716225537155](random/image-20260716225537155.png)
+
+
+
+
 
 ## Multirate Systems & Random Sequences
 

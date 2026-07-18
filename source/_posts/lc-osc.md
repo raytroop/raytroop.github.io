@@ -1281,6 +1281,14 @@ $$
 
 
 
+## Phase Noise Modeling of Oscillators with Arbitrary Profiles
+
+> Tawna, "Modeling Oscillators with Arbitrary Phase Noise Profiles"[[https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles](https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles)]
+>
+> —, "How to Specify Phase Noise as an Instance Parameter in Spectre Sources (e.g. vsource, isource, Port)" [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port](https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port)]
+
+*TODO* &#128197;
+
 
 
 ## simulation in oscillator

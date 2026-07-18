@@ -419,7 +419,7 @@ $$
 For Class-B with **an Ideal Current Source**
 
 -  noise factor is $\boxed{1+\gamma_n}$
--  -gm transistors (M1,2) do **not** contribute to $1/f$ noise upconversion
+-  $-g_m$ transistors (M1,2) do **not** contribute to $1/f$ noise upconversion
 
 ![image-20260702212831279](osc-pn/image-20260702212831279.png)
 
@@ -431,11 +431,26 @@ Note the contrast with **thermal noise**: **white noise is uncorrelated between 
 
 ### Closed-Form Formula for the ISF
 
- If several impulses land on different nodes **at the same instant**, write $\Delta \vec X = \sum_i \Delta v_i\,\hat e_i$ (with $\Delta v_i = \Delta q_i/C_i$) and the dot product distributes:
+![image-20260718105439247](osc-pn/image-20260718105439247.png)If the state variables are node voltages, write $\Delta \vec X = \sum_i \Delta v_i\,\hat e_i$ (with $\Delta v_i = \Delta q_i/C_i$) and the **dot product** distributes:
 $$
-\Delta\phi = \omega_0\,\frac{\big(\sum_i \Delta v_i \hat e_i\big)\cdot \dot{\vec X}}{\lVert\dot{\vec X}\rVert^{2}} \;=\; \sum_i \omega_0\,\frac{\Delta v_i\, \dot v_i}{\lVert\dot{\vec X}\rVert^{2}} \;=\; \sum_i \Delta\phi_i,
+\Delta\phi = \frac{2\pi}{T}\frac{\big(\sum_i \Delta v_i \hat e_i\big)\cdot \dot{\vec X}}{\lVert\dot{\vec X}\rVert^{2}} \;=\frac{2\pi}{T}\; \sum_i\,\frac{\Delta v_i\, \dot v_i}{\lVert\dot{\vec X}\rVert^{2}} \;=\; \sum_i \Delta\phi_i,
 $$
-where each term is exactly eq. (34) for node $i$ — or in normalized form, $\Delta\phi = \sum_i \Gamma_i(\omega_0 t)\,\Delta q_i/q_{\max,i}$. That's why the paper can treat the effect of a whole group of impulses as a single perturbation vector: per-node contributions superpose.
+For second-order system, one can use the normalized waveform and its derivative as the state variables
+$$
+\Gamma_{1}(x)=\frac{f'(x)}{f^{2}(x)+f'^{2}(x)} \qquad \Gamma_{2}(x)=\frac{f''(x)}{f'^{2}(x)+f''^{2}(x)}
+$$
+In the case of an ideal sinusoidal oscillator $f=\cos(x)$
+$$
+\Gamma_{1}(x)=-\sin(x) \qquad \Gamma_{2}(x)=-\cos(x)
+$$
+A finite charge impulse into the node cannot make the inductor current jump ($v$ stays bounded, so $i_L=\frac{1}{L}\int v\,dt$ is continuous) — **current** *component of the perturbation* is exactly **zero**. That's physics of the input, not an approximation: $\Delta\vec X = (\Delta v,\,0)$ exactly, so $\Gamma_2$ gets multiplied by zero
+
+Total phase noise sums over physical sources, each weighted by its own ISF
+
+-  If every noise source in the circuit injects current into nodes — transistor channel noise, resistor noise, the usual on-chip situation — then the $\Gamma_1$ family is the whole story with no approximation
+- $\Gamma_2$ enters only when a source physically acts as a series voltage on the inductor (flux injection), such as the coil's series resistance
+
+![image-20260718115933857](osc-pn/image-20260718115933857.png)
 
 > quietly assumes the normal component contributes *zero* phase shift, i.e., that surfaces of equal phase (isochrons) cross the limit cycle orthogonally
 >
@@ -989,11 +1004,24 @@ $$
 
 
 
+ ***source-specific ISF***
+
+For example, if MOS drain thermal noise is represented as a current source between drain and source, then the perturbation used to obtain the source-specific ISF should also be injected between those same drain and source nodes
+
+![image-20260718182429958](osc-pn/image-20260718182429958.png)
+
+![image-20260718182328349](osc-pn/image-20260718182328349.png)
+
+
+
+***NMF $\alpha(t)$ shall work with the corresponding source-specific ISF/PPV***
+
 ![image-20260712162600802](osc-pn/image-20260712162600802.png)
 $$
 \boxed{I_n(t)=4kT\gamma \cdot \textcolor{red}{g_m(t)} = 4kT\gamma \cdot \textcolor{red}{\alpha (t)g_{m,0}}}
 $$
 
+![image-20260718115348587](osc-pn/image-20260718115348587.png)
 
 ### ISF using PSS + PXF
 
@@ -1017,7 +1045,31 @@ $$
 
 
 
-## flicker noise In circuit-noise analysis
+## flicker noise upconversion
+
+> Y. Hu, T. Siriburanon and R. B. Staszewski, "A Low-Flicker-Noise 30-GHz Class-F23 Oscillator in 28-nm CMOS Using Implicit Resonance and Explicit Common-Mode Return Path," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 7, pp. 1977-1987, July 2018 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650)]
+>
+> —, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
+>
+> —, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
+
+
+
+
+
+### Flicker Noise Formulations in Compact Models
+
+> G. J. Coram, C. C. McAndrew, K. K. Gullapalli and K. S. Kundert, "Flicker Noise Formulations in Compact Models," in *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*, vol. 39, no. 10, pp. 2812-2821, Oct. 2020 [[https://kenkundert.com/docs/tcad20-flicker-noise.pdf](https://kenkundert.com/docs/tcad20-flicker-noise.pdf)],[[https://github.com/KenKundert/flicker-noise](https://github.com/KenKundert/flicker-noise)]
+>
+> BSIM4v4.7 MOSFET Model -User's Manual [[https://class.ece.iastate.edu/djchen/ee501/BSIM470_Manual.pdf](https://class.ece.iastate.edu/djchen/ee501/BSIM470_Manual.pdf)]
+
+
+
+
+
+
+
+### flicker noise in circuit-noise analysis
 
 its power spectral density is approximately
 $$
@@ -1092,6 +1144,13 @@ $$
 \text{ phase-noise upconversion from that source.}
 }
 $$
+
+
+
+
+
+
+
 
 
 ## Mathematical Preliminaries

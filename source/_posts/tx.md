@@ -515,15 +515,17 @@ Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter 
 
 —, Synopsys. CMOS Circuit Techniques for Wireline Transmitters [[https://www.synopsys.com/webinars/wireline-transmitters-part-1.html](https://www.synopsys.com/webinars/wireline-transmitters-part-1.html)]
 
-Jihwan Kim, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications 
+Jihwan Kim, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
 
-—, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
+—, Intel, SNU Summer 2021 [Topic] "A 200Gb/s CMOS Transmitter: Challenges and Overcoming Design Techniques" [[https://youtu.be/w3lb_1TwdeE](https://youtu.be/w3lb_1TwdeE)]
+
+—, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications
 
 Friedel Gerfers, ISSCC2021 T6: Basics of DAC-based Wireline Transmitters
 
 Tod Dickson, IBM. High-Speed CMOS Serial Transmitters for 56-112Gb/s Electrical Interconnects [[https://www.youtube.com/watch?v=g1pcZabsRNc](https://www.youtube.com/watch?v=g1pcZabsRNc)]
 
-B. Razavi, "Design Techniques for High-Speed Wireline Transmitters," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 53-66, 2021, [[https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf)]
+B. Razavi, "Design Techniques for High-Speed Wireline Transmitters," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 53-66, 2021,[[https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf)]
 
 ---
 

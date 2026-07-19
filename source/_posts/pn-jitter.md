@@ -325,7 +325,177 @@ Cadence Spectre's `PN` function may call `abs_jitter` and `psd` function under t
 
 
 
-## Phase Noise in `vsource` 
+
+
+## Phase Noise Modeling of Oscillators with Arbitrary Profiles
+
+> Tawna, "Modeling Oscillators with Arbitrary Phase Noise Profiles"[[https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles](https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles)]
+>
+> —, "How to Specify Phase Noise as an Instance Parameter in Spectre Sources (e.g. vsource, isource, Port)" [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port](https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port)]
+
+
+
+
+
+![image-20260719013301709](pn-jitter/image-20260719013301709.png)
+
+![image-20260719012251065](pn-jitter/image-20260719012251065.png)
+
+driving an otherwise ideal oscillator with direct phase modulation makes its noise purely PM — a good model of near-carrier oscillator noise 
+
+![image-20260719020826827](pn-jitter/image-20260719020826827.png)
+
+![image-20260719015605522](pn-jitter/image-20260719015605522.png)
+
+In verilog-A model `oscwphnoise.va`, ***Norton-equivalent circuit***
+$$
+\boxed{v(t) = A\cos(\omega_0 t + \phi(t))\approx A[\cos\omega_0 t - \sin\omega_0 t \cdot \varphi(t)]}
+$$
+![image-20260719105917024](pn-jitter/image-20260719105917024.png)
+
+```verilog
+`define db10_real(x) pow(10, (x)/10)
+`define dbm2pow(x) `db10_real(((x)-30))
+`define pow2v(x,r) sqrt(8*(r)*(x))
+```
+
+The first two macros convert the available power from dBm to watts:
+$$
+P_{\mathrm{W}}
+=
+10^{(P_{\mathrm{dBm}}-30)/10}.
+$$
+The third macro calculates the **open-circuit peak voltage**
+$$
+V_{\text{oc,pk}}=\sqrt{8R_{\text{out}}P_{\mathrm{W}}}.
+$$
+The factor $8$ follows from a matched source:
+$$
+V_{\text{load,pk}}=\frac{V_{\text{oc,pk}}}{2},
+$$
+and therefore
+$$
+P_{\mathrm{avail}}
+=
+\frac{V_{\text{load,rms}}^2}{R_{\text{out}}}
+=
+\frac{\left(V_{\text{oc,pk}}/2\sqrt{2}\right)^2}{R_{\text{out}}}
+=
+\frac{V_{\text{oc,pk}}^2}{8R_{\text{out}}}.
+$$
+For the defaults,
+$$
+P=10\ \mathrm{dBm}=10\ \mathrm{mW},
+\qquad
+R_{\text{out}}=50\ \Omega,
+$$
+so
+$$
+V_{\text{oc,pk}}
+=
+\sqrt{8(50)(0.01)}
+=
+2\ \mathrm{V}.
+$$
+With a matched $50\ \Omega$ load, the load voltage is $1\ \mathrm{V_{pk}}$, corresponding to $10\ \mathrm{dBm}$. 
+
+
+
+
+
+```verilog
+`include "constants.vams"
+`include "disciplines.vams"
+
+// Behavioral oscillator with an arbitrary phase noise profile.
+
+// fundname: the name of the fundamentail frequency default: ""
+// power: available power (dBm) 	default: 10 dBm
+// freq: output frequency (Hz)          default: 1 GHz
+// rout: output impedance (Ohm)        	default: 50 Ohm
+
+`define db10_real(x) pow(10, (x)/10)
+`define dbm2pow(x) `db10_real( ((x)-30) )
+`define pow2v(x,r) sqrt(8*(r)*(x))  // open-circuit peak voltage
+
+module oscwphnoise(out, ph);
+inout out;
+input ph;
+electrical out;
+electrical ph;
+electrical gnd;
+ground gnd;
+electrical int;
+
+parameter real power = 10 ;
+parameter real rout = 50 ;
+parameter real freq = 1e+09 ;
+  
+isource #(.type("sine"), .ampl(`pow2v(`dbm2pow(power),rout)/rout), .freq(freq) ) is1(gnd,out);
+vsource #(.type("sine"), .ampl(`pow2v(`dbm2pow(power),rout)/rout), .sinephase(-90), .freq(freq) ) vs1(gnd,int);
+ 
+analog begin
+    I(out) <+ -V(int)*V(ph); // - \sin\omega_c t \cdot \phi(t)
+    I(out) <+ V(out)/rout;
+end
+
+endmodule
+```
+
+Note that `int` is purely internal — no current flows there, and it never appears at the output; `vs1` exists only to be sampled by the multiplier
+
+
+
+---
+
+ `isource` and `vsource` are **not built-in Verilog-A language constructs**. They are Cadence-provided behavioral source modules
+$$
+\boxed{
+\texttt{isource},\ \texttt{vsource}
+\text{ are instantiated source models supplied by Cadence}
+}
+$$
+
+1. **vsource (p, n)** forces V(p) − V(n) = w(t), where for `type="sine"` the waveform is w(t) = ampl·sin(2πf(t − delay) + sinephase·π/180), with `sinephase` in degrees. 
+
+​		So in the model, `vs1(gnd, int)` means V(gnd) − V(int) = w(t), i.e. **V(int) = −w(t)** — the polarity flips because ground was listed first.
+
+
+
+2. **isource (p, n)**: positive current flows *from p, through the source, to n* — it is pulled out of node p and **injected into node n**. 
+
+​		So `is1(gnd, out)` pumps ampl·sin(ωt) into node `out`, which is exactly why the blog wired it as (gnd, out): to drive the output. Writing `is1(out, gnd)` with the same amplitude would sink that current from `out` instead
+
+
+
+3. **`I(a,b) <+ expr`** adds a current `expr` flowing a → b through that branch. 
+
+​	So **`I(out) <+ V(out)/rout`** is a resistor from `out` to ground, 
+
+​	and `**I(out) <+ -X**` *injects* X into `out` (positive contribution = current leaving the node)
+
+
+
+---
+
+---
+
+![image-20260719010706918](pn-jitter/image-20260719010706918.png)
+
+For modern spectreRF, PORTs and other sources with **noisefiles** or **instance parameter** are easier and correct methods
+
+Starting in **MMSIM 13.1**, you can specify the phase noise as an instance parameter in Spectre sources, including port, vsource and isource
+
+![image-20260719005818616](pn-jitter/image-20260719005818616.png)
+
+The `Generate noise?` button (corresponds to `isnoisy` parameter on the port) is **by default set to "yes"**
+
+
+
+## Phase Noise in `vsource`
+
+> Article 20256770 How to specify phase noise as an instance parameter in spectre sources (e.g. vsource,
+> isource, port) [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port](https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port)]
 
 Suppose pnoise result of one block is shown as below, and the result is stimulus of following block 
 

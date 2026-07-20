@@ -880,21 +880,15 @@ Finally, we obtain
 
 
 
-## ISF & PPV simulation
+## ISF & PPV Extraction
 
-> S. Levantino, P. Maffezzoni, F. Pepe, A. Bonfanti, C. Samori and A. L. Lacaita, "Efficient Calculation of the Impulse Sensitivity Function in Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 59, no. 10, pp. 628-632, Oct. 2012, [[https://sci-hub.jp/10.1109/TCSII.2012.2208679](https://sci-hub.jp/10.1109/TCSII.2012.2208679)]
->
-> —, "Computing the Perturbation Projection Vector of Oscillators via Frequency Domain Analysis," in IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, vol. 31, no. 10, pp. 1499-1507, Oct. 2012, [[https://sci-hub.jp/10.1109/TCAD.2012.2194493](https://sci-hub.jp/10.1109/TCAD.2012.2194493)]
->
-> S. Galeone and M. P. Kennedy, "A comparison of simulation strategies for estimating phase noise in oscillators," 2017 13th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME), Giardini Naxos - Taormina, Italy, 2017
->
 > PPV values from pss/pnoise simulation in spectreRF [[https://community.cadence.com/cadence_technology_forums/f/rf-design/35062/ppv-values-from-pss-pnoise-simulation-in-spectrerf](https://community.cadence.com/cadence_technology_forums/f/rf-design/35062/ppv-values-from-pss-pnoise-simulation-in-spectrerf)]
 >
 > ISF Function Extraction in Cadence Virtuoso [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/43969/isf-function-extraction-in-cadence-virtuoso](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/43969/isf-function-extraction-in-cadence-virtuoso)]
 
 
 
-### ISF using Transient Analysis
+### ISF from Transient Analysis
 
 > David Dolt. ECEN 620 Network Theory - Broadband Circuit Design: "VCO ISF Simulation" [[https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf](https://people.engr.tamu.edu/spalermo/ecen620/ISF_SIM.pdf)]
 
@@ -994,6 +988,8 @@ $$
 
 ---
 
+---
+
 > Aditya Varma Muppala, Noise Modulation Function (**NMF**) Simulation in Cadence | Oscillators 08 | MMIC 13 [[https://youtu.be/CvcLG9cSreg](https://youtu.be/CvcLG9cSreg)] [[code](https://drive.google.com/file/d/1kShP5BChj7fnRMTs2qAHs-InUnsp5-r7/view?usp=sharing)]
 
 
@@ -1008,16 +1004,16 @@ For example, if MOS drain thermal noise is represented as a current source betwe
 
 
 
-***NMF $\alpha(t)$ shall work with the corresponding source-specific ISF/PPV***
+***NMF $\alpha_{NMF}(t)$ shall work with the corresponding source-specific ISF/PPV***
 
 ![image-20260712162600802](osc-pn/image-20260712162600802.png)
 $$
-\boxed{I_n(t)=4kT\gamma \cdot \textcolor{red}{g_m(t)} = 4kT\gamma \cdot \textcolor{red}{\alpha (t)g_{m,0}}}
+\boxed{I_n(t)=4kT\gamma \cdot \textcolor{red}{g_m(t)} = 4kT\gamma \cdot \textcolor{red}{\alpha_{NMF} (t)g_{m,0}}}
 $$
 
 ![image-20260718115348587](osc-pn/image-20260718115348587.png)
 
-### ISF using PSS + PXF
+### ISF from PSS + *Positive Sidebands* of PXF
 
 > Hu, Yizhe, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.ru/10.1109/TCSII.2019.2896483](https://sci-hub.ru/10.1109/TCSII.2019.2896483)]
 >
@@ -1025,7 +1021,7 @@ $$
 >
 > —, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
 >
-> Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
+> Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[video](https://youtu.be/Lu6VEWEEdxo) [note](https://adityamuppala.github.io/assets/Notes_YouTube/ISF_from_PXF.pdf) [code](https://drive.google.com/file/d/1kShP5BChj7fnRMTs2qAHs-InUnsp5-r7/view)]
 
 *TODO* &#128197;
 
@@ -1047,7 +1043,7 @@ plot(t/1e-9,circshift(ISF_Tran2,633),'--','LineWidth',3)
 
 ![image-20260720081429910](osc-pn/image-20260720081429910.png)
 
-### PPV using PSS inbuilt solver
+### PPV from PSS inbuilt solver
 
 > Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
 
@@ -1055,6 +1051,13 @@ plot(t/1e-9,circshift(ISF_Tran2,633),'--','LineWidth',3)
 
 
 
+
+## non-normalized effective ISF
+
+for thermal noise
+
+
+for flicker noise
 
 
 

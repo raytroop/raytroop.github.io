@@ -882,15 +882,9 @@ Finally, we obtain
 
 ## ISF & PPV simulation
 
-> Hu, Yizhe, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
->
-> —. (2019). A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF). 10.13140/RG.2.2.32151.60323. [[link](https://www.researchgate.net/publication/331072119_A_Simulation_Technique_of_Impulse_Sensitivity_Function_ISF_Based_on_Periodic_Transfer_Function_PXF)]
->
-> —, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
->
 > S. Levantino, P. Maffezzoni, F. Pepe, A. Bonfanti, C. Samori and A. L. Lacaita, "Efficient Calculation of the Impulse Sensitivity Function in Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 59, no. 10, pp. 628-632, Oct. 2012, [[https://sci-hub.jp/10.1109/TCSII.2012.2208679](https://sci-hub.jp/10.1109/TCSII.2012.2208679)]
 >
-> S. Levantino and P. Maffezzoni, "Computing the Perturbation Projection Vector of Oscillators via Frequency Domain Analysis," in IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, vol. 31, no. 10, pp. 1499-1507, Oct. 2012, [[https://sci-hub.jp/10.1109/TCAD.2012.2194493](https://sci-hub.jp/10.1109/TCAD.2012.2194493)]
+> —, "Computing the Perturbation Projection Vector of Oscillators via Frequency Domain Analysis," in IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, vol. 31, no. 10, pp. 1499-1507, Oct. 2012, [[https://sci-hub.jp/10.1109/TCAD.2012.2194493](https://sci-hub.jp/10.1109/TCAD.2012.2194493)]
 >
 > S. Galeone and M. P. Kennedy, "A comparison of simulation strategies for estimating phase noise in oscillators," 2017 13th Conference on Ph.D. Research in Microelectronics and Electronics (PRIME), Giardini Naxos - Taormina, Italy, 2017
 >
@@ -1025,6 +1019,12 @@ $$
 
 ### ISF using PSS + PXF
 
+> Hu, Yizhe, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.ru/10.1109/TCSII.2019.2896483](https://sci-hub.ru/10.1109/TCSII.2019.2896483)]
+>
+> —. (2019). A Simulation Technique of Impulse Sensitivity Function (ISF) Based on Periodic Transfer Function (PXF). 10.13140/RG.2.2.32151.60323. [[link](https://www.researchgate.net/publication/331072119_A_Simulation_Technique_of_Impulse_Sensitivity_Function_ISF_Based_on_Periodic_Transfer_Function_PXF)]
+>
+> —, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
+>
 > Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
 
 *TODO* &#128197;
@@ -1032,6 +1032,20 @@ $$
 
 
 
+
+
+
+----
+
+time reference between tran simulation and pss/pxf is different, that's why `circshift` is used.
+
+```matlab
+ISF_Tran2 = interp1(time_Tran,-ISF_Tran{:,2},t);
+
+plot(t/1e-9,circshift(ISF_Tran2,633),'--','LineWidth',3)
+```
+
+![image-20260720081429910](osc-pn/image-20260720081429910.png)
 
 ### PPV using PSS inbuilt solver
 

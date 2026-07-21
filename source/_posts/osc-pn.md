@@ -196,21 +196,8 @@ That single block is the origin of *every* $1/\Delta\omega^2$ factor in phase no
 
 ### Pure sinusoidal voltage
 
-Consider the **ideal parallel *LC* network** — pure sinusoid wave
-
-Suppose a current pulse with area $q$ suddenly changes the charge across the capacitor, its voltage changes by $\Delta v_c=\Delta q/C$
-
-![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential-1781624282026-1.svg)
-
-Decompose the horizontal kick $\Delta\vec r=(\Delta x,0) $ and $\Delta x=\Delta v_C/A_0$, with tangential direction $\hat t=(-\sin\theta,\cos\theta)$ and radial direction  $\hat r=(\cos\theta,\sin\theta)$
-$$
-\Delta \phi = \arctan\left(\frac{\Delta\vec r\cdot \hat t}{1 + \Delta\vec r\cdot \hat r}\right) = \arctan\left(\frac{-\Delta x \sin \theta}{1 + \Delta x \cos \theta}\right)\approx -\frac{\Delta v_C}{A_0} \sin(\omega_0 \tau)
-$$
-
-![image-20260613191539886](osc-pn/image-20260613191539886.png)
 
 
-Therefore, the **ISF of an ideal parallel LC resonator** can be expressed as $\boxed{\Gamma(\omega \tau)=-\sin(\omega_0 \tau)}$, which is independent of peak voltage value $A_0$
 
 ![image-20260622231558562](osc-pn/image-20260622231558562.png)
 
@@ -458,6 +445,28 @@ Total phase noise sums over physical sources, each weighted by its own ISF
 
 
 
+---
+
+> The dot product and norm in (31)–(33) mean different things in different coordinates, so the same physical oscillator run through (33) in two different coordinate systems yields two different ISFs — and only one coordinate choice yields the paper's intended answer
+
+Consider the **ideal parallel *LC* network** — pure sinusoid wave
+
+Suppose a current pulse with area $q$ suddenly changes the charge across the capacitor, its voltage changes by $\Delta v_c=\Delta q/C$
+
+![phase_kick_decomposition_radial_tangential](osc-pn/phase_kick_decomposition_radial_tangential-1781624282026-1.svg)
+
+Decompose the horizontal kick $\Delta\vec r=(\Delta x,0)$ and $\Delta x=\Delta v_C/A_0$, with tangential direction $\hat t=(-\sin\theta,\cos\theta)$ and radial direction  $\hat r=(\cos\theta,\sin\theta)$
+$$
+\Delta \phi = \arctan\left(\frac{\Delta\vec r\cdot \hat t}{1 + \Delta\vec r\cdot \hat r}\right) = \arctan\left(\frac{-\Delta x \sin \theta}{1 + \Delta x \cos \theta}\right)\approx -\frac{\Delta v_C}{A_0} \sin(\omega_0 \tau)
+$$
+
+![image-20260613191539886](osc-pn/image-20260613191539886.png)
+
+
+Therefore, the **ISF of an ideal parallel LC resonator** can be expressed as $\boxed{\Gamma(\omega \tau)=-\sin(\omega_0 \tau)}$, which is independent of peak voltage value $A_0$
+
+
+
 
 ---
 
@@ -467,6 +476,31 @@ Total phase noise sums over physical sources, each weighted by its own ISF
 ![image-20260624205015362](osc-pn/image-20260624205015362.png)
 
 
+
+
+
+### additive voltage error
+
+A fixed $\Delta V$ at a crossing shifts the crossing time by $\Delta t = \Delta V/\dot v$, so $\Delta\phi = \omega_0\Delta V/\dot v$. Express this against the normalized injection $\Delta\phi = \Gamma\cdot\Delta V/V_{\max}$ and solve:
+$$
+\Gamma_{\text{crossing}} = \frac{\omega_0 V_{\max}}{\dot v} = \frac{1}{f'}
+$$
+Now take eq. (37) at the mid-transition, where $f'' = 0$ (inflection point):
+$$
+\Gamma = \frac{f'}{f'^2 + f''^2}\;\Big|_{f''=0} = \frac{f'}{f'^2} = \frac{1}{f'}
+$$
+
+$$
+\boxed{
+\text{steeper transition}
+\quad\Longrightarrow\quad
+\text{smaller ISF peak}
+}
+$$
+with $\Gamma = \sin x$, at crossing $\sin x =1$, which is derivative of edge
+$$
+\Delta \phi = \Gamma \frac{\Delta q}{q_\text{max}} = \sin x\cdot \frac{\Delta q}{C\cdot A}= \sin x\cdot \frac{\Delta q}{C\cdot A\sin x}
+$$
 
 
 
@@ -1013,6 +1047,8 @@ $$
 
 ![image-20260718115348587](osc-pn/image-20260718115348587.png)
 
+
+
 ### ISF from PSS + *Positive Sidebands* of PXF
 
 > Hu, Yizhe, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.ru/10.1109/TCSII.2019.2896483](https://sci-hub.ru/10.1109/TCSII.2019.2896483)]
@@ -1023,9 +1059,23 @@ $$
 >
 > Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[video](https://youtu.be/Lu6VEWEEdxo) [note](https://adityamuppala.github.io/assets/Notes_YouTube/ISF_from_PXF.pdf) [code](https://drive.google.com/file/d/1kShP5BChj7fnRMTs2qAHs-InUnsp5-r7/view)]
 
-*TODO* &#128197;
+![image-20260721001737826](osc-pn/image-20260721001737826.png)
+
+![image-20260721003010409](osc-pn/image-20260721003010409.png)
+
+- **`freqaxis=in`**
+
+  PXF preserves the signed input-frequency axis. Therefore, both positive- and negative-frequency input sidebands can be used directly to extract the ISF
+
+- **`freqaxis=absin`** (default)
+
+  Positive sidebands can be used directly. For negative sidebands, the PXF result corresponds to the Hermitian-symmetric positive-frequency response and must first be complex-conjugated; equivalently, retain its magnitude and reverse its phase
 
 
+
+![image-20260721074606473](osc-pn/image-20260721074606473.png)
+
+![image-20260721075448677](osc-pn/image-20260721075448677.png)
 
 
 
@@ -1052,12 +1102,36 @@ plot(t/1e-9,circshift(ISF_Tran2,633),'--','LineWidth',3)
 
 
 
-## non-normalized effective ISF
+### effective ISF
 
-for thermal noise
+***thermal noise*** with **NMF**
+
+![image-20260720230732764](osc-pn/image-20260720230732764.png)
+
+***source-specific ISF + its NMF***
 
 
-for flicker noise
+
+---
+
+---
+
+
+
+***flicker noise*** with ***effective non-normalized ISF***
+
+> Y. Hu, T. Siriburanon and R. B. Staszewski, "A Low-Flicker-Noise 30-GHz Class-F23 Oscillator in 28-nm CMOS Using Implicit Resonance and Explicit Common-Mode Return Path," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 7, pp. 1977-1987, July 2018 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650)]
+
+![image-20260720232628786](osc-pn/image-20260720232628786.png)
+
+
+
+> M. Shahmohammadi, M. Babaie and R. B. Staszewski, "A 1/f Noise Upconversion Reduction Technique for Voltage-Biased RF CMOS Oscillators," in IEEE Journal of Solid-State Circuits, vol. 51, no. 11, pp. 2610-2624, Nov. 2016 [[https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf](https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf)]
+>
+
+![image-20260720234322600](osc-pn/image-20260720234322600.png)
+
+
 
 
 

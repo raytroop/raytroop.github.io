@@ -1213,6 +1213,8 @@ $$
 
 Using the small-angle approximation,
 
+> The small-angle approximation remains valid even if the phase perturbation is **complex**, provided its magnitude is small $|\theta| \ll 1$
+
 $$
 e^{j\phi}\approx1+j\phi,
 $$

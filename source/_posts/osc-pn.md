@@ -1093,6 +1093,238 @@ plot(t/1e-9,circshift(ISF_Tran2,633),'--','LineWidth',3)
 
 ![image-20260720081429910](osc-pn/image-20260720081429910.png)
 
+
+
+---
+---
+
+***Complex Derivation of PXF from ISF***
+
+**credits to chatgpt**
+
+Using a complex exponential representation gives the same result as the cosine derivation in the slides, provided the Fourier coefficient conventions are handled consistently.
+
+**1. Test Current**
+
+Instead of
+
+$$
+i_t(t)=I_t\cos\!\left((k\omega_0+\Delta\omega)t+\gamma_k\right),
+$$
+
+use the analytic signal
+
+$$
+\tilde{i}_t(t)
+=
+I_t e^{j[(k\omega_0+\Delta\omega)t+\gamma_k]}.
+$$
+
+**2. Complex Fourier Series of ISF**
+
+The slide defines the real ISF as
+
+$$
+h_{DS}(t)
+=
+\frac12 h_0\cos\theta_0
++
+\sum_{m=1}^{\infty}
+h_m\cos(m\omega_0t+\theta_{h,m}).
+$$
+
+Expressing it as a complex Fourier series,
+
+$$
+h_{DS}(t)
+=
+\sum_{m=-\infty}^{\infty}
+H_m e^{jm\omega_0t},
+$$
+
+gives
+
+$$
+H_{\pm m}
+=
+\frac{h_m}{2}
+e^{\pm j\theta_{h,m}}.
+$$
+
+Hence
+
+$$
+H_{-k}
+=
+\frac{h_k}{2}
+e^{-j\theta_{h,k}}.
+$$
+
+**3. Phase Perturbation**
+
+The phase perturbation is
+
+$$
+\phi(t)
+=
+\int h_{DS}(t)i_t(t)\,dt.
+$$
+
+Substituting the Fourier series,
+
+$$
+\phi(t)
+=
+I_t
+\sum_m
+\frac{H_m}
+{j[(m+k)\omega_0+\Delta\omega]}
+e^{j[(m+k)\omega_0+\Delta\omega]t}.
+$$
+
+Only the slowly varying term contributes significantly, so choose
+
+$$
+m=-k,
+$$
+
+which yields
+
+$$
+\boxed{
+\phi(t)
+=
+\frac{I_tH_{-k}}
+{j\Delta\omega}
+e^{j(\Delta\omega t+\gamma_k)}.
+}
+$$
+
+**4. Oscillator Voltage**
+
+Represent the oscillator voltage as
+
+$$
+V_{DS}
+=
+V_{H1}
+e^{j(\omega_0t+\phi(t))}.
+$$
+
+Using the small-angle approximation,
+
+$$
+e^{j\phi}\approx1+j\phi,
+$$
+
+gives
+
+$$
+V_{DS}
+\approx
+V_{H1}e^{j\omega_0t}
++
+\frac{V_{H1}I_tH_{-k}}
+{\Delta\omega}
+e^{j(\omega_0+\Delta\omega)t}.
+$$
+
+Therefore,
+
+$$
+\boxed{
+H_{\mathrm{PXF}}
+=
+\frac{V_{H1}}{\Delta\omega}
+H_{-k}.
+}
+$$
+
+**5. Relation to the Slide**
+
+The fundamental drain voltage is
+
+$$
+v_{DS}(t)
+=
+V_{h1}\cos(\omega_0t+\theta),
+$$
+
+whose complex coefficient is
+
+$$
+\boxed{
+V_{H1}
+=
+\frac{V_{h1}}{2}
+e^{j\theta}.
+}
+$$
+
+Since
+
+$$
+H_{-k}
+=
+\frac{h_k}{2}
+e^{-j\theta_{h,k}},
+$$
+
+we obtain
+
+$$
+H_{\mathrm{PXF}}
+=
+\frac{V_{h1}}{2\Delta\omega}
+\cdot
+\frac{h_k}{2}
+e^{j(\theta-\theta_{h,k})}
+=
+\frac{V_{h1}h_k}
+{4\Delta\omega}
+e^{j(\theta-\theta_{h,k})}.
+$$
+
+Thus
+
+$$
+\boxed{
+|H_{\mathrm{PXF}}|
+=
+\frac{V_{h1}h_k}
+{4\Delta\omega}
+}
+$$
+
+and
+
+$$
+\boxed{
+\angle H_{\mathrm{PXF}}
+=
+\theta-\theta_{h,k}.
+}
+$$
+
+These are exactly Eqs. (6) and (7) in the slide.
+
+**Conclusion**
+
+The complex-exponential derivation is algebraically simpler than the cosine derivation. The only subtlety is the Fourier-series convention:
+
+- Positive-frequency coefficient of a cosine:
+  $$
+  H_k=\frac{h_k}{2}e^{j\theta_{h,k}}.
+  $$
+
+- Fundamental voltage phasor:
+  $$
+  V_{H1}=\frac{V_{h1}}{2}e^{j\theta}.
+  $$
+
+Accounting for these \(1/2\) factors yields the identical PXF expression derived in the slides.
+
+
 ### PPV from PSS inbuilt solver
 
 > Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]

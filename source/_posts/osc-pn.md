@@ -1322,7 +1322,7 @@ The complex-exponential derivation is algebraically simpler than the cosine deri
   V_{H1}=\frac{V_{h1}}{2}e^{j\theta}.
   $$
 
-Accounting for these \(1/2\) factors yields the identical PXF expression derived in the slides.
+Accounting for these $1/2$ factors yields the identical PXF expression derived in the slides.
 
 
 ### PPV from PSS inbuilt solver

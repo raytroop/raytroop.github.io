@@ -237,60 +237,6 @@ $$
 
 
 
-## challenges in DSP-based SerDes
-
-![image-20250524224829419](link-misc/image-20250524224829419.png)
-
-### Parallel implementation
-
-![image-20250524235031104](link-misc/image-20250524235031104.png)
-
-
-
-![image-20250525101922485](link-misc/image-20250525101922485.png)
-
-
-
-### Loop-Unrolling DFE
-
-![image-20250525105017605](link-misc/image-20250525105017605.png)
-
-![image-20250525191101301](link-misc/image-20250525191101301.png)
-
-Corresponding to the three distinct voltage thresholds in the *PAM4* systems, it would need *12 slicers, 3 multiplexers*, and *one thermometer-to-binary decoder* in each deserialized data path, even if only one tap of the DFE is unrolled
-
-
-
-### Look-Ahead Multiplexing DFE
-
-![image-20250525151918214](link-misc/image-20250525151918214.png)
-
-The look-ahead multiplexing technique brings the key benefit that the timing constraint can be significantly relaxed, as the iteration bound is ***doubled*** at the expense of extra hardware
-
-![image-20250525192228275](link-misc/image-20250525192228275.png)
-
-
-
-> Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI](https://youtu.be/puEP0DlVZGI)]
->
-> Chen, Kuan-Chang (2022) *Energy-Efficient Receiver Design for High-Speed Interconnects.* Dissertation (Ph.D.), California Institute of Technology. [[https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf](https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf)]
-
-
-
-
-
-## Forward Error Correction (FEC)
-
-It is called "**forward**" error correction because it can correct errors even in the common situations where there is no backward channel
-
-![image-20250527212624165](link-misc/image-20250527212624165.png)
-
-
-
-> Keysight Technologies. Tutorial – Why Use Forward Error Correction (FEC) [[https://youtu.be/56nF4c61KR0](https://youtu.be/56nF4c61KR0)]
->
-> Paul McLellan, What the FEC is Forward Error Correction? [[https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/fec](https://community.cadence.com/cadence_blogs_8/b/breakfast-bytes/posts/fec)]
-
 
 
 ## DSP-Based SerDes

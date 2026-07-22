@@ -184,7 +184,8 @@ To minimize the difference between $\Delta I_1$ and $\Delta I_0$, the drift of  
 >
 > for real signal $H(j\omega)^*=H(-j\omega)$​
 
-![image-20240903222441433](precision/image-20240903222441433.png)
+![image-20260722211826349](precision/image-20260722211826349.png)
+
 
 $$
 H(j\hat{\omega})*H(j\hat{\omega}) = \int_{-\infty}^{\infty}H(j\omega)H(j(\hat{\omega}-\omega))d\omega
@@ -246,7 +247,7 @@ That is, the input signal **remains the same** after chopping or squarewave up/d
 
 ### Bandwidth & Gain Accuracy
 
-![image-20240903225224732](precision/image-20240903225224732.png)
+![image-20260722211856320](precision/image-20260722211856320.png)
 
 - *lower effective gain*: DC level at the output of the amplifiers is a bit less than what it should be
 
@@ -281,9 +282,11 @@ where assuming $\tau \ll T$
 
 > [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/57799/very-low-dc-gain-of-pstb-simulation/1392299](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/57799/very-low-dc-gain-of-pstb-simulation/1392299)]
 
+
+
 ### Residual Offset of Chopping
 
-![image-20240903222425730](precision/image-20240903222425730.png)
+![image-20260722212055690](precision/image-20260722212055690.png)
 
 assume input spikes can be expressed as
 $$
@@ -467,13 +470,13 @@ Christian-Charles Enz. "High precision CMOS micropower amplifiers"
 
 Kofi Makinwa. Precision Analog Circuit Design: Coping with Variability, [[https://youtu.be/nA_DZtRqrTQ](https://youtu.be/nA_DZtRqrTQ)] [[https://youtu.be/uwRpP20Lprc](https://youtu.be/uwRpP20Lprc)]
 
- Chung-chun Chen, Why Design Challenge in Chopping Offset & Flicker Noise? [[https://youtu.be/ydjca2KrXgc](https://youtu.be/ydjca2KrXgc)]
+—, ISSCC 2007 Dynamic-Offset Cancellation Techniques in CMOS 
 
 —, Why Needs A Low Ripple after Chopping Amplifier for A Very Low DC Offset & Flicker Noise? [[https://youtu.be/y7TzJtHE7IA](https://youtu.be/y7TzJtHE7IA)]
 
-Qinwen Fan, Evolution of precision amplifiers
+Qinwen Fan, 2022 SSCS webinar:  Evolution of precision amplifiers
 
-Kofi Makinwa, ISSCC 2007 Dynamic-Offset Cancellation Techniques in CMOS 
+—. IEEE Sensors 2018: Capacitively-Coupled Chopper Instrumentation Amplifiers : an Overview [[https://youtu.be/NoGHJfCFCks](https://youtu.be/NoGHJfCFCks)]
 
 Axel Thomsen, Silicon Laboratories  ISSCC2012 T8: "Managing Offset and Flicker Noise"
 
@@ -487,4 +490,3 @@ CC Chen. Why Dynamic Offset or Mismatch Cancellation with Auto-zeroing Technique
 
 —. Why Needs A Low Ripple after Chopping Amplifier for A Very Low DC Offset & Flicker Noise? [[https://youtu.be/y7TzJtHE7IA](https://youtu.be/y7TzJtHE7IA)]
 
-Qinwen Fan, Kofi Makinwa. IEEE Sensors 2018: Capacitively-Coupled Chopper Instrumentation Amplifiers : an Overview [[https://youtu.be/NoGHJfCFCks](https://youtu.be/NoGHJfCFCks)]

@@ -116,7 +116,41 @@ $$
 
 
 
+## DFE in digital
 
+> Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI](https://youtu.be/puEP0DlVZGI)]
+>
+> Chen, Kuan-Chang (2022) *Energy-Efficient Receiver Design for High-Speed Interconnects.* Dissertation (Ph.D.), California Institute of Technology. [[https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf](https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf)]
+
+![image-20250524224829419](dsp2asic/image-20250524224829419.png)
+
+**Parallel implementation**
+
+![image-20250524235031104](dsp2asic/image-20250524235031104.png)
+
+
+
+![image-20250525101922485](dsp2asic/image-20250525101922485.png)
+
+
+
+**Loop-Unrolling DFE**
+
+![image-20250525105017605](dsp2asic/image-20250525105017605.png)
+
+![image-20250525191101301](dsp2asic/image-20250525191101301.png)
+
+Corresponding to the three distinct voltage thresholds in the *PAM4* systems, it would need *12 slicers, 3 multiplexers*, and *one thermometer-to-binary decoder* in each deserialized data path, even if only one tap of the DFE is unrolled
+
+
+
+**Look-Ahead Multiplexing DFE**
+
+![image-20250525151918214](dsp2asic/image-20250525151918214.png)
+
+The look-ahead multiplexing technique brings the key benefit that the timing constraint can be significantly relaxed, as the iteration bound is ***doubled*** at the expense of extra hardware
+
+![image-20250525192228275](dsp2asic/image-20250525192228275.png)
 
 
 

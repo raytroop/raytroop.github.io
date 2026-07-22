@@ -25,10 +25,17 @@ mathjax: true
 
 
 
-###  Flicker Noise Modulation
+### Flicker Noise Modulation
 
 
+MOS flicker noise in large-signal setting can be treated as a stationary, bias-independent series gate source $v_{1/f}$ converted to drain current by the deterministic periodic modulation
 
+$$
+m(t) = G_m(t) + \Omega I_D(t)
+$$
+
+
+![2026-07-22_09-50.png](nltv/2026-07-22_09-50.png)
 
 
 

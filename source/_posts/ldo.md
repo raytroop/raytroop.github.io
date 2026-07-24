@@ -247,6 +247,14 @@ $$
 
 
 
+## NMOS LDO
+
+![image-20260725003807343](ldo/image-20260725003807343.png)
+
+For ESD considertion, NMOS is placed in DNW, which provide ESD discharging path from source to AVDD
+
+
+
 
 
 ## feedback resistor divider noise

@@ -37,6 +37,87 @@ $$
 $$
 
 
+
+##  instantaneous & average PSD
+
+For white noise $n(t)$
+
+![image-20260725005940162](nltv/image-20260725005940162.png)
+
+
+
+## flicker noise spectrum
+
+![image-20260724230315724](nltv/image-20260724230315724.png)
+
+![image-20260724230516271](nltv/image-20260724230516271.png)
+
+```matlab
+f       = logspace(0, 10, 4000);      % 1 Hz ... 10 GHz
+tau_min = 1e-9;                       % fastest trap (corner ~160 MHz)
+tau_max = 1e-2;                       % slowest trap (corner ~16 Hz)
+r       = tau_max/tau_min;            % 7 decades of time constants
+Nlist   = [1 3 300];            % number of superposed traps
+
+figure('Color','w','Position',[100 60 720 800]);
+
+% ------------------------------ spectra ------------------------------
+ax1 = subplot(2,1,1); hold(ax1,'on');
+for m = 1:numel(Nlist)
+    N = Nlist(m);
+    if N == 1
+        tau = sqrt(tau_min*tau_max);                        % mid-band trap
+    else
+        tau = logspace(log10(tau_min), log10(tau_max), N);  % log-spaced
+    end
+    S = zeros(size(f));
+    for k = 1:numel(tau)
+        S = S + tau(k) ./ (1 + (2*pi*f*tau(k)).^2);         % c_t = 1
+    end
+    % Every Lorentzian carries the same total power (integral over f = 1/4
+    % regardless of tau), so dividing by N keeps the total variance fixed:
+    S = S/N;
+    plot(ax1, f, S, 'LineWidth', 2, 'DisplayName', sprintf('N = %d', N));
+end
+
+xline(ax1, 1/(2*pi*tau_max), 'Color', [.85 .85 .85], 'LineWidth',2, 'HandleVisibility', 'off');
+xline(ax1, 1/(2*pi*tau_min), 'Color', [.85 .85 .85], 'LineWidth',2, 'HandleVisibility', 'off');
+set(ax1, 'XScale','log', 'YScale','log'); grid(ax1,'on');
+xlim(ax1, [f(1) f(end)]);
+xlabel(ax1, 'f  (Hz)'); ylabel(ax1, 'S(f) / (c_t N)   (a.u.)');
+title(ax1, 'Superposition of trap Lorentzians \rightarrow 1/f');
+legend(ax1, 'Location', 'southwest', 'FontSize', 8);
+
+% --------------------------- local slope -----------------------------
+ax2 = subplot(2,1,2); hold(ax2,'on');
+for m = 1:numel(Nlist)
+    N = Nlist(m);
+    if N == 1
+        tau = sqrt(tau_min*tau_max);
+    else
+        tau = logspace(log10(tau_min), log10(tau_max), N);
+    end
+    S = zeros(size(f));
+    for k = 1:numel(tau)
+        S = S + tau(k) ./ (1 + (2*pi*f*tau(k)).^2);
+    end
+    plot(ax2, f, gradient(log(S))./gradient(log(f)), 'LineWidth', 2);
+end
+% plot(ax2, f, gradient(log(SL))./gradient(log(f)), '-.', 'Color', [.55 .55 .55]);
+yline(ax2, -1, ':', '1/f',   'Color', [.85 .1 .2], 'LineWidth', 1.2);
+yline(ax2, -2, ':', '1/f^2', 'Color', 'k');
+xline(ax2, 1/(2*pi*tau_max), 'Color', [.85 .85 .85], 'LineWidth', 2);
+xline(ax2, 1/(2*pi*tau_min), 'Color', [.85 .85 .85], 'LineWidth', 2);
+set(ax2, 'XScale', 'log'); grid(ax2,'on');
+xlim(ax2, [f(1) f(end)]); ylim(ax2, [-2.4 0.25]);
+xlabel(ax2, 'f  (Hz)'); ylabel(ax2, 'd logS / d logf');
+title(ax2, 'Local log-log slope: one trap \rightarrow -2,  many traps \rightarrow -1');
+```
+
+
+
+
+
 ## flicker noise upconversion
 
 > Y. Hu, T. Siriburanon and R. B. Staszewski, "A Low-Flicker-Noise 30-GHz Class-F23 Oscillator in 28-nm CMOS Using Implicit Resonance and Explicit Common-Mode Return Path," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 7, pp. 1977-1987, July 2018 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650)]

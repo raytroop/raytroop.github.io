@@ -72,76 +72,6 @@ Given $\color{blue}\Theta\sim U[0,2\pi]$, after ensemble averaging, the autocorr
 
 ---
 
-***sinewaves discrete approximate for continuous white noise***
-
-> A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]
-
-![image-20260714224742102](comm/image-20260714224742102.png)
-
-suppose $\color{blue}n(t) = \sum_i N[i]e^{ji\omega_0 t}$ where $\color{blue}N[i] = \sigma\, e^{j\theta_i} \quad \theta_i \ \text{i.i.d. } \mathcal{U}(-\pi, +\pi]$
-
-the three related quantities are:
-$$
-|N[i]| = \sigma \quad(\text{deterministic}), \qquad \langle N[i]\rangle = \sigma\,\langle e^{j\theta_i}\rangle = 0, \qquad N[i]\,\overline{N[i]} = \sigma e^{j\theta_i}\cdot \sigma e^{-j\theta_i} = \sigma^2.
-$$
-with the definition of the (ensemble) autocorrelation of a complex process 
-$$
-R_n(\tau) = \big\langle\, n(t+\tau)\,\overline{n(t)}\,\big\rangle = \sum_i \sum_k \big\langle N[i]\,\overline{N[k]}\big\rangle\, e^{j(i-k)\omega_0 t}\, e^{ji\omega_0 \tau} = \sum_i \sigma^2\, e^{ji\omega_0 \tau}
-$$
-The delta-function limit is then a Riemann sum: with $\color{blue}\sigma^2 = N^2\Delta f$ and $\omega_0 = 2\pi\Delta f$,
-$$
-R_n(\tau) = \sum_i N^2\,e^{j2\pi (i\Delta f) \tau}\,\Delta f \;\xrightarrow{\;\Delta f \to 0\;}\; N^2\!\int_{-\infty}^{\infty} e^{j2\pi f\tau}\,df = N^2\delta(\tau),
-$$
-recovering the ideal white-noise autocorrelation stated in the paper
-
-
-
----
-
-$$
-\color{blue}\boxed{
-\text{fixed magnitude + uniform phase}
-\Rightarrow
-\text{approximately Gaussian for many tones}
-}
-$$
-
-whereas
-$$
-\boxed{
-\text{complex Gaussian coefficients}
-\Rightarrow
-\text{exactly Gaussian band-limited noise}
-}.
-$$
-If every sinusoid has a fixed amplitude and only its phase is random,
-$$
-N_k
-=
-\sqrt{P_k}e^{j\Theta_k},
-$$
-then a finite sum is not exactly Gaussian. However, when many independent components are added, the time-domain distribution becomes approximately Gaussian by the central limit effect.
-
-For an exactly Gaussian frequency-domain construction, the spectral coefficients should be complex Gaussian:
-$$
-N_k
-=
-N_{I,k}+jN_{Q,k},
-$$
-where
-$$
-N_{I,k},N_{Q,k}
-\sim
-\mathcal N(0,\sigma_k^2).
-$$
-In that case:
-$$
-\Theta_k\sim\mathcal U(-\pi,\pi],
-$$
-but the magnitude is also random and has a Rayleigh distribution
-
----
-
 Assume $\Theta\sim \mathcal U[0,2\pi)$ is a **single random phase that remains constant for all $t$**:
 $$
 \color{blue}\boxed{X(t)=A\cos(\omega_0t+\Theta).}
@@ -283,7 +213,7 @@ S_X(f)
 $$
 The random phase makes the **ensemble stationary**; a sinusoid with a fixed deterministic phase is not normally regarded as a stationary random process because it contains no random ensemble.
 
-
+![image-20260725093435128](comm/image-20260725093435128.png)
 
 
 

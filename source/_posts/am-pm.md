@@ -59,7 +59,11 @@ modulate the phase of the oscillation with an index of approximately $\frac{2V_{
 
 
 
+---
 
+> Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
+
+![image-20260725143852951](am-pm/image-20260725143852951.png)
 
 
 

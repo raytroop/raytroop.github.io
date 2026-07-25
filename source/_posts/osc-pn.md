@@ -752,7 +752,12 @@ $R_{nInQ}(\tau)=-R_{nQnI}(\tau)$ demonstrate  $n_I $ and $n_Q $ are **uncorrelat
 
 
 
-![image-20260712235956996](osc-pn/image-20260712235956996.png)
+![image-20260725231729074](osc-pn/image-20260725231729074.png)
+
+$$
+V_{PM}\cos \omega_m t \overset{\text{power}}{\longrightarrow} \frac{S_{Vpm}}{2} = \frac{1}{2}(2kTR + 2kTR)
+$$
+
 
 
 
@@ -1330,6 +1335,8 @@ Accounting for these $1/2$ factors yields the identical PXF expression derived i
 > Aditya Varma Muppala, Fast Simulation of ISF and PPV using PSS and PXF in Cadence | Oscillators 12 | MMIC 19 [[https://youtu.be/Lu6VEWEEdxo](https://youtu.be/Lu6VEWEEdxo)]
 
 *TODO* &#128197;
+
+![image-20260725201359867](osc-pn/image-20260725201359867.png)
 
 
 

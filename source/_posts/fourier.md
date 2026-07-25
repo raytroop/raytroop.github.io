@@ -50,6 +50,142 @@ x(t) &= \sum_{k=-\infty}^{+\infty}a_ke^{jk(2\pi/T) t}
 
 
 
+
+
+
+
+---
+
+Let the periodic waveform $w(t)$, with period $T_0=2\pi/\omega_0$, have the complex Fourier series
+$$
+w(t)=\sum_{\ell=-\infty}^{\infty}W[\ell]e^{j\ell\omega_0t}.
+$$
+We want the Fourier coefficients of
+$$
+w(t)\sin(\omega_0t)
+\quad\text{and}\quad
+w(t)\cos(\omega_0t).
+$$
+
+**Multiplication by $\sin(\omega_0t)$**
+
+Use
+$$
+\sin(\omega_0t)
+=
+\frac{e^{j\omega_0t}-e^{-j\omega_0t}}{2j}.
+$$
+Then
+$$
+\begin{aligned}
+w(t)\sin(\omega_0t)
+&=
+\left(\sum_{\ell=-\infty}^{\infty}
+W[\ell]e^{j\ell\omega_0t}\right)
+\frac{e^{j\omega_0t}-e^{-j\omega_0t}}{2j}
+\\[4pt]
+&=
+\frac{1}{2j}
+\sum_{\ell=-\infty}^{\infty}
+W[\ell]
+\left[
+e^{j(\ell+1)\omega_0t}
+-
+e^{j(\ell-1)\omega_0t}
+\right].
+\end{aligned}
+$$
+Now collect the coefficient multiplying $e^{jk\omega_0t}$.
+
+For the first term,
+$$
+k=\ell+1
+\quad\Longrightarrow\quad
+\ell=k-1,
+$$
+so its coefficient is $W[k-1]$.
+
+For the second term,
+$$
+k=\ell-1
+\quad\Longrightarrow\quad
+\ell=k+1,
+$$
+so its coefficient is $W[k+1]$.
+
+Therefore,
+$$
+\boxed{
+w(t)\sin(\omega_0t)
+=
+\sum_{k=-\infty}^{\infty}
+\frac{W[k-1]-W[k+1]}{2j}
+e^{jk\omega_0t}
+}
+$$
+and the Fourier coefficient is
+$$
+\color{blue}\boxed{
+\left[w(t)\sin(\omega_0t)\right]_k
+=
+\frac{W[k-1]-W[k+1]}{2j}.
+}
+$$
+
+------
+
+**Multiplication by $\cos(\omega_0t)$**
+
+Use
+$$
+\cos(\omega_0t)
+=
+\frac{e^{j\omega_0t}+e^{-j\omega_0t}}{2}.
+$$
+Then
+$$
+\begin{aligned}
+w(t)\cos(\omega_0t)
+&=
+\left(\sum_{\ell=-\infty}^{\infty}
+W[\ell]e^{j\ell\omega_0t}\right)
+\frac{e^{j\omega_0t}+e^{-j\omega_0t}}{2}
+\\[4pt]
+&=
+\frac{1}{2}
+\sum_{\ell=-\infty}^{\infty}
+W[\ell]
+\left[
+e^{j(\ell+1)\omega_0t}
++
+e^{j(\ell-1)\omega_0t}
+\right].
+\end{aligned}
+$$
+Collecting the coefficient of $e^{jk\omega_0t}$,
+$$
+\boxed{
+w(t)\cos(\omega_0t)
+=
+\sum_{k=-\infty}^{\infty}
+\frac{W[k-1]+W[k+1]}{2}
+e^{jk\omega_0t}.
+}
+$$
+Therefore,
+$$
+\color{blue}\boxed{
+\left[w(t)\cos(\omega_0t)\right]_k
+=
+\frac{W[k-1]+W[k+1]}{2}.
+}
+$$
+
+
+
+
+
+
 ### Continuous-Time Fourier transform (CTFT)
 
 $$\begin{align}

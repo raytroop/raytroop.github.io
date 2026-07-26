@@ -757,7 +757,7 @@ $R_{nInQ}(\tau)=-R_{nQnI}(\tau)$ demonstrate  $n_I $ and $n_Q $ are **uncorrelat
 $$
 V_{PM}\cos \omega_m t \overset{\text{power}}{\longrightarrow} \frac{S_{Vpm}}{2} = \frac{1}{2}(2kTR + 2kTR)
 $$
-
+quadrature noise → geometric tilt $\phi,\, \Phi$ (bounded) → frequency shift $f \propto \theta$ → accumulated phase $\phi = \int f\,dt,\, \Theta$. Me
 
 
 

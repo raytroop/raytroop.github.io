@@ -742,7 +742,7 @@ $R_{nInQ}(\tau)=-R_{nQnI}(\tau)$ demonstrate  $n_I $ and $n_Q $ are **uncorrelat
 
 
 
-## Abidi's PN
+## Abidi & Hooman's PN
 
 > A. A. Abidi and D. Murphy, "How to Design a Differential CMOS LC Oscillator," in IEEE Open Journal of the Solid-State Circuits Society, vol. 5, pp. 45-59, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10818782)]
 >
@@ -761,6 +761,20 @@ quadrature noise → geometric tilt $\phi,\, \Phi$ (bounded) → frequency shift
 
 
 
+----
+
+![image-20260726111128525](osc-pn/image-20260726111128525.png)
+
+***Noise Passing through a Nonlinearity***
+
+![image-20260726112432265](osc-pn/image-20260726112432265.png)
+
+![image-20260726112649814](osc-pn/image-20260726112649814.png)
+
+
+
+
+
 ## Bank's General Result
 
 > J. Bank, "A harmonic-oscillator design methodology based on describing functions," Ph.D. dissertation, Dept. Signals Syst., Sch. Elect. Eng., Chalmers Univ. Techn., Chalmers, Sweden, 2006. [[https://publications.lib.chalmers.se/records/fulltext/17376.pdf](https://publications.lib.chalmers.se/records/fulltext/17376.pdf)]
@@ -769,7 +783,23 @@ quadrature noise → geometric tilt $\phi,\, \Phi$ (bounded) → frequency shift
 
 
 
-![image-20260715223505523](osc-pn/image-20260715223505523.png)
+
+
+![image-20260726154549762](osc-pn/image-20260726154549762.png)
+
+![image-20260726153846807](osc-pn/image-20260726153846807.png)
+
+![image-20260726154648915](osc-pn/image-20260726154648915.png)
+
+with $\overline{g_m} R_p=1$
+$$
+\overline{i_n^2} = \overline{i_{R}^2} + \overline{i_{gnr}^2}= \frac{4kT}{R_p} + 4kT\gamma \overline{g_m} =  \frac{4kT}{R_p}(1+ \gamma \overline{g_m} R) = \frac{4kT}{R_p}(1+ \gamma)
+$$
+
+
+
+
+## Two-Port Oscillators
 
 
 

@@ -302,13 +302,19 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 ---
 
-***current limited vs voltage limited***
+### current vs voltage limited
 
 ![image-20260622205909171](lc-osc/image-20260622205909171.png)
 
 ![image-20251026121829983](lc-osc/image-20251026121829983.png)
 
 
+
+---
+
+> Luong, H. C., & Yin, J. (2016). *Transformer-based design techniques for oscillators and frequency dividers*. Springer International Publishing
+
+![image-20260727234122604](lc-osc/image-20260727234122604.png)
 
 ### Class-B Power/Current Efficiency
 

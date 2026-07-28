@@ -68,7 +68,7 @@ Unfortunately, the gain *less than 1* due to numerical error or nonlinearity
 
 
 
-### Example
+### JTF by impulse response
 #### Low Pass Filter
 
 ![image-20220322124344158](jitter-amplify/image-20220322124344158.png)
@@ -143,6 +143,26 @@ title('JTF of inverter chain');
 ```
 
 ![image-20220608233303576](jitter-amplify/image-20220608233303576.png)
+
+
+
+### JTF by step response
+
+| t<sub>0</sub> | t<sub>1</sub>               | t<sub>2</sub>                  | t<sub>3</sub>                  | t<sub>4</sub>                  | t<sub>5</sub>                  | t<sub>6</sub>                  | t<sub>7</sub>                  |
+| ------------- | --------------------------- | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+| h<sub>0</sub> | h<sub>1</sub>               | h<sub>2</sub>                  | h<sub>3</sub>                  | h<sub>4</sub>                  | h<sub>5</sub>                  | h<sub>6</sub>                  | h<sub>7</sub>                  |
+|               | h<sub>0</sub>               | h<sub>1</sub>                  | h<sub>2</sub>                  | h<sub>3</sub>                  | h<sub>4</sub>                  | h<sub>5</sub>                  | h<sub>6</sub>                  |
+|               |                             | h<sub>0</sub>                  | h<sub>1</sub>                  | h<sub>2</sub>                  | h<sub>3</sub>                  | h<sub>4</sub>                  | h<sub>5</sub>                  |
+|               |                             |                                | h<sub>0</sub>                  | h<sub>1</sub>                  | h<sub>2</sub>                  | h<sub>3</sub>                  | h<sub>4</sub>                  |
+|               |                             |                                |                                | h<sub>0</sub>                  | h<sub>1</sub>                  | h<sub>2</sub>                  | h<sub>3</sub>                  |
+|               |                             |                                |                                |                                | h<sub>0</sub>                  | h<sub>1</sub>                  | h<sub>2</sub>                  |
+|               |                             |                                |                                |                                |                                | h<sub>0</sub>                  | h<sub>1</sub>                  |
+|               |                             |                                |                                |                                |                                |                                | h<sub>0</sub>                  |
+| h<sub>0</sub> | h<sub>0</sub>+h<sub>1</sub> | h<sub>0</sub>+...h<sub>2</sub> | h<sub>0</sub>+...h<sub>3</sub> | h<sub>0</sub>+...h<sub>4</sub> | h<sub>0</sub>+...h<sub>5</sub> | h<sub>0</sub>+...h<sub>6</sub> | h<sub>0</sub>+...h<sub>7</sub> |
+
+
+
+In step response,  h<sub>0</sub>+...h<sub>n</sub> is approaching to input derivation, which ensure **DC gain is unit** — $X(e^{j0})=\sum_{n=-\infty}^{+\infty}x[n]e^{-j0 n}=\sum_{n=-\infty}^{+\infty}x[n]$
 
 
 

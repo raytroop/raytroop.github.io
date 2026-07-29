@@ -208,7 +208,9 @@ $$
 
 ---
 
-series model (R<sub>s</sub>, C<sub>s</sub>) to parallel model (R<sub>p</sub>, C<sub>p</sub>) w/ different R<sub>s</sub>
+series model (R<sub>s</sub>, C<sub>s</sub>) to parallel model (R<sub>p</sub>, C<sub>p</sub>) w/ fixed C<sub>s</sub> but varying R<sub>s</sub>
+
+parallel model (R<sub>p</sub>, C<sub>p</sub>) to series model (R<sub>s</sub>, C<sub>s</sub>) w/ fixed C<sub>p</sub> but varying R<sub>p</sub>
 
 
 $$\begin{align}

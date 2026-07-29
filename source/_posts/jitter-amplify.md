@@ -116,7 +116,7 @@ grid on;
 
 ![image-20220327010421475](jitter-amplify/image-20220327010421475.png)
 
-### inverter chain
+#### inverter chain
 
 ![image-20220608232251056](jitter-amplify/image-20220608232251056.png)
 

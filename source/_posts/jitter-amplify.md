@@ -162,7 +162,7 @@ title('JTF of inverter chain');
 
 
 
-In step response,  h<sub>0</sub>+...h<sub>n</sub> is approaching to input derivation, which ensure **DC gain is unit** — $X(e^{j0})=\sum_{n=-\infty}^{+\infty}x[n]e^{-j0 n}=\sum_{n=-\infty}^{+\infty}x[n]$
+For a unit-step input, the cumulative sum h<sub>0</sub>+...+h<sub>n</sub> converges to unity, ensuring a unity DC gain — $X(e^{j0})=\sum_{n=-\infty}^{+\infty}x[n]e^{-j0 n}=\sum_{n=-\infty}^{+\infty}x[n]$
 
 
 

@@ -147,15 +147,31 @@ $$
 
 
 
-### Flicker Noise Formulations in Compact Models
+### Flicker Noise Formulations in Verilog-A
 
 > G. J. Coram, C. C. McAndrew, K. K. Gullapalli and K. S. Kundert, "Flicker Noise Formulations in Compact Models," in *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*, vol. 39, no. 10, pp. 2812-2821, Oct. 2020 [[https://kenkundert.com/docs/tcad20-flicker-noise.pdf](https://kenkundert.com/docs/tcad20-flicker-noise.pdf)],[[https://github.com/KenKundert/flicker-noise](https://github.com/KenKundert/flicker-noise)]
 >
 > BSIM4v4.7 MOSFET Model -User's Manual [[https://class.ece.iastate.edu/djchen/ee501/BSIM470_Manual.pdf](https://class.ece.iastate.edu/djchen/ee501/BSIM470_Manual.pdf)]
+>
+> C. C. McAndrew *et al*., "Best Practices for Compact Modeling in Verilog-A," in *IEEE Journal of the Electron Devices Society*, vol. 3, no. 5, pp. 383-396, Sept. 2015 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7154394](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7154394)]
 
 
 
-![image-20260726111128525](nltv/image-20260726111128525.png)
+
+
+
+
+---
+
+> Marek Mierzwinski, Verilog-A Standardization for Compact Modeling [[https://www.mos-ak.org/washington_dc/papers/Mierzwinski_MOS-AK_2011.pdf](https://www.mos-ak.org/washington_dc/papers/Mierzwinski_MOS-AK_2011.pdf)]
+
+Current BSIM models use compact-model equations standardized through reference Verilog-A code, but commercial simulators often execute an optimized built-in implementation rather than the Verilog-A source directly
+
+![image-20260729232946151](nltv/image-20260729232946151.png)
+
+![image-20260729233151017](nltv/image-20260729233151017.png)
+
+![image-20260729233304135](nltv/image-20260729233304135.png)
 
 
 

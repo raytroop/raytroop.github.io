@@ -204,6 +204,22 @@ $$
 
 
 
+---
+---
+
+series model (R<sub>s</sub>, C<sub>s</sub>) to parallel model (R<sub>p</sub>, C<sub>p</sub>) w/ different R<sub>s</sub>
+
+
+$$\begin{align}
+C_p &= \frac{Q^2}{1+Q^2}C_s=C_s(1-\frac{1}{1+Q^2}) \qquad R_p = (1+Q^2)R_s =  (1+Q^2)\frac{1}{\omega C_s Q}=(\frac{1}{Q}+Q)\frac{1}{\omega C_s}\\
+C_s &= \frac{1+Q^2}{Q^2}C_p = C_p(1+\frac{1}{Q^2}) \qquad R_s = \frac{1}{1+Q^2}R_p = \frac{1}{1+Q^2}\frac{Q}{\omega C_p} = \frac{Q}{1+Q^2}\frac{1}{\omega C_p}
+\end{align}$$
+
+![CsRs_CpRp_Q.png](resonant/CsRs_CpRp_Q.png)
+
+![CpRp_CsRs_Q.png](resonant/CpRp_CsRs_Q.png)
+
+
 
 
 

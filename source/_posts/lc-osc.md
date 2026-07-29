@@ -1117,7 +1117,7 @@ $$
 
 ## Discrete Capacitor Tuning
 
-> A. D. Berny, A. M. Niknejad and R. G. Meyer, "A 1.8-GHz LC VCO with 1.3-GHz tuning range and digital amplitude calibration," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 4, pp. 909-917, April 2005 
+> A. D. Berny, A. M. Niknejad and R. G. Meyer, "A 1.8-GHz LC VCO with 1.3-GHz tuning range and digital amplitude calibration," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 4, pp. 909-917, April 2005 [[https://sci-hub.jp/10.1109/JSSC.2004.842851](https://sci-hub.jp/10.1109/JSSC.2004.842851)]
 
 ![image-20260729223441717](lc-osc/image-20260729223441717.png)
 

@@ -61,7 +61,7 @@ Directly compare the input phase noise and output phase noise, the input wavefor
 
 
 
-Theoretically, the DC gain of JTF of low pass filter shall be ***1***. 
+Theoretically, the DC gain of JTF of low pass filter shall be ***1***.
 Unfortunately, the gain *less than 1* due to numerical error or nonlinearity
 
 ![image-20220313231027512](jitter-amplify/image-20220313231027512.png)
@@ -92,7 +92,7 @@ plot(abs(Y(1:N/2)));
 ![image-20220322124932584](jitter-amplify/image-20220322124932584.png)
 
 > discrete time jitter impulse response
-> 
+>
 > both input and output are discrete time signal, i.e. no sampling in the input, that's why ratio $1/T_s$ is not in the jtf
 
 #### High Pass Filter
@@ -163,6 +163,11 @@ title('JTF of inverter chain');
 
 
 For a unit-step input, the cumulative sum h<sub>0</sub>+...+h<sub>n</sub> converges to **1**, ensuring a unity DC gain — $X(e^{j0})=\sum_{n=-\infty}^{+\infty}x[n]e^{-j0 n}=\sum_{n=-\infty}^{+\infty}x[n]$
+
+$$
+\boxed{h_\text{impulse}[n] = h_\text{step}[n+1] - h_\text{step}[n]}
+$$
+
 
 
 

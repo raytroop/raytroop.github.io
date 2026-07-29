@@ -316,6 +316,10 @@ Owing to switch-off PMOS eliminating common mode current, all $I_T$ is different
 
 ![image-20260727234122604](lc-osc/image-20260727234122604.png)
 
+Once the swing clips near the supply (voltage-limited regime), more tail current just burns power and can even hurt phase noise
+
+
+
 ### Class-B Power/Current Efficiency
 
 > Z. Wang, S. Diao, L. He, X. Jiang and F. Lin, "Analysis of Current Efficiency for CMOS Class-B LC Oscillators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 62, no. 5, pp. 1345-1352, May 2015 [[https://sci-hub.jp/10.1109/TCSI.2015.2411792](https://sci-hub.jp/10.1109/TCSI.2015.2411792)]
@@ -1108,6 +1112,29 @@ $$
 $$
 
 
+
+
+
+## Discrete Capacitor Tuning
+
+> A. D. Berny, A. M. Niknejad and R. G. Meyer, "A 1.8-GHz LC VCO with 1.3-GHz tuning range and digital amplitude calibration," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 4, pp. 909-917, April 2005 
+
+![image-20260729223441717](lc-osc/image-20260729223441717.png)
+
+
+
+```mermaid
+graph LR
+    A[Lower f₀] --> B["Larger C_T"]
+    B --> C["Lower bank Q"]
+    C --> D["Lower tank Q & Lower √(L/C_T)"]
+    D --> E["Lower R_p"]
+    E --> F["Higher I_bias (for the same amplitude)"]
+
+
+```
+
+![image-20260729230115658](lc-osc/image-20260729230115658.png)
 
 
 

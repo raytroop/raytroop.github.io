@@ -465,6 +465,12 @@ trade-offs between *noise amplification* and *signal equalization*
 
 
 
+## ESD structure
+
+![image-20260801014821774](rx-fe/image-20260801014821774.png)
+
+??? which diodes are used in right topology
+
 
 
 ## reference

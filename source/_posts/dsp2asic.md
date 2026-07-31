@@ -279,6 +279,8 @@ Kuo, Sen-Maw. (2013) Real-Time Digital Signal Processing: Implementations and Ap
 
 D. Markovic and R. W. Brodersen, DSP Architecture Design Essentials, Springer, 2012.
 
+X. Yang, Integrated Circuit Design: IC Design Flow and Project-Based Learning, 1st edition. Boca Raton: CRC Press, 2024 [[repo](https://github.com/IC-Design-Lab/IC-Design)]
+
 ---
 
 Bevan Baas, EEC281 VLSI Digital Signal Processing,  [[https://www.ece.ucdavis.edu/~bbaas/281/](https://www.ece.ucdavis.edu/~bbaas/281/)]

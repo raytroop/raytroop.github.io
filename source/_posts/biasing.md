@@ -156,6 +156,22 @@ The low threshold voltage of cascode MOS **don't** help decrease the minimum out
 
 
 
+
+
+---
+
+***Poor Man's Cascode***
+
+![image-20260731213434853](biasing/image-20260731213434853.png)
+$$
+V_{DS1} = V_{GS2} - V_{GS1} \qquad  V_{GS1} = V_{OV1} + V_\text{th1}
+$$
+with $V_{GS2} - V_\text{th2}\lt V_{DS1} $
+$$
+V_{GS2} - V_\text{th2} \lt V_{GS2} - V_{GS1} \to V_{GS1} \lt V_\text{th2} \to \color{green}\boxed{V_{OV1} \lt V_\text{th2} - V_\text{th1}}
+$$
+
+
 ## Channel-length modulation
 
 > &#10071; There it **not** channel-length modulation in the triode region

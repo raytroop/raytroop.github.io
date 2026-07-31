@@ -234,9 +234,25 @@ the carrier phase/time origin is fixed, not randomized, it not WSS but **cyclost
 
 ---
 
+---
+
 ![image-20241002231615792](comm/image-20241002231615792.png)
 
 ![image-20241002231639299](comm/image-20241002231639299.png)
+
+
+
+---
+
+---
+
+$g(t) = i_n(t)\sin\omega_0 t$ is ***not* WSS (it's cyclostationary)**, but its *time-averaged* PSD is **white**
+
+![image-20260731220218142](comm/image-20260731220218142.png)
+
+> the solution silently performs the time-averaging step 
+
+![image-20260731220208819](comm/image-20260731220208819.png)
 
 
 

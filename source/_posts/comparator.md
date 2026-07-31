@@ -45,6 +45,26 @@ mathjax: true
 
 
 
+---
+
+---
+
+> Ashish Patni , Sampled(Jitter) noisetype in Pnoise/Hbnoise analysis[[https://community.cadence.com/cfs-file/__key/communityserver-discussions-components-files/38/Sampled_2800_Jitter_2900_-noisetype-in-Pnoise_5F00_1.pdf](https://community.cadence.com/cfs-file/__key/communityserver-discussions-components-files/38/Sampled_2800_Jitter_2900_-noisetype-in-Pnoise_5F00_1.pdf)]
+
+by  ***Edge Crossing***
+
+![image-20260801002320031](comparator/image-20260801002320031.png)
+
+
+
+by ***Sampled Phase***
+
+![image-20260801002609577](comparator/image-20260801002609577.png)
+
+![image-20260801002643868](comparator/image-20260801002643868.png)
+
+
+
 ### Transient Noise Method
 
 > Noise **Fmax** sets the bandwidth of the random noise sources that are injected at each time point in the transient analysis

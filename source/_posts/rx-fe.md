@@ -465,13 +465,21 @@ trade-offs between *noise amplification* and *signal equalization*
 
 
 
-## ESD structure
+## dual-diode based ESD protection
 
 ![image-20260801014821774](rx-fe/image-20260801014821774.png)
 
-??? which diodes are used in right topology
+??? which diodes are used in right topology — both pdiode and ndiode are used
 
 
+
+
+
+---
+
+
+
+![image-20260801022107783](rx-fe/image-20260801022107783.png)
 
 ## reference
 

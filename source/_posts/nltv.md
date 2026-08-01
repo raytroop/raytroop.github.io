@@ -123,7 +123,15 @@ title(ax2, 'Local log-log slope: one trap \rightarrow -2,  many traps \rightarro
 
 
 
+### numerical generation of flicker noise
 
+> Bibbona, Enrico, Gianna Panfilo and Patrizia Tavella. "The Ornstein–Uhlenbeck process as a model of a low pass filtered white noise." *Metrologia* 45 (2008): S117 - S126. [[https://iris.polito.it/retrieve/e384c42f-3847-d4b2-e053-9f05fe0a1d67/OUasFWN_finale.pdf](https://iris.polito.it/retrieve/e384c42f-3847-d4b2-e053-9f05fe0a1d67/OUasFWN_finale.pdf)]
+
+**Ornstein–Uhlenbeck process**, equivalently **white noise passed through a first-order low-pass filter**
+
+![image-20260801203350117](nltv/image-20260801203350117.png)
+
+![image-20260801203516575](nltv/image-20260801203516575.png)
 
 ### Flicker Noise Formulations in Verilog-A
 

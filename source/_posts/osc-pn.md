@@ -722,6 +722,12 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 ## Razavi's PN
 
+
+
+### Additive Noise to PN
+
+$n_I(t)$ and $n_Q(t)$ have the **same PSD** and are **uncorrelated**
+
 ![image-20260628111202330](osc-pn/image-20260628111202330.png)
 
 
@@ -730,17 +736,33 @@ P_{x,n} &= \int_{f=-\infty}^{\infty} |X_n|^2\frac{\omega_0^2n^2c}{\frac{1}{4}\om
 
 ![image-20260628113608943](osc-pn/image-20260628113608943.png)
 
-![image-20260628114309467](osc-pn/image-20260628114309467.png)
-
-$R_{nI}(\tau) = R_{nQ}(\tau)$ demonstrate **spectra** of $n_I $ and $n_Q $ to be **equal**
-
-$R_{nInQ}(\tau)=-R_{nQnI}(\tau)$ demonstrate  $n_I $ and $n_Q $ are **uncorrelated**
 
 
+### Tail Thermal Noise
+
+![image-20260801094552320](osc-pn/image-20260801094552320.png)
+
+***low-frequency content***:
+
+![image-20260801094204572](osc-pn/image-20260801094204572.png)
+
+***around $\omega_0$***:
+
+*no phase noise is produced*
+
+![image-20260801094304755](osc-pn/image-20260801094304755.png)
+
+***around $2\omega_0$***:
+
+$\frac{2}{\pi}[n_I(t)\cos2\omega_0 t - n_Q(t)\sin2\omega_0 t]\cdot \color{red}\cos\omega_0 t$ produce most phase noise
+
+$\frac{2}{\textcolor{green}{3}\pi}[n_I(t)\cos2\omega_0 t - n_Q(t)\sin2\omega_0 t]\cdot \color{red}\cos3\omega_0 t$  produce phase noise, but can be negligible — $10\log(1+\frac{1}{3^2})\approx +0.46\, \text{dB}$
 
 
 
+### Tail Flicker Noise
 
+![image-20260801102320489](osc-pn/image-20260801102320489.png)
 
 ## Abidi & Hooman's PN
 

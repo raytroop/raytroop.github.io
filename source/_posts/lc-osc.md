@@ -1138,6 +1138,10 @@ graph LR
 
 
 
+> In a **differential LC VCO**, every tuning bit should preserve the symmetry of the two tank nodes
+>
+> To maintain a **symmetric connection** between the inductor and the capacitor bank, each weighted capacitor branch should be split and placed symmetrically about the differential axis
+
 
 
 ## Temperature Compensation

@@ -307,6 +307,26 @@ $$
 
 
 
+## Rice's representation of WSS
+
+> Papoulis, A., & Pillai, S. U. (2002). *Probability, random variables, and stochastic processes* (4th ed.). McGraw-Hill
+>
+> Po-Ning Chen, Chapter 10 Random Walks and Other Applications [[https://video.ocw.nycu.edu.tw/pub/spr052/Handout/random10s16.pdf](https://video.ocw.nycu.edu.tw/pub/spr052/Handout/random10s16.pdf)]
+
+![image-20260801093029892](random/image-20260801093029892.png)
+
+
+
+---
+
+$R_{nI}(\tau) = R_{nQ}(\tau)$ demonstrate **spectra** of $n_I$ and $n_Q$ to be **equal**
+
+$R_{nI,nQ}(\tau)=-R_{nQ,nI}(\tau)$ demonstrate  $n_I$ and $n_Q$ are **uncorrelated**
+
+![image-20260628114309467](random/image-20260628114309467.png)
+
+
+
 ## arbitrary stationary process model
 
 > Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.

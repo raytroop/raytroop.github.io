@@ -819,7 +819,7 @@ $$
 \delta A.
 $$
 
-Thus, the flicker noise from the tail current source is converted into phase noise through the following sequence:
+Thus, the **flicker noise from the tail current source** is converted into phase noise through the following sequence:
 
 $$
 \text{Tail }1/f\ \text{noise}
@@ -831,17 +831,19 @@ $$
 \text{phase noise}.
 $$
 
-The oscillator phase is perturbed directly for for the cross-coupled pair
+> The **oscillator phase is perturbed directly for the cross-coupled pair**
+>
+> $$
+> \text{Cross-coupled }1/f\ \text{noise}
+> \;\rightarrow\;
+> \text{direct timing error}
+> \;\rightarrow\;
+> \text{phase noise}.
+> $$
+>
+> Unlike the Groszkowski effect, this mechanism **does not rely on amplitude-to-frequency conversion**
 
-$$
-\text{Cross-coupled }1/f\ \text{noise}
-\;\rightarrow\;
-\text{direct timing error}
-\;\rightarrow\;
-\text{phase noise}.
-$$
 
-Unlike the Groszkowski effect, this mechanism **does not rely on amplitude-to-frequency conversion**
 
 
 ---

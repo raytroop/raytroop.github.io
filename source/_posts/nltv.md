@@ -46,7 +46,14 @@ For white noise $n(t)$
 
 
 
-## flicker noise spectrum
+
+
+
+
+## flicker noise Modulation
+
+
+### flicker noise spectrum
 
 ![image-20260724230315724](nltv/image-20260724230315724.png)
 
@@ -118,35 +125,6 @@ title(ax2, 'Local log-log slope: one trap \rightarrow -2,  many traps \rightarro
 
 
 
-## flicker noise upconversion
-
-> Y. Hu, T. Siriburanon and R. B. Staszewski, "A Low-Flicker-Noise 30-GHz Class-F23 Oscillator in 28-nm CMOS Using Implicit Resonance and Explicit Common-Mode Return Path," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 7, pp. 1977-1987, July 2018 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650)]
->
-> —, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
->
-> —, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
->
-> E. G. Ioannidis, C. G. Theodorou, T. A. Karatsori, S. Haendler, C. A. Dimitriadis and G. Ghibaudo, "Drain-Current Flicker Noise Modeling in nMOSFETs From a 14-nm FDSOI Technology," in IEEE Transactions on Electron Devices, vol. 62, no. 5, pp. 1574-1579, May 2015 [[https://sci-hub.jp/10.1109/TED.2015.2411678](https://sci-hub.jp/10.1109/TED.2015.2411678)]
-
-
-
-
-
-### Flicker Noise Modulation
-
-
-MOS flicker noise in large-signal setting can be treated as a stationary, bias-independent series gate source $v_{1/f}$ converted to drain current by the deterministic periodic modulation
-
-$$
-m(t) = G_m(t) + \Omega I_D(t)
-$$
-
-
-![2026-07-22_09-50.png](nltv/2026-07-22_09-50.png)
-
-
-
-
 ### Flicker Noise Formulations in Verilog-A
 
 > G. J. Coram, C. C. McAndrew, K. K. Gullapalli and K. S. Kundert, "Flicker Noise Formulations in Compact Models," in *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems*, vol. 39, no. 10, pp. 2812-2821, Oct. 2020 [[https://kenkundert.com/docs/tcad20-flicker-noise.pdf](https://kenkundert.com/docs/tcad20-flicker-noise.pdf)],[[https://github.com/KenKundert/flicker-noise](https://github.com/KenKundert/flicker-noise)]
@@ -157,7 +135,56 @@ $$
 
 
 
+![image-20260801190953551](nltv/image-20260801190953551.png)
 
+When `sign(Ir) = -1`, the argument becomes
+$$
+q(t)=\operatorname{sign}(I_r)P_n=-P_n.
+$$
+A simulator that correctly supports Kundert’s formulation does **not** interpret this as a physically negative PSD, nor does it calculate the ordinary complex square root $\sqrt{-P_n}$. Instead, the sign selects the sign of the deterministic noise-modulation amplitude:
+$$
+\boxed{
+m(t)=\operatorname{sign}\!\big(q(t)\big)\sqrt{|q(t)|}
+}
+$$
+Therefore, when $q=-P_n$,
+$$
+m(t)=-\sqrt{P_n}.
+$$
+This is equivalent to
+
+```
+I(a,b) <+ sign(Ir)*flicker_noise(Pn, EF, "flicker");
+```
+
+provided the simulator supports a noise function inside an expression
+
+```verilog
+// BSIM flicker noise simulations
+
+simulator lang=spectre
+
+model nchbsim4_f0 bsim4      fnoimod=0 kf=1e-23 af=2
+model nchbsim4_f1 bsim4      fnoimod=1
+
+Vmod (mod 0) vsource type=sine dc=1.0 sinedc=0.0 ampl=100mV freq=131.072kHz
+ED (d 0 mod 0) vcvs gain=1
+ES (s 0 mod 0) vcvs gain=-1
+VG (g 0) vsource dc=3
+VB (b 0) vsource dc=-0.2
+
+MBSIM4f0 (d_f0 g s b) nchbsim4_f0 l=1um w=10um
+MBSIM4f1 (d_f1 g s b) nchbsim4_f1 l=1um w=10um
+
+iRESf0 (d d_f0) vsource dc=0.0
+iRESf1 (d d_f1) vsource dc=0.0
+Rout (noise 0) resistor isnoisy=no r=100kOhm
+Hnoise (noise  0) pccvs coeffs=[0 1 1] probes=[iRESf0 iRESf1]
+
+noise (noise 0) noise start=4_Hz stop=4.194304MHz dec=2k
+pop pss fund=131.072kHz
+pnoise (noise 0) pnoise start=4_Hz stop=4.194304MHz dec=2k maxsideband=10
+```
 
 
 

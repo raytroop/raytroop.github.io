@@ -829,6 +829,134 @@ $$
 
 
 
+## flicker noise upconversion
+
+> Y. Hu, T. Siriburanon and R. B. Staszewski, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
+>
+> —, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
+>
+> E. G. Ioannidis, C. G. Theodorou, T. A. Karatsori, S. Haendler, C. A. Dimitriadis and G. Ghibaudo, "Drain-Current Flicker Noise Modeling in nMOSFETs From a 14-nm FDSOI Technology," in IEEE Transactions on Electron Devices, vol. 62, no. 5, pp. 1574-1579, May 2015 [[https://sci-hub.jp/10.1109/TED.2015.2411678](https://sci-hub.jp/10.1109/TED.2015.2411678)]
+
+
+
+Two different mechanisms:
+$$
+\boxed{\text{tail-transistor }1/f\text{ noise}}
+\qquad\text{vs.}\qquad
+\boxed{\text{cross-coupled-pair }1/f\text{ noise}}
+$$
+They are **not** upconverted through exactly the same physical path
+
+
+
+### Tail-current-source flicker noise
+
+> J. J. Rael and A. A. Abidi, "Physical processes of phase noise in differential LC oscillators," *Proceedings of the IEEE 2000 Custom Integrated Circuits Conference (Cat. No.00CH37044)*, Orlando, FL, USA, 2000 [[https://people.engr.tamu.edu/spalermo/ecen620/physical_processes_pn_diff_lc_osc_rael_cicc_2000.pdf](https://people.engr.tamu.edu/spalermo/ecen620/physical_processes_pn_diff_lc_osc_rael_cicc_2000.pdf)]
+>
+> A. Bevilacqua and P. Andreani, "An Analysis of 1/f Noise to Phase Noise Conversion in CMOS Harmonic Oscillators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 59, no. 5, pp. 938-945, May 2012 [[https://sci-hub.jp/10.1109/TCSI.2012.2190564](https://sci-hub.jp/10.1109/TCSI.2012.2190564)]
+
+$$
+v_{n,\mathrm{tail}}^{1/f}
+\rightarrow
+\Delta I_T
+\rightarrow
+\text{AM and harmonic-content modulation}
+\rightarrow
+\Delta\omega_0
+\rightarrow
+\phi(t).
+$$
+
+They explicitly associate tail-current flicker noise with the sensitivity of oscillation frequency to tail current,
+$$
+K_{I_T\rightarrow\omega}
+=
+\frac{\partial\omega_{\mathrm{osc}}}{\partial I_T}.
+$$
+Thus,
+$$
+S_{\phi}(\Delta f)
+\approx
+\frac{
+\left|
+\partial\omega_{\mathrm{osc}}/\partial I_T
+\right|^2
+S_{I_T}(\Delta f)}
+{(2\pi\Delta f)^2}.
+$$
+For $S_{I_T}\propto1/\Delta f$, this produces $S_\phi\propto1/\Delta f^3$.
+
+
+
+### Cross-coupled-pair flicker noise
+
+> Y. Hu, T. Siriburanon and R. B. Staszewski, "A Low-Flicker-Noise 30-GHz Class-F23 Oscillator in 28-nm CMOS Using Implicit Resonance and Explicit Common-Mode Return Path," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 7, pp. 1977-1987, July 2018 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650)]
+>
+> F. Pepe, A. Bonfanti, S. Levantino, C. Samori and A. L. Lacaita, "Analysis and Minimization of Flicker Noise Up-Conversion in Voltage-Biased Oscillators," in *IEEE Transactions on Microwave Theory and Techniques*, vol. 61, no. 6, pp. 2382-2394, June 2013 [[https://sci-hub.jp/10.1109/TMTT.2013.2259257](https://sci-hub.jp/10.1109/TMTT.2013.2259257)]
+>
+> P. Andreani and A. Fard, "More on the 1/f2 Phase Noise Performance of CMOS Differential-Pair LC-Tank Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 12, pp. 2703-2712, Dec. 2006 [[https://backend.orbit.dtu.dk/ws/files/3913656/Andreani.pdf](https://backend.orbit.dtu.dk/ws/files/3913656/Andreani.pdf)]
+
+Its central model is
+$$
+i_{n,1/f}(t)
+=
+\alpha(t)n_{1/f}(t),
+$$
+where $\alpha(t)$ represents the cyclostationary modulation of MOS flicker noise. The relevant phase-conversion function is then
+$$
+\Gamma_{\mathrm{eff}}(t)
+=
+\Gamma(t)\alpha(t).
+$$
+The low-frequency noise produces first-order phase accumulation when
+$$
+\Gamma_{\mathrm{eff,DC}}
+=
+\frac{1}{T_0}
+\int_0^{T_0}
+\Gamma_{\mathrm{eff}}(t)\,dt
+\neq 0.
+$$
+
+
+### Effect of Tail Capacitance
+
+![image-20260801161111253](osc-pn/image-20260801161111253.png)
+
+![image-20260801161736533](osc-pn/image-20260801161736533.png)
+
+
+
+---
+
+
+
+***Flicker noise of the tail transistor***
+$$
+M_{\mathrm{tail}}\text{ flicker}
+\rightarrow
+\Delta I_T
+\rightarrow
+\Delta A,\Delta H_n
+\rightarrow
+\Delta\omega_0.
+$$
+
+***Tail capacitance affecting pair flicker***
+$$
+C_T
+\rightarrow
+\text{asymmetric }i_{D1}(t)
+\rightarrow
+\Gamma_{\mathrm{eff,DC}}\neq0
+\rightarrow
+M_{1,2}\text{ flicker upconversion}.
+$$
+
+The tail capacitor is not itself a flicker-noise generator. It modifies the periodic operating point and breaks the cancellation of the cross-coupled pair’s flicker-noise-induced phase perturbations
+
+
+
 ## Chembiyan's Phase Perturbation
 
 > Chembiyan T, "Brownian Motion And The Oscillator Phase Noise" [[link](https://www.linkedin.com/posts/chembiyan-t-0b34b910_vco-perturbed-by-a-brownian-motion-activity-6994691057045159936-nqaN?utm_source=share&utm_medium=member_desktop)]

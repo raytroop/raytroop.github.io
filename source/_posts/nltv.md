@@ -3,7 +3,7 @@ title: Noise in Nonlinear Circuits And Systems
 date: 2025-07-21 22:12:27
 tags:
 categories:
-- noise
+- osc
 mathjax: true
 ---
 
@@ -167,6 +167,10 @@ I(a,b) <+ sign(Ir)*flicker_noise(Pn, EF, "flicker");
 
 provided the simulator supports a noise function inside an expression
 
+![image-20260802114438747](nltv/image-20260802114438747.png)
+
+![flicker_noise_commutation_vs_abs_static](nltv/flicker_noise_commutation_vs_abs_static.svg)
+
 ```verilog
 // BSIM flicker noise simulations
 
@@ -192,6 +196,26 @@ Hnoise (noise  0) pccvs coeffs=[0 1 1] probes=[iRESf0 iRESf1]
 noise (noise 0) noise start=4_Hz stop=4.194304MHz dec=2k
 pop pss fund=131.072kHz
 pnoise (noise 0) pnoise start=4_Hz stop=4.194304MHz dec=2k maxsideband=10
+```
+
+
+
+```verilog
+// Resistor flicker noise simulations
+
+simulator lang=spectre
+
+ahdl_include "resistor.va"
+
+model rref resistor kf=1.0e-6 af=2  // to match res_va
+
+Vmod   (n 0) vsource type=sine dc=1.0 sinedc=0.0 ampl=100mV freq=131.072kHz
+Rva    (n 0) res_va
+Rref   (n 0) rref r=100.0
+
+noise        noise start=4_Hz stop=4.194304MHz dec=2k oprobe=Vmod
+pss          pss fund=131.072kHz maxacfreq=4.194304MHz
+pnoise       pnoise start=4_Hz stop=4.194304MHz dec=2k maxsideband=10 oprobe=Vmod
 ```
 
 
@@ -292,20 +316,159 @@ $$
 
 
 
-## Mathematical Preliminaries
+## Ordinary Differential Equations (ODEs)
 
-> Strogatz, S.H. (2015). **Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering (2nd ed.)**. CRC Press [[https://www.biodyn.ro/course/literatura/Nonlinear_Dynamics_and_Chaos_2018_Steven_H._Strogatz.pdf](https://www.biodyn.ro/course/literatura/Nonlinear_Dynamics_and_Chaos_2018_Steven_H._Strogatz.pdf)]
->
-> Higham, Desmond. (2001). An Algorithmic Introduction to Numerical Simulation of Stochastic Differential Equations. SIAM Review. 43. 525-546. 10.1137/S0036144500378302. [[https://www.cmor-faculty.rice.edu/~cox/stoch/dhigham.pdf](https://www.cmor-faculty.rice.edu/~cox/stoch/dhigham.pdf)]
->
-> Jiří Lebl. **Notes on Diffy Qs: Differential Equations for Engineers** [[link](https://www.jirka.org/diffyqs/)]
->
-> Matt Charnley. **Differential Equations: An Introduction for Engineers** [[link](https://sites.rutgers.edu/matthew-charnley/course-materials/differential-equations-an-introduction-for-engineers/)]
->
-> Åström, K.J. & Murray, Richard. (2021). **Feedback Systems: An Introduction for Scientists and Engineers Second Edition** [[https://www.cds.caltech.edu/~murray/books/AM08/pdf/fbs-public_24Jul2020.pdf](https://www.cds.caltech.edu/~murray/books/AM08/pdf/fbs-public_24Jul2020.pdf)]
->
+> Steve Brunton, ME 564 - Mechanical Engineering Analysis [[http://faculty.washington.edu/sbrunton/me564/](http://faculty.washington.edu/sbrunton/me564/)] [[videos](https://youtube.com/playlist?list=PLMrJAkhIeNNTYaOnVI3QpH7jgULnAmvPA)]
+
+### Dirac delta function in ODEs
+
+Integrate across the impulse to find the jump
+$$
+\underbrace{\text{zero state} + \delta(t)\text{ input}}_{t=0^-} \quad\Longrightarrow\quad \underbrace{\text{zero input} + \text{new ICs at }t=0^+}_{t>0}
+$$
 
 
+![image-20260710230815001](nltv/image-20260710230815001.png)
+
+![image-20260711003430785](nltv/image-20260711003430785.png)
+
+```python
+import numpy as np
+import scipy.integrate as spi
+import matplotlib.pyplot as plt
+
+
+L, C, R = 2.533e-9, 10e-12, 100.0
+
+def rhs(t, y):
+    il , dil = y
+    dildt = dil
+    ddildt = -(1/(R*C))*dil - (1/(L*C))*il
+    return [dildt, ddildt]
+
+sol = spi.solve_ivp(rhs, (0, 10e-9), [0, 1/(L*C)],
+                    t_eval=np.linspace(0, 10e-9, 2001),
+                    rtol=1e-10, atol=1e-4)   # error drops to ~1e-10
+
+plt.plot(sol.t, sol.y[0])
+plt.title('RLC Circuit Response')
+plt.xlabel('Time (s)')
+plt.ylabel('Current (A)')
+plt.grid()
+plt.show()
+```
+
+![image-20260710235118022](nltv/image-20260710235118022.png)
+
+### Doublet function in ODEs
+
+![image-20260711004412242](nltv/image-20260711004412242.png)
+
+![image-20260711004554172](nltv/image-20260711004554172.png)
+
+
+
+![image-20260711010924471](nltv/image-20260711010924471.png)
+
+```python
+import numpy as np
+import scipy.integrate as spi
+import matplotlib.pyplot as plt
+
+
+RC = 1.0
+T_START = 0.0
+T_STOP = 20.0
+NUM_SAMPLES = 2001
+
+
+def wien_bridge_rhs(t, state):
+    """Return the state derivative for the normalized Wien bridge response."""
+    del t
+    vo, dvo = state
+    ddvo = -(3.0 / RC) * dvo - vo / RC**2
+    return [dvo, ddvo]
+
+
+def analytic_response(t):
+    """Closed-form voltage response for the same initial conditions."""
+    sqrt_5 = np.sqrt(5.0)
+    s1 = (-3.0 + sqrt_5) / (2.0 * RC)
+    s2 = (-3.0 - sqrt_5) / (2.0 * RC)
+    return (s1 * np.exp(s1 * t) - s2 * np.exp(s2 * t)) / sqrt_5
+
+
+def main():
+    t_eval = np.linspace(T_START, T_STOP, NUM_SAMPLES)
+    initial_state = [1.0 / RC, -3.0 / RC**2]
+
+    sol = spi.solve_ivp(
+        wien_bridge_rhs,
+        (T_START, T_STOP),
+        initial_state,
+        t_eval=t_eval,
+        rtol=1e-10,
+        atol=1e-8,
+    )
+
+    fig, ax = plt.subplots(figsize=(8, 4.8), constrained_layout=True)
+    ax.plot(sol.t, sol.y[0], linewidth=3.0, label="Numerical solution")
+    ax.plot(t_eval, analytic_response(t_eval), "--", linewidth=3.0, label="Analytic response")
+
+    ax.set_title("Wien Bridge Natural Response")
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("Output voltage, $v_o$ (V)")
+    ax.grid(True, which="both", linestyle=":", linewidth=0.8, alpha=0.8)
+    ax.legend(frameon=False)
+
+    plt.show()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+
+
+
+
+## Stochastic Differential Equations (SDE)
+
+*TODO* &#128197;
+
+
+
+## Fourier Analysis & Partial Differential Equations (PDEs)
+
+$$
+\text{Fourier analysis}
+\longrightarrow
+\text{method for solving PDEs},
+$$
+
+*TODO* &#128197;
+
+
+
+
+
+## Differential Equations in Matlab & Python
+
+`scipy.integrate.solve_ivp` 
+
+Solve an **i**nitial **v**alue **p**roblem for a system of ODEs
+
+`rtol` and `atol` are the error tolerances for `scipy.integrate.solve_ivp`.
+
+`rtol` is relative tolerance: allowed error scales with the size of the solution.
+
+`atol` is absolute tolerance: allowed error floor when the solution is near zero.
+
+SciPy roughly controls local error using:
+
+```
+error < atol + rtol * abs(y)
+```
 
 
 
@@ -322,3 +485,17 @@ A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in oscillators: a unifyi
 A. Mehrotra and A. Sangiovanni-Vincentelli, *Noise Analysis of Radio Frequency Circuits*, 1st ed. New York, NY, USA: Springer, 2004
 
 Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
+
+---
+
+***<span style="color: white; background-color: black">Mathematical Preliminaries</span>***
+
+Strogatz, S.H. (2015). **Nonlinear Dynamics and Chaos: With Applications to Physics, Biology, Chemistry, and Engineering (2nd ed.)**. CRC Press [[https://www.biodyn.ro/course/literatura/Nonlinear_Dynamics_and_Chaos_2018_Steven_H._Strogatz.pdf](https://www.biodyn.ro/course/literatura/Nonlinear_Dynamics_and_Chaos_2018_Steven_H._Strogatz.pdf)]
+
+Higham, Desmond. (2001). An Algorithmic Introduction to Numerical Simulation of Stochastic Differential Equations. SIAM Review. 43. 525-546. 10.1137/S0036144500378302. [[https://www.cmor-faculty.rice.edu/~cox/stoch/dhigham.pdf](https://www.cmor-faculty.rice.edu/~cox/stoch/dhigham.pdf)]
+
+Jiří Lebl. **Notes on Diffy Qs: Differential Equations for Engineers** [[link](https://www.jirka.org/diffyqs/)]
+
+Matt Charnley. **Differential Equations: An Introduction for Engineers** [[link](https://sites.rutgers.edu/matthew-charnley/course-materials/differential-equations-an-introduction-for-engineers/)]
+
+Åström, K.J. & Murray, Richard. (2021). **Feedback Systems: An Introduction for Scientists and Engineers Second Edition** [[https://www.cds.caltech.edu/~murray/books/AM08/pdf/fbs-public_24Jul2020.pdf](https://www.cds.caltech.edu/~murray/books/AM08/pdf/fbs-public_24Jul2020.pdf)]

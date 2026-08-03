@@ -7,7 +7,9 @@ categories:
 mathjax: true
 ---
 
+![image-20260802151919963](comparator/image-20260802151919963.png)
 
+![image-20260802152509229](comparator/image-20260802152509229.png)
 
 ## Noise Analysis
 
@@ -162,13 +164,33 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 ## Hysteresis  
 
 
-> P. Bruschi: Notes on Mixed Signal Design [http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Optional_notes/Chap_3_4_Comparators.pdf](http://www2.ing.unipi.it/~a008309/mat_stud/MIXED/archive/2019/Optional_notes/Chap_3_4_Comparators.pdf)
+> P. Bruschi: Notes on Mixed Signal Design [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/18_Comparators__1_Dei.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/18_Comparators__1_Dei.pdf)]
 
 *TODO* &#128197;
 
+![image-20260802151532829](comparator/image-20260802151532829.png)
 
 
-## Kickback Noise
+
+
+
+
+
+## Kickback
+
+> Paolo Bruschi , Design of Mixed Signal Circuits and Systems [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/19_Comparators_2_Dei.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/19_Comparators_2_Dei.pdf)]
+>
+> CC Chen, Why Sampler Kickback Matters in SerDes? [[https://youtu.be/LIr0fqBk3Gg](https://youtu.be/LIr0fqBk3Gg)]
+
+![image-20260802160529593](comparator/image-20260802160529593.png)
+
+![image-20260802160628231](comparator/image-20260802160628231.png)
+
+
+
+![image-20260802161953860](comparator/image-20260802161953860.png)
+
+---
 
 > *Kickback noise* trades with the *dimensions of the input transistors* and hence with the *offset voltage*
 
@@ -198,6 +220,10 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 > Mike Shuo-Wei Chen and R. W. Brodersen, "A 6-bit 600-MS/s 5.3-mW Asynchronous ADC in 0.13-μm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 12, pp. 2669-2680, Dec. 2006 [[pdf](https://engineering.purdue.edu/oxidemems/conferences/isscc2006/files/D31_05.pdf), [slides](https://engineering.purdue.edu/oxidemems/conferences/isscc2006/files/V31_05.pdf)]
 >
 > K. Bult and A. Buchwald, "An embedded 240-mW 10-b 50-MS/s CMOS ADC in 1-mm/sup 2/," in IEEE Journal of Solid-State Circuits, vol. 32, no. 12, pp. 1887-1895, Dec. 1997 [[https://sci-hub.st/10.1109/4.643647](https://sci-hub.st/10.1109/4.643647)]
+
+![image-20260802160729730](comparator/image-20260802160729730.png)
+
+
 
 ## CMOS Latch
 

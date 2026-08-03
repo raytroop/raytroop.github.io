@@ -405,6 +405,412 @@ $$
 
 
 
+
+
+
+
+## Phase Noise Modeling
+
+### w/ noisefile
+
+> Tawna, "Modeling Oscillators with Arbitrary Phase Noise Profiles"[[https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles](https://community.cadence.com/cadence_blogs_8/b/rf/posts/modeling-oscillators-with-arbitrary-phase-noise-profiles)]
+>
+> —, "How to Specify Phase Noise as an Instance Parameter in Spectre Sources (e.g. vsource, isource, Port)" [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port](https://community.cadence.com/cadence_blogs_8/b/rf/posts/how-to-specify-phase-noise-as-an-instance-parameter-in-spectre-sources-e-g-vsource-isource-port)]
+
+
+
+![image-20260719013301709](jitter/image-20260719013301709.png)
+
+![image-20260719012251065](jitter/image-20260719012251065.png)
+
+driving an otherwise ideal oscillator with direct phase modulation makes its noise purely PM — a good model of near-carrier oscillator noise 
+
+![image-20260719020826827](jitter/image-20260719020826827.png)
+
+![image-20260719015605522](jitter/image-20260719015605522.png)
+
+In verilog-A model `oscwphnoise.va`, ***Norton-equivalent circuit***
+$$
+\boxed{v(t) = A\cos(\omega_0 t + \phi(t))\approx A[\cos\omega_0 t - \sin\omega_0 t \cdot \varphi(t)]}
+$$
+![image-20260719105917024](jitter/image-20260719105917024.png)
+
+```verilog
+`define db10_real(x) pow(10, (x)/10)
+`define dbm2pow(x) `db10_real(((x)-30))
+`define pow2v(x,r) sqrt(8*(r)*(x))
+```
+
+The first two macros convert the available power from dBm to watts:
+$$
+P_{\mathrm{W}}
+=
+10^{(P_{\mathrm{dBm}}-30)/10}.
+$$
+The third macro calculates the **open-circuit peak voltage**
+$$
+V_{\text{oc,pk}}=\sqrt{8R_{\text{out}}P_{\mathrm{W}}}.
+$$
+The factor $8$ follows from a matched source:
+$$
+V_{\text{load,pk}}=\frac{V_{\text{oc,pk}}}{2},
+$$
+and therefore
+$$
+P_{\mathrm{avail}}
+=
+\frac{V_{\text{load,rms}}^2}{R_{\text{out}}}
+=
+\frac{\left(V_{\text{oc,pk}}/2\sqrt{2}\right)^2}{R_{\text{out}}}
+=
+\frac{V_{\text{oc,pk}}^2}{8R_{\text{out}}}.
+$$
+For the defaults,
+$$
+P=10\ \mathrm{dBm}=10\ \mathrm{mW},
+\qquad
+R_{\text{out}}=50\ \Omega,
+$$
+so
+$$
+V_{\text{oc,pk}}
+=
+\sqrt{8(50)(0.01)}
+=
+2\ \mathrm{V}.
+$$
+With a matched $50\ \Omega$ load, the load voltage is $1\ \mathrm{V_{pk}}$, corresponding to $10\ \mathrm{dBm}$. 
+
+
+
+
+
+```verilog
+`include "constants.vams"
+`include "disciplines.vams"
+
+// Behavioral oscillator with an arbitrary phase noise profile.
+
+// fundname: the name of the fundamentail frequency default: ""
+// power: available power (dBm) 	default: 10 dBm
+// freq: output frequency (Hz)          default: 1 GHz
+// rout: output impedance (Ohm)        	default: 50 Ohm
+
+`define db10_real(x) pow(10, (x)/10)
+`define dbm2pow(x) `db10_real( ((x)-30) )
+`define pow2v(x,r) sqrt(8*(r)*(x))  // open-circuit peak voltage
+
+module oscwphnoise(out, ph);
+inout out;
+input ph;
+electrical out;
+electrical ph;
+electrical gnd;
+ground gnd;
+electrical int;
+
+parameter real power = 10 ;
+parameter real rout = 50 ;
+parameter real freq = 1e+09 ;
+  
+isource #(.type("sine"), .ampl(`pow2v(`dbm2pow(power),rout)/rout), .freq(freq) ) is1(gnd,out);
+vsource #(.type("sine"), .ampl(`pow2v(`dbm2pow(power),rout)/rout), .sinephase(-90), .freq(freq) ) vs1(gnd,int);
+ 
+analog begin
+    I(out) <+ -V(int)*V(ph); // - \sin\omega_c t \cdot \phi(t)
+    I(out) <+ V(out)/rout;
+end
+
+endmodule
+```
+
+Note that `int` is purely internal — no current flows there, and it never appears at the output; `vs1` exists only to be sampled by the multiplier
+
+
+
+---
+
+ `isource` and `vsource` are **not built-in Verilog-A language constructs**. They are Cadence-provided behavioral source modules
+$$
+\boxed{
+\texttt{isource},\ \texttt{vsource}
+\text{ are instantiated source models supplied by Cadence}
+}
+$$
+
+1. **vsource (p, n)** forces V(p) − V(n) = w(t), where for `type="sine"` the waveform is w(t) = ampl·sin(2πf(t − delay) + sinephase·π/180), with `sinephase` in degrees. 
+
+​		So in the model, `vs1(gnd, int)` means V(gnd) − V(int) = w(t), i.e. **V(int) = −w(t)** — the polarity flips because ground was listed first.
+
+
+
+2. **isource (p, n)**: positive current flows *from p, through the source, to n* — it is pulled out of node p and **injected into node n**. 
+
+​		So `is1(gnd, out)` pumps ampl·sin(ωt) into node `out`, which is exactly why the blog wired it as (gnd, out): to drive the output. Writing `is1(out, gnd)` with the same amplitude would sink that current from `out` instead
+
+
+
+3. **`I(a,b) <+ expr`** adds a current `expr` flowing a → b through that branch. 
+
+​	So **`I(out) <+ V(out)/rout`** is a resistor from `out` to ground, 
+
+​	and `**I(out) <+ -X**` *injects* X into `out` (positive contribution = current leaving the node)
+
+
+
+---
+
+---
+
+![image-20260719010706918](jitter/image-20260719010706918.png)
+
+For modern spectreRF, PORTs and other sources with **noisefiles** or **instance parameter** are easier and correct methods
+
+Starting in **MMSIM 13.1**, you can specify the phase noise as an instance parameter in Spectre sources, including port, vsource and isource
+
+![image-20260719005818616](jitter/image-20260719005818616.png)
+
+The `Generate noise?` button (corresponds to `isnoisy` parameter on the port) is **by default set to "yes"**
+
+
+
+
+
+### w/ periodic jitter inject
+
+> 我想流tsmc28nm, 振荡器噪声建模：从Phase Noise 到Jitter [[xiaohongshu](https://www.xiaohongshu.com/explore/6a70334c000000000502bd25?xsec_token=CBgayytWezHD3rQO6rVJU8hNnyvEQrepUC7c_s163Abiw=&xsec_source=app_share)]
+>
+> Claude Fable5 [[Github gist](https://gist.github.com/raytroop/d206c428bf3ac2e07f13a34c32246943)]
+
+The same jitter standard deviation $\sigma_a^2$ can correspond to completely different phase noise shapes. A single $\sigma_a^2$ **cannot** define the PN shape, because σ is an *integral* of the spectrum, and integration throws away shape information. 
+
+The shape lives in the **correlation structure** of the jitter sequence — equivalently, in *how* $\sigma^2_{p(N)}$ grows with $N$ — and in your simulation it is set by *how you generate and inject* the samples, not by the $\sigma_a^2$ value itself
+
+![image-20260803174915707](jitter/image-20260803174915707.png)
+
+
+
+***Flat: $\mathcal{L}(f)=\mathcal{L}_0$***
+
+**statistically independent edges**, the generator therefore perturbs each ideal edge directly, with **no accumulation**
+$$
+t_n \;=\; nT_0 + a_n,
+\qquad
+a_n \stackrel{\text{iid}}{\sim} \mathcal{N}\!\left(0,\;\sigma_a^2\right),
+\qquad
+\sigma_a^2 = \frac{\mathcal{L}_0}{4\pi^2 f_0}
+$$
+
+---
+
+
+
+***$1/f^2$: $\mathcal{L}(f)=\mathcal{L}_1 f_1^2/f^2$ (white FM)***
+
+$\sigma_p^2(N)\;=\;\frac{\mathcal{L}_1 f_1^2}{f_0^3}\,N$ — **Linear growth** in $N$ is the signature of **independent increments**, the generator injects an iid error into every period and **accumulates edges**:
+$$
+t_n \;=\; t_{n-1} + T_0 + d_n,
+\qquad
+d_n \stackrel{\text{iid}}{\sim} \mathcal{N}\!\left(0,\;\sigma_\Delta^2\right),
+\qquad
+\sigma_\Delta^2 \;=\; \sigma_p^2(N{=}1) \;=\; \frac{\mathcal{L}_1 f_1^2}{f_0^3}
+$$
+
+---
+
+
+
+***$1/f^3$: $\mathcal{L}(f)=\mathcal{L}_1 f_1^3/f^3$ (flicker FM)***
+
+
+
+```python
+W = np.fft.rfft(rng.standard_normal(M))
+```
+
+This generates white Gaussian noise and transforms it to the frequency domain, i.e. Unit-variance sampled white noise has one-sided PSD
+$$
+S_W = \frac{2}{f_s}
+$$
+
+```python
+H[1:] = 1.0 / np.sqrt(f[1:])
+```
+
+Filtering amplitudes by $1/\sqrt f$ filters power by
+$$
+|H(f)|^2=\frac{1}{f}
+$$
+
+
+```python
+return x * np.sqrt(c * fs / 2.0)
+```
+
+Therefore, the resulting sequence has a \(1/f\) PSD. DC is set to zero because ideal \(1/f\) noise diverges at \(f=0\).
+
+Unit-variance sampled white noise has one-sided PSD \(2/f_s\). Thus the output PSD is
+$$
+S_o(f) = \frac{2}{f_s}\frac{1}{f} \left(\frac{c f_s}{2}\right) = \frac{c}{f}
+$$
+
+```python
+c_fl  = 2 * L3 * f1 ** 3 / f0 ** 4      # 1/f^3: period-error PSD S_d(f)=c/f [s^2/Hz]
+```
+
+$$
+c_{fl} = \frac{2L_3f_1^3}{f_0^4}
+$$
+
+
+
+```python
+J["1_f3_only"] = np.cumsum(d3)
+```
+
+**Accumulation is discrete-time integration**. Its exact transfer function is
+$$
+|H_{\mathrm{acc}}(f)|^2 = \frac{1}{4\sin^2(\pi f/f_0)} \approx \frac{f_0^2}{4\pi^2f^2}, \qquad f\ll f_0
+$$
+Consequently, the accumulated time-error PSD is
+
+$$
+S_J(f) \approx \frac{c}{f}\frac{f_0^2}{4\pi^2f^2} = \frac{c f_0^2}{4\pi^2f^3}
+$$
+
+
+Timing error is converted to phase using $\phi=2\pi f_0J$
+
+Therefore,
+
+$$
+S_\phi(f) =(2\pi f_0)^2S_J(f) \approx \frac{c f_0^4}{f^3}
+$$
+Since the code uses the usual phase-noise definition $L(f)=S_\phi(f)/2$
+
+$$
+L(f)=\frac{c f_0^4}{2f^3}
+$$
+The coefficient is selected as $c_{fl} = \frac{2L_3f_1^3}{f_0^4}$. Substitution gives exactly the desired target:
+
+$$
+\boxed{L(f)=L_3\left(\frac{f_1}{f}\right)^3}
+$$
+In short:
+
+$$
+\underbrace{\frac1f}_{\text{flicker period noise}} \times \underbrace{\frac1{f^2}}_{\text{accumulation}} = \underbrace{\frac1{f^3}}_{\text{phase noise}}
+$$
+
+![pn_closedloop](jitter/pn_closedloop.png)
+
+![sigma_pN](jitter/sigma_pN.png)
+
+
+
+
+```python
+EULER_GAMMA = 0.5772156649015329
+
+# ----------------------------------------------------------------- targets ----
+f0 = 5.015e9                # DCO frequency [Hz]
+T0 = 1.0 / f0
+f1 = 1e6                    # reference offset for the sloped lines [Hz]
+L0_dB = -155.0              # flat floor            [dBc/Hz]
+L2_dB = -128.0              # 1/f^2 line @ 1 MHz    [dBc/Hz]
+L3_dB = -130.0              # 1/f^3 line @ 1 MHz    [dBc/Hz]
+L0, L2, L3 = (10 ** (x / 10) for x in (L0_dB, L2_dB, L3_dB))
+
+M    = 2 ** 22              # number of simulated periods (~0.84 ms)
+fmin = f0 / M               # low-frequency cutoff set by record length
+rng  = np.random.default_rng(7)
+
+# ----------------------------- sigma_p^2(N)  ->  generator parameters ---------
+var_a = L0 / (4 * np.pi ** 2 * f0)      # flat : edge-jitter variance   [s^2]
+var_d = L2 * f1 ** 2 / f0 ** 3          # 1/f^2: per-period variance = sigma_p^2(1)
+c_fl  = 2 * L3 * f1 ** 3 / f0 ** 4      # 1/f^3: period-error PSD S_d(f)=c/f [s^2/Hz]
+
+print(f"sigma_a  (flat, per edge)    = {np.sqrt(var_a)*1e15:8.3f} fs")
+print(f"sigma_d  (1/f^2, per period) = {np.sqrt(var_d)*1e15:8.3f} fs")
+print(f"flicker coefficient c        = {c_fl:.3e}  s^2  (S_d = c/f)")
+
+def flicker(M, fs, c, rng):
+    """Zero-mean Gaussian sequence with one-sided PSD c/f, sampled at fs."""
+    W = np.fft.rfft(rng.standard_normal(M)) # Unit-variance sampled white noise has one-sided PSD 2/fs
+    f = np.fft.rfftfreq(M, d=1.0 / fs)
+    H = np.zeros_like(f)
+    H[1:] = 1.0 / np.sqrt(f[1:])            # |H|^2 = 1/f, DC removed
+    x = np.fft.irfft(W * H, n=M)
+    return x * np.sqrt(c * fs / 2.0)        # c/f
+
+# --------------------------------------------- generate the three sequences ---
+a  = rng.standard_normal(M) * np.sqrt(var_a)    # flat : direct edge displacement
+d2 = rng.standard_normal(M) * np.sqrt(var_d)    # white period errors
+d3 = flicker(M, f0, c_fl, rng)                  # flicker period errors
+
+# --------------------- per-period injection  +  edge accumulation -------------
+#   t_n = n*T0 + J(n).  Only the deviation J is accumulated -> no precision loss.
+J = {
+    "flat_only": a,                              # no accumulation (white PM)
+    "1_f2_only": np.cumsum(d2),                  # random walk     (white FM)
+    "1_f3_only": np.cumsum(d3),                  # flicker walk    (flicker FM)
+}
+J["all_noise"] = J["1_f2_only"] + J["1_f3_only"] + a
+
+def Lref_dB(name, f):
+    if name == "flat_only":
+        return np.full_like(f, L0_dB)
+    if name == "1_f2_only":
+        return L2_dB - 20 * np.log10(f / f1)
+    if name == "1_f3_only":
+        return L3_dB - 30 * np.log10(f / f1)
+    return 10 * np.log10(L0 + L2 * f1 ** 2 / f ** 2 + L3 * f1 ** 3 / f ** 3)
+```
+
+
+
+---
+
+Let the input period error be \(d[n]\), and let the accumulated timing error be $J[n]=J[n-1]+d[n]$
+
+This is exactly what `np.cumsum(d)` implements, assuming $J[-1]=0$
+
+Taking the \(z\)-transform: $J(z)=z^{-1}J(z)+D(z)$
+
+Rearranging $J(z)(1-z^{-1})=D(z)$
+
+so the accumulator transfer function is
+$$
+H_{\mathrm{acc}}(z) =\frac{J(z)}{D(z)} =\frac{1}{1-z^{-1}}
+$$
+
+
+To obtain its frequency response, evaluate it on the unit circle: $z=e^{j\omega}$
+
+Therefore,
+$$
+H_{\mathrm{acc}}(e^{j\omega}) = \frac{1}{1-e^{-j\omega}}
+$$
+Its power gain is the squared magnitude:
+$$
+|H_{\mathrm{acc}}(e^{j\omega})|^2 = \frac{1}{|1-e^{-j\omega}|^2}
+$$
+The denominator can be simplified as
+
+$$\begin{aligned} 
+|1-e^{-j\omega}|^2 &=(1-e^{-j\omega})(1-e^{j\omega})\\ 
+&=2-e^{j\omega}-e^{-j\omega}\\ 
+&=2-2\cos\omega\\ 
+&=4\sin^2\left(\frac{\omega}{2}\right)
+\end{aligned}$$
+
+Thus the exact discrete-time power gain is
+
+$$
+\boxed{ |H_{\mathrm{acc}}(e^{j\omega})|^2 = \frac{1}{4\sin^2(\omega/2)} }
+$$
+
+
 ## references
 
 AN10007 Clock Jitter Definitions and Measurement Methods, SiTime [[pdf](https://www.sitime.com/sites/default/files/hiddenresources/AN10007-Jitter-and-measurement-methods_SIT.pdf)]

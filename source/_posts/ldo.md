@@ -9,6 +9,10 @@ mathjax: true
 
 
 
+![image-20260803110501438](ldo/image-20260803110501438.png)
+
+![image-20260803113804322](ldo/image-20260803113804322.png)
+
 ## Load-Transient Response  
 
 *TODO* &#128197;
@@ -291,7 +295,15 @@ $$
 \text{vno1}^2= \text{vn1}^2+\text{vn2}^2/6^2=16.5758 + 99.45453/6^2 = 19.338425833
 $$
 
+## stability vs feedback ratio
 
+Since loop gain $\text{LG} = A\beta$, stability degrades as the feedback ratio $\beta$ increases. 
+
+Therefore, at a fixed $V_{ref,in}$, the **lowest output voltage** ($\beta=1$) represents the canonical worst-case scenario for stability
+
+![image-20260803103849207](ldo/image-20260803103849207.png)
+
+![ldo_loop_gain_vs_beta_bode](ldo/ldo_loop_gain_vs_beta_bode.svg)
 
 
 

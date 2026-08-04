@@ -204,31 +204,6 @@ $$
 
 
 
----
-
----
-
-series model (R<sub>s</sub>, C<sub>s</sub>) to parallel model (R<sub>p</sub>, C<sub>p</sub>) w/ fixed C<sub>s</sub> but varying R<sub>s</sub>
-
-$$
-\boxed{C_p = \frac{Q^2}{1+Q^2}C_s=C_s(1-\frac{1}{1+Q^2}) \qquad\qquad R_p = (1+Q^2)R_s =  (1+Q^2)\frac{1}{\omega C_s Q}=(\frac{1}{Q}+Q)\frac{1}{\omega C_s}}
-$$
-
-
-![CsRs_CpRp_Q.png](resonant/CsRs_CpRp_Q.png)
-
-parallel model (R<sub>p</sub>, C<sub>p</sub>) to series model (R<sub>s</sub>, C<sub>s</sub>) w/ fixed C<sub>p</sub> but varying R<sub>p</sub>
-$$
-\boxed{C_s = \frac{1+Q^2}{Q^2}C_p = C_p(1+\frac{1}{Q^2}) \qquad\qquad R_s = \frac{1}{1+Q^2}R_p = \frac{1}{1+Q^2}\frac{Q}{\omega C_p} = \frac{Q}{1+Q^2}\frac{1}{\omega C_p}}
-$$
-
-
-![CpRp_CsRs_Q.png](resonant/CpRp_CsRs_Q.png)
-
-
-
-
-
 ### Non ideal Inductor
 
 ![image-20231224163740411](resonant/image-20231224163740411.png)

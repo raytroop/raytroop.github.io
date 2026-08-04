@@ -415,11 +415,6 @@ y[n]=a\,y[n-1]+(1-a)x[n],
 \label{eq:colored_noise_filter}
 $$
 
-```matlab
-[y zf]=filter(1-a,[1 -a],x);
-coloredNoise = y;
-```
-
 
 
 whose transfer function is
@@ -429,8 +424,12 @@ H(z)=\frac{Y(z)}{X(z)}
 \label{eq:digital_filter_transfer}
 $$
 
-Evaluating the transfer function on the unit circle gives
+```matlab
+[y zf]=filter(1-a,[1 -a],x);
+coloredNoise = y;
+```
 
+Evaluating the transfer function on the unit circle gives
 $$
 H\!\left(e^{j2\pi f/F_s}\right)
 =

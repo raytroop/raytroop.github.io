@@ -920,6 +920,12 @@ An **8-shaped (figure-8) inductor** is a specialized on-chip, high-Q component u
 
 
 
+### single-turn spiral
+
+![image-20260804211048126](lc-osc/image-20260804211048126.png)
+
+
+
 ## On-Chip Capacitor
 
 ***monolithic C-V characteristic***
@@ -1038,6 +1044,35 @@ Two resistances, both in series with the variable capacitance:
 
 
 
+### varactor AM-PM PN
+
+![image-20260804212706792](lc-osc/image-20260804212706792.png)
+
+with $v_n = \sqrt{4kTR} = \sqrt{1.66 \times 10^{-20} \times 50} \approx 0.9 \, \text{nV}/\sqrt{\text{Hz}}$
+
+```octave
+octave:1> 10*log10(1/2*(200e6*0.9e-9/1e6)^2)
+ans = -137.90
+```
+
+
+
+> ![image-20260621101558719](lc-osc/image-20260621101558719.png)
+
+
+
+Waleed's CICC slide  $\Delta f = K_\text{v} v_n$ is already an **RMS** quantity — $v_n$ is specified as an rms density; Samori's $\Delta \omega_0$ is the **peak** deviation of a deterministic sinusoidal test tone.
+
+Connect them with
+$$
+\Delta_{\text{peak}} = \sqrt{2} \cdot \Delta_{\text{rms}} \implies \frac{1}{4} (\sqrt{2} \Delta_{\text{rms}})^2 = \frac{1}{2}\Delta_{\text{rms}}^2
+$$
+Identical physics, different bookkeeping
+
+
+
+
+
 
 ## LC Tank Q
 
@@ -1121,6 +1156,10 @@ $$
 
 > A. D. Berny, A. M. Niknejad and R. G. Meyer, "A 1.8-GHz LC VCO with 1.3-GHz tuning range and digital amplitude calibration," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 4, pp. 909-917, April 2005 [[https://sci-hub.jp/10.1109/JSSC.2004.842851](https://sci-hub.jp/10.1109/JSSC.2004.842851)]
 
+
+
+### Q of SC bank
+
 ![image-20260729223441717](lc-osc/image-20260729223441717.png)
 
 
@@ -1140,9 +1179,66 @@ graph LR
 
 
 
-> In a **differential LC VCO**, every tuning bit should preserve the symmetry of the two tank nodes
->
-> To maintain a **symmetric connection** between the inductor and the capacitor bank, each weighted capacitor branch should be split and placed symmetrically about the differential axis
+### coding & layout methodology
+
+In a **differential LC VCO**, every tuning bit should preserve the symmetry of the two tank nodes
+
+To maintain a **symmetric connection** between the inductor and the capacitor bank, each weighted capacitor branch should be split and placed symmetrically about the differential axis
+
+
+
+### switch res impact on Q
+
+series model (R<sub>s</sub>, C<sub>s</sub>) to parallel model (R<sub>p</sub>, C<sub>p</sub>) with fixed C<sub>s</sub> but varying R<sub>s</sub>
+
+$$
+\boxed{C_p = \frac{Q^2}{1+Q^2}C_s=C_s(1-\frac{1}{1+Q^2}) \qquad\qquad R_p = (1+Q^2)R_s =  (1+Q^2)\frac{1}{\omega C_s Q}=(\frac{1}{Q}+Q)\frac{1}{\omega C_s}}
+$$
+
+
+![CsRs_CpRp_Q.png](lc-osc/CsRs_CpRp_Q.png)
+
+parallel model (R<sub>p</sub>, C<sub>p</sub>) to series model (R<sub>s</sub>, C<sub>s</sub>) with fixed C<sub>p</sub> but varying R<sub>p</sub>
+$$
+\boxed{C_s = \frac{1+Q^2}{Q^2}C_p = C_p(1+\frac{1}{Q^2}) \qquad\qquad R_s = \frac{1}{1+Q^2}R_p = \frac{1}{1+Q^2}\frac{Q}{\omega C_p} = \frac{Q}{1+Q^2}\frac{1}{\omega C_p}}
+$$
+
+
+![CpRp_CsRs_Q.png](lc-osc/CpRp_CsRs_Q.png)
+
+
+
+
+
+### 2 Capacitor Q
+
+***parallel-combination***
+
+![image-20260804225328820](lc-osc/image-20260804225328820.png)
+
+with $C= C_0 + C_1$ and $R=\frac{R_0R_1}{R_0+R_1}=\frac{Q_0Q_1}{\omega(C_0Q_1 + C_1Q_0)}$, the combined $Q_C$ is
+$$
+Q_C = R\cdot \omega C = \frac{Q_0Q_1}{C_0Q_1+C_1Q_0}C
+$$
+therefore
+$$
+\boxed{\frac{1}{Q_C} = \frac{C_0}{C}\frac{1}{Q_0} + \frac{C_1}{C}\frac{1}{Q_1}}
+$$
+
+
+---
+
+
+
+***series-combination***
+
+![image-20260804225302373](lc-osc/image-20260804225302373.png)
+
+with $C=\frac{C_0C_1}{C_0+C_1}$, $R=R_0 + R_1=\frac{1}{\omega}\left(\frac{1}{Q_0C_0}+\frac{1}{Q_1C_1}\right)$
+$$
+\boxed{Q_C = \frac{1}{\omega R C} = Q_0\frac{1+\frac{C_0}{C_1}}{1+\frac{C_0}{C_1}\frac{Q_0}{Q_1}}}
+$$
+
 
 
 
@@ -1400,4 +1496,3 @@ Manetakis, K. (2023). *Topics in LC Oscillators: Principles, phase noise, pullin
 Hajimiri, A., & Lee, T. H. (1999). The design of low noise oscillators. Norwell, MA: Kluwer
 
 Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005.
-

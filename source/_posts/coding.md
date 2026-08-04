@@ -1050,6 +1050,20 @@ $$
 
 
 
+---
+
+---
+
+***implication arrow***
+
+`\implies` produces $\implies$ (displays a long arrow with proper math spacing).
+
+`\Rightarrow` produces $\Rightarrow$ (displays a standard-length double right arrow).
+
+`\longrightarrow` produces $\longrightarrow$ (displays a long single right arrow)
+
+
+
 ## mermaid
 
 *Mermaid is a JavaScript based diagramming and charting tool* that takes Markdown-inspired text definitions and creates diagrams dynamically in the browser

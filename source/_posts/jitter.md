@@ -581,6 +581,8 @@ The `Generate noise?` button (corresponds to `isnoisy` parameter on the port) is
 > 我想流tsmc28nm, 振荡器噪声建模：从Phase Noise 到Jitter [[xiaohongshu](https://www.xiaohongshu.com/explore/6a70334c000000000502bd25?xsec_token=CBgayytWezHD3rQO6rVJU8hNnyvEQrepUC7c_s163Abiw=&xsec_source=app_share)]
 >
 > Claude Fable5 [[Github gist](https://gist.github.com/raytroop/d206c428bf3ac2e07f13a34c32246943)]
+>
+> Matthew Schubert. Colouring Noise - Generating coloured noise to simulate physical processes [[https://blog.ioces.com/matt/posts/colouring-noise/](https://blog.ioces.com/matt/posts/colouring-noise/)] [[https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0](https://gist.github.com/m-schubert/45c562146c6607b8990f1e8f34ff87b0)]
 
 The same jitter standard deviation $\sigma_a^2$ can correspond to completely different phase noise shapes. A single $\sigma_a^2$ **cannot** define the PN shape, because σ is an *integral* of the spectrum, and integration throws away shape information. 
 

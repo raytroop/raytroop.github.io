@@ -295,6 +295,27 @@ $$
 
 ![image-20260625234008676](dpll/image-20260625234008676.png)
 
+
+Assume that the lower m bits of the digital filter output are discarded by truncation. The truncation error is therefore modeled as a uniformly distributed random variable,
+
+$$
+E_t \sim U[0,2^m\text{LSB}]
+$$
+
+Because the effective output resolution is reduced, the new least significant bit becomes
+
+$$
+\text{LSB}_t = 2^m\text{LSB}
+$$
+
+and the DAC quantization error is correspondingly modeled as
+
+$$
+Q_{DAC} \sim U[0,\text{LSB}_t]
+$$
+
+
+
 ![image-20260625233243905](dpll/image-20260625233243905.png)
 
 

@@ -1379,6 +1379,8 @@ Peter Kinget, ISSCC 2010 short course, Transistor-Level Design of Critical PLL C
 
 J. Bank, "A harmonic-oscillator design methodology based on describing functions," Ph.D. dissertation, Dept. Signals Syst., Sch. Elect. Eng., Chalmers Univ. Techn., Chalmers, Sweden, 2006. [[https://publications.lib.chalmers.se/records/fulltext/17376.pdf](https://publications.lib.chalmers.se/records/fulltext/17376.pdf)]
 
+Waleed Khalil, CICC2021 ES2-3: VCO Design Challenges and Solutions for mm-wave Applications
+
 ---
 
 Razavi, Behzad. RF Microelectronics. 2nd ed. Prentice Hall, 2012.

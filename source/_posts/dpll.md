@@ -296,7 +296,7 @@ $$
 ![image-20260625234008676](dpll/image-20260625234008676.png)
 
 
-Assume that the lower m bits of the digital filter output are discarded by truncation. The truncation error is therefore modeled as a uniformly distributed random variable,
+Assume that the lower $m$ bits of the digital filter output are discarded by truncation. The truncation error is therefore modeled as a uniformly distributed random variable,
 
 $$
 E_t \sim U[0,2^m\text{LSB}]

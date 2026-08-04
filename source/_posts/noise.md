@@ -323,6 +323,8 @@ Two methods to generate colored Gaussian noise for given mean and PSD shape
 ### Filtering in Time domain
 
 > Alessandro Cudazzo. noise generator developed in C99 (white, brown) [[https://github.com/alessandrocuda/noise_generator](https://github.com/alessandrocuda/noise_generator)]
+>
+> Julius Orion Smith III. Spectral Audio Signal Processing [[https://www.dsprelated.com/freebooks/sasp/Filtered_White_Noise.html](https://www.dsprelated.com/freebooks/sasp/Filtered_White_Noise.html)]
 
 with *Derivatives approximation*, $H_p(s) = \frac{1}{s\tau +  1} \to H_p(z)=\frac{\alpha}{1 +(\alpha -1)z^{-1}}$, where $\alpha = \frac{T}{\tau+T}$
 
@@ -338,39 +340,188 @@ get_bnoise(){
 
 
 
+---
+
+> Viswanathan, M. (2020). *Simulation of Digital Communication Systems Using Matlab* (2nd ed.). GaussianWaves
+>
+> [[Github gist](https://gist.github.com/raytroop/90c086e26380c77ce7273bb7b675263e)]
+
 ![image-20260207210932591](noise/image-20260207210932591.png)
 
+
+
 ```matlab
+%Generation of colored noise in Matlab
+a=0.9; %low pass filter parameter
+
+Fs=1000; %sampling rate
+Fc=10; % carrier frequency for the dummy signal
+recordDuration=120; % seconds; a longer record reduces PSD estimation variance
+numSamples=round(recordDuration*Fs);
+t=(0:numSamples-1)/Fs; %time base
+variance = 1; %variance of white noise
+
+% Generate Gaussian White Noise with zero mean and unit variance
+whiteNoise=sqrt(variance)*randn(1,length(t));
+
+% Welch PSD estimate: 50%-overlapped Hann windows average about 116
+% segments for this record, reducing the variation of a raw periodogram.
+welchSegmentLength = 2048;
+welchOverlap = welchSegmentLength/2;
+NFFT = 4096;
+welchWindow = hann(welchSegmentLength,'periodic');
+[whiteNoiseSpectrum,f] = pwelch(whiteNoise,welchWindow,welchOverlap, ...
+    NFFT,Fs,'onesided');
+
+% Analytical one-sided white-noise PSD for comparison. DC and Nyquist are
+% not doubled in a one-sided PSD.
+whiteNoiseTheory = 2*variance/Fs*ones(size(f));
+whiteNoiseTheory([1 end]) = variance/Fs;
+
 %Colored Noise Generation
 x=whiteNoise;
 %First Order Low pass filter y(n)=a*y(n-1)+(1-a)*x(n)
 %Filter Trasfer function Y(Z) = X(Z)*(1-a)/(1-aZ^-1)
 [y zf]=filter(1-a,[1 -a],x);
 coloredNoise = y;
+[coloredNoiseSpectrum,f] = pwelch(coloredNoise,welchWindow,welchOverlap, ...
+    NFFT,Fs,'onesided');
+
+% Theoretical colored-noise PSD: S_y(f) = S_x(f)*|H(f)|^2.
+filterResponse = (1-a)./(1-a*exp(-1j*2*pi*f/Fs));
+coloredNoiseTheory = whiteNoiseTheory.*abs(filterResponse).^2;
 ```
 
 
 
----
+The input sequence $x[n]$ is zero-mean **discrete-time white Gaussian noise** with variance $\sigma_x^2$. Its one-sided power spectral density is
 
-> Julius Orion Smith III. Spectral Audio Signal Processing [[https://www.dsprelated.com/freebooks/sasp/Filtered_White_Noise.html](https://www.dsprelated.com/freebooks/sasp/Filtered_White_Noise.html)]
 
-Example: Synthesis of 1/F Noise (Pink Noise)
+$$
+S_x^{(1)}(f)=
+\begin{cases}
+\dfrac{\sigma_x^2}{F_s},
+    & f=0 \ \text{or}\ f=\dfrac{F_s}{2}, \\[6pt]
+\dfrac{2\sigma_x^2}{F_s},
+    & 0<f<\dfrac{F_s}{2}.
+\end{cases}
+\label{eq:white_noise_psd}
+$$
+
+The **colored-noise sequence** is generated using the *first-order digital low-pass filter*
+
+$$
+y[n]=a\,y[n-1]+(1-a)x[n],
+\label{eq:colored_noise_filter}
+$$
 
 ```matlab
-Nx = 2^16;  % number of samples to synthesize
-B = [0.049922035 -0.095993537 0.050612699 -0.004408786];
-A = [1 -2.494956002   2.017265875  -0.522189400];
-nT60 = round(log(1000)/(1-max(abs(roots(A))))); % T60 est.
-v = randn(1,Nx+nT60); % Gaussian white noise: N(0,1)
-x = filter(B,A,v);    % Apply 1/F roll-off to PSD
-x = x(nT60+1:end);    % Skip transient response
-
-%{
-octave:1> sum(B)/sum(A)
-ans = 1.0991
-%}
+[y zf]=filter(1-a,[1 -a],x);
+coloredNoise = y;
 ```
+
+
+
+whose transfer function is
+$$
+H(z)=\frac{Y(z)}{X(z)}
+    =\frac{1-a}{1-a z^{-1}}.
+\label{eq:digital_filter_transfer}
+$$
+
+Evaluating the transfer function on the unit circle gives
+
+$$
+H\!\left(e^{j2\pi f/F_s}\right)
+=
+\frac{1-a}
+     {1-ae^{-j2\pi f/F_s}},
+$$
+
+and therefore
+
+$$
+\left|H\!\left(e^{j2\pi f/F_s}\right)\right|^2
+=
+\frac{(1-a)^2}
+     {1+a^2-2a\cos\!\left(2\pi f/F_s\right)}.
+\label{eq:digital_filter_magnitude}
+$$
+
+Consequently, the theoretical one-sided colored-noise PSD is
+$$
+S_y^{(1)}(f)
+=
+S_x^{(1)}(f)
+\frac{(1-a)^2}
+     {1+a^2-2a\cos\!\left(2\pi f/F_s\right)}.
+\label{eq:colored_noise_psd}
+$$
+
+
+
+
+
+![colorNgen](noise/colorNgen.png)
+
+
+
+specifically, it is the backward-Euler approximation of a continuous first-order low-pass filter:
+$$
+\tau\frac{dy}{dt}+y=x,\qquad \frac{dy}{dt}\approx F_s(y[n]-y[n-1])
+$$
+This produces:
+$$
+y[n]=a\,y[n-1]+(1-a)x[n],\qquad a=\frac{\tau F_s}{1+\tau F_s}
+$$
+Therefore the corresponding continuous-time cutoff is:
+$$
+\boxed{\omega_c=\frac{1-a}{a}F_s\ \text{rad/s}}
+$$
+
+
+However, this is not the exact −3 dB frequency of the resulting digital filter. Its exact digital cutoff is:
+$$
+\boxed{\omega_{3\text{dB,digital}} =F_s\cos^{-1}\!\left(1-\frac{(1-a)^2}{2a}\right)\ \text{rad/s}}
+$$
+
+
+For `a = 0.9` and `Fs = 1000`:
+
+- Backward-Euler continuous cutoff: `111.11 rad/s` (`17.68 Hz`)
+- Exact digital −3 dB cutoff: `105.46 rad/s` (`16.78 Hz`)
+
+Now we derive $\omega_{3\text{dB,digital}}$, Start with the digital transfer function: $H(z)=\frac{1-a}{1-az^{-1}}$
+
+Evaluate it on the unit circle, $z=e^{j\Omega}$, where $Omega$ is digital frequency in rad/sample: $H(e^{j\Omega})=\frac{1-a}{1-ae^{-j\Omega}}$
+
+Its magnitude squared is $|H(e^{j\Omega})|^2 =\frac{(1-a)^2}{|1-ae^{-j\Omega}|^2}$
+
+Expanding the denominator:
+$$
+\begin{aligned} |1-ae^{-j\Omega}|^2 &=(1-a\cos\Omega)^2+(a\sin\Omega)^2\\ &=1+a^2-2a\cos\Omega\\ &=(1-a)^2+2a(1-\cos\Omega). \end{aligned}
+$$
+
+
+The DC gain is one: $|H(e^{j0})|^2=1$
+
+At the −3 dB frequency, power is half its DC value: $|H(e^{j\Omega_{3\mathrm{dB}}})|^2=\frac{1}{2}$
+
+Therefore, $\frac{(1-a)^2} {(1-a)^2+2a(1-\cos\Omega_{3\mathrm{dB}})} =\frac12$
+
+and hence
+$$
+\boxed{ \Omega_{3\mathrm{dB}} =\cos^{-1}\!\left(1-\frac{(1-a)^2}{2a}\right) } \quad\text{rad/sample}
+$$
+Since \(\omega=\Omega F_s\),
+$$
+\boxed{ \omega_{3\mathrm{dB}} =F_s\cos^{-1}\!\left(1-\frac{(1-a)^2}{2a}\right) } \quad\text{rad/s}
+$$
+
+
+For \(a=0.9\) and \(F_s=1000\):
+
+$\Omega_{3\mathrm{dB}}\approx0.10546\ \text{rad/sample}$,  $\omega_{3\mathrm{dB}}\approx105.46\ \text{rad/s} \approx16.78\ \text{Hz}$
 
 
 

@@ -311,7 +311,7 @@ $$
 and the DAC quantization error is correspondingly modeled as
 
 $$
-Q_{DAC} \sim U[0,\text{LSB}_t]
+Q_{DAC} \sim U[0,1] \space \text{in}\space \text{LSB}_t
 $$
 
 

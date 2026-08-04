@@ -624,7 +624,7 @@ $$
 
 ***$1/f^3$: $\mathcal{L}(f)=\mathcal{L}_1 f_1^3/f^3$ (flicker FM)***
 
-
+> shaping noise in the frequency domain
 
 ```python
 W = np.fft.rfft(rng.standard_normal(M))

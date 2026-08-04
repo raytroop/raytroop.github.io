@@ -625,6 +625,8 @@ $$
 ***$1/f^3$: $\mathcal{L}(f)=\mathcal{L}_1 f_1^3/f^3$ (flicker FM)***
 
 > shaping noise in the frequency domain
+>
+> `fft` and `ifft` are just tool to transform between time domain and frequency domain — we only care about input PSD (**uniformly sampled discrete white noise**) and final output PSD
 
 ```python
 W = np.fft.rfft(rng.standard_normal(M))
@@ -649,9 +651,9 @@ $$
 return x * np.sqrt(c * fs / 2.0)
 ```
 
-Therefore, the resulting sequence has a \(1/f\) PSD. DC is set to zero because ideal \(1/f\) noise diverges at \(f=0\).
+Therefore, the resulting sequence has a $1/f$ PSD. DC is set to zero because ideal $1/f$ noise diverges at $f=0$.
 
-Unit-variance sampled white noise has one-sided PSD \(2/f_s\). Thus the output PSD is
+Unit-variance sampled white noise has one-sided PSD $2/f_s$. Thus the output PSD is
 $$
 S_o(f) = \frac{2}{f_s}\frac{1}{f} \left(\frac{c f_s}{2}\right) = \frac{c}{f}
 $$

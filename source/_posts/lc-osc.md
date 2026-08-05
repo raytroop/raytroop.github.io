@@ -1072,6 +1072,24 @@ Identical physics, different bookkeeping
 
 
 
+### Tuning Range
+
+![2026-08-05_12-06](./lc-osc/2026-08-05_12-06.png)
+
+$$
+\frac{C_\text{on}}{C_\text{off}} = \frac{C_\text{max} - C_\text{fix}}{C_\text{min} - C_\text{fix}} = \frac{C_\text{max}/C_\text{min} - C_\text{fix}/C_\text{min}}{1-C_\text{fix}/C_\text{min}}
+$$
+
+with $C_\text{max}/C_\text{min} \gt 1$ and $C_\text{fix}/C_\text{min}\lt 1$
+
+$$
+\frac{C_\text{on}}{C_\text{off}} = K_0 + \frac{K_1}{1-C_\text{fix}/C_\text{min}}
+$$
+
+For same FTR and higher frequency
+$$
+\text{smaller}\space\space C_\text{min} \implies \text{larger} \space\space \frac{C_\text{on}}{C_\text{off}}
+$$
 
 
 ## LC Tank Q

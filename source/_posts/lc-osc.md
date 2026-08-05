@@ -943,6 +943,14 @@ characterized by by ***quality factor*** and ***capacitance ratio factor***
  ***tuning range***
 
 ![image-20260704114222117](lc-osc/image-20260704114222117.png)
+
+**VCO gain** $K_{\mathrm{VCO},f}$ in $\text{Hz}/V$
+$$
+K_{\mathrm{VCO},f}=\frac{df_0}{dV}=-\frac{f_0}{2C}K_v
+$$
+
+where $K_v$ is the **varactor capacitance sensitivity** ($F/V$)
+
 $$
 \Delta\omega_0 = \frac{\partial \omega_0}{\partial C}\cdot \Delta C = -\frac{\Delta C}{2C}\cdot \omega_0
 $$

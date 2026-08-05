@@ -1082,8 +1082,7 @@ Identical physics, different bookkeeping
 
 ### Tuning Range
 
-![2026-08-05_12-06](./lc-osc/2026-08-05_12-06.png)
-
+![image-20260805210508175](lc-osc/image-20260805210508175.png)
 $$
 \frac{C_\text{on}}{C_\text{off}} = \frac{C_\text{max} - C_\text{fix}}{C_\text{min} - C_\text{fix}} = \frac{C_\text{max}/C_\text{min} - C_\text{fix}/C_\text{min}}{1-C_\text{fix}/C_\text{min}}
 $$

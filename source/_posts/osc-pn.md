@@ -416,6 +416,61 @@ Note the contrast with **thermal noise**: **white noise is uncorrelated between 
 
 
 
+
+
+### Tail-Current Noise Conversion with the ISF
+
+> A. Hajimiri and T. H. Lee, "Design issues in CMOS differential LC oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 34, no. 5, pp. 717-724, May 1999. [[paper](https://chic.caltech.edu/wp-content/uploads/2013/05/Ali_CMOS_99.pdf)]
+>
+> T. H. Lee, *Linearity, Time-Variation, Phase Modulation and Oscillator Phase Noise*. [[slides](https://class.ece.iastate.edu/djchen/ee507/PhaseNoiseTutorialLee.pdf)]
+>
+> K. Gunnam and M. VahidFar, eds., *Selected Topics in RF, Analog and Mixed Signal Circuits and Systems*, 1st ed. River Publishers, 2017.
+
+![image-20260805221347730](osc-pn/image-20260805221347730.png)
+
+![image-20260805221944438](osc-pn/image-20260805221944438.png)
+
+The differential pair commutates twice per oscillation cycle. After half a cycle, the two sides exchange roles, but the common tail node returns to the same state. Therefore, both the tail voltage and the tail-current ISF have half-period symmetry:
+$$
+v_\text{tail}\left(t+\frac{T_0}{2}\right)=v_\text{tail}(t),
+\qquad
+\Gamma_\text{tail}(\theta+\pi)=\Gamma_\text{tail}(\theta).
+$$
+It follows that the tail ISF can have a DC component but only even harmonics of $\omega_0$:
+$$
+\Gamma_\text{tail}(\theta)
+=\sum_{k=-\infty}^{\infty}c_{2k}e^{j2k\theta}
+\approx c_0+c_2e^{j2\theta}+c_{-2}e^{-j2\theta},
+$$
+where the approximation retains the DC and dominant second-harmonic terms.
+
+Tail-current noise first produces an instantaneous frequency perturbation, which is then integrated into phase:
+$$
+\dot{\phi}_\text{tail}(t)
+=\frac{\Gamma_\text{tail}(\omega_0t)i_\text{n,tail}(t)}{q_\text{max}},
+\qquad
+\boxed{\phi_\text{tail}(t)
+=\frac{1}{q_\text{max}}\int_{-\infty}^{t}
+\Gamma_\text{tail}(\omega_0\tau)i_\text{n,tail}(\tau)\,d\tau.}
+$$
+
+Multiplication by the periodic ISF acts as a mixer. For stationary tail-current noise, using a two-sided PSD convention, the phase-noise PSD at an offset $\Omega\ll\omega_0$ is
+$$
+S_{\phi,\text{tail}}(\Omega)
+=\frac{1}{q_\text{max}^2\Omega^2}
+\sum_{k=-\infty}^{\infty}|c_{2k}|^2
+S_{i,\text{tail}}(\Omega-2k\omega_0).
+$$
+Thus, $c_0$ converts low-frequency noise directly to close-in phase noise, while $c_{\pm2}$ downconvert noise near $2\omega_0\pm\Omega$ to the same offset $\Omega$. Noise near $\omega_0$ makes no first-order contribution because the odd Fourier coefficients vanish.
+
+In the DC-plus-second-harmonic approximation, **only low-frequency noise and noise near $2\omega_0$ create close-in phase noise**.
+
+More generally, a nonsinusoidal tail ISF can also fold noise near $4\omega_0,6\omega_0,\ldots$; low-frequency conversion vanishes when the DC coefficient $c_0$ is zero.
+
+![image-20260805222648254](osc-pn/image-20260805222648254.png)
+
+
+
 ### Closed-Form Formula for the ISF
 
 ![image-20260718105439247](osc-pn/image-20260718105439247.png)If the state variables are node voltages, write $\Delta \vec X = \sum_i \Delta v_i\,\hat e_i$ (with $\Delta v_i = \Delta q_i/C_i$) and the **dot product** distributes:
@@ -598,8 +653,12 @@ The commutation folds  tail noise as **a (near) single sideband**, which is equi
 ---
 
 > E. Hegazi, H. Sjoland and A. Abidi, "A filtering technique to lower oscillator phase noise," *2001 IEEE International Solid-State Circuits Conference. Digest of Technical Papers. ISSCC (Cat. No.01CH37177)*, San Francisco, CA, USA, 2001 [[paper](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/D23_4.pdf), [slides](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/SS23_4.pdf)]
+>
+> Peter Kinget, ISSCC 2010 short course, Transistor-Level Design of Critical PLL Circuits
 
 ![image-20260711204714462](osc-pn/image-20260711204714462.png)
+
+![image-20260805205218513](osc-pn/image-20260805205218513.png)
 
 In the first-order, **noise around DC (flicker)** is **upconverted** as a pair of correlated, symmetric sidebands around the carrier — which is **pure AM**
 
@@ -919,13 +978,11 @@ $$
 $$
 
 
-### Effect of Tail Capacitance
+### Tail Capacitance Effect
 
 ![image-20260801161111253](osc-pn/image-20260801161111253.png)
 
-![image-20260801161736533](osc-pn/image-20260801161736533.png)
-
-
+![image-20260805221750191](osc-pn/image-20260805221750191.png)
 
 ---
 
@@ -1800,6 +1857,4 @@ Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity O
 Bae, Woorham, and Deog-Kyoon Jeong. *Analysis and Design of CMOS Clocking Circuits for Low Phase Noise*. Institution of Engineering and Technology, 2020.
 
 M. Babaie, M. Shahmohammadi, R. B. Staszewski, (2019) "RF CMOS Oscillators for Modern Wireless Applications" River Publishers [[https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf](https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf)]
-
-
 

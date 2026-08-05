@@ -946,7 +946,7 @@ characterized by by ***quality factor*** and ***capacitance ratio factor***
 
 **VCO gain** $K_{\mathrm{VCO},f}$ in $\text{Hz}/V$
 $$
-K_{\mathrm{VCO},f}=\frac{df_0}{dV}=-\frac{f_0}{2C}K_v
+\boxed{K_{\mathrm{VCO},f}=\frac{df_0}{dV}=-\frac{f_0}{2C}K_v}
 $$
 
 where $K_v$ is the **varactor capacitance sensitivity** ($F/V$)

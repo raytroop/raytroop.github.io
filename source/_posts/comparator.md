@@ -172,7 +172,13 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 
 
 
+---
 
+---
+
+***A simple comparator based on the 4-transistor hysteresis cell***
+
+![image-20260806223447008](comparator/image-20260806223447008.png)
 
 
 

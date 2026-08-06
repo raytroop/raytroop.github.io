@@ -183,7 +183,7 @@ S. Beer, R. Ginosar, M. Priel, R. Dobkin and A. Kolodny, "The Devolution of Sync
 
 Asad Abidi. ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe3VUTNb4Q&t=681](https://youtu.be/sVe3VUTNb4Q&t=681)]
 
-Matt Venn. Interactive flip flop simulation [[https://github.com/mattvenn/flipflop_demo](https://github.com/mattvenn/flipflop_demo)]
+Matt Venn. Inside a flip-flop: exploring metastability [[https://zerotoasiccourse.com/metastability/](https://zerotoasiccourse.com/metastability/)] [[https://github.com/mattvenn/flipflop_demo](https://github.com/mattvenn/flipflop_demo)]
 
 Amr Adel Mohammady. Clock Domain Crossing [[linkedin](https://www.linkedin.com/posts/amradelm_clock-domain-crossing-all-parts-activity-7245373317526818816-tiO8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 

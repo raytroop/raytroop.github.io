@@ -111,6 +111,8 @@ $$
 > Tianshuang Qiu; Ying Guo, "7. Finite-Precision Numerical Effects in Digital Signal Processing," in *Signal Processing and Data Analysis* , De Gruyter, 2018, pp.236-248
 >
 > Antoniou, Andreas. “Digital Signal Processing: Signals, Systems, and Filters.” (2005). [[pdf](https://fmipa.umri.ac.id/wp-content/uploads/2016/03/Andreas-Intoniou-Digital-signal-processing.9780071454247.31527.pdf)]
+>
+> Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
 
 *TODO* &#128197;
 

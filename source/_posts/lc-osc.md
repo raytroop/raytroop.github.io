@@ -100,6 +100,37 @@ FF = Qt^2*eta_I*eta_V*2/1e3/(kB*T)/10^(FoM/10); % 4.6006
 ![image-20260629212724673](lc-osc/image-20260629212724673.png)
 
 
+---
+
+---
+
+***Tail Current-Shaping Harmonics***
+
+Assuming cross-coupled pair act as ideal swithes and tail current waveform in $I_\text{tail}=1-\cos 2\omega_0 t$
+
+$$
+x(t)=
+\begin{cases}
+1+\cos(2\omega_0 t), & -\pi < 2\omega_0 t < \pi,\\[2mm]
+0, & \pi < 2\omega_0 t < 3\pi.
+\end{cases}
+$$
+
+![tail_current-shaping](lc-osc/tail_current-shaping.png)
+
+
+
+$$
+\boxed{x(t)
+=
+1
++\textcolor{red}{\frac{8}{3\pi}\cos(\omega_0 t)}
++\frac{1}{2}\cos(2\omega_0 t)
+-\frac{8}{15\pi}\cos(3\omega_0 t)
++\cdots}
+$$
+
+The fundamental harmonic coefficients is $\frac{8}{3\pi}$ and we know class-B coeff. is $\frac{2}{\pi}$
 
 
 

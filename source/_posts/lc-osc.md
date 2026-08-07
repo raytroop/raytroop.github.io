@@ -1101,6 +1101,8 @@ ans = -137.90
 > ![image-20260621101558719](lc-osc/image-20260621101558719.png)
 >
 > ![2026-08-07_12-05.png](lc-osc/2026-08-07_12-05.png)
+>
+> FM $\Delta \omega_0 \cos\omega_m t$ to PM $\frac{\Delta \omega_0}{\omega_m} \sin\omega_m t$ depend on FM modulation frequency $\omega_m$
 
 
 Waleed's CICC slide  $\Delta f = K_\text{v} v_n$ is already an **RMS** quantity — $v_n$ is specified as an rms density; Samori's $\Delta \omega_0$ is the **peak** deviation of a deterministic sinusoidal test tone.

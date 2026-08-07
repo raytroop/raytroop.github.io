@@ -959,6 +959,8 @@ An **8-shaped (figure-8) inductor** is a specialized on-chip, high-Q component u
 
 ## On-Chip Capacitor
 
+> A. Bonfanti, S. Levantino, C. Samori and A. L. Lacaita, "A varactor configuration minimizing the amplitude-to-phase noise conversion in VCOs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 53, no. 3, pp. 481-488, March 2006 [[https://sci-hub.ru/10.1109/TCSI.2005.858764](https://sci-hub.ru/10.1109/TCSI.2005.858764)]
+
 ***monolithic C-V characteristic***
 
 ![image-20260704112319127](lc-osc/image-20260704112319127.png)
@@ -1131,6 +1133,97 @@ $$
 $$
 
 
+
+
+## Discrete Capacitor Tuning
+
+> A. D. Berny, A. M. Niknejad and R. G. Meyer, "A 1.8-GHz LC VCO with 1.3-GHz tuning range and digital amplitude calibration," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 4, pp. 909-917, April 2005 [[https://sci-hub.jp/10.1109/JSSC.2004.842851](https://sci-hub.jp/10.1109/JSSC.2004.842851)]
+>
+> D. Turker et al., "A 7.4-to-14GHz PLL with 54fsrms jitter in 16nm FinFET for integrated RF-data-converter SoCs," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310342](https://sci-hub.ru/10.1109/ISSCC.2018.8310342)]
+
+
+### Q of SC bank
+
+![image-20260729223441717](lc-osc/image-20260729223441717.png)
+
+
+
+```mermaid
+graph LR
+    A[Lower f₀] --> B["Larger C_T"]
+    B --> C["Lower bank Q"]
+    C --> D["Lower tank Q & Lower √(L/C_T)"]
+    D --> E["Lower R_p"]
+    E --> F["Higher I_bias (for the same amplitude)"]
+
+
+```
+
+![image-20260729230115658](lc-osc/image-20260729230115658.png)
+
+
+
+### coding & layout methodology
+
+In a **differential LC VCO**, every tuning bit should preserve the symmetry of the two tank nodes
+
+To maintain a **symmetric connection** between the inductor and the capacitor bank, each weighted capacitor branch should be split and placed symmetrically about the differential axis
+
+
+
+### switch res impact on Q
+
+series model (R<sub>s</sub>, C<sub>s</sub>) to parallel model (R<sub>p</sub>, C<sub>p</sub>) with fixed C<sub>s</sub> but varying R<sub>s</sub>
+
+$$
+\boxed{C_p = \frac{Q^2}{1+Q^2}C_s=C_s(1-\frac{1}{1+Q^2}) \qquad\qquad R_p = (1+Q^2)R_s =  (1+Q^2)\frac{1}{\omega C_s Q}=(\frac{1}{Q}+Q)\frac{1}{\omega C_s}}
+$$
+
+
+![CsRs_CpRp_Q.png](lc-osc/CsRs_CpRp_Q.png)
+
+parallel model (R<sub>p</sub>, C<sub>p</sub>) to series model (R<sub>s</sub>, C<sub>s</sub>) with fixed C<sub>p</sub> but varying R<sub>p</sub>
+$$
+\boxed{C_s = \frac{1+Q^2}{Q^2}C_p = C_p(1+\frac{1}{Q^2}) \qquad\qquad R_s = \frac{1}{1+Q^2}R_p = \frac{1}{1+Q^2}\frac{Q}{\omega C_p} = \frac{Q}{1+Q^2}\frac{1}{\omega C_p}}
+$$
+
+
+![CpRp_CsRs_Q.png](lc-osc/CpRp_CsRs_Q.png)
+
+
+
+
+
+### Two Capacitor Q
+
+***parallel-combination***
+
+![image-20260804225328820](lc-osc/image-20260804225328820.png)
+
+with $C= C_0 + C_1$ and $R=\frac{R_0R_1}{R_0+R_1}=\frac{Q_0Q_1}{\omega(C_0Q_1 + C_1Q_0)}$, the combined $Q_C$ is
+$$
+Q_C = R\cdot \omega C = \frac{Q_0Q_1}{C_0Q_1+C_1Q_0}C
+$$
+therefore
+$$
+\boxed{\frac{1}{Q_C} = \frac{C_0}{C}\frac{1}{Q_0} + \frac{C_1}{C}\frac{1}{Q_1}}
+$$
+
+
+---
+
+
+
+***series-combination***
+
+![image-20260804225302373](lc-osc/image-20260804225302373.png)
+
+with $C=\frac{C_0C_1}{C_0+C_1}$, $R=R_0 + R_1=\frac{1}{\omega}\left(\frac{1}{Q_0C_0}+\frac{1}{Q_1C_1}\right)$
+$$
+\boxed{Q_C = \frac{1}{\omega R C} = Q_0\frac{1+\frac{C_0}{C_1}}{1+\frac{C_0}{C_1}\frac{Q_0}{Q_1}}}
+$$
+
+
 ## LC Tank Q
 
 ![image-20260620145624711](lc-osc/image-20260620145624711.png)
@@ -1205,96 +1298,6 @@ $$
 \boxed{|Z(\omega_0\pm \omega_m)|^2 \cong \frac{1}{(2\omega_m C)^2}}\qquad\qquad \boxed{|Z(\omega_0\pm \omega_m)|^2 \cong R^2\left(\frac{\omega_0}{2Q\omega_m}\right)^2}
 $$
 
-
-
-
-
-## Discrete Capacitor Tuning
-
-> A. D. Berny, A. M. Niknejad and R. G. Meyer, "A 1.8-GHz LC VCO with 1.3-GHz tuning range and digital amplitude calibration," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 4, pp. 909-917, April 2005 [[https://sci-hub.jp/10.1109/JSSC.2004.842851](https://sci-hub.jp/10.1109/JSSC.2004.842851)]
-
-
-
-### Q of SC bank
-
-![image-20260729223441717](lc-osc/image-20260729223441717.png)
-
-
-
-```mermaid
-graph LR
-    A[Lower f₀] --> B["Larger C_T"]
-    B --> C["Lower bank Q"]
-    C --> D["Lower tank Q & Lower √(L/C_T)"]
-    D --> E["Lower R_p"]
-    E --> F["Higher I_bias (for the same amplitude)"]
-
-
-```
-
-![image-20260729230115658](lc-osc/image-20260729230115658.png)
-
-
-
-### coding & layout methodology
-
-In a **differential LC VCO**, every tuning bit should preserve the symmetry of the two tank nodes
-
-To maintain a **symmetric connection** between the inductor and the capacitor bank, each weighted capacitor branch should be split and placed symmetrically about the differential axis
-
-
-
-### switch res impact on Q
-
-series model (R<sub>s</sub>, C<sub>s</sub>) to parallel model (R<sub>p</sub>, C<sub>p</sub>) with fixed C<sub>s</sub> but varying R<sub>s</sub>
-
-$$
-\boxed{C_p = \frac{Q^2}{1+Q^2}C_s=C_s(1-\frac{1}{1+Q^2}) \qquad\qquad R_p = (1+Q^2)R_s =  (1+Q^2)\frac{1}{\omega C_s Q}=(\frac{1}{Q}+Q)\frac{1}{\omega C_s}}
-$$
-
-
-![CsRs_CpRp_Q.png](lc-osc/CsRs_CpRp_Q.png)
-
-parallel model (R<sub>p</sub>, C<sub>p</sub>) to series model (R<sub>s</sub>, C<sub>s</sub>) with fixed C<sub>p</sub> but varying R<sub>p</sub>
-$$
-\boxed{C_s = \frac{1+Q^2}{Q^2}C_p = C_p(1+\frac{1}{Q^2}) \qquad\qquad R_s = \frac{1}{1+Q^2}R_p = \frac{1}{1+Q^2}\frac{Q}{\omega C_p} = \frac{Q}{1+Q^2}\frac{1}{\omega C_p}}
-$$
-
-
-![CpRp_CsRs_Q.png](lc-osc/CpRp_CsRs_Q.png)
-
-
-
-
-
-### 2 Capacitor Q
-
-***parallel-combination***
-
-![image-20260804225328820](lc-osc/image-20260804225328820.png)
-
-with $C= C_0 + C_1$ and $R=\frac{R_0R_1}{R_0+R_1}=\frac{Q_0Q_1}{\omega(C_0Q_1 + C_1Q_0)}$, the combined $Q_C$ is
-$$
-Q_C = R\cdot \omega C = \frac{Q_0Q_1}{C_0Q_1+C_1Q_0}C
-$$
-therefore
-$$
-\boxed{\frac{1}{Q_C} = \frac{C_0}{C}\frac{1}{Q_0} + \frac{C_1}{C}\frac{1}{Q_1}}
-$$
-
-
----
-
-
-
-***series-combination***
-
-![image-20260804225302373](lc-osc/image-20260804225302373.png)
-
-with $C=\frac{C_0C_1}{C_0+C_1}$, $R=R_0 + R_1=\frac{1}{\omega}\left(\frac{1}{Q_0C_0}+\frac{1}{Q_1C_1}\right)$
-$$
-\boxed{Q_C = \frac{1}{\omega R C} = Q_0\frac{1+\frac{C_0}{C_1}}{1+\frac{C_0}{C_1}\frac{Q_0}{Q_1}}}
-$$
 
 
 

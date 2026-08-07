@@ -117,7 +117,7 @@ plt.show()
 > 		    `((,l11 ,l22) (,q11 ,q22) (,k))))
 > 		'(("L1" "L2") ("Q1" "Q2") ("k")))))
 > ```
-> 
+>
 > In recent versions (specifically EMX2024 and later), `(k (if ((abs kk) < 2.0) kk 0.0)))` was updated to `(k (if ((abs kk) < 2.0) -kk 0.0)))` to ensure the **correct sign** for `k`
 
 ---
@@ -211,7 +211,7 @@ legend('Tapped inductor model', 'tcoil model calc');
 >
 > A. Bevilacqua, "Tutorial: Fundamentals of Integrated Transformers: from Principles to Applications," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020 [[pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T1Visuals.pdf)]
 >
-> —, "Fundamentals of Integrated Transformers: From Principles to Applications," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 4, pp. 86-100, Fall 2020 
+> —, "Fundamentals of Integrated Transformers: From Principles to Applications," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 4, pp. 86-100, Fall 2020
 
 
 
@@ -269,7 +269,134 @@ like shunt-peaking, the impedance of $C_o/n$, $L_s$, $r_s$ have resonant peak at
 
 > Mixed-Mode Y/Z-Parameters [[http://zeptoblog.com/2024/03/09/mixed-mode-yz-parameters.html](http://zeptoblog.com/2024/03/09/mixed-mode-yz-parameters.html)]
 
-![image-20260109001415365](emx/image-20260109001415365.png)
+![image-20260807214809889](emx/image-20260807214809889.png)
+
+For an AC simulation:
+
+When a differential-voltage stimulus, i.e., $V_1=-V_2$, is applied, the differential-mode current can be calculated from the simulated branch currents as $I_{DM}=(I_1-I_2)/2$.
+
+When a differential-current stimulus, i.e., $I_1=-I_2$, is applied, the differential-mode voltage can be calculated from the simulated node voltages as $V_{DM}=V_1-V_2$.
+
+
+
+---
+
+For a **center-tapped (CTAP) inductor with the center tap AC-grounded**, define
+
+$$
+R_1=\frac{\omega L_1}{Q_1},
+\qquad
+R_2=\frac{\omega L_2}{Q_2},
+\qquad
+M=k\sqrt{L_1L_2}.
+$$
+
+For the usual CT winding orientation, when both port currents are defined **from the outer terminals toward the grounded center tap**, the two halves have opposite dot orientation. Therefore, the 2-port impedance matrix is
+
+$$
+\mathbf Z=
+\begin{bmatrix}
+R_1+j\omega L_1 & -j\omega M\\
+-j\omega M & R_2+j\omega L_2
+\end{bmatrix}.
+$$
+
+The differential impedance is
+
+$$
+Z_{\mathrm{diff}}
+=
+Z_{11}+Z_{22}-Z_{12}-Z_{21}.
+$$
+
+Therefore,
+
+$$
+\begin{aligned}
+Z_{\mathrm{diff}}
+&=
+R_1+j\omega L_1
++
+R_2+j\omega L_2
+-
+(-j\omega M)
+-
+(-j\omega M)
+\\
+&=
+R_1+R_2
++
+j\omega(L_1+L_2+2M).
+\end{aligned}
+$$
+
+Using
+
+$$
+M=k\sqrt{L_1L_2},
+$$
+
+we obtain
+
+$$
+\boxed{
+Z_{\mathrm{diff}}
+=
+R_1+R_2
++
+j\omega
+\left(
+L_1+L_2+2k\sqrt{L_1L_2}
+\right)
+}.
+$$
+
+Hence, the differential inductance is
+
+$$
+\boxed{
+L_{\mathrm{diff}}
+=
+L_1+L_2+2k\sqrt{L_1L_2}
+}.
+$$
+
+The differential series resistance is
+
+$$
+R_{\mathrm{diff}}
+=
+R_1+R_2
+=
+\frac{\omega L_1}{Q_1}
++
+\frac{\omega L_2}{Q_2}.
+$$
+
+Therefore, the differential quality factor is
+
+$$
+Q_{\mathrm{diff}}
+=
+\frac{\operatorname{Im}\{Z_{\mathrm{diff}}\}}
+{\operatorname{Re}\{Z_{\mathrm{diff}}\}}.
+$$
+
+Thus,
+
+$$
+\boxed{
+Q_{\mathrm{diff}}
+=
+\frac{
+L_1+L_2+2k\sqrt{L_1L_2}
+}{
+L_1/Q_1+L_2/Q_2
+}
+}.
+$$
+
+
 
 ### DE & SE excitation
 
@@ -285,17 +412,17 @@ Y parameters to Z parameters
 $$\begin{align}
 |Y| &= Y_{11}*Y_{22} - Y_{12}*Y_{22} \\
 \begin{bmatrix}
-Z_{11} & Z_{12}\\ 
+Z_{11} & Z_{12}\\
 Z_{21} & Z_{22}
 \end{bmatrix}
 &=
 \begin{bmatrix}
-\frac{Y_{22}}{|Y|} & \frac{-Y_{12}}{|Y|}\\ 
+\frac{Y_{22}}{|Y|} & \frac{-Y_{12}}{|Y|}\\
 \frac{-Y_{21}}{|Y|} & \frac{Y_{11}}{|Y|}
-\end{bmatrix} 
+\end{bmatrix}
 \end{align}$$
 
-Then **differential impedance** is 
+Then **differential impedance** is
 $$
 Z_{diff} = Z_{11} - Z_{12} - Z_{21} + Z_{22}
 $$
@@ -318,12 +445,12 @@ $$
 > similarly, Z parameters to Y parameters
 > $$
 > \begin{bmatrix}
-> Y_{11} & Y_{12}\\ 
+> Y_{11} & Y_{12}\\
 > Y_{21} & Y_{22}
 > \end{bmatrix}
 > =
 > \begin{bmatrix}
-> \frac{Z_{22}}{|Z|} & \frac{-Z_{12}}{|Z|}\\ 
+> \frac{Z_{22}}{|Z|} & \frac{-Z_{12}}{|Z|}\\
 > \frac{-Z_{21}}{|Z|} & \frac{Z_{11}}{|Z|}
 > \end{bmatrix}
 > $$
@@ -364,7 +491,7 @@ $$
 - **drawing** layer rectangle pin and specify **Access Direction** as intended
 - check **Cadence pins** in **Advanced options**
 
-> The rectangle pins are always selected as driven port while there are **only rectangle pin**  whether **Cadence pins** checked or not. 
+> The rectangle pins are always selected as driven port while there are **only rectangle pin**  whether **Cadence pins** checked or not.
 
 ---
 
@@ -423,10 +550,10 @@ Synthesis is supported by the Pcells that are suffixed **\_scalable**, and these
 
 ## EMX plot function
 
-> EMX's formulation is defined in 
+> EMX's formulation is defined in
 >
 > `/path/to/EMX/share/emx/virtuoso_ui/emxinterface/emxskill/emxform.ils`
-> 
+>
 > EMX import this file at Virtuoso startup, you have to relaunch Virtuoso if you change this file
 
 
@@ -472,7 +599,7 @@ L_{diff} = \frac{Im(Z_{diff})}{2\pi f} \qquad Q_{diff} = \frac{Im(Z_{diff})}{Re(
 $$
 Y =
 \begin{bmatrix}
-Y_{11} & Y_{12} & Y_{13}\\ 
+Y_{11} & Y_{12} & Y_{13}\\
 Y_{21} & Y_{22} & Y_{23}\\
 Y_{31} & Y_{32} & Y_{33}
 \end{bmatrix}
@@ -498,7 +625,7 @@ Assume `CT` i.e. port 3 in S-parameter is grounded, `(z (EMX_differential (nth 0
 $$
 Y =
 \begin{bmatrix}
-Y_{11} & Y_{12}\\ 
+Y_{11} & Y_{12}\\
 Y_{21} & Y_{22}
 \end{bmatrix}
 $$
@@ -645,7 +772,7 @@ EMX plot the real and imaginary part of $Z_0$, $\alpha$ and $\beta$ of $\gamma$
 
 > using AC simulation, and inductor's parallel model or series model
 >
-> That is to say: both `sp` (network parameter) and `ac` (impedance) can be used to plot inductance, Q value. 
+> That is to say: both `sp` (network parameter) and `ac` (impedance) can be used to plot inductance, Q value.
 >
 > usually EMX choose `ac` method
 
@@ -990,4 +1117,4 @@ Using 'Cadence pins' as ports with access direction in EMX simulations
 
 EMX miscellaneous features [[https://picture.iczhiku.com/resource/eetop/WyIFKleSLTRIuvCb.pdf](https://picture.iczhiku.com/resource/eetop/WyIFKleSLTRIuvCb.pdf)]
 
-Cadence Rapid Adoption Kit (RAK). Analysis of a Figure-Eight Inductor with EMX 
+Cadence Rapid Adoption Kit (RAK). Analysis of a Figure-Eight Inductor with EMX

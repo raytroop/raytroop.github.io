@@ -318,20 +318,6 @@ $$
 
 
 
-### Cyclostationary Noise Sources
-
-Cyclostationary noise can be viewed as stationary noise, $i_{n0}(t)$, multiplied by a periodic envelope, $\alpha(\omega_0 t)$.
-
-***Effective ISF* — *ISF* multiplied with *Noise Modulating Function (NMF)***
-
-![image-20260617010019682](osc-pn/image-20260617010019682.png)
-
-![image-20260617010125436](osc-pn/image-20260617010125436.png)
-
-For Colpitts Oscillator, $\Gamma_\text{eff}(x)$ is different from $\Gamma(x)$, however  $\Gamma_\text{eff}(x)$ and $\Gamma(x)$ are almost identical for ring oscillator
-
-
-
 ### alternative derivation
 
 > Michael Perrott August 12, 2008, Short Course On Phase-Locked Loops and Their Applications Day 2, AM Lecture *Basic Building Blocks Voltage-Controlled Oscillators* [[https://www.cppsim.com/PLL_Lectures/day2_am.pdf](https://www.cppsim.com/PLL_Lectures/day2_am.pdf)]
@@ -556,6 +542,272 @@ with $\Gamma = \sin x$, at crossing $\sin x =1$, which is derivative of edge
 $$
 \Delta \phi = \Gamma \frac{\Delta q}{q_\text{max}} = \sin x\cdot \frac{\Delta q}{C\cdot A}= \sin x\cdot \frac{\Delta q}{C\cdot A\sin x}
 $$
+
+
+
+## Effective ISF
+
+### cyclostationary noise sources
+
+Cyclostationary noise can be viewed as stationary noise, $i_{n0}(t)$, multiplied by a periodic envelope, $\alpha(\omega_0 t)$.
+
+***Effective ISF* — *ISF* multiplied with *Noise Modulating Function (NMF)***
+
+![image-20260617010019682](osc-pn/image-20260617010019682.png)
+
+![image-20260617010125436](osc-pn/image-20260617010125436.png)
+
+For Colpitts Oscillator, $\Gamma_\text{eff}(x)$ is different from $\Gamma(x)$, however  $\Gamma_\text{eff}(x)$ and $\Gamma(x)$ are almost identical for ring oscillator
+
+
+
+### thermal noise with NMF
+
+![image-20260720230732764](osc-pn/image-20260720230732764.png)
+
+***source-specific ISF + its NMF***
+
+
+
+
+### flicker noise with effective non-normalized ISF
+
+> Y. Hu, T. Siriburanon and R. B. Staszewski, "A Low-Flicker-Noise 30-GHz Class-F23 Oscillator in 28-nm CMOS Using Implicit Resonance and Explicit Common-Mode Return Path," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 7, pp. 1977-1987, July 2018 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650)]
+>
+> —, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
+>
+> —, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.jp/10.1109/TCSII.2019.2896483](https://sci-hub.jp/10.1109/TCSII.2019.2896483)]
+
+
+
+![image-20260807204616765](osc-pn/image-20260807204616765.png)
+
+![image-20260807214139295](osc-pn/image-20260807214139295.png)
+
+
+
+![image-20260807213853180](osc-pn/image-20260807213853180.png)
+
+![image-20260807213716397](osc-pn/image-20260807213716397.png)
+
+
+
+---
+
+
+
+With the paper’s implicit **$1\text{-Hz}$ noise bandwidth**, Eq. (3)
+$$
+v_{1/f}(t)
+=
+\sqrt{2}\,V_{1/f,\mathrm{rms}}
+\cos(\Delta\omega t+\gamma)
+$$
+represents one narrowband sinusoidal noise component.
+
+Here:
+$$
+V_{1/f,\mathrm{rms}}
+=
+\sqrt{S_{v,1/f}(\Delta f)\cdot 1\,\mathrm{Hz}}
+$$
+is the **RMS voltage amplitude** of that component. Therefore, strictly within Eq. (3),
+$$
+[V_{1/f,\mathrm{rms}}]=\mathrm V.
+$$
+Because the bandwidth is implicitly $1\,\mathrm{Hz}$, its numerical value equals the amplitude spectral density expressed in $\mathrm{V}/\sqrt{\mathrm{Hz}}$:
+$$
+V_{1/f,\mathrm{rms}}[\mathrm V]
+\overset{B=1\,\mathrm{Hz}}{=}
+\sqrt{S_{v,1/f}}
+\left[\frac{\mathrm V}{\sqrt{\mathrm{Hz}}}\right]
+\sqrt{1\,\mathrm{Hz}}.
+$$
+Also, more precisely:
+
+- $\Delta\omega t+\gamma$ is the **phase** of the sinusoidal component.
+- $\cos(\Delta\omega t+\gamma)$ is the dimensionless sinusoidal waveform.
+- $\gamma$ is the random initial phase.
+- $\sqrt{2}V_{1/f,\mathrm{rms}}$ is the peak amplitude.
+
+Indeed,
+$$
+\operatorname{rms}
+\left\{
+\sqrt{2}V_{1/f,\mathrm{rms}}
+\cos(\Delta\omega t+\gamma)
+\right\}
+=
+V_{1/f,\mathrm{rms}}.
+$$
+Therefore, the same interpretation applies to Eq. (4):
+$$
+i_{1/f,\mathrm{cyclo}}(t)
+=
+\sqrt{2}I_{1/f,\mathrm{rms}}(t)
+\cos(\Delta\omega t+\gamma).
+$$
+Under the implicit $1\text{-Hz}$ bandwidth,
+$$
+[I_{1/f,\mathrm{rms}}(t)]=\mathrm A,
+$$
+From Eq. (4),
+$$
+i_{1/f,\mathrm{cyclo}}(t)
+=
+\sqrt{2}\,I_{1/f,\mathrm{rms}}(t)
+\cos(\Delta\omega t+\gamma).
+$$
+Substitute this into the phase perturbation integral:
+$$
+\begin{aligned}
+\phi(t)
+&=
+\int_{-\infty}^{t}
+h_{\mathrm{DS}}(\tau)
+i_{1/f,\mathrm{cyclo}}(\tau)\,d\tau
+\\
+&=
+\sqrt{2}
+\int_{-\infty}^{t}
+h_{\mathrm{DS}}(\tau)
+I_{1/f,\mathrm{rms}}(\tau)
+\cos(\Delta\omega\tau+\gamma)\,d\tau.
+\end{aligned}
+$$
+Define the **periodically varying effective ISF** as
+$$
+\color{blue}\boxed{h_{\mathrm{eff}}(t)
+\equiv
+h_{\mathrm{DS}}(t)I_{1/f,\mathrm{rms}}(t)}
+$$
+Therefore,
+$$
+\phi(t)
+=
+\sqrt{2}
+\int_{-\infty}^{t}
+h_{\mathrm{eff}}(\tau)
+\cos(\Delta\omega\tau+\gamma)\,d\tau.
+$$
+Since $h_{\mathrm{eff}}(t)$ is periodic with period $T=2\pi/\omega_0$, write
+$$
+h_{\mathrm{eff}}(t)
+=
+h_{\mathrm{eff,dc}}
++
+\sum_{k=1}^{\infty}
+H_k\cos(k\omega_0t+\psi_k),
+$$
+where
+$$
+h_{\mathrm{eff,dc}}
+=
+\frac{1}{T}
+\int_0^T
+h_{\mathrm{eff}}(t)\,dt
+=
+\frac{1}{T}
+\int_0^T
+h_{\mathrm{DS}}(t)
+I_{1/f,\mathrm{rms}}(t)\,dt.
+$$
+This is Eq. (7).
+
+Substitution gives
+$$
+\begin{aligned}
+\phi(t)
+={}&
+\sqrt{2}h_{\mathrm{eff,dc}}
+\int^t\cos(\Delta\omega\tau+\gamma)\,d\tau
+\\
+&+
+\sqrt{2}\sum_{k=1}^{\infty}H_k
+\int^t
+\cos(k\omega_0\tau+\psi_k)
+\cos(\Delta\omega\tau+\gamma)\,d\tau.
+\end{aligned}
+$$
+The first term is
+$$
+\sqrt{2}h_{\mathrm{eff,dc}}
+\int^t\cos(\Delta\omega\tau+\gamma)\,d\tau
+=
+\frac{\sqrt{2}h_{\mathrm{eff,dc}}}{\Delta\omega}
+\sin(\Delta\omega t+\gamma).
+$$
+For the harmonic terms, use
+$$
+\cos A\cos B
+=
+\frac{1}{2}\left[\cos(A+B)+\cos(A-B)\right].
+$$
+Thus, the exact harmonic contribution is
+$$
+\begin{aligned}
+\phi_k(t)
+=
+\frac{\sqrt{2}H_k}{2}
+\Bigg[
+&
+\frac{
+\sin\!\left[(k\omega_0+\Delta\omega)t+\psi_k+\gamma\right]
+}{
+k\omega_0+\Delta\omega
+}
+\\
++&
+\frac{
+\sin\!\left[(k\omega_0-\Delta\omega)t+\psi_k-\gamma\right]
+}{
+k\omega_0-\Delta\omega
+}
+\Bigg].
+\end{aligned}
+$$
+These terms lie near $k\omega_0\pm\Delta\omega$, whereas the DC term produces a slowly varying phase component directly at $\Delta\omega$.
+
+Because
+$$
+\Delta\omega\ll\omega_0,
+$$
+the slow component is also much larger after integration:
+$$
+\frac{1}{\Delta\omega}
+\gg
+\frac{1}{k\omega_0\pm\Delta\omega}.
+$$
+Therefore, keeping only the dominant low-frequency phase term,
+$$
+\color{blue}\boxed{
+\phi(t)
+\approx
+\frac{\sqrt{2}h_{\mathrm{eff,dc}}}{\Delta\omega}
+\sin(\Delta\omega t+\gamma)
+}
+$$
+The essential mechanism is
+$$
+\underbrace{h_{\mathrm{DS}}(t)}_{\text{periodic ISF}}
+\,
+\underbrace{I_{1/f,\mathrm{rms}}(t)}_{\text{periodic noise amplitude}}
+\longrightarrow
+\underbrace{h_{\mathrm{eff,dc}}}_{\text{nonzero average}},
+$$
+
+
+
+---
+
+
+
+
+> M. Shahmohammadi, M. Babaie and R. B. Staszewski, "A 1/f Noise Upconversion Reduction Technique for Voltage-Biased RF CMOS Oscillators," in IEEE Journal of Solid-State Circuits, vol. 51, no. 11, pp. 2610-2624, Nov. 2016 [[https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf](https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf)]
+
+![image-20260720234322600](osc-pn/image-20260720234322600.png)
+
+
 
 
 
@@ -892,7 +1144,7 @@ $$
 
 > Y. Hu, T. Siriburanon and R. B. Staszewski, "Oscillator Flicker Phase Noise: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 2, pp. 538-544, Feb. 2021 [[paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9286468)] [[slides](https://www.researchgate.net/publication/352173342_Oscillator_Flicker_Phase_Noise_A_Tutorial)]
 >
-> —, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.se/10.1109/TCSII.2019.2896483](https://sci-hub.se/10.1109/TCSII.2019.2896483)]
+> —, "Intuitive Understanding of Flicker Noise Reduction via Narrowing of Conduction Angle in Voltage-Biased Oscillators," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 66, no. 12, pp. 1962-1966, Dec. 2019 [[https://sci-hub.jp/10.1109/TCSII.2019.2896483](https://sci-hub.jp/10.1109/TCSII.2019.2896483)]
 >
 > E. G. Ioannidis, C. G. Theodorou, T. A. Karatsori, S. Haendler, C. A. Dimitriadis and G. Ghibaudo, "Drain-Current Flicker Noise Modeling in nMOSFETs From a 14-nm FDSOI Technology," in IEEE Transactions on Electron Devices, vol. 62, no. 5, pp. 1574-1579, May 2015 [[https://sci-hub.jp/10.1109/TED.2015.2411678](https://sci-hub.jp/10.1109/TED.2015.2411678)]
 
@@ -1576,237 +1828,6 @@ Accounting for these $1/2$ factors yields the identical PXF expression derived i
 ![image-20260725201359867](osc-pn/image-20260725201359867.png)
 
 
-
-
-
-
-### effective ISF
-
-***thermal noise*** with **NMF**
-
-![image-20260720230732764](osc-pn/image-20260720230732764.png)
-
-***source-specific ISF + its NMF***
-
-
-
----
-
----
-
-
-
-***flicker noise*** with ***effective non-normalized ISF***
-
-> Y. Hu, T. Siriburanon and R. B. Staszewski, "A Low-Flicker-Noise 30-GHz Class-F23 Oscillator in 28-nm CMOS Using Implicit Resonance and Explicit Common-Mode Return Path," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 7, pp. 1977-1987, July 2018 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=8345650)]
-
-![image-20260720232628786](osc-pn/image-20260720232628786.png)
-
-With the paper’s implicit **$1\text{-Hz}$ noise bandwidth**, Eq. (3)
-$$
-v_{1/f}(t)
-=
-\sqrt{2}\,V_{1/f,\mathrm{rms}}
-\cos(\Delta\omega t+\gamma)
-$$
-represents one narrowband sinusoidal noise component.
-
-Here:
-$$
-V_{1/f,\mathrm{rms}}
-=
-\sqrt{S_{v,1/f}(\Delta f)\cdot 1\,\mathrm{Hz}}
-$$
-is the **RMS voltage amplitude** of that component. Therefore, strictly within Eq. (3),
-$$
-[V_{1/f,\mathrm{rms}}]=\mathrm V.
-$$
-Because the bandwidth is implicitly $1\,\mathrm{Hz}$, its numerical value equals the amplitude spectral density expressed in $\mathrm{V}/\sqrt{\mathrm{Hz}}$:
-$$
-V_{1/f,\mathrm{rms}}[\mathrm V]
-\overset{B=1\,\mathrm{Hz}}{=}
-\sqrt{S_{v,1/f}}
-\left[\frac{\mathrm V}{\sqrt{\mathrm{Hz}}}\right]
-\sqrt{1\,\mathrm{Hz}}.
-$$
-Also, more precisely:
-
-- $\Delta\omega t+\gamma$ is the **phase** of the sinusoidal component.
-- $\cos(\Delta\omega t+\gamma)$ is the dimensionless sinusoidal waveform.
-- $\gamma$ is the random initial phase.
-- $\sqrt{2}V_{1/f,\mathrm{rms}}$ is the peak amplitude.
-
-Indeed,
-$$
-\operatorname{rms}
-\left\{
-\sqrt{2}V_{1/f,\mathrm{rms}}
-\cos(\Delta\omega t+\gamma)
-\right\}
-=
-V_{1/f,\mathrm{rms}}.
-$$
-Therefore, the same interpretation applies to Eq. (4):
-$$
-i_{1/f,\mathrm{cyclo}}(t)
-=
-\sqrt{2}I_{1/f,\mathrm{rms}}(t)
-\cos(\Delta\omega t+\gamma).
-$$
-Under the implicit $1\text{-Hz}$ bandwidth,
-$$
-[I_{1/f,\mathrm{rms}}(t)]=\mathrm A,
-$$
-From Eq. (4),
-$$
-i_{1/f,\mathrm{cyclo}}(t)
-=
-\sqrt{2}\,I_{1/f,\mathrm{rms}}(t)
-\cos(\Delta\omega t+\gamma).
-$$
-Substitute this into the phase perturbation integral:
-$$
-\begin{aligned}
-\phi(t)
-&=
-\int_{-\infty}^{t}
-h_{\mathrm{DS}}(\tau)
-i_{1/f,\mathrm{cyclo}}(\tau)\,d\tau
-\\
-&=
-\sqrt{2}
-\int_{-\infty}^{t}
-h_{\mathrm{DS}}(\tau)
-I_{1/f,\mathrm{rms}}(\tau)
-\cos(\Delta\omega\tau+\gamma)\,d\tau.
-\end{aligned}
-$$
-Define the **periodically varying effective ISF** as
-$$
-\color{blue}\boxed{h_{\mathrm{eff}}(t)
-\equiv
-h_{\mathrm{DS}}(t)I_{1/f,\mathrm{rms}}(t)}
-$$
-Therefore,
-$$
-\phi(t)
-=
-\sqrt{2}
-\int_{-\infty}^{t}
-h_{\mathrm{eff}}(\tau)
-\cos(\Delta\omega\tau+\gamma)\,d\tau.
-$$
-Since $h_{\mathrm{eff}}(t)$ is periodic with period $T=2\pi/\omega_0$, write
-$$
-h_{\mathrm{eff}}(t)
-=
-h_{\mathrm{eff,dc}}
-+
-\sum_{k=1}^{\infty}
-H_k\cos(k\omega_0t+\psi_k),
-$$
-where
-$$
-h_{\mathrm{eff,dc}}
-=
-\frac{1}{T}
-\int_0^T
-h_{\mathrm{eff}}(t)\,dt
-=
-\frac{1}{T}
-\int_0^T
-h_{\mathrm{DS}}(t)
-I_{1/f,\mathrm{rms}}(t)\,dt.
-$$
-This is Eq. (7).
-
-Substitution gives
-$$
-\begin{aligned}
-\phi(t)
-={}&
-\sqrt{2}h_{\mathrm{eff,dc}}
-\int^t\cos(\Delta\omega\tau+\gamma)\,d\tau
-\\
-&+
-\sqrt{2}\sum_{k=1}^{\infty}H_k
-\int^t
-\cos(k\omega_0\tau+\psi_k)
-\cos(\Delta\omega\tau+\gamma)\,d\tau.
-\end{aligned}
-$$
-The first term is
-$$
-\sqrt{2}h_{\mathrm{eff,dc}}
-\int^t\cos(\Delta\omega\tau+\gamma)\,d\tau
-=
-\frac{\sqrt{2}h_{\mathrm{eff,dc}}}{\Delta\omega}
-\sin(\Delta\omega t+\gamma).
-$$
-For the harmonic terms, use
-$$
-\cos A\cos B
-=
-\frac{1}{2}\left[\cos(A+B)+\cos(A-B)\right].
-$$
-Thus, the exact harmonic contribution is
-$$
-\begin{aligned}
-\phi_k(t)
-=
-\frac{\sqrt{2}H_k}{2}
-\Bigg[
-&
-\frac{
-\sin\!\left[(k\omega_0+\Delta\omega)t+\psi_k+\gamma\right]
-}{
-k\omega_0+\Delta\omega
-}
-\\
-+&
-\frac{
-\sin\!\left[(k\omega_0-\Delta\omega)t+\psi_k-\gamma\right]
-}{
-k\omega_0-\Delta\omega
-}
-\Bigg].
-\end{aligned}
-$$
-These terms lie near $k\omega_0\pm\Delta\omega$, whereas the DC term produces a slowly varying phase component directly at $\Delta\omega$.
-
-Because
-$$
-\Delta\omega\ll\omega_0,
-$$
-the slow component is also much larger after integration:
-$$
-\frac{1}{\Delta\omega}
-\gg
-\frac{1}{k\omega_0\pm\Delta\omega}.
-$$
-Therefore, keeping only the dominant low-frequency phase term,
-$$
-\color{blue}\boxed{
-\phi(t)
-\approx
-\frac{\sqrt{2}h_{\mathrm{eff,dc}}}{\Delta\omega}
-\sin(\Delta\omega t+\gamma)
-}
-$$
-The essential mechanism is
-$$
-\underbrace{h_{\mathrm{DS}}(t)}_{\text{periodic ISF}}
-\,
-\underbrace{I_{1/f,\mathrm{rms}}(t)}_{\text{periodic noise amplitude}}
-\longrightarrow
-\underbrace{h_{\mathrm{eff,dc}}}_{\text{nonzero average}},
-$$
-
-
-> M. Shahmohammadi, M. Babaie and R. B. Staszewski, "A 1/f Noise Upconversion Reduction Technique for Voltage-Biased RF CMOS Oscillators," in IEEE Journal of Solid-State Circuits, vol. 51, no. 11, pp. 2610-2624, Nov. 2016 [[https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf](https://pure.tudelft.nl/ws/portalfiles/portal/30880387/07571191.pdf)]
->
-
-![image-20260720234322600](osc-pn/image-20260720234322600.png)
 
 
 

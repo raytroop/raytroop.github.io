@@ -38,6 +38,9 @@ mathjax: true
 
 ![image-20260621101558719](jitter/image-20260621101558719.png)
 
+FM $\Delta \omega_0 \cos\omega_m t$ to PM $\frac{\Delta \omega_0}{\omega_m} \sin\omega_m t$ depend on FM modulation frequency $\omega_m$
+
+
 ![image-20260609231247931](jitter/image-20260609231247931.png)
 
 ![image-20260609231317481](jitter/image-20260609231317481.png)
@@ -58,6 +61,8 @@ Spurious Tones in Spectrum & ***S**pur-to-**C**arrier **R**atio* (**SCR**)
 
 ![image-20250523222846691](jitter/image-20250523222846691.png)
 
+
+single tone PM $A\sin\omega_m t$ to DJ don't depend on PM modulation frequency $\omega_m$
 
 
 ---

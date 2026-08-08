@@ -63,23 +63,23 @@ $$
 > w_{\mathrm{per}}[n] = \frac{1}{2} -\frac{1}{4}e^{j2\pi n/N} -\frac{1}{4}e^{-j2\pi n/N}
 > $$
 >
-> These three terms are exactly three $N$-point DFT basis functions: 
+> These three terms are exactly three $N$-point DFT basis functions:
 > $$
 > 1, \qquad e^{j2\pi n/N}, \qquad e^{-j2\pi n/N}
 > $$
 >
 > ```python
 > import numpy as np
-> 
+>
 > N = 16
 > w = np.hanning(N + 1)[:N]
-> 
+>
 > W = np.fft.fft(w)
-> 
+>
 > for k, value in enumerate(W):
 >     print(f"k={k:2d}: {value.real:+.12f} {value.imag:+.12f}j")
-> 
-> 
+>
+>
 > # k= 0: +8.000000000000 +0.000000000000j
 > # k= 1: -4.000000000000 +0.000000000000j
 > # k= 2: +0.000000000000 +0.000000000000j

@@ -23,6 +23,252 @@ mathjax: true
 
 
 
+## periodic vs symmetric Hann
+
+> why windowing length is N+1 but drop the last one? #10 [[https://github.com/wulffern/aic2023/issues/10#issuecomment-3242582671](https://github.com/wulffern/aic2023/issues/10#issuecomment-3242582671)]
+
+
+
+- **Symmetric Hann**: include both ends of the window
+
+- **Periodic Hann**: sample one period and exclude the duplicated endpoint
+
+> <span style="color:blue">Normalizing by $\sum w$ of the window recovers only the carrier **amplitude;**</span>
+>
+> <span style="color:blue">Only **periodic window**  `np.hanning(N+1)[:N]` cleans the spectrum  noise floor, harmonics, THD, SNDR, SFDR</span>
+
+The important point is **not simply that one has zero at both array ends**. The key difference is that the **periodic** Hann uses denominator $N$, so its cosine is exactly commensurate with the $N$-point DFT:
+$$
+w_{\text{periodic}}[n]
+=
+\frac{1}{2}
+\left(
+1-\cos\left(\frac{2\pi n}{\textcolor{blue}{N}}\right)
+\right),
+\qquad
+n=0,\ldots,N-1.
+$$
+
+Thus,
+
+$$
+w_{\text{periodic}}[n]
+\sim
+\cos\left(\frac{2\pi n}{N}\right).
+$$
+
+
+
+> $$
+> w_{\mathrm{per}}[n] = \frac{1}{2} -\frac{1}{4}e^{j2\pi n/N} -\frac{1}{4}e^{-j2\pi n/N}
+> $$
+>
+> These three terms are exactly three $N$-point DFT basis functions: 
+> $$
+> 1, \qquad e^{j2\pi n/N}, \qquad e^{-j2\pi n/N}
+> $$
+>
+> ```python
+> import numpy as np
+> 
+> N = 16
+> w = np.hanning(N + 1)[:N]
+> 
+> W = np.fft.fft(w)
+> 
+> for k, value in enumerate(W):
+>     print(f"k={k:2d}: {value.real:+.12f} {value.imag:+.12f}j")
+> 
+> 
+> # k= 0: +8.000000000000 +0.000000000000j
+> # k= 1: -4.000000000000 +0.000000000000j
+> # k= 2: +0.000000000000 +0.000000000000j
+> # k= 3: +0.000000000000 -0.000000000000j
+> # k= 4: +0.000000000000 +0.000000000000j
+> # k= 5: -0.000000000000 -0.000000000000j
+> # k= 6: +0.000000000000 +0.000000000000j
+> # k= 7: +0.000000000000 +0.000000000000j
+> # k= 8: +0.000000000000 +0.000000000000j
+> # k= 9: +0.000000000000 +0.000000000000j
+> # k=10: +0.000000000000 +0.000000000000j
+> # k=11: -0.000000000000 -0.000000000000j
+> # k=12: +0.000000000000 +0.000000000000j
+> # k=13: -0.000000000000 -0.000000000000j
+> # k=14: +0.000000000000 +0.000000000000j
+> # k=15: -4.000000000000 +0.000000000000j
+> ```
+
+This cosine is exactly one of the $N$-point DFT basis frequencies.
+
+In contrast, the **symmetric** Hann uses
+$$
+w_{\text{symmetric}}[n]
+=
+\frac{1}{2}
+\left(
+1-\cos\left(\frac{2\pi n}{\textcolor{blue}{N-1}}\right)
+\right),
+\qquad
+n=0,\ldots,N-1,
+$$
+
+so
+
+$$
+w_{\text{symmetric}}[n]
+\sim
+\cos\left(\frac{2\pi n}{N-1}\right).
+$$
+
+The $N$-point DFT basis is
+
+$$
+e^{-j2\pi kn/N},
+$$
+
+so the denominator is $N$, not $N-1$.
+
+Therefore:
+
+$$
+\boxed{
+\text{Periodic Hann: denominator }N
+\rightarrow
+\text{aligned with the }N\text{-point DFT grid}
+}
+$$
+
+while
+
+$$
+\boxed{
+\text{Symmetric Hann: denominator }N-1
+\rightarrow
+\text{exact sample symmetry}
+}
+$$
+
+So the essence of the distinction is
+
+$$
+\boxed{
+N \quad \text{vs.} \quad N-1
+}
+$$
+
+rather than simply whether the last stored sample is zero.
+
+```python
+# Symmetric Hann
+w_sym = np.hanning(N)
+
+# Periodic Hann
+w_per = np.hanning(N + 1)[:N]
+```
+
+
+
+[[https://github.com/wulffern/aic2026/blob/3e36f104be4caef0315160222f54abcd46c948ab/ex/q.py#L59-L82](https://github.com/wulffern/aic2026/blob/3e36f104be4caef0315160222f54abcd46c948ab/ex/q.py#L59-L82)]
+
+```python
+def freqDomain(x,hann=True):
+    N = len(x)
+    # Use hanning window to prevent FFT bin energy spread.
+    # N+1 with the last sample dropped is deliberate. It is exactly the
+    # periodic window 0.5 - 0.5*cos(2*pi*n/N), which is a sum of three
+    # DFT basis vectors: bins 0 and +-1, with weights 1/2, -1/4, -1/4.
+    # Multiplying by it therefore convolves the spectrum with three
+    # taps, so a tone sitting on an exact bin lands in exactly three
+    # bins and leaks nothing anywhere else. np.hanning(N) is the
+    # symmetric window, 0.5 - 0.5*cos(2*pi*n/(N-1)), which is not a
+    # combination of DFT basis vectors - it has N-1 nonzero DFT
+    # coefficients - so the same tone smears across every bin at about
+    # -45 dBc. Measured, not asserted (aic2023 issue #10).
+    if(hann):
+        w = np.hanning(N+1)
+    else:
+        w = np.ones(N+1)
+
+    # Convert to frequency domain
+    X= np.fft.fftshift(np.fft.fft(np.multiply(w[0:N],x)))
+
+    # Normalize to max output power
+    X = X/np.max(np.abs(X))
+    return X
+```
+
+
+
+
+
+---
+
+![image-20260808200640460](dft-window/image-20260808200640460.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ------------------------------------------------------------
+# Parameters
+# ------------------------------------------------------------
+N = 16
+n = np.arange(N)
+
+# Symmetric Hann
+w_sym = np.hanning(N)
+
+# Periodic Hann
+w_per = np.hanning(N + 1)[:N]
+
+# Equivalent explicit expressions:
+#
+# w_sym = 0.5 * (1 - np.cos(2*np.pi*n/(N-1)))
+# w_per = 0.5 * (1 - np.cos(2*np.pi*n/N))
+
+
+# ============================================================
+# 2. Frequency domain
+#
+# Dense zero-padded FFT ≈ samples of DTFT
+# ============================================================
+Nfft = 65536
+
+W_sym_dense = np.fft.fft(w_sym, Nfft)
+W_per_dense = np.fft.fft(w_per, Nfft)
+
+# Frequency in cycles/sample
+f_dense = np.arange(Nfft) / Nfft
+
+# Normalize each response to its DC value
+W_sym_dense = np.abs(W_sym_dense) / np.abs(W_sym_dense[0])
+W_per_dense = np.abs(W_per_dense) / np.abs(W_per_dense[0])
+
+eps = 1e-14
+
+W_sym_dense_dB = 20*np.log10(np.maximum(W_sym_dense, eps))
+W_per_dense_dB = 20*np.log10(np.maximum(W_per_dense, eps))
+
+
+# ------------------------------------------------------------
+# Actual N-point DFT
+# ------------------------------------------------------------
+W_sym_DFT = np.fft.fft(w_sym, N)
+W_per_DFT = np.fft.fft(w_per, N)
+
+f_DFT = np.arange(N) / N
+
+W_sym_DFT = np.abs(W_sym_DFT) / np.abs(W_sym_DFT[0])
+W_per_DFT = np.abs(W_per_DFT) / np.abs(W_per_DFT[0])
+
+W_sym_DFT_dB = 20*np.log10(np.maximum(W_sym_DFT, eps))
+W_per_DFT_dB = 20*np.log10(np.maximum(W_per_DFT, eps))
+```
+
+
+
+
+
 ## Windowed Signal
 
 Short transient signals in the time domain produce high, broadband frequency content.

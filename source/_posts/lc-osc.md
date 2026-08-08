@@ -1102,7 +1102,7 @@ ans = -137.90
 >
 > ![2026-08-07_12-05.png](lc-osc/2026-08-07_12-05.png)
 >
-> FM $\Delta \omega_0 \cos\omega_m t$ to PM $\frac{\Delta \omega_0}{\omega_m} \sin\omega_m t$ depend on FM modulation frequency $\omega_m$
+> FM $\Delta \omega_0 \cos\omega_m t$ to PM $\frac{\Delta \omega_0}{\omega_m} \sin\omega_m t$ depend on FM modulation frequency $\omega_m$ — in frequency domain $\frac{K_\text{vco} V_n}{s}$
 
 
 Waleed's CICC slide  $\Delta f = K_\text{v} v_n$ is already an **RMS** quantity — $v_n$ is specified as an rms density; Samori's $\Delta \omega_0$ is the **peak** deviation of a deterministic sinusoidal test tone.
@@ -1165,14 +1165,6 @@ graph LR
 
 
 
-### coding & layout methodology
-
-In a **differential LC VCO**, every tuning bit should preserve the symmetry of the two tank nodes
-
-To maintain a **symmetric connection** between the inductor and the capacitor bank, each weighted capacitor branch should be split and placed symmetrically about the differential axis
-
-
-
 ### switch res impact on Q
 
 series model (R<sub>s</sub>, C<sub>s</sub>) to parallel model (R<sub>p</sub>, C<sub>p</sub>) with fixed C<sub>s</sub> but varying R<sub>s</sub>
@@ -1224,6 +1216,29 @@ with $C=\frac{C_0C_1}{C_0+C_1}$, $R=R_0 + R_1=\frac{1}{\omega}\left(\frac{1}{Q_0
 $$
 \boxed{Q_C = \frac{1}{\omega R C} = Q_0\frac{1+\frac{C_0}{C_1}}{1+\frac{C_0}{C_1}\frac{Q_0}{Q_1}}}
 $$
+
+
+
+## layout philosophy
+
+> S. Shahramian, "Tutorial: The Art of mm-Wave Design and Layout," *2023 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2023
+>
+> Patrick Reynaert (KU Leuven), "The Art of CMOS RF Design & Layout" [[https://hoomanreyhani.com/product/2025j/](https://hoomanreyhani.com/product/2025j/)]
+>
+> D. Turker et al., "A 7.4-to-14GHz PLL with 54fsrms jitter in 16nm FinFET for integrated RF-data-converter SoCs," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310342](https://sci-hub.ru/10.1109/ISSCC.2018.8310342)]
+
+In a **differential LC VCO**, every tuning bit should preserve the symmetry of the two tank nodes
+
+To maintain a **symmetric connection** between the inductor and the capacitor bank, each weighted capacitor branch should be split and placed symmetrically about the differential axis
+
+
+
+---
+
+![image-20260808095856891](lc-osc/image-20260808095856891.png)
+
+
+
 
 
 ## LC Tank Q

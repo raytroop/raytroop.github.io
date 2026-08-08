@@ -207,9 +207,9 @@ legend('Tapped inductor model', 'tcoil model calc');
 
 ## Transformer
 
-> J. R. Long, "On-chip transformer design and application to RF and mm-wave front-ends," 2017 IEEE Custom Integrated Circuits Conference (CICC), Austin, TX, USA, 2017 [[pdf](https://picture.iczhiku.com/resource/eetop/sYIYDwZKiKUOecXc.pdf)]
+> J. R. Long, "On-chip transformer design and application to RF and mm-wave front-ends," 2017 IEEE Custom Integrated Circuits Conference (CICC), Austin, TX, USA, 2017
 >
-> A. Bevilacqua, "Tutorial: Fundamentals of Integrated Transformers: from Principles to Applications," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020 [[pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T1Visuals.pdf)]
+> A. Bevilacqua, "Tutorial: Fundamentals of Integrated Transformers: from Principles to Applications," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020
 >
 > —, "Fundamentals of Integrated Transformers: From Principles to Applications," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 4, pp. 86-100, Fall 2020
 

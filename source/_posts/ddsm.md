@@ -105,7 +105,7 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 
 
-##  stability of DSM
+##   DSM stability
 
 ![image-20250908213730155](ddsm/image-20250908213730155.png)
 
@@ -113,7 +113,7 @@ y[n] &= \alpha[n-2] + d[n-2] +  q[n]-2q[n-1]+q[n-2] \\
 
 ![image-20250913161933338](ddsm/image-20250913161933338.png)
 
-### accumulator wordlength 
+### accumulator wordlength
 
 > Z. Ye and M. P. Kennedy, "Hardware Reduction in Digital Delta–Sigma Modulators Via Error Masking—Part II: SQ-DDSM," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 56, no. 2, pp. 112-116, Feb. 2009 [[https://sci-hub.se/10.1109/TCSII.2008.2010188](https://sci-hub.se/10.1109/TCSII.2008.2010188)]
 >
@@ -132,7 +132,7 @@ with $\frac{y}{2^{m_2}} + q= v$,  where $v = \lfloor\frac{y}{2^{m_2}}\rfloor$
 $$
 \left\{ \begin{array}{cl}
 Y + 2^{m_2} Q &= 2^{m_2}V   \\
-U - z^{-1}2^{m_2}Q &= Y  
+U - z^{-1}2^{m_2}Q &= Y
 \end{array} \right.
 $$
 
@@ -181,7 +181,7 @@ print(sum(vlist)/len(vlist)); print(sum(outlist)/len(outlist)*2**m2)
 
 ![acc-wordlength.drawio](ddsm/acc-wordlength.drawio.svg)
 
-To avoid overflow
+A conservative sufficient condition for avoiding accumulator overflow is
 
 $$
 \log_2(2^k + 2^{N-m}) \leq N
@@ -192,18 +192,22 @@ $$
 N \ge k - \log_2(1 - \frac{1}{2^m}) = k+m -\log_2(2^m-1)
 $$
 
-suppose $m\in [1,+\infty)$
+For an integer quantizer width $m\geq 1$,
 $$
 k < k - \log_2(1 - \frac{1}{2^m}) \leq k + 1
 $$
-$N = k +1$ is sufficient for any $k$
+The minimum integer $N$ satisfying this bound is
+$$
+N_{\min}=\left\lceil k-\log_2(1-2^{-m})\right\rceil=k+1.
+$$
 
-> In the above Temes's sides, $N = m_1+m_2$ and $m=m_1$, we have
+> In the above Temes's slides, $N = m_1+m_2$ and $m=m_1$, we have
 > $$
 > 2^k \leq 2^{m_1+m_2}\cdot (1-\frac{1}{2^{m_1}}) = 2^{m_1+m_2} - 2^{m_2}
 > $$
 
-Generally speaking, $N \propto k$ and $N \propto \frac{1}{m}$, especially $N_{min} = k+1$ if *single-bit quantizer* $m=1$
+Thus, this bound requires one guard bit beyond the $k$-bit input width, independent of $m$.
+For a single-bit quantizer ($m=1$), the guard bit is the adder carry-out.
 
 
 
@@ -230,11 +234,11 @@ Generally speaking, $N \propto k$ and $N \propto \frac{1}{m}$, especially $N_{mi
 >
 > Ian Galton. Delta-Sigma Fractional-N Phase-Locked Loops [[https://ispg.ucsd.edu/wordpress/wp-content/uploads/2022/10/fnpll_ieee_tutorial_2003_corrected.pdf](https://ispg.ucsd.edu/wordpress/wp-content/uploads/2022/10/fnpll_ieee_tutorial_2003_corrected.pdf)]
 >
-> —. ISSCC 2010 SC3: Fractional-N PLLs 
+> —. ISSCC 2010 SC3: Fractional-N PLLs
 >
 > —. “Delta-Sigma Fractional-N Phase-Locked Loops.” (2003)
 >
-> Mike Shuo-Wei Chen, ISSCC 2020 T6: Digital Fractional-N Phase Locked Loop Design 
+> Mike Shuo-Wei Chen, ISSCC 2020 T6: Digital Fractional-N Phase Locked Loop Design
 
 ![image-20250824103717743](ddsm/image-20250824103717743.png)
 
@@ -254,7 +258,7 @@ $$
 \tau[n] = \tau[n-1] + (y[n] - \alpha)T_{PLL}
 $$
 
-where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$ 
+where $\tau[n] = t_{v_{DIV}} -  t_{v_{DIV}, desired}$
 
 ![image-20250824221741018](ddsm/image-20250824221741018.png)
 
@@ -361,14 +365,14 @@ $$
 fref = 40e6;
 fcw = 360.123;
 kvco = 2 * pi * 300e6;
- 
+
 % Components
 icp = 60e-6; C0 = 40e-12;
 R1 = 14000; C1 = 360e-12;
 R2 = 1000; C2 = 20e-12;
 
 % --- Frequency Vector ---
-f = logspace(2, 9, 1000); 
+f = logspace(2, 9, 1000);
 s = 1i * 2 * pi * f;
 
 % --- Loop Filter Transfer Function ---
@@ -387,7 +391,7 @@ sfra = 10 * log10((1 / (12 * fref)) .* abs(hfra).^2);
 
 % --- Plot ---
 semilogx(f, sfra, LineWidth=2);
-ylim([-250, -100]); yticks(-250:10:-100); 
+ylim([-250, -100]); yticks(-250:10:-100);
 grid on; xlabel('Frequency (Hz)'); ylabel('dB');
 title('Quantization Noise Effects', FontSize=14);
 ```
@@ -614,9 +618,9 @@ n_ana = 1/10^(snr_ana/10);
 
 snr_tot = 10*log10(1/(n_if + n_ds + n_ana))
 
-% 
+%
 % snr_tot =
-% 
+%
 %    94.9995
 ```
 
@@ -832,7 +836,7 @@ Woogeun Rhee. ISCAS 2019 Mini Tutorials: Single-Bit Delta-Sigma Modulation Techn
 
 ---
 
-Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016. Understanding Delta-Sigma Data Converters. 2nd ed. Wiley. 
+Pavan, Shanthi, Richard Schreier, and Gabor Temes. (2016) 2016. Understanding Delta-Sigma Data Converters. 2nd ed. Wiley.
 
 ---
 
@@ -843,4 +847,3 @@ K. Hosseini and M. P. Kennedy, Minimizing Spurious Tones in Digital Delta-Sigma 
 Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology
 
 Lacaita, Andrea Leonardo, Salvatore Levantino, and Carlo Samori. *Integrated frequency synthesizers for wireless systems*. Cambridge University Press, 2007.
-

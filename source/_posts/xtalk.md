@@ -11,6 +11,33 @@ mathjax: true
 
 
 
+---
+
+**Electric field coupling** (also called **capacitive coupling**) occurs when energy is coupled from one circuit to another through an **electric field**
+
+![Two circuits above a signal return plane.](xtalk/Fig01-1751987296818-55.png)
+
+**Magnetic field coupling** (also called **inductive coupling**) occurs when energy is coupled from one circuit to another through a **magnetic field**
+
+![Two circuits above a signal return plane](xtalk/Fig01-1751718884303-3-1751987296819-56.png)
+
+---
+
+For instance
+
+- magnetic coupling between multiple inductors
+- capacitive coupling between multiple transmission lines
+
+
+
+---
+
+![image-20260808160818333](xtalk/image-20260808160818333.png)
+
+
+
+
+
 ## Transmission Line
 
 ![image-20260530103816500](xtalk/image-20260530103816500.png)
@@ -31,24 +58,11 @@ for lossless T-line, $\gamma = j\beta$
 
 
 
+## Capacitive Coupling
 
+***Faraday cage***
 
-## Electromagnetic coupling
-
-**Electric field coupling** (also called **capacitive coupling**) occurs when energy is coupled from one circuit to another through an **electric field**
-
-![Two circuits above a signal return plane.](xtalk/Fig01-1751987296818-55.png)
-
-**Magnetic field coupling** (also called **inductive coupling**) occurs when energy is coupled from one circuit to another through a **magnetic field**
-
-![Two circuits above a signal return plane](xtalk/Fig01-1751718884303-3-1751987296819-56.png)
-
----
-
-For instance
-
-- magnetic coupling between multiple inductors
-- capacitive coupling between multiple transmission lines
+![image-20260808160638564](xtalk/image-20260808160638564.png)
 
 
 

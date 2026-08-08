@@ -11,11 +11,83 @@ mathjax: true
 
 > Mehmet Soyuer. *Monolithic Phase-Locked Loops for Clocking* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf)]
 
+![image-20260808093448775](cp-pll/image-20260808093448775.png)
+
+## PD & PFD
+
+> Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 Lecture 4: Phase Detector Circuits [[https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf)]
+>
+> Michael Perrott, 6.976 High Speed Communication Circuits and Systems *Lecture 15 Integer-N Frequency Synthesizers* [[https://rfic.eecs.berkeley.edu/courses/ee242/pdf/perrott_lec15.pdf](https://rfic.eecs.berkeley.edu/courses/ee242/pdf/perrott_lec15.pdf)]
+>
+> Mehmet Soyuer. *Monolithic Phase-Locked Loops for Clocking* [[https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf](https://ewh.ieee.org/r5/denver/sscs/Presentations/2009_06_Soyuer.pdf)]
+>
+> Qasim Chaudhari. What are Cycle Slips and Hangup in Phase Locked Loops?  [[https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/](https://wirelesspi.com/what-are-cycle-slips-and-hangup-in-phase-locked-loops/)]
 
 
-## PFD Deadzone
+
+![image-20260613083929737](cp-pll/image-20260613083929737.png)
+
+###  XOR Phase Detector
+
+![image-20260613083621395](cp-pll/image-20260613083621395.png)
+
+
+
+---
+
+**Cycle Slipping**
+
+![image-20260613085103536](cp-pll/image-20260613085103536.png)
+
+![image-20260613085238609](cp-pll/image-20260613085238609.png)
+
+### Tristate PFD
+
+![image-20260613083646800](cp-pll/image-20260613083646800.png)
+
+![image-20260613083715144](cp-pll/image-20260613083715144.png)
+
+![image-20260613085340899](cp-pll/image-20260613085340899.png)
+
+PFD requires periodic edges on both inputs
+
+In a CDR, one input is random NRZ data, and a long run of identical bits has no transitions at all
+
+The PFD's state machine interprets those missing edges as a huge phase/frequency error and pumps the loop away from lock
+
+
+
+### frequency acquisition
+
+![image-20260613095817926](cp-pll/image-20260613095817926.png)
+
+![image-20260613101004088](cp-pll/image-20260613101004088.png)
+
+> [[Gist link](https://gist.github.com/raytroop/ede1eca4ccea67da05b29ec1fdd78f34)]
+
+![image-20260613101030913](cp-pll/image-20260613101030913.png)
+
+![image-20260613101049573](cp-pll/image-20260613101049573.png)
+
+>  beat period: $2\pi\cdot T_{beat,per}\cdot \Delta f = 2\pi \to T_{beat,per}=\frac{1}{\Delta f}$
+
+
+
+---
+
+---
+
+![image-20260627101018275](cp-pll/image-20260627101018275.png)
+
+
+
+
+
+### PFD Deadzone
 
 > Sam Palermo, "Lecture 4: Phase Detector Circuit" [[https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture04_ee620_phase_detectors.pdf)]
+
+![image-20260808091337910](cp-pll/image-20260808091337910.png)
 
 Dead zone induced by *incomplete settling* of charge-pump currents
 
@@ -25,9 +97,17 @@ This situation can be avoided by adding *additional delay to the AND gate* in th
 
 
 
+---
+
+> D. Turker et al., "A 7.4-to-14GHz PLL with 54fsrms jitter in 16nm FinFET for integrated RF-data-converter SoCs," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310342](
+
+![image-20260807235323330](cp-pll/image-20260807235323330.png)
+
+**$\tau$ shall be minimized to reduce noise of CP**
 
 
-## PFD/CP Modelling
+
+## PFD/CP Modeling
 
 ![image-20250807225013850](cp-pll/image-20250807225013850.png)
 
@@ -39,7 +119,7 @@ This situation can be avoided by adding *additional delay to the AND gate* in th
 
 ---
 
-> Deog-Kyoon Jeong. Topics in IC Design 2.1 Introduction to Phase-Locked Loop [[pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%202%20-%20Charge-Pump%20PLL%2C%20Freuqency%20Synthesizers%2C%20and%20SSCG.pdf)]
+> Deog-Kyoon Jeong. Topics in IC Design 2.1 Introduction to Phase-Locked Loop
 
 ![image-20250807230740496](cp-pll/image-20250807230740496.png)
 
@@ -117,10 +197,14 @@ Vice versa, if If Up pulse arrives $\Delta T$ after the Dn pulse, the steady-sta
 > Johnson, M., Hudson, E.: A variable delay line PLL for CPU-coprocessor synchronization. IEEE Journal of Solid-State Circuits 23(10), 1218–1223 (1988)  [[https://sci-hub.se/10.1109/4.5947](https://sci-hub.se/10.1109/4.5947)]
 >
 > Sam Palermo, Lecture 5: Charge Pump Circuits, ECEN620: Network Theory Broadband Circuit Design Fall 2024 [[https://people.engr.tamu.edu/spalermo/ecen620/lecture05_ee620_charge_pumps.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture05_ee620_charge_pumps.pdf)]
+>
+> D. Turker et al., "A 7.4-to-14GHz PLL with 54fsrms jitter in 16nm FinFET for integrated RF-data-converter SoCs," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310342](https://sci-hub.ru/10.1109/ISSCC.2018.8310342)]
 
 ***charge pump with amplifier***
 
-![image-20260426171545204](cp-pll/image-20260426171545204.png)
+![](cp-pll/image-20260426171545204.png)
+
+![image-20260808005243795](cp-pll/image-20260808005243795.png)
 
 
 

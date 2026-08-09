@@ -30,7 +30,7 @@ mathjax: true
 
 ![image-20260207085804825](dsp2asic/image-20260207085804825.png)
 
-> Google AI Mode [[https://share.google/aimode/KsxxgDF0vAdhAIgm0](https://share.google/aimode/KsxxgDF0vAdhAIgm0)]
+
 
 ![image-20260207094125000](dsp2asic/image-20260207094125000.png)
 
@@ -85,7 +85,7 @@ $$
 | **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](dsp2asic/image-20260207102147689.png) |
 | **IEEE 754 floating point notation** | *biased exponent*              | ![image-20260207102210468](dsp2asic/image-20260207102210468.png) |
 
-> [[https://share.google/aimode/yY2R2EQCTsP9BlMNx](https://share.google/aimode/yY2R2EQCTsP9BlMNx)]
+
 
 | Format                        | Exponent Bits | Bias (Decimal) | Representable Range |
 | ----------------------------- | ------------- | -------------- | ------------------- |
@@ -153,6 +153,133 @@ Corresponding to the three distinct voltage thresholds in the *PAM4* systems, it
 The look-ahead multiplexing technique brings the key benefit that the timing constraint can be significantly relaxed, as the iteration bound is ***doubled*** at the expense of extra hardware
 
 ![image-20250525192228275](dsp2asic/image-20250525192228275.png)
+
+
+
+## MASH111 in Verilog
+
+> [[https://github.com/raytroop/dsmwk](https://github.com/raytroop/dsmwk)]
+
+Digital block between a **20-bit digital loop filter (DLF) output** and an **8-bit DAC input**. The 12 truncated LSBs are pushed through a MASH-1-1-1 delta-sigma modulator so the truncation error is 3rd-order noise-shaped instead of lost:
+
+```
+dac(z) = dlf(z)/2^12  -  (1 - z^-1)^3 · q(z)              (× z^-1 latency)
+
+q ≜ e3/2^12 ∈ [0,1) LSB₈,  σ² ≈ 1/12 LSB₈²
+```
+
+where `e3` is the stage-3 accumulator residue in raw 20-bit-LSB counts (0…4095, quantizer step 2¹²) and `q` is the same error referred to the 8-bit output grid — the unit-step quantization noise of the effective 1-LSB₈ quantizer.
+
+> <span style="color:blue">dac(z) = dlf<sub>MSB8</sub> (z)/2<sup>12</sup> + dlf<sub>LSB12</sub> (z)/2<sup>12</sup>+ q(z) · (1 - z<sup>-1</sup>)<sup>3</sup> = dlf(z)/2<sup>12</sup> +   q(z) · (1 - z<sup>-1</sup>)<sup>3</sup></span>
+
+
+
+
+
+```
+ dlf_in[19:12] ─────────────────────────────────┐
+                                                ▼
+ dlf_in[11:0] ──► ACC1 ──c1──────────────────► (+) ──sat[0,255]──► reg ──► dac_out[7:0]
+                   │r1                          ▲
+                   └──► ACC2 ──c2──(1-z⁻¹)──────┤
+                         │r2                    │
+                         └──► ACC3 ──c3──(1-z⁻¹)²
+```
+
+
+
+```mermaid
+flowchart LR
+    IN["dlf_in<br/>20 bits"] -->|"upper 8 bits"| XMSB["x_msb<br/>coarse value"]
+    IN -->|"lower 12 bits"| A1["Stage 1<br/>acc1 + x_frac"]
+
+    R1[("acc1<br/>register")] --> A1
+    A1 -->|"residue r1"| R1
+    A1 -->|"r1"| A2["Stage 2<br/>acc2 + r1"]
+    A1 -->|"carry c1"| NC["Noise cancellation<br/>c1 + c2 − c2_d1<br/>+ c3 − 2c3_d1 + c3_d2"]
+
+    R2[("acc2<br/>register")] --> A2
+    A2 -->|"residue r2"| R2
+    A2 -->|"r2"| A3["Stage 3<br/>acc3 + r2"]
+    A2 -->|"carry c2"| NC
+    A2 -->|"c2"| C2D1[("c2_d1<br/>z⁻¹")]
+    C2D1 -->|"−c2_d1"| NC
+
+    R3[("acc3<br/>register")] --> A3
+    A3 -->|"residue r3"| R3
+    A3 -->|"carry c3"| NC
+    A3 -->|"c3"| C3D1[("c3_d1<br/>z⁻¹")]
+    C3D1 -->|"−2c3_d1"| NC
+    C3D1 --> C3D2[("c3_d2<br/>z⁻²")]
+    C3D2 -->|"+c3_d2"| NC
+
+    NC -->|"signed correction y<br/>−3…+4"| ADD["x_msb + y"]
+    XMSB --> ADD
+    ADD --> SAT["Clamp to 0…255"]
+    SAT --> OUTREG[("Output register")]
+    OUTREG --> OUT["dac_out<br/>8 bits"]
+```
+
+
+
+| Branch    | Expression                             | Range        |
+| --------- | -------------------------------------- | ------------ |
+| stage 1   | `c1`                                   | {0, 1}       |
+| stage 2   | `(1−z⁻¹)·c2` = `c2 − c2_d1`            | {−1, 0, +1}  |
+| stage 3   | `(1−z⁻¹)²·c3` = `c3 − 2·c3_d1 + c3_d2` | [−2, +2]     |
+| **total** | `y`                                    | **[−3, +4]** |
+
+
+
+```verilog
+ wire signed [5:0] y =
+          $signed({5'b0, c1})
+        + $signed({5'b0, c2})   - $signed({5'b0, c2_d1})
+        + $signed({5'b0, c3})   - $signed({4'b0, c3_d1, 1'b0})  // 2*c3_d1
+        + $signed({5'b0, c3_d2});
+```
+
+Each carry is a bare bit `{0,1}`. `{5'b0, c1}` zero-extends it to 6 bits (value unchanged), and `$signed(...)` marks it for signed arithmetic. The term `{4'b0, c3_d1, 1'b0}` is `c3_d1` with a zero appended — a shift-left-by-1, i.e. `2·c3_d1` (value 0 or 2) — so the multiply costs nothing.
+
+The reachable values of `y` and their actual bit patterns:
+
+| value | `y[5:0]` |      | value | `y[5:0]` |
+| ----: | -------- | ---- | ----: | -------- |
+|    +4 | `000100` |      |     0 | `000000` |
+|    +3 | `000011` |      |    −1 | `111111` |
+|    +2 | `000010` |      |    −2 | `111110` |
+|    +1 | `000001` |      |    −3 | `111101` |
+
+Worked example: `c1=0, c2=0, c2_d1=1, c3=0, c3_d1=1, c3_d2=0` → `y = 0 + (0−1) + (0−2+0) = −3` → `111101`.
+
+
+
+
+
+***clamp [-3, 259] to [0, 255]***
+
+For `msb ∈ [3, 251]`, `x_msb + y` never leaves [0,255], the mux always takes the pass-through leg, and `dac_sat ≡ dac_sum` bit-for-bit.
+
+```verilog
+    //-------------------------------------------------------------------------
+    // Recombine and saturate: dac = clamp(x_msb + y, 0, 2^OUT_W-1)
+    //   sum range [-3, 2^OUT_W-1+4] -> (OUT_W+3)-bit signed is sufficient
+    //-------------------------------------------------------------------------
+    // explicit sign-extension of y to adder width (assumes OUT_W >= 4)
+    wire signed [OUT_W+2:0] y_ext   = {{(OUT_W-3){y[5]}}, y};
+    wire signed [OUT_W+2:0] dac_sum = $signed({3'b0, x_msb}) + y_ext;
+
+    wire [OUT_W-1:0] dac_sat =
+          dac_sum[OUT_W+2]        ? {OUT_W{1'b0}} :   // negative  -> 0
+          (|dac_sum[OUT_W+1:OUT_W]) ? {OUT_W{1'b1}} :   // > max     -> 2^OUT_W-1
+          dac_sum[OUT_W-1:0];
+```
+
+In a locked PLL the DLF integrator sits mid-range and the **clamp never fires** — cost: zero. It engages only during acquisition/slew, where noise is irrelevant and its job is exactly right: drive the DAC monotonically to the rail without wrapping
+
+
+
+
 
 
 
@@ -273,11 +400,9 @@ filtered = 1*x[n]   + 3*x[n-1] + 3*x[n-2] + 1*x[n-3]
 
 Jabbour, Chadi, etc.. "Digitally enhanced mixed signal systems." *IEEE International Symposium on Circuits and Systems (ISCAS)*. 2019.
 
-Sen M. Kuo. Real-Time Digital Signal Processing: Fundamentals, Implementations and Applications, 3rd Edition. John Wiley & Sons 2013
+Sen M. Kuo. Real-Time Digital Signal Processing: Fundamentals, Implementations and Applications, 3rd Edition. John Wiley & Sons 2013 [[pdf](http://dl.icdst.org/pdfs/files/e51100ce301ad56951e4511a9a1c66aa.pdf)]
 
 Taylor, Fred. *Digital filters: principles and applications with MATLAB*. John Wiley & Sons, 2011
-
-Kuo, Sen-Maw. (2013) Real-Time Digital Signal Processing: Implementations and Applications 3rd [[pdf](http://dl.icdst.org/pdfs/files/e51100ce301ad56951e4511a9a1c66aa.pdf)]
 
 D. Markovic and R. W. Brodersen, DSP Architecture Design Essentials, Springer, 2012.
 

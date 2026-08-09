@@ -1,11 +1,13 @@
 ---
-title: DSP to ASIC
+title: Fixed-Point Signal Processing
 date: 2025-11-11 07:29:09
 tags:
 categories:
 - phy
 mathjax: true
 ---
+
+Because the dynamic range of the incoming physical signal is tightly controlled by an Analog Front End (AFE) using Automatic Gain Control (AGC), a massive floating-point dynamic range isn't necessary
 
 
 
@@ -96,13 +98,251 @@ $$
 
 
 
+### **Q notation** for fixed-point
+
+The **Q notation** is a way to specify the parameters of a **binary fixed point number format**
+
+`Q0.3` is a notation for a **fixed-point binary number format**.
+$$
+\boxed{Q0.3
+=
+\text{sign bit}
++
+0\text{ integer bits}
++
+3\text{ fractional bits}}
+$$
 
 
-## VLSI Arithmetic
-
-*TODO* &#128197;
+---
 
 
+
+The useful **fixed-point multiplication** rule is
+$$
+Q_{F_1} \times Q_{F_2}
+\;\Rightarrow\;
+F_{\text{product}} = F_1 + F_2
+$$
+where $F_1$ and $F_2$ are the numbers of fractional bits of the two operands
+
+4-bit words are
+
+```
+a      = 0.100  -> 0100
+y_hat  = 0.111  -> 0111
+```
+
+Now temporarily ignore the binary point and multiply the integer bit patterns:
+
+```
+      0100        (= 4)
+    × 0111        (= 7)
+    -------
+      0100
+     0100
+    0100
+   0000
+    -------
+   0011100        (= 28)
+```
+
+
+
+---
+
+---
+
+Different sources use slightly different $Q$-format conventions
+
+![image-20260809183953893](dsp2asic/image-20260809183953893.png)
+
+**$Q1.3$ means that the `1` includes the sign bit.**
+$$
+Q1.3
+=
+\underbrace{1\text{ bit}}_{\text{sign / integer side}}
++
+\underbrace{3\text{ fractional bits}}_{\text{fractional side}}
+$$
+So it is a **4-bit two's-complement fixed-point number**: 
+
+```
+ b3 . b2 b1 b0
+ ↑      ↑ ↑ ↑
+sign    3 fractional bits
+```
+
+
+
+## Limit Cycles
+
+
+
+![image-20260809190548962](dsp2asic/image-20260809190548962.png)
+
+
+
+### Limit Cycles Owing to Round-off & Truncation
+
+
+
+![image-20260809181349219](dsp2asic/image-20260809181349219.png)
+
+For **infinite-precision linear system** $y[n] = a y[n-1] + x[n],$
+
+with zero initial condition $y[-1]=0$, the impulse response is
+$$
+y[n] = \frac{7}{8} a^n u[n]
+$$
+because after the impulse at $n=0$, we have $x[n]=0$ for all $n\ge 1$.
+
+![image-20260809182508333](dsp2asic/image-20260809182508333.png)
+
+For **nonlinear system** $\hat{y}[n] = Q[a \hat{y}[n-1]] + x[n],$
+
+![image-20260809171752386](dsp2asic/image-20260809171752386.png)
+
+The nonzero **steady oscillation** or **constant value** is created entirely by the **rounding operation (nonlinear)** $Q[\cdot]$
+
+
+
+### Limit Cycles Owing to Overflow
+
+![image-20260809190314224](dsp2asic/image-20260809190314224.png)
+
+![image-20260809190258197](dsp2asic/image-20260809190258197.png)
+
+![image-20260809190915962](dsp2asic/image-20260809190915962.png)
+
+
+
+```matlab
+%% Parameters
+a1 =  3/4;
+a2 = -3/4;
+
+% Q1.3:
+% 1 sign/integer bit + 3 fractional bits
+F  = 3;               % fractional bits
+WL = 4;               % total word length
+S  = 2^F;             % scale factor = 8
+
+% Initial conditions
+% y[-2] = -3/4
+% y[-1] = +3/4
+y_m2 = -3/4;
+y_m1 =  3/4;
+
+N = 20;
+n = 0:N;
+
+
+%% ------------------------------------------------------------
+%  Finite-precision Q1.3 system
+% -------------------------------------------------------------
+
+yq = zeros(size(n));
+
+% Store the two previous states
+ym2 = y_m2;
+ym1 = y_m1;
+
+for k = 1:length(n)
+
+    % Products
+    p1 = a1 * ym1;
+    p2 = a2 * ym2;
+
+    % Round products back to Q1.3.
+    % Halfway cases are rounded away from zero:
+    %
+    %   +9/16 -> +5/8
+    %   -9/16 -> -5/8
+    %
+    p1q = sign(p1) * floor(abs(p1)*S + 0.5) / S;
+    p2q = sign(p2) * floor(abs(p2)*S + 0.5) / S;
+
+    % Addition
+    s = p1q + p2q;
+
+    % Two's-complement overflow / wraparound
+    %
+    % Convert to integer representation first
+    sint = round(s*S);
+
+    % Wrap to WL-bit signed two's-complement range
+    sint = mod(sint + 2^(WL-1), 2^WL) - 2^(WL-1);
+
+    % Convert back to Q1.3
+    yq(k) = sint / S;
+
+    % Update states
+    ym2 = ym1;
+    ym1 = yq(k);
+end
+
+
+%% ------------------------------------------------------------
+%  Infinite-precision system
+% -------------------------------------------------------------
+
+yinf = zeros(size(n));
+
+ym2 = y_m2;
+ym1 = y_m1;
+
+for k = 1:length(n)
+
+    yinf(k) = a1*ym1 + a2*ym2;
+
+    ym2 = ym1;
+    ym1 = yinf(k);
+end
+
+```
+
+
+
+
+
+---
+
+![image-20260809190145842](dsp2asic/image-20260809190145842.png)
+
+![image-20260809190058129](dsp2asic/image-20260809190058129.png)
+
+
+
+```verilog
+//-------------------------------------------------------------------------
+// Recombine and saturate: dac = clamp(x_msb + y, 0, 2^OUT_W-1)
+//   sum range [-3, 2^OUT_W-1+4] -> (OUT_W+2)-bit signed is sufficient
+//   (needs 2^(OUT_W+1) >= 2^OUT_W + 4, true for any OUT_W >= 2)
+//-------------------------------------------------------------------------
+// explicit sign-extension of y to adder width (assumes OUT_W >= 5)
+wire signed [OUT_W+1:0] y_ext   = {{(OUT_W-4){y[5]}}, y};
+wire signed [OUT_W+1:0] dac_sum = $signed({2'b0, x_msb}) + y_ext;
+
+wire [OUT_W-1:0] dac_sat =
+      dac_sum[OUT_W+1] ? {OUT_W{1'b0}} :   // negative  -> 0
+      dac_sum[OUT_W]   ? {OUT_W{1'b1}} :   // > max     -> 2^OUT_W-1
+      dac_sum[OUT_W-1:0];
+```
+
+
+
+### Avoiding Limit Cycles
+
+The suppression of limit cycles is a broad topic with all the complexity to be expected in a *nonlinear system* behavior.
+
+The most basic tools of **saturation arithmetic** and **magnitude truncation — rounding rounds toward zero**
+
+
+
+---
+
+![image-20260809184414494](dsp2asic/image-20260809184414494.png)
 
 
 
@@ -261,18 +501,19 @@ Worked example: `c1=0, c2=0, c2_d1=1, c3=0, c3_d1=1, c3_d2=0` → `y = 0 + (0−
 For `msb ∈ [3, 251]`, `x_msb + y` never leaves [0,255], the mux always takes the pass-through leg, and `dac_sat ≡ dac_sum` bit-for-bit.
 
 ```verilog
-    //-------------------------------------------------------------------------
-    // Recombine and saturate: dac = clamp(x_msb + y, 0, 2^OUT_W-1)
-    //   sum range [-3, 2^OUT_W-1+4] -> (OUT_W+3)-bit signed is sufficient
-    //-------------------------------------------------------------------------
-    // explicit sign-extension of y to adder width (assumes OUT_W >= 4)
-    wire signed [OUT_W+2:0] y_ext   = {{(OUT_W-3){y[5]}}, y};
-    wire signed [OUT_W+2:0] dac_sum = $signed({3'b0, x_msb}) + y_ext;
+//-------------------------------------------------------------------------
+// Recombine and saturate: dac = clamp(x_msb + y, 0, 2^OUT_W-1)
+//   sum range [-3, 2^OUT_W-1+4] -> (OUT_W+2)-bit signed is sufficient
+//   (needs 2^(OUT_W+1) >= 2^OUT_W + 4, true for any OUT_W >= 2)
+//-------------------------------------------------------------------------
+// explicit sign-extension of y to adder width (assumes OUT_W >= 5)
+wire signed [OUT_W+1:0] y_ext   = {{(OUT_W-4){y[5]}}, y};
+wire signed [OUT_W+1:0] dac_sum = $signed({2'b0, x_msb}) + y_ext;
 
-    wire [OUT_W-1:0] dac_sat =
-          dac_sum[OUT_W+2]        ? {OUT_W{1'b0}} :   // negative  -> 0
-          (|dac_sum[OUT_W+1:OUT_W]) ? {OUT_W{1'b1}} :   // > max     -> 2^OUT_W-1
-          dac_sum[OUT_W-1:0];
+wire [OUT_W-1:0] dac_sat =
+      dac_sum[OUT_W+1] ? {OUT_W{1'b0}} :   // negative  -> 0
+      dac_sum[OUT_W]   ? {OUT_W{1'b1}} :   // > max     -> 2^OUT_W-1
+      dac_sum[OUT_W-1:0];
 ```
 
 In a locked PLL the DLF integrator sits mid-range and the **clamp never fires** — cost: zero. It engages only during acquisition/slew, where noise is irrelevant and its job is exactly right: drive the DAC monotonically to the rail without wrapping
@@ -397,6 +638,10 @@ filtered = 1*x[n]   + 3*x[n-1] + 3*x[n-2] + 1*x[n-3]
 
 
 ## reference
+
+Padgett, Wayne T. and David V. Anderson. "Fixed-Point Signal Processing." *Synthesis Lectures on Signal Processing* (2009).
+
+Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
 
 Jabbour, Chadi, etc.. "Digitally enhanced mixed signal systems." *IEEE International Symposium on Circuits and Systems (ISCAS)*. 2019.
 

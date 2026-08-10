@@ -131,6 +131,8 @@ $$
 > Patrick Kennedy, Impact of Noise Coupler on 128 GT/s Rx Calibration and DUT Testing
 >
 > Anritsu White paper: PCIe® 6.0: Testing for a New Generation [[link](https://img.datacenterfrontier.com/files/base/ebm/datacenterfrontier/document/2022/09/1663627621780-pcie60testingforanewgenerationnewlogo.pdf?dl=1663627621780-pcie60testingforanewgenerationnewlogo.pdf)]
+>
+> Chung-Chun Chen (CC) 陳俊中, Why PCIe Adds a 2.1 GHz Interference Tone? [[https://youtu.be/8qN2-QVUJRs](https://youtu.be/8qN2-QVUJRs)]
 
 ***sinusoidal*** differential mode interference (**DMI**), and common mode interference (**CMI**)
 

@@ -1124,11 +1124,15 @@ quadrature noise → geometric tilt $\phi,\, \Phi$ (bounded) → frequency shift
 
 ![image-20260726154648915](osc-pn/image-20260726154648915.png)
 
-with $\overline{g_m} R_p=1$
+For the oscillation condition $\overline{g_m}R_p=1$, the total noise-current power spectral density (PSD) is
 $$
-\overline{i_n^2} = \overline{i_{R}^2} + \overline{i_{gnr}^2}= \frac{4kT}{R_p} + 4kT\gamma \overline{g_m} =  \frac{4kT}{R_p}(1+ \gamma \overline{g_m} R) = \frac{4kT}{R_p}(1+ \gamma)
+\overline{i_n^2} = \overline{i_R^2} + \overline{i_{gnr}^2} = \frac{4kT}{R_p} + 4kT\gamma\overline{g_m} = \frac{4kT}{R_p}\left(1+\gamma\overline{g_m}R_p\right) = \frac{4kT}{R_p}(1+\gamma).
 $$
 
+More generally, if $K\overline{g_m}R_p=1$, then $\overline{g_m}R_p=1/K$, and the PSD becomes
+$$
+\overline{i_n^2} = \frac{4kT}{R_p}\left(1+\frac{\gamma}{K}\right).
+$$
 
 
 
@@ -1878,4 +1882,3 @@ Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity O
 Bae, Woorham, and Deog-Kyoon Jeong. *Analysis and Design of CMOS Clocking Circuits for Low Phase Noise*. Institution of Engineering and Technology, 2020.
 
 M. Babaie, M. Shahmohammadi, R. B. Staszewski, (2019) "RF CMOS Oscillators for Modern Wireless Applications" River Publishers [[https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf](https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf)]
-

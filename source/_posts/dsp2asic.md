@@ -7,7 +7,9 @@ categories:
 mathjax: true
 ---
 
-Because the dynamic range of the incoming physical signal is tightly controlled by an Analog Front End (AFE) using Automatic Gain Control (AGC), a massive floating-point dynamic range isn't necessary
+<span style="color:blue"> ***why fixed-point arithmetic?***</span>
+
+<span style="color:blue">Because the **dynamic range of the incoming physical signal** is tightly controlled by an Analog Front End (AFE) using Automatic Gain Control (AGC), **a massive floating-point dynamic range isn't necessary**</span>
 
 
 
@@ -24,6 +26,11 @@ Because the dynamic range of the incoming physical signal is tightly controlled 
 ![image-20260207094834081](dsp2asic/image-20260207094834081.png)
 
 ![image-20260206230528138](dsp2asic/image-20260206230528138.png)
+
+
+
+
+
 
 
 ### 2's Complement
@@ -98,7 +105,9 @@ $$
 
 
 
-### **Q notation** for fixed-point
+### $Q$-Format for fixed-point
+
+![image-20260810120058735](dsp2asic/image-20260810120058735.png)
 
 The **Q notation** is a way to specify the parameters of a **binary fixed point number format**
 
@@ -116,7 +125,7 @@ $$
 
 ---
 
-
+![image-20260810112135977](dsp2asic/image-20260810112135977.png)
 
 The useful **fixed-point multiplication** rule is
 $$
@@ -153,7 +162,7 @@ Now temporarily ignore the binary point and multiply the integer bit patterns:
 
 ---
 
-Different sources use slightly different $Q$-format conventions
+***Different sources use slightly different $Q$-format conventions***
 
 ![image-20260809183953893](dsp2asic/image-20260809183953893.png)
 
@@ -172,6 +181,185 @@ So it is a **4-bit two's-complement fixed-point number**:
  ↑      ↑ ↑ ↑
 sign    3 fractional bits
 ```
+
+
+
+##  Coefficient Quantization & finite-precision arithmetic
+
+![image-20260810140838611](dsp2asic/image-20260810140838611.png)
+
+
+
+![image-20260810141352975](dsp2asic/image-20260810141352975.png)
+
+![image-20260810153447080](dsp2asic/image-20260810153447080.png)
+
+![image-20260810153504682](dsp2asic/image-20260810153504682.png)
+
+
+
+---
+
+
+
+***Direct-Form I (DF-I) implementation of a digital filter IIR***
+
+![image-20260810154617188](dsp2asic/image-20260810154617188.png)
+
+Equation (6.101) follows directly by writing the difference equation for the **quantized system** and subtracting the difference equation for the **ideal system**.
+
+For the direct-form-I filter in Fig. 6.59, the ideal output satisfies
+
+$$
+y[n]
+=
+\sum_{k=0}^{M} b_k x[n-k]
++
+\sum_{k=1}^{N} a_k y[n-k].
+\tag{1}
+$$
+
+The combined quantization noise $e[n]$ is injected **after the $b_k$ section (zeros) and before the $a_k$ feedback section (poles)**. Therefore the actual output $\hat y[n]$ satisfies
+
+$$
+\hat y[n]
+=
+\sum_{k=0}^{M} b_k x[n-k]
++
+\sum_{k=1}^{N} a_k \hat y[n-k]
++
+e[n].
+\tag{2}
+$$
+
+The book defines
+
+$$
+\boxed{\hat y[n]=y[n]+f[n]}
+$$
+
+where $f[n]$ is the output component caused by the quantization noise.
+
+Substitute
+
+$$
+\hat y[n]=y[n]+f[n]
+$$
+
+into (2):
+
+$$
+y[n]+f[n]
+=
+\sum_{k=0}^{M}b_kx[n-k]
++
+\sum_{k=1}^{N}a_k\left(y[n-k]+f[n-k]\right)
++
+e[n].
+$$
+
+Expand:
+
+$$
+y[n]+f[n]
+=
+\underbrace{
+\sum_{k=0}^{M}b_kx[n-k]
++
+\sum_{k=1}^{N}a_ky[n-k]
+}_{=\,y[n]}
++
+\sum_{k=1}^{N}a_kf[n-k]
++
+e[n].
+$$
+
+Using the ideal-system equation (1),
+
+$$
+y[n]+f[n]
+=
+y[n]
++
+\sum_{k=1}^{N}a_kf[n-k]
++
+e[n].
+$$
+
+Cancel $y[n]$ from both sides:
+
+$$
+\boxed{
+f[n]
+=
+\sum_{k=1}^{N}a_k f[n-k]+e[n]
+}
+\tag{6.101}
+$$
+
+That is exactly Eq. (6.101).
+
+***Why do the $b_k$ coefficients disappear?***
+
+This is the important point.
+
+The signal path is
+
+$$
+x[n]
+\rightarrow
+\underbrace{B(z)}_{\text{zeros}}
+\rightarrow
+\boxed{+\,e[n]}
+\rightarrow
+\underbrace{\frac{1}{A(z)}}_{\text{poles}}
+\rightarrow
+\hat y[n].
+$$
+
+The noise is inserted **after $B(z)$**, so it never passes through the zeros. It only passes through the all-pole feedback section.
+
+In the $z$-domain, Eq. (6.101) gives
+
+$$
+F(z)
+=
+\sum_{k=1}^{N}a_kz^{-k}F(z)+E(z).
+$$
+
+Thus,
+
+$$
+F(z)
+\left(
+1-\sum_{k=1}^{N}a_kz^{-k}
+\right)
+=
+E(z),
+$$
+
+and therefore
+
+$$
+\boxed{
+\frac{F(z)}{E(z)}
+=
+\frac{1}
+{1-\displaystyle\sum_{k=1}^{N}a_kz^{-k}}
+}
+$$
+
+So the **output quantization-noise transfer function contains only the poles**, which is what the sentence immediately after (6.101) means.
+
+For the second-order example in the figure,
+
+$$
+\boxed{
+f[n]=a_1f[n-1]+a_2f[n-2]+e[n].
+}
+$$
+
+The coefficients $b_0,b_1,b_2$ have no effect on $f[n]$ because $e[n]$ is injected after that part of the filter.
 
 
 

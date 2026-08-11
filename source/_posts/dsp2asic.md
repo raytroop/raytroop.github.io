@@ -194,13 +194,21 @@ sign    3 fractional bits
 >
 > Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
 
-*TODO* &#128197;
+
 
 ![image-2026-08-11_12-38](dsp2asic/image-2026-08-11_12-38.png)
 
+### Coefficient Quantization
+
+![image-20260811212405720](dsp2asic/image-20260811212405720.png)
 
 
-###  Coefficient Quantization & finite-precision arithmetic
+
+###  Roundoff Noise
+
+
+
+
 
 ![image-20260810140838611](dsp2asic/image-20260810140838611.png)
 
@@ -383,7 +391,7 @@ The coefficients $b_0,b_1,b_2$ have no effect on $f[n]$ because $e[n]$ is inject
 
 
 
-### Limit Cycles
+### Limit Cycles in feedback system
 
 
 
@@ -553,6 +561,25 @@ The most basic tools of **saturation arithmetic** and **magnitude truncation —
 ![image-20260809184414494](dsp2asic/image-20260809184414494.png)
 
 
+
+### Saturation Arithmetic & Scaling of Signals
+
+***<span style="color:blue">Saturation arithmetic</span> prevents <span style="color:blue">overflow</span> by clipping the results to a maximum value***
+
+![image-20260811215535538](dsp2asic/image-20260811215535538.png)
+
+
+
+---
+
+---
+
+***The most effective technique in preventing <span style="color:blue">overflow</span> is by <span style="color:blue">scaling down</span> the signal***
+
+![image-20260811220100236](dsp2asic/image-20260811220100236.png)
+
+
+
 ## DFE in digital
 
 > Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI](https://youtu.be/puEP0DlVZGI)]
@@ -712,6 +739,29 @@ wire [OUT_W-1:0] dac_sat =
 ```
 
 In a locked PLL the DLF integrator sits mid-range and the **clamp never fires** — cost: zero. It engages only during acquisition/slew, where noise is irrelevant and its job is exactly right: drive the DAC monotonically to the rail without wrapping
+
+
+
+---
+
+---
+
+<span style="color:blue">***overall ENOB calculation***</span>
+
+```
+SNR  = P_sig / (P_q,in + P_dsm)          (powers add — sources are independent)
+ENOB = (SNR_dB − 1.76) / 6.02
+```
+
+with everything in the same units (<span style="color:blue">LSB₈²</span> is convenient) and — critically — **both noise terms integrated in-band only** (0 … f_bw, i.e. what survives the analog filter):
+
+| Term                                | Expression (<span style="color:blue">LSB₈²</span>, fs = f_clk) |
+| ----------------------------------- | ------------------------------------------------------------ |
+| Signal (full-scale sine convention) | `P_sig = FS²/8 = 256²/8 = 8192`                              |
+| DSM shaped noise, in-band           | `P_dsm = (1/12)·(π⁶/7)·OSR⁻⁷`                                |
+| Input quantization noise, in-band   | <span style="color:blue">P_q,in = (2⁻¹²)²/12 · κ</span>      |
+
+**Sanity check at OSR = 50** (static input, κ=1): `P_q,in = 4.97e-9`, `P_dsm = 1.47e-11` → SNR = 122.1 dB → **ENOB = 19.98** — the DSM costs only 0.13 dB against the ideal 20.00. At OSR = 10: DSM dominates, ENOB = 16.1 
 
 
 

@@ -105,7 +105,7 @@ $$
 
 
 
-### $Q$-Format for fixed-point
+### $Q$-Format
 
 ![image-20260810120058735](dsp2asic/image-20260810120058735.png)
 

@@ -1038,7 +1038,7 @@ Triple well, Deep N-Well (optional):
 
 
 
-## Deep N-well
+## Deep N-well (DNW)
 
 > Chew, K.W., Zhang, J., Shao, K., Loh, W., & Chu, S.F. (2002). Impact of Deep N-well Implantation on Substrate Noise Coupling and RF Transistor Performance for Systems-on-a-Chip Integration. 32nd European Solid-State Device Research Conference, 251-254. URL:[[slides](http://www.essderc2002.deis.unibo.it/ESSDERC_web/Session_D11/D11_1.pdf), [paper](http://www.essderc2002.deis.unibo.it/data/pdf/Chew.pdf)]
 >
@@ -1064,7 +1064,9 @@ However *guard rings alone cannot prevent noise coupling deep in the substrate, 
 
 
 
-### DNW
+### DNW structure
+
+> 
 
 The N-channel devices built directly into the P-type substrate are not as effectively isolated as P-channel devices in their N-wells. This is because despite creating a P+ guard ring around the devices, there remains an electrical path below the guard ring for charge to flow. 
 

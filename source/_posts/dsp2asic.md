@@ -184,7 +184,23 @@ sign    3 fractional bits
 
 
 
-##  Coefficient Quantization & finite-precision arithmetic
+
+
+## Finite-wordlength Effects
+
+> Tianshuang Qiu; Ying Guo, "7. Finite-Precision Numerical Effects in Digital Signal Processing," in *Signal Processing and Data Analysis* , De Gruyter, 2018, pp.236-248
+>
+> Antoniou, Andreas. “Digital Signal Processing: Signals, Systems, and Filters.” (2005). [[pdf](https://fmipa.umri.ac.id/wp-content/uploads/2016/03/Andreas-Intoniou-Digital-signal-processing.9780071454247.31527.pdf)]
+>
+> Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
+
+*TODO* &#128197;
+
+![image-2026-08-11_12-38](dsp2asic/image-2026-08-11_12-38.png)
+
+
+
+###  Coefficient Quantization & finite-precision arithmetic
 
 ![image-20260810140838611](dsp2asic/image-20260810140838611.png)
 
@@ -363,7 +379,11 @@ The coefficients $b_0,b_1,b_2$ have no effect on $f[n]$ because $e[n]$ is inject
 
 
 
-## Limit Cycles
+
+
+
+
+### Limit Cycles
 
 
 
@@ -371,7 +391,7 @@ The coefficients $b_0,b_1,b_2$ have no effect on $f[n]$ because $e[n]$ is inject
 
 
 
-### Limit Cycles Owing to Round-off & Truncation
+#### Limit Cycles Owing to Round-off & Truncation
 
 
 
@@ -395,7 +415,7 @@ The nonzero **steady oscillation** or **constant value** is created entirely by 
 
 
 
-### Limit Cycles Owing to Overflow
+#### Limit Cycles Owing to Overflow
 
 ![image-20260809190314224](dsp2asic/image-20260809190314224.png)
 
@@ -520,7 +540,7 @@ wire [OUT_W-1:0] dac_sat =
 
 
 
-### Avoiding Limit Cycles
+#### Avoiding Limit Cycles
 
 The suppression of limit cycles is a broad topic with all the complexity to be expected in a *nonlinear system* behavior.
 
@@ -531,19 +551,6 @@ The most basic tools of **saturation arithmetic** and **magnitude truncation —
 ---
 
 ![image-20260809184414494](dsp2asic/image-20260809184414494.png)
-
-
-
-## Word-Length Effects
-
-> Tianshuang Qiu; Ying Guo, "7. Finite-Precision Numerical Effects in Digital Signal Processing," in *Signal Processing and Data Analysis* , De Gruyter, 2018, pp.236-248
->
-> Antoniou, Andreas. “Digital Signal Processing: Signals, Systems, and Filters.” (2005). [[pdf](https://fmipa.umri.ac.id/wp-content/uploads/2016/03/Andreas-Intoniou-Digital-signal-processing.9780071454247.31527.pdf)]
->
-> Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
-
-*TODO* &#128197;
-
 
 
 ## DFE in digital

@@ -318,6 +318,22 @@ $$
 
 ![image-20260625233243905](dpll/image-20260625233243905.png)
 
+## Enhancing Resolution w/ DSM
+
+> J. Stonick. ISSCC 2011 tutorials, T5: "DPLL-Based Clock and Data Recovery"
+>
+> Amir Amirkhany. ISSCC 2019 "Basics of Clock and Data Recovery Circuits"
+
+![image-20260812233408446](dpll/image-20260812233408446.png)
+
+$M+1$ bits ensure on overflow or underflow in the signed adder
+
+![image-20260812233515238](dpll/image-20260812233515238.png)
+
+
+
+![image-20260812232659641](dpll/image-20260812232659641.png)
+
 
 
 

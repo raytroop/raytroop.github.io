@@ -33,14 +33,6 @@ mathjax: true
 
 
 
----
-
-**Cycle Slipping**
-
-![image-20260613085103536](cp-pll/image-20260613085103536.png)
-
-![image-20260613085238609](cp-pll/image-20260613085238609.png)
-
 ### Tristate PFD
 
 ![image-20260613083646800](cp-pll/image-20260613083646800.png)
@@ -115,6 +107,44 @@ This situation can be avoided by adding *additional delay to the AND gate* in th
 
 
 
+
+
+---
+
+---
+
+<span style="color:blue">***feedback path delay***</span>
+
+> Dennis Fischette, First Time, Every Time – Practical Tips for PhaseLocked Loop Design [[https://www.delroy.com/PLL_dir/tutorial/PLL_tutorial_slides.pdf](https://www.delroy.com/PLL_dir/tutorial/PLL_tutorial_slides.pdf)]
+>
+> Amir Amirkhany. ISSCC 2019 "Basics of Clock and Data Recovery Circuits"
+
+Open-Loop PLL Gain
+
+![image-20260812215725321](cp-pll/image-20260812215725321.png)
+
+$\color{red}T_\text{pfd}/2$ term is typically an **equivalent delay caused by the <span style="color:blue">sampled-data nature</span> of the PFD/charge-pump**
+
+![image-20260812212850273](cp-pll/image-20260812212850273.png)
+
+The feedback divider provides a sampled version of the scaled VCO phase, and the PFD obtains the sampled phase error between that feedback phase and the reference phase
+
+There is no delay between oscillator output phase and feedback divider output phase if C2Q and logic propagation delays are neglected
+
+If the real divider has C2Q delay $t_{CQ}$, then it becomes approximately
+$$
+\boxed{T_d \approx t_{\mathrm{CQ}} + \frac{T_{\mathrm{pfd}}}{2}}
+$$
+
+
+
+
+> ![image-20260812215429178](cp-pll/image-20260812215429178.png)
+
+
+
+
+
 ---
 
 ---
@@ -122,6 +152,20 @@ This situation can be avoided by adding *additional delay to the AND gate* in th
 > Deog-Kyoon Jeong. Topics in IC Design 2.1 Introduction to Phase-Locked Loop
 
 ![image-20250807230740496](cp-pll/image-20250807230740496.png)
+
+
+
+
+
+## Cycle Slipping
+
+> Dennis Fischette, Could you explain the cycle-skip phenomenon in PLL performance? [[https://www.delroy.com/PLL_dir/FAQ/faq_cycle_slip.txt](https://www.delroy.com/PLL_dir/FAQ/faq_cycle_slip.txt)]
+
+![image-20260613085103536](cp-pll/image-20260613085103536.png)
+
+![image-20260613085238609](cp-pll/image-20260613085238609.png)
+
+
 
 
 
@@ -271,6 +315,12 @@ $$
 ![image-20241222200158107](cp-pll/image-20241222200158107.png)
 
 > [[https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html](https://lpsa.swarthmore.edu/Fourier/Series/ExFS.html)]
+
+
+
+
+
+
 
 
 

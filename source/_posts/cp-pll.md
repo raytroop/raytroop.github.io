@@ -138,6 +138,14 @@ $$
 
 
 
+ideal feedback divider don't contribute delay
+
+![image-20260813210256180](cp-pll/image-20260813210256180.png)
+
+
+
+
+
 
 > ![image-20260812215429178](cp-pll/image-20260812215429178.png)
 

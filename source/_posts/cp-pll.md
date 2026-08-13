@@ -353,6 +353,9 @@ Chembiyan T. Chargepump PLL Basics- From A Control Theoretic Viewpoint [[linkedi
 
 —. A Unified Approach to Low Noise Loop Design in Chargepump PLLs [[linkedin](https://www.linkedin.com/posts/chembiyan-t-0b34b910_pll-loop-design-shorter-version-activity-7116456644846252032-Klx0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
 
+
+N. Kuznetsov, A. Matveev, M. Yuldashev and R. Yuldashev, "Nonlinear Analysis of Charge-Pump Phase-Locked Loop: The Hold-In and Pull-In Ranges," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 10, pp. 4049-4061, Oct. 2021 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9509840](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9509840)]
+
 ---
 
 Xiang Gao Credo Semiconductor. ISSCC2018 T1: Low-Jitter PLLs for Wireless Transceivers

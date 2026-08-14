@@ -138,7 +138,7 @@ $$
 
 
 
-An ideal feedback divider does not introduce propagation delay
+An ideal feedback divider does not introduce propagation delay in **phase domain**
 
 ![image-20260814081101054](cp-pll/image-20260814081101054.png)
 

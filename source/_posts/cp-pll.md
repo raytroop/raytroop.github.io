@@ -138,11 +138,9 @@ $$
 
 
 
-ideal feedback divider don't contribute delay
+An ideal feedback divider does not introduce propagation delay
 
-![image-20260813210256180](cp-pll/image-20260813210256180.png)
-
-
+![image-20260814081101054](cp-pll/image-20260814081101054.png)
 
 
 

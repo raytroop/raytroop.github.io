@@ -210,6 +210,30 @@ $$
 
 
 
+## Multipliers
+
+> HARDWARE MULTIPLIERS [[https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.mult.pdf](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.mult.pdf)]
+>
+> FIXED-INPUT MULTS [[https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fixed.input.mults.pdf](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fixed.input.mults.pdf)]
+
+![image-20260815010241418](dsp2asic/image-20260815010241418.png)
+
+
+
+![image-20260815010408352](dsp2asic/image-20260815010408352.png)
+
+
+
+![image-20260815010836501](dsp2asic/image-20260815010836501.png)
+
+
+
+## FIR Filter Scaling
+
+> FIR FILTER HARDWARE [[https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fir.hardware.pdf](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fir.hardware.pdf)]
+
+![image-20260815015828789](dsp2asic/image-20260815015828789.png)
+
 
 
 ## Finite-wordlength Effects
@@ -604,8 +628,6 @@ The most basic tools of **saturation arithmetic** and **magnitude truncation —
 
 ![image-20260811220100236](dsp2asic/image-20260811220100236.png)
 
-
-
 ## DFE in digital
 
 > Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI](https://youtu.be/puEP0DlVZGI)]
@@ -792,6 +814,16 @@ with everything in the same units (<span style="color:blue">LSB₈²</span> is c
 
 
 
+
+## Sign Extension In Verilog
+
+> [[https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.sign.extension.pdf]](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.sign.extension.pdf)
+
+![image-20260815014502338](dsp2asic/image-20260815014502338.png)
+
+![image-20260815014531762](dsp2asic/image-20260815014531762.png)
+
+![image-20260815015049513](dsp2asic/image-20260815015049513.png)
 
 
 

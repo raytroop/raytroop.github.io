@@ -77,34 +77,6 @@ $$
 
 
 
-
-### Floating Point Number
-
-> Dennis Forbes. Understanding Floating-Point Numbers [[https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/](https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/)]
->
-> IEEE Standard for Floating-Point Arithmetic [[https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf](https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf)]
-
-![image-20260207101850895](dsp2asic/image-20260207101850895.png)
-
-![image-20260207104005414](dsp2asic/image-20260207104005414.png)
-
-|                                      |                                |                                                              |
-| ------------------------------------ | ------------------------------ | ------------------------------------------------------------ |
-| **32-bit floating-point version 1**  | store *implicit leading one*   | ![image-20260207102121844](dsp2asic/image-20260207102121844.png) |
-| **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](dsp2asic/image-20260207102147689.png) |
-| **IEEE 754 floating point notation** | *biased exponent*              | ![image-20260207102210468](dsp2asic/image-20260207102210468.png) |
-
-
-
-| Format                        | Exponent Bits | Bias (Decimal) | Representable Range |
-| ----------------------------- | ------------- | -------------- | ------------------- |
-| **Single Precision (32-bit)** | 8             | **127**        | -126 to +127        |
-| **Double Precision (64-bit)** | 11            | **1023**       | -1022 to +1023      |
-
-![image-20260207103557952](dsp2asic/image-20260207103557952.png)
-
-
-
 ### $Q$-Format
 
 ![image-20260810120058735](dsp2asic/image-20260810120058735.png)
@@ -181,6 +153,60 @@ So it is a **4-bit two's-complement fixed-point number**:
  ↑      ↑ ↑ ↑
 sign    3 fractional bits
 ```
+
+
+
+
+
+
+### Floating-point Number
+
+> 
+>
+
+
+
+
+
+
+
+### Floating-point Number in IEEE 754 Format
+
+> Floating-point data in IEEE 754 Format [[https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf](https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf)]
+>
+> Rajaraman, V.. “IEEE standard for floating point numbers.” *Resonance* 21 (2016): 11 - 30. [[https://www.ias.ac.in/article/fulltext/reso/021/01/0011-0030](https://www.ias.ac.in/article/fulltext/reso/021/01/0011-0030)]
+>
+> IEEE Standard for Floating-Point Arithmetic [[https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf](https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf)]
+>
+> Dennis Forbes. Understanding Floating-Point Numbers [[https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/](https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/)]
+
+![image-20260207101850895](dsp2asic/image-20260207101850895.png)
+
+![image-20260207104005414](dsp2asic/image-20260207104005414.png)
+
+|                                      |                                |                                                              |
+| ------------------------------------ | ------------------------------ | ------------------------------------------------------------ |
+| **32-bit floating-point version 1**  | store *implicit leading one*   | ![image-20260814232552030](dsp2asic/image-20260814232552030.png) |
+| **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](dsp2asic/image-20260207102147689.png) |
+| **IEEE 754 floating point notation** | ***biased exponent***          | ![image-20260207102210468](dsp2asic/image-20260207102210468.png) |
+
+![image-20260814235410144](dsp2asic/image-20260814235410144.png)
+
+![image-20260814235251961](dsp2asic/image-20260814235251961.png)
+$$
+\boxed{
+\begin{aligned}
+E=0 &: \quad \text{zero or subnormal},\\
+1\le E\le254 &: \quad \text{normal finite number},\\
+E=255 &: \quad \infty \text{ or NaN}.
+\end{aligned}
+}
+$$
+
+
+![image-20260814225825011](dsp2asic/image-20260814225825011.png)
+
+
 
 
 

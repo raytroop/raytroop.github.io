@@ -50,6 +50,16 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 
 
 
+---
+
+> A. Sheikholeslami and H. Tamura, "Design metrics for blind ADC-based wireline receivers," *Proceedings of the IEEE 2013 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2013 [[https://www.eecg.utoronto.ca/~ali/papers/cicc2013-p3-1.pdf](https://www.eecg.utoronto.ca/~ali/papers/cicc2013-p3-1.pdf)]
+
+
+
+![image-20260815001847647](phy/image-20260815001847647.png)
+
+
+
 ## Lane-to-Lane Skew
 
 *TODO* &#128197;

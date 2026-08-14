@@ -123,7 +123,7 @@ Open-Loop PLL Gain
 
 ![image-20260812215725321](cp-pll/image-20260812215725321.png)
 
-$\color{red}T_\text{pfd}/2$ term is typically an **equivalent delay caused by the <span style="color:blue">sampled-data nature</span> of the PFD/charge-pump**
+$\color{red}T_\text{pfd}/2$ term is typically an **equivalent delay caused by the <span style="color:blue">sampled-data nature of the PFD/charge-pump</span> **
 
 ![image-20260812212850273](cp-pll/image-20260812212850273.png)
 
@@ -140,7 +140,7 @@ $$
 
 An ideal feedback divider does not introduce propagation delay in **phase domain**
 
-![image-20260814081101054](cp-pll/image-20260814081101054.png)
+![image-20260814202707911](cp-pll/image-20260814202707911.png)
 
 
 

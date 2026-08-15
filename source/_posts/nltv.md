@@ -384,7 +384,7 @@ NUM_SAMPLES = 2001
 
 def wien_bridge_rhs(t, state):
     """Return the state derivative for the normalized Wien bridge response."""
-    del t
+    #del t
     vo, dvo = state
     ddvo = -(3.0 / RC) * dvo - vo / RC**2
     return [dvo, ddvo]
@@ -469,6 +469,171 @@ SciPy roughly controls local error using:
 ```
 error < atol + rtol * abs(y)
 ```
+
+
+
+
+
+## DifferentialEquations.jl
+
+
+
+### ODE forms
+
+ODE is usually defined in one of two forms: **out-of-place** or **in-place**
+
+```julia
+# out-of-place
+
+function f(x, p, t)
+    return 2x
+end
+
+x0 = 1.0
+tspan = (0.0, 5.0)
+
+prob = ODEProblem(f, x0, tspan)
+sol = solve(prob)
+```
+
+`x` = current state
+
+`p` = parameters
+
+`t` = current time
+
+returned value = dx/dt
+
+
+
+```julia
+# in-place
+
+function f!(dx, x, p, t)
+    dx[1] = 2*x[1]  # calars cannot be mutated
+end
+
+x0 = [1.0]
+tspan = (0.0, 5.0)
+
+prob = ODEProblem(f!, x0, tspan)
+sol = solve(prob)
+```
+
+**Scalar ODE**
+$$
+\frac{dx}{dt} = -2x
+$$
+
+
+```julia
+function f(x, p, t)
+    return 2x
+end
+
+x0 = 1.0
+tspan = (0.0, 5.0)
+
+prob = ODEProblem(f, x0, tspan)
+sol = solve(prob)
+```
+
+
+
+**System of ODEs**
+
+$$\begin{align}
+\dot{x} &= y, \\
+\dot{y} &= -x - 0.2y.
+\end{align}$$
+
+```julia
+function oscillator!(du, u, p, t)
+    x = u[1]
+    y = u[2]
+
+    du[1] = y
+    du[2] = -x - 0.2y
+end
+
+u0 = [1.0, 0.0]
+tspan = (0.0, 20.0)
+
+prob = ODEProblem(oscillator!, u0, tspan)
+sol = solve(prob)
+```
+
+$$
+u = \begin{bmatrix} x \\ y \end{bmatrix}, \quad du = \begin{bmatrix} \dot{x} \\ \dot{y} \end{bmatrix}.
+$$
+
+
+
+**ODE with parameters**
+
+```julia
+function f!(du, u, p, t)
+    a, b = p
+    x = u[1]
+
+    du[1] = a*x - b*x^3
+end
+
+u0 = [0.1]
+p = (2.0, 1.0)
+tspan = (0.0, 10.0)
+
+prob = ODEProblem(f!, u0, tspan, p)
+sol = solve(prob)
+```
+
+
+
+***The Lorenz Equation — employ above features***
+
+
+
+### Event Handling & Callback Functions
+
+*TODO* &#128197;
+
+
+
+
+
+## CP-PLL Time domain model
+
+> metroidman, fractional N量化噪声对系统相位噪声的影响 两种分析方法 LTI频域法和时域采样DFT法 [[link](https://www.bilibili.com/video/BV1RCw4zREcJ/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+
+**classic PLL module transient response**
+
+![image-20260508211343022](nltv/image-20260508211343022.png)
+
+![image-20260505162601167](nltv/image-20260505162601167.png)
+
+> initial state is ***Reset***
+
+![image-20260508204250391](nltv/image-20260508204250391.png)
+
+
+
+**classic PLL module in Matlab & Simulink**
+
+Kai Wang, *Is there a way to improve the code speed?* [[https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed](https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed)]
+
+
+
+**classic PLL module in Julia**
+
+Julia version (Claude Opus 4.7)  [[https://gist.github.com/raytroop/53f210b2cca18ec77295dc91dbe35818](https://gist.github.com/raytroop/53f210b2cca18ec77295dc91dbe35818)]
+
+![image-20260515202527271](nltv/image-20260515202527271.png)
+
+**classic PLL module in Mathematica**
+
+![image-20260507000319278](nltv/image-20260507000319278.png)
+
+
 
 
 

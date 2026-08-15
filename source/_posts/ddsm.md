@@ -422,38 +422,6 @@ title('Quantization Noise Effects', FontSize=14);
 
 
 
----
-
----
-
-**classic PLL module transient response**
-
-![image-20260508211343022](ddsm/image-20260508211343022.png)
-
-![image-20260505162601167](ddsm/image-20260505162601167.png)
-
-> initial state is ***Reset***
-
-![image-20260508204250391](ddsm/image-20260508204250391.png)
-
-
-
-**classic PLL module in Matlab & Simulink**
-
-Kai Wang, *Is there a way to improve the code speed?* [[https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed](https://www.mathworks.com/matlabcentral/answers/2039821-is-there-a-way-to-improve-the-code-speed)]
-
-
-
-**classic PLL module in Julia**
-
-Julia version (Claude Opus 4.7)  [[https://gist.github.com/raytroop/53f210b2cca18ec77295dc91dbe35818](https://gist.github.com/raytroop/53f210b2cca18ec77295dc91dbe35818)]
-
-![image-20260515202527271](ddsm/image-20260515202527271.png)
-
-**classic PLL module in Mathematica**
-
-![image-20260507000319278](ddsm/image-20260507000319278.png)
-
 
 
 ## $\Delta\Sigma$ DAC

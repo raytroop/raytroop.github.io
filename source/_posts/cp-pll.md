@@ -65,14 +65,6 @@ The PFD's state machine interprets those missing edges as a huge phase/frequency
 
 
 
----
-
----
-
-![image-20260627101018275](cp-pll/image-20260627101018275.png)
-
-
-
 
 
 ### PFD Deadzone
@@ -166,6 +158,12 @@ An ideal feedback divider does not introduce propagation delay in **phase domain
 ## Cycle Slipping
 
 > Dennis Fischette, Could you explain the cycle-skip phenomenon in PLL performance? [[https://www.delroy.com/PLL_dir/FAQ/faq_cycle_slip.txt](https://www.delroy.com/PLL_dir/FAQ/faq_cycle_slip.txt)]
+
+![image-20260627101018275](cp-pll/image-20260627101018275.png)
+
+
+
+
 
 ![image-20260613085103536](cp-pll/image-20260613085103536.png)
 

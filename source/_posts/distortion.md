@@ -177,6 +177,16 @@ grid on; legend('Post Tap FFE', 'Pre Tap FFE'); title('FFE Group Delay')
 
 
 
+## Sampling & Realtime Oscilloscope
+
+> Leslie A. Rusch, Module 3 – Bandwidth Limited Channels [[https://wcours.gel.ulaval.ca/GEL7132/assets/pdfs/Module3/Mod3_merged.pdf](https://wcours.gel.ulaval.ca/GEL7132/assets/pdfs/Module3/Mod3_merged.pdf)]
+
+*TODO* &#128197;
+
+
+
+
+
 ## reference
 
 Hollister, Allen L. *Wideband Amplifier Design*. Raleigh, NC: SciTech Pub., 2007.

@@ -30,18 +30,66 @@ mathjax: true
 ## Frequency Divider
 
 > Gunnman, Kiran, and Mohammad Vahidfar. *Selected Topics in RF, Analog and Mixed Signal Circuits and Systems*. Aalborg: River Publishers, 2017
+>
+> Arora, Mohit. “Clock Dividers Made Easy.” (2002). [[https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf](https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf)]
+>
+> Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
 
 ![image-20240803225130324](clocking-misc/image-20240803225130324.png)
 
-> Large values of N lowers the loop BW which is bad for jitter
-
----
-
-### MMD (Multimodulus Divider)
-
-*TODO* &#128197;
+Large values of N lowers the loop BW which is bad for jitter
 
 
+
+### Asynchronous vs Synchronous Divider
+
+> Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 Lecture 8: Divider Circuits  [[https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf)]
+
+![image-20260815221338155](clocking-misc/image-20260815221338155.png)
+
+
+
+### Dual-Modulus Dividers
+
+<span style="color:blue">***divide-by-2/3***</span>
+
+![image-20260815211327476](clocking-misc/image-20260815211327476.png)
+
+
+
+<span style="color:blue">***divide-by-4/5***</span>
+
+![image-20260815213030044](clocking-misc/image-20260815213030044.png)
+
+
+
+<span style="color:blue"> ***Divide-by-8/9***</span>
+
+![image-20260815213540694](clocking-misc/image-20260815213540694.png)
+
+
+
+
+
+### Multi-Modulus Dividers (MMD)
+
+
+
+***Multi-modulus divider using a <span style="color:blue">cascade of divide-by-2/3s</span>***
+
+![image-20260815214721784](clocking-misc/image-20260815214721784.png)
+
+<span style="background-color:yellow">***extra one cycle delay*** vs ***reducing accumulated noise*** from the last retiming DFF</span>
+
+![image-20260815221958790](clocking-misc/image-20260815221958790.png)
+
+
+
+<span style="color:blue">***Pulse-swallow multi-modulus divider***</span>
+
+
+
+![image-20260815221854343](clocking-misc/image-20260815221854343.png)
 
 
 

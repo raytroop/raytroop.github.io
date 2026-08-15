@@ -99,25 +99,29 @@ This situation can be avoided by adding *additional delay to the AND gate* in th
 
 
 
-
-
----
-
----
-
-<span style="color:blue">***feedback path delay***</span>
+## feedback path delay
 
 > Dennis Fischette, First Time, Every Time – Practical Tips for PhaseLocked Loop Design [[https://www.delroy.com/PLL_dir/tutorial/PLL_tutorial_slides.pdf](https://www.delroy.com/PLL_dir/tutorial/PLL_tutorial_slides.pdf)]
 >
 > Amir Amirkhany. ISSCC 2019 "Basics of Clock and Data Recovery Circuits"
 
-Open-Loop PLL Gain
+### PFD ZOH
+
+<span style="background-color:yellow">PFD **ZOH** half reference cycle delay in Open-Loop PLL Gain</span>
 
 ![image-20260812215725321](cp-pll/image-20260812215725321.png)
 
 $\color{red}T_\text{pfd}/2$ term is typically an **equivalent delay caused by the <span style="color:blue">sampled-data nature of the PFD/charge-pump</span> **
 
 ![image-20260812212850273](cp-pll/image-20260812212850273.png)
+
+
+
+### Divider delay
+
+<span style="background-color:yellow">An ideal feedback divider does not introduce propagation delay in **phase domain**</span>
+
+![image-20260814202707911](cp-pll/image-20260814202707911.png)
 
 The feedback divider provides a sampled version of the scaled VCO phase, and the PFD obtains the sampled phase error between that feedback phase and the reference phase
 
@@ -130,26 +134,28 @@ $$
 
 
 
-An ideal feedback divider does not introduce propagation delay in **phase domain**
+### last DFF retimng
 
-![image-20260814202707911](cp-pll/image-20260814202707911.png)
+> Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
 
+<span style="background-color:yellow">***extra one cycle delay*** vs ***reducing accumulated noise*** from the last DFF retiming DFF</span>
 
+![image-20260815214721784](cp-pll/image-20260815214721784.png)
 
-
-> ![image-20260812215429178](cp-pll/image-20260812215429178.png)
-
-
-
+![image-20260815221958790](cp-pll/image-20260815221958790.png)
 
 
----
 
----
 
-> Deog-Kyoon Jeong. Topics in IC Design 2.1 Introduction to Phase-Locked Loop
+> Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 Lecture 8: Divider Circuits  [[https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf)]
 
-![image-20250807230740496](cp-pll/image-20250807230740496.png)
+![image-20260815221034113](cp-pll/image-20260815221034113.png)
+
+
+
+### loop delay effect
+
+![image-20260812215429178](cp-pll/image-20260812215429178.png)
 
 
 

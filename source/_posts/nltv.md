@@ -591,13 +591,299 @@ sol = solve(prob)
 
 ***The Lorenz Equation — employ above features***
 
+$$\begin{align}
+\frac{dx}{dt} &= \sigma (y - x) \\
+\frac{dy}{dt} &= x (\rho - z) -y \\
+\frac{dz}{dt} &= xy - \beta z
+\end{align}$$
+
+
+
+```julia
+function lorenz!(du,u,p,t)
+    σ,ρ,β = p
+    du[1] = σ*(u[2]-u[1])
+    du[2] = u[1]*(ρ-u[3]) - u[2]
+    du[3] = u[1]*u[2] - β*u[3]
+end
+
+u0 = [1.0,0.0,0.0]
+p = (10,28,8/3) # we could also make this an array, or any other type!
+tspan = (0.0,100.0)
+
+prob = ODEProblem(lorenz!,u0,tspan,p)
+sol = solve(prob)
+
+Plots.plot(sol, vars=(1,2,3), size=(1400, 700))
+```
+
+
+
+![image-20260815142842589](nltv/image-20260815142842589.png)
+
 
 
 ### Event Handling & Callback Functions
 
-*TODO* &#128197;
+In `DifferentialEquations.jl`, a **callback** allows the ODE solver to detect an event and execute some action when that event occurs. This is useful for hybrid systems, switching circuits, threshold detection, impacts, resets, stopping conditions, etc.
+$$
+\boxed{\text{condition} \longrightarrow \text{event} \longrightarrow \text{affect!}}
+$$
+
+| Callback             | Condition  | Typical use                         |
+| -------------------- | ---------- | ----------------------------------- |
+| `ContinuousCallback` | (g(u,t)=0) | zero crossings, thresholds, impacts |
+| `DiscreteCallback`   | Boolean    | mode switching, logical conditions  |
 
 
+
+```julia
+function f!(du, u, p, t)
+    du[1] = -u[1]
+end
+
+u0 = [1.0]
+tspan = (0.0, 10.0)
+
+prob = ODEProblem(f!, u0, tspan)
+
+function condition(u, t, integrator)
+    u[1] - 0.2
+end
+
+function affect!(integrator)
+    terminate!(integrator)
+end
+
+cb = ContinuousCallback(condition, affect!)
+
+sol = solve(prob, Tsit5(), callback=cb)
+println(sol.u[end][1])  # This will print the last value of u when the callback is triggered
+println(sol.t[end])  # This will print the time at which the callback is triggered
+println(exp(-sol.t[end]))  # This will print the expected value of u at that time
+
+Plots.plot(sol, xlims=(0, 2), linewidth=5, title="Solution of ODE with Callback", xlabel="Time", ylabel="u(t)")
+
+# 0.20000000000000004
+# 1.6094312935462547
+# 0.20000132378195012
+```
+
+
+
+`integrator` is the **currently running solver object**. `DifferentialEquations.jl` automatically passes it into callback functions.
+
+```julia
+integrator.u  # current state
+integrator.t  # current time
+integrator.p  # problem parameters
+integrator.sol  # solution accumulated so far
+```
+
+
+
+---
+
+
+
+***`ContinuousCallback`***
+
+Use `ContinuousCallback` when the event is defined by a **continuous zero crossing** $g(u,t)=0$
+
+```mermaid
+graph LR
+    A[ODE solver] --> B[integrate normally]
+    B --> C{condition = 0 ?}
+    C -- yes --> D["affect!()"]
+    D --> E[continue integration]
+```
+
+
+
+![image-20260815154158538](nltv/image-20260815154158538.png)
+$$
+\begin{cases} 
+\dot{x} = v \\ 
+\dot{v} = -g 
+\end{cases}
+$$
+
+
+```julia
+using DifferentialEquations
+import Plots
+
+
+function ball!(du, u, p, t)
+    g = 9.81
+
+    du[1] = u[2]   # dx/dt = v
+    du[2] = -g     # dv/dt = -g
+end
+
+function condition(u, t, integrator)
+    u[1]           # event when x = 0
+end
+
+function bounce!(integrator)
+    e = 0.8
+    integrator.u[2] = -e * integrator.u[2]
+end
+
+cb = ContinuousCallback(condition, bounce!)
+
+u0 = [10.0, 0.0]
+
+prob = ODEProblem(ball!, u0, (0.0, 10.0))
+
+sol = solve(prob, Tsit5(), callback=cb)
+
+Plots.plot(sol, size=(1200, 600), title="Bouncing Ball", xlabel="Time (s)", ylabel="Height (m)", legend=false)
+```
+
+
+
+---
+
+
+
+***`DiscreteCallback`***
+
+The condition returns a **Boolean**
+
+```julia
+condition(u, t, integrator) = true/false
+```
+
+
+
+
+
+`DiscreteCallback` checks its Boolean condition **at the end of accepted integration steps**. It does not use root finding to locate the exact point where $u=1$
+
+![image-20260815161659197](nltv/image-20260815161659197.png)
+
+```julia
+using DifferentialEquations
+import Plots
+
+function f!(du, u, p, t)
+    du[1] = 1.0
+end
+
+u0 = [0.0]
+tspan = (0.0, 5.0)
+
+prob = ODEProblem(f!, u0, tspan)
+
+# Boolean condition
+function condition_DT(u, t, integrator)
+    u[1] >= 1.0
+end
+
+function condition_CT(u, t, integrator)
+    u[1] - 1.0
+end
+
+# Action when condition == true
+function affect!(integrator)
+    integrator.u[1] = 0.0
+end
+
+cb_DT = DiscreteCallback(condition_DT, affect!)
+cb_CT = ContinuousCallback(condition_CT, affect!)
+
+sol_DT = solve(prob, Tsit5(), callback=cb_DT)
+println("Discrete-callback solution time: ", sol_DT.t[end-1:end])
+println("Discrete-callback solution: ", sol_DT.u[end-1:end])
+# Discrete-callback solution time: [5.0, 5.0]
+# Discrete-callback solution: [[4.999999999999999], [0.0]]
+
+sol_CT = solve(prob, Tsit5(), callback=cb_CT)
+
+plt = Plots.plot(
+    sol_DT,
+    title="Two ODE Solutions: Discrete vs Continuous Callback",
+    xlabel="Time",
+    ylabel="u(t)",
+    label="Discrete-callback solution",
+    linewidth=2,
+    linestyle=:dash,
+    legend=:topleft,
+    size=(1200, 600),
+)
+Plots.plot!(plt, sol_CT, label="Continuous-callback solution", linewidth=2)
+```
+
+`DiscreteCallback` checks only after each accepted solver step. Because `du/dt = 1` is exactly linear, `Tsit5()` takes a large step from approximately `t=0.58` directly to `t=5`. It therefore does not check near `u=1`.
+
+
+
+---
+
+
+
+***A callback can modify parameters***
+
+Callbacks provide the mechanism that connects the continuous ODE dynamics to this discrete switching behavior
+
+So mathematically two components:
+$$
+\dot{\mathbf{x}} = f(\mathbf{x}, p, t)
+$$
+for the $\textbf{continuous-time dynamics}$, and
+$$
+g(\mathbf{x}, t) = 0 \implies (\mathbf{x}, p) \to R(\mathbf{x}, p)
+$$
+for the $\textbf{event/reset dynamics}$. $R(x,p)$ means a **reset map** or **event update rule**
+
+
+$$
+\dot{x} = \begin{cases} 
+-x, & x > 0.5 \\ 
+-2x, & x < 0.5. 
+\end{cases}
+$$
+
+
+```julia
+using DifferentialEquations
+import Plots
+
+function f!(du, u, p, t)
+    du[1] = -p[1]
+end
+
+function condition(u, t, integrator)
+    u[1] - 0.5
+end
+
+function affect!(integrator)
+    integrator.p[1] = -integrator.p[1]
+end
+
+p = [1.0]
+
+cb = ContinuousCallback(condition, affect!)
+
+prob = ODEProblem(f!, [1.0], (0.0, 1.0), p)
+
+sol = solve(prob, Tsit5(), callback=cb)
+
+Plots.plot(
+    sol,
+    title="A Callback Can Modify Parameters",
+    xlabel="Time (t)",
+    ylabel="State u₁(t)",
+    label="u₁(t)",
+    linewidth=2,
+    size=(1200, 600)
+)
+```
+
+
+
+![image-20260815164724091](nltv/image-20260815164724091.png)
 
 
 

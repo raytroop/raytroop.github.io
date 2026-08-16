@@ -109,7 +109,9 @@ This situation can be avoided by adding *additional delay to the AND gate* in th
 
 <span style="background-color:yellow">PFD **ZOH** half reference cycle delay in Open-Loop PLL Gain</span>
 
-![image-20260812215725321](cp-pll/image-20260812215725321.png)
+![image-20260816080527790](cp-pll/image-20260816080527790.png)
+
+
 
 $\color{red}T_\text{pfd}/2$ term is typically an **equivalent delay caused by the <span style="color:blue">sampled-data nature of the PFD/charge-pump</span> **
 

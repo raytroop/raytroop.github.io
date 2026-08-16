@@ -58,6 +58,8 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 
 ![image-20260815001847647](phy/image-20260815001847647.png)
 
+Frequency offset minimization is required to limit latency (the depth of elastic buffer)
+
 
 
 ## Lane-to-Lane Skew

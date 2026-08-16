@@ -156,20 +156,6 @@ sign    3 fractional bits
 
 
 
-
-
-
-### Floating-point Number
-
-> 
->
-
-
-
-
-
-
-
 ### Floating-point Number in IEEE 754 Format
 
 > Floating-point data in IEEE 754 Format [[https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf](https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf)]
@@ -179,6 +165,8 @@ sign    3 fractional bits
 > IEEE Standard for Floating-Point Arithmetic [[https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf](https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf)]
 >
 > Dennis Forbes. Understanding Floating-Point Numbers [[https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/](https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/)]
+>
+> Bevan Baas, EEC 281 - VLSI Digital Signal Processing Winter 2025 [[FLOATING POINT](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.float.pt.pdf)] [[ FLOATING POINT <---> FIXED POINT CONVERSION ](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.float.convert.pdf)]
 
 ![image-20260207101850895](dsp2asic/image-20260207101850895.png)
 
@@ -212,9 +200,8 @@ $$
 
 ## Multipliers
 
-> HARDWARE MULTIPLIERS [[https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.mult.pdf](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.mult.pdf)]
+> B. Baas, [[HARDWARE MULTIPLIERS](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.mult.pdf)] [[FIXED-INPUT MULTS ](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fixed.input.mults.pdf)] [[MULTIPLICATION SCALING](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.mult.scaling.pdf)]
 >
-> FIXED-INPUT MULTS [[https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fixed.input.mults.pdf](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fixed.input.mults.pdf)]
 
 ![image-20260815010241418](dsp2asic/image-20260815010241418.png)
 
@@ -222,17 +209,133 @@ $$
 
 ![image-20260815010408352](dsp2asic/image-20260815010408352.png)
 
+![image-20260816090110993](dsp2asic/image-20260816090110993.png)
 
 
-![image-20260815010836501](dsp2asic/image-20260815010836501.png)
 
+![image-20260816100444270](dsp2asic/image-20260816100444270.png)
+
+**negate last partial product** when multiplier[MSB]=1, i.e. multiplier is negative
+
+1. Multiply the multiplicand, then invert it
+2. Invert the multiplicand, then multiply it
+
+![image-20260816101321117](dsp2asic/image-20260816101321117.png)
+
+
+
+![image-20260816101652062](dsp2asic/image-20260816101652062.png)
+
+
+
+
+
+
+
+---
+
+***Multiplication Scaling***
+
+![image-20260816095555538](dsp2asic/image-20260816095555538.png)
+
+
+
+
+
+---
+
+
+
+![image-20260816132359003](dsp2asic/image-20260816132359003.png)
+
+
+
+| Operands          | Nominal full product width |
+| ----------------- | -------------------------: |
+| Unsigned          |                      $m+n$ |
+| Signed fractional |                    $m+n-1$ |
+
+For **signed fractional multiplication**,
+
+$$
+Q1.(m-1)\times Q1.(n-1)
+\rightarrow Q1.(m+n-2)
+$$
+
+Therefore, the total number of bits is
+
+$$
+1+(m+n-2)=m+n-1.
+$$
+
+There is one special corner case:
+
+$$
+(-1)\times(-1)=+1
+$$
+
+but a signed fractional format such as $Q1.(m+n-2)$ has the range
+
+$$
+-1
+\le x \le
+1-2^{-(m+n-2)},
+$$
+
+so it cannot represent exactly $+1$.
+
+Therefore:
+
+- Normally, signed fractional multiplication requires
+
+$$
+\boxed{m+n-1\text{ bits}}
+$$
+
+- To guarantee no overflow even for
+
+$$
+(-1)(-1)=+1,
+$$
+
+you need
+
+$$
+\boxed{m+n\text{ bits}}.
+$$
+
+Equivalently, if the operands have widths
+
+$$
+B_0+1
+\quad\text{and}\quad
+B_1+1,
+$$
+
+then the normal signed fractional product width is
+
+$$
+(B_0+1)+(B_1+1)-1
+=
+\boxed{B_0+B_1+1}.
+$$
+
+The only exception is again
+
+$$
+(-1)(-1)=+1.
+$$
 
 
 ## FIR Filter Scaling
 
-> FIR FILTER HARDWARE [[https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fir.hardware.pdf](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fir.hardware.pdf)]
+> Bevan Baas, EEC 281 - VLSI Digital Signal Processing Winter 2025 [[FIR FILTER HARDWARE](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fir.hardware.pdf)]
 
 ![image-20260815015828789](dsp2asic/image-20260815015828789.png)
+
+
+
+
 
 
 
@@ -243,6 +346,8 @@ $$
 > Antoniou, Andreas. “Digital Signal Processing: Signals, Systems, and Filters.” (2005). [[pdf](https://fmipa.umri.ac.id/wp-content/uploads/2016/03/Andreas-Intoniou-Digital-signal-processing.9780071454247.31527.pdf)]
 >
 > Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
+>
+> Bevan Baas, EEC 281 - VLSI Digital Signal Processing Winter 2025 [[QUANTIZATION NOISE AS A FUNCTION OF WORD SIZE](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.quant.pdf)] [[SATURATION&COMPRESSION](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.saturation.pdf)] [[ROUNDING](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.rounding.pdf)]
 
 
 
@@ -270,7 +375,7 @@ $$
 
 ![image-20260810153504682](dsp2asic/image-20260810153504682.png)
 
-
+![image-20260816124806680](dsp2asic/image-20260816124806680.png)
 
 ---
 
@@ -312,7 +417,7 @@ $$
 \boxed{\hat y[n]=y[n]+f[n]}
 $$
 
-where $f[n]$ is the output component caused by the quantization noise.
+where $f[n]$ is the **output component caused by the quantization noise**
 
 Substitute
 
@@ -627,6 +732,14 @@ The most basic tools of **saturation arithmetic** and **magnitude truncation —
 ***The most effective technique in preventing <span style="color:blue">overflow</span> is by <span style="color:blue">scaling down</span> the signal***
 
 ![image-20260811220100236](dsp2asic/image-20260811220100236.png)
+
+### Saturation Bias Effects
+
+![image-20260816104709271](dsp2asic/image-20260816104709271.png)
+
+![image-20260816104545601](dsp2asic/image-20260816104545601.png)
+
+
 
 ## DFE in digital
 

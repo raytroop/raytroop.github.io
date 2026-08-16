@@ -31,6 +31,8 @@ e.g. $\frac{W_c(j\omega|\omega=0)}{T_s} = N$ for Rectangular Window, shown in ab
 
 
 
+> A finite length sequence can be considered to be an infinite length sequence multiplied by a "Rectangular Window". Also called a "Boxcar Window"
+
 ## warmup
 
 |                       | Continuous-time signals $x_c(t)$ | Discrete-time signals $x[n]$    |

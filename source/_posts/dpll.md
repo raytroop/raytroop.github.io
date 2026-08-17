@@ -90,7 +90,7 @@ import numpy as np
 
 N = 2**10
 sigma = 0.1
-dt = np.random.normal(sigma,size=N)
+dt = np.random.normal(0, sigma, size=N)
 et = np.sign(dt)
 
 # Eq-(2)
@@ -126,9 +126,10 @@ plt.legend([r'$\Delta t \sim \varepsilon $', r'$x_{fit} \sim y_{fit}$', r'$ \tex
 plt.show()
 
 
-# coef_form: 0.7910794009505085
+# coef_form: 7.82197790742685
 # coef_gauss: 7.978845608028654
-# coef_fit: [0.79013999 0.0204332 ]
+# coef_fit: [7.82251511 0.01010586]
+
 ```
 
 

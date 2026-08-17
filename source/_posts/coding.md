@@ -1,5 +1,5 @@
 ---
-title: Coding Cheatsheets
+title: Coding
 date: 2022-02-07 23:52:42
 tags:
 categories:

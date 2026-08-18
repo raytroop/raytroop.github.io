@@ -325,15 +325,9 @@ sampled pac result support the opinion of  Frank Wiedmann — harmonic 0 (with n
 
 ## reference
 
-K. S. Kundert, "Introduction to RF simulation and its application," in IEEE Journal of Solid-State Circuits, vol. 34, no. 9, pp. 1298-1319, Sept. 1999, doi: 10.1109/4.782091. [[pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
+Pavan, Shanthi, and Gabor C. Temes. Circuit Analysis for Analog, Mixed-Signal and RF Designers. Wiley-IEEE Press, 2026.
 
-Stephen Maas, Nonlinear Microwave and RF Circuits, Second Edition , Artech, 2003. [[pdf](https://picture.iczhiku.com/resource/eetop/syihWagzTfGHsvbc.pdf)]
-
-Karti Mayaram. ECE 521 Fall 2016 Analog Circuit Simulation: Simulation of Radio Frequency Integrated Circuits [[pdf1](https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_16.pdf), [pdf2](https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_23.pdf)]
-
-The Value Of RF Harmonic Balance Analyses For Analog Verification: Frequency domain periodic large and small signal analyses. [[https://semiengineering.com/the-value-of-rf-harmonic-balance-analyses-for-analog-verification/](https://semiengineering.com/the-value-of-rf-harmonic-balance-analyses-for-analog-verification/)]
-
-Shanthi Pavan, "Demystifying Linear Time Varying Circuits"
+—, "Demystifying Linear Time Varying Circuits"
 
 —, "Reciprocity and Inter-Reciprocity: A Tutorial— Part I: Linear Time-Invariant Networks," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 70, no. 9, pp. 3413-3421, Sept. 2023, doi: 10.1109/TCSI.2023.3276700.
 
@@ -344,6 +338,14 @@ Shanthi Pavan, "Demystifying Linear Time Varying Circuits"
 —. Introduction to Time - Varying Electrical Network. [[https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9](https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9)]
 
 —. EE5323: Advanced Electrical Networks (Jan-May. 2015) [[https://www.ee.iitm.ac.in/vlsi/courses/ee5323/start](https://www.ee.iitm.ac.in/vlsi/courses/ee5323/start)]
+
+K. S. Kundert, "Introduction to RF simulation and its application," in IEEE Journal of Solid-State Circuits, vol. 34, no. 9, pp. 1298-1319, Sept. 1999, doi: 10.1109/4.782091. [[pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
+
+Stephen Maas, Nonlinear Microwave and RF Circuits, Second Edition , Artech, 2003. [[pdf](https://picture.iczhiku.com/resource/eetop/syihWagzTfGHsvbc.pdf)]
+
+Karti Mayaram. ECE 521 Fall 2016 Analog Circuit Simulation: Simulation of Radio Frequency Integrated Circuits [[pdf1](https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_16.pdf), [pdf2](https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_23.pdf)]
+
+The Value Of RF Harmonic Balance Analyses For Analog Verification: Frequency domain periodic large and small signal analyses. [[https://semiengineering.com/the-value-of-rf-harmonic-balance-analyses-for-analog-verification/](https://semiengineering.com/the-value-of-rf-harmonic-balance-analyses-for-analog-verification/)]
 
 R. S. Ashwin Kumar. EE698W: Analog circuits for signal processing [[https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html](https://home.iitk.ac.in/~ashwinrs/2022_EE698W.html)]
 

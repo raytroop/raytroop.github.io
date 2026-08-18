@@ -491,6 +491,8 @@ It's the **hold** function that is responsible for the $\operatorname{sinc}()$ b
 
 ## reference
 
+Pavan, Shanthi, and Gabor C. Temes. Circuit Analysis for Analog, Mixed-Signal and RF Designers. Wiley-IEEE Press, 2026.
+
 Boris Murmann. EE315A VLSI Signal Conditioning Circuits [[pdf](https://picture.iczhiku.com/resource/eetop/SyIgQJfyzyuDhBXc.pdf)]
 
 Kwantae Kim. ELEC-E3530 Integrated Analog Systems D (5 ECTS) [[video](https://youtube.com/playlist?list=PLmK06TkPUUKo-2LmZfhBpbcLTjFOxk2WJ)] [[github](https://github.com/KwantaeKim/ELEC-E3530)]

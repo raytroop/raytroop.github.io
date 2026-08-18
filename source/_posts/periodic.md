@@ -327,7 +327,7 @@ sampled pac result support the opinion of  Frank Wiedmann — harmonic 0 (with n
 
 Pavan, Shanthi, and Gabor C. Temes. Circuit Analysis for Analog, Mixed-Signal and RF Designers. Wiley-IEEE Press, 2026.
 
-—, "Demystifying Linear Time Varying Circuits"
+—, "Demystifying Linear Time Varying Circuits," IEEE Solid-State Circuits Society (SSCS) Webinar, 2016. [Online]. Available: IEEE SSCS Resource Center
 
 —, "Reciprocity and Inter-Reciprocity: A Tutorial— Part I: Linear Time-Invariant Networks," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 70, no. 9, pp. 3413-3421, Sept. 2023, doi: 10.1109/TCSI.2023.3276700.
 

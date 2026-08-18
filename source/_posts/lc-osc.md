@@ -1065,7 +1065,23 @@ Two resistances, both in series with the variable capacitance:
 
 
 
+---
 
+---
+
+
+
+> Li, Qiang, et al. Differential varactor circuit for a voltage controlled oscillator. Patent No. US 8,098,109 B2, 17 Jan. 2012 [[https://patentimages.storage.googleapis.com/57/d5/16/75bc7e21f7321c/US8098109.pdf](https://patentimages.storage.googleapis.com/57/d5/16/75bc7e21f7321c/US8098109.pdf)]
+
+The VCO varactor introduces a loading effect on the preceding CP-PLL loop filter
+$$
+\color{blue}\boxed{
+\text{The VCO varactor is part of the CP-PLL loop-filter load.}
+}
+$$
+
+
+![image-20260818230345064](lc-osc/image-20260818230345064.png)
 
 
 
@@ -1242,6 +1258,12 @@ To maintain a **symmetric connection** between the inductor and the capacitor ba
 ![image-20260808095856891](lc-osc/image-20260808095856891.png)
 
 
+
+
+
+
+
+![image-20260818225012824](lc-osc/image-20260818225012824.png)
 
 
 

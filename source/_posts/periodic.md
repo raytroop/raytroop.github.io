@@ -333,7 +333,7 @@ Pavan, Shanthi, and Gabor C. Temes. Circuit Analysis for Analog, Mixed-Signal an
 
 —, "Reciprocity and Inter-Reciprocity: A Tutorial—Part II: Linear Periodically Time-Varying Networks," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 70, no. 9, pp. 3422-3435, Sept. 2023, doi: 10.1109/TCSI.2023.3294298.
 
-—, "Interreciprocity in Linear Periodically Time-Varying Networks With Sampled Outputs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 61, no. 9, pp. 686-690, Sept. 2014, doi: 10.1109/TCSII.2014.2335393.
+—, "Interreciprocity in Linear Periodically Time-Varying Networks With Sampled Outputs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 61, no. 9, pp. 686-690, Sept. 2014, [[https://sci-hub.jp/10.1109/TCSII.2014.2335393](https://sci-hub.jp/10.1109/TCSII.2014.2335393)]
 
 —. Introduction to Time - Varying Electrical Network. [[https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9](https://youtube.com/playlist?list=PLyqSpQzTE6M8qllAtp9TTODxNfaoxRLp9)]
 
@@ -341,7 +341,9 @@ Pavan, Shanthi, and Gabor C. Temes. Circuit Analysis for Analog, Mixed-Signal an
 
 K. S. Kundert, "Introduction to RF simulation and its application," in IEEE Journal of Solid-State Circuits, vol. 34, no. 9, pp. 1298-1319, Sept. 1999, doi: 10.1109/4.782091. [[pdf](https://designers-guide.org/analysis/rf-sim.pdf)]
 
-Stephen Maas, Nonlinear Microwave and RF Circuits, Second Edition , Artech, 2003. [[pdf](https://picture.iczhiku.com/resource/eetop/syihWagzTfGHsvbc.pdf)]
+—. (2006). Simulating Switched-Capacitor Filters with SpectreRF.  URL:[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)
+
+Stephen Maas, Nonlinear Microwave and RF Circuits, Second Edition , Artech, 2003.
 
 Karti Mayaram. ECE 521 Fall 2016 Analog Circuit Simulation: Simulation of Radio Frequency Integrated Circuits [[pdf1](https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_16.pdf), [pdf2](https://web.engr.oregonstate.edu/~karti/ece521/lec16_11_23.pdf)]
 
@@ -355,7 +357,7 @@ Beffa, Federico. (2023). Weakly Nonlinear Systems. 10.1007/978-3-031-40681-2.
 
 Wereley, Norman. (1990). Analysis and control of linear periodically time varying systems.
 
-Hameed, S. (2017). Design and Analysis of Programmable Receiver Front-Ends Based on LPTV Circuits. *UCLA*. ProQuest ID: Hameed_ucla_0031D_15577. Merritt ID: ark:/13030/m5gb6zcz. Retrieved from [https://escholarship.org/uc/item/51q2m7bx](https://escholarship.org/uc/item/51q2m7bx)
+Hameed, S. (2017). Design and Analysis of Programmable Receiver Front-Ends Based on LPTV Circuits. *UCLA*. ProQuest ID: Hameed_ucla_0031D_15577. Merritt ID: ark:/13030/m5gb6zcz. Retrieved from [[https://escholarship.org/uc/item/51q2m7bx](https://escholarship.org/uc/item/51q2m7bx)]
 
 Matt Allen. Introduction to Linear Time Periodic Systems.  [[https://youtu.be/OCOkEFDQKTI](https://youtu.be/OCOkEFDQKTI)]
 
@@ -365,11 +367,9 @@ RF Harmonic Balance Analysis for Nonlinear Circuits [[https://resources.pcb.cade
 
 Steer, Michael. Microwave and RF Design (Third Edition, 2019). NC State University, 2019.
 
-Steer, Michael. Harmonic Balance Analysis of Nonlinear RF Circuits - Case Study Index:  CS_AmpHB [[link](https://youtu.be/BM5ZQgfb_sY)]
+—. Harmonic Balance Analysis of Nonlinear RF Circuits - Case Study Index:  CS_AmpHB [[link](https://youtu.be/BM5ZQgfb_sY)]
 
 Josh Carnes,Peter Kurahashi. "Periodic Analyses of Sampled Systems" URL:[https://slideplayer.com/slide/14865977/](https://slideplayer.com/slide/14865977/)
-
-Kundert, Ken. (2006). Simulating Switched-Capacitor Filters with SpectreRF.  URL:[https://designers-guide.org/analysis/sc-filters.pdf](https://designers-guide.org/analysis/sc-filters.pdf)
 
 Article (20482538) Title: Why is pnoise sampled(jitter) different than pnoise timeaverage on a driven circuit?
 
@@ -381,7 +381,7 @@ Dr. Yanghong Huang. MATH44041/64041: Applied Dynamical Systems [[https://persona
 
 Jeffrey Wong. Math 563, Spring 2020 Applied computational analysis [[https://services.math.duke.edu/~jtwong/math563-2020/main.html](https://services.math.duke.edu/~jtwong/math563-2020/main.html)]
 
-Jeffrey Wong. Math 353, Fall 2020 Ordinary and Partial Differential Equations [[https://services.math.duke.edu/~jtwong/math353-2020/main.html](https://services.math.duke.edu/~jtwong/math353-2020/main.html)]
+—. Math 353, Fall 2020 Ordinary and Partial Differential Equations [[https://services.math.duke.edu/~jtwong/math353-2020/main.html](https://services.math.duke.edu/~jtwong/math353-2020/main.html)]
 
 Tip of the Week: Please explain in more practical (less theoretical) terms the concept of "oscillator line width." [[https://community.cadence.com/cadence_blogs_8/b/rf/posts/please-explain-in-more-practical-less-theoretical-terms-the-concept-of-quot-oscillator-line-width-quot](https://community.cadence.com/cadence_blogs_8/b/rf/posts/please-explain-in-more-practical-less-theoretical-terms-the-concept-of-quot-oscillator-line-width-quot)]
 

@@ -940,6 +940,27 @@ with everything in the same units (<span style="color:blue">LSB₈²</span> is c
 
 
 
+## One-Hot and Thermometer (Unary) codes
+
+**An N-bit binary input represents $2^{N}$ unique values** (from 0 to $2^N - 1$)
+
+Converting this input requires a **$2^{N}$-bit width for One-Hot** encoding, but only a **$(2^N - 1)$-bit width for Thermometer Code**, as the value zero is represented by all zeros
+
+
+
+| Decimal | Binary ($N=3$) | One-Hot ($2^3 = 8$) bits) | Thermometer ($2^3 - 1 = 7$) bits) |
+| ------- | -------------- | ------------------------- | --------------------------------- |
+| **0**   | `000`          | `00000001`                | `0000000`                         |
+| **1**   | `001`          | `00000010`                | `0000001`                         |
+| **2**   | `010`          | `00000100`                | `0000011`                         |
+| **3**   | `011`          | `00001000`                | `0000111`                         |
+| **4**   | `100`          | `00010000`                | `0001111`                         |
+| **5**   | `101`          | `00100000`                | `0011111`                         |
+| **6**   | `110`          | `01000000`                | `0111111`                         |
+| **7**   | `111`          | `10000000`                | `1111111`                         |
+
+
+
 ## RTL module
 
 > MakerCode RTL Challenge [[https://github.com/Weiyet/MakerCode_RTLChallenge](https://github.com/Weiyet/MakerCode_RTLChallenge)]

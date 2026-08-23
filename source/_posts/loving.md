@@ -2,6 +2,7 @@
 title: All is well
 date: 1994-02-05 02:14:13
 tags:
+hidden: true
 ---
 
 

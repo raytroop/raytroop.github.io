@@ -965,7 +965,7 @@ Converting this input requires a **$2^{N}$-bit width for One-Hot** encoding, but
 
 > MakerCode RTL Challenge [[https://github.com/Weiyet/MakerCode_RTLChallenge](https://github.com/Weiyet/MakerCode_RTLChallenge)]
 
-***decimation_filter***
+### decimation_filter
 
 Filter Equation
 
@@ -1071,6 +1071,31 @@ filtered = 1*x[n]   + 3*x[n-1] + 3*x[n-2] + 1*x[n-3]
 | `x3`      | x[n-3]           | coeff 1    |
 
 ![image-20260619230018566](dsp2asic/image-20260619230018566.png)
+
+
+
+### gray-code
+
+
+
+```verilog
+function automatic logic [3:0] bin2gray(input logic [3:0] bin);
+    bin2gray = bin ^ (bin >> 1);
+endfunction
+```
+
+
+
+```verilog
+function automatic logic [3:0] bin2gray(input logic [3:0] bin);
+    assign bin2gray[3] = bin[3];
+    assign bin2gray[2] = bin[3] ^ bin[2];
+    assign bin2gray[1] = bin[2] ^ bin[1];
+    assign bin2gray[0] = bin[1] ^ bin[0];
+endfunction
+```
+
+
 
 
 

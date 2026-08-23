@@ -11,6 +11,44 @@ mathjax: true
 
 
 
+## Switched-Capacitor Filter
+
+> Kwantae Kim, Integrated Analog Systems D - Lecture 08 (Switched-Capacitor Filter) [[https://youtu.be/G0lzrMll-Ho](https://youtu.be/G0lzrMll-Ho)]
+>
+> —, Integrated Analog Systems D - Lecture 10 CAD (Switched-Capacitor Filter) [[[https://youtu.be/eMOFMjuKiJQ](https://youtu.be/eMOFMjuKiJQ)]
+
+***switched-Capacitor Resistor***
+
+![image-20260319234852885](sc/image-20260319234852885.png)
+
+![image-20260319235853713](sc/image-20260319235853713.png)
+
+Due to not taking loading $C_2$ into account, actual switched-capacitor filter deviate from equivalent $R_{SC}$ + $C_2$ low pass filter as $f_p$ approaching to $f_s$
+
+![image-20260320213653416](sc/image-20260320213653416.png)
+
+
+
+![image-20260320225532492](sc/image-20260320225532492.png)
+$$
+\color{red}H(z) =\frac{V_{OUT}(z)}{V_{IN}(z)}=\frac{C_1z^{-1/2}}{C_1+C_2}\frac{1}{1-\frac{C_2}{C_1+C_2}z^{-1}}
+$$
+
+
+---
+
+![image-20260320225157429](sc/image-20260320225157429.png)
+
+
+
+![image-20260320225029809](sc/image-20260320225029809.png)
+
+> [[https://youtu.be/eMOFMjuKiJQ](https://youtu.be/eMOFMjuKiJQ)]
+
+
+
+
+
 
 ## Track-and-Hold (TH)
 
@@ -115,42 +153,6 @@ $$
 
 
 
-## Switched-Capacitor Filter
-
-> Kwantae Kim, Integrated Analog Systems D - Lecture 08 (Switched-Capacitor Filter) [[https://youtu.be/G0lzrMll-Ho](https://youtu.be/G0lzrMll-Ho)]
->
-> —, Integrated Analog Systems D - Lecture 10 CAD (Switched-Capacitor Filter) [[[https://youtu.be/eMOFMjuKiJQ](https://youtu.be/eMOFMjuKiJQ)]
-
-***switched-Capacitor Resistor***
-
-![image-20260319234852885](sc/image-20260319234852885.png)
-
-![image-20260319235853713](sc/image-20260319235853713.png)
-
-Due to not taking loading $C_2$ into account, actual switched-capacitor filter deviate from equivalent $R_{SC}$ + $C_2$ low pass filter as $f_p$ approaching to $f_s$
-
-![image-20260320213653416](sc/image-20260320213653416.png)
-
-
-
-![image-20260320225532492](sc/image-20260320225532492.png)
-$$
-\color{red}H(z) =\frac{V_{OUT}(z)}{V_{IN}(z)}=\frac{C_1z^{-1/2}}{C_1+C_2}\frac{1}{1-\frac{C_2}{C_1+C_2}z^{-1}}
-$$
-
-
----
-
-![image-20260320225157429](sc/image-20260320225157429.png)
-
-
-
-![image-20260320225029809](sc/image-20260320225029809.png)
-
-> [[https://youtu.be/eMOFMjuKiJQ](https://youtu.be/eMOFMjuKiJQ)]
-
-
-
 ## Sampling Switch
 
 > Kwantae Kim, *Integrated Analog Systems D - Lecture 10 (ADC)* [[https://youtu.be/IEdbLNJb9wQ](https://youtu.be/IEdbLNJb9wQ)]
@@ -223,7 +225,7 @@ $$
 
 
 
-## analytical expression for $HD_3$
+## analytical expression for HD<sub>3</sub>
 
 > Boris Murmann, MEAD2026 [[https://github.com/bmurmann/MEAD2026](https://github.com/bmurmann/MEAD2026)]
 >

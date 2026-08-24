@@ -117,6 +117,17 @@ Extensive work on DFEs has produced a multitude of architectures, which can be b
 
 
 
+## Edge DFE
+
+> K. -L. J. Wong, E. -H. Chen and C. -K. K. Yang, "Edge and Data Adaptive Equalization of Serial-Link Transceivers," in IEEE Journal of Solid-State Circuits, vol. 43, no. 9, pp. 2157-2169, Sept. 2008 [[https://sci-hub.ru/10.1109/JSSC.2008.2001876]*https://sci-hub.ru/10.1109/JSSC.2008.2001876]
+>
+> B. Brunn, “Edge equalization NRZ,” Jul. 2004 [Online]. Available: [[http://www.ieee802.org/3/ap/public/jul04/brunn_01_0704.pdf](http://www.ieee802.org/3/ap/public/jul04/brunn_01_0704.pdf)]
+>
+> CC Chen, "Why Edge DFE?" [[https://youtu.be/azkm7A9plyY](https://youtu.be/azkm7A9plyY)]
+
+*TODO* &#128197;
+
+
 ## reference
 
 Miguel Gandara, MediaTek. CICC 2025 Circuit Insights: Basics of Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg](https://youtu.be/X4JTuh2Gdzg)]

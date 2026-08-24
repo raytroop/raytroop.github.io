@@ -371,7 +371,8 @@ and $\phi _e(\infty) = 0$
 
 ![ps_ro.drawio](clocking-misc/ps_ro.drawio.svg)
 
-we have
+
+Asynchronous clock alignment results in a maximum skew of $\pm 1$ cycle ($\Delta \in [-1, 1]$)
 
 $$
 (N+\Delta) T_o  = MT_r\quad \Delta\in [-1,1]

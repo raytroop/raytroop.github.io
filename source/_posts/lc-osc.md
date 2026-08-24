@@ -1365,6 +1365,53 @@ where $f_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the reso
 
 
 
+
+
+---
+
+
+
+continuous coding to eliminate glitch during code changing
+
+![ChatGPT Image Aug 24, 2026, 08_56_43 PM](lc-osc/ChatGPT%20Image%20Aug%2024,%202026,%2008_56_43%20PM.png)
+
+![image-20260824211559451](lc-osc/image-20260824211559451.png)
+
+
+
+## Automatic Frequency Control
+
+> Inverter-19 - Ring Oscillators and Process Variations [[https://youtu.be/b1xZU0aD4hA](https://youtu.be/b1xZU0aD4hA)]
+>
+> IC_designer, VCO cali [[link](https://www.xiaohongshu.com/explore/69f0c69e0000000036018246?app_platform=ios&app_version=9.27.1&share_from_user_hidden=true&xsec_source=app_share&type=normal&xsec_token=CBhlhhkQaYn8597suoZPVRUdEfoxSX8fxREo1B4KR2zbI=&author_share=1&xhsshare=WeixinSession&shareRedId=OD1EMERJRks2NzUyOTgwNjY6OTc3NjlP&apptime=1777422393&share_id=e42b9eaed44144edaeefbf521f3cdadc)]
+
+![ps_ro.drawio](lc-osc/ps_ro.drawio.svg)
+
+
+Asynchronous clock alignment results in a maximum skew of $\pm 1$ cycle ($\Delta \in [-1, 1]$)
+
+$$
+(N+\Delta) T_o  = MT_r\quad \Delta\in [-1,1]
+$$
+
+then,
+
+$$
+f_o = \frac{N}{M}f_r\color{red}\left(1+\frac{\Delta}{N}\right)
+$$
+
+$\frac{\Delta}{N}$ determine measurement accuracy, $\frac{\Delta}{N} \lt 0.01$ if 1% accuracy is needed
+
+
+
+---
+
+
+
+![image-20260824211411705](lc-osc/image-20260824211411705.png)
+
+
+
 ## Automatic Amplitude Control (AAC)
 
 **peak detector**, **envelope detector**
@@ -1380,6 +1427,8 @@ The digital AAC regulates the amplitude without increasing the amplitude modulat
 ![image-20260703234109027](lc-osc/image-20260703234109027.png)
 
 ![image-20260703234240260](lc-osc/image-20260703234240260.png)
+
+
 
 
 

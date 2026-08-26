@@ -321,6 +321,11 @@ $$
 ![image-20251111221923708](insight/image-20251111221923708.png)
 
 
+### Gamma vs current density
+
+
+*TODO* &#128197;
+
 
 ### MOS Flicker Noise
 

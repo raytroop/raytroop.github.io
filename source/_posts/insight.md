@@ -324,7 +324,10 @@ $$
 ### Gamma vs current density
 
 
-*TODO* &#128197;
+
+![gamma_A_normalized_x](insight/gamma_A_normalized_x.png)
+
+
 
 
 ### MOS Flicker Noise

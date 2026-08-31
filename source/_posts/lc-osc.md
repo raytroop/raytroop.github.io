@@ -1351,19 +1351,94 @@ $$
 
 ![image-20251213154802429](lc-osc/image-20251213154802429.png)
 
+![image-20251213161312529](lc-osc/image-20251213161312529.png)
 
 $$
-f=\frac{1}{2\pi\sqrt{L_p C_p}} = \frac{1}{2\pi\sqrt{L_s\frac{Q_L^2+1}{Q_L^2} C_s\frac{Q_C^2}{Q_C^2+1}}} = \frac{1}{2\pi\sqrt{L_sC_s}}\cdot \sqrt{\frac{1+1/Q_c^2}{1+1/Q_L^2}}
+\omega=\frac{1}{\sqrt{L_p C_p}} = \frac{1}{\sqrt{L_s\frac{Q_L^2+1}{Q_L^2} C_s\frac{Q_C^2}{Q_C^2+1}}} = \frac{1}{\sqrt{L_sC_s}}\cdot \sqrt{\frac{1+1/Q_c^2}{1+1/Q_L^2}}
 $$
 Assuming the tank's Q is limited by the inductor's quality factor $Q_L$, i.e. $Q_L\ll Q_c$
 $$
-f\approx  \frac{1}{2\pi\sqrt{L_sC_s}}\cdot \sqrt{1-\frac{1}{Q_L^2}} =f_0\cdot\sqrt{1-\frac{1}{Q_L^2}}
+\omega\approx  \frac{1}{\sqrt{L_sC_s}}\cdot \sqrt{1-\frac{1}{Q_L^2}} =\omega_0\cdot\sqrt{1-\frac{1}{Q_L^2}} = \omega_0\cdot\sqrt{1-\frac{C R_L^2}{L}}
 $$
-where $f_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the resonant frequency
+where $\omega_0=\frac{1}{\sqrt{L_sC_s}}$ is the first order approximation of the resonant frequency
 
-![image-20251213161312529](lc-osc/image-20251213161312529.png)
+Expand:
+
+$$
+\boxed{ \omega^2 \approx \frac{1}{LC} - \frac{R_L^2}{L^2} }
+$$
+
+This form makes the derivation especially simple.
 
 
+
+> How much must $C$ change with temperature to keep the VCO resonance frequency $\omega$ constant as $R_L$ changes with temperature?
+
+The calibration capacitor compensates temperature drift, so during compensation $\color{red}\frac{d\omega}{dT}=0.$
+
+Assume also that $L$'s temperature variation is much smaller than the effect of $R_L$, so $L$ is treated as constant.
+
+Differentiate $\omega^2$ with respect to $T$:
+
+$$
+0 = \frac{d}{dT} \left[ \frac{1}{LC} - \frac{R_L^2}{L^2} \right].
+$$
+
+Hence
+
+$$
+\color{red}\boxed{ \frac{dC}{dT} = -\frac{2R_LC^2}{L} \frac{dR_L}{dT} } \tag{5a}
+$$
+
+which is the first part of Eq. (5).
+
+The inductor's temperature coefficient of resistance is
+
+$$
+\boxed{ TCR = \frac{1}{R_L}\frac{dR_L}{dT} }
+$$
+
+so
+
+$$
+\frac{dR_L}{dT} = R_L\,TCR.
+$$
+
+Substitute this into (5a):
+
+$$
+\frac{dC}{dT} = -\frac{2R_LC^2}{L} (R_L TCR),
+$$
+
+giving
+
+$$
+\boxed{ \frac{dC}{dT} \approx -\frac{2R_L^2C^2}{L}\,TCR } \tag{5}
+$$
+
+which is exactly the paper's equation.
+
+
+
+Also, the negative sign has a physical meaning: for a metal inductor,
+
+$$
+T\uparrow \Rightarrow R_L\uparrow,
+$$
+
+and from
+
+$$
+\omega^2 \approx \frac{1}{LC}-\frac{R_L^2}{L^2},
+$$
+
+increased $R_L$ tends to reduce $\omega$. To maintain the same $\omega$, you need
+
+$$
+\boxed{C\downarrow}
+$$
+
+hence $dC/dT<0$.
 
 
 

@@ -336,6 +336,235 @@ $M+1$ bits ensure on overflow or underflow in the signed adder
 
 
 
+## !! DPLL time-domain model
+
+> L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
+>
+> —, “Contributions to the Theory and Development of Low-Jitter Bang-Bang Integrated Frequency Synthesizers.” University College Dublin. School of Electrical and Electronic Engineering, 2022. [[http://hdl.handle.net/10197/13372](http://hdl.handle.net/10197/13372)]
+>
+> N. Da Dalt, "Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 55, no. 11, pp. 3663-3675, Dec. 2008 [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]
+
+
+
+![ChatGPT Image Aug 31, 2026, 08_26_30 PM](dpll/ChatGPT%20Image%20Aug%2031,%202026,%2008_26_30%20PM.png)
+
+The paper defines the BPD input as
+
+$$
+\boxed{\Delta t[k]=t_r[k]-t_d[k]}
+$$
+
+where $t_r[k]$ is the reference-edge timestamp and $t_d[k]$ is the divider-output timestamp.
+
+
+
+The signal chain is essentially
+$$
+\epsilon[k] \rightarrow \underbrace{\beta\epsilon[k]+\psi[k]}_{u[k]} \rightarrow \underbrace{K_T u[k]}_{\text{DCO period change}} \rightarrow T_v.
+$$
+
+A useful distinction is that $K_T$ is **not the usual DCO frequency gain $K_{\mathrm{DCO}}$ in Hz/code**. This paper models the DCO in the **period domain**, so its gain is *period/code*. Around the nominal operating point, $f=\frac{1}{T}$
+
+hence for a small period change,
+
+$$
+\Delta f \approx -\frac{\Delta T}{T_0^2}.
+$$
+
+Therefore the corresponding frequency gain would be approximately
+
+$$
+\boxed{ K_{\mathrm{DCO}} \approx -\frac{K_T}{T_0^2} = -K_T f_v^2 }
+$$
+
+in *Hz/code*. The minus sign means increasing the period lowers the frequency.
+
+![image-20260831205554741](dpll/image-20260831205554741.png)
+
+```matlab
+%% DPLL parameters from the paper
+fr    = 100e6;
+N     = 24;
+fv    = N*fr;
+
+beta  = 70;
+alpha = beta/2^8;
+
+KT = 0.145e-15;          % [s/bit]
+
+df = 1e6;                % DCO PN specified at 1 MHz
+
+%% Table-I cases
+%           Ref PN       DCO PN @ 1 MHz
+cases = [   -155,        -Inf;
+            -Inf,        -108;
+            -155,        -108;
+            -150,        -108;
+            -155,        -103];
+
+Nsim  = 1e6;
+Nburn = 2e4;
+
+rng(1);
+
+sigma_sim = zeros(size(cases,1),1);
+
+for icase = 1:size(cases,1)
+
+    Lref = cases(icase,1);
+    Ldco = cases(icase,2);
+
+    %% ------------------------------------------------------------
+    % Reference white phase noise -> absolute timestamp jitter
+    %% ------------------------------------------------------------
+    if isinf(Lref)
+        sigma_ref = 0;
+    else
+        Sphi_ref = 10^(Lref/10);
+
+        sigma_ref = sqrt( ...
+            Sphi_ref/(4*pi^2*fr) );
+    end
+
+    %% ------------------------------------------------------------
+    % DCO 1/f^2 phase noise -> DCO cycle jitter
+    % Eq. (15)
+    %% ------------------------------------------------------------
+    if isinf(Ldco)
+        sigma_Tv = 0;
+    else
+        Sphi_dco = 10^(Ldco/10);
+
+        sigma_Tv = sqrt( ...
+            Sphi_dco * df^2 / fv^3 );
+    end
+
+    fprintf('\nCase %d\n',icase);
+    fprintf('sigma_ref = %.3f fs\n',sigma_ref/1e-15);
+    fprintf('sigma_Tv  = %.3f fs\n',sigma_Tv/1e-15);
+
+    %% Reference absolute jitter
+    jr = sigma_ref * randn(Nsim+1,1);
+
+    %% Sum of N independent DCO-period errors
+    %
+    % Wv[k] = sum of N cycle-jitter samples
+    %
+    Wv = sqrt(N)*sigma_Tv*randn(Nsim,1);
+
+    %% ------------------------------------------------------------
+    % Bang-bang DPLL
+    %% ------------------------------------------------------------
+
+    dt  = zeros(Nsim+1,1);
+    psi = 0;
+
+    % t_r[0] - t_d[0]
+    dt(1) = jr(1);  % or w/ Zero-initialization
+
+    for k = 1:Nsim
+
+        %% Binary phase detector
+        if dt(k) >= 0
+            epsilon = +1;
+        else
+            epsilon = -1;
+        end
+
+        %% Integral path
+        psi = psi + alpha*epsilon;
+
+        %% PI loop-filter output
+        u = beta*epsilon + psi;
+
+        %% Time-error recursion
+        dt(k+1) = dt(k) ...
+                + (jr(k+1)-jr(k)) ...	% absolute jitter to period jitter
+                - N*KT*u ...
+                - Wv(k);
+
+    end
+
+    %% Remove startup transient
+    dt_ss = dt(Nburn+1:end);
+
+    sigma_sim(icase) = std(dt_ss);
+
+end
+
+%% Results
+fprintf('\n------------------------------------------\n');
+fprintf('Case       sigma_Dt [fs]\n');
+fprintf('------------------------------------------\n');
+
+for k = 1:length(sigma_sim)
+    fprintf('(%c)        %8.2f\n', ...
+        'a'+k-1, sigma_sim(k)/1e-15);
+end
+```
+
+There are two different random sequences:
+
+$$
+\boxed{j_r[k] = \text{absolute reference edge jitter}}
+$$
+
+versus
+
+$$
+\boxed{\delta T_r[k]=j_r[k+1]-j_r[k] =\text{reference period jitter}}.
+$$
+
+Our simulation generates
+
+```
+jr = sigma_ref * randn(...);
+```
+
+because the paper assumes **white absolute reference jitter**. The paper explicitly calls $\sigma_{t_r}^2$ the *absolute jitter variance of the reference*. 
+
+Then the model naturally converts that absolute jitter into reference-period variation using
+
+```
+jr(k+1) - jr(k)
+```
+
+There is also a subtle but important consequence. If $j_r[k]\sim\mathcal N(0,\sigma_{t_r}^2)$ is i.i.d., then $\operatorname{Var}\{j_r[k+1]-j_r[k]\} = 2\sigma_{t_r}^2.$
+
+But consecutive period errors are **correlated**:
+
+$$
+\operatorname{Cov} \left( j_r[k+1]-j_r[k], j_r[k+2]-j_r[k+1] \right) = -\sigma_{t_r}^2.
+$$
+
+So you should **not** replace the code with independent samples such as
+
+```
+djr = sqrt(2)*sigma_ref*randn(...);
+```
+
+because that gets the variance right but loses the required correlation.
+
+In short:
+
+$$
+\boxed{ \texttt{jr[k]}=\text{edge jitter} \quad\Rightarrow\quad \texttt{jr[k+1]-jr[k]}=\text{period jitter} }
+$$
+
+and the DPLL recursion evolves from **one edge interval to the next**, which is why the difference appears.
+
+
+
+
+
+
+
+---
+
+$\boxed{\sigma_{\Delta t}}$ at the **BPD input**, not directly the RMS DCO-output jitter. To obtain actual DCO-output jitter, we should also simulate/store $t_v[h]$, rather than only the reference-rate recursion for $\Delta t[k]$.
+
+
+
 
 
 ## reference
@@ -372,14 +601,9 @@ Daniel Boschen. GRCon24 - Quick Start on Control Loops with Python Workshop [[vi
 
 ---
 
-
-L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
-
 M. Zanuso, D. Tasca, S. Levantino, A. Donadel, C. Samori and A. L. Lacaita, "Noise Analysis and Minimization in Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 56, no. 11, pp. 835-839, Nov. 2009 [[https://sci-hub.st/10.1109/TCSII.2009.2032470](https://sci-hub.st/10.1109/TCSII.2009.2032470)]
 
-N. Da Dalt, "Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 55, no. 11, pp. 3663-3675, Dec. 2008 [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]
-
-—, "Markov Chains-Based Derivation of the Phase Detector Gain in Bang-Bang PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 53, no. 11, pp. 1195-1199, Nov. 2006 [[https://sci-hub.st/10.1109/TCSII.2006.883197](https://sci-hub.st/10.1109/TCSII.2006.883197)]
+N. Da Dalt, "Markov Chains-Based Derivation of the Phase Detector Gain in Bang-Bang PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 53, no. 11, pp. 1195-1199, Nov. 2006 [[https://sci-hub.st/10.1109/TCSII.2006.883197](https://sci-hub.st/10.1109/TCSII.2006.883197)]
 
 —, "A design-oriented study of the nonlinear dynamics of digital bang-bang PLLs," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 52, no. 1, pp. 21-31, Jan. 2005 [[https://sci-hub.se/10.1109/TCSI.2004.840089](https://sci-hub.se/10.1109/TCSI.2004.840089)]
 

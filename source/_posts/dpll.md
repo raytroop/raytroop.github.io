@@ -163,13 +163,8 @@ $$
 
 > Amir Amirkhany. ISSCC 2019 "Basics of Clock and Data Recovery Circuits"
 >
-> CC Chen. Why A Low Loop Latency in A CDR Design? [[https://youtu.be/io9WZbhlahU](https://youtu.be/io9WZbhlahU)]
->
-> —. Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8](https://youtu.be/Jyy18865jv8)]
 
-![image-20250706173343946](dpll/image-20250706173343946.png)
 
----
 
 ![image-20250706121529451](dpll/image-20250706121529451.png)
 
@@ -205,13 +200,120 @@ loop latency is represented as $e^{-sD}$ in linear model
 
 
 
-### Optimizing Loop Latency
+### Loop Latency model
 
-*TODO* &#128197;
+> CC Chen. Why A Low Loop Latency in A CDR Design? [[https://youtu.be/io9WZbhlahU](https://youtu.be/io9WZbhlahU)]
+>
+> —. Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8](https://youtu.be/Jyy18865jv8)]
+>
+> Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data Recovery in Serial Data Transmission Systems. [[paper](https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf),[slides](https://www.omnisterra.com/walker/pdfs.talks/bctm2.maker.pdf)]
+
+![image-20260831225928887](dpll/image-20260831225928887.png)
+
+![image-20260831230613322](dpll/image-20260831230613322.png)
 
 
 
-> CC Chen. Circuit Image: Why Understanding and Optimizing Loop Latency for A CDR Design? [[https://youtu.be/Jyy18865jv8](https://youtu.be/Jyy18865jv8)]
+```python
+"""
+Behavioral model of the experiment on the slides
+"Max dphi w/ SJ & Sweeping loop Latency" (pages 5 and 6):
+
+    8 Gb/s, PRBS7, no input RJ
+    SJ = 10 %UI p-p @ 100 MHz
+    T_D (loop latency) = 2 / 5 / 10 UI  ->  dphi = 12 / 19 / 23 %UI p-p
+
+Units: time step = 1 UI (125 ps @ 8 Gb/s), all phases in UI.
+
+Loop (digital type-II, latency T_D inserted in the feedback path):
+
+    e[n]       = sign(dphi[n]) on data transitions, 0 otherwise   (BBPD)
+    acc[n+1]   = acc[n]   + Ki * e[n-TD]                          (integral / freq)
+    ph_ck[n+1] = ph_ck[n] + acc[n+1] + Kp * e[n-TD]               (VCO phase)
+    dphi[n]    = ph_din[n] - ph_ck[n]
+
+Fitted gains that reproduce the three measured points:
+
+    Kp = 0.60 %UI per decision,  Ki = Kp/1024
+    -> dphi(p-p) = 12.8 / 19.3 / 23.4 %UI   (measured 12 / 19 / 23)
+
+Key mechanism (confirmed by the page-6 zoom): the loop is SLEW-RATE LIMITED,
+not bandwidth limited.  The CDR can move clock phase at most
+
+    SR    = Kp * eta                    ~ 3.0 mUI/UI  (eta = PRBS7 edge density)
+
+while the SJ demands
+
+    SJ_SR = pi * A_pp * f_sj / f_b      ~ 3.9 mUI/UI
+
+Since SR < SJ_SR, ph_ck ramps at constant slope, falls behind, and then keeps
+ramping past the input after the sine turns around; T_D extends that turnaround.
+The result is a coherent triangular oscillation at f_sj whose amplitude EXCEEDS
+the input jitter.  The regime boundary is
+
+    f_SL  = Kp * eta * f_b / (pi * A_pp) ~ 77 MHz
+"""
+
+def bbcdr(TD_UI=2, Kp=KP_FIT, zeta_div=ZD_FIT, ki_en=None,
+          sj_pp=0.10, f_sj=100e6, f_b=F_B, ppm=0.0,
+          n_ui=20000, n_settle=4000, seed=0x7F):
+    """
+    One CDR run.  Returns the waveforms plus p-p / peak / rms phase error
+    measured after n_settle UI.
+
+    dphi = ph_din - ph_ck   (>0 : data late -> clock must be delayed)
+
+    ki_en : True -> type-II (Ki = Kp/zeta_div), False -> type-I (Ki = 0),
+            None -> follow the module-level KI_EN.
+    """
+    use_ki = KI_EN if ki_en is None else ki_en
+    Ki = Kp / zeta_div if use_ki else 0.0
+    TD = int(round(TD_UI))
+
+    n = np.arange(n_ui)
+    ph_din = 0.5 * sj_pp * np.sin(2 * np.pi * (f_sj / f_b) * n) + ppm * 1e-6 * n
+
+    bits = prbs7(n_ui + 1, seed)
+    trans = (bits[1:] != bits[:-1]).astype(np.int8)   # BBPD updates on edges only
+
+    ph_ck = np.empty(n_ui)
+    dphi = np.empty(n_ui)
+    e_buf = np.zeros(TD + 1)                          # latency pipeline
+    acc = 0.0
+    ck = 0.0
+
+    for i in range(n_ui):
+        d = ph_din[i] - ck
+        dphi[i] = d
+        ph_ck[i] = ck
+
+        e_buf[1:] = e_buf[:-1]
+        e_buf[0] = np.sign(d) * trans[i]              # BBPD decision
+        e_del = e_buf[TD]                             # delayed by T_D UI
+
+        acc += Ki * e_del
+        ck += acc + Kp * e_del
+
+    d = dphi[n_settle:]
+    return dict(dphi=dphi, ph_ck=ph_ck, ph_din=ph_din, t=n,
+                pp=d.max() - d.min(), peak=np.abs(d).max(), rms=d.std())
+```
+
+
+
+
+
+
+
+
+
+
+
+---
+
+![image-20260831230916152](dpll/image-20260831230916152.png)
+
+![image-20260831231004522](dpll/image-20260831231004522.png)
 
 
 
@@ -608,8 +710,6 @@ N. Da Dalt, "Markov Chains-Based Derivation of the Phase Detector Gain in Bang-B
 —, "A design-oriented study of the nonlinear dynamics of digital bang-bang PLLs," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 52, no. 1, pp. 21-31, Jan. 2005 [[https://sci-hub.se/10.1109/TCSI.2004.840089](https://sci-hub.se/10.1109/TCSI.2004.840089)]
 
 —, "Theory and Implementation of Digital Bang-Bang Frequency Synthesizers for High Speed Serial Data Communications", PhD Dissertation, RWTH Aachen University, Aachen, North Rhine-Westphalia, Germany, 2007 [[pdf](https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf)]
-
-Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data Recovery in Serial Data Transmission Systems. [[paper](https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf),[slides](https://www.omnisterra.com/walker/pdfs.talks/bctm2.maker.pdf)]
 
 ---
 

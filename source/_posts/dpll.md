@@ -639,11 +639,24 @@ in *Hz/code*. The minus sign means increasing the period lowers the frequency.
 
 ![image-20260831205554741](dpll/image-20260831205554741.png)
 
+![bbdpll-mdl.drawio](dpll/bbdpll-mdl.drawio.svg)
+
+with $t_A = t_B - d_t[k]=j_r[k]-d_t[k]$
+$$
+t_C = t_A + NT_{v0}+NK_T u[k]+W_v[k] = j_r[k]-d_t[k] +  NT_{v0}+NK_T u[k]+W_v[k]
+$$
+with $t_D = N T_{v0} + j_r[k+1]$
+$$
+d_t[k+1] = t_D - t_c = d_t[k] + (j_r[k+1] - j_r[k]) -  NK_T u[k]-W_v[k]
+$$
+
+
 ```matlab
 %% DPLL parameters from the paper
 fr    = 100e6;
 N     = 24;
 fv    = N*fr;
+Tv0   = 1/fv;             % nominal free-running DCO period [s]
 
 beta  = 70;
 alpha = beta/2^8;
@@ -662,6 +675,7 @@ cases = [   -155,        -Inf;
 
 Nsim  = 1e6;
 Nburn = 2e4;
+
 
 rng(1);
 
@@ -704,17 +718,27 @@ for icase = 1:size(cases,1)
     %% Reference absolute jitter
     jr = sigma_ref * randn(Nsim+1,1);
 
-    %% Sum of N independent DCO-period errors
+    %% DCO cycle-period errors at the fast clock rate
     %
-    % Wv[k] = sum of N cycle-jitter samples
+    % Tv(:,k) holds the N zero-mean period-noise samples in reference
+    % interval k.  Their sum is the Wv[k] term in the reference-rate
+    % recursion.  Keeping the individual samples makes it possible to
+    % construct the path-consistent DCO timestamps tv[h] from Eq. (4).
     %
-    Wv = sqrt(N)*sigma_Tv*randn(Nsim,1);
+    if sigma_Tv == 0
+        Tv = [];
+        Wv = zeros(Nsim,1);
+    else
+        Tv = sigma_Tv*randn(N,Nsim);
+        Wv = sum(Tv,1).';
+    end
 
     %% ------------------------------------------------------------
     % Bang-bang DPLL
     %% ------------------------------------------------------------
 
     dt  = zeros(Nsim+1,1);
+    u   = zeros(Nsim,1);
     psi = 0;
 
     % t_r[0] - t_d[0]
@@ -733,15 +757,49 @@ for icase = 1:size(cases,1)
         psi = psi + alpha*epsilon;
 
         %% PI loop-filter output
-        u = beta*epsilon + psi;
+        u(k) = beta*epsilon + psi;
 
         %% Time-error recursion
         dt(k+1) = dt(k) ...
                 + (jr(k+1)-jr(k)) ...	% absolute jitter to period jitter
-                - N*KT*u ...
+                - N*KT*u(k) ...
                 - Wv(k);
 
     end
+
+    %% ------------------------------------------------------------
+    % DCO-output timestamps, Eq. (4)
+    %% ------------------------------------------------------------
+    % The DLF output is zero-order held for N DCO cycles.  Add that
+    % control contribution to the SAME fast-rate noise samples whose
+    % block sums drove the recursion above.  Accumulate the period error
+    % first so nominal-period roundoff cannot mask femtosecond jitter.
+    dTctrl = (KT*u).';
+    if isempty(Tv)
+        Tv = repmat(dTctrl,N,1);
+    else
+        for m = 1:N
+            Tv(m,:) = Tv(m,:) + dTctrl;
+        end
+    end
+    % Reuse Tv for the accumulated timing error to limit the peak to
+    % roughly two full DCO-rate traces during the leading-zero prepend.
+    clear Wv u dTctrl
+    Tv = cumsum(Tv(:));             % t_v[h] - h*Tv0, h = 1,...,N*Nsim
+    tv = [0; Tv];                   % include t_v[0]
+    clear Tv
+
+    % Form literal edge timestamps without cumulatively adding Tv0.
+    % Chunking avoids another full-size temporary vector.
+    Ndco = N*Nsim;
+    edge_chunk = 1e6;
+    for h0 = 0:edge_chunk:Ndco
+        h1 = min(h0+edge_chunk-1,Ndco);
+        h = (h0:h1).';
+        idx = h+1;
+        tv(idx) = tv(idx) + h*Tv0;
+    end
+
 
     %% Remove startup transient
     dt_ss = dt(Nburn+1:end);
@@ -759,6 +817,7 @@ for k = 1:length(sigma_sim)
     fprintf('(%c)        %8.2f\n', ...
         'a'+k-1, sigma_sim(k)/1e-15);
 end
+
 ```
 
 There are two different random sequences:

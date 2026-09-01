@@ -214,6 +214,66 @@ loop latency is represented as $e^{-sD}$ in linear model
 
 
 
+![image-20260901073301709](dpll/image-20260901073301709.png)
+
+
+
+$$
+q[n]\rightarrow \left( K_P+\frac{K_I}{1-z^{-1}} \right) \rightarrow \frac{1}{1-z^{-1}} \rightarrow\phi_{CK}.
+$$
+
+The last term is already the VCO integration from frequency to phase.
+
+So the two paths have different effects:
+
+$$
+K_P q[n] \quad\stackrel{\mathrm{VCO}}{\longrightarrow}\quad \text{one integration}
+$$
+
+whereas
+
+$$
+K_I\sum q[n] \quad\stackrel{\mathrm{VCO}}{\longrightarrow}\quad \text{two integrations}.
+$$
+
+Using the delayed BBPD output
+
+$$
+q_D[n]=q[n-T_D],\qquad q_D[n]\in\{-1,+1\},
+$$
+
+the loop filter is
+
+$$
+\boxed{ f_I[n+1]=f_I[n]+K_I q_D[n] }
+$$
+
+and
+
+$$
+\boxed{ \Delta f_{\rm DCO}[n] = K_P q_D[n]+f_I[n]. }
+$$
+
+The DCO phase then evolves as
+
+$$
+\boxed{ \phi_{\rm DCO}[n+1] = \phi_{\rm DCO}[n] + \Delta\phi_{\rm nom} + \Delta f_{\rm DCO}[n]. }
+$$
+
+If we remove the nominal $2\pi$ rotation and only track **phase error**, this becomes
+
+$$
+\boxed{ \Delta\phi_{\rm DCO}[n+1] = \Delta\phi_{\rm DCO}[n] + K_Pq_D[n]+f_I[n]. }
+$$
+
+So the structure is
+
+$$
+q_D \rightarrow \boxed{K_P+\frac{K_I}{1-z^{-1}}} \rightarrow \boxed{\frac{1}{1-z^{-1}}} \rightarrow \phi_{\rm DCO}.
+$$
+
+
+
 ```python
 """
 Behavioral model of the experiment on the slides
@@ -301,7 +361,88 @@ def bbcdr(TD_UI=2, Kp=KP_FIT, zeta_div=ZD_FIT, ki_en=None,
 
 
 
+$K_P$ is the **normalized DCO frequency deviation caused by one BBPD decision**, and because that deviation lasts for one UI, it produces $K_P$ UI of excess phase over that interval:
 
+$$
+\Delta\phi_{\rm excess} = \frac{\Delta f_{\rm DCO}}{f_{\rm data}} = K_P. \qquad \boxed{\text{unit}: \space\mathrm{UI/UI}}
+$$
+
+another model
+
+```python
+def simulate(td_ui: int, kp: float, ki: float):
+    """
+    BB-CDR recursion.
+
+    e[n]    = phi_data[n] - phi_clk[n]
+
+    q[n]    = sign(e[n]) when a PRBS data transition exists.
+              During no-transition intervals, the binary detector keeps
+              the previous Early/Late state.
+
+    qd[n]   = q[n-TD]
+
+    fi[n+1] = fi[n] + Ki*qd[n]
+
+    df[n]   = Kp*qd[n] + fi[n+1]
+
+    phi_clk[n+1] = phi_clk[n] + df[n]
+
+    The last line is the VCO frequency-to-phase integration.
+    """
+    n = np.arange(N_UI)
+
+    # 100 MHz SJ at 8 Gb/s => period = 80 UI
+    phi_data = SJ_PK * np.sin(2*np.pi*(F_SJ/RB)*n)
+
+    phi_clk = np.zeros(N_UI)
+    fi = np.zeros(N_UI)        # integral path; frequency correction
+    df = np.zeros(N_UI)        # total normalized frequency correction
+    bb = np.zeros(N_UI)
+
+    last_bb = 0.0
+
+    for k in range(N_UI - 1):
+        phase_err_now = wrap_ui(phi_data[k] - phi_clk[k])
+
+        # Transition-aware binary phase detector
+        if TRANSITION[k]:
+            if phase_err_now > 0:
+                last_bb = +1.0
+            elif phase_err_now < 0:
+                last_bb = -1.0
+
+        # Binary PD: no HOLD state
+        bb[k] = last_bb
+
+        # Explicit loop latency
+        kd = k - td_ui
+        cmd = bb[kd] if kd >= 0 else 0.0
+
+        # PI loop filter
+        fi[k + 1] = fi[k] + ki * cmd
+        df[k + 1] = kp * cmd + fi[k + 1]
+
+        # VCO: frequency -> phase
+        phi_clk[k + 1] = phi_clk[k] + df[k + 1]
+
+    phase_err = wrap_ui(phi_data - phi_clk)
+
+    ss = slice(N_BURN, None)
+    dphi_pp = np.ptp(phase_err[ss])
+
+    return {
+        "n": n,
+        "phi_data": phi_data,
+        "phi_clk": phi_clk,
+        "phase_err": phase_err,
+        "bb": bb,
+        "fi": fi,
+        "df": df,
+        "dphi_pp": dphi_pp,
+    }
+
+```
 
 
 
@@ -690,6 +831,8 @@ Saurabh Saxena, IIT Madras. Phase-Locked Loops: Noise Analysis in Digital PLL [[
 ---
 
 Y. Hu, T. Siriburanon and R. B. Staszewski, "Multirate Timestamp Modeling for Ultralow-Jitter Frequency Synthesis: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 7, pp. 3030-3036, July 2022
+
+Wang, X., & Kennedy, M. P. (2026). *Jitter and Spur Minimization in Fractional-N Digital Frequency Synthesizers: Modeling, Simulation, Analysis, and Design Methodologies*. Springer Cham.
 
 ---
 

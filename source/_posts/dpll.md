@@ -809,6 +809,16 @@ $\boxed{\sigma_{\Delta t}}$ at the **BPD input**, not directly the RMS DCO-outpu
 
 
 
+## MRDT (Multi-rate Discrete-Time) Modeling
+
+> Y. Hu, T. Siriburanon and R. B. Staszewski, "Multirate Timestamp Modeling for Ultralow-Jitter Frequency Synthesis: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 7, pp. 3030-3036, July 2022
+>
+> Wang, X., & Kennedy, M. P. (2026). *Jitter and Spur Minimization in Fractional-N Digital Frequency Synthesizers: Modeling, Simulation, Analysis, and Design Methodologies*. Springer Cham.
+
+
+*TODO* &#128197;
+
+
 
 ## reference
 
@@ -827,12 +837,6 @@ Mike Shuo-Wei Chen, CICC 2020 ES2-3: Low-Spur PLL Architectures and Techniques [
 S. Levantino, "Digital phase-locked loops," 2018 IEEE Custom Integrated Circuits Conference (CICC), San Diego, CA, USA, 2018
 
 Saurabh Saxena, IIT Madras. Phase-Locked Loops: Noise Analysis in Digital PLL [[https://youtu.be/mddtxcqfiKU](https://youtu.be/mddtxcqfiKU)]
-
----
-
-Y. Hu, T. Siriburanon and R. B. Staszewski, "Multirate Timestamp Modeling for Ultralow-Jitter Frequency Synthesis: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 7, pp. 3030-3036, July 2022
-
-Wang, X., & Kennedy, M. P. (2026). *Jitter and Spur Minimization in Fractional-N Digital Frequency Synthesizers: Modeling, Simulation, Analysis, and Design Methodologies*. Springer Cham.
 
 ---
 

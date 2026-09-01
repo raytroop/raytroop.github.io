@@ -361,7 +361,7 @@ def bbcdr(TD_UI=2, Kp=KP_FIT, zeta_div=ZD_FIT, ki_en=None,
 
 
 
-$K_P$ is the **normalized DCO frequency deviation caused by one BBPD decision**, and because that deviation lasts for one UI, it produces $K_P$ UI of excess phase over that interval:
+$K_P$ is the <span style="color:blue">normalized DCO frequency deviation caused by one BBPD decision</span>, and because that deviation lasts for one UI, it produces $K_P$ UI of excess phase over that interval:
 
 $$
 \Delta\phi_{\rm excess} = \frac{\Delta f_{\rm DCO}}{f_{\rm data}} = K_P. \qquad \boxed{\text{unit}: \space\mathrm{UI/UI}}

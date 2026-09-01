@@ -647,7 +647,7 @@ t_C = t_A + NT_{v0}+NK_T u[k]+W_v[k] = j_r[k]-d_t[k] +  NT_{v0}+NK_T u[k]+W_v[k]
 $$
 with $t_D = N T_{v0} + j_r[k+1]$
 $$
-d_t[k+1] = t_D - t_c = d_t[k] + (j_r[k+1] - j_r[k]) -  NK_T u[k]-W_v[k]
+\textcolor{red}{d_t[k+1]} = t_D - t_C = \textcolor{red}{\boxed{d_t[k] + (j_r[k+1] - j_r[k]) -  NK_T u[k]-W_v[k]}}
 $$
 
 

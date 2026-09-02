@@ -209,7 +209,7 @@ loop latency is represented as $e^{-sD}$ in linear model
 
 
 $$
-q[n]\rightarrow \left( K_P+\frac{K_I}{1-z^{-1}} \right) \rightarrow \frac{1}{1-z^{-1}} \rightarrow\phi_{CK}.
+q[n]\rightarrow \left( K_P+\frac{K_I}{1-z^{-1}} \right) \rightarrow \frac{1}{1-z^{-1}} \rightarrow\phi_{CK}
 $$
 
 The last term is already the VCO integration from frequency to phase.
@@ -223,13 +223,13 @@ $$
 whereas
 
 $$
-K_I\sum q[n] \quad\stackrel{\mathrm{VCO}}{\longrightarrow}\quad \text{two integrations}.
+K_I\sum q[n] \quad\stackrel{\mathrm{VCO}}{\longrightarrow}\quad \text{two integrations}
 $$
 
 Using the delayed BBPD output
 
 $$
-q_D[n]=q[n-T_D],\qquad q_D[n]\in\{-1,+1\},
+q_D[n]=q[n-T_D],\qquad q_D[n]\in\{-1,+1\}
 $$
 
 the loop filter is
@@ -241,25 +241,25 @@ $$
 and
 
 $$
-\boxed{ \Delta f_{\rm DCO}[n] = K_P q_D[n]+f_I[n]. }
+\boxed{ \Delta f_{\rm DCO}[n] = K_P q_D[n]+f_I[n] }
 $$
 
 The DCO phase then evolves as
 
 $$
-\boxed{ \phi_{\rm DCO}[n+1] = \phi_{\rm DCO}[n] + \Delta\phi_{\rm nom} + \Delta f_{\rm DCO}[n]. }
+\boxed{ \phi_{\rm DCO}[n+1] = \phi_{\rm DCO}[n] + \Delta\phi_{\rm nom} + \Delta f_{\rm DCO}[n] }
 $$
 
 If we remove the nominal $2\pi$ rotation and only track **phase error**, this becomes
 
 $$
-\boxed{ \Delta\phi_{\rm DCO}[n+1] = \Delta\phi_{\rm DCO}[n] + K_Pq_D[n]+f_I[n]. }
+\boxed{ \Delta\phi_{\rm DCO}[n+1] = \Delta\phi_{\rm DCO}[n] + K_Pq_D[n]+f_I[n] }
 $$
 
 So the structure is
 
 $$
-q_D \rightarrow \boxed{K_P+\frac{K_I}{1-z^{-1}}} \rightarrow \boxed{\frac{1}{1-z^{-1}}} \rightarrow \phi_{\rm DCO}.
+q_D \rightarrow \boxed{K_P+\frac{K_I}{1-z^{-1}}} \rightarrow \boxed{\frac{1}{1-z^{-1}}} \rightarrow \phi_{\rm DCO}
 $$
 
 
@@ -354,7 +354,7 @@ def bbcdr(TD_UI=2, Kp=KP_FIT, zeta_div=ZD_FIT, ki_en=None,
 $K_P$ is the <span style="color:blue">normalized DCO frequency deviation caused by one BBPD decision</span>, and because that deviation lasts for one UI, it produces $K_P$ UI of excess phase over that interval:
 
 $$
-\Delta\phi_{\rm excess} = \frac{\Delta f_{\rm DCO}}{f_{\rm data}} = K_P. \qquad \boxed{\text{unit}: \space\mathrm{UI/UI}}
+\Delta\phi_{\rm excess} = \frac{\Delta f_{\rm DCO}}{f_{\rm data}} = K_P \qquad \boxed{\text{unit}: \space\mathrm{UI/UI}}
 $$
 
 another model

@@ -601,6 +601,8 @@ $M+1$ bits ensure on overflow or underflow in the signed adder
 > —, “Contributions to the Theory and Development of Low-Jitter Bang-Bang Integrated Frequency Synthesizers.” University College Dublin. School of Electrical and Electronic Engineering, 2022. [[http://hdl.handle.net/10197/13372](http://hdl.handle.net/10197/13372)]
 >
 > N. Da Dalt, "Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 55, no. 11, pp. 3663-3675, Dec. 2008 [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]
+>
+> —, “Theory and implementation of digital bang-bang frequency synthesizers for high speed serial data communications,” Ph.D. dissertation, RWTH Aachen University, Aachen, Germany, 2007. [[https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf](https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf)]
 
 
 

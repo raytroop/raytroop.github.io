@@ -637,7 +637,6 @@ $$
 
 in *Hz/code*. The minus sign means increasing the period lowers the frequency.
 
-![image-20260831205554741](dpll/image-20260831205554741.png)
 
 ![bbdpll-mdl.drawio](dpll/bbdpll-mdl.drawio.svg)
 
@@ -650,6 +649,7 @@ $$
 \textcolor{red}{d_t[k+1]} = t_D - t_C = \textcolor{red}{\boxed{d_t[k] + (j_r[k+1] - j_r[k]) -  NK_T u[k]-W_v[k]}}
 $$
 
+![image-20260831205554741](dpll/image-20260831205554741.png)
 
 ```matlab
 %% DPLL parameters from the paper

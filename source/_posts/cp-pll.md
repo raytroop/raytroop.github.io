@@ -136,7 +136,7 @@ $$
 
 
 
-### last DFF retimng
+### retimer at divider output
 
 > Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
 
@@ -148,10 +148,22 @@ $$
 
 
 
+---
+
+
+
 
 > Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 Lecture 8: Divider Circuits  [[https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf)]
 
 ![image-20260815221034113](cp-pll/image-20260815221034113.png)
+
+---
+
+> L. Romano, S. Levantino, S. Pellerano, C. Samori and A. Lacaita, "Low jitter design of a 0.35 µm-CMOS frequency divider operating up to 3GHz," *Proceedings of the 28th European Solid-State Circuits Conference*, Florence, Italy, 2002, pp. 611-614. [[https://www.researchgate.net/publication/4158185_Low_jitter_design_of_a_035m-CMOS_frequency_divider_operating_up_to_3GHz](https://www.researchgate.net/publication/4158185_Low_jitter_design_of_a_035m-CMOS_frequency_divider_operating_up_to_3GHz)]
+
+![image-20260902233248487](cp-pll/image-20260902233248487.png)
+
+
 
 
 

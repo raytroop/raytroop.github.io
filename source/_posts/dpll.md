@@ -594,15 +594,101 @@ $M+1$ bits ensure on overflow or underflow in the signed adder
 
 
 
+
+
+
+## MRDT (Multi-rate Discrete-Time) Modeling
+
+> Y. Hu, T. Siriburanon and R. B. Staszewski, "Multirate Timestamp Modeling for Ultralow-Jitter Frequency Synthesis: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 7, pp. 3030-3036, July 2022
+>
+> N. Da Dalt, "Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 55, no. 11, pp. 3663-3675, Dec. 2008 [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]
+>
+> —, “Theory and implementation of digital bang-bang frequency synthesizers for high speed serial data communications,” Ph.D. dissertation, RWTH Aachen University, Aachen, Germany, 2007. [[https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf](https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf)]
+
+There are two key features associated with the behavior of DPLLs, namely, the <span style="background-color:yellow">**multi-rate**</span> and <span style="background-color:yellow">**discrete-time** properties</span>
+
+
+
+### reference & DCO model
+
+![image-20260902235132344](dpll/image-20260902235132344.png)
+
+<span style="color:blue">**timestamps**</span> with **synchronous jitter** for <span style="color:blue">**reference clock signal**</span>
+
+<span style="color:blue">**periods**</span> with period jitter for <span style="color:blue">**free-running DCO**</span>
+
+![image-20260902225332366](dpll/image-20260902225332366.png)
+
+---
+
+
+
+![image-20260902235623176](dpll/image-20260902235623176.png)
+
+---
+
+
+
+![image-20260902232246273](dpll/image-20260902232246273.png)
+
+###  output jitter, PN & input jitter
+Determine quantitatively the system **jitters** and **PN** from behavioral simulation of the MRDT DPLL 
+
+![image-20260903000718115](dpll/image-20260903000718115.png)
+
+
+
+---
+
+
+
+![image-20260903000841401](dpll/image-20260903000841401.png)
+
+
+
+```matlab
+%% Wang, Xu and Michael Peter Kennedy. “Jitter and Spur Minimization in Fractional-N Digital Frequency Synthesizers - Modeling, Simulation, Analysis, and Design Methodologies.” *Analog Circuits and Signal Processing* (2026).
+
+function [F_mean,t_n_rms,phi_n_rms,f_PSD,PSD_phi] = acquisition(t)
+%% Ensure column vector
+[~,ncol]=size(t);
+if ncol ~= 1
+t = t';
+end
+%% Periods
+T          = diff(t);
+%% Average period
+T_mean     = mean(T);
+F_mean     = 1/T_mean;
+%% Period jitter
+T_n        = T - T_mean;
+%% Zero-mean accumulated time jitter
+t_n        = cumsum(T_n);
+t_n        = t_n - mean(t_n);
+%% RMS time jitter
+t_n_rms    = std(t_n);
+%% Phase error
+phi_n      = 2*pi/T_mean * t_n;
+phi_n_rms  = std(phi_n);
+%% PSD of phase error
+npsd = 2^(nextpow2(length(phi_n)/8)-1);
+Fpsd = 1/(npsd*T_mean);
+f_PSD = 0:Fpsd:Fpsd*(floor(npsd/2)-1);
+[PSD_phi,~] = pwelch(phi_n,window(@hann,npsd),npsd/2,npsd,1/T_mean, 'two-sided');
+PSD_phi = PSD_phi(1:floor(npsd/2));
+```
+
+
+
+
+
+
+
 ## !! DPLL time-domain model
 
 > L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
 >
 > —, “Contributions to the Theory and Development of Low-Jitter Bang-Bang Integrated Frequency Synthesizers.” University College Dublin. School of Electrical and Electronic Engineering, 2022. [[http://hdl.handle.net/10197/13372](http://hdl.handle.net/10197/13372)]
->
-> N. Da Dalt, "Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 55, no. 11, pp. 3663-3675, Dec. 2008 [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]
->
-> —, “Theory and implementation of digital bang-bang frequency synthesizers for high speed serial data communications,” Ph.D. dissertation, RWTH Aachen University, Aachen, Germany, 2007. [[https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf](https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf)]
 
 
 
@@ -651,7 +737,7 @@ $$
 \textcolor{red}{d_t[k+1]} = t_D - t_C = \textcolor{red}{\boxed{d_t[k] + (j_r[k+1] - j_r[k]) -  NK_T u[k]-W_v[k]}}
 $$
 
-![image-20260831205554741](dpll/image-20260831205554741.png)
+
 
 ```matlab
 %% DPLL parameters from the paper
@@ -822,8 +908,9 @@ end
 
 ```
 
-There are two different random sequences:
+![image-20260831205554741](dpll/image-20260831205554741.png)
 
+There are two different random sequences:
 $$
 \boxed{j_r[k] = \text{absolute reference edge jitter}}
 $$
@@ -885,18 +972,16 @@ $\boxed{\sigma_{\Delta t}}$ at the **BPD input**, not directly the RMS DCO-outpu
 
 
 
-## MRDT (Multi-rate Discrete-Time) Modeling
-
-> Y. Hu, T. Siriburanon and R. B. Staszewski, "Multirate Timestamp Modeling for Ultralow-Jitter Frequency Synthesis: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 7, pp. 3030-3036, July 2022
->
-> Wang, X., & Kennedy, M. P. (2026). *Jitter and Spur Minimization in Fractional-N Digital Frequency Synthesizers: Modeling, Simulation, Analysis, and Design Methodologies*. Springer Cham.
-
-
-*TODO* &#128197;
-
-
 
 ## reference
+
+Wang, Xu and Michael Peter Kennedy. “Jitter and Spur Minimization in Fractional-N Digital Frequency Synthesizers - Modeling, Simulation, Analysis, and Design Methodologies.” *Analog Circuits and Signal Processing* (2026).
+
+Brandonisio, F., & Kennedy, M. P. (2014). *Noise-Shaping All-Digital Phase-Locked Loops: Modeling, Simulation, Analysis and Design*. Springer. 
+
+Staszewski, Robert Bogdan and Poras T. Balsara. “All-digital frequency synthesizer in deep-submicron CMOS.” (2006).
+
+---
 
 Topics in IC (Wireline Transceiver Design) [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf)]
 

@@ -680,7 +680,9 @@ PSD_phi = PSD_phi(1:floor(npsd/2));
 
 
 
+### Simplified linearized model of !!DPLL
 
+![image-20260903111015](dpll/image-20260903111015.png)
 
 
 

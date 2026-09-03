@@ -178,6 +178,146 @@ Provided that $\xi = e^{j\omega_1}$ and $z = e^{j\omega_2}$, we have $U_f(\xi)$ 
 
 
 
+## upsampling & downsampling cascading
+
+In general,
+
+$$
+\boxed{\downarrow N\;\rightarrow\;\uparrow N \neq \text{identity}}
+$$
+
+while
+
+$$
+\boxed{\uparrow N\;\rightarrow\;\downarrow N = \text{identity}}
+$$
+
+a useful way to remember the asymmetry:
+
+$$
+\boxed{ \uparrow N\rightarrow\downarrow N: \quad \text{insert zeros, then remove those zeros} \Rightarrow x[n] }
+$$
+
+but
+
+$$
+\boxed{ \downarrow N\rightarrow\uparrow N: \quad \text{remove real samples, then insert zeros} \Rightarrow \text{information lost}. }
+$$
+
+If you put an **ideal anti-aliasing filter before downsampling and an ideal interpolation filter after upsampling**, then for a sufficiently bandlimited signal you *can* reconstruct the original signal. That case is where the apparent $N$ or $1/N$ gain factors become especially important.
+
+
+
+> For $y[n]=x[Nn],$ the DTFT is
+>
+> $$
+> \boxed{ Y(e^{j\omega}) = \frac{1}{N} \sum_{k=0}^{N-1} X\left(e^{j(\omega+2\pi k)/N}\right) }
+> $$
+>
+> so the $1/N$ appears explicitly.
+>
+> But this **doesn't mean downsampling has a physical gain of $1/N$**. <span style="color:blue">The $N$ compressed/shifted spectral copies are **summed**</span>
+
+
+
+---
+
+assuming the downsampler keeps the samples inserted at multiples of $N$.
+
+For example, let $N=2$:
+
+$$
+x[n]=[a,b,c,d,e,f,\ldots]
+$$
+
+Downsample by 2:
+
+$$
+x_d[n]=[a,c,e,\ldots]
+$$
+
+Then upsample by 2:
+
+$$
+y[n]=[a,0,c,0,e,0,\ldots]
+$$
+
+Clearly,
+
+$$
+\boxed{y[n]\neq x[n]}
+$$
+
+The information in $b,d,f,\ldots$ was **destroyed by the downsampler**. Upsampling cannot reconstruct it; it only inserts zeros.
+
+In fact, the cascade is
+
+$$
+\boxed{ y[n]= \begin{cases} x[n], & n=0,\pm N,\pm2N,\ldots\\ 0, & \text{otherwise}. \end{cases}}
+$$
+
+---
+
+**↑N followed immediately by $\downarrow N$ *is* identity**
+
+Start with $x[n]$
+
+Upsample:
+
+$$
+x_u[n]= \begin{cases} x[n/N],&n=N k\\ 0,&\text{otherwise}. \end{cases}
+$$
+
+Then downsample:
+
+$$
+y[n]=x_u[Nn]
+$$
+
+Therefore
+
+$$
+\boxed{y[n]=x[n]}
+$$
+
+So
+
+$$
+\boxed{ x[n]\xrightarrow{\uparrow N}\xrightarrow{\downarrow N}x[n] }
+$$
+
+has **total gain 1**, not $1/N$.
+
+The frequency-domain formula confirms this. After upsampling,
+
+$$
+X_u(e^{j\omega})=X(e^{jN\omega})
+$$
+
+Then downsampling gives
+
+$$
+\begin{aligned} Y(e^{j\omega}) &= \frac1N \sum_{k=0}^{N-1} X_u\left(e^{j(\omega+2\pi k)/N}\right)\\ &= \frac1N \sum_{k=0}^{N-1} X\left(e^{jN(\omega+2\pi k)/N}\right)\\ &= \frac1N \sum_{k=0}^{N-1} X(e^{j(\omega+2\pi k)}). \end{aligned}
+$$
+
+Because the DTFT is $2\pi$-periodic,
+
+$$
+X(e^{j(\omega+2\pi k)})=X(e^{j\omega})
+$$
+
+so
+
+$$
+Y(e^{j\omega}) = \frac1N \underbrace{\sum_{k=0}^{N-1}X(e^{j\omega})}_{N\text{ identical terms}} = \boxed{X(e^{j\omega})}
+$$
+
+So the apparent $1/N$ is exactly canceled by the **$N$ spectral copies being summed**.
+
+
+
+
+
 ## Polyphase Decomposition
 
 Polyphase decomposition is *a powerful technique used in digital signal processing* to efficiently implement multirate systems.

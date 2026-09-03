@@ -685,6 +685,107 @@ PSD_phi = PSD_phi(1:floor(npsd/2));
 ![image-20260903111015](dpll/image-20260903111015.png)
 
 
+At low frequencies, the transfer function from $t_{r}$ to $T_{v}$ can be approximated as:
+
+$$
+H_{t_r,T_v} \approx \frac{1-z^{-1}}{Nz^{-1}}
+$$
+
+
+---
+
+
+Because $f_{\mathrm{mod}} = 1\,\mathrm{kHz}$ is near DC relative to the loop bandwidth, you should get approximately
+
+$$
+j_v(t) \approx j_r(t)
+$$
+
+and therefore
+
+$$
+\frac{A_{\mathrm{out}}}{A_{\mathrm{in}}} \approx 1
+$$
+
+or
+
+$$
+20\log_{10}\left|\frac{T_v}{T_r}\right| \approx 0\,\mathrm{dB}.
+$$
+
+At the same time,
+
+$$
+\Delta t = j_r - j_v \approx 0.
+$$
+
+
+[[Github Gist — dpll_in_out.py](https://gist.github.com/raytroop/f28d1f32f1b64230efa1682abbbeca48)]
+
+```python
+# ============================================================
+# DCO OUTPUT TIMESTAMPS
+#
+# The DLF output is held for N DCO cycles.
+# ============================================================
+
+# DCO period error due to loop control
+dTctrl = (KT * u)
+
+# Total DCO period error for every fast-clock cycle
+dT = np.repeat(dTctrl, N)
+
+# Limit to exactly Nsim*N DCO cycles
+dT = dT[:Nsim * N]
+
+# Accumulate timing error
+jv_fast = np.concatenate(
+    ([0.0], np.cumsum(dT))
+)
+
+# ------------------------------------------------------------
+# Actual DCO timestamps
+# ------------------------------------------------------------
+hdco = np.arange(Nsim * N + 1)
+
+tv = hdco * Tv0 + jv_fast
+
+# ============================================================
+# OUTPUT JITTER FROM tv
+#
+# jv[h] = tv[h] - h*Tv0
+# ============================================================
+jv_from_tv = tv - hdco * Tv0
+```
+
+![low_frequency_jitter.png](dpll/low_frequency_jitter.png)
+
+```
+============================================================
+DPLL LOW-FREQUENCY INPUT JITTER TEST
+============================================================
+Reference frequency        : 100.000 MHz
+DCO frequency              : 2.400 GHz
+Frequency division         : 24
+
+Input jitter frequency     : 1000.000 Hz
+Input jitter amplitude     : 1.004880 ps
+
+Output jitter amplitude    : 1.004533 ps
+Residual error amplitude   : 0.015916 ps
+
+|Jv/Jr|                    : 0.99965447
+Jv/Jr gain                 : -0.003002 dB
+
+Input RMS jitter           : 708.703382 fs
+Output RMS jitter          : 729.245449 fs
+Residual RMS error         : 172.582105 fs
+
+|Error/Jr|                 : 1.583866e-02
+Error transfer gain        : -36.006 dB
+============================================================
+```
+
 
 ## !! DPLL time-domain model
 

@@ -680,7 +680,7 @@ PSD_phi = PSD_phi(1:floor(npsd/2));
 
 
 
-### Simplified linearized model of !!DPLL
+### simplified linearized model of !!DPLL
 
 ![image-20260903111015](dpll/image-20260903111015.png)
 
@@ -691,6 +691,9 @@ $$
 H_{t_r,T_v} \approx \frac{1-z^{-1}}{Nz^{-1}}
 $$
 
+
+
+The $1/N$ is an intentional normalization associated with the change of sampling/time domain, chosen to preserve the correct DC (steady-state) gain; it is not an inherent gain factor of upsampling
 
 ---
 

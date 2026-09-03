@@ -587,7 +587,7 @@ $$
 
 ---
 
-***psd of WSS of WSS random sequences***
+***psd of WSS random sequences***
 
 ![image-20250818202138087](random/image-20250818202138087.png)
 

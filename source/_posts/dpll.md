@@ -601,9 +601,6 @@ $M+1$ bits ensure on overflow or underflow in the signed adder
 
 > Y. Hu, T. Siriburanon and R. B. Staszewski, "Multirate Timestamp Modeling for Ultralow-Jitter Frequency Synthesis: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 7, pp. 3030-3036, July 2022
 >
-> N. Da Dalt, "Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 55, no. 11, pp. 3663-3675, Dec. 2008 [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]
->
-> —, “Theory and implementation of digital bang-bang frequency synthesizers for high speed serial data communications,” Ph.D. dissertation, RWTH Aachen University, Aachen, Germany, 2007. [[https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf](https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf)]
 
 There are two key features associated with the behavior of DPLLs, namely, the <span style="background-color:yellow">**multi-rate**</span> and <span style="background-color:yellow">**discrete-time** properties</span>
 
@@ -682,24 +679,116 @@ PSD_phi = PSD_phi(1:floor(npsd/2));
 
 ### simplified linearized model of !!DPLL
 
-![image-20260903111015](dpll/image-20260903111015.png)
+> N. Da Dalt, "Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 55, no. 11, pp. 3663-3675, Dec. 2008 [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]
+>
+> —, “Theory and implementation of digital bang-bang frequency synthesizers for high speed serial data communications,” Ph.D. dissertation, RWTH Aachen University, Aachen, Germany, 2007. [[https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf](https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf)]
+>
+> H. Lu and P. P. Mercier, "Linear Periodically Time-Variant Digital PLL Phase Noise Modeling Using Conversion Matrices and Uncorrelated Upsampling," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 71, no. 12, pp. 6021-6033, Dec. 2024, doi: 10.1109/TCSI.2024.3415001
+
+![image-20260904073104167](dpll/image-20260904073104167.png)
+
+![image-20260903202552419](dpll/image-20260903202552419.png)
+
+
+
+$$
+\boxed{ \text{For deriving Eq. (10), the }\uparrow N\text{ block must be treated as unity-amplitude rate conversion} }
+$$
+
+The statement
+
+$$
+\uparrow N_{\text{Da Dalt}}=N\,\uparrow N_{\text{standard}}
+$$
+
+**cannot be inserted as a scalar gain $N$ when deriving Eq. (10)**. If we do that, the explicit $1/N$ in Fig. 10 cancels:
+
+$$
+N\times \frac1N=1
+$$
+
+and Eq. (10) would become $N$ times larger. Its DC phase gain would then be $N^2$, instead of the correct $N$.
+
+
+
 
 
 At low frequencies, the transfer function from $t_{r}$ to $T_{v}$ can be approximated as:
-
 $$
 H_{t_r,T_v} \approx \frac{1-z^{-1}}{Nz^{-1}}
 $$
 
 
 
-The $1/N$ is an intentional normalization associated with the change of sampling/time domain, chosen to preserve the correct DC (steady-state) gain; it is not an inherent gain factor of upsampling
+---
+
+
+
+|                       | $H_{t_r,t_v}(1)$ | correct for                                                  |
+| --------------------- | ---------------- | ------------------------------------------------------------ |
+| without $1/N$         | $N$              | <span style="background-color:yellow">tracing **waveforms<**/span>, step responses |
+| with $1/N$ — Eq. (10) | $1$              | <span style="background-color:yellow">**PSD** via (9), variance via (13)</span> |
+
+Da Dalt only ever uses the second. Hence the printed $1/N$.
+
+
+
+Equation (10) is never used to trace a waveform, while exists to be squared and multiplied into a spectrum, via (9):
+
+$$
+S_{\phi_v}(f) = \left|H_{\phi_r,\phi_v}(f)\right|^2\cdot\left(S_{\phi_r}+S_{\phi_{\mathrm{bpd}}}(f)\right) + \left|H_{\phi_{\mathrm{dco}},\phi_v}(f)\right|^2 S_{\phi_{\mathrm{dco}}}(f)
+$$
+
+and to be integrated for jitter variance in (13). Both uses require a PSD-consistent transfer function, and for a slow-in/fast-out path that is **not** the same as the transform ratio.
+
+Write the cross-domain path as
+
+$$
+y[n] = \sum_k h[n-kN]\,x[k]
+$$
+
+with $x$ white, variance $\sigma^2$, on the slow grid $T_{r0}$. Then
+
+$$
+E\{y^2[n]\} = \sigma^2\sum_k h^2[n-kN]
+$$
+
+which **depends on $n \bmod N$** — the output is cyclostationary, not wide-sense stationary. Averaging over one period:
+
+$$
+\overline{\sigma_y^2} = \frac{\sigma^2}{N}\sum_j h^2[j]
+$$
+
+Now demand the ordinary form $S_y = c\,|H|^2 S_x$. With the paper's convention $S_x(f) = T_{r0}\sigma^2$, integrating over the fast Nyquist band $F = N/T_{r0}$ and applying Parseval $\int_{-F/2}^{F/2}|H|^2\,df = F\sum_j h^2[j]$:
+
+$$
+c\,T_{r0}\sigma^2\cdot\frac{N}{T_{r0}}\sum_j h^2[j] = \frac{\sigma^2}{N}\sum_j h^2[j]
+\quad\Longrightarrow\quad c = \frac{1}{N^2}
+$$
+
+$$
+\boxed{\;S_y(f) = \frac{|H|^2}{N^2}\,S_x(f)\;}
+$$
+
+So the transfer function you may legitimately plug into $S_y = |H|^2 S_x$ is $H/N$, not $H$. **That is equation (10).**
+
+The root cause in one line: $S_x$ is normalized on $T_{r0}$ while $S_y$ is normalized on $T_{v0} = T_{r0}/N$. The $1/N$ reconciles the two normalizations.
+
+
+
+---
 
 ---
 
 
-Because $f_{\mathrm{mod}} = 1\,\mathrm{kHz}$ is near DC relative to the loop bandwidth, you should get approximately
 
+$$
+\boxed{\text{Physically: zero stuff }T_v\rightarrow\text{ZOH}\rightarrow\text{accumulate; no }1/N}
+$$
+
+
+
+Because $f_{\mathrm{mod}} = 1\,\mathrm{kHz}$ is near DC relative to the loop bandwidth, you should get approximately
 $$
 j_v(t) \approx j_r(t)
 $$
@@ -721,7 +810,6 @@ At the same time,
 $$
 \Delta t = j_r - j_v \approx 0.
 $$
-
 
 [[Github Gist — dpll_in_out.py](https://gist.github.com/raytroop/f28d1f32f1b64230efa1682abbbeca48)]
 
@@ -760,6 +848,14 @@ tv = hdco * Tv0 + jv_fast
 # ============================================================
 jv_from_tv = tv - hdco * Tv0
 ```
+
+So, specifically for Python model:
+
+$$
+\boxed{ \texttt{np.repeat(x,N)} = \uparrow N+ \frac{1-z^{-N}}{1-z^{-1}} }
+$$
+
+
 
 ![low_frequency_jitter.png](dpll/low_frequency_jitter.png)
 

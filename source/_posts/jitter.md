@@ -185,6 +185,25 @@ where $\sigma_{\mathbf{p}}^2 = \frac{\mathcal{L}_0 f_{3dB}^2}{f_0^3}$
 
 ![image-20251218222327126](jitter/image-20251218222327126.png)
 
+
+
+
+---
+
+---
+
+**$1/f^2$$ phase noise corresponds to white frequency/period fluctuations**
+
+- $L(f) \propto \frac{1}{f^2}$ phase noise corresponds to **white frequency noise**.
+- Frequency/period fluctuations are related to the derivative of phase, introducing an $f^2$ factor.
+
+Therefore:
+
+$$
+S_{\phi}(f) \propto \frac{1}{f^2} \quad\Rightarrow\quad S_{\Delta f}(f) \propto f^2 S_{\phi}(f) = \text{constant}
+$$
+
+
 ## Intersymbol interference (ISI)
 
 ![image-20260208094957058](jitter/image-20260208094957058.png)

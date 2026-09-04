@@ -774,7 +774,7 @@ $$
 \boxed{\;S_y(f) = \frac{|H|^2}{N^2}\,S_x(f)\;}
 $$
 
-So the transfer function you may legitimately plug into $S_y = |H|^2 S_x$ is $H/N$, not $H$. **That is equation (10).**
+So the transfer function you may legitimately plug into $S_y = |H|^2 S_x$ is $\textcolor{red}{H/N}$, not $H$. **That is equation (10).**
 
 The root cause in one line: $S_x$ is normalized on $T_{r0}$ while $S_y$ is normalized on $T_{v0} = T_{r0}/N$. The $1/N$ reconciles the two normalizations.
 

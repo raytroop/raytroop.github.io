@@ -677,7 +677,7 @@ PSD_phi = PSD_phi(1:floor(npsd/2));
 
 
 
-### simplified linearized model of !!DPLL
+### cross-domain scaling for PSD-consistent
 
 > N. Da Dalt, "Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 55, no. 11, pp. 3663-3675, Dec. 2008 [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]
 >

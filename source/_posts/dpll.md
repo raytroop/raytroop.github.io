@@ -781,6 +781,8 @@ In DPLL model, $H$ is ZOH with rectangular impulse response — $H(z)=\frac{1-z^
 The root cause in one line: $S_x$ is normalized on $T_{r0}$ while $S_y$ is normalized on $T_{v0} = T_{r0}/N$. The $1/N$ reconciles the two normalizations.
 
 
+![cross-domain_path.drawio.svg](dpll/cross-domain_path.drawio.svg)
+
 
 ---
 

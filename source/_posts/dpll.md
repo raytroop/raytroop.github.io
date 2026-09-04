@@ -753,7 +753,7 @@ $$
 E\{y^2[n]\} = \sigma^2\sum_k h^2[n-kN]
 $$
 
-which **depends on $n \bmod N$** — the output is cyclostationary, not wide-sense stationary. Averaging over one period:
+which **depends on $n \bmod N$** — the output is **cyclostationary, not wide-sense stationary**. Averaging over one period:
 
 $$
 \overline{\sigma_y^2} = \frac{\sigma^2}{N}\sum_j h^2[j]
@@ -763,7 +763,7 @@ Now demand the ordinary form $S_y = c\,|H|^2 S_x$. With the paper's convention $
 
 $$
 c\,T_{r0}\sigma^2\cdot\frac{N}{T_{r0}}\sum_j h^2[j] = \frac{\sigma^2}{N}\sum_j h^2[j]
-\quad\Longrightarrow\quad c = \frac{1}{N^2}
+\quad\Longrightarrow\quad \textcolor{red}{c = \frac{1}{N^2}}
 $$
 
 $$

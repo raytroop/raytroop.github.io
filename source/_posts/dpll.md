@@ -737,7 +737,7 @@ $$
 
 and to be integrated for jitter variance in (13). Both uses require a <span style="background-color:yellow">PSD-consistent transfer function</span>, and for a slow-in/fast-out path that is **not** the same as the transform ratio.
 
-Write the cross-domain path as
+Write the **cross-domain path** as
 
 $$
 y[n] = \sum_k h[n-kN]\,x[k]
@@ -774,7 +774,9 @@ $$
 \boxed{\;S_y(f) = \frac{|H|^2}{N^2}\,S_x(f)\;}
 $$
 
-So the transfer function you may legitimately plug into $S_y = |H|^2 S_x$ is $\textcolor{red}{H/N}$, not $H$. **That is equation (10).**
+So the transfer function you may legitimately plug into $S_y = |H|^2 S_x$ is $\textcolor{red}{H/N}$, not $H$. **That is equation (10)**
+
+In DPLL model, $H$ is ZOH with rectangular impulse response — $H(z)=\frac{1-z^{-N}}{1-z^{-1}}$ in fast grid
 
 The root cause in one line: $S_x$ is normalized on $T_{r0}$ while $S_y$ is normalized on $T_{v0} = T_{r0}/N$. The $1/N$ reconciles the two normalizations.
 

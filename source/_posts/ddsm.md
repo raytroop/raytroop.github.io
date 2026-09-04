@@ -598,7 +598,9 @@ snr_tot = 10*log10(1/(n_if + n_ds + n_ana))
 
 > J. W. M. Rogers, F. F. Dai, M. S. Cavin and D. G. Rahn, "A multiband /spl Delta//spl Sigma/ fractional-N frequency synthesizer for a MIMO WLAN transceiver RFIC," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 3, pp. 678-689, March 2005 [[https://sci-hub.se/10.1109/JSSC.2005.843604](https://sci-hub.se/10.1109/JSSC.2005.843604)]
 
-![image-20250926204309028](ddsm/image-20250926204309028.png)
+
+
+![image-20260904225009193](ddsm/image-20260904225009193.png)
 
 ---
 
@@ -775,6 +777,34 @@ Here is the breakdown of what is happening:
 - **`fcwi[i]`**: This calls the function you defined earlier. For every value of `i` from 1 to 9,999, it calculates the instantaneous integer division ratio produced by the MASH modulator.
 - **`fcwit = ...`**: It stores all 9,999 results into a single long list (an array) named `fcwit`.
 - **`;` (Semicolon)**: This is important—it suppresses the output. Without it, Mathematica would print all 9,999 numbers on your screen, which would be a huge mess!
+
+
+
+---
+
+
+
+![image-20260904224041939](ddsm/image-20260904224041939.png)
+
+![image-20260904224324472](ddsm/image-20260904224324472.png)
+
+- Fig. 3.10 style (**delaying integrators**): <span style="background-color:yellow">**delays are mandator**y, $H_1=z^{-2}$ minimum</span>
+- **non-delaying accumulators** style (**STF = 1**): <span style="background-color:yellow">no delays needed</span>
+
+So, in short:
+
+$$
+\boxed{\text{The delays are necessary in Fig. 3.10, but not universally necessary for MASH 1-1-1}}
+$$
+
+They compensate for the one-cycle STF delay introduced by each $\frac{z^{-1}}{1-z^{-1}}$ stage.
+
+| Realization    | First-order accumulator/integrator                       | Cancellation                                                 |
+| -------------- | -------------------------------------------------------- | ------------------------------------------------------------ |
+| Fig. 3.10      | $\displaystyle \frac{\textcolor{red}{z^{-1}}}{1-z^{-1}}$ | $\displaystyle z^{-2}Y_1+z^{-1}(1-z^{-1})Y_2+(1-z^{-1})^2Y_3$ |
+| Fig. 9.18/9.21 | $\displaystyle \frac{1}{1-z^{-1}}$ / carry-based timing  | $\displaystyle C_1+(1-z^{-1})C_2+(1-z^{-1})^2C_3$            |
+
+![image-20260904225009193](ddsm/image-20260904225009193.png)
 
 
 

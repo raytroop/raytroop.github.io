@@ -685,6 +685,11 @@ PSD_phi = PSD_phi(1:floor(npsd/2));
 >
 > H. Lu and P. P. Mercier, "Linear Periodically Time-Variant Digital PLL Phase Noise Modeling Using Conversion Matrices and Uncorrelated Upsampling," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 71, no. 12, pp. 6021-6033, Dec. 2024, doi: 10.1109/TCSI.2024.3415001
 
+At low frequencies, the transfer function from $t_{r}$ to $T_{v}$ can be approximated as:
+$$
+H_{t_r,T_v} \approx \frac{1-z^{-1}}{Nz^{-1}}
+$$
+
 ![image-20260904073104167](dpll/image-20260904073104167.png)
 
 ![image-20260903202552419](dpll/image-20260903202552419.png)
@@ -708,15 +713,6 @@ N\times \frac1N=1
 $$
 
 and Eq. (10) would become $N$ times larger. Its DC phase gain would then be $N^2$, instead of the correct $N$.
-
-
-
-
-
-At low frequencies, the transfer function from $t_{r}$ to $T_{v}$ can be approximated as:
-$$
-H_{t_r,T_v} \approx \frac{1-z^{-1}}{Nz^{-1}}
-$$
 
 
 
@@ -765,6 +761,8 @@ $$
 c\,T_{r0}\sigma^2\cdot\frac{N}{T_{r0}}\sum_j h^2[j] = \frac{\sigma^2}{N}\sum_j h^2[j]
 \quad\Longrightarrow\quad \textcolor{red}{c = \frac{1}{N^2}}
 $$
+
+Finally
 
 $$
 \boxed{\;S_y(f) = \frac{|H|^2}{N^2}\,S_x(f)\;}

@@ -755,10 +755,16 @@ $$
 \overline{\sigma_y^2} = \frac{\sigma^2}{N}\sum_j h^2[j]
 $$
 
-Now demand the ordinary form $S_y = c\,|H|^2 S_x$. With the paper's convention $S_x(f) = T_{r0}\sigma^2$, integrating over the fast Nyquist band $F = N/T_{r0}$ and applying Parseval $\int_{-F/2}^{F/2}|H|^2\,df = F\sum_j h^2[j]$:
+Now demand the ordinary form
 
 $$
-c\,T_{r0}\sigma^2\cdot\frac{N}{T_{r0}}\sum_j h^2[j] = \frac{\sigma^2}{N}\sum_j h^2[j]
+S_y = c\,|H|^2 S_x
+$$
+
+With the paper's convention $S_x(f) = T_{r0}\sigma^2$, integrating over the fast Nyquist band $F = N/T_{r0}$ and applying Parseval $\int_{-F/2}^{F/2}|H|^2\,df = F\sum_j h^2[j]$:
+
+$$
+\overline{\sigma_y^2} = c\,T_{r0}\sigma^2\cdot\frac{N}{T_{r0}}\sum_j h^2[j]
 \quad\Longrightarrow\quad \textcolor{red}{c = \frac{1}{N^2}}
 $$
 

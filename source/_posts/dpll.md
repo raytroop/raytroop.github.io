@@ -726,7 +726,7 @@ $$
 
 |                       | $H_{t_r,t_v}(1)$ | correct for                                                  |
 | --------------------- | ---------------- | ------------------------------------------------------------ |
-| without $1/N$         | $N$              | <span style="background-color:yellow">tracing **waveforms<**/span>, step responses |
+| without $1/N$         | $N$              | <span style="background-color:yellow">tracing **waveforms**</span>, step responses |
 | with $1/N$ — Eq. (10) | $1$              | <span style="background-color:yellow">**PSD** via (9), variance via (13)</span> |
 
 Da Dalt only ever uses the second. Hence the printed $1/N$.
@@ -739,7 +739,7 @@ $$
 S_{\phi_v}(f) = \left|H_{\phi_r,\phi_v}(f)\right|^2\cdot\left(S_{\phi_r}+S_{\phi_{\mathrm{bpd}}}(f)\right) + \left|H_{\phi_{\mathrm{dco}},\phi_v}(f)\right|^2 S_{\phi_{\mathrm{dco}}}(f)
 $$
 
-and to be integrated for jitter variance in (13). Both uses require a PSD-consistent transfer function, and for a slow-in/fast-out path that is **not** the same as the transform ratio.
+and to be integrated for jitter variance in (13). Both uses require a <span style="background-color:yellow">PSD-consistent transfer function</span>, and for a slow-in/fast-out path that is **not** the same as the transform ratio.
 
 Write the cross-domain path as
 

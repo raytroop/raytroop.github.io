@@ -5,9 +5,9 @@ date: 2022-02-02 15:41:17
 
 
 
-Senior IC Design Engineer and former Computer Vision Deep Learning Engineer
+IC Design Engineer and former Computer Vision Deep Learning Engineer
 
-Email: raytroop@gmail.com
+Email: [raytroop@gmail.com](raytroop@gmail.com)
 
 ---
 

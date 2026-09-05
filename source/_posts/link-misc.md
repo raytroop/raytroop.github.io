@@ -662,20 +662,6 @@ Linearity can actually be a critical constraint in these signal paths, and you r
 
 
 
-### BER with Quantization Noise
-
-![image-20240804110522955](link-misc/image-20240804110522955.png)
-
-
-
-
-> $$
-> \text{Var}(X) = E[X^2] - E[X]^2
-> $$
->
-> ![image-20240804110235178](link-misc/image-20240804110235178.png)
-
-
 
 ### Impulse Response or Pulse Response
 
@@ -880,68 +866,21 @@ DAC quantization noise
 
 > M. -J. Park and J. Kim, "Pseudo-Linear Analysis of Bang-Bang Controlled Timing Circuits," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 60, no. 6, pp. 1381-1394, June 2013  [[https://sci-hub.st/10.1109/TCSI.2012.2220502](https://sci-hub.st/10.1109/TCSI.2012.2220502)]
 
-## Time to Digital Converter (TDC)
-
-
-
-##  Digital to Phase Converter (DPC)
-
-
-
-
-
-## IIR low pass filter
-
-![image-20241024232055792](link-misc/image-20241024232055792.png)
-
-simple approximation:
-$$
-z = 1 + sT
-$$
-bilinear-z transform
-$$
-z =\frac{}{}
-$$
-
-
-
-
-![image-20241024232111368](link-misc/image-20241024232111368.png)
-
-
-
-
-
-
-
-## FAQ
-
-### PLL vs. CDR
-
-| PLL                                  | CDR                                                          |
-| ------------------------------------ | ------------------------------------------------------------ |
-| Clock edge periodic                  | Data edge random                                             |
-| Phase & Frequency detecting possible | Phase detecting possible , <br />Frequency detecting impossible |
-
-
-
-> PLL or FD(Frequency Detector) for frequency detecting in CDR
-
 
 
 ## reference
 
-J. Stonick. ISSCC 2011 "DPLL-Based Clock and Data Recovery" [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T5.pdf)]
+J. Stonick. ISSCC 2011 "DPLL-Based Clock and Data Recovery" 
 
-P. Hanumolu. ISSCC 2015 "Clock and Data Recovery Architectures and Circuits" [[slides](https://www.nishanchettri.com/isscc-slides/2015%20ISSCC/TUTORIALS/ISSCC2015Visuals-T6.pdf)]
+P. Hanumolu. ISSCC 2015 "Clock and Data Recovery Architectures and Circuits"
 
 Amir Amirkhany. ISSCC 2019 "Basics of Clock and Data Recovery Circuits" 
 
-Fulvio Spagna. INTEL, CICC2018, "Clock and Data Recovery Systems" [[slides](https://picture.iczhiku.com/resource/eetop/WhiTfzdJZSZyDcBM.pdf)]
+Fulvio Spagna. INTEL, CICC2018, "Clock and Data Recovery Systems"
 
 M. Perrott. 6.976 High Speed Communication Circuits and Systems (lecture 21). Spring 2003. Massachusetts Institute of Technology: MIT OpenCourseWare, [[lec21.pdf](https://ocw.mit.edu/courses/6-976-high-speed-communication-circuits-and-systems-spring-2003/b396ec97fe1fc0eb7e39e88bf86c2979_lec21.pdf)]
 
-Akihide Sai. ISSCC 2023, T5 "All Digital Plls From Fundamental Concepts To Future Trends" [[T5.pdf](https://www.nishanchettri.com/isscc-slides/2023%20ISSCC/TUTORIALS/T5.pdf)]
+Akihide Sai. ISSCC 2023, T5 "All Digital Plls From Fundamental Concepts To Future Trends"
 
 J. L. Sonntag and J. Stonick, "A Digital Clock and Data Recovery Architecture for Multi-Gigabit/s Binary Links," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1867-1875, Aug. 2006  [[https://sci-hub.se/10.1109/JSSC.2006.875292](https://sci-hub.se/10.1109/JSSC.2006.875292)]
 
@@ -959,7 +898,7 @@ Marinaci, Stefano. "Study of a Phase Locked Loop based Clock and Data Recovery C
 
 P. Palestri *et al*., "Analytical Modeling of Jitter in Bang-Bang CDR Circuits Featuring Phase Interpolation," in *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 29, no. 7, pp. 1392-1401, July 2021 [[https://sci-hub.se/10.1109/TVLSI.2021.3068450](https://sci-hub.se/10.1109/TVLSI.2021.3068450)]
 
-F. M. Gardner, "Phaselock Techniques", 3rd Edition, Wiley Interscience, Hoboken, NJ, 2005 [[https://picture.iczhiku.com/resource/eetop/WyIgwGtkDSWGSxnm.pdf](https://picture.iczhiku.com/resource/eetop/WyIgwGtkDSWGSxnm.pdf)]
+F. M. Gardner, "Phaselock Techniques", 3rd Edition, Wiley Interscience, Hoboken, NJ, 2005 
 
 Rhee, W. (2020). *Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems*. The Institution of Engineering and Technology
 

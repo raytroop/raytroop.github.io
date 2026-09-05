@@ -122,7 +122,7 @@ In the power domain, $\color{red}v_{nS,RMS}/3 \lt \sigma_{q,RMS}$ ensures that s
 
 ## ADC SNR & clock jitter
 
-> Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
+> Akkaya, A. (2021). High-Speed ADC Design and Optimization for Wireline Links (Publication No. 8453) [PhD thesis, EPFL; Supervised by Y. Leblebici]. [[https://doi.org/10.5075/epfl-thesis-8453](https://doi.org/10.5075/epfl-thesis-8453)]
 >
 > CC Chen, Why Absolute Jitter Matters for ADCs & DACs? [[https://youtu.be/jBgDDFFDq30](https://youtu.be/jBgDDFFDq30)]
 >
@@ -247,7 +247,7 @@ plt.show()
 >
 > ![image-20241210232716862](ad-da/image-20241210232716862.png)
 >
-> Ayça Akkaya, "High-Speed ADC Design and Optimization for Wireline Links" [[https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content](https://infoscience.epfl.ch/server/api/core/bitstreams/96216029-c2ff-48e5-a675-609c1e26289c/content)]
+> Akkaya, A. (2021). High-Speed ADC Design and Optimization for Wireline Links (Publication No. 8453) [PhD thesis, EPFL; Supervised by Y. Leblebici]. [[https://doi.org/10.5075/epfl-thesis-8453](https://doi.org/10.5075/epfl-thesis-8453)]
 
 ---
 
@@ -1094,7 +1094,7 @@ Ahmed M. A. Ali. CICC 2018: High Speed Pipelined ADCs: Fundamentals and Variants
 
 John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs" 
 
-Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters"
+Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://personal.utdallas.edu/~yxc101000/courses/7327/handout/isscc2023_tutorial.pdf](https://personal.utdallas.edu/~yxc101000/courses/7327/handout/isscc2023_tutorial.pdf)]
 
 —， "Design and Calibration Techniques for SAR and Pipeline ADCs" [[http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf](http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf)]
 

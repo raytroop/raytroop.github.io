@@ -219,17 +219,6 @@ print(f"alpha({T:.0f}s): circuit ODE {np.degrees(a_ckt[-2*N]):+.2f} deg | "
 ```
 
 
-## MPIL-ROSC (Multi-Phase Injection-Locked Ring Oscillators)
-
-> Z. Wang, Y. Zhang, Y. Onizuka and P. R. Kinget, "Multi-Phase Clock Generation for Phase Interpolation With a Multi-Phase, Injection-Locked Ring Oscillator and a Quadrature DLL," in IEEE Journal of Solid-State Circuits, vol. 57, no. 6, pp. 1776-1787, June 2022, doi: 10.1109/JSSC.2021.3124486
->
-> —, Phase Error Sensitivity to Injection Signals in Multi-Phase Injection-Locked Ring Oscillators [[https://arxiv.org/pdf/2501.01580v1](https://arxiv.org/pdf/2501.01580v1)]
-> 
-> Multiphase Clock Generation Techniques [[https://www.rfinsights.com/synthesizer/multiphase-clock-generation-techniques/](https://www.rfinsights.com/synthesizer/multiphase-clock-generation-techniques/)]
-
-
-
-*TODO* &#128197;
 
 
 

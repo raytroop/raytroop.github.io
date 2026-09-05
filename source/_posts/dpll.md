@@ -1260,6 +1260,61 @@ $\boxed{\sigma_{\Delta t}}$ at the **BPD input**, not directly the RMS DCO-outpu
 
 
 
+### causality z<sup>-1</sup> in linear model
+
+$\textcolor{red}{z^{-1}}$ makes the loop <span style="color:red">**causal**</span>, and it represents the one-reference-cycle latency that is physically unavoidable in a digital PLL
+
+With the indexing used in this slide,
+
+$$
+\boxed{\Delta t[k]=t_r[k]-t_v[k-1]}
+$$
+
+so in the $z$-domain,
+
+$$
+\Delta T(z)=T_r(z)-z^{-1}T_v(z)
+$$
+
+That is exactly the $z^{-1}$ shown in the feedback path.
+
+The timing sequence is essentially
+
+$$
+t_v[k-1] \;\longrightarrow\; \Delta t[k] \;\longrightarrow\; \text{TDC/filter} \;\longrightarrow\; u[k] \;\longrightarrow\; t_v[k]
+$$
+
+Meanwhile the DCO timing recursion is
+
+$$
+t_v[k]=t_v[k-1]+N K_T u[k]
+$$
+
+which gives
+
+$$
+\frac{T_v(z)}{U(z)} = \frac{N K_T}{1-z^{-1}}
+$$
+
+So the two appearances of $z^{-1}$ have related but different meanings:
+
+- Inside $\displaystyle \frac{NK_T}{1-z^{-1}}$: the DCO **accumulates period/time increments**.
+- In the feedback path: the TDC at iteration $k$ sees the **previous DCO/divider timing state $t_v[k-1]$**.
+
+![image-20260905125123435](dpll/image-20260905125123435.png)
+
+A useful way to read the lower figure is therefore:
+
+$$
+\boxed{ t_r[k] - \underbrace{t_v[k-1]}_{\text{available feedback edge}} \rightarrow \text{TDC} \rightarrow H(z) \rightarrow \text{DCO} \rightarrow t_v[k] }
+$$
+
+
+
+![image-20260905125504065](dpll/image-20260905125504065.png)
+
+
+
 ## reference
 
 Wang, Xu and Michael Peter Kennedy. “Jitter and Spur Minimization in Fractional-N Digital Frequency Synthesizers - Modeling, Simulation, Analysis, and Design Methodologies.” *Analog Circuits and Signal Processing* (2026).

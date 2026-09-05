@@ -784,7 +784,55 @@ Here is the breakdown of what is happening:
 
 
 
-![image-20260904224041939](ddsm/image-20260904224041939.png)
+
+
+![image-20260905084342044](ddsm/image-20260905084342044.png)
+
+For each first-order stage,
+
+$$
+\begin{aligned}
+y_1 &=z^{-1}x+(1-z^{-1})q_1\\
+y_2 &=-z^{-1}q_1+(1-z^{-1})q_2\\
+y_3 &=-z^{-1}q_2+(1-z^{-1})q_3
+\end{aligned}
+$$
+
+The error-cancellation network is
+
+$$
+y=z^{-2}y_1 +z^{-1}(1-z^{-1})y_2 +(1-z^{-1})^2y_3
+$$
+
+Substitute:
+
+$$
+\begin{aligned}
+y ={}&z^{-2}\left[z^{-1}x+(1-z^{-1})q_1\right] \\
+&+z^{-1}(1-z^{-1}) \left[-z^{-1}q_1+(1-z^{-1})q_2\right]\\
+&+(1-z^{-1})^2 \left[-z^{-1}q_2+(1-z^{-1})q_3\right]
+\end{aligned}
+$$
+
+Now $q_1$ cancels:
+
+$$
+z^{-2}(1-z^{-1})q_1 -z^{-2}(1-z^{-1})q_1=0
+$$
+
+And $q_2$ cancels:
+
+$$
+z^{-1}(1-z^{-1})^2q_2 -z^{-1}(1-z^{-1})^2q_2=0
+$$
+
+What remains is
+
+$$
+\boxed{ y=z^{-3}x+(1-z^{-1})^3\textcolor{red}{q_3} }
+$$
+
+Only the last stage's quantization error survives — that is the defining property of a MASH.
 
 ![image-20260904224324472](ddsm/image-20260904224324472.png)
 
@@ -805,6 +853,79 @@ They compensate for the one-cycle STF delay introduced by each $\frac{z^{-1}}{1-
 | Fig. 9.18/9.21 | $\displaystyle \frac{1}{1-z^{-1}}$ / carry-based timing  | $\displaystyle C_1+(1-z^{-1})C_2+(1-z^{-1})^2C_3$            |
 
 ![image-20260904225009193](ddsm/image-20260904225009193.png)
+
+
+
+From Eq. (9.47),
+
+$$
+N_{\text{frac}}[k] = C_1[k] +(1-z^{-1})C_2[k] +(1-z^{-1})^2 C_3[k]
+$$
+
+or
+
+$$
+N_{\text{frac}}[k] = C_1[k] +\big(C_2[k]-C_2[k-1]\big) +\big(C_3[k]-2C_3[k-1]+C_3[k-2]\big)
+$$
+
+Since each carry is one bit,
+
+$$
+C_i[k]\in\{0,1\}
+$$
+
+Therefore,
+
+$$
+C_1\in[0,1],\qquad (1-z^{-1})C_2\in[-1,1]
+$$
+
+and
+
+$$
+(1-z^{-1})^2C_3\in[-2,2]
+$$
+
+So the worst-case sum is
+
+$$
+\boxed{-3\le N_{\text{frac}}\le 4}
+$$
+
+A 3-bit two's-complement number only represents
+
+$$
+\boxed{-4,\ldots,+3}
+$$
+
+so it cannot represent $+4$. Therefore that implementation uses 4 bits:
+
+$$
+\boxed{\text{signed }[-3,+4]\Rightarrow 4\text{ bits}}
+$$
+
+whereas Fig. 3.14 uses
+
+$$
+\boxed{\text{8 encoded levels}\Rightarrow 3\text{ bits}}
+$$
+
+So the distinction is:
+
+$$
+\boxed{ \begin{array}{ll} 3\text{ bits} & \text{enough to encode the 8 possible levels with special coding},\\[2mm] 4\text{ bits} & \text{needed for straightforward signed two's-complement arithmetic.} \end{array}}
+$$
+
+
+
+So there is no fundamental disagreement:
+$$
+\boxed{ \begin{array}{c} \text{Fig. 9.21: signed arithmetic representation} \rightarrow 4\text{ bits}\\[2mm] \text{Fig. 3.14: encoded divider-selection word} \rightarrow 3\text{ bits} \end{array}}
+$$
+
+The important fact is that a MASH 1-1-1 only needs to select **8 divider levels**; therefore the final divider control can indeed be implemented with **3 physical bits**.
+
+
 
 
 

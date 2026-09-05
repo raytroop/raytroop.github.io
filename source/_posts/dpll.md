@@ -743,20 +743,22 @@ $$
 y[n] = \sum_k h[n-kN]\,x[k]
 $$
 
-with $x$ white, variance $\sigma^2$, on the slow grid $T_{r0}$. Then
+with $x$ **zero-mean**, <span style="color:blue">**white**</span>, and of variance $\sigma^2$ on the slow grid $T_{r0}$, and with real-valued $h$. Then
 
 $$
 E\{y^2[n]\} = \sigma^2\sum_k h^2[n-kN]
 $$
 
-which **depends on $n \bmod N$** — the output is **cyclostationary, not wide-sense stationary**. Averaging over one period:
+The variance is $N$-periodic, but it need not differ between output phases. The output is generally **cyclostationary**; even when its variance is constant, its autocorrelation can depend on $n\bmod N$.
 
+Averaging the variance over $N$ fast samples:
 $$
 \overline{\sigma_y^2} = \frac{\sigma^2}{N}\sum_j h^2[j]
 $$
 
-Now demand the ordinary form
 
+
+Now demand the ordinary form
 $$
 S_y = c\,|H|^2 S_x
 $$
@@ -776,12 +778,81 @@ $$
 
 So the transfer function you may legitimately plug into $S_y = |H|^2 S_x$ is $\textcolor{red}{H/N}$, not $H$. **That is equation (10)**
 
-In DPLL model, $H$ is ZOH with rectangular impulse response — $H(z)=\frac{1-z^{-N}}{1-z^{-1}}$ in fast grid
+For the hold stage alone, $H_{\mathrm{ZOH}}(z)=(1-z^{-N})/(1-z^{-1})$, whose impulse response is rectangular. For the complete cross-domain path, $h$ denotes the full effective impulse response.
 
 The root cause in one line: $S_x$ is normalized on $T_{r0}$ while $S_y$ is normalized on $T_{v0} = T_{r0}/N$. The $1/N$ reconciles the two normalizations.
 
-
 ![cross-domain_path.drawio.svg](dpll/cross-domain_path.drawio.svg)
+
+Assume real-valued $h$ and **zero-mean** white input:
+
+$$
+E\{x[k]\}=0,\qquad
+E\{x[k]x[\ell]\}=\sigma^2\delta_{k\ell}.
+$$
+
+Here $k$ indexes slow samples, while $n$ indexes fast samples; one slow interval contains $N$ fast samples.
+
+Starting from
+
+$$
+y[n]=\sum_k h[n-kN]x[k],
+$$
+
+we have $E\{y[n]\}=0$, so its variance equals its second moment. Expanding the square:
+
+$$
+\begin{aligned}
+\operatorname{Var}(y[n])
+&=E\!\left\{
+\left(\sum_k h[n-kN]x[k]\right)
+\left(\sum_\ell h[n-\ell N]x[\ell]\right)
+\right\}\\
+&=\sum_k\sum_\ell h[n-kN]h[n-\ell N]\,
+E\{x[k]x[\ell]\}\\
+&=\boxed{\sigma^2\sum_k h^2[n-kN]}.
+\end{aligned}
+$$
+
+Every term with $k\ne\ell$ vanishes because distinct input samples are uncorrelated. Independence is unnecessary.
+
+Write $n=qN+r$, where $r\in\{0,\ldots,N-1\}$. Then
+
+$$
+\operatorname{Var}(y[qN+r])
+=\sigma^2\sum_k h^2[r-(k-q)N]
+=\sigma^2\sum_m h^2[r-mN].
+$$
+
+The result depends only on the phase $r$, not the period number $q$.
+
+Thus, at each output phase, the variance uses only the filter coefficients whose indices have that particular remainder modulo $N$.
+
+Take the arithmetic average of these $N$ phase variances:
+
+$$
+\overline{\sigma_y^2}
+=\frac1N\sum_{r=0}^{N-1}\operatorname{Var}(y[r])
+=\frac{\sigma^2}{N}
+\sum_{r=0}^{N-1}\sum_k h^2[r-kN].
+$$
+
+Every integer $j$ has exactly one representation
+
+$$
+j=r-kN,\qquad 0\le r<N.
+$$
+
+Consequently, the double sum includes every $h^2[j]$ exactly once:
+
+$$
+\boxed{\overline{\sigma_y^2}
+=\frac{\sigma^2}{N}\sum_j h^2[j]}.
+$$
+
+This is the **average of the variances**, not the variance of an averaged output signal.
+
+
 
 
 ---
@@ -810,8 +881,10 @@ $$
 or
 
 $$
-20\log_{10}\left|\frac{T_v}{T_r}\right| \approx 0\,\mathrm{dB}.
+20\log_{10}\left|\frac{J_v}{J_r}\right| \approx 0\,\mathrm{dB}.
 $$
+
+Here $J_v$ and $J_r$ are the Fourier components of the output and reference timing jitter at $f_{\mathrm{mod}}$.
 
 At the same time,
 
@@ -1178,8 +1251,6 @@ and the DPLL recursion evolves from **one edge interval to the next**, which is 
 ---
 
 $\boxed{\sigma_{\Delta t}}$ at the **BPD input**, not directly the RMS DCO-output jitter. To obtain actual DCO-output jitter, we should also simulate/store $t_v[h]$, rather than only the reference-rate recursion for $\Delta t[k]$.
-
-
 
 
 

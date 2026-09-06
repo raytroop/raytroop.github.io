@@ -594,7 +594,7 @@ snr_tot = 10*log10(1/(n_if + n_ds + n_ana))
 
 
 
-## MASH 1-1-1 Model
+## MASH 1-1-1
 
 > J. W. M. Rogers, F. F. Dai, M. S. Cavin and D. G. Rahn, "A multiband /spl Delta//spl Sigma/ fractional-N frequency synthesizer for a MIMO WLAN transceiver RFIC," in *IEEE Journal of Solid-State Circuits*, vol. 40, no. 3, pp. 678-689, March 2005 [[https://sci-hub.se/10.1109/JSSC.2005.843604](https://sci-hub.se/10.1109/JSSC.2005.843604)]
 
@@ -782,11 +782,7 @@ Here is the breakdown of what is happening:
 
 ---
 
-
-
-
-
-![image-20260905084342044](ddsm/image-20260905084342044.png)
+![image-20260906142413731](ddsm/image-20260906142413731.png)
 
 For each first-order stage,
 

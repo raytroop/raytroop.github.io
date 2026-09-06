@@ -124,9 +124,25 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 
 ---
 
+> Zhaokai Liu. Time-interleaved SAR ADC Design Using Berkeley Analog Generator [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2020/EECS-2020-109.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2020/EECS-2020-109.pdf)]
+
 ![image-20250609224554118](comparator/image-20250609224554118.png)
 
-> Zhaokai Liu. Time-interleaved SAR ADC Design Using Berkeley Analog Generator [[https://www2.eecs.berkeley.edu/Pubs/TechRpts/2020/EECS-2020-109.pdf](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2020/EECS-2020-109.pdf)]
+
+
+
+
+---
+
+> L. Kull *et al*., "A 3.1 mW 8b 1.2 GS/s Single-Channel Asynchronous SAR ADC With Alternate Comparators for Enhanced Speed in 32 nm Digital SOI CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 48, no. 12, pp. 3049-3058, Dec. 2013 [[https://sci-hub.jp/10.1109/JSSC.2013.2279571](https://sci-hub.jp/10.1109/JSSC.2013.2279571)]
+>
+> P. Nuzzo, F. De Bernardinis, P. Terreni and G. Van der Plas, "Noise Analysis of Regenerative Comparators for Reconfigurable ADC Architectures," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 55, no. 6, pp. 1441-1454, July 2008 [[https://sci-hub.jp/10.1109/TCSI.2008.917991](https://sci-hub.jp/10.1109/TCSI.2008.917991)]
+
+
+
+![image-20260906141852047](comparator/image-20260906141852047.png)
+
+
 
 
 

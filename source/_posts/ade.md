@@ -9,6 +9,18 @@ mathjax: true
 
 
 
+## Tran options for VCO
+
+> [[https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/15832/how-to-run-the-simulaiton-for-1-ns-step-interval](https://community.cadence.com/cadence_technology_forums/f/custom-ic-design/15832/how-to-run-the-simulaiton-for-1-ns-step-interval)]
+
+![image-20260907205834146](ade/image-20260907205834146.png)
+
+**`cmin` is a small artificial capacitance that the simulator adds from every circuit node to ground** during transient simulation. Cadence recommends it mainly as a convergence aid because it smooths abrupt/discontinuous behavior that can force extremely small timesteps
+
+This is **not a physical capacitor in your schematic**. It is a numerical stabilization parameter.
+
+
+
 ## undo sorting in ADE
 
 ![image-20260715220657033](ade/image-20260715220657033.png) 

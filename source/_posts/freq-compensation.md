@@ -846,6 +846,8 @@ Sergio Franco, San Francisco State University, Design with Operational Amplifier
 
 ***Pole-Zero Doublet***
 
+C. Mangelsdorf, "Don’t Fear the Doublet [Shop Talk: What You Didn’t Learn in School]," in *IEEE Solid-State Circuits Magazine*, vol. 18, no. 3, pp. 16-21, Summer 2026, doi: 10.1109/MSSC.2026.3707281.
+
 Elad Alon, Lecture 10: Settling-Limited Amplifier Design Methodology, EE 240B – Spring 2018, Advanced Analog Integrated Circuits [[https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf)]
 
 Eric Chang, Prof. Elad Alon EE240B HW3 [[https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf) and [https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf)]

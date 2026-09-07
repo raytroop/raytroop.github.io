@@ -317,6 +317,8 @@ Morita, B.G. (2014). Understand Low-Dropout Regulator ( LDO ) Concepts to Achiev
 
 H. -S. Kim, "Exploring Ways to Minimize Dropout Voltage for Energy-Efficient Low-Dropout Regulators: Viable approaches that preserve performance," in IEEE Solid-State Circuits Magazine, vol. 15, no. 2, pp. 59-68, Spring 2023, doi: 10.1109/MSSC.2023.3262767.
 
+—, "Fundamentals of Energy-Efficient LDO Regulator Design: From dropout optimization to wide-bandwidth and high-PSR techniques," in *IEEE Solid-State Circuits Magazine*, vol. 18, no. 3, pp. 55-72, Summer 2026, doi: 10.1109/MSSC.2026.3696588
+
 Ali Sheikholeslami, Circuit Intuitions: Voltage Regulators IEEE Solid-State Circuits Magazine, Vol. 12, Issue 4, to appear, Fall 2020.
 
 Operational Transconductance Amplifier II Multi-Stage Designs [[https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf](https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf)]

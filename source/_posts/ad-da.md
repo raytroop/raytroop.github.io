@@ -1082,7 +1082,7 @@ $$
 
 Maloberti, F. *Data Converters*. Dordrecht, Netherlands: Springer, 2007.
 
-Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
+Ali, Ahmed M. A. *High Speed Data Converters*. The Institution of Engineering and Technology, 2016.
 
 Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.
 
@@ -1112,6 +1112,8 @@ Jan Mulder Broadcom. ISSCC2015 T5: High-Speed Current-Steering DACs
 
 Zhang, Milin, Zhihua Wang, Jan van der Spiegel and Franco Maloberti. "Advanced Tutorial on Analog Circuit Design." (2023)
 
+S. Su, "Principles and Practices of High-Speed DAC Design: From Conversion Fundamentals to Layout-Aware Implementation," in *IEEE Solid-State Circuits Magazine*, vol. 18, no. 3, pp. 26-43, Summer 2026, doi: 10.1109/MSSC.2026.3704105
+
 ---
 
 M. Gu, Y. Tao, Y. Zhong, L. Jie and N. Sun, "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in IEEE Open Journal of the Solid-State Circuits Society [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
@@ -1126,7 +1128,7 @@ Kester, Walt. (2009). Understand SINAD, ENOB, SNR, THD, THD + N, and SFDR so You
 
 T. C. Hofner: Dynamic ADC testing part I. Defining and testing dynamic ADC parameters, Microwaves & RF, 2000, vol. 39, no. 11, pp. 75-84,162
 
-T. C. Hofner: Dynamic ADC testing part 2. Measuring and evaluating dynamic line parameters, Microwaves & RF, 2000, vol. 39, no. 13, pp. 78-94
+—: Dynamic ADC testing part 2. Measuring and evaluating dynamic line parameters, Microwaves & RF, 2000, vol. 39, no. 13, pp. 78-94
 
 AN9675: A Tutorial in Coherent and Windowed Sampling with A/D Converters [https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters](https://www.renesas.com/us/en/document/apn/an9675-tutorial-coherent-and-windowed-sampling-ad-converters)
 

@@ -738,6 +738,8 @@ Fulvio Spagna, CICC2018 Clock and Data Recovery Systems [[pdf](https://picture.i
 
 Wei-Zen Chen, ISSCC2026. T9: Clocking and CDR Techniques for High-Performance Wireline Transceiver
 
+B. Razavi, "The Design of a Clock and Data Recovery Circuit [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 18, no. 3, pp. 11-116, Summer 2026, doi: 10.1109/MSSC.2026.3706674.
+
 ---
 
 A. A. Bazargani, H. Shakiba and D. A. Johns, "MMSE Equalizer Design Optimization for Wireline SerDes Applications," in *IEEE Transactions on Circuits and Systems I: Regular Papers* [[https://www.eecg.utoronto.ca/~johns/nobots/papers/pdf/2024_bazaragani.pdf](https://www.eecg.utoronto.ca/~johns/nobots/papers/pdf/2024_bazaragani.pdf)]

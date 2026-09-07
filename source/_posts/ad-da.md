@@ -328,6 +328,20 @@ ampling Jitter Effects for *ADC/DAC*
 
 
 
+---
+
+---
+
+> Jungwirth, Patrick. *Sampling Theory and Analog-to-Digital Conversion*. Independently published, 2018.
+
+![image-20260907235127782](ad-da/image-20260907235127782.png)
+
+![image-20260907235159600](ad-da/image-20260907235159600.png)
+
+
+
+
+
 ## DAC Linearity (DNL/INL)
 
 

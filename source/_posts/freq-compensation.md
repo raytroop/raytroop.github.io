@@ -793,6 +793,18 @@ legend('\omega_{p2}<\omega_{z}', '\omega_{p2}=\omega_{z}', '\omega_{p2}>\omega_{
 ```
 
 
+---
+
+---
+
+**divider doublet**
+
+> Fundamentals of passive probe operation Active vs. passive probes [[https://www.rohde-schwarz.com/us/products/test-and-measurement/essentials-test-equipment/rs-essentials-digital-oscilloscopes/understanding-passive-oscilloscope-probes_254518.html](https://www.rohde-schwarz.com/us/products/test-and-measurement/essentials-test-equipment/rs-essentials-digital-oscilloscopes/understanding-passive-oscilloscope-probes_254518.html)]
+>
+> Secrets of the 10x Passive Probe Explained Understanding the internal design of a 10x passive probe reveals the trade-offs that affect signal accuracy, bandwidth, and noise performance. [[https://www.teledynelecroy.com/oscilloscope/blog/secrets-of-the-10x-passive-probe-explained/](https://www.teledynelecroy.com/oscilloscope/blog/secrets-of-the-10x-passive-probe-explained/)]
+
+
+*TODO* &#128197;
 
 
 

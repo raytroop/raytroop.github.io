@@ -178,7 +178,7 @@ Provided that $\xi = e^{j\omega_1}$ and $z = e^{j\omega_2}$, we have $U_f(\xi)$ 
 
 
 
-## upsampling & downsampling cascading
+## up/down-sampling cascading
 
 In general,
 
@@ -256,7 +256,56 @@ $$
 \boxed{ y[n]= \begin{cases} x[n], & n=0,\pm N,\pm2N,\ldots\\ 0, & \text{otherwise}. \end{cases}}
 $$
 
+
+
+<span style="color:white; background-color:black">**Time domain**</span>
+
+The cascade multiplies $x[n]$ by an impulse train:
+
+$$
+y[n]=x[n]\,c_N[n],\qquad c_N[n]=\sum_{r=-\infty}^{\infty}\delta[n-rN]
+$$
+
+The useful trick is to write that comb as a sum of complex exponentials (a DFT identity):
+
+$$
+c_N[n]=\frac{1}{N}\sum_{k=0}^{N-1}e^{j2\pi kn/N}=\frac{1}{N}\sum_{k=0}^{N-1}W_N^{-kn},\qquad W_N\triangleq e^{-j2\pi/N}
+$$
+
+So the cascade is a **modulation by $N$ carriers**, which is exactly where the aliasing comes from.
+
+<span style="color:white; background-color:black">**$z$ domain**</span>
+$$
+Y(z)=\sum_n x[n]c_N[n]z^{-n}=\frac{1}{N}\sum_{k=0}^{N-1}\sum_n x[n]\big(zW_N^{k}\big)^{-n}
+$$
+
+$$
+\boxed{\;Y(z)=\frac{1}{N}\sum_{k=0}^{N-1}X\!\left(zW_N^{k}\right)=\frac{1}{N}\sum_{k=0}^{N-1}X\!\left(z\,e^{-j2\pi k/N}\right)\;}
+$$
+
+You get the same thing by composing the two stages. Decimation by $N$:
+
+$$
+V(z)=\frac{1}{N}\sum_{k=0}^{N-1}X\!\left(z^{1/N}W_N^{k}\right)
+$$
+
+Expansion by $N$ just substitutes $z\to z^N$:
+
+$$
+Y(z)=V(z^N)=\frac{1}{N}\sum_{k=0}^{N-1}X\!\left(zW_N^{k}\right)
+$$
+
+
+
+> L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
+
+![image-20260908233201823](multirate/image-20260908233201823.png)
+
+
+
 ---
+
+
 
 **↑N followed immediately by $\downarrow N$ *is* identity**
 

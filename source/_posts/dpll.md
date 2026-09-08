@@ -690,7 +690,7 @@ $$
 H_{t_r,T_v} \approx \frac{1-z^{-1}}{Nz^{-1}}
 $$
 
-![image-20260904073104167](dpll/image-20260904073104167.png)
+![image-20260908220239926](dpll/image-20260908220239926.png)
 
 ![image-20260903202552419](dpll/image-20260903202552419.png)
 
@@ -1315,6 +1315,71 @@ $$
 
 
 
+### Model at Reference Rate
+
+> S. Levantino, "Digital phase-locked loops," 2018 IEEE Custom Integrated Circuits Conference (CICC), San Diego, CA, USA, 2018
+>
+> —, "Advanced digital phase-locked loops," *Proceedings of the IEEE 2013 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2013, pp. 1-95 [[https://sci-hub.jp/10.1109/CICC.2013.6658505](https://sci-hub.jp/10.1109/CICC.2013.6658505)]
+
+
+
+![image-20260908212439876](dpll/image-20260908212439876.png)
+$$
+\boxed{\frac{T_V}{W}(z) = \frac{NK_T}{z-1} = \frac{NK_T}{\textcolor{red}{1-z^{-1}}}\cdot\textcolor{red}{z^{-1}}}
+$$
+
+
+![image-20260908210939073](dpll/image-20260908210939073.png)
+
+$$\begin{align}
+y[n] &= y[n-1] + x[n-1] \quad &\Rightarrow\quad\quad \bbox[yellow]{\frac{Y}{X}(z) = \frac{z^{-1}}{1-z^{-1}}} \\
+y[n] &= y[n-1] + x[n] \quad &\Rightarrow\quad\quad \frac{Y}{X}(z) = \frac{1}{1-z^{-1}}
+\end{align}$$
+
+
+
+---
+
+> N. Da Dalt, "Linearized Analysis of a Digital Bang-Bang PLL and Its Validity Limits Applied to Jitter Transfer and Jitter Generation," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 55, no. 11, pp. 3663-3675, Dec. 2008 [[https://sci-hub.st/10.1109/TCSI.2008.925948](https://sci-hub.st/10.1109/TCSI.2008.925948)]
+
+![image-20260908222309507](dpll/image-20260908222309507.png)
+
+![image-20260908223449533](dpll/image-20260908223449533.png)
+
+### Model at DCO Rate
+
+> L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
+
+
+
+![image-20260908230340428](dpll/image-20260908230340428.png)
+
+t<sub>r</sub>[h] in Fig. 5 is **up-sampled and zero-padded** from t<sub>r</sub>[k] in Fig. 2. — zero-padded transform of a signal in the slow domain
+$$
+\boxed{\Delta t[h] = \left\{ \begin{array}{cl}
+t_r[h]-t_d[h] & \text{when } h=0,\pm N,\pm 2N,... \\
+0 & \text{otherwise}
+\end{array} \right.}
+$$
+![image-20260909000021723](dpll/image-20260909000021723.png)
+
+
+
+---
+
+
+
+![image-20260909004823888](dpll/image-20260909004823888.png)
+
+
+
+![image-20260909004150334](dpll/image-20260909004150334.png)
+
+
+
+
+
+
 ## reference
 
 Wang, Xu and Michael Peter Kennedy. “Jitter and Spur Minimization in Fractional-N Digital Frequency Synthesizers - Modeling, Simulation, Analysis, and Design Methodologies.” *Analog Circuits and Signal Processing* (2026).
@@ -1336,8 +1401,6 @@ Robert Bogdan Staszewski,  CICC 2020:  Beyond All-Digital PLL for RF and Millime
 Akihide Sai, ISSCC 2023 T5: All-digital PLLs From Fundamental Concepts to Future Trends 
 
 Mike Shuo-Wei Chen, CICC 2020 ES2-3: Low-Spur PLL Architectures and Techniques [[https://youtu.be/sgPDchYhN-4](https://youtu.be/sgPDchYhN-4)]
-
-S. Levantino, "Digital phase-locked loops," 2018 IEEE Custom Integrated Circuits Conference (CICC), San Diego, CA, USA, 2018
 
 Saurabh Saxena, IIT Madras. Phase-Locked Loops: Noise Analysis in Digital PLL [[https://youtu.be/mddtxcqfiKU](https://youtu.be/mddtxcqfiKU)]
 

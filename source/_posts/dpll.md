@@ -1364,6 +1364,22 @@ $$
 ![image-20260909000021723](dpll/image-20260909000021723.png)
 
 
+---
+
+![image-2026-09-09_09-23](dpll/image-2026-09-09_09-23.png)
+
+Taking the $\mathcal{Z}$-transform of the discrete-time accumulator
+
+$$
+t_v^\prime[k] = t_v^\prime[k-1] + w[k-1]
+$$
+
+results in the system function
+
+$$
+\frac{T_v^\prime}{W}(z) = \frac{z^{-1}}{1-z^{-1}}
+$$
+
 
 ---
 

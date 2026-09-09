@@ -1377,7 +1377,7 @@ $$
 results in the system function
 
 $$
-\frac{T_v^\prime}{W}(z) = \frac{z^{-1}}{1-z^{-1}}
+\boxed{\frac{T_v^\prime}{W}(z) = \frac{z^{-1}}{1-z^{-1}}}
 $$
 
 

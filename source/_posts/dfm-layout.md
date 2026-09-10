@@ -9,6 +9,18 @@ mathjax: true
 
 
 
+## GAA (Gate‑All‑Around)
+
+> Ravi Todi, Urmimala Roy, Xi-Wei LinRavi Todi, Urmimala Roy, Xi-Wei Lin, *From Gate‑All‑Around to Complementary FETs: What’s Next in Transistor Scaling* [[https://www.synopsys.com/blogs/chip-design/gate-all-around-complementary-fets-whats-next-transistor-scaling.html](https://www.synopsys.com/blogs/chip-design/gate-all-around-complementary-fets-whats-next-transistor-scaling.html)]
+
+
+
+![Standard cell representational top view (not to scale). GAA allows flexible transistor width.](dfm-layout/finfetvsgaa-fig2.webp)
+
+GAA can also be thought of as fins flipped sideways and then stacked vertically. That makes the **width continuous** in the plane of the layout, allowing the process to be optimized using the nanosheet width as a variable.
+
+
+
 ## ICOVL & DTCD
 
 > 东华博客, ICOVL Cell [[http://www.truevue.org/p/938](http://www.truevue.org/p/938)]

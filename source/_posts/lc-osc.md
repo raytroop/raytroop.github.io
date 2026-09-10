@@ -1085,6 +1085,78 @@ $$
 
 
 
+---
+
+---
+
+<span style="color:white; background-color:black">Varactor Tuning Sensitivity</span>
+
+![varactor_Kc.drawio](lc-osc/varactor_Kc.drawio.svg)
+
+Given
+
+$$
+C_{\text{tot}}
+=
+C_{mp}
++
+(C_v+C_p)\parallel C_m
+$$
+
+where $C_{mp}$, $C_p$, and $C_m$ are fixed, while $C_v=C_v(V)$.
+
+Then
+
+$$
+C_{\text{tot}}
+=
+C_{mp}
++
+\frac{C_m(C_v+C_p)}
+{C_m+C_v+C_p}.
+$$
+
+Using the chain rule,
+
+$$
+\frac{dC_{\text{tot}}}{dV}
+=
+\frac{\partial C_{\text{tot}}}{\partial C_v}
+\frac{dC_v}{dV}.
+$$
+
+Since
+
+$$
+\frac{\partial C_{\text{tot}}}{\partial C_v}
+=
+\frac{C_m^2}
+{(C_m+C_v+C_p)^2},
+$$
+
+we obtain
+
+$$
+\boxed{
+\frac{dC_{\text{tot}}}{dV}
+=
+\left(
+\frac{C_m}
+{C_m+C_v+C_p}
+\right)^2
+\frac{dC_v}{dV}
+}
+$$
+
+Therefore, the effective tuning sensitivity $dC_{\text{tot}}/dV$ is attenuated relative to the intrinsic varactor sensitivity $dC_v/dV$ by
+
+$$
+\left(
+\frac{C_m}
+{C_m+C_v+C_p}
+\right)^2
+$$
+
 
 
 ### Capacitor Bank

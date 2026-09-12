@@ -23,10 +23,9 @@ The DDSM performs **integer arithmetic** (equivalently, fixed-point with the bin
 
 ![image-20260602071603557](ddsm/image-20260602071603557.png)
 
-![image-20250824092757793](ddsm/image-20250824092757793.png)
-$$\begin{align}
-v[n] = \{0,1,2,...,M-1\} &\space\Rightarrow\space  y[n] = 0 \space\Rightarrow\space  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\} \\
-v[n] = \{M,M+1,M2,...,2M-1\} &\space\Rightarrow\space  y[n] = 1 \space\Rightarrow\space  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\}
+![image-20260911213529659](ddsm/image-20260911213529659.png)$$\begin{align}
+v[n] = \{0,1,2,...,M-1\} &\quad\Longrightarrow\quad  y[n] = 0 \quad\Longrightarrow\quad  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\} \\
+v[n] = \{M,M+1,M2,...,2M-1\} &\quad\Longrightarrow\quad  y[n] = 1 \quad\Longrightarrow\quad  e_q[n] = \{0, -\frac{1}{M},-\frac{2}{M},...,-\frac{M-1}{M}\}
 \end{align}$$
 
 > ![image-20250823232924985](ddsm/image-20250823232924985.png)
@@ -692,13 +691,35 @@ plt.show()
 
 ---
 
-> Harald Pretl, Radio-Frequency Integrated Circuits. 7.4 Fractional-N PLL [[note](https://iic-jku.github.io/radio-frequency-integrated-circuits/rfic.html#sec-pll-frac-n)] [[MASH Modulator (3rd Order) code](https://iic-jku.github.io/radio-frequency-integrated-circuits/content/pll/delta_sigma_modulator-preview.html)]
+> Harald Pretl, Radio-Frequency Integrated Circuits. 7.4 Fractional-N PLL [[note](https://iic-jku.github.io/radio-frequency-integrated-circuits/rfic.html#sec-pll-frac-n)] [[MASH Modulator (3rd Order) code](https://iic-jku.github.io/radio-frequency-integrated-circuits/content/pll/delta_sigma_modulator-preview.html)] [[github link](https://github.com/iic-jku/radio-frequency-integrated-circuits/blob/d3ef0c6f682c47eb8a9a9bc487aed8c437243680/content/pll/delta_sigma_modulator.ipynb)]
+
+3rd order MASH (1-1-1) modulator that converts a constant input value **(0-1)** into a multi-bit sequence
 
 ![image-20260307140247849](ddsm/image-20260307140247849.png)
 
+for this unipolar 1-bit implementation, the valid instantaneous input is:
+
+$$
+\boxed{0 \le x \le 1}
+$$
+At each stage, the accumulator is quantized to `0` or `1`, leaving the remainder:
+$$
+e_i = \text{accumulator}_i-y_i,\qquad 0\le e_i<1
+$$
 
 
 ```python
+# Parameters
+input_value = 0.125  # Constant input (0-1)
+sequence_length = 2**15  # Length of sequence
+display_samples = 100  # Number of samples to display in time plot
+dither_seed = 0  # RNG seed for reproducible dithering (None for random)
+
+# Dithering configurations to compare
+dither_amplitude_no_dither = 0.0  # No dithering
+dither_amplitude_with_dither = 0.000001  # With dithering
+
+
 # Stage 1: 1st order modulator with input signal
 self.integrator1 += input_value
 y1 = 1 if self.integrator1 >= 1.0 else 0
@@ -755,13 +776,73 @@ psd_no = 20 * np.log10(np.abs(fft_no) / N + 1e-12)
 
 > metroidman, 用Simulink Excel Mathematica三种不同工具从零搭建3阶ΣΔ调制器并进行时域和频率分析 [[link](https://www.bilibili.com/video/BV1cAFFzHERD/?share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
 
+<span style="color:white; background-color:black">output-feedback MASH 1-1-1 DDSM</span>
+
+
+
+
+
 ***Simulink***
+
+for a fractional frequency-control word:
+
+$$
+\mathrm{FCW} = \underbrace{\lfloor\mathrm{FCW}\rfloor}_{\text{integer}} + \underbrace{x}_{\text{fractional}}
+$$
+
+with the fractional part entering the MASH and the integer part added back at the output.
 
 ![image-20260506224056912](ddsm/image-20260506224056912.png)
 
 
 
+Each stage contains an accumulator
+
+$$
+H(z)=\frac{1}{1-z^{-1}}
+$$
+
+followed by a quantizer (`floor`), and the **quantizer output is fed back** around the accumulator. That is why it is called **output-feedback**
+
+For the three stages, using your labels, the quantization errors are approximately
+
+$$\begin{align}
+q_1&=u_1-y_1\\
+q_2&=u_2-y_2\\
+q_3&=u_3-y_3
+\end{align}$$
+
+The important MASH feature is that the quantization error of one stage drives the next stage:
+
+$$
+q_1 \rightarrow \text{stage 2}, \qquad q_2 \rightarrow \text{stage 3}
+$$
+
+At the top, the blocks labeled
+
+$$
+\frac{z-1}{z}=1-z^{-1}
+$$
+
+form the **digital noise-cancellation network**. Ignoring sign-convention differences, the MASH output has the standard form
+
+$$
+\boxed{ y_{\mathrm{MASH}} = y_1 + (1-z^{-1})y_2 + (1-z^{-1})^2y_3 }
+$$
+
+so that the first- and second-stage quantization errors cancel, leaving the third-stage error shaped by
+
+$$
+\boxed{ (1-z^{-1})^3}
+$$
+
+**with the usual additive quantizer-noise convention**, your $q_1,q_2,q_3$ are the **negative of the quantization errors**
+
+
+
 ***Excel***
+
+The table is consistent with the labels in your Simulink diagram
 
 ![image-20260505164717508](ddsm/image-20260505164717508.png)
 
@@ -785,7 +866,6 @@ Here is the breakdown of what is happening:
 ![image-20260906142413731](ddsm/image-20260906142413731.png)
 
 For each first-order stage,
-
 $$
 \begin{aligned}
 y_1 &=z^{-1}x+(1-z^{-1})q_1\\
@@ -793,15 +873,11 @@ y_2 &=-z^{-1}q_1+(1-z^{-1})q_2\\
 y_3 &=-z^{-1}q_2+(1-z^{-1})q_3
 \end{aligned}
 $$
-
 The error-cancellation network is
-
 $$
 y=z^{-2}y_1 +z^{-1}(1-z^{-1})y_2 +(1-z^{-1})^2y_3
 $$
-
 Substitute:
-
 $$
 \begin{aligned}
 y ={}&z^{-2}\left[z^{-1}x+(1-z^{-1})q_1\right] \\
@@ -809,25 +885,18 @@ y ={}&z^{-2}\left[z^{-1}x+(1-z^{-1})q_1\right] \\
 &+(1-z^{-1})^2 \left[-z^{-1}q_2+(1-z^{-1})q_3\right]
 \end{aligned}
 $$
-
 Now $q_1$ cancels:
-
 $$
 z^{-2}(1-z^{-1})q_1 -z^{-2}(1-z^{-1})q_1=0
 $$
-
 And $q_2$ cancels:
-
 $$
 z^{-1}(1-z^{-1})^2q_2 -z^{-1}(1-z^{-1})^2q_2=0
 $$
-
 What remains is
-
 $$
 \boxed{ y=z^{-3}x+(1-z^{-1})^3\textcolor{red}{q_3} }
 $$
-
 Only the last stage's quantization error survives — that is the defining property of a MASH.
 
 ![image-20260904224324472](ddsm/image-20260904224324472.png)
@@ -836,11 +905,9 @@ Only the last stage's quantization error survives — that is the defining prope
 - **non-delaying accumulators** style (**STF = 1**): <span style="background-color:yellow">no delays needed</span>
 
 So, in short:
-
 $$
 \boxed{\text{The delays are necessary in Fig. 3.10, but not universally necessary for MASH 1-1-1}}
 $$
-
 They compensate for the one-cycle STF delay introduced by each $\frac{z^{-1}}{1-z^{-1}}$ stage.
 
 | Realization    | First-order accumulator/integrator                       | Cancellation                                                 |
@@ -853,65 +920,45 @@ They compensate for the one-cycle STF delay introduced by each $\frac{z^{-1}}{1-
 
 
 From Eq. (9.47),
-
 $$
 N_{\text{frac}}[k] = C_1[k] +(1-z^{-1})C_2[k] +(1-z^{-1})^2 C_3[k]
 $$
-
 or
-
 $$
 N_{\text{frac}}[k] = C_1[k] +\big(C_2[k]-C_2[k-1]\big) +\big(C_3[k]-2C_3[k-1]+C_3[k-2]\big)
 $$
-
 Since each carry is one bit,
-
 $$
 C_i[k]\in\{0,1\}
 $$
-
 Therefore,
-
 $$
 C_1\in[0,1],\qquad (1-z^{-1})C_2\in[-1,1]
 $$
-
 and
-
 $$
 (1-z^{-1})^2C_3\in[-2,2]
 $$
-
 So the worst-case sum is
-
 $$
 \boxed{-3\le N_{\text{frac}}\le 4}
 $$
-
 A 3-bit two's-complement number only represents
-
 $$
 \boxed{-4,\ldots,+3}
 $$
-
 so it cannot represent $+4$. Therefore that implementation uses 4 bits:
-
 $$
 \boxed{\text{signed }[-3,+4]\Rightarrow 4\text{ bits}}
 $$
-
 whereas Fig. 3.14 uses
-
 $$
 \boxed{\text{8 encoded levels}\Rightarrow 3\text{ bits}}
 $$
-
 So the distinction is:
-
 $$
 \boxed{ \begin{array}{ll} 3\text{ bits} & \text{enough to encode the 8 possible levels with special coding},\\[2mm] 4\text{ bits} & \text{needed for straightforward signed two's-complement arithmetic.} \end{array}}
 $$
-
 
 
 So there is no fundamental disagreement:
@@ -920,6 +967,167 @@ $$
 $$
 
 The important fact is that a MASH 1-1-1 only needs to select **8 divider levels**; therefore the final divider control can indeed be implemented with **3 physical bits**.
+
+
+
+## MASH structures
+
+> MASH 1-1-1 DDSM — output feedback vs error feedback [[https://github.com/raytroop/mash_of_ef_int](https://github.com/raytroop/mash_of_ef_int)]
+
+
+
+<span style="color:white; background-color:black">Output-feedback (OF)</span>
+
+![mash_circuits-1 Output feedback – mash_of().drawio](ddsm/mash_circuits-1%20Output%20feedback%20%E2%80%93%20mash_of().drawio.svg)
+
+> ![image-20260506224056912](ddsm/image-20260506224056912.png)
+
+
+
+<span style="color:white; background-color:black">Error-feedback (EF), non-pipelined</span>
+
+![mash_circuits-2 Error feedback – mash_ef().drawio](ddsm/mash_circuits-2%20Error%20feedback%20%E2%80%93%20mash_ef().drawio.svg)
+
+
+
+<span style="color:white; background-color:black">Error-feedback (EF), pipelined</span>
+
+![mash_circuits-3 Error feedback, pipelined – mash_ef(pipelined).drawio](ddsm/mash_circuits-3%20Error%20feedback,%20pipelined%20%E2%80%93%20mash_ef(pipelined).drawio.svg)
+
+
+
+In a MASH 1-1-1, <span style="color:blue">**pipelined**</span> means registers are inserted between the three stages.
+
+At clock $n$:
+
+- **Non-pipelined:** Stage 2 uses Stage 1’s newly computed residue from clock $n$; Stage 3 similarly uses Stage 2’s new residue.
+- **Pipelined:** Stage 2 uses Stage 1’s residue from clock $n-1$, and Stage 3 uses Stage 2’s residue from clock $n-1$
+
+This allows all stages to **operate concurrently on different samples, shortening the hardware critical path**. The tradeoff is two clocks of latency, although throughput remains one output per clock after startup
+
+The noise-cancellation outputs must therefore be realigned:
+
+$$
+\boxed{y_1[n-2],\qquad y_2[n-1],\qquad y_3[n]}
+$$
+
+
+
+<span style="color:white; background-color:black">Output-feedback (OF), Exact integer model</span>
+
+![mash_circuits-4 Output feedback, integer – mash_of_int().drawio](ddsm/mash_circuits-4%20Output%20feedback,%20integer%20%E2%80%93%20mash_of_int().drawio.svg)
+
+The models add the integer part, so the average of `out` is $\text{ip} + k/M$, not $k/M$ alone. Call `mash_of_int(k, M, 0, …)` with $ip = 0$ and the average is exactly $k/M$
+$$
+\boxed{\operatorname{mean}(\text{out}) \to \text{integer}+\frac{k}{M}}
+$$
+
+
+
+```python
+def mash_ef_int(k, M, integer, n_samples, r_init=(0, 0, 0)):
+    r = list(r_init)
+    ncl_y3_prev = ncl_s_prev = 0
+    out, carries, residues = [], [], []
+    for _ in range(n_samples):
+        stage_in = k
+        y = [0, 0, 0]
+        for i in range(3):
+            a = r[i] + stage_in
+            y[i] = a // M
+            r[i] = a - M * y[i]
+            stage_in = r[i]
+        s = y[1] + (y[2] - ncl_y3_prev)
+        out.append(integer + y[0] + (s - ncl_s_prev))
+        ncl_y3_prev, ncl_s_prev = y[2], s
+        carries.append(tuple(y))
+        residues.append(tuple(r))
+    return out, carries, residues
+```
+
+```python
+# ---------------------------------------------------------------------------
+# Exact integer models: fractional input k/M, modulus M (hardware-style)
+# ---------------------------------------------------------------------------
+def mash_of_int(k, M, integer, n_samples, u_init=(0, 0, 0)):
+    u, y_prev = list(u_init), [0, 0, 0]
+    ncl_y3_prev = ncl_s_prev = 0
+    out, carries, residues, e3 = [], [], [], []
+    for _ in range(n_samples):
+        stage_in = k
+        y, q = [0, 0, 0], [0, 0, 0]
+        for i in range(3):
+            u[i] += stage_in - M * y_prev[i]
+            y[i] = u[i] // M
+            q[i] = u[i] - M * y[i]
+            stage_in = q[i]
+        s = y[1] + (y[2] - ncl_y3_prev)
+        out.append(integer + y[0] + (s - ncl_s_prev))
+        ncl_y3_prev, ncl_s_prev, y_prev = y[2], s, y
+        carries.append(tuple(y))
+        residues.append(tuple(q))
+        e3.append(M * y[2] - u[2])     # E3 = y3 - u3, in units of 1/M
+    return out, carries, residues, e3
+```
+
+
+
+
+
+<span style="color:white; background-color:black">Error-feedback (EF), Exact integer model</span>
+
+![mash_circuits-5 Error feedback, integer – mash_ef_int().drawio](ddsm/mash_circuits-5%20Error%20feedback,%20integer%20%E2%80%93%20mash_ef_int().drawio.svg)
+
+
+
+```python
+def mash_ef_int(k, M, integer, n_samples, r_init=(0, 0, 0)):
+    r = list(r_init)
+    ncl_y3_prev = ncl_s_prev = 0
+    out, carries, residues = [], [], []
+    for _ in range(n_samples):
+        stage_in = k
+        y = [0, 0, 0]
+        for i in range(3):
+            a = r[i] + stage_in
+            y[i] = a // M
+            r[i] = a - M * y[i]
+            stage_in = r[i]
+        s = y[1] + (y[2] - ncl_y3_prev)
+        out.append(integer + y[0] + (s - ncl_s_prev))
+        ncl_y3_prev, ncl_s_prev = y[2], s
+        carries.append(tuple(y))
+        residues.append(tuple(r))
+    return out, carries, residues
+```
+
+
+
+
+
+For both pairs, **`_int` means the same feedback structure implemented with exact integer arithmetic**, with internal signals scaled by a modulus $M$
+
+| Property        | `mash_ef` / `mash_of`                  | `mash_ef_int` / `mash_of_int`                                |
+| --------------- | -------------------------------------- | ------------------------------------------------------------ |
+| Input           | Floating-point `fcw`                   | Separate `integer`, `k`, `M`, representing $FCW=\text{integer}+k/M$ |
+| Internal states | Floating-point values                  | Integers scaled by $M$                                       |
+| Residue range   | $0\le r<1$                             | $0\le R<M$                                                   |
+| Quantization    | `floor(value)`                         | `value // M`                                                 |
+| Arithmetic      | Double precision; rounding is possible | Exact for integer arguments                                  |
+
+```python
+print("T5  Fixed-point, exhaustive: 8 bits (M = 256), every k, IC 0 and 1, 2M samples")
+M, bad = 256, 0
+for k in range(M):
+    for ic in (0, 1):
+        a = mash_of_int(k, M, 0, 2 * M, u_init=(ic, 0, 0))[:3]
+        b = mash_ef_int(k, M, 0, 2 * M, r_init=(ic, 0, 0))
+        # Python compares all these nested contents recursively, so a != b is a single True if any value differs.
+        bad += a != b
+print("    mismatching (k, IC) cases: %d of %d" % (bad, 2 * M))
+```
+
+
 
 
 

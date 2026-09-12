@@ -779,9 +779,9 @@ The look-ahead multiplexing technique brings the key benefit that the timing con
 
 
 
-## MASH111 in Verilog
+## MASH 1-1-1 in Verilog
 
-> [[https://github.com/raytroop/dsmwk](https://github.com/raytroop/dsmwk)]
+> MASH-1-1-1 Noise-Shaping Truncator (DLF → DAC) [[https://github.com/raytroop/dsmwk](https://github.com/raytroop/dsmwk)]
 
 Digital block between a **20-bit digital loop filter (DLF) output** and an **8-bit DAC input**. The 12 truncated LSBs are pushed through a MASH-1-1-1 delta-sigma modulator so the truncation error is 3rd-order noise-shaped instead of lost:
 

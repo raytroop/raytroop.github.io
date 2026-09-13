@@ -17,6 +17,10 @@ mathjax: true
 
 ![image-20250825173843550](adc-calib/image-20250825173843550.png)
 
+**Walden FoM unit**: <span style="color:blue">**J/conv-step**</span>
+
+
+
 ![image-20260503113513018](adc-calib/image-20260503113513018.png)
 
 ![image-20260503092050266](adc-calib/image-20260503092050266.png)

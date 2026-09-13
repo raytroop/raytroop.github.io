@@ -344,8 +344,13 @@ ampling Jitter Effects for *ADC/DAC*
 
 ## DAC Linearity (DNL/INL)
 
+![image-20241215101400962](ad-da/image-20241215101400962.png)
 
-***DAC DNL***
+> The worst INL of three DAC Architecture is same
+
+![image-20260913165357043](ad-da/image-20260913165357043.png)
+
+<span style="color:white; background-color:black">***DAC DNL***</span>
 
 One difference between ADC and DAC is that *DAC DNL can be less than -1 LSB*
 
@@ -353,25 +358,26 @@ One difference between ADC and DAC is that *DAC DNL can be less than -1 LSB*
 
 ![image-20241006215420568](ad-da/image-20241006215420568.png)
 
----
+![image-20260913124553643](ad-da/image-20260913124553643.png)
+
+
 
 ---
 
+---
 
-***DAC INL***
+<span style="color:white; background-color:black">***DAC INL***</span>
 
-![image-20241215101400962](ad-da/image-20241215101400962.png)
 
-> The worst INL of three DAC Architecture is same
 
-![image-20241215110708021](ad-da/image-20241215110708021.png)
+![image-20260913165242029](ad-da/image-20260913165242029.png)
 
 - $A = \sum_{j=1}^k I_j$, $B=\sum_{j=k+1}^N I_j$
 - A and B are independent with $\sigma_A^2 = k\sigma_u^2$ and $\sigma_B^2=(N-k)\sigma_u^2$
 
 Therefore
 $$
-\mathrm{Var}\left(\frac{X}{Y}\right)\simeq \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{\mathrm{cov}(X,Y)}{kNI_u^2}\right)
+\mathrm{Var}\left(\frac{X}{Y}\right)\approx \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{\mathrm{cov}(X,Y)}{kNI_u^2}\right)
 $$
 and
 $$\begin{align}
@@ -383,11 +389,11 @@ $$\begin{align}
 
 Finally,
 $$
-\mathrm{Var}\left(\frac{X}{Y}\right)\simeq \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{k\sigma_i^2}{kNI_u^2}\right) = \frac{k^2}{N^2}\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2
+\mathrm{Var}\left(\frac{X}{Y}\right)\approx \frac{k^2}{N^2}\left(\frac{\sigma_i^2}{kI_u^2} + \frac{\sigma_i^2}{NI_u^2} -2\frac{k\sigma_i^2}{kNI_u^2}\right) = \frac{k^2}{N^2}\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2
 $$
 i.e.
 $$
-\mathrm{Var(INL(k))} = k^2\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2 = k\left(1- \frac{k}{N}\right)\sigma_u^2
+\boxed{\mathrm{Var(INL(k))} = k^2\left(\frac{1}{k}- \frac{1}{N}\right)\sigma_u^2 = k\left(1- \frac{k}{N}\right)\sigma_u^2}
 $$
 
 
@@ -850,9 +856,11 @@ $\Gamma_x$ is  ***no-overload range***
 
 
 
-## Track Time
+## Tracking Settling Accuracy
 
-![image-20250729005114037](ad-da/image-20250729005114037.png)
+![image-20260913185637548](ad-da/image-20260913185637548.png)
+
+![image-20260913185723050](ad-da/image-20260913185723050.png)
 
 ---
 
@@ -861,12 +869,10 @@ $\Gamma_x$ is  ***no-overload range***
 
 ---
 
-Finite Acquisition Time - Consider a sinusoidal input
-
-> utilizing Laplace transform pair
+Finite Acquisition Time - Consider a **sinusoidal input**
 
 $$\begin{align}
-V_\text{in}(t)=\cos{\omega t+\theta} & \overset{\mathcal{L}}{\Rightarrow} \frac{s\cos \theta-\omega \sin \theta}{s^2+\omega^2} \\
+V_\text{in}(t)=\cos(\omega t+\theta) & \overset{\mathcal{L}}{\Rightarrow} \frac{s\cos \theta-\omega \sin \theta}{s^2+\omega^2} \\
 h(t) & \overset{\mathcal{L}}{\Rightarrow} \frac{\frac{1}{\tau}}{s+\frac{1}{\tau}}
 \end{align}$$
 
@@ -880,21 +886,95 @@ V_\text{out}(s) &= V_\text{in}(s)\cdot H(s) \\
 
 Obtain,
 
-$$\begin{align}
-A &= -\frac{\cos(\theta - \phi)}{\sqrt{\tau ^2 \omega^2 +1}} \\
-B & = -A \\
-C &= -\frac{\omega \sin(\theta - \phi)}{\sqrt{\tau ^2 \omega^2 +1}}
-\end{align}$$
+$$
+A = -\frac{\cos(\theta - \phi)}{\sqrt{ \omega^2\tau ^2 +1}} \qquad\qquad B  = -A \qquad\qquad C = -\frac{\omega \sin(\theta - \phi)}{\sqrt{\omega^2\tau ^2 +1}}
+$$
 
 That is
 $$
-V_\text{out}(s) = -\frac{\cos(\theta - \phi)}{\sqrt{\tau ^2 \omega^2 +1}} \frac{1}{s+\frac{1}{\tau}} + \frac{1}{\sqrt{\tau ^2 \omega^2 +1}}\frac{s\cos(\theta - \phi) - \omega \sin(\theta - phi)}{s^2+\omega^2}
+\boxed{V_\text{out}(s) = -\frac{\cos(\theta - \phi)}{\sqrt{\omega^2\tau ^2 +1}} \frac{1}{s+\frac{1}{\tau}} + \frac{1}{\sqrt{\omega^2\tau ^2 +1}}\frac{s\cos(\theta - \phi) - \omega \sin(\theta - \phi)}{s^2+\omega^2}}
 $$
 
 where $\phi = \arctan(\omega \tau)$
 
-> Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
+The relation $V_\text{out}(s) = H(s)\,V_\text{in}(s)$ is the **zero-state response** only. The transfer function is defined under the assumption $V_\text{out}(0^-) = 0$, so you can't recover the **natural response** from it. You have to go back one step, to the **differential equation**.
 
+For the RC (track) network with $\tau = RC$:
+
+$$
+\tau \dot{V}_\text{out} + V_\text{out} = V_\text{in}
+$$
+
+Transform with the full derivative rule $\mathcal{L}\{\dot{V}_\text{out}\} = s V_\text{out}(s) - V_0$, where $V_0 \equiv V_\text{out}(0^-)$ (the capacitor voltage is continuous, so $0^-$ and $0^+$ agree):
+$$
+\tau\big(s V_\text{out}(s) - V_0\big) + V_\text{out}(s) = V_\text{in}(s)
+$$
+
+$$
+\boxed{\;V_\text{out}(s)
+= \underbrace{\frac{V_\text{in}(s)}{\tau s + 1}}_{\text{zero-state}}
++ \underbrace{\frac{\tau V_0}{\tau s + 1}}_{\text{zero-input}}
+= H(s)\,V_\text{in}(s) + \frac{V_0}{s + \frac{1}{\tau}}\;}
+$$
+
+Then the **Complete Laplace Expression** is
+$$
+\boxed{V_\text{out}(s) = -\frac{\cos(\theta - \phi)}{\sqrt{\omega^2\tau ^2 +1}} \frac{1}{s+\frac{1}{\tau}} + \frac{1}{\sqrt{\omega^2\tau ^2 +1}}\frac{s\cos(\theta - \phi) - \omega \sin(\theta - \phi)}{s^2+\omega^2} + \frac{V_\text{out}(0)}{s + \frac{1}{\tau}} }
+$$
+The **Total Time-Domain Solution**
+$$
+\boxed{V_{\text{out}}(t) = \underbrace{V_{\text{out}}(0)e^{-\frac{t}{\tau}}}_{\text{Pure Natural Response}} + \underbrace{\frac{1}{\sqrt{\omega^2\tau^2 + 1}} \left[ \cos(\omega t + \theta - \phi) - \cos(\theta - \phi) e^{-\frac{t}{\tau}} \right]}_{\text{Forced Response (Transient + Steady-State)}}
+}
+$$
+And grouped by transient vs. steady-state components:
+$$
+\boxed{V_{\text{out}}(t) = \underbrace{\left[ V_{\text{out}}(0) - \frac{\cos(\theta - \phi)}{\sqrt{\omega^2\tau^2 + 1}} \right] e^{-\frac{t}{\tau}}}_{\text{Total Transient Response}} + \underbrace{\frac{\cos(\omega t + \theta - \phi)}{\sqrt{\omega^2\tau^2 + 1}}}_{\text{Steady-State Response}}}
+$$
+
+
+![image-20260913181152511](ad-da/image-20260913181152511.png)
+
+
+
+![image-20260913185936010](ad-da/image-20260913185936010.png)
+
+
+
+
+
+![image-20260913190230077](ad-da/image-20260913190230077.png)
+
+
+
+## DAC Settling Accuracy
+
+**In a SAR conversion the DAC doesn't move by full scale** — the **MSB trial is the largest single step**, and it is exactly **half of full scale**. Subsequent trials step by $V_{FS}/4$, $V_{FS}/8$, … So the MSB transition ($\color{red}0 \to V_{FS}/2$) is the worst case, and if it settles in the allotted per-bit time, every later trial does too.
+
+<span style="color:white; background-color:black">The accuracy criterion</span>
+
+The settling error must stay below half an LSB, where $\text{LSB} = V_{FS}/2^{n}$:
+
+$$
+\frac{V_{FS}}{2} - V_{DAC}(t_{settle}) \;\le\; \frac{1}{2}\cdot\frac{V_{FS}}{2^{n}} = \frac{V_{FS}}{2^{\,n+1}}
+$$
+
+Rearranged
+$$
+V_{DAC}(t_{settle}) \ge V_{FS}\left(\frac{1}{2}-\frac{1}{2^{n+1}}\right)
+$$
+
+<span style="color:white; background-color:black">Solving for the time</span>
+$$
+\frac{V_{FS}}{2}e^{-t_{settle}/\tau} \le \frac{V_{FS}}{2^{\,n+1}} \;\Longrightarrow\; e^{-t_{settle}/\tau} \le 2^{-n}
+$$
+
+$$
+\boxed{\;t_{settle} \ge n\,\tau\ln 2 \approx 0.693\,n\,\tau\;}
+$$
+
+| $n$ | 8 | 10 | 12 | 14 | 16 |
+|---|---|---|---|---|---|
+| $t_{settle}/\tau$ | 5.5 | 6.9 | 8.3 | 9.7 | 11.1 |
 
 
 

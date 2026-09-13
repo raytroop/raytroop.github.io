@@ -11,9 +11,9 @@ mathjax: true
 
 ![f-mdl.drawio](ti-adc/f-mdl.drawio.svg)
 
+![image-20260913094812184](ti-adc/image-20260913094812184.png)
 
 
-![image-20250903212048962](ti-adc/image-20250903212048962.png)
 
 ## resync (alignment)
 
@@ -265,6 +265,66 @@ $$
 > E. -H. Chen *et al*., "7.1 A 212.5Gb/s DSP-Based PAM-4 Transceiver with 50dB Loss Compensation for Large AI System Interconnects in 4nm FinFET," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025
 
 *TODO* &#128197;
+
+
+
+
+
+## DNL/INL Benefit
+
+Each sub-ADC has its **own physical capacitor array**, so each slice has its own independent, zero-mean mismatch error
+
+Because the sub-ADC are sampled round-robin, *a busy input signal* visits all $N$ sub-ADC with equal probability over the whole input range. The transfer curve that the *composite* output presents is therefore the **ensemble average**
+$$
+e_{\mathrm{eff}}(k)
+=
+\frac{1}{N}\sum_{i=1}^{N} e_i(k)
+\quad\Rightarrow\quad
+\sigma\!\left\{e_{\mathrm{eff}}(k)\right\}
+=
+\frac{\sigma\{e_i(k)\}}{\textcolor{red}{\sqrt{N}}}
+$$
+the measured static DNL/INL genuinely improves by $\sqrt{N}$ at **code-density (histogram)** test
+
+The composite result
+$$
+\boxed{\sigma_{DNL,\max}^{TI}
+=
+\frac{\sigma_{\text{sub},DNL}}{\sqrt{N}},
+\qquad
+\sigma_{INL,\max}^{TI}
+=
+\frac{\sigma_{\text{sub},INL}}{\sqrt{N}}}
+$$
+where $N$ is channel number
+
+
+
+<span style="color:white; background-color:black">Conventional binary array  sub-SARADC</span>
+$$
+\sigma_{DNL,\max}=\sqrt{2^n-1}\,\frac{\sigma_u}{C_u}\,[\mathrm{LSB}],
+\qquad
+\sigma_{INL,\max}=\frac{\sqrt{2^n}}{2}\,\frac{\sigma_u}{C_u}\,[\mathrm{LSB}]
+$$
+<span style="color:white; background-color:black">VCM-based ($n-1$ bit array)  sub-SARADC</span>
+
+In a VCM-based (top-plate-sampled, tri-level) SAR, the MSB decision needs **no capacitor switching at all** — it's a direct comparison against $V_{CM}$
+$$
+\sigma^{VCM}_{DNL,\max}
+=
+\sqrt{2^{n-1}-1}\,\frac{\sigma_u}{C_u},
+\qquad
+\sigma^{VCM}_{INL,\max}
+=
+\frac{\sqrt{2^{n-1}}}{2}\,\frac{\sigma_u}{C_u}
+\qquad
+\text{at } k=2^{n-2},\,3\cdot 2^{n-2}
+$$
+
+
+---
+
+![image-20260913173227688](ti-adc/image-20260913173227688.png)
 
 
 

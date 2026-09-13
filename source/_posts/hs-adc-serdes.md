@@ -13,6 +13,75 @@ mathjax: true
 
 
 
+## Timing Skew for Broadband signals
+
+> M. El-Chammas and B. Murmann, "General Analysis on the Impact of Phase-Skew Mismatch in Time-Interleaved ADCs," IEEE Trans. on Circuits and Systems I, vol. 56, No. 5, pp. 902-910, May 2009 [[https://sci-hub.ru/10.1109/TCSI.2009.2015206](https://sci-hub.ru/10.1109/TCSI.2009.2015206)]
+>
+> —, "Background Calibration of Timing Skew in Time-Interleaved A/D Converters," Ph.D. Thesis, Stanford University, August 2010 [[https://purl.stanford.edu/xc093xt9301](https://purl.stanford.edu/xc093xt9301)]
+>
+> —, "Time-Interleaved ADCs: Theory and Design," Tutorial in IEEE International Conf. on Elec., Circ., and Sys., Lebanon, December 2011 [[https://el-chammas.com/papers/Manar_ICECS_handouts.pdf](https://el-chammas.com/papers/Manar_ICECS_handouts.pdf)]
+>
+> —, "The World of Time-Interleaved ADCs: From Theory to Design," Tutorial in IEEE International NEWCAS Conf., Montreal, Canada, June 2012 [[https://el-chammas.com/papers/Manar_NEWCAS_TIADC_tutorial.pdf](https://el-chammas.com/papers/Manar_NEWCAS_TIADC_tutorial.pdf)]
+
+![image-20260913202344592](hs-adc-serdes/image-20260913202344592.png)
+
+
+
+<span style="color:white; background-color:black">"Best-fit" approach</span>
+
+![image-20260913213529847](hs-adc-serdes/image-20260913213529847.png)
+
+Using a **normalized autocorrelation** (or equivalently assuming <span style="color:#FF5733">**unit signal power**</span>) — $\color{red}R(\tau) = \frac{R_x(\tau)}{R_x(0)}$
+
+![image-20260913215052664](hs-adc-serdes/image-20260913215052664.png)
+
+For this ideal low-pass-filtered white-noise input,
+
+$$
+\boxed{ \frac{1}{|R''(0)|} = \frac{3}{4\pi^2f_c^2}}
+$$
+
+Notice the difference from the sinusoidal case: for a sinusoid,
+
+$$
+|R''(0)|=(2\pi f)^2
+$$
+
+whereas for ideal LPF white noise,
+
+$$
+\boxed{ |R''(0)|=\textcolor{red}{\frac{1}{3}}(2\pi f_c)^2}
+$$
+
+That factor of $1/3$ comes from averaging all frequencies uniformly from $-f_c$ to $f_c$, rather than having all the signal power concentrated at a single frequency
+
+
+
+<span style="color:white; background-color:black">The sinusoidal approach</span>
+
+![image-20260913204139288](hs-adc-serdes/image-20260913204139288.png)
+
+
+
+
+
+---
+
+> Boris Murmann, August 2013 Lectures on Circuit and Architecture Design for High-Speed ADCs — *Determining ADC specs from system specs* [[https://bbs.eetop.cn/thread-979682-1-1.html](https://bbs.eetop.cn/thread-979682-1-1.html)]
+
+![image-20260913205226885](hs-adc-serdes/image-20260913205226885.png)
+
+
+
+![image-20260913223921349](hs-adc-serdes/image-20260913223921349.png)
+
+
+
+
+
+
+
+
 ## BER with Quantization Noise
 
 ![image-20240804110522955](hs-adc-serdes/image-20240804110522955.png)

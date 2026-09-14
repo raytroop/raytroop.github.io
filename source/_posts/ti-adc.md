@@ -385,7 +385,7 @@ Poulton, Ken. ISSCC2009  "Time-Interleaved ADCs, Past and Future" [(slides)](htt
 
 Ewout Martens. ESSCIRC 2019 Tutorials: Advanced Techniques for ADCs for 5G Massive MIMO [[https://youtu.be/7hYichGGU6k](https://youtu.be/7hYichGGU6k)]
 
-Athanasios Ramkaj. January 26, 2022, IEEE SSCS Santa Clara Valley Section Technical Talk: Design Considerations Towards Optimal High-Resolution Wide-Bandwidth Time-Interleaved ADCs [[https://youtu.be/k3jY9NtfYlY](https://youtu.be/k3jY9NtfYlY)]
+Athanasios Ramkaj. January 26, 2022, IEEE SSCS Santa Clara Valley Section Technical Talk: Design Considerations Towards Optimal High-Resolution Wide-Bandwidth Time-Interleaved ADCs [[https://youtu.be/k3jY9NtfYlY](https://youtu.be/k3jY9NtfYlY)] [[slides](https://r6.ieee.org/scv-sscs/wp-content/uploads/sites/80/2022/02/Thanos-Ramkaj-SCV-Talk-01-26-22.pdf)]
 
 ---
 

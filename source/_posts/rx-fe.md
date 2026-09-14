@@ -481,13 +481,27 @@ trade-offs between *noise amplification* and *signal equalization*
 
 ![image-20260801022107783](rx-fe/image-20260801022107783.png)
 
+
+
+## CTLE paper
+
+> J. Im *et al*., "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 1, pp. 7-18, Jan. 2021, doi: 10.1109/JSSC.2020.3024261
+>
+> A. Khairi *et al*., "A 1.41-pJ/b 224-Gb/s PAM4 6-bit ADC-Based SerDes Receiver With Hybrid AFE Capable of Supporting Long Reach Channels," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 1, pp. 8-18, Jan. 2023, doi: 10.1109/JSSC.2022.3211475
+>
+> D. Pfaff *et al*., "A 224 Gb/s 3 pJ/bit 40 dB Insertion Loss Transceiver in 3-nm FinFET CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 60, no. 1, pp. 9-22, Jan. 2025, doi: 10.1109/JSSC.2024.3466092
+
+
+
+
+
 ## reference
 
 J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[paper](https://sci-hub.jp/10.1109/ISSCC.2018.8310204)] [[slides](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf)]
 
 Miguel Gandara. CICC2025 Circuits Insights: Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg](https://youtu.be/X4JTuh2Gdzg)]
 
-Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers" [[pdf](https://picture.iczhiku.com/resource/eetop/wHKfZPYpAleAKXBV.pdf)]
+Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers"
 
 Byungsub Kim,  ISSCC 2022, "T11: Basics of Equalization Techniques: Channels, Equalization, and Circuits"
 

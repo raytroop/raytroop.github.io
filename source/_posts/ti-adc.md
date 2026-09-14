@@ -7,6 +7,10 @@ categories:
 mathjax: true
 ---
 
+![image-20260914193314752](ti-adc/image-20260914193314752.png)
+
+
+
 ## Frequency Domain Model
 
 ![f-mdl.drawio](ti-adc/f-mdl.drawio.svg)
@@ -15,50 +19,39 @@ mathjax: true
 
 
 
-## resync (alignment)
-
-*TODO* &#128197;
 
 
 
 
+## Interleaver Architectures
 
-## Multi-Phase Clock Generation (MPCG)
-
-*TODO* &#128197;
-
-
-![image-20250611222614434](ti-adc/image-20250611222614434.png)
-
-## Interleaver
-
-![image-20250621094704819](ti-adc/image-20250621094704819.png)
+![image-20260914194340521](ti-adc/image-20260914194340521.png)
 
 
 
-### Direct Interleaver
+<span style="color:white; background-color:black">Direct Interleaver</span>
 
-![image-20250621101542418](ti-adc/image-20250621101542418.png)
-
-
+![image-20260914194944454](ti-adc/image-20260914194944454.png)
 
 > similar to increase the resolution of the flash ADC with *more* parallel comparators
 
 
 
-### De-multiplexing Interleaver
-
-![image-20250621103205333](ti-adc/image-20250621103205333.png)
 
 
+<span style="color:white; background-color:black">De-multiplexing Interleaver</span>
 
-> it is the *front-end samplers* that determine *timing/bandwidth mismatch errors*
+![image-20260914200548166](ti-adc/image-20260914200548166.png)
+
+it is the *front-end samplers* that determine *timing/bandwidth mismatch errors*
+
+only one front-end channel $L=1$ eliminate any timing/bandwidth mismatch errors to the first order
 
 
 
-### Re-sampling Interleaver
+<span style="color:white; background-color:black">Re-sampling Interleaver</span>
 
- ![image-20250621111119041](ti-adc/image-20250621111119041.png)
+ ![image-20260914195228805](ti-adc/image-20260914195228805.png)
 
 
 
@@ -76,71 +69,76 @@ mathjax: true
 
 
 
-### Interleaver Model
+<span style="color:white; background-color:black">Interleaver Model</span>
 
-![image-20250621112657111](ti-adc/image-20250621112657111.png)
-
-
+![image-20260914195326519](ti-adc/image-20260914195326519.png)
 
 
 
 ## Interleaving Errors
 
-![image-20250621072540691](ti-adc/image-20250621072540691.png)
-
-![image-20250621093552545](ti-adc/image-20250621093552545.png)
+![image-20260914202358169](ti-adc/image-20260914202358169.png)
 
 
 
-### Offset Mismatch Error
-
-![image-20250621072621033](ti-adc/image-20250621072621033.png)
 
 
+<span style="color:white; background-color:black">Offset Mismatch Errors</span>
 
-### Gain Mismatch Error
+![image-20260914202446007](ti-adc/image-20260914202446007.png)
 
-![image-20250621072824275](ti-adc/image-20250621072824275.png)
+
+
+<span style="color:white; background-color:black">Gain Mismatch Errors</span>
+
+![image-20260914202550362](ti-adc/image-20260914202550362.png)
 
 ![image-20250621072944516](ti-adc/image-20250621072944516.png)
 
-
-
-### Timing Mismatch Error
-
-![image-20250621090407014](ti-adc/image-20250621090407014.png)
-
-$\pi/2$-rad phase: the maximum error occurs at the ***zero crossing*** and not on the peaks (Gain Mismatch error)
-
-Frequency-dependent: the *higher* frequency input signal $f_\text{in}$, the *larger* error becomes
-
-> ![image-20250621091024424](ti-adc/image-20250621091024424.png)
->
-> ![image-20250621091047339](ti-adc/image-20250621091047339.png)
->
-> $\pi/2$ phase shift
-> $$
-> e^{j\pi/2} = j
-> $$
-> frequency-dependent
-> $$
-> V^{'} \propto  f
-> $$
->
-> In time domain
-> $$
-> \frac{\mathrm{d}\sin(\omega t)}{\mathrm{d}t} = \omega \cos(\omega t) \propto \omega
-> $$
+![image-20260914210022880](ti-adc/image-20260914210022880.png)
 
 
 
+<span style="color:white; background-color:black">Timing Mismatch Errors</span>
+
+![image-20260914204512858](ti-adc/image-20260914204512858.png)
+
+In frequency domain
+$$
+\mathcal{L}\left\{ \frac{\mathrm{d}V(t)}{\mathrm{d}t} \right\} \xrightarrow{\quad} sV(s)=j\omega V(j\omega)
+$$
+$\color{blue}\pi/2$ phase shift come from $j = e^{j\color{blue}\pi/2}$
+
+In time domain
+$$
+\frac{\mathrm{d}\sin(\omega t)}{\mathrm{d}t} = \omega \cos(\omega t) \propto \omega
+$$
+
+**Frequency-dependent**: the *higher* frequency input signal $f_\text{in}$, the *larger* error becomes
+
+![image-20250621091024424](ti-adc/image-20250621091024424.png)
+
+![image-20260914210257078](ti-adc/image-20260914210257078.png)
+
+![image-20250621091047339](ti-adc/image-20250621091047339.png)
 
 
-### Bandwidth Mismatch Errors
 
-![image-20250621092214162](ti-adc/image-20250621092214162.png)
+
+
+<span style="color:white; background-color:black">Bandwidth Mismatch Errors</span>
+
+![image-20260914202752033](ti-adc/image-20260914202752033.png)
 
 > ![image-20250621093321623](ti-adc/image-20250621093321623.png)
+
+
+
+## resync (alignment)
+
+*TODO* &#128197;
+
+
 
 ## Calibration Techniques
 
@@ -385,7 +383,7 @@ Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ie
 
 John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs"
 
-Athanasios Ramkaj. January 26, 2022, IEEE SSCS Santa Clara Valley Section Technical Talk: Design Considerations Towards Optimal High-Resolution Wide-Bandwidth Time-Interleaved ADCs [[https://youtu.be/k3jY9NtfYlY](https://youtu.be/k3jY9NtfYlY)] [[slides](https://r6.ieee.org/scv-sscs/wp-content/uploads/sites/80/2022/02/Thanos-Ramkaj-SCV-Talk-01-26-22.pdf)]
+Athanasios Ramkaj. January 26, 2022, IEEE SSCS Santa Clara Valley Section Technical Talk: Design Considerations Towards Optimal High-Resolution Wide-Bandwidth Time-Interleaved ADCs [[video](https://youtu.be/k3jY9NtfYlY)] [[slides](https://r6.ieee.org/scv-sscs/wp-content/uploads/sites/80/2022/02/Thanos-Ramkaj-SCV-Talk-01-26-22.pdf)]
 
 ---
 

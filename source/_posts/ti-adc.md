@@ -103,16 +103,35 @@ only one front-end channel $L=1$ eliminate any timing/bandwidth mismatch errors 
 
 ![image-20260914204512858](ti-adc/image-20260914204512858.png)
 
-In frequency domain
-$$
-\mathcal{L}\left\{ \frac{\mathrm{d}V(t)}{\mathrm{d}t} \right\} \xrightarrow{\quad} sV(s)=j\omega V(j\omega)
-$$
-$\color{blue}\pi/2$ phase shift come from $j = e^{j\color{blue}\pi/2}$
 
-In time domain
+In the frequency domain,
+
 $$
-\frac{\mathrm{d}\sin(\omega t)}{\mathrm{d}t} = \omega \cos(\omega t) \propto \omega
+\mathcal{L}\left\{ \frac{dV(t)}{dt} \right\}
+\;\longrightarrow\;
+sV(s)
+\quad\text{and, for }s=j\omega,\quad
+j\omega V(j\omega).
 $$
+
+The factor
+
+$$
+j=e^{j\pi/2}
+$$
+
+introduces a **$+\pi/2$ (90°) phase shift**, while $\omega$ scales the magnitude proportionally to frequency.
+
+In the time domain,
+
+$$
+\frac{d}{dt}\sin(\omega t)
+=\omega\cos(\omega t)
+=\omega\sin\left(\omega t+\frac{\pi}{2}\right).
+$$
+
+Thus, differentiation produces two effects: **magnitude scaling by $\omega$** and a **$90^\circ$ phase advance**.
+
 
 **Frequency-dependent**: the *higher* frequency input signal $f_\text{in}$, the *larger* error becomes
 

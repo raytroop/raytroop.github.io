@@ -723,3 +723,4 @@ Carsten Wulff , Oversampling and Sigma-Delta ADCs [[https://analogicus.com/aic20
 
 PDM Microphones and Sigma-Delta A/D Conversion [[https://tomverbeure.github.io/2020/10/04/PDM-Microphones-and-Sigma-Delta-Conversion.html](https://tomverbeure.github.io/2020/10/04/PDM-Microphones-and-Sigma-Delta-Conversion.html)]
 
+Dan Boschen Why use a 1-bit ADC in a Sigma Delta Modulator?. [[https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063](https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063)]

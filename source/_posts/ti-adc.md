@@ -79,7 +79,7 @@ only one front-end channel $L=1$ eliminate any timing/bandwidth mismatch errors 
 
 ![image-20260914202358169](ti-adc/image-20260914202358169.png)
 
-
+![image-20260915213004819](ti-adc/image-20260915213004819.png)
 
 
 
@@ -404,9 +404,11 @@ John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs"
 
 Athanasios Ramkaj. January 26, 2022, IEEE SSCS Santa Clara Valley Section Technical Talk: Design Considerations Towards Optimal High-Resolution Wide-Bandwidth Time-Interleaved ADCs [[video](https://youtu.be/k3jY9NtfYlY)] [[slides](https://r6.ieee.org/scv-sscs/wp-content/uploads/sites/80/2022/02/Thanos-Ramkaj-SCV-Talk-01-26-22.pdf)]
 
+V. Chen, "Tutorial: High-Speed Analog-to-Digital Converters," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 1-1, doi: 10.1109/ISSCC49661.2025.11076112.
+
 ---
 
-Ahmed M. A. Ali 2016, "High Speed Data Converters" [[pdf](https://picture.iczhiku.com/resource/eetop/sYKhdRGJFFGyZbcB.pdf)]
+Ahmed M. A. Ali 2016, "High Speed Data Converters"
 
 Razavi, B. (2025). *Analysis and design of data converters*. Cambridge University Press.
 

@@ -22,8 +22,6 @@ mathjax: true
 > —, "Time-Interleaved ADCs: Theory and Design," Tutorial in IEEE International Conf. on Elec., Circ., and Sys., Lebanon, December 2011 [[https://el-chammas.com/papers/Manar_ICECS_handouts.pdf](https://el-chammas.com/papers/Manar_ICECS_handouts.pdf)]
 >
 > —, "The World of Time-Interleaved ADCs: From Theory to Design," Tutorial in IEEE International NEWCAS Conf., Montreal, Canada, June 2012 [[https://el-chammas.com/papers/Manar_NEWCAS_TIADC_tutorial.pdf](https://el-chammas.com/papers/Manar_NEWCAS_TIADC_tutorial.pdf)]
->
-> —, "A 12-GS/s 81-mW 5-bit Time-Interleaved Flash ADC With Background Timing Skew Calibration," in IEEE Journal of Solid-State Circuits, vol. 46, no. 4, pp. 838-847, April 2011
 
 ![image-20260913202344592](hs-adc-serdes/image-20260913202344592.png)
 
@@ -81,6 +79,84 @@ That factor of $1/3$ comes from averaging all frequencies uniformly from $-f_c$ 
 
 
 
+---
+
+> M. El-Chammas and B. Murmann, "A 12-GS/s 81-mW 5-bit Time-Interleaved Flash ADC With Background Timing Skew Calibration," in *IEEE Journal of Solid-State Circuits*, vol. 46, no. 4, pp. 838-847, April 2011 [[https://sci-hub.ru/10.1109/JSSC.2011.2108125](https://sci-hub.ru/10.1109/JSSC.2011.2108125)]
+
+![image-20260915201208259](hs-adc-serdes/image-20260915201208259.png)
+
+![image-20260915202457064](hs-adc-serdes/image-20260915202457064.png)
+
+> The total simulated correction range was **32 ps** with a step size of approximately **0.25 ps**
+>
+> Ts = 1/12G=84 ps. correction range is about half Ts
+
+
+
+|                          | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    |
+| ------------------------ | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| $\phi_1$                 | 0    | 8    | 16   | 24   | 32   | 40   | 48   | 56   | 64   |
+| $\phi_{CAL}$             | 0    | 9    | 18   | 27   | 36   | 45   | 54   | 63   | 72   |
+| $(\phi_{CAL}-\phi_1)\%8$ | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 0    |
+
+Let the calibration clock be
+
+$$
+t_{\mathrm{CAL}}[m]=\delta+9mT_s
+$$
+
+where $\delta$ is an arbitrary initial phase.
+
+For ADC $i$, its ideal sampling instants are
+
+$$
+t_i[k]=iT_s+8kT_s
+$$
+
+The time difference is
+
+$$
+\Delta t = \delta+9mT_s-iT_s-8kT_s
+$$
+
+Because $\gcd(9,8)=1$, the quantity
+
+$$
+9m-i-8k
+$$
+
+can actually take **any integer value** $q$. Therefore,
+
+$$
+\Delta t=\delta+qT_s
+$$
+
+We can choose the pair of CAL/ADC edges that makes
+
+$$
+|\delta+qT_s|
+$$
+
+**minimum**. Thus the physically relevant residual offset can be written as
+$$
+\boxed{ \Delta t_{\min} = \delta\pmod{T_s} }
+$$
+
+with the centered choice satisfying
+
+$$
+\boxed{ |\Delta t_{\min}|\le \frac{T_s}{2} }
+$$
+
+> **The 32-ps DCDL is not enough to tolerate a completely arbitrary phase offset between $CLK_{\mathrm{RCAL}}$ and the ideal ADC sampling grid.**
+
+The CAL clock must therefore be **coarsely phase-positioned sufficiently close to the ADC sampling grid**, while the 32-ps delay lines handle residual skew/fine alignment. The paper explicitly requires the CAL sampling edges to form a timing grid matching the ideal sub-ADC sampling points.
+
+
+
+![image-20260915212523718](hs-adc-serdes/image-20260915212523718.png)
+
+![image-20260915212541344](hs-adc-serdes/image-20260915212541344.png)
 
 
 
@@ -106,6 +182,8 @@ Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis
 Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
 
 Nhat Nguyen and Masum Hossain, ISSCC 2021 Forum 6.7: 112Gb/s-and-Beyond Long-Reach and Short-Reach Electrical Interfaces
+
+V. Chen, "Tutorial: High-Speed Analog-to-Digital Converters," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 1-1, doi: 10.1109/ISSCC49661.2025.11076112.
 
 T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)] 
 

@@ -758,41 +758,6 @@ print(f"Adjusted f_in: {fmt(coherent_sampling(10, 100, 2**6))}Hz")
 
 
 
-## 1-bit DAC
-
-*TODO* &#128197;
-
-$\Delta \Sigma$ ADC: Linearity
-
-!!PD: Non-linear
-
-
-
-
-
-> Dan Boschen Why use a 1-bit ADC in a Sigma Delta Modulator?. [[https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063](https://dsp.stackexchange.com/questions/53059/why-use-a-1-bit-adc-in-a-sigma-delta-modulator#comment105988_53063)]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Charge Injection and Clock Feedthrough
-
-> *Slow Gating*, *Fast Gating*
-
-*TODO* &#128197;
-
-
 
 ## Midrise and Midtread Quantizers
 
@@ -1086,6 +1051,64 @@ It divides the process into several comparison stages, the number of which is pr
 
 
 
+---
+
+
+
+![image-20260915220254339](ad-da/image-20260915220254339.png)
+
+
+
+## Multiplying DACs (MDAC)
+
+![image-20260915230732911](ad-da/image-20260915230732911.png)
+
+| Connection                                 | Sampling phase | Amplification phase |
+| ------------------------------------------ | -------------- | ------------------- |
+| \(V_{\text{in}}\) to left plate of \(C_S\) | Closed         | Open                |
+| Left plate of \(C_S\) to ground            | Open           | Closed              |
+| Node \(x\) to ground                       | Closed         | Open                |
+| Output to ground                           | Closed         | Open                |
+
+Phase 1: sample the input
+
+- $C_S$ has $V_{\text{in}}$ on its left plate and 0 V on its right plate, so it **stores the input as charge**.
+- Both ends of $C_F$ are grounded, resetting its voltage to zero.
+- The small ADC samples the same input and determines a digital code.
+
+At the end of sampling:
+
+$$
+Q_{x,\text{sample}}=-C_SV_{\text{in}}
+$$
+
+Phase 2: subtract and amplify
+
+- Switching \(C_S\)’s left plate from \(V_{\text{in}}\) to zero disturbs node \(x\).
+- Switching the DAC bottom plate from zero to \(V_D\) produces an opposing disturbance.
+- The amplifier changes \(V_{\text{out}}\), through \(C_F\), to balance the remaining charge.
+
+After amplification settles, both ends of $C_S$ are approximately **zero**:
+
+$$
+Q_{x,\text{amp}}=-C_FV_{\text{out}}-C_{\text{DAC}}V_D
+$$
+
+Equating them:
+
+$$
+\boxed{ V_{\text{out}} = \frac{C_S}{C_F}V_{\text{in}} - \frac{C_{\text{DAC}}}{C_F}V_D }
+$$
+
+If $C_S=C_{\text{DAC}}$, this becomes:
+
+$$
+\boxed{V_{\text{out}}=G(V_{\text{in}}-V_D)}, \qquad G=\frac{C_S}{C_F}
+$$
+
+
+
+
 
 
 ## R-2R & C-2C
@@ -1196,7 +1219,7 @@ Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://personal.utd
 
 —， Recent Advances in Multistep Nyquist ADC's [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf)]
 
-Aaron Buchwald, ISSCC 2008 T2 Pipelined A/D Converters: The Basics [[pdf](https://www.nishanchettri.com/isscc-slides/2008%20ISSCC/Tutorials/T02_Pres.pdf)]
+Aaron Buchwald, ISSCC 2008 T2 Pipelined A/D Converters: The Basics
 
 Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
 
@@ -1205,6 +1228,8 @@ Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis
 Jan Mulder Broadcom. ISSCC2015 T5: High-Speed Current-Steering DACs 
 
 Zhang, Milin, Zhihua Wang, Jan van der Spiegel and Franco Maloberti. "Advanced Tutorial on Analog Circuit Design." (2023)
+
+V. Chen, "Tutorial: High-Speed Analog-to-Digital Converters," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 1-1, doi: 10.1109/ISSCC49661.2025.11076112.
 
 S. Su, "Principles and Practices of High-Speed DAC Design: From Conversion Fundamentals to Layout-Aware Implementation," in *IEEE Solid-State Circuits Magazine*, vol. 18, no. 3, pp. 26-43, Summer 2026, doi: 10.1109/MSSC.2026.3704105
 
@@ -1270,7 +1295,7 @@ Dr. Tai-Haur Kuo (郭泰豪 教授) Analog IC Design (類比積體電路設計) 
 
 Converter Passion for data-converter professionals sharing thoughts on ADCs and DACs [[https://converterpassion.wordpress.com/](https://converterpassion.wordpress.com/)]
 
-Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013 [[pdf](https://picture.iczhiku.com/resource/eetop/SYKrGuktkyhKaxXB.pdf)]
+Boris Murmann, EE315B VLSI Data Conversion Circuits, Autumn 2013
 
 ---
 

@@ -160,6 +160,37 @@ The CAL clock must therefore be **coarsely phase-positioned sufficiently close t
 
 
 
+
+
+---
+
+
+
+![image-20260916215451430](hs-adc-serdes/image-20260916215451430.png)
+
+***Reducing (2.51) to (20.23)***
+
+For $x(t)=A\cos\omega_{in}t$, the autocorrelation and power are
+$$
+R(\tau)=\frac{A^2}{2}\cos\omega_{in}\tau,\qquad P=R(0)=\frac{A^2}{2}\quad\Rightarrow\quad\frac{R(\tau)}{P}=\cos\omega_{in}\tau
+$$
+
+In Razavi's model, one channel samples on time and the other samples $\Delta T$ late, so $\tau_0=0$ and $\tau_1=\Delta T$. The sum in (2.50) becomes
+
+$$
+\cos\omega_{in}\tau+\cos\omega_{in}(\Delta T-\tau)=2\cos\left(\frac{\omega_{in}\Delta T}{2}\right)\cos\left[\omega_{in}\left(\tau-\frac{\Delta T}{2}\right)\right]
+$$
+
+This is largest at $\hat{\tau}=\Delta T/2$, where it equals $2\cos(\pi f_{in}\Delta T)$. Substituting into (2.51), the $1/N^2=1/4$ cancels the $2^2$:
+
+$$
+SNR_\tau=\frac{1}{1-\cos^2(\pi f_{in}\Delta T)}=\frac{1}{\sin^2(\pi f_{in}\Delta T)}\approx\frac{1}{\pi^2\Delta T^2 f_{in}^2}
+$$
+
+The last step uses $\sin x\approx x$, and the result is exactly (20.23).
+
+
+
 ## BER with Quantization Noise
 
 ![image-20240804110522955](hs-adc-serdes/image-20240804110522955.png)

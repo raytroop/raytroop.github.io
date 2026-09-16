@@ -781,6 +781,44 @@ $\Gamma_x$ is  ***no-overload range***
 
 ![image-20240825231816582](ad-da/image-20240825231816582.png)
 
+The capacitor voltage is defined as
+
+$$
+V_C = V_{\text{out}}-V_X
+$$
+
+Before $M_2$ turns off, $M_1$ and $M_2$ are both ON, so approximately
+
+$$
+V_{\text{out}}=V_{\text{in}},\qquad V_X=0
+$$
+
+and therefore
+
+$$
+V_C=V_{\text{in}}
+$$
+
+When $M_2$ turns off first, the slide writes
+
+$$
+V_C=V_{\text{in}}+\frac{\Delta Q_2}{C}
+$$
+
+At this moment $M_1$ is still ON, so the top plate is still held at
+
+$$
+V_{\text{out}}\approx V_{\text{in}}
+$$
+
+Hence
+
+$$\begin{aligned} 
+V_X &=V_{\text{out}}-V_C\\ &=V_{\text{in}} -\left(V_{\text{in}}+\frac{\Delta Q_2}{C}\right)\\ &=\boxed{-\frac{\Delta Q_2}{C}}.
+\end{aligned}$$
+
+
+
 ![image-20240825232007848](ad-da/image-20240825232007848.png)
 
 ![image-20240825232717342](ad-da/image-20240825232717342.png)

@@ -3,7 +3,7 @@ title: Fixed-Point Signal Processing
 date: 2025-11-11 07:29:09
 tags:
 categories:
-- phy
+- dsp
 mathjax: true
 ---
 

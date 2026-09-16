@@ -910,6 +910,21 @@ $$
 ![image-20260913190230077](ad-da/image-20260913190230077.png)
 
 
+## Tracking Nonlinearity
+
+> Wei Yu, Subhajit Sen and B. H. Leung, "Distortion analysis of MOS track-and-hold sampling mixers using time-varying Volterra series," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 46, no. 2, pp. 101-113, Feb. 1999 [[https://sci-hub.ru/10.1109/82.752910](https://sci-hub.ru/10.1109/82.752910)]
+>
+> B. Murmann, EE315B VLSI-Data-Conversion-Circuits [[https://dl.sabzdanesh.com/Electronic/VLSI-Data-Conversion-Circuits_(WWW.SabzElco.IR).pdf](https://dl.sabzdanesh.com/Electronic/VLSI-Data-Conversion-Circuits_(WWW.SabzElco.IR).pdf)]
+
+$$\begin{align}
+HD_2 &\approx \frac{1}{2}\omega C V_m \frac{\mathcal{d} R_{on}}{\mathcal{d}v_{in}}\bigg\rvert_{v_{in}=0}=\frac{1}{2}\omega C V_m\frac{R_{ON}}{V_{OV}} = \frac{1}{2}\frac{\omega}{\omega_c}\frac{V_m}{V_{OV}} \\
+HD_3 &\approx \frac{1}{4}\omega C V_m^2 \frac{\mathcal{d}^2 R_{on}}{\mathcal{d}v_{in}^2}\bigg\rvert_{v_{in}=0}=\frac{1}{4}\omega C V_m^2\frac{R_{ON}}{V_{OV}^2} = \frac{1}{2}\frac{\omega}{\omega_c}\left(\frac{V_m}{V_{OV}}\right)^2
+\end{align}$$
+
+where $V_{OV}=V_{DD}-V_{IN}-V_t$, $R_{ON}=\frac{1}{\mu C_{ox}W/LV_{OV}}$ and $\omega_c=1/R_{ON}C$
+
+Even-order distortion products cancel in perfectly symmectrical circuits; But phase and amplitude imbalances lead to finite $HD_2$ in practice
+
 
 ## DAC Settling Accuracy
 

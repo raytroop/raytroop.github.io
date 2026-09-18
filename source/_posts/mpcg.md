@@ -17,17 +17,17 @@ mathjax: true
 >
 > Z. Wang and P. R. Kinget, "A Very High Linearity Twin Phase Interpolator With a Low-Noise and Wideband Delta Quadrature DLL for High-Speed Data Link Clocking," in IEEE Journal of Solid-State Circuits, vol. 58, no. 4, pp. 1172-1184, April 2023, doi: 10.1109/JSSC.2022.3197061
 >
-> Z. Wang, Phd thesis 2022. Efficient and High-Performance Clocking Circuits for High-Speed Data Links [[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
+> Wang, Zhaowen. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
 >
 > Y. Tian *et al*., "A 28-nm 8–28-GHz Eight-Phase Clock Generator Using an Injection-Locked Dual-Feedback Ring Oscillator," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 1, pp. 47-62, Jan. 2026, doi: 10.1109/JSSC.2025.3613940
 
 
 
-![image-20260917225422455](multiphase/image-20260917225422455.png)
+![image-20260917225422455](mpcg/image-20260917225422455.png)
 $$
 V_{ip}=\mathrm{XNOR}(CKD_0,CKD_{90})\qquad \qquad V_{in}=\mathrm{XNOR}(CKD_{45},CKD_{315})
 $$
-![image-20260917225735471](multiphase/image-20260917225735471.png)
+![image-20260917225735471](mpcg/image-20260917225735471.png)
 
 
 
@@ -71,13 +71,13 @@ The amount of correction can be set by intentional injection of an *offset curre
 >
 > increasing DC of input signal is equivalent to lower down the threshold of INV
 
-![image-20241215233057176](multiphase/image-20241215233057176.png)
+![image-20241215233057176](mpcg/image-20241215233057176.png)
 
 
 
 ---
 
-![image-20241216205525818](multiphase/image-20241216205525818.png)
+![image-20241216205525818](mpcg/image-20241216205525818.png)
 
 voltage at *INV1* will increased by:
 $$
@@ -97,9 +97,9 @@ $$
 
 ---
 
-![image-20251014215409535](multiphase/image-20251014215409535.png)
+![image-20251014215409535](mpcg/image-20251014215409535.png)
 
-![image-20251014220640238](multiphase/image-20251014220640238.png)
+![image-20251014220640238](mpcg/image-20251014220640238.png)
 
 > C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)* [[https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205](https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205)],[[visual](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf)]
 >
@@ -111,11 +111,11 @@ $$
 
 ---
 
-![image-20240720073616597](multiphase/image-20240720073616597.png)
+![image-20240720073616597](mpcg/image-20240720073616597.png)
 
 > Since duty-cycle error is *high frequency* component, the high-pass filter suppresses the duty-cycle error propagating to the output
 
-![image-20240720005226736](multiphase/image-20240720005226736.png)
+![image-20240720005226736](mpcg/image-20240720005226736.png)
 
 - The AC-coupling capacitor blocks the low-frequency component of the input
 - The feedback resistor sets common mode voltage to the crossover voltage

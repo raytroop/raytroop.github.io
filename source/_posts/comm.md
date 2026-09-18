@@ -254,6 +254,87 @@ $g(t) = i_n(t)\sin\omega_0 t$ is ***not* WSS (it's cyclostationary)**, but its *
 
 ![image-20260731220208819](comm/image-20260731220208819.png)
 
+---
+
+
+
+Assume zero-mean white noise $n(t)$ is multiplied by a sinusoid:
+
+$$
+y(t)=n(t)\cos(\omega_0 t)
+$$
+
+Let the two-sided white-noise PSD be
+
+$$
+S_n(f)=\frac{N_0}{2}
+$$
+
+so
+
+$$
+R_n(\tau)=\frac{N_0}{2}\delta(\tau)
+$$
+
+Because the sinusoid is deterministic and time-varying, $y(t)$ is generally **cyclostationary**, not WSS.
+
+Using the symmetric autocorrelation definition,
+
+$$
+R_y(t,\tau) = E\left[ y\left(t+\frac{\tau}{2}\right) y\left(t-\frac{\tau}{2}\right) \right]
+$$
+
+we get
+
+$$\begin{aligned}
+R_y(t,\tau) &= R_n(\tau) \cos\left(\omega_0 t+\frac{\omega_0\tau}{2}\right) \cos\left(\omega_0 t-\frac{\omega_0\tau}{2}\right) \\ 
+&= \frac{R_n(\tau)}{2} \left[ \cos(\omega_0\tau)+\cos(2\omega_0t) \right]
+\end{aligned}$$
+
+Therefore, for white noise,
+
+$$
+\boxed{ R_y(t,\tau) = \frac{N_0}{4} \left[ \cos(\omega_0\tau)+\cos(2\omega_0t) \right]\delta(\tau) }
+$$
+
+If you **average over one modulation period**, then
+
+$$
+\overline{R_y}(\tau) = \frac12 R_n(\tau)\cos(\omega_0\tau)
+$$
+
+For general stationary noise this corresponds to
+
+$$
+\boxed{ \overline{S_y}(f) = \frac14 \left[ S_n(f-f_0)+S_n(f+f_0) \right] }
+$$
+
+where $f_0=\frac{\omega_0}{2\pi}$
+
+For ideal white noise,
+
+$$
+S_n(f-f_0)=S_n(f+f_0)=\frac{N_0}{2}
+$$
+
+so
+
+$$
+\boxed{ \overline{S_y}(f)=\frac{N_0}{4} }
+$$
+
+Thus an important result is: **multiplying ideal white noise by a sinusoid does not change the shape of its time-averaged PSD—it remains white—but its average PSD is reduced by a factor of 2**, because
+
+$$
+\overline{\cos^2(\omega_0t)}=\frac12
+$$
+
+For colored noise, however, the sinusoidal multiplication creates two shifted copies:
+
+$$
+S_n(f) \rightarrow \frac14S_n(f-f_0)+\frac14S_n(f+f_0)
+$$
+
 
 
 ### Quadrature-Modulated Processes

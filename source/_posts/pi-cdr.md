@@ -7,6 +7,13 @@ categories:
 mathjax: true
 ---
 
+![image-20260918203511797](pi-cdr/image-20260918203511797.png)
+
+> Wang, Zhaowen. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
+
+The PI-based architecture decouples the high-frequency clock synthesis and local clock deskew, allowing to optimize the power consumption and circuit area at a system level
+
+
 
 ## Phase Interpolator (PI)
 
@@ -16,11 +23,11 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 ![image-20240821203756602](pi-cdr/image-20240821203756602.png)
 
-> *four input clocks given by the cyan, black, magenta, red* 
+> *four input clocks given by the cyan, black, magenta, red*
 
 
 
-> John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery" [[https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf)]
+> John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery"
 
 
 
@@ -227,6 +234,138 @@ A **constant Output amplitude** is desired because the *swing-dependent delay ch
 ### Voltage-Mode Phase Interpolator
 
 ### Integrating-Mode Phase Interpolator
+
+
+
+## Sampling Offset due to PI Nonlinearity
+
+> Wang, Zhaowen. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
+
+
+
+
+
+Let $T=T_{\mathrm{LSB}}$, and write a PI’s output time as
+
+$$
+t(k)=t_{\mathrm{ref}}+[k+I(k)]T
+$$
+
+where $I(k)=\mathrm{INL}(k)$, expressed in LSBs. Then
+
+$$
+\mathrm{DNL}(k)=\frac{t(k+1)-t(k)}{T}-1 =I(k+1)-I(k)
+$$
+
+Thus INL describes the error at a code, while DNL describes the error in one code-to-code step.
+
+<span style="color:white; background-color:black">**1. Why $(0.5+|\mathrm{DNL}_p|)T$?**</span>
+
+For an ideal PI, available phases are spaced by $T$. If the desired transition lies halfway between two available phases, selecting the nearest phase leaves an error of
+
+$$
+|E_e|\le \frac{T}{2}
+$$
+
+That explains the **$0.5$**
+
+With DNL, a particular step has width
+
+$$
+t(k+1)-t(k)=[1+\mathrm{DNL}(k)]T
+$$
+
+A larger step means a larger gap in which the desired phase might lie.
+
+The excerpt can be read as budgeting
+
+$$
+\underbrace{0.5T}_{\text{nominal quantization}} + \underbrace{|\mathrm{DNL}_p|T}_{\text{nonlinearity allowance}}
+$$
+
+But for a monotonic PI that actually selects the nearest available phase, the tighter bound is **half the largest actual step**:
+
+$$
+\boxed{|E_e| \le \frac{1+\max_k\mathrm{DNL}(k)}{2}T \le \left(0.5+\frac{|\mathrm{DNL}_p|}{2}\right)T}
+$$
+
+So the paper's $0.5+|\mathrm{DNL}_p|$ is a looser bound under this model
+
+
+
+<span style="color:white; background-color:black">**2. Why does the data-clock bound become $(1+|\mathrm{DNL}_p|+|\mathrm{INL}_{pp}|)T$?**</span>
+
+$E_e$ and $E_d$ are **timing errors**, measured in seconds—not the clock times themselves
+
+- **$E_e$: edge-sampling clock error** relative to the ideal data-transition time:
+  $$
+  E_e=t_e-t_{\text{transition}}.
+  $$
+  
+- **$E_d$: data-sampling clock error** relative to the ideal data-sampling time, assumed here to be half a UI after that transition:
+  $$
+  E_d=t_d-\left(t_{\text{transition}}+\frac{\mathrm{UI}}{2}\right).
+  $$
+
+Here $t_e$ and $t_d$ are the **actual sampling times**. A positive error means the clock samples **late**; a negative error means it samples **early**.
+
+Writing $H=\mathrm{UI}/2$, these definitions give
+
+$$
+\boxed{E_d=E_e+\underbrace{(t_d-t_e-H)}_{\text{error in edge-to-data spacing}}.}
+$$
+
+Let the desired edge-to-data spacing be
+
+$$
+H=\frac{\mathrm{UI}}{2},
+$$
+
+and let the data-clock code be $k+m$ when the edge-clock code is $k$. Then
+
+$$
+t_d-t_e=mT+[I(k+m)-I(k)]T.
+$$
+
+Consequently, the data-clock error relative to its ideal sampling position is
+
+$$
+\boxed{ E_d = E_e +\underbrace{(mT-H)}_{\text{spacing quantization}} +\underbrace{[I(k+m)-I(k)]T}_{\text{relative INL error}}. }
+$$
+
+If $m$ is chosen by rounding $H/T$, then
+
+$$
+|mT-H|\le 0.5T.
+$$
+
+Combining this with the paper’s edge-clock allowance gives
+
+$$
+|E_d| \le \underbrace{(0.5+|\mathrm{DNL}_p|)T}_{\text{edge-clock error}} +\underbrace{0.5T}_{\text{spacing quantization}} +\underbrace{\mathrm{INL}_{pp}T}_{\text{relative INL error}},
+$$
+
+which produces the quoted expression.
+
+Using tighter edge-clock bound
+
+$$
+|E_d| \le \underbrace{\left(0.5+\frac{|\mathrm{DNL}_p|}{2}\right)T_{\mathrm{LSB}}}_{\text{edge-clock error}} +\underbrace{0.5T_{\mathrm{LSB}}}_{\text{spacing quantization}} +\underbrace{\mathrm{INL}_{pp}T_{\mathrm{LSB}}}_{\text{relative INL error}},
+$$
+
+so
+
+$$
+\boxed{|E_d|\le \left(1+\frac{|\mathrm{DNL}_p|}{2}+\mathrm{INL}_{pp}\right)T_{\mathrm{LSB}}}
+$$
+
+
+
+If $H/T$ is an integer—for example, a full-period PI with a number of steps divisible by eight can represent $45^\circ$ exactly—then $mT-H=0$. That extra $0.5T$ is unnecessary. (If the desired edge-to-data spacing is exactly representable by an integer number of PI steps, the spacing-quantization term vanishes, and the constant $1$ becomes $0.5$)
+
+
+
+
 
 
 

@@ -3046,6 +3046,8 @@ Until you make the unconscious conscious, it will direct your life and you will 
 
 
 ```
+人们彼此理解，但每个人，都只能解释其自身。
+
 “爱不能祈求而来，”她说，“也不能去索取。
 爱需要自我肯定的力量。它不是被吸引，而是去主动吸引。
 辛克莱尔，你的爱是被我吸引来的，如果它能吸引到我，我自己就会来的。我不想赠予，而是被赢得。”

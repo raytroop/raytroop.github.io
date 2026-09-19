@@ -241,7 +241,7 @@ A **constant Output amplitude** is desired because the *swing-dependent delay ch
 
 > Wang, Zhaowen. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
 
-
+![image-20260919082930453](pi-cdr/image-20260919082930453.png)
 
 
 
@@ -365,6 +365,49 @@ If $H/T$ is an integer—for example, a full-period PI with a number of steps di
 
 
 
+---
+
+The CDR finds an edge-clock code, and the data-clock code is obtained by adding a fixed code offset
+
+With $T=T_{\mathrm{LSB}}$ and $H=\mathrm{UI}/2$:
+
+$$
+k_e=k,\qquad m=\operatorname{round}\left(\frac{H}{T}\right),\qquad k_d=k_e+m
+$$
+
+Here, $m$ is **a number of PI steps**, not a time. Thus, for an **ideal PI**, the timing relationship is
+
+$$
+\boxed{ t_d=t_e+\operatorname{round}\left(\frac{\mathrm{UI}}{2T}\right)T}
+$$
+
+The circuit operates continuously: the CDR adjusts $k_e$, and the data-clock code follows as $k_d=k_e+m$. It does not need to measure a numerical value of $t_e$ before generating the data clock.
+
+For **nonlinear PIs**, adding $m$ codes does not necessarily add exactly $mT$ in time. Assuming a common timing reference,
+
+$$
+\boxed{ t_d=t_e+mT+ \left[I_d(k_e+m)-I_e(k_e)\right]T}
+$$
+
+That last term is precisely the relative INL error we discussed. The subscripts allow the edge and data clocks to come from different PIs.
+
+
+
+## Deterministic Jitter due to PI Nonlinearity
+
+![image-20260919083229868](pi-cdr/image-20260919083229868.png)
+
+$$
+K_{f,PI} = \frac{1/2^N}{T_m/T_o}\cdot \frac{1}{T_o} = \frac{f_m}{2^N}
+$$
+![pi-code.drawio](pi-cdr/pi-code.drawio.svg)
+
+---
+
+<span style="color:white; background-color:black">**For DCO**</span>
+$$
+K_{f,DCO} = \frac{K_T}{T_o}\cdot \frac{1}{T_o} = \frac{K_T}{T_o^2}
+$$
 
 
 

@@ -191,6 +191,44 @@ The last step uses $\sin x\approx x$, and the result is exactly (20.23).
 
 
 
+
+
+##  self-pulse-generation (SPG)
+
+> C. Liu *et al*., "An 800GbE PAM-4 PHY Transceiver that Supports 42dB Copper and Direct-Drive Optical Applications in 7nm," *2025 IEEE Custom Integrated Circuits Conference (CICC)*, Boston, MA, USA, 2025, pp. 1-3, doi: 10.1109/CICC63670.2025.10983780.
+>
+> —, "An 800GbE PAM-4 PHY Transceiver for 42 dB Copper and Direct-Drive Optical Applications in 7 nm," in *IEEE Solid-State Circuits Letters*, vol. 8, pp. 281-284, 2025, doi: 10.1109/LSSC.2025.3608134
+
+![image-20260919184658378](hs-adc-serdes/image-20260919184658378.png)
+
+
+
+Taking the initial `Q/Qb` rising edge as $t=0$:
+
+$$
+t_{\mathrm{Clk\_pulse}\uparrow} =T_1+T_{\mathrm{dly}}+T_1 =T_1+T_{\mathrm{rst}}
+$$
+
+whereas
+
+$$
+t_{\mathrm{Q/Qb}\downarrow} =T_1+T_2+T_{\mathrm{rst}}
+$$
+
+Therefore, **the model predicts `Clk_pulse` rising $T_2$ before `Q/Qb` finish resetting.** This also conflicts with the drawing, which places `Q/Qb` falling before `Clk_pulse` rises.
+
+The qualification is that this compares their **instantaneous currents during reset**: `Q/Qb` may already be falling and weakening the NMOS. It does not necessarily require the PMOS to overpower a fully enabled NMOS under all conditions.
+
+![image-20260919192752296](hs-adc-serdes/image-20260919192752296.png)
+
+![image-20260919192242210](hs-adc-serdes/image-20260919192242210.png)
+
+
+
+![image-20260919185026347](hs-adc-serdes/image-20260919185026347.png)
+
+
+
 ## BER with Quantization Noise
 
 ![image-20240804110522955](hs-adc-serdes/image-20240804110522955.png)
@@ -231,12 +269,6 @@ Kull, Lukas, Thomas Toifl, Martin L. Schmatz, Pier Andrea Francese, Christian Me
 —., "A 3.1mW 8b 1.2GS/s single-channel asynchronous SAR ADC with alternate comparators for enhanced speed in 32nm digital SOI CMOS," *2013 IEEE International Solid-State Circuits Conference Digest of Technical Papers*, San Francisco, CA, USA, 2013, pp. 468-469 [[https://sci-hub.jp/10.1109/ISSCC.2013.6487818](https://sci-hub.jp/10.1109/ISSCC.2013.6487818)]
 
 —., "A 3.1 mW 8b 1.2 GS/s Single-Channel Asynchronous SAR ADC With Alternate Comparators for Enhanced Speed in 32 nm Digital SOI CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 48, no. 12, pp. 3049-3058, Dec. 2013 [[https://sci-hub.jp/10.1109/JSSC.2013.2279571](https://sci-hub.jp/10.1109/JSSC.2013.2279571)]
-
----
-
-C. Liu *et al*., "An 800GbE PAM-4 PHY Transceiver that Supports 42dB Copper and Direct-Drive Optical Applications in 7nm," *2025 IEEE Custom Integrated Circuits Conference (CICC)*, Boston, MA, USA, 2025, pp. 1-3, doi: 10.1109/CICC63670.2025.10983780.
-
-—, "An 800GbE PAM-4 PHY Transceiver for 42 dB Copper and Direct-Drive Optical Applications in 7 nm," in *IEEE Solid-State Circuits Letters*, vol. 8, pp. 281-284, 2025, doi: 10.1109/LSSC.2025.3608134
 
 ---
 

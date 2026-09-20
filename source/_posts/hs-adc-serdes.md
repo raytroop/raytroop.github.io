@@ -11,7 +11,7 @@ mathjax: true
 
 ![image-20260912112631937](hs-adc-serdes/image-20260912112631937.png)
 
-
+![image-20260920203404941](hs-adc-serdes/image-20260920203404941.png)
 
 ## Timing Skew for Broadband signals
 
@@ -251,6 +251,8 @@ Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis
 Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
 
 Nhat Nguyen and Masum Hossain, ISSCC 2021 Forum 6.7: 112Gb/s-and-Beyond Long-Reach and Short-Reach Electrical Interfaces
+
+Heng Zhang, Broadcom, ISSCC 2025 - Forum 4.2: < High-speed ADCs for 100Gbps+ Wireline Transceivers >
 
 V. Chen, "Tutorial: High-Speed Analog-to-Digital Converters," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 1-1, doi: 10.1109/ISSCC49661.2025.11076112.
 

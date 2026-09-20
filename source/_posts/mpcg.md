@@ -144,3 +144,10 @@ $$
 Nicola Da Dalt, Intel. ISSCC 2017 Forum: High-Performance Clock Generation and Distribution in Very-High-Speed Wireline Transceivers
 
 Jihwan Kim,Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
+
+Heng Zhang, Broadcom, ISSCC 2025 - Forum 4.2: < High-speed ADCs for 100Gbps+ Wireline Transceivers >
+
+**H. Zhang**, D. Cui, J. Cao, and A.Momtaz, "Phase Adjustment Scheme for Time-interleaved ADCs", United States Patent. US 9065464 B2. Issued Jun.23, 2015*.* *Citation:* 4
+
+***H. Zhang**, D. Cui,  and J. Cao, "Clock Generator for Use in A Time-interleaved ADC and Methods for Use therewith", United States Patent. US 8902094 B1. Issued Dec.2, 2014*.* *Citation:* 16
+

@@ -237,3 +237,7 @@ Kull, Lukas, Thomas Toifl, Martin L. Schmatz, Pier Andrea Francese, Christian Me
 C. Liu *et al*., "An 800GbE PAM-4 PHY Transceiver that Supports 42dB Copper and Direct-Drive Optical Applications in 7nm," *2025 IEEE Custom Integrated Circuits Conference (CICC)*, Boston, MA, USA, 2025, pp. 1-3, doi: 10.1109/CICC63670.2025.10983780.
 
 —, "An 800GbE PAM-4 PHY Transceiver for 42 dB Copper and Direct-Drive Optical Applications in 7 nm," in *IEEE Solid-State Circuits Letters*, vol. 8, pp. 281-284, 2025, doi: 10.1109/LSSC.2025.3608134
+
+---
+
+G. Manganaro, "An Introduction to High Sample Rate Nyquist Analog-to-Digital Converters," in IEEE Open Journal of the Solid-State Circuits Society, vol. 2, pp. 82-102, 2022 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9911689](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9911689)]

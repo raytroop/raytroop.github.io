@@ -13,6 +13,16 @@ mathjax: true
 
 ![image-20260920203404941](hs-adc-serdes/image-20260920203404941.png)
 
+
+
+## Two-Rank Time-Interleaving
+
+![image-20260920224558212](hs-adc-serdes/image-20260920224558212.png)
+
+
+
+
+
 ## Timing Skew for Broadband signals
 
 > M. El-Chammas and B. Murmann, "General Analysis on the Impact of Phase-Skew Mismatch in Time-Interleaved ADCs," IEEE Trans. on Circuits and Systems I, vol. 56, No. 5, pp. 902-910, May 2009 [[https://sci-hub.ru/10.1109/TCSI.2009.2015206](https://sci-hub.ru/10.1109/TCSI.2009.2015206)]

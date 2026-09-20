@@ -1,5 +1,5 @@
 ---
-title: ADC Calibration & Characterization
+title: ADC Characterization & Calibration
 date: 2024-08-19 14:50:27
 tags:
 categories:
@@ -35,7 +35,18 @@ For Scherier FoM (DR, SNDR)
 
 
 
-## Offset and Gain Error
+![image-20260920225732153](adc-calib/image-20260920225732153.png)
+
+|                             | Wang, ISSCC 24 | Pfaff, ISSCC 24 | Li, ISSCC 24 | Nguyen, ISSCC 24 |
+| --------------------------- | -------------- | --------------- | ------------ | ---------------- |
+| **Sampling rate (Fs) Gs/s** | 106            | 112             | 105          | 200              |
+| **SNDR, hf (dB)**           | 30             | 25.5            | 39.2         | 36.1             |
+| **RX Power**                | 288            | 448             | 698          | 400              |
+| **FOM,hf (dB)**             | 82.6           | 76.5            | 88.0         | 90.1             |
+
+
+
+## Offset & Gain Error
 
 > Kwantae Kim, Integrated Analog Systems D - Lecture 10 (ADC) [[https://youtu.be/IEdbLNJb9wQ](https://youtu.be/IEdbLNJb9wQ)]
 

@@ -75,6 +75,18 @@ only one front-end channel $L=1$ eliminate any timing/bandwidth mismatch errors 
 
 
 
+
+
+## Interchannel Crosstalk
+
+
+
+![image-20260920232810972](ti-adc/image-20260920232810972.png)
+
+
+
+
+
 ## Interleaving Errors
 
 ![image-20260914202358169](ti-adc/image-20260914202358169.png)
@@ -150,6 +162,43 @@ Thus, differentiation produces two effects: **magnitude scaling by $\omega$** an
 ![image-20260914202752033](ti-adc/image-20260914202752033.png)
 
 > ![image-20250621093321623](ti-adc/image-20250621093321623.png)
+
+
+
+## Clock Generation for Interleaved ADCs
+
+![image-20260920233137056](ti-adc/image-20260920233137056.png)
+
+Note that the falling edge of $\phi_1$ is **determined by the rising edge of CK** and is thus **free from jitter and mismatch in $X_1$**, which accumulates jitter and phase mismatch
+
+![image-20260920233403464](ti-adc/image-20260920233403464.png)
+
+**reset mechanism** to the latches for nominal order
+
+![image-20260920233601904](ti-adc/image-20260920233601904.png)
+
+
+
+---
+
+
+
+<span style="color:white; background-color:black">a clock generator for an eight-channel ADC</span>
+
+![image-20260920235134383](ti-adc/image-20260920235134383.png)
+
+| NORed    |                        | $\div 2$         | $\div 2 \div 2$  |
+| -------- | ---------------------- | ---------------- | ---------------- |
+| $\phi_1$ | $\text{CK}$            | $I_1$            | $I_2$            |
+| $\phi_2$ | $\overline{\text{CK}}$ | $Q_1$            | $I_3$            |
+| $\phi_3$ | $\text{CK}$            | $\overline{I_1}$ | $Q_2$            |
+| $\phi_4$ | $\overline{\text{CK}}$ | $\overline{Q_1}$ | $Q_3$            |
+| $\phi_5$ | $\text{CK}$            | $I_1$            | $\overline{I_2}$ |
+| $\phi_6$ | $\overline{\text{CK}}$ | $Q_1$            | $\overline{I_3}$ |
+| $\phi_7$ | $\text{CK}$            | $\overline{I_1}$ | $\overline{Q_2}$ |
+| $\phi_8$ | $\overline{\text{CK}}$ | $\overline{Q_1}$ | $\overline{Q_3}$ |
+
+$\text{CK}$, $I/Q_1$ and $I/Q_{2,3}$ shift by **1UI**
 
 
 

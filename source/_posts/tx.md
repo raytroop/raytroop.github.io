@@ -67,11 +67,20 @@ To achieve the same differential output amplitude, CML topologies consume $4$ ti
 *TODO* &#128197;
 
 
+
 ## 1UI Pulse Generator
+
+>  J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
 
 > **duty correction** & **delay adjustment** 
 
 *TODO* &#128197;
+
+![image-20260921231822433](tx/image-20260921231822433.png)
+
+![image-20260921231842187](tx/image-20260921231842187.png)
+
+
 
 
 

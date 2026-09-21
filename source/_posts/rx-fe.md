@@ -62,9 +62,7 @@ Lvals = np.linspace(0.001, 1.5, 300)
 
 ![image-20260608224954010](rx-fe/image-20260608224954010.png)
 
-![image-20260608224505556](rx-fe/image-20260608224505556.png)
-
-![image-20260608225657252](rx-fe/image-20260608225657252.png)
+![image-20260921235234693](rx-fe/image-20260921235234693.png)
 
 
 
@@ -81,6 +79,18 @@ Lvals = np.linspace(0.001, 1.5, 300)
 ![shunt_chatgpt](rx-fe/shunt_chatgpt.svg)
 
 ![image-20260611233156089](rx-fe/image-20260611233156089.png)
+
+
+
+---
+
+<span style="color:white; background-color:black">Shunt peaking, Q-Shaping, LC-tuned Amplifier</span>
+
+![image-20260921234359120](rx-fe/image-20260921234359120.png)
+
+
+
+
 
 ## series peaking
 
@@ -381,7 +391,7 @@ Above curve demonstrate that only zero is not enough to compensate channel+pkg l
 
 ---
 
-> P. A. Francese *et al*., "10.6 continuous-time linear equalization with programmable active-peaking transistor arrays in a 14nm FinFET 2mW/Gb/s 16Gb/s 2-Tap speculative DFE receiver," *2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers*, San Francisco, CA, USA, 2015 [[pdf](https://sci-hub.se/10.1109/ISSCC.2015.7062988)]
+> P. A. Francese *et al*., "10.6 continuous-time linear equalization with programmable active-peaking transistor arrays in a 14nm FinFET 2mW/Gb/s 16Gb/s 2-Tap speculative DFE receiver," *2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers*, San Francisco, CA, USA, 2015 [[https://sci-hub.se/10.1109/ISSCC.2015.7062988](https://sci-hub.se/10.1109/ISSCC.2015.7062988)]
 
 ![image-20251203232523501](rx-fe/image-20251203232523501.png)
 
@@ -413,7 +423,7 @@ In the active copper cable (ACC) application, it is necessary to give different 
 
 
 
-## Gm-TIA CTLE
+## Gm-TIA
 
 > H. Kimura *et al*., "A 28 Gb/s 560 mW Multi-Standard SerDes With Single-Stage Analog Front-End and 14-Tap Decision Feedback Equalizer in 28 nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 12, pp. 3091-3103, Dec. 2014 [[https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf](https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf)]
 >
@@ -426,6 +436,10 @@ In the active copper cable (ACC) application, it is necessary to give different 
 > Bae, W. (2019). CMOS Inverter as Analog Circuit: An Overview. *Journal of Low Power Electronics and Applications*. [[pdf](https://pdfs.semanticscholar.org/6494/3a15452b12c89d31cdcedb22d605c42ed8bd.pdf)]
 
 *CTLE, with Gm + TIA structure*
+
+![image-20260921214634581](rx-fe/image-20260921214634581.png)
+
+
 
 ![image-20250904202636824](rx-fe/image-20250904202636824.png)
 
@@ -442,6 +456,42 @@ In the active copper cable (ACC) application, it is necessary to give different 
 >  ![image-20251202222831594](rx-fe/image-20251202222831594.png)
 
 
+
+## Cherry-Hooper Amplifier
+
+![image-20260921235713422](rx-fe/image-20260921235713422.png)
+
+![image-20260921235635071](rx-fe/image-20260921235635071.png)
+
+
+
+## Passive series peaking
+
+> D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537.
+
+![image-20260922003739424](rx-fe/image-20260922003739424.png)
+$$
+i_f = g_{md1}v_f \quad i_f = (v_f - v_o)/R_f \qquad \Longrightarrow \qquad \frac{v_o}{v_i} = -\frac{g_{m1}}{g_{md1}} + g_{m1}R_f
+$$
+since $R_f=0$
+$$
+A_{DC} = -\frac{g_{m1}}{g_{md1}}
+$$
+
+
+
+
+
+
+
+
+---
+
+![image-20260922003625379](rx-fe/image-20260922003625379.png)
+
+![image-20260922002932197](rx-fe/image-20260922002932197.png)
+
+![image-20260922003026369](rx-fe/image-20260922003026369.png)
 
 
 
@@ -497,7 +547,7 @@ trade-offs between *noise amplification* and *signal equalization*
 
 ## reference
 
-J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[paper](https://sci-hub.jp/10.1109/ISSCC.2018.8310204)] [[slides](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf)]
+J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[paper](https://sci-hub.jp/10.1109/ISSCC.2018.8310204)]
 
 Miguel Gandara. CICC2025 Circuits Insights: Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg](https://youtu.be/X4JTuh2Gdzg)]
 
@@ -505,7 +555,11 @@ Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers"
 
 Byungsub Kim,  ISSCC 2022, "T11: Basics of Equalization Techniques: Channels, Equalization, and Circuits"
 
+Jihwan Kim,Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
+
 Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
+
+Heng Zhang, Broadcom, ISSCC 2025 - Forum 4.2: < High-speed ADCs for 100Gbps+ Wireline Transceivers >
 
 ---
 

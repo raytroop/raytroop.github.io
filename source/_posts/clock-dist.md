@@ -51,6 +51,12 @@ mathjax: true
 
 
 
+## LC Loaded Amps
+
+![image-20260921231718388](clock-dist/image-20260921231718388.png)
+
+
+
 
 
 ## Cascaded PLLs
@@ -303,6 +309,8 @@ Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Manageme
 Phillip Restle. ISSCC2021 SC4: Processor Clock Generation, Distribution, and Clock Sensor/Management Loops
 
 Jihwan Kim,Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
+
+J. Kim *et al*., "8.1 A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 126-128
 
 ---
 

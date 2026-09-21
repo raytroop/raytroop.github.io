@@ -262,6 +262,8 @@ Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ie
 
 Nhat Nguyen and Masum Hossain, ISSCC 2021 Forum 6.7: 112Gb/s-and-Beyond Long-Reach and Short-Reach Electrical Interfaces
 
+Ben Rhew, Samsung Electronics, Hwaseong, Korea, ISSCC 2023 F5 Extreme Data Converters and Their Peripherals: High Performance ADC Design in High-Speed Wireline Transceivers and 5G Wireless Transceiver
+
 Heng Zhang, Broadcom, ISSCC 2025 - Forum 4.2: < High-speed ADCs for 100Gbps+ Wireline Transceivers >
 
 V. Chen, "Tutorial: High-Speed Analog-to-Digital Converters," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 1-1, doi: 10.1109/ISSCC49661.2025.11076112.

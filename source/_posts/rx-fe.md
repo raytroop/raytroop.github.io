@@ -479,11 +479,24 @@ A_{DC} = -\frac{g_{m1}}{g_{md1}}
 $$
 
 
+![passive_series_peaking.drawio](rx-fe/passive_series_peaking.drawio.svg)
 
+with $\omega_n = \frac{1}{\sqrt{LC}}$
+$$
+\frac{V_o}{V_i}(s) = -g_{m1}R_s\cdot \frac{\frac{1}{LC}}{s^2 + \frac{R_s+R_{LS}}{L}s + \frac{1}{LC}}=-g_{m1}R_s\cdot \frac{\omega_n^2}{s^2+\frac{\omega_n}{Q}s+\omega_n^2}
+$$
 
+we have
+$$
+\boxed{Q=\frac{\omega_n L}{R_s + R_{LS}}}
+$$
 
+above $Q$ is the **resonator loaded quality factor**
 
-
+That is
+$$
+\frac{A_{HF}}{A_{DC}} = Q
+$$
 
 ---
 

@@ -486,12 +486,12 @@ $$
 \frac{V_o}{V_i}(s) = -g_{m1}R_s\cdot \frac{\frac{1}{LC}}{s^2 + \frac{R_s+R_{LS}}{L}s + \frac{1}{LC}}=-g_{m1}R_s\cdot \frac{\omega_n^2}{s^2+\frac{\omega_n}{Q}s+\omega_n^2}
 $$
 
-we have
+where
 $$
 \boxed{Q=\frac{\omega_n L}{R_s + R_{LS}}}
 $$
 
-above $Q$ is the **resonator loaded quality factor**
+The $Q$ is the **resonator loaded quality factor**
 
 That is
 $$

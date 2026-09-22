@@ -252,11 +252,13 @@ $$
 
 ###  Series Resonant RLC
 
-The **series RLC resonator** is a **voltage divider**,  driven by an alternating **voltage** source $v_s(t)=V_m\cos\omega t$
+
 
 ![image-20260619163323279](resonant/image-20260619163323279.png)
 
 ---
+
+The **series RLC resonator** is a **voltage divider**,  driven by an alternating **voltage** source $v_s(t)=V_m\cos\omega t$
 
 ![image-20260619164058914](resonant/image-20260619164058914.png)
 

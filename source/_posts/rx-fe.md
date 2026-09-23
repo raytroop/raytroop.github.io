@@ -82,12 +82,6 @@ Lvals = np.linspace(0.001, 1.5, 300)
 
 
 
----
-
-<span style="color:white; background-color:black">Shunt peaking, Q-Shaping, LC-tuned Amplifier</span>
-
-![image-20260921234359120](rx-fe/image-20260921234359120.png)
-
 
 
 
@@ -507,6 +501,19 @@ $$
 ![image-20260922003026369](rx-fe/image-20260922003026369.png)
 
 
+
+## Q-Shaping
+
+
+> Y. Krupnik et al., "112 Gb/s PAM4 ADC Based SERDES Receiver for Long-Reach Channels in 10nm Process," 2019 Symposium on VLSI Circuits, Kyoto, Japan, 2019, pp. C266-C267, doi: 10.23919/VLSIC.2019.8778136
+>
+> —, "112-Gb/s PAM4 ADC-Based SERDES Receiver With Resonant AFE for Long-Reach Channels," in IEEE Journal of Solid-State Circuits, vol. 55, no. 4, pp. 1077-1085, April 2020, doi: 10.1109/JSSC.2019.2959511
+>
+> S. Kiran et al., "A 56GHz Receiver Analog Front End for 224Gb/s PAM-4 SerDes in 10nm CMOS," 2021 Symposium on VLSI Circuits, Kyoto, Japan, 2021, pp. 1-2, doi: 10.23919/VLSICircuits52068.2021.9492471
+
+<span style="color:white; background-color:black">Shunt peaking, Q-Shaping, LC-tuned Amplifier</span>
+
+![image-20260921234359120](rx-fe/image-20260921234359120.png)
 
 
 

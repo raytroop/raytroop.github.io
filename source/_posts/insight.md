@@ -574,26 +574,23 @@ R_2'  &= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
 
 ## TIA
 
-![image-20240824111517140](insight/image-20240824111517140.png)
-
-$$\begin{align}
-I_{in} &= \frac{V_i}{R_S} + \frac{V_i - V_o}{R_F} \\
-\frac{V_i - V_o}{R_F} &= g_m V_i
-\end{align}$$
+![tia](insight/tia.svg)
+$$
+I_{in} = \frac{V_i}{R_S} + \frac{V_i - V_o}{R_F} \qquad \frac{V_i - V_o}{R_F} = g_m V_i
+$$
 
 Then
 
-$$\begin{align}
-V_o &= \frac{I_{in}R_F}{\frac{R_S+R_F}{R_S}\frac{1}{1-g_mR_F}- 1} \\
-V_i &= \frac{I_{in}R_F}{\frac{R_F}{R_S}+g_mR_F}
-\end{align}$$
+$$
+V_o = \frac{I_{in}R_F}{\frac{R_S+R_F}{R_S}\frac{1}{1-g_mR_F}- 1} \qquad V_i= \frac{I_{in}R_F}{\frac{R_F}{R_S}+g_mR_F}
+$$
 If $R_S \gg R_F$
-$$\begin{align}
-V_o &= \frac{I_{in}}{g_m}(1-g_mR_F) \\
-V_i &= \frac{I_{in}}{g_m}
-\end{align}$$
+$$
+V_o = \frac{I_{in}}{g_m}(1-g_mR_F) \qquad V_i = \frac{I_{in}}{g_m}
+$$
 
 ***linearity***
+
 > TIA stage allows for improved gain with **better linearity**, as mostly signal current passes through $R_F$
 *TODO* &#128197;
 ??? Quantitative analysis

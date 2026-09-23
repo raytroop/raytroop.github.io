@@ -1606,6 +1606,16 @@ y_{\sin}(t) = \underbrace{\frac{\alpha_2}{2} + \frac{3\alpha_4}{8}}_{\text{DC}}
 + \underbrace{\frac{\alpha_4}{8}\,\sin\!\left(4\omega_0 t + \textcolor{blue}{\frac{\pi}{2}}\right)}_{4\omega_0}
 $$
 
+with $\boxed{x(t) = \sin(-\omega_0 t)}$ and we have $\sin\left(-\alpha+\frac{\pi}{2}\right) = \sin\left(\alpha+\frac{\pi}{2}\right)$, $\sin(-\alpha) = \sin(\alpha +\pi)$
+$$
+y_{-\sin}(t) = \underbrace{\frac{\alpha_2}{2} + \frac{3\alpha_4}{8}}_{\text{DC}}
++ \underbrace{\left(\alpha_1 + \frac{3\alpha_3}{4}\right)\sin(\omega_0 t+\textcolor{red}{\pi})}_{\omega_0}
+- \underbrace{\frac{\alpha_2 + \alpha_4}{2}\,\sin\!\left(2\omega_0 t + \textcolor{blue}{\frac{\pi}{2}}\right)}_{2\omega_0}
+- \underbrace{\frac{\alpha_3}{4}\,\sin(3\omega_0 t+\textcolor{red}{\pi})}_{3\omega_0}
++ \underbrace{\frac{\alpha_4}{8}\,\sin\!\left(4\omega_0 t + \textcolor{blue}{\frac{\pi}{2}}\right)}_{4\omega_0}
+$$
+
+
 with $\boxed{x(t) = \cos(\omega_0 t)}$
 $$
 y_{\cos}(t) = \underbrace{\frac{\alpha_2}{2}+\frac{3\alpha_4}{8}}_{\text{DC}}
@@ -1627,7 +1637,7 @@ $$
 
 ![image-20260630235022053](lc-osc/image-20260630235022053.png)
 
-given $\Delta t$ is constant
+Given $\Delta t$ is constant
 $$
 \boxed{\Delta t = \frac{\Delta\Phi_N}{N\omega_0} \implies \Delta\Phi_N = N\Delta\Phi_0 \quad (\Delta t = \text{constant})}
 $$

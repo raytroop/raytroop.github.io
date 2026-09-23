@@ -38,6 +38,8 @@ For instance
 
 
 
+
+
 ## Transmission Line
 
 ![image-20260530103816500](xtalk/image-20260530103816500.png)
@@ -75,6 +77,40 @@ for lossless T-line, $\gamma = j\beta$
 
 
 ![shield_ground_loop_faraday_induction](xtalk/shield_ground_loop_faraday_induction.svg)
+
+
+
+## NEXT & FEXT
+
+<span style="color:white; background-color:black">Backward (near-end) crosstalk</span> & <span style="color:white; background-color:black">Forward (far-end) crosstalk</span>
+
+> Mohammad Abu Khater, ISCAS2019 tutorial: High-Performance Printed Circuit Boards (PCBs)
+
+![image-20260923232807253](xtalk/image-20260923232807253.png)
+
+Consider a small section at distance \(x\) from the input:
+
+1. The aggressor’s edge reaches it at time $x/v$, generating a small noise pulse.
+2. That pulse travels forward on the victim through the remaining distance $\ell-x$
+
+Its arrival time at the far end is therefore
+
+$$
+t_{\text{arrival}} =\underbrace{\frac{x}{v}}_{\text{aggressor reaches section}} +\underbrace{\frac{\ell-x}{v}}_{\text{noise reaches far end}} =\frac{\ell}{v}
+$$
+
+<span style="background-color:yellow">**Noise generated earlier travels farther; noise generated later travels less**. The pulses overlap, so adding more coupled sections increases their summed amplitude</span>
+
+Each short section contributes in proportion to its length and the edge slope:
+$$
+dV_F\propto dx\,\frac{\Delta V}{t_r} \quad\Longrightarrow\quad \boxed{V_{F,\text{peak}}\propto \ell\,\frac{\Delta V}{t_r}}
+$$
+
+Here, $\ell$ means **the length over which the traces run alongside each other**.
+
+For comparison, backward noise arrives at $x/v+x/v=2x/v$, so <span style="background-color:yellow">contributions from different locations spread out in time</span>. That explains why extending a sufficiently long coupled line mainly increases the backward pulse’s duration
+
+
 
 ## relative dielectric constant vs permittivity
 
@@ -239,6 +275,16 @@ C = (gamma_ftarget/Zline_ftarget).imag / omega
 
 
 
+## 90<sup>o</sup> Turns
+
+> Mohammad Abu Khater, ISCAS2019 tutorial: High-Performance Printed Circuit Boards (PCBs)
+
+![image-20260923225838811](xtalk/image-20260923225838811.png)
+
+
+
+
+
 ## Hyperbolic Functions
 
 ![image-20260418105248415](xtalk/image-20260418105248415.png)
@@ -270,4 +316,3 @@ How Much Transmission-Line Loss is Too Much? [[http://blog.teledynelecroy.com/20
 Raymond Y. Chen, Raymond Y. Chen. Fundamentals of S Fundamentals of S-Parameter Parameter Modeling for Power Distribution Modeling for Power Distribution System (PDS) and SSO Analysis System (PDS) and SSO Analysis [[https://ibis.org/summits/jun05/chen.pdf](https://ibis.org/summits/jun05/chen.pdf)]
 
 Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 9: Noise Sources [[https://people.engr.tamu.edu/spalermo/ecen689/lecture9_ee720_noise_sources.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture9_ee720_noise_sources.pdf)]
-

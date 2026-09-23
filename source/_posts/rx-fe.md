@@ -9,6 +9,10 @@ mathjax: true
 
 
 
+![image-20260924012204914](rx-fe/image-20260924012204914.png)
+
+
+
 ## shunt peaking
 
 ![image-20260608215130203](rx-fe/image-20260608215130203.png)
@@ -464,6 +468,8 @@ In the active copper cable (ACC) application, it is necessary to give different 
 > D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537.
 
 ![image-20260922003739424](rx-fe/image-20260922003739424.png)
+
+At DC
 $$
 i_f = g_{md1}v_f \quad i_f = (v_f - v_o)/R_f \qquad \Longrightarrow \qquad \frac{v_o}{v_i} = -\frac{g_{m1}}{g_{md1}} + g_{m1}R_f
 $$
@@ -502,7 +508,7 @@ $$
 
 
 
-## Q-Shaping
+## Q-Shaping (LC-resonator Based CTLE)
 
 
 > Y. Krupnik et al., "112 Gb/s PAM4 ADC Based SERDES Receiver for Long-Reach Channels in 10nm Process," 2019 Symposium on VLSI Circuits, Kyoto, Japan, 2019, pp. C266-C267, doi: 10.23919/VLSIC.2019.8778136
@@ -510,8 +516,20 @@ $$
 > —, "112-Gb/s PAM4 ADC-Based SERDES Receiver With Resonant AFE for Long-Reach Channels," in IEEE Journal of Solid-State Circuits, vol. 55, no. 4, pp. 1077-1085, April 2020, doi: 10.1109/JSSC.2019.2959511
 >
 > S. Kiran et al., "A 56GHz Receiver Analog Front End for 224Gb/s PAM-4 SerDes in 10nm CMOS," 2021 Symposium on VLSI Circuits, Kyoto, Japan, 2021, pp. 1-2, doi: 10.23919/VLSICircuits52068.2021.9492471
+>
+> H. Park *et al*., "7.4 A 112Gb/s DSP-Based PAM-4 Receiver with an LC-Resonator-Based CTLE for >52dB Loss Compensation in 4nm FinFET," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 142-144, doi: 10.1109/ISSCC49661.2025.10904638.
 
 <span style="color:white; background-color:black">Shunt peaking, Q-Shaping, LC-tuned Amplifier</span>
+
+![image-20260924003949332](rx-fe/image-20260924003949332.png)
+
+
+
+![image-20260923233823241](rx-fe/image-20260923233823241.png)
+
+![image-20260924002757637](rx-fe/image-20260924002757637.png)
+
+![image-20260924011450698](rx-fe/image-20260924011450698.png)
 
 ![image-20260921234359120](rx-fe/image-20260921234359120.png)
 
@@ -579,7 +597,9 @@ Jihwan Kim,Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrica
 
 Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
 
-Heng Zhang, Broadcom, ISSCC 2025 - Forum 4.2: < High-speed ADCs for 100Gbps+ Wireline Transceivers >
+Heng Zhang, Broadcom, ISSCC 2025 - Forum 4.2: *High-speed ADCs for 100Gbps+ Wireline Transceivers*
+
+Ariel Cohen, Intel, ISSCC 2026 - Forum 2.3: *State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*
 
 ---
 

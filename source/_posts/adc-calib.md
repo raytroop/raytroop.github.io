@@ -66,6 +66,73 @@ For Scherier FoM (DR, SNDR)
 
 ![image-20250825152414651](adc-calib/image-20250825152414651.png)
 
+##  Offset Calibration
+
+**measured** in **digital** domain: **long-term averages** of ADC out
+
+> If the input has a nonzero mean, the output average also contains the signal’s DC component, so it does not identify offset alone
+
+![image-20260925232441699](adc-calib/image-20260925232441699.png)
+
+**corrected** in **analog** domain:  **ADC dynamic range reduction** due to the offset, which holds if we force the offset of each channel to zero rather than make the offsets of different channels equal
+
+> ![image-20260925234147852](adc-calib/image-20260925234147852.png)
+
+
+
+---
+
+
+
+![image-20260926002408716](adc-calib/image-20260926002408716.png)
+
+The offset-correction DAC here is a switched-capacitor DAC. Its digital code selects which capacitor bottom plates switch between ground and $V_{\mathrm{REF}}$
+
+The op-amp holds the summing node approximately at **virtual ground**. The injected charge is balanced through feedback capacitor $C_2$, causing **$V_{\mathrm{res}}$ to change**.
+
+For an ideal op-amp, the correction-induced output step is
+
+$$
+\boxed{\Delta V_{\mathrm{res}} =-\frac{\sum_k C_{D,k}\,\Delta V_{b,k}}{C_2}}
+$$
+
+where $C_{D,k}$ are the correction-DAC capacitors and $\Delta V_{b,k}$ are their bottom-plate voltage changes.
+
+Thus, the DAC supplies a digitally controlled **charge correction**, which the MDAC converts into an output-voltage correction.
+
+---
+
+![image-20260926003059811](adc-calib/image-20260926003059811.png)
+
+The correction DAC's bottom plates remain fixed during these trials, but **its capacitance still loads $X$**
+
+eglecting other parasitic capacitances:
+
+$$
+G_{Q\rightarrow V,\mathrm{ideal}}=\frac{1}{C_{\mathrm{SAR}}}, \qquad \boxed{G_{Q\rightarrow V,\mathrm{loaded}} =\frac{1}{C_{\mathrm{SAR}}+C_{\mathrm{CALIB}}}}
+$$
+
+During a SAR bit trial, switching capacitor $C_k$ by $\Delta V_{b,k}$ therefore produces
+
+$$
+\Delta V_X=\frac{C_k\,\Delta V_{b,k}} {C_{\mathrm{SAR}}+C_{\mathrm{CALIB}}}
+$$
+
+ Every SAR DAC voltage step is reduced by
+
+$$
+\boxed{\alpha=\frac{C_{\mathrm{SAR}}} {C_{\mathrm{SAR}}+C_{\mathrm{CALIB}}}<1}
+$$
+
+**the SAR DAC gain decreases, whereas the ADC’s output-code-per-volt gain increases.** In the shown circuit, the sampling switch directly sets $V_X=V_{\mathrm{in}}$, so the sampled input is not attenuated. Smaller DAC steps mean more code is needed to balance the same input:
+$$
+\boxed{\frac{G_{\mathrm{ADC}}}{G_{\mathrm{ADC,ideal}}} =\frac{1}{\alpha} =1+\frac{C_{\mathrm{CALIB}}}{C_{\mathrm{SAR}}}}
+$$
+
+
+
+![sar-dac-step-and-adc-gain](adc-calib/sar-dac-step-and-adc-gain.svg)
+
 
 
 ## Testing

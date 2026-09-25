@@ -303,7 +303,7 @@ $M+1$ bits ensure on overflow or underflow in the signed adder
 
 ## MRDT (Multi-rate Discrete-Time) Modeling
 
-> Y. Hu, T. Siriburanon and R. B. Staszewski, "Multirate Timestamp Modeling for Ultralow-Jitter Frequency Synthesis: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 7, pp. 3030-3036, July 2022
+> Y. Hu, T. Siriburanon and R. B. Staszewski, "Multirate Timestamp Modeling for Ultralow-Jitter Frequency Synthesis: A Tutorial," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 69, no. 7, pp. 3030-3036, July 2022 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9765581](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9765581)]
 >
 
 There are two key features associated with the behavior of DPLLs, namely, the <span style="background-color:yellow">**multi-rate**</span> and <span style="background-color:yellow">**discrete-time** properties</span>

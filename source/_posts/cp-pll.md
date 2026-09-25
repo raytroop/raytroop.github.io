@@ -444,6 +444,14 @@ Julia version (Claude Opus 4.7)  [[https://gist.github.com/raytroop/53f210b2cca1
 
 
 
+## MRDT Modeling for CP-PLL
+
+> X. Wang and S. Elsalahi, "Multi-Rate Discrete-Time Analysis and Behavioral Modeling of Nonlinear High-Order Fractional-N Charge-Pump Phase Locked Loops," in *IEEE Open Journal of the Solid-State Circuits Society*, doi: 10.1109/OJSSCS.2026.3737100. [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11705418](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11705418)]
+
+*TODO* &#128197;
+
+
+
 
 
 ## reference

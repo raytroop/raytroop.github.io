@@ -743,26 +743,19 @@ The *common centroid* technique describes that if there are n blocks which are t
 
 > Mark Williams. Stacked MOSFETs in Analog Layout [[https://community.cadence.com/cadence_blogs_8/b/cic/posts/stacked-mosfets-in-analog-layout](https://community.cadence.com/cadence_blogs_8/b/cic/posts/stacked-mosfets-in-analog-layout)]
 
-### Modeling Consideration
+### parasitic RC
 
 ![image-20221217152830191](dfm-layout/image-20221217152830191.png)
 
 ![image-20221210170042233](dfm-layout/image-20221210170042233.png)
 
+![mos_rc.drawio](dfm-layout/mos_rc.drawio.svg)
 
 
-![mos_pro](dfm-layout/mos_pro.drawio.svg)
 $$\begin{align}
-R_{d1} &\propto \frac{1}{N_{fins}} \\
-R_{s1} &\propto \frac{1}{N_{fins}} \\
-R_{g1} &\propto N_{fins} \\
-C_{gd} &\propto N_{fins} \cdot N_{fingers} \cdot N_{multipler} \\
-C_{gs} &= Cgd \\
-C_{g1d} &\propto N_{fins} \\
-C_{g1s} &= C_{g1d} \\
-C_{g1d1} &\propto N_{fins} \\
-C_{g1s1} &= C_{g1d1}  \\
-C_{g1d1} &\simeq 2\times C_{g1d}
+R_{d1} &\propto \frac{1}{N_{fins}} \qquad R_{s1} \propto \frac{1}{N_{fins}} \qquad R_{g1} \propto N_{fins} \\
+C_{gd} &\propto N_{fins} \cdot N_{fingers} \cdot N_{multipler} \qquad C_{gs} = Cgd \qquad C_{g1d} \propto N_{fins} \\
+C_{g1s} &= C_{g1d} \qquad C_{g1d1} \propto N_{fins} \qquad C_{g1s1} = C_{g1d1}  \qquad C_{g1d1} \approx 2\times C_{g1d}
 \end{align}$$
 
 
@@ -793,7 +786,7 @@ C_{g1d1} &\simeq 2\times C_{g1d}
 | **Con's**       | density                                                      | LDE (LOD/OSE)                                                |
 | **edge device** | 3T PODE(with single side OD): NO ERC<br />4T M-PODE (with S/D): ERC (gate tied to power/ground) | won't form device; <br />NO ERC; <br />OD under CPODE is cut off |
 
-
+![image-20260925141339306](dfm-layout/image-20260925141339306.png)
 
 
 
@@ -1215,13 +1208,33 @@ For pnp BJT, *N* type Base in *Nwell*, the "floating.nxwell" can be waived
 
 ## reference
 
+JED Hurwitz, ISSCC2011 "T4: Layout: The other half of Nanometer CMOS Analog Design"
+
+Cliff Hou, ISSCC 2017: P1:  A Smart Design Paradigm for Smart Chips [[https://youtu.be/tBSrgwUQg9E](https://youtu.be/tBSrgwUQg9E)]
+
+A. L. S. Loke, 2016 Symposia on VLSI Technology and Circuits: Migrating Analog/Mixed-Signal Designs to FinFET Alvin Loke / Qualcomm. 
+
+—, "Analog/mixed-signal design challenges in 7-nm CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference (CICC), San Diego, CA, USA, 2018, pp. 1-8, doi: 10.1109/CICC.2018.8357060.[[slides](https://ewh.ieee.org/r6/san_diego/sscs/events/slides/2018_05_23_AMSDesignChallengesIn7nmCMOS_AlvinLoke.pdf)]
+
+—, "Nanoscale CMOS Implications on Analog/Mixed-Signal Design," 2019 IEEE Custom Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi: 10.1109/CICC.2019.8780267.
+
+—, FinFET technology considerations for circuit design (invited short course). BCICTS 2020 Monterey, CA
+
+—, TSMC. Device and Physical Design Considerations for Circuits in FinFET Technology", ISSCC 2020
+
+Eric J.-W. Fang, T5: Fundamentals of Process Monitors for Signoff-Oriented Circuit Design, 2022 IEEE International Solid-State Circuits Conference
+
+L. Yang, SC1-1 "CMOS Scaling Exploration: Technology Trends and System-Level Perspectives," short course presentation at the *2025 Symposium on VLSI Technology and Circuits*, Honolulu, HI, USA, June 2025.
+
+Noman Hai, How to Think About FinFET Layout (Conceptual Walkthrough) [[https://youtu.be/aI5xJQl1gU8](https://youtu.be/aI5xJQl1gU8)]
+
+---
+
 Mikael Sahrling, Layout Techniques for Integrated Circuit Designers 1st Edition , Artech House 2022
 
 LAYOUT, [EE6350 VLSI Design Lab](http://www.ee.columbia.edu/~kinget/EE6350_S16/)  SMART TEMPERATURE SENSOR  URL: [https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html](https://www.ee.columbia.edu/~kinget/EE6350_S16/06_TEMPSENS_Sukanya_Vani/layout.html)
 
 Stacked MOSFETs in analog layout [https://pulsic.com/stacked-mosfets-in-analog-layout/](https://pulsic.com/stacked-mosfets-in-analog-layout/)
-
-JED Hurwitz, ISSCC2011 "T4: Layout: The other half of Nanometer CMOS Analog Design" [[slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T4.pdf), [transcript](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/Transcription_T4.pdf)]
 
 Tom Quan, TSMC, Bob Lefferts, Fred Sendig, Synopsys, Custom Design with FinFETs - Best practices designing mixed-signal IP
 
@@ -1229,22 +1242,8 @@ Jacob, Ajey & Xie, Ruilong & Sung, Min & Liebmann, Lars & Lee, Rinus & Taylor, B
 
 Joddy Wang, Synopsys ["FinFET SPICE Modeling"](https://www.mos-ak.org/washington_dc_2015/presentations/T03_Joddy_Wang_MOS-AK_Washington_DC_2015.pdf)  Modeling of Systems and Parameter Extraction Working Group 8th International MOS-AK Workshop (co-located with the IEDM Conference and CMC Meeting) Washington DC, December 9 2015
 
-A. L. S. Loke et al., "Analog/mixed-signal design challenges in 7-nm CMOS and beyond," 2018 IEEE Custom Integrated Circuits Conference (CICC), San Diego, CA, USA, 2018, pp. 1-8, doi: 10.1109/CICC.2018.8357060.[[slides](https://ewh.ieee.org/r6/san_diego/sscs/events/slides/2018_05_23_AMSDesignChallengesIn7nmCMOS_AlvinLoke.pdf)]
-
 Prof. Adam Teman, Advanced Process Technologies, [[pdf](https://www.eng.biu.ac.il/temanad/files/2022/03/Lecture-2-Advanced-Process-Technologies.pdf)]
 
 Luke Collins. FinFET variability issues challenge advantages of new process [[link](https://www.techdesignforums.com/blog/2014/04/16/finfet-variability-challenges-advantages/)]
 
-Loke, Alvin. (2020). FinFET technology considerations for circuit design (invited short course). BCICTS 2020 Monterey, CA
-
-Alvin Leng Sun Loke, TSMC. Device and Physical Design Considerations for Circuits in FinFET Technology", ISSCC 2020
-
-A. L. S. Loke, C. K. Lee and B. M. Leary, "Nanoscale CMOS Implications on Analog/Mixed-Signal Design," 2019 IEEE Custom Integrated Circuits Conference (CICC), Austin, TX, USA, 2019, pp. 1-57, doi: 10.1109/CICC.2019.8780267.
-
-A. L. S. Loke, Migrating Analog/Mixed-Signal Designs to FinFET Alvin Loke / Qualcomm. 2016 Symposia on VLSI Technology and Circuits
-
 Lattice Semiconductor, 16FFC Process Technology Introduction December 9th, 2021[[pdf](https://cdn.latticesemi-insights.com/wp-content/uploads/2024/01/29174339/HR1000000009.pdf)]
-
-Cliff Hou, ISSCC 2017: P1:  A Smart Design Paradigm for Smart Chips [[https://youtu.be/tBSrgwUQg9E](https://youtu.be/tBSrgwUQg9E)]
-
-Noman Hai, How to Think About FinFET Layout (Conceptual Walkthrough) [[https://youtu.be/aI5xJQl1gU8](https://youtu.be/aI5xJQl1gU8)]

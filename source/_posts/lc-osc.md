@@ -1061,7 +1061,7 @@ Two resistances, both in series with the variable capacitance:
 
 
 
-
+![image-20260925142950594](lc-osc/image-20260925142950594.png)
 
 
 

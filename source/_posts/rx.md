@@ -127,13 +127,22 @@ Extensive work on DFEs has produced a multitude of architectures, which can be b
 
 *TODO* &#128197;
 
-
 ## reference
+
+T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)] 
 
 Miguel Gandara, MediaTek. CICC 2025 Circuit Insights: Basics of Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg](https://youtu.be/X4JTuh2Gdzg)]
 
 Tony Chan Carusone, Alphawave Semi. VLSI2025 SC2: Connectivity Technologies to Accelerate AI
 
-H. Park et al., "7.4 A 112Gb/s DSP-Based PAM-4 Receiver with an LC-Resonator-Based CTLE for >52dB Loss Compensation in 4nm FinFET," 2025 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2025
-
 Noman Hai, Synopsys, Canada CASS Talks 2025 - May 2, 2025: High-speed Wireline Interconnects: Design Challenges and Innovations in 224G SerDes [[https://www.youtube.com/live/wHNOlxHFTzY](https://www.youtube.com/live/wHNOlxHFTzY)]
+
+Nhat Nguyen and Masum Hossain, ISSCC 2021 Forum *F6.7: 112Gb/s-and-Beyond Long-Reach and Short-Reach Electrical Interfaces*
+
+Jihwan Kim, Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
+
+Ariel Cohen, Intel, ISSCC 2024 Forum *F6.3: Beyond 200Gbps Electrical transceivers – Circuit Architecture, Design Implementation and Silicon Results*
+
+Heng Zhang, Broadcom, ISSCC 2025 Forum *F4.2: High-speed ADCs for 100Gbps+ Wireline Transceivers*
+
+E-Hung Chen, MTK, ISSCC 2026 Forum *F2.3: State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*

@@ -74,6 +74,38 @@ A good PSRR is important when an LDO is used as a sub-regulator in cascade with 
 
 ![image-20260108215117646](ldo/image-20260108215117646.png)
 
+
+
+##  Feedforward Supply-Noise Cancellation Technique
+
+> E. -H. Chen *et al*., "7.1 A 212.5Gb/s DSP-Based PAM-4 Transceiver with 50dB Loss Compensation for Large AI System Interconnects in 4nm FinFET," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 1-3, doi: 10.1109/ISSCC49661.2025.10904601.
+>
+> B. Yang, B. Drost, S. Rao and P. K. Hanumolu, "A high-PSR LDO using a feedforward supply-noise cancellation technique," *2011 IEEE Custom Integrated Circuits Conference (CICC)*, San Jose, CA, USA, 2011, pp. 1-4 [[https://sci-hub.jp/10.1109/CICC.2011.6055409](https://sci-hub.jp/10.1109/CICC.2011.6055409)]
+
+<span style="color:white; background-color:black">**PMOS** PSRR at **Mid**-frequency</span>
+
+![image-20260925115633571](ldo/image-20260925115633571.png)
+$$
+\boxed{\text{PSRR}_\text{PMOS,MidFreq} = \frac{R_L}{R_L+r_\text{ds}}}
+$$
+
+
+![image-20260925120043167](ldo/image-20260925120043167.png)
+
+
+
+<span style="color:white; background-color:black">**NMOS** PSRR at **Mid**-frequency</span>
+
+![image-20260925114747806](ldo/image-20260925114747806.png)
+$$
+\boxed{\text{PSRR}_\text{NMOS,MidFreq} = \frac{C_{GD}}{C_L}}
+$$
+
+
+
+
+
+
 ## High frequency PSRR
 
 ![high-psrr.drawio](ldo/high-psrr.drawio.svg)

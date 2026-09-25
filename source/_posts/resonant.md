@@ -367,6 +367,16 @@ end
 
 
 
+## Resonance in a discrete-time system
+
+In continuous-time systems, resonance occurs when poles approach the imaginary axis ($s = \pm j\omega$).
+
+<span style="background-color:yellow">In **discrete-time systems**, it occurs when poles approach the **unit circle** ($z=e^{j\omega}$)</span>
+
+
+
+
+
 ## reference
 
 Pozar, David M. *Microwave Engineering*. 4th ed. Wiley, 2012. [[pdf](https://hajaress.wordpress.com/wp-content/uploads/2019/09/microwave_engineering_david_m_pozar_4ed_wiley_2012.pdf)]

@@ -173,9 +173,11 @@ $$
 
 Nicola Da Dalt, Intel. ISSCC 2017 Forum: High-Performance Clock Generation and Distribution in Very-High-Speed Wireline Transceivers
 
+Jri Lee, NTU. ISSCC 2017 Forum: Fully-Integrated Millimeter-Wave Clock Generation — From DC to 300GHz
+
 Jihwan Kim,Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
 
-Heng Zhang, Broadcom, ISSCC 2025 - Forum 4.2: < High-speed ADCs for 100Gbps+ Wireline Transceivers >
+Heng Zhang, Broadcom, ISSCC 2025 - Forum *F4.2: High-speed ADCs for 100Gbps+ Wireline Transceivers*
 
 **H. Zhang**, D. Cui, J. Cao, and A.Momtaz, "Phase Adjustment Scheme for Time-interleaved ADCs", United States Patent. US 9065464 B2. Issued Jun.23, 2015*.* [[https://patentimages.storage.googleapis.com/c1/11/1f/6fb830d08b710b/US9065464.pdf](https://patentimages.storage.googleapis.com/c1/11/1f/6fb830d08b710b/US9065464.pdf)]
 
@@ -186,3 +188,5 @@ rfinsights, Quadrature Phase Detector: passive mixer vs XOR gate [[https://www.r
 —, multiphase clock generation technique: a brief look into the history and the latest [[https://www.rfinsights.com/synthesizer/multiphase-clock-generation-techniques/](https://www.rfinsights.com/synthesizer/multiphase-clock-generation-techniques/)]
 
 —, phase rotator in serdes - every major topology, explained [[https://www.rfinsights.com/synthesizer/phase-rotator/](https://www.rfinsights.com/synthesizer/phase-rotator/)]
+
+Y. Tian *et al*., "A 28-nm 8–28-GHz Eight-Phase Clock Generator Using an Injection-Locked Dual-Feedback Ring Oscillator," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 1, pp. 47-62, Jan. 2026, doi: 10.1109/JSSC.2025.3613940

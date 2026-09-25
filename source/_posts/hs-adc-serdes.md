@@ -256,19 +256,25 @@ The qualification is that this compares their **instantaneous currents during re
 
 ## reference
 
+T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)] 
+
 Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis
 
 Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
 
-Nhat Nguyen and Masum Hossain, ISSCC 2021 Forum 6.7: 112Gb/s-and-Beyond Long-Reach and Short-Reach Electrical Interfaces
-
 Ben Rhew, Samsung Electronics, Hwaseong, Korea, ISSCC 2023 F5.6 Extreme Data Converters and Their Peripherals: High Performance ADC Design in High-Speed Wireline Transceivers and 5G Wireless Transceiver
-
-Heng Zhang, Broadcom, ISSCC 2025 - Forum 4.2: < High-speed ADCs for 100Gbps+ Wireline Transceivers >
 
 V. Chen, "Tutorial: High-Speed Analog-to-Digital Converters," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 1-1, doi: 10.1109/ISSCC49661.2025.11076112.
 
-T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)] 
+Nhat Nguyen and Masum Hossain, ISSCC 2021 Forum *F6.7: 112Gb/s-and-Beyond Long-Reach and Short-Reach Electrical Interfaces*
+
+Jihwan Kim, Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
+
+Ariel Cohen, Intel, ISSCC 2024 Forum *F6.3: Beyond 200Gbps Electrical transceivers – Circuit Architecture, Design Implementation and Silicon Results*
+
+Heng Zhang, Broadcom, ISSCC 2025 Forum *F4.2: High-speed ADCs for 100Gbps+ Wireline Transceivers*
+
+E-Hung Chen, MTK, ISSCC 2026 Forum *F2.3: State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*
 
 ---
 

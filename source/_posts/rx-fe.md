@@ -11,6 +11,100 @@ mathjax: true
 
 ![image-20260924012204914](rx-fe/image-20260924012204914.png)
 
+**source-degeneration** -> **+resonator-based** CTLE for higher peaking frequency
+
+![image-20260925091849782](rx-fe/image-20260925091849782.png)
+
+## CTLE design target
+
+***peaking gain*** + ***curve shape***
+
+### CTLE transfer function
+
+> Circuit Insights @ ISSCC2025: Circuits for Wireline Communications - Kevin Zheng [[https://youtu.be/8NZl81Dj45M&t=1045](https://youtu.be/8NZl81Dj45M&t=1045)]
+
+![image-20260328182328792](rx-fe/image-20260328182328792.png)
+
+![image-20260328182339762](rx-fe/image-20260328182339762.png)
+
+---
+
+> Why Shunt-peaking or Source Degenerated type Active CTLE? [[https://youtu.be/EFMZG-FIWeo](https://youtu.be/EFMZG-FIWeo)]
+
+![image-20260519232914332](rx-fe/image-20260519232914332.png)
+
+***Shunt Peaking broaden the RC bandwidth***
+
+![image-20260519233200484](rx-fe/image-20260519233200484.png)
+
+![image-20260526210821835](rx-fe/image-20260526210821835.png)
+
+![image-20260526210739466](rx-fe/image-20260526210739466.png)
+
+### curve shape
+
+> PCIe Gen6 Channel and Reference Package S4P Models for Rx Stressed Eye Calibration
+
+![image-20251204005909804](rx-fe/image-20251204005909804.png)
+
+Above curve demonstrate that only zero is not enough to compensate channel+pkg loss (>20 dB/decade), peaking or *Complex*-*Conjugate Poles* is necessary
+
+![image-20251204005738743](rx-fe/image-20251204005738743.png)
+
+
+
+---
+
+> S. Shahramian *et al*., "30.5 A 1.41pJ/b 56Gb/s PAM-4 Wireline Receiver Employing Enhanced Pattern Utilization CDR and Genetic Adaptation Algorithms in 7nm CMOS," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019 [[pdf](https://sci-hub.se/10.1109/ISSCC.2019.8662421)]
+
+![image-20251203231733124](rx-fe/image-20251203231733124.png)
+
+---
+
+> P. A. Francese *et al*., "10.6 continuous-time linear equalization with programmable active-peaking transistor arrays in a 14nm FinFET 2mW/Gb/s 16Gb/s 2-Tap speculative DFE receiver," *2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers*, San Francisco, CA, USA, 2015 [[https://sci-hub.se/10.1109/ISSCC.2015.7062988](https://sci-hub.se/10.1109/ISSCC.2015.7062988)]
+
+![image-20251203232523501](rx-fe/image-20251203232523501.png)
+
+---
+
+> Z. Li, M. Tang, T. Fan and Q. Pan, "A 56-Gb/s PAM4 Receiver Analog Front-End With Fixed Peaking Frequency and Bandwidth in 40-nm CMOS," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 9, pp. 3058-3062, Sept. 2021 [[slides](https://confcats-event-sessions.s3.amazonaws.com/isicas21/slides/9402.pdf)] [[paper](https://sci-hub.se/10.1109/TCSII.2021.3074384)]
+
+In the active copper cable (ACC) application, it is necessary to give different equalizations at the same frequency according to different cable lengths, Therefore, the AFE with ***fixed peaking frequency*** and ***constant bandwidth*** is desirable for these applications
+
+![image-20251217224711701](rx-fe/image-20251217224711701.png)
+
+
+
+###  Low-Frequency CTLE (LF-CTLE)
+
+> S. Parikh *et al*., "A 32Gb/s wireline receiver with a low-frequency equalizer, CTLE and 2-tap DFE in 28nm CMOS," *2013 IEEE International Solid-State Circuits Conference Digest of Technical Papers*, San Francisco, CA, USA, 2013 [[https://sci-hub.se/10.1109/ISSCC.2013.6487622](https://sci-hub.se/10.1109/ISSCC.2013.6487622)]
+>
+> T. Shibasaki *et al*., "A 56-Gb/s receiver front-end with a CTLE and 1-tap DFE in 20-nm CMOS," *2014 Symposium on VLSI Circuits Digest of Technical Papers*, Honolulu, HI, USA, 2014, pp. 1-2
+>
+> Yasuo Hidaka  Comment #146, #174: Low-Frequency CTLE to support 3m cable w/o FEC [[https://www.ieee802.org/3/by/public/Sept15/hidaka_3by_01_0915.pdf](https://www.ieee802.org/3/by/public/Sept15/hidaka_3by_01_0915.pdf)]
+
+![image-20251217233444843](rx-fe/image-20251217233444843.png)
+
+![image-20251217234434659](rx-fe/image-20251217234434659.png)
+
+![image-20251217234637716](rx-fe/image-20251217234637716.png)
+
+
+### Equalization Noise Enhancement
+
+> Advanced Signal Integrity for High-Speed Digital Designs, S. H. Hall and H. L. Heck, John Wiley & Sons, 2009
+>
+> CC Chen, Why CTLE? [[https://youtu.be/zsuJMqadaKY](https://youtu.be/zsuJMqadaKY)]
+
+![image-20251021211402274](rx-fe/image-20251021211402274.png)
+
+![image-20250904235434247](rx-fe/image-20250904235434247.png)
+
+Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
+
+---
+
+trade-offs between *noise amplification* and *signal equalization*
 
 
 ## shunt peaking
@@ -347,78 +441,6 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 
 
 
-## CTLE transfer function
-
-> Circuit Insights @ ISSCC2025: Circuits for Wireline Communications - Kevin Zheng [[https://youtu.be/8NZl81Dj45M&t=1045](https://youtu.be/8NZl81Dj45M&t=1045)]
-
-![image-20260328182328792](rx-fe/image-20260328182328792.png)
-
-![image-20260328182339762](rx-fe/image-20260328182339762.png)
-
----
-
-> Why Shunt-peaking or Source Degenerated type Active CTLE? [[https://youtu.be/EFMZG-FIWeo](https://youtu.be/EFMZG-FIWeo)]
-
-![image-20260519232914332](rx-fe/image-20260519232914332.png)
-
-***Shunt Peaking broaden the RC bandwidth***
-
-![image-20260519233200484](rx-fe/image-20260519233200484.png)
-
-![image-20260526210821835](rx-fe/image-20260526210821835.png)
-
-![image-20260526210739466](rx-fe/image-20260526210739466.png)
-
-## Equalization Shaping
-
-> PCIe Gen6 Channel and Reference Package S4P Models for Rx Stressed Eye Calibration
-
-![image-20251204005909804](rx-fe/image-20251204005909804.png)
-
-Above curve demonstrate that only zero is not enough to compensate channel+pkg loss (>20 dB/decade), peaking or *Complex*-*Conjugate Poles* is necessary
-
-![image-20251204005738743](rx-fe/image-20251204005738743.png)
-
-
-
----
-
-> S. Shahramian *et al*., "30.5 A 1.41pJ/b 56Gb/s PAM-4 Wireline Receiver Employing Enhanced Pattern Utilization CDR and Genetic Adaptation Algorithms in 7nm CMOS," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019 [[pdf](https://sci-hub.se/10.1109/ISSCC.2019.8662421)]
-
-![image-20251203231733124](rx-fe/image-20251203231733124.png)
-
----
-
-> P. A. Francese *et al*., "10.6 continuous-time linear equalization with programmable active-peaking transistor arrays in a 14nm FinFET 2mW/Gb/s 16Gb/s 2-Tap speculative DFE receiver," *2015 IEEE International Solid-State Circuits Conference - (ISSCC) Digest of Technical Papers*, San Francisco, CA, USA, 2015 [[https://sci-hub.se/10.1109/ISSCC.2015.7062988](https://sci-hub.se/10.1109/ISSCC.2015.7062988)]
-
-![image-20251203232523501](rx-fe/image-20251203232523501.png)
-
----
-
-> Z. Li, M. Tang, T. Fan and Q. Pan, "A 56-Gb/s PAM4 Receiver Analog Front-End With Fixed Peaking Frequency and Bandwidth in 40-nm CMOS," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 9, pp. 3058-3062, Sept. 2021 [[slides](https://confcats-event-sessions.s3.amazonaws.com/isicas21/slides/9402.pdf)] [[paper](https://sci-hub.se/10.1109/TCSII.2021.3074384)]
-
-In the active copper cable (ACC) application, it is necessary to give different equalizations at the same frequency according to different cable lengths, Therefore, the AFE with ***fixed peaking frequency*** and ***constant bandwidth*** is desirable for these applications
-
-![image-20251217224711701](rx-fe/image-20251217224711701.png)
-
-
-
-##  Low-Frequency CTLE (LF-CTLE)
-
-> S. Parikh *et al*., "A 32Gb/s wireline receiver with a low-frequency equalizer, CTLE and 2-tap DFE in 28nm CMOS," *2013 IEEE International Solid-State Circuits Conference Digest of Technical Papers*, San Francisco, CA, USA, 2013 [[https://sci-hub.se/10.1109/ISSCC.2013.6487622](https://sci-hub.se/10.1109/ISSCC.2013.6487622)]
->
-> T. Shibasaki *et al*., "A 56-Gb/s receiver front-end with a CTLE and 1-tap DFE in 20-nm CMOS," *2014 Symposium on VLSI Circuits Digest of Technical Papers*, Honolulu, HI, USA, 2014, pp. 1-2
->
-> Yasuo Hidaka  Comment #146, #174: Low-Frequency CTLE to support 3m cable w/o FEC [[https://www.ieee802.org/3/by/public/Sept15/hidaka_3by_01_0915.pdf](https://www.ieee802.org/3/by/public/Sept15/hidaka_3by_01_0915.pdf)]
-
-![image-20251217233444843](rx-fe/image-20251217233444843.png)
-
-![image-20251217234434659](rx-fe/image-20251217234434659.png)
-
-![image-20251217234637716](rx-fe/image-20251217234637716.png)
-
-
-
 
 
 ## Gm-TIA
@@ -461,9 +483,11 @@ In the active copper cable (ACC) application, it is necessary to give different 
 
 ![image-20260921235635071](rx-fe/image-20260921235635071.png)
 
+## Resonator-Based CTLE
 
+![image-20260925162456941](rx-fe/image-20260925162456941.png)
 
-## Passive series peaking
+### Passive series peaking
 
 > D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537.
 
@@ -495,8 +519,12 @@ The $Q$ is the **resonator loaded quality factor**
 
 That is
 $$
-\frac{A_{HF}}{A_{DC}} = Q
+A_{DC}=-g_{m1}R_s\qquad\qquad A_{HF}=jg_{m1}R_s\cdot Q \qquad\qquad \frac{A_{HF}}{A_{DC}} = Q
 $$
+
+where $A_{HF}$ is the gain *at resonance*
+
+
 
 ---
 
@@ -508,18 +536,22 @@ $$
 
 
 
-## Q-Shaping (LC-resonator Based CTLE)
+### Q-Shaping (LC-tuned Amplifier)
 
 
-> Y. Krupnik et al., "112 Gb/s PAM4 ADC Based SERDES Receiver for Long-Reach Channels in 10nm Process," 2019 Symposium on VLSI Circuits, Kyoto, Japan, 2019, pp. C266-C267, doi: 10.23919/VLSIC.2019.8778136
+> Y. Krupnik et al., "112 Gb/s PAM4 ADC Based SERDES Receiver for Long-Reach Channels in 10nm Process," 2019 Symposium on VLSI Circuits, Kyoto, Japan, 2019, pp. C266-C267, [[https://sci-hub.jp/10.23919/VLSIC.2019.8778136](https://sci-hub.jp/10.23919/VLSIC.2019.8778136)]
 >
-> —, "112-Gb/s PAM4 ADC-Based SERDES Receiver With Resonant AFE for Long-Reach Channels," in IEEE Journal of Solid-State Circuits, vol. 55, no. 4, pp. 1077-1085, April 2020, doi: 10.1109/JSSC.2019.2959511
+> —, **"112-Gb/s PAM4 ADC-Based SERDES Receiver With Resonant AFE for Long-Reach Channels,"** in IEEE Journal of Solid-State Circuits, vol. 55, no. 4, pp. 1077-1085, April 2020, [[https://sci-hub.jp/10.1109/JSSC.2019.2959511](https://sci-hub.jp/10.1109/JSSC.2019.2959511)]
 >
-> S. Kiran et al., "A 56GHz Receiver Analog Front End for 224Gb/s PAM-4 SerDes in 10nm CMOS," 2021 Symposium on VLSI Circuits, Kyoto, Japan, 2021, pp. 1-2, doi: 10.23919/VLSICircuits52068.2021.9492471
+> S. Kiran et al., "A 56GHz Receiver Analog Front End for 224Gb/s PAM-4 SerDes in 10nm CMOS," 2021 Symposium on VLSI Circuits, Kyoto, Japan, 2021, pp. 1-2, [[https://sci-hub.jp/10.23919/VLSICircuits52068.2021.9492471](https://sci-hub.jp/10.23919/VLSICircuits52068.2021.9492471)]
 >
-> H. Park *et al*., "7.4 A 112Gb/s DSP-Based PAM-4 Receiver with an LC-Resonator-Based CTLE for >52dB Loss Compensation in 4nm FinFET," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 142-144, doi: 10.1109/ISSCC49661.2025.10904638.
+> Y. Segal *et al*., "A 1.41pJ/b 224Gb/s PAM-4 SerDes Receiver with 31dB Loss Compensation," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 114-116, [[https://sci-hub.jp/10.1109/ISSCC42614.2022.9731794](https://sci-hub.jp/10.1109/ISSCC42614.2022.9731794)]
+>
+> A. Khairi *et al*., "A 1.41-pJ/b 224-Gb/s PAM4 6-bit ADC-Based SerDes Receiver With Hybrid AFE Capable of Supporting Long Reach Channels," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 1, pp. 8-18, Jan. 2023, doi: 10.1109/JSSC.2022.3211475
+>
+> D. Pfaff *et al*., "A 224 Gb/s 3 pJ/bit 40 dB Insertion Loss Transceiver in 3-nm FinFET CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 60, no. 1, pp. 9-22, Jan. 2025, doi: 10.1109/JSSC.2024.3466092
 
-<span style="color:white; background-color:black">Shunt peaking, Q-Shaping, LC-tuned Amplifier</span>
+
 
 ![image-20260924003949332](rx-fe/image-20260924003949332.png)
 
@@ -531,25 +563,123 @@ $$
 
 ![image-20260924011450698](rx-fe/image-20260924011450698.png)
 
+---
+
+
+
 ![image-20260921234359120](rx-fe/image-20260921234359120.png)
 
 
 
-## Equalization Noise Enhancement
+### Q-Shaping w/ Parallel RLC
 
-> Advanced Signal Integrity for High-Speed Digital Designs, S. H. Hall and H. L. Heck, John Wiley & Sons, 2009
->
-> CC Chen, Why CTLE? [[https://youtu.be/zsuJMqadaKY](https://youtu.be/zsuJMqadaKY)]
+> H. Park *et al*., "7.4 A 112Gb/s DSP-Based PAM-4 Receiver with an LC-Resonator-Based CTLE for >52dB Loss Compensation in 4nm FinFET," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 142-144, doi: 10.1109/ISSCC49661.2025.10904638.
 
-![image-20251021211402274](rx-fe/image-20251021211402274.png)
+![image-20260925162753669](rx-fe/image-20260925162753669.png)
 
-![image-20250904235434247](rx-fe/image-20250904235434247.png)
+With **Zero-Forcing**, inverse of $h_0 \sim h_1$ only
 
-Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
+```
+┌ 1    0    0    0 ┐ ┌c0┐   ┌1┐
+│ 0.7  1    0    0 │ │c1│ = │0│
+│ 0    0.7  1    0 │ │c2│   │0│
+└ 0    0    0.7  1 ┘ └c3┘   └0┘
+```
 
----
+```matlab
+% Define the coefficient matrix A
+A = [1    0    0    0;
+     0.7  1    0    0;
+     0    0.7  1    0;
+     0    0    0.7  1];
 
-trade-offs between *noise amplification* and *signal equalization*
+% Define the right-hand side vector b
+b = [1;
+     0;
+     0;
+     0];
+
+% Solve the linear system A * c = b for c
+% The backslash operator (\) is the recommended way to solve linear systems in MATLAB
+c = A \ b;
+
+% Display the result
+disp('Vector c:');
+disp(c');
+
+% Vector c:
+%     1.0000   -0.7000    0.4900   -0.3430
+```
+
+
+
+the other method: Treat $z^{-1}$  as an ordinary variable and divide 1 by $1+0.7z^{-1}$, working in **ascending powers of $z^{-1}$**
+
+```
+                  1  − 0.7z⁻¹ + 0.49z⁻² − 0.343z⁻³ + …      ← quotient = c
+               ┌─────────────────────────────────────────
+ 1 + 0.7z⁻¹    │ 1
+               │ 1 + 0.7z⁻¹                                ← 1 × divisor
+               │ ───────────
+               │   − 0.7z⁻¹                                ← remainder
+               │   − 0.7z⁻¹ − 0.49z⁻²                      ← (−0.7z⁻¹) × divisor
+               │   ──────────────────
+               │             + 0.49z⁻²
+               │             + 0.49z⁻² + 0.343z⁻³          ← (0.49z⁻²) × divisor
+               │             ───────────────────
+               │                       − 0.343z⁻³
+               │                          …
+```
+
+
+
+
+
+```matlab
+% Define the coefficient matrix A
+A = [1    0    0    0    0    0;
+     0.7  1    0    0    0    0;
+     0.48 0.7  1    0    0    0;
+     0.35 0.48 0.7  1    0    0;
+     0.27 0.35 0.48 0.7  1    0;
+     0.22 0.27 0.35 0.48 0.7  1];
+
+% Define the right-hand side vector b
+b = [1;
+     0;
+     0;
+     0;
+     0;
+     0];
+
+
+% Solve the linear system A * c = b for c
+% The backslash operator (\) is the recommended way to solve linear systems in MATLAB
+c = A \ b;
+
+% Display the result
+disp('Vector c:');
+disp(c');
+
+% Vector c:
+%     1.0000   -0.7000    0.0100   -0.0210   -0.0151   -0.0138
+```
+
+
+
+![](rx-fe/image-20260925175504622.png)
+
+**CTLE1**: $1-\alpha z^{-1}$,  without pole
+
+**CTLE2**: $1-\alpha z^{-1} + c_1 (\beta z^{-2} - \beta^2 z^{-3} + \dots) = 1 - \alpha z^{-1} +  \frac{c_1\beta z^{-2}}{1 + \beta z^{-1}}$, with pole $-\beta$
+
+![image-20260925180121841](rx-fe/image-20260925180121841.png)
+
+![image-20260925184115093](rx-fe/image-20260925184115093.png)
+
+![image-20260925184603380](rx-fe/image-20260925184603380.png)
+
+![image-20260925184646942](rx-fe/image-20260925184646942.png)
 
 
 
@@ -575,9 +705,8 @@ trade-offs between *noise amplification* and *signal equalization*
 
 > J. Im *et al*., "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 1, pp. 7-18, Jan. 2021, doi: 10.1109/JSSC.2020.3024261
 >
-> A. Khairi *et al*., "A 1.41-pJ/b 224-Gb/s PAM4 6-bit ADC-Based SerDes Receiver With Hybrid AFE Capable of Supporting Long Reach Channels," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 1, pp. 8-18, Jan. 2023, doi: 10.1109/JSSC.2022.3211475
->
-> D. Pfaff *et al*., "A 224 Gb/s 3 pJ/bit 40 dB Insertion Loss Transceiver in 3-nm FinFET CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 60, no. 1, pp. 9-22, Jan. 2025, doi: 10.1109/JSSC.2024.3466092
+
+
 
 
 
@@ -585,7 +714,7 @@ trade-offs between *noise amplification* and *signal equalization*
 
 ## reference
 
-J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[paper](https://sci-hub.jp/10.1109/ISSCC.2018.8310204)]
+T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)] 
 
 Miguel Gandara. CICC2025 Circuits Insights: Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg](https://youtu.be/X4JTuh2Gdzg)]
 
@@ -593,15 +722,21 @@ Elad Alon, ISSCC 2014, "T6: Analog Front-End Design for Gb/s Wireline Receivers"
 
 Byungsub Kim,  ISSCC 2022, "T11: Basics of Equalization Techniques: Channels, Equalization, and Circuits"
 
-Jihwan Kim,Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
+Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[www.theise.org/...](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
 
-Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
+Nhat Nguyen and Masum Hossain, ISSCC 2021 Forum *F6.7: 112Gb/s-and-Beyond Long-Reach and Short-Reach Electrical Interfaces*
 
-Heng Zhang, Broadcom, ISSCC 2025 - Forum 4.2: *High-speed ADCs for 100Gbps+ Wireline Transceivers*
+Jihwan Kim, Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
 
-Ariel Cohen, Intel, ISSCC 2026 - Forum 2.3: *State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*
+Ariel Cohen, Intel, ISSCC 2024 Forum *F6.3: Beyond 200Gbps Electrical transceivers – Circuit Architecture, Design Implementation and Silicon Results*
+
+Heng Zhang, Broadcom, ISSCC 2025 Forum *F4.2: High-speed ADCs for 100Gbps+ Wireline Transceivers*
+
+E-Hung Chen, MTK, ISSCC 2026 Forum *F2.3: State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*
 
 ---
+
+J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[paper](https://sci-hub.jp/10.1109/ISSCC.2018.8310204)]
 
 S. Shekhar, J. S. Walling and D. J. Allstot, "Bandwidth Extension Techniques for CMOS Amplifiers," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 11, pp. 2424-2439, Nov. 2006 [[pdf](https://people.engr.tamu.edu/spalermo/ecen689_oi/2006_passive_bw_extension_techniques_shekhar_jssc.pdf)]
 

@@ -569,6 +569,17 @@ where $A_{HF}$ is the gain *at resonance*
 
 ![image-20260921234359120](rx-fe/image-20260921234359120.png)
 
+At resonant frequency
+$$
+\boxed{|A_v|=
+\frac{g_m}
+{1+\left(\dfrac{g_mR_D}{1+j\omega R_DC_D}\right)}
+Q_{\mathrm{ind}}\omega L,
+\qquad
+\omega=\frac{1}{2\pi\sqrt{L_C L_L}}}
+$$
+where $Q_{\mathrm{ind}}=\frac{\omega L}{R_L}, \qquad R_p=Q_{\mathrm{ind}}^{\,2}R_L=Q_{\mathrm{ind}}\omega L$
+
 
 
 ### Q-Shaping w/ Parallel RLC
@@ -631,6 +642,16 @@ the other method: Treat $z^{-1}$  as an ordinary variable and divide 1 by $1+0.7
                │                          …
 ```
 
+
+
+Use $1/(1 − r) = 1 + r + r^2 + \dots$ and $r=-\alpha z^{-1}$
+$$
+\boxed{\frac{1}{1+\alpha z^{-1}} = 1 - \alpha z^{-1} + \alpha \left( \alpha z^{-2} - \alpha^2 z^{-3} + \dots \right)}
+$$
+that is
+$$
+\frac{1}{1+0.7z^{-1}} = 1 - 0.7z^{-1} + 0.7\left( 0.7 z^{-2} - 0.49 z^{-3} + \dots \right)
+$$
 
 
 

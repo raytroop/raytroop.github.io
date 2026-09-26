@@ -767,6 +767,19 @@ The curious paradox is that when I accept myself just as I am, then I can change
 
 
 ```
+The psychological rule says that when an inner situation is not made conscious, it happens outside, as fate. 
+That is to say, when the individual remains undivided and does not become conscious of his inner opposite, 
+the world must perforce act out the conflict and be torn into opposing halves.
+
+---
+Carl Jung, Aion, Christ: A Symbol of the Self, Pages 70-71, Para 126.
+```
+
+
+
+
+
+```
 容易想太多的人，其实是缺乏安全感
 
 弹一场恋爱🎹:

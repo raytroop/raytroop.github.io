@@ -106,7 +106,7 @@ Thus, the DAC supplies a digitally controlled **charge correction**, which the M
 
 The correction DAC's bottom plates remain fixed during these trials, but **its capacitance still loads $X$**
 
-eglecting other parasitic capacitances:
+neglecting other parasitic capacitances:
 
 $$
 G_{Q\rightarrow V,\mathrm{ideal}}=\frac{1}{C_{\mathrm{SAR}}}, \qquad \boxed{G_{Q\rightarrow V,\mathrm{loaded}} =\frac{1}{C_{\mathrm{SAR}}+C_{\mathrm{CALIB}}}}

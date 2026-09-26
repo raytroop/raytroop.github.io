@@ -21,9 +21,9 @@ mathjax: true
 >
 > Wang, Zhaowen. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
 >
-> Y. Tian *et al*., "A 28-nm 8–28-GHz Eight-Phase Clock Generator Using an Injection-Locked Dual-Feedback Ring Oscillator," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 1, pp. 47-62, Jan. 2026, doi: 10.1109/JSSC.2025.3613940
->
 > Shaokang ZHAO, 2025, "Multi-Phase Clock Generator for High-Speed Wireline Systems," [[paper](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/1.Thesis/2.Mphil/Shaokang%20Thesis.pdf), [slides](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/2.Slides/2.Mphil/Shaokang_Zhao%20Slides.pdf)]
+>
+> J. Im *et al*., "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 1, pp. 7-18, Jan. 2021, [[https://sci-hub.jp/10.1109/JSSC.2020.3024261](https://sci-hub.jp/10.1109/JSSC.2020.3024261)]
 
 
 
@@ -76,6 +76,8 @@ Its main limitation is that accurate phase detection relies on the input clocks 
 ## Multi-Phase Generation using ILO
 
 > D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537
+>
+> Y. Tian *et al*., "A 28-nm 8–28-GHz Eight-Phase Clock Generator Using an Injection-Locked Dual-Feedback Ring Oscillator," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 1, pp. 47-62, Jan. 2026, doi: 10.1109/JSSC.2025.3613940
 
 ![image-20260921232848373](mpcg/image-20260921232848373.png)
 
@@ -189,4 +191,3 @@ rfinsights, Quadrature Phase Detector: passive mixer vs XOR gate [[https://www.r
 
 —, phase rotator in serdes - every major topology, explained [[https://www.rfinsights.com/synthesizer/phase-rotator/](https://www.rfinsights.com/synthesizer/phase-rotator/)]
 
-Y. Tian *et al*., "A 28-nm 8–28-GHz Eight-Phase Clock Generator Using an Injection-Locked Dual-Feedback Ring Oscillator," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 1, pp. 47-62, Jan. 2026, doi: 10.1109/JSSC.2025.3613940

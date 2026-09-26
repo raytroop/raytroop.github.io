@@ -15,6 +15,30 @@ mathjax: true
 
 ![image-20260925091849782](rx-fe/image-20260925091849782.png)
 
+
+
+## input network
+
+![image-20250706110415914](rx-fe/image-20250706110415914.png)
+
+---
+
+![image-20250611075951974](rx-fe/image-20250611075951974.png)
+
+> ```
+> >> 10e6/2/pi/400/50
+> 
+> ans =
+> 
+> 79.5775
+> ```
+
+
+
+
+
+
+
 ## CTLE design target
 
 ***peaking gain*** + ***curve shape***
@@ -105,6 +129,270 @@ Assuming $\mathrm{SNR}(f) = \frac{S_x(f)}{S_n(f)}$
 ---
 
 trade-offs between *noise amplification* and *signal equalization*
+
+
+
+
+
+## Gm-TIA
+
+> H. Kimura *et al*., "A 28 Gb/s 560 mW Multi-Standard SerDes With Single-Stage Analog Front-End and 14-Tap Decision Feedback Equalizer in 28 nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 12, pp. 3091-3103, Dec. 2014 [[https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf](https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf)]
+>
+> Pisati, et.al., "Sub-250mW 1-to-56Gb/s Continuous-Range PAM-4 42.5dB IL ADC/DAC- Based Transceiver in 7nm FinFET," 2019 IEEE International Solid-State Circuits Conference (ISSCC), 2019 [[https://sci-hub.se/10.1109/ISSCC.2019.8662428](https://sci-hub.se/10.1109/ISSCC.2019.8662428)]
+>
+> Z. Li, M. Tang, T. Fan and Q. Pan, "A 56-Gb/s PAM4 Receiver Analog Front-End With Fixed Peaking Frequency and Bandwidth in 40-nm CMOS," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 9, pp. 3058-3062, Sept. 2021 [[slides](https://confcats-event-sessions.s3.amazonaws.com/isicas21/slides/9402.pdf)] [[paper](https://sci-hub.se/10.1109/TCSII.2021.3074384)]
+>
+> K. Kwon *et al*., "A 212.5Gb/s Pam-4 Receiver With Mutual Inductive Coupled Gm-Tia in 4nm Finfet," *2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Kyoto, Japan, 2025
+>
+> Bae, W. (2019). CMOS Inverter as Analog Circuit: An Overview. *Journal of Low Power Electronics and Applications*. [[pdf](https://pdfs.semanticscholar.org/6494/3a15452b12c89d31cdcedb22d605c42ed8bd.pdf)]
+
+*CTLE, with Gm + TIA structure*
+
+![image-20260921214634581](rx-fe/image-20260921214634581.png)
+
+
+
+![image-20250904202636824](rx-fe/image-20250904202636824.png)
+
+
+
+
+
+---
+
+> Chongyun ZHANG, 2025, "Energy-Efficient CMOS Optical Receiver for Short-Reach Data Center Application,". [[slides](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/2.Slides/1.PhD/Chongyun%20ZHANG%202025.pdf), [paper](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/1.Thesis/1.PhD/Chongyun%20Zhang%202025.pdf)]
+
+![image-20251202222813043](rx-fe/image-20251202222813043.png)
+
+>  ![image-20251202222831594](rx-fe/image-20251202222831594.png)
+
+
+
+## Cherry-Hooper Amplifier
+
+![image-20260921235713422](rx-fe/image-20260921235713422.png)
+
+![image-20260921235635071](rx-fe/image-20260921235635071.png)
+
+## Resonator-Based CTLE
+
+![image-20260925162456941](rx-fe/image-20260925162456941.png)
+
+### Passive series peaking
+
+> D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537.
+
+![image-20260922003739424](rx-fe/image-20260922003739424.png)
+
+At DC
+$$
+i_f = g_{md1}v_f \quad i_f = (v_f - v_o)/R_f \qquad \Longrightarrow \qquad \frac{v_o}{v_i} = -\frac{g_{m1}}{g_{md1}} + g_{m1}R_f
+$$
+since $R_f=0$
+$$
+A_{DC} = -\frac{g_{m1}}{g_{md1}}
+$$
+
+
+![passive_series_peaking.drawio](rx-fe/passive_series_peaking.drawio.svg)
+
+
+$$
+\frac{V_o}{V_i}(s) = -g_{m1}R_s\cdot \frac{\frac{1}{LC}}{s^2 + \frac{R_s+R_{LS}}{L}s + \frac{1}{LC}}=-g_{m1}R_s\cdot \frac{\omega_n^2}{s^2+\frac{\omega_n}{Q}s+\omega_n^2}
+$$
+
+where
+$$
+\boxed{Q=\frac{\omega_n L}{R_s + R_{LS}} \qquad \qquad \omega_n = \frac{1}{\sqrt{LC}}}
+$$
+
+The $Q$ is the **resonator loaded quality factor**
+
+That is
+$$
+A_{DC}=-g_{m1}R_s\qquad\qquad A_{HF}=jg_{m1}R_s\cdot Q \qquad\qquad \frac{A_{HF}}{A_{DC}} = Q
+$$
+
+where $A_{HF}$ is the gain *at resonance*
+
+
+
+---
+
+![image-20260922003625379](rx-fe/image-20260922003625379.png)
+
+![image-20260922002932197](rx-fe/image-20260922002932197.png)
+
+![image-20260922003026369](rx-fe/image-20260922003026369.png)
+
+
+
+### Q-Shaping (LC-tuned Amplifier)
+
+
+> Y. Krupnik et al., "112 Gb/s PAM4 ADC Based SERDES Receiver for Long-Reach Channels in 10nm Process," 2019 Symposium on VLSI Circuits, Kyoto, Japan, 2019, pp. C266-C267, [[https://sci-hub.jp/10.23919/VLSIC.2019.8778136](https://sci-hub.jp/10.23919/VLSIC.2019.8778136)]
+>
+> —, **"112-Gb/s PAM4 ADC-Based SERDES Receiver With Resonant AFE for Long-Reach Channels,"** in IEEE Journal of Solid-State Circuits, vol. 55, no. 4, pp. 1077-1085, April 2020, [[https://sci-hub.jp/10.1109/JSSC.2019.2959511](https://sci-hub.jp/10.1109/JSSC.2019.2959511)]
+>
+> S. Kiran et al., "A 56GHz Receiver Analog Front End for 224Gb/s PAM-4 SerDes in 10nm CMOS," 2021 Symposium on VLSI Circuits, Kyoto, Japan, 2021, pp. 1-2, [[https://sci-hub.jp/10.23919/VLSICircuits52068.2021.9492471](https://sci-hub.jp/10.23919/VLSICircuits52068.2021.9492471)]
+>
+> Y. Segal *et al*., "A 1.41pJ/b 224Gb/s PAM-4 SerDes Receiver with 31dB Loss Compensation," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 114-116, [[https://sci-hub.jp/10.1109/ISSCC42614.2022.9731794](https://sci-hub.jp/10.1109/ISSCC42614.2022.9731794)]
+>
+> A. Khairi *et al*., "A 1.41-pJ/b 224-Gb/s PAM4 6-bit ADC-Based SerDes Receiver With Hybrid AFE Capable of Supporting Long Reach Channels," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 1, pp. 8-18, Jan. 2023, doi: 10.1109/JSSC.2022.3211475
+>
+> D. Pfaff *et al*., "A 224 Gb/s 3 pJ/bit 40 dB Insertion Loss Transceiver in 3-nm FinFET CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 60, no. 1, pp. 9-22, Jan. 2025, doi: 10.1109/JSSC.2024.3466092
+
+
+
+![image-20260924003949332](rx-fe/image-20260924003949332.png)
+
+
+
+![image-20260923233823241](rx-fe/image-20260923233823241.png)
+
+![image-20260924002757637](rx-fe/image-20260924002757637.png)
+
+![image-20260924011450698](rx-fe/image-20260924011450698.png)
+
+---
+
+
+
+![image-20260921234359120](rx-fe/image-20260921234359120.png)
+
+At resonant frequency
+$$
+\boxed{|A_v|=
+\frac{g_m}
+{1+\left(\dfrac{g_mR_D}{1+j\omega R_DC_D}\right)}
+Q_{\mathrm{ind}}\omega L,
+\qquad
+\omega=\frac{1}{2\pi\sqrt{L_C L_L}}}
+$$
+where $Q_{\mathrm{ind}}=\frac{\omega L}{R_L}, \qquad R_p=Q_{\mathrm{ind}}^{\,2}R_L=Q_{\mathrm{ind}}\omega L$
+
+
+
+### Q-Shaping w/ Parallel RLC
+
+> H. Park *et al*., "7.4 A 112Gb/s DSP-Based PAM-4 Receiver with an LC-Resonator-Based CTLE for >52dB Loss Compensation in 4nm FinFET," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 142-144, doi: 10.1109/ISSCC49661.2025.10904638.
+
+![image-20260925162753669](rx-fe/image-20260925162753669.png)
+
+With **Zero-Forcing**, inverse of $h_0 \sim h_1$ only
+
+```
+┌ 1    0    0    0 ┐ ┌c0┐   ┌1┐
+│ 0.7  1    0    0 │ │c1│ = │0│
+│ 0    0.7  1    0 │ │c2│   │0│
+└ 0    0    0.7  1 ┘ └c3┘   └0┘
+```
+
+```matlab
+% Define the coefficient matrix A
+A = [1    0    0    0;
+     0.7  1    0    0;
+     0    0.7  1    0;
+     0    0    0.7  1];
+
+% Define the right-hand side vector b
+b = [1;
+     0;
+     0;
+     0];
+
+% Solve the linear system A * c = b for c
+% The backslash operator (\) is the recommended way to solve linear systems in MATLAB
+c = A \ b;
+
+% Display the result
+disp('Vector c:');
+disp(c');
+
+% Vector c:
+%     1.0000   -0.7000    0.4900   -0.3430
+```
+
+
+
+the other method: Treat $z^{-1}$  as an ordinary variable and divide 1 by $1+0.7z^{-1}$, working in **ascending powers of $z^{-1}$**
+
+```
+                  1  − 0.7z⁻¹ + 0.49z⁻² − 0.343z⁻³ + …      ← quotient = c
+               ┌─────────────────────────────────────────
+ 1 + 0.7z⁻¹    │ 1
+               │ 1 + 0.7z⁻¹                                ← 1 × divisor
+               │ ───────────
+               │   − 0.7z⁻¹                                ← remainder
+               │   − 0.7z⁻¹ − 0.49z⁻²                      ← (−0.7z⁻¹) × divisor
+               │   ──────────────────
+               │             + 0.49z⁻²
+               │             + 0.49z⁻² + 0.343z⁻³          ← (0.49z⁻²) × divisor
+               │             ───────────────────
+               │                       − 0.343z⁻³
+               │                          …
+```
+
+
+
+Use $1/(1 − r) = 1 + r + r^2 + \dots$ and $r=-\alpha z^{-1}$
+$$
+\boxed{\frac{1}{1+\alpha z^{-1}} = 1 - \alpha z^{-1} + \alpha \left( \alpha z^{-2} - \alpha^2 z^{-3} + \dots \right)}
+$$
+that is
+$$
+\frac{1}{1+0.7z^{-1}} = 1 - 0.7z^{-1} + 0.7\left( 0.7 z^{-2} - 0.49 z^{-3} + \dots \right)
+$$
+
+
+
+
+```matlab
+% Define the coefficient matrix A
+A = [1    0    0    0    0    0;
+     0.7  1    0    0    0    0;
+     0.48 0.7  1    0    0    0;
+     0.35 0.48 0.7  1    0    0;
+     0.27 0.35 0.48 0.7  1    0;
+     0.22 0.27 0.35 0.48 0.7  1];
+
+% Define the right-hand side vector b
+b = [1;
+     0;
+     0;
+     0;
+     0;
+     0];
+
+
+% Solve the linear system A * c = b for c
+% The backslash operator (\) is the recommended way to solve linear systems in MATLAB
+c = A \ b;
+
+% Display the result
+disp('Vector c:');
+disp(c');
+
+% Vector c:
+%     1.0000   -0.7000    0.0100   -0.0210   -0.0151   -0.0138
+```
+
+
+
+![](rx-fe/image-20260925175504622.png)
+
+**CTLE1**: $1-\alpha z^{-1}$,  without pole
+
+**CTLE2**: $1-\alpha z^{-1} + c_1 (\beta z^{-2} - \beta^2 z^{-3} + \dots) = 1 - \alpha z^{-1} +  \frac{c_1\beta z^{-2}}{1 + \beta z^{-1}}$, with pole $-\beta$
+
+![image-20260925180121841](rx-fe/image-20260925180121841.png)
+
+![image-20260925184115093](rx-fe/image-20260925184115093.png)
+
+![image-20260925184603380](rx-fe/image-20260925184603380.png)
+
+![image-20260925184646942](rx-fe/image-20260925184646942.png)
+
 
 
 ## shunt peaking
@@ -423,284 +711,7 @@ If $C_{gd}$ is considered, and apply miller effect. half equivalent circuit is s
 
 
 
-## input network
 
-![image-20250706110415914](rx-fe/image-20250706110415914.png)
-
----
-
-![image-20250611075951974](rx-fe/image-20250611075951974.png)
-
-> ```
-> >> 10e6/2/pi/400/50
-> 
-> ans =
-> 
-> 79.5775
-> ```
-
-
-
-
-
-## Gm-TIA
-
-> H. Kimura *et al*., "A 28 Gb/s 560 mW Multi-Standard SerDes With Single-Stage Analog Front-End and 14-Tap Decision Feedback Equalizer in 28 nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 12, pp. 3091-3103, Dec. 2014 [[https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf](https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf)]
->
-> Pisati, et.al., "Sub-250mW 1-to-56Gb/s Continuous-Range PAM-4 42.5dB IL ADC/DAC- Based Transceiver in 7nm FinFET," 2019 IEEE International Solid-State Circuits Conference (ISSCC), 2019 [[https://sci-hub.se/10.1109/ISSCC.2019.8662428](https://sci-hub.se/10.1109/ISSCC.2019.8662428)]
->
-> Z. Li, M. Tang, T. Fan and Q. Pan, "A 56-Gb/s PAM4 Receiver Analog Front-End With Fixed Peaking Frequency and Bandwidth in 40-nm CMOS," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 9, pp. 3058-3062, Sept. 2021 [[slides](https://confcats-event-sessions.s3.amazonaws.com/isicas21/slides/9402.pdf)] [[paper](https://sci-hub.se/10.1109/TCSII.2021.3074384)]
->
-> K. Kwon *et al*., "A 212.5Gb/s Pam-4 Receiver With Mutual Inductive Coupled Gm-Tia in 4nm Finfet," *2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Kyoto, Japan, 2025
->
-> Bae, W. (2019). CMOS Inverter as Analog Circuit: An Overview. *Journal of Low Power Electronics and Applications*. [[pdf](https://pdfs.semanticscholar.org/6494/3a15452b12c89d31cdcedb22d605c42ed8bd.pdf)]
-
-*CTLE, with Gm + TIA structure*
-
-![image-20260921214634581](rx-fe/image-20260921214634581.png)
-
-
-
-![image-20250904202636824](rx-fe/image-20250904202636824.png)
-
-
-
-
-
----
-
-> Chongyun ZHANG, 2025, "Energy-Efficient CMOS Optical Receiver for Short-Reach Data Center Application,". [[slides](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/2.Slides/1.PhD/Chongyun%20ZHANG%202025.pdf), [paper](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/1.Thesis/1.PhD/Chongyun%20Zhang%202025.pdf)]
-
-![image-20251202222813043](rx-fe/image-20251202222813043.png)
-
->  ![image-20251202222831594](rx-fe/image-20251202222831594.png)
-
-
-
-## Cherry-Hooper Amplifier
-
-![image-20260921235713422](rx-fe/image-20260921235713422.png)
-
-![image-20260921235635071](rx-fe/image-20260921235635071.png)
-
-## Resonator-Based CTLE
-
-![image-20260925162456941](rx-fe/image-20260925162456941.png)
-
-### Passive series peaking
-
-> D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537.
-
-![image-20260922003739424](rx-fe/image-20260922003739424.png)
-
-At DC
-$$
-i_f = g_{md1}v_f \quad i_f = (v_f - v_o)/R_f \qquad \Longrightarrow \qquad \frac{v_o}{v_i} = -\frac{g_{m1}}{g_{md1}} + g_{m1}R_f
-$$
-since $R_f=0$
-$$
-A_{DC} = -\frac{g_{m1}}{g_{md1}}
-$$
-
-
-![passive_series_peaking.drawio](rx-fe/passive_series_peaking.drawio.svg)
-
-
-$$
-\frac{V_o}{V_i}(s) = -g_{m1}R_s\cdot \frac{\frac{1}{LC}}{s^2 + \frac{R_s+R_{LS}}{L}s + \frac{1}{LC}}=-g_{m1}R_s\cdot \frac{\omega_n^2}{s^2+\frac{\omega_n}{Q}s+\omega_n^2}
-$$
-
-where
-$$
-\boxed{Q=\frac{\omega_n L}{R_s + R_{LS}} \qquad \qquad \omega_n = \frac{1}{\sqrt{LC}}}
-$$
-
-The $Q$ is the **resonator loaded quality factor**
-
-That is
-$$
-A_{DC}=-g_{m1}R_s\qquad\qquad A_{HF}=jg_{m1}R_s\cdot Q \qquad\qquad \frac{A_{HF}}{A_{DC}} = Q
-$$
-
-where $A_{HF}$ is the gain *at resonance*
-
-
-
----
-
-![image-20260922003625379](rx-fe/image-20260922003625379.png)
-
-![image-20260922002932197](rx-fe/image-20260922002932197.png)
-
-![image-20260922003026369](rx-fe/image-20260922003026369.png)
-
-
-
-### Q-Shaping (LC-tuned Amplifier)
-
-
-> Y. Krupnik et al., "112 Gb/s PAM4 ADC Based SERDES Receiver for Long-Reach Channels in 10nm Process," 2019 Symposium on VLSI Circuits, Kyoto, Japan, 2019, pp. C266-C267, [[https://sci-hub.jp/10.23919/VLSIC.2019.8778136](https://sci-hub.jp/10.23919/VLSIC.2019.8778136)]
->
-> —, **"112-Gb/s PAM4 ADC-Based SERDES Receiver With Resonant AFE for Long-Reach Channels,"** in IEEE Journal of Solid-State Circuits, vol. 55, no. 4, pp. 1077-1085, April 2020, [[https://sci-hub.jp/10.1109/JSSC.2019.2959511](https://sci-hub.jp/10.1109/JSSC.2019.2959511)]
->
-> S. Kiran et al., "A 56GHz Receiver Analog Front End for 224Gb/s PAM-4 SerDes in 10nm CMOS," 2021 Symposium on VLSI Circuits, Kyoto, Japan, 2021, pp. 1-2, [[https://sci-hub.jp/10.23919/VLSICircuits52068.2021.9492471](https://sci-hub.jp/10.23919/VLSICircuits52068.2021.9492471)]
->
-> Y. Segal *et al*., "A 1.41pJ/b 224Gb/s PAM-4 SerDes Receiver with 31dB Loss Compensation," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 114-116, [[https://sci-hub.jp/10.1109/ISSCC42614.2022.9731794](https://sci-hub.jp/10.1109/ISSCC42614.2022.9731794)]
->
-> A. Khairi *et al*., "A 1.41-pJ/b 224-Gb/s PAM4 6-bit ADC-Based SerDes Receiver With Hybrid AFE Capable of Supporting Long Reach Channels," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 1, pp. 8-18, Jan. 2023, doi: 10.1109/JSSC.2022.3211475
->
-> D. Pfaff *et al*., "A 224 Gb/s 3 pJ/bit 40 dB Insertion Loss Transceiver in 3-nm FinFET CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 60, no. 1, pp. 9-22, Jan. 2025, doi: 10.1109/JSSC.2024.3466092
-
-
-
-![image-20260924003949332](rx-fe/image-20260924003949332.png)
-
-
-
-![image-20260923233823241](rx-fe/image-20260923233823241.png)
-
-![image-20260924002757637](rx-fe/image-20260924002757637.png)
-
-![image-20260924011450698](rx-fe/image-20260924011450698.png)
-
----
-
-
-
-![image-20260921234359120](rx-fe/image-20260921234359120.png)
-
-At resonant frequency
-$$
-\boxed{|A_v|=
-\frac{g_m}
-{1+\left(\dfrac{g_mR_D}{1+j\omega R_DC_D}\right)}
-Q_{\mathrm{ind}}\omega L,
-\qquad
-\omega=\frac{1}{2\pi\sqrt{L_C L_L}}}
-$$
-where $Q_{\mathrm{ind}}=\frac{\omega L}{R_L}, \qquad R_p=Q_{\mathrm{ind}}^{\,2}R_L=Q_{\mathrm{ind}}\omega L$
-
-
-
-### Q-Shaping w/ Parallel RLC
-
-> H. Park *et al*., "7.4 A 112Gb/s DSP-Based PAM-4 Receiver with an LC-Resonator-Based CTLE for >52dB Loss Compensation in 4nm FinFET," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 142-144, doi: 10.1109/ISSCC49661.2025.10904638.
-
-![image-20260925162753669](rx-fe/image-20260925162753669.png)
-
-With **Zero-Forcing**, inverse of $h_0 \sim h_1$ only
-
-```
-┌ 1    0    0    0 ┐ ┌c0┐   ┌1┐
-│ 0.7  1    0    0 │ │c1│ = │0│
-│ 0    0.7  1    0 │ │c2│   │0│
-└ 0    0    0.7  1 ┘ └c3┘   └0┘
-```
-
-```matlab
-% Define the coefficient matrix A
-A = [1    0    0    0;
-     0.7  1    0    0;
-     0    0.7  1    0;
-     0    0    0.7  1];
-
-% Define the right-hand side vector b
-b = [1;
-     0;
-     0;
-     0];
-
-% Solve the linear system A * c = b for c
-% The backslash operator (\) is the recommended way to solve linear systems in MATLAB
-c = A \ b;
-
-% Display the result
-disp('Vector c:');
-disp(c');
-
-% Vector c:
-%     1.0000   -0.7000    0.4900   -0.3430
-```
-
-
-
-the other method: Treat $z^{-1}$  as an ordinary variable and divide 1 by $1+0.7z^{-1}$, working in **ascending powers of $z^{-1}$**
-
-```
-                  1  − 0.7z⁻¹ + 0.49z⁻² − 0.343z⁻³ + …      ← quotient = c
-               ┌─────────────────────────────────────────
- 1 + 0.7z⁻¹    │ 1
-               │ 1 + 0.7z⁻¹                                ← 1 × divisor
-               │ ───────────
-               │   − 0.7z⁻¹                                ← remainder
-               │   − 0.7z⁻¹ − 0.49z⁻²                      ← (−0.7z⁻¹) × divisor
-               │   ──────────────────
-               │             + 0.49z⁻²
-               │             + 0.49z⁻² + 0.343z⁻³          ← (0.49z⁻²) × divisor
-               │             ───────────────────
-               │                       − 0.343z⁻³
-               │                          …
-```
-
-
-
-Use $1/(1 − r) = 1 + r + r^2 + \dots$ and $r=-\alpha z^{-1}$
-$$
-\boxed{\frac{1}{1+\alpha z^{-1}} = 1 - \alpha z^{-1} + \alpha \left( \alpha z^{-2} - \alpha^2 z^{-3} + \dots \right)}
-$$
-that is
-$$
-\frac{1}{1+0.7z^{-1}} = 1 - 0.7z^{-1} + 0.7\left( 0.7 z^{-2} - 0.49 z^{-3} + \dots \right)
-$$
-
-
-
-
-```matlab
-% Define the coefficient matrix A
-A = [1    0    0    0    0    0;
-     0.7  1    0    0    0    0;
-     0.48 0.7  1    0    0    0;
-     0.35 0.48 0.7  1    0    0;
-     0.27 0.35 0.48 0.7  1    0;
-     0.22 0.27 0.35 0.48 0.7  1];
-
-% Define the right-hand side vector b
-b = [1;
-     0;
-     0;
-     0;
-     0;
-     0];
-
-
-% Solve the linear system A * c = b for c
-% The backslash operator (\) is the recommended way to solve linear systems in MATLAB
-c = A \ b;
-
-% Display the result
-disp('Vector c:');
-disp(c');
-
-% Vector c:
-%     1.0000   -0.7000    0.0100   -0.0210   -0.0151   -0.0138
-```
-
-
-
-![](rx-fe/image-20260925175504622.png)
-
-**CTLE1**: $1-\alpha z^{-1}$,  without pole
-
-**CTLE2**: $1-\alpha z^{-1} + c_1 (\beta z^{-2} - \beta^2 z^{-3} + \dots) = 1 - \alpha z^{-1} +  \frac{c_1\beta z^{-2}}{1 + \beta z^{-1}}$, with pole $-\beta$
-
-![image-20260925180121841](rx-fe/image-20260925180121841.png)
-
-![image-20260925184115093](rx-fe/image-20260925184115093.png)
-
-![image-20260925184603380](rx-fe/image-20260925184603380.png)
-
-![image-20260925184646942](rx-fe/image-20260925184646942.png)
 
 
 
@@ -719,17 +730,6 @@ disp(c');
 
 
 ![image-20260801022107783](rx-fe/image-20260801022107783.png)
-
-
-
-## CTLE paper
-
-> J. Im *et al*., "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 1, pp. 7-18, Jan. 2021, doi: 10.1109/JSSC.2020.3024261
->
-
-
-
-
 
 
 

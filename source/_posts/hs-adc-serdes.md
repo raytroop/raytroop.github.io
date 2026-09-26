@@ -33,17 +33,29 @@ mathjax: true
 >
 > —, "The World of Time-Interleaved ADCs: From Theory to Design," Tutorial in IEEE International NEWCAS Conf., Montreal, Canada, June 2012 [[https://el-chammas.com/papers/Manar_NEWCAS_TIADC_tutorial.pdf](https://el-chammas.com/papers/Manar_NEWCAS_TIADC_tutorial.pdf)]
 
-![image-20260913202344592](hs-adc-serdes/image-20260913202344592.png)
 
 
-
-<span style="color:white; background-color:black">"Best-fit" approach</span>
-
-![image-20260913213529847](hs-adc-serdes/image-20260913213529847.png)
+![image-20260926112748037](hs-adc-serdes/image-20260926112748037.png)
 
 Using a **normalized autocorrelation** (or equivalently assuming <span style="color:#FF5733">**unit signal power**</span>) — $\color{red}R(\tau) = \frac{R_x(\tau)}{R_x(0)}$
 
-![image-20260913215052664](hs-adc-serdes/image-20260913215052664.png)
+![image-20260926110427560](hs-adc-serdes/image-20260926110427560.png)
+
+
+
+<span style="color:white; background-color:black">**sinusoidal input**</span>
+
+for a **sinusoid** $x(t)=\sqrt{2}\cos\omega t$
+$$
+\boxed{R(\tau)=\cos\omega\tau \qquad\Rightarrow\qquad |R''(0)|=(2\pi f)^2}
+$$
+
+
+
+
+<span style="color:white; background-color:black">**bandlimited white noise input**</span>
+
+![image-20260926110504675](hs-adc-serdes/image-20260926110504675.png)
 
 For this ideal low-pass-filtered white-noise input,
 
@@ -51,13 +63,14 @@ $$
 \boxed{ \frac{1}{|R''(0)|} = \frac{3}{4\pi^2f_c^2}}
 $$
 
-Notice the difference from the sinusoidal case: for a sinusoid,
+Notice the difference from the sinusoidal case: 
 
+for a **sinusoid**,
 $$
 |R''(0)|=(2\pi f)^2
 $$
 
-whereas for ideal LPF white noise,
+whereas for **ideal LPF white noise**,
 
 $$
 \boxed{ |R''(0)|=\textcolor{red}{\frac{1}{3}}(2\pi f_c)^2}
@@ -67,13 +80,42 @@ That factor of $1/3$ comes from averaging all frequencies uniformly from $-f_c$ 
 
 
 
-<span style="color:white; background-color:black">The sinusoidal approach</span>
-
-![image-20260913204139288](hs-adc-serdes/image-20260913204139288.png)
 
 
 
 
+---
+
+<span style="color:white; background-color:black">**sinusoidal input w/ N=2**</span>
+
+![image-20260926091551033](hs-adc-serdes/image-20260926091551033.png)
+
+***Reducing (2.51) to (20.23)***
+
+For $x(t)=A\cos\omega_{in}t$, the autocorrelation and power are
+$$
+R(\tau)=\frac{A^2}{2}\cos\omega_{in}\tau\qquad P=R(0)=\frac{A^2}{2}\qquad\Rightarrow\qquad\frac{R(\tau)}{P}=\cos\omega_{in}\tau
+$$
+
+In Razavi's model, one channel samples on time and the other samples $\Delta T$ late, so $\tau_0=0$ and $\tau_1=\Delta T$. The sum in (2.50) becomes
+
+$$
+\cos\omega_{in}\tau+\cos\omega_{in}(\Delta T-\tau)=2\cos\left(\frac{\omega_{in}\Delta T}{2}\right)\cos\left[\omega_{in}\left(\tau-\frac{\Delta T}{2}\right)\right]
+$$
+
+This is largest at $\hat{\tau}=\Delta T/2$, where it equals $2\cos(\pi f_{in}\Delta T)$. Substituting into (2.51), the $1/N^2=1/4$ cancels the $2^2$:
+
+$$
+SNR_\tau=\frac{1}{1-\cos^2(\pi f_{in}\Delta T)}=\frac{1}{\sin^2(\pi f_{in}\Delta T)}\approx\frac{1}{\pi^2\Delta T^2 f_{in}^2}
+$$
+
+The last step uses $\sin x\approx x$, and the result is exactly (20.23).
+
+
+
+
+
+---
 
 ---
 
@@ -169,35 +211,6 @@ The CAL clock must therefore be **coarsely phase-positioned sufficiently close t
 ![image-20260915212541344](hs-adc-serdes/image-20260915212541344.png)
 
 
-
-
-
----
-
-
-
-![image-20260916215451430](hs-adc-serdes/image-20260916215451430.png)
-
-***Reducing (2.51) to (20.23)***
-
-For $x(t)=A\cos\omega_{in}t$, the autocorrelation and power are
-$$
-R(\tau)=\frac{A^2}{2}\cos\omega_{in}\tau,\qquad P=R(0)=\frac{A^2}{2}\quad\Rightarrow\quad\frac{R(\tau)}{P}=\cos\omega_{in}\tau
-$$
-
-In Razavi's model, one channel samples on time and the other samples $\Delta T$ late, so $\tau_0=0$ and $\tau_1=\Delta T$. The sum in (2.50) becomes
-
-$$
-\cos\omega_{in}\tau+\cos\omega_{in}(\Delta T-\tau)=2\cos\left(\frac{\omega_{in}\Delta T}{2}\right)\cos\left[\omega_{in}\left(\tau-\frac{\Delta T}{2}\right)\right]
-$$
-
-This is largest at $\hat{\tau}=\Delta T/2$, where it equals $2\cos(\pi f_{in}\Delta T)$. Substituting into (2.51), the $1/N^2=1/4$ cancels the $2^2$:
-
-$$
-SNR_\tau=\frac{1}{1-\cos^2(\pi f_{in}\Delta T)}=\frac{1}{\sin^2(\pi f_{in}\Delta T)}\approx\frac{1}{\pi^2\Delta T^2 f_{in}^2}
-$$
-
-The last step uses $\sin x\approx x$, and the result is exactly (20.23).
 
 
 

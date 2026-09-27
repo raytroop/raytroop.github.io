@@ -17,35 +17,44 @@ mathjax: true
 >
 > —, Integrated Analog Systems D - Lecture 10 CAD (Switched-Capacitor Filter) [[[https://youtu.be/eMOFMjuKiJQ](https://youtu.be/eMOFMjuKiJQ)]
 
-***switched-Capacitor Resistor***
+<span style="color:white; background-color:black">***switched-Capacitor Resistor***</span>
 
 ![image-20260319234852885](sc/image-20260319234852885.png)
 
-![image-20260319235853713](sc/image-20260319235853713.png)
 
-Due to not taking loading $C_2$ into account, actual switched-capacitor filter deviate from equivalent $R_{SC}$ + $C_2$ low pass filter as $f_p$ approaching to $f_s$
+
+<span style="color:white; background-color:black">***switched-Capacitor Filter***</span>
+
+**Due to not taking loading $C_2$ into account**, actual switched-capacitor filter deviate from equivalent $R_{SC}$ + $C_2$ low pass filter as $f_p$ approaching to $f_s$
+
+![image-20260319235853713](sc/image-20260319235853713.png)
 
 ![image-20260320213653416](sc/image-20260320213653416.png)
 
 
 
-![image-20260320225532492](sc/image-20260320225532492.png)
+![image-20260927161012908](sc/image-20260927161012908.png)
 $$
-\color{red}H(z) =\frac{V_{OUT}(z)}{V_{IN}(z)}=\frac{C_1z^{-1/2}}{C_1+C_2}\frac{1}{1-\frac{C_2}{C_1+C_2}z^{-1}}
+\boxed{\color{red}H(z) =\frac{V_{OUT}(z)}{V_{IN}(z)}=\frac{C_1z^{-1/2}}{C_1+C_2}\frac{1}{1-\frac{C_2}{C_1+C_2}z^{-1}}}
 $$
 
 
----
 
-![image-20260320225157429](sc/image-20260320225157429.png)
-
+![image-20260927160759510](sc/image-20260927160759510.png)
 
 
-![image-20260320225029809](sc/image-20260320225029809.png)
 
-> [[https://youtu.be/eMOFMjuKiJQ](https://youtu.be/eMOFMjuKiJQ)]
+$$
+\boxed{ \begin{aligned} \text{Exact DT }3\text{-dB:}\quad& \frac{f_s}{\pi} \sin^{-1} \left[ \frac{C_1}{2\sqrt{C_2(C_1+C_2)}} \right] \\[4pt] \text{Exact pole mapping (Eq.2):}\quad& \frac{f_s}{2\pi} \ln\left(1+\frac{C_1}{C_2}\right) \\[4pt] \text{Low-BW approximation (Eq.1):}\quad& \frac{f_s}{2\pi}\frac{C_1}{C_2}. \end{aligned} }
+$$
+
+For $f_p\ll f_s$, all three are essentially the same.
 
 
+
+
+
+![image-20260927160522379](sc/image-20260927160522379.png)
 
 
 
@@ -58,14 +67,14 @@ $$
 
 ![image-20260301152756691](sc/image-20260301152756691.png)
 
-![image-20260301152723365](sc/image-20260301152723365.png)
+![image-20260927162234356](sc/image-20260927162234356.png)
 
 ![image-20260301153439749](sc/image-20260301153439749.png)
 $$
-H_\mathrm{TH}(f) \approx \frac{1}{2}
+\boxed{\color{red}H_\mathrm{TH}(f) \approx \frac{1}{2}
 \left(
     1 + \mathrm{sinc}\left( \frac{f}{2f_s} \right)e^{-j\pi f T_s/2}
-\right)
+\right)}
 $$
 
 
@@ -90,8 +99,8 @@ $$
 
 Given $\color{red}T_p = T_s$
 $$
-H_\mathrm{SH}(f) \approx
-    \mathrm{sinc}\left( \frac{f}{f_s} \right)e^{-j\pi f T_s}
+\boxed{\color{red}H_\mathrm{SH}(f) \approx
+    \mathrm{sinc}\left( \frac{f}{f_s} \right)e^{-j\pi f T_s}}
 $$
 
 

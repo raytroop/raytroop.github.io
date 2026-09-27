@@ -78,7 +78,7 @@ For Scherier FoM (DR, SNDR)
 
 > ![image-20260925234147852](adc-calib/image-20260925234147852.png)
 
-
+![image-20260927110355108](adc-calib/image-20260927110355108.png)
 
 ---
 
@@ -132,6 +132,12 @@ $$
 
 
 ![sar-dac-step-and-adc-gain](adc-calib/sar-dac-step-and-adc-gain.svg)
+
+## Phase Calibration
+
+![image-20260927112522831](adc-calib/image-20260927112522831.png)
+
+![image-20260927112535725](adc-calib/image-20260927112535725.png)
 
 
 

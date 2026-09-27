@@ -19,7 +19,12 @@ mathjax: true
 
 
 
+<span style="color:white; background-color:black">Why (8.14) means "sampled at $T_s$"</span>
+$$
+X_s(f) = \frac{1}{T_s}\sum_{k=-\infty}^{\infty} X(f - kf_s)
+$$
 
+This spectrum is periodic with period $f_s$: copies of $X(f)$ sit at every multiple of $f_s$, with weight $1/T_s$. That is exactly the spectrum of uniform sampling at $T_s$
 
 
 

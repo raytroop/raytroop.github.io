@@ -163,18 +163,25 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 
 ### Flipped Voltage Follower (FVF)
 
+moving the current source from the source to the drain is referred to as **flipping**, and hence the name **FVF**
+
 ![image-20240921110019881](ana-tech/image-20240921110019881.png)
 
 ![image-20240921113630249](ana-tech/image-20240921113630249.png)
 
-**T&H buffer in ADC**
-
-![image-20240923200147070](ana-tech/image-20240923200147070.png)
-
+<span style="color:white; background-color:black">T&H buffer in ADC</span>
 
 > [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop)]
 >
 > Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 116-118, doi: 10.1109/ISSCC42614.2022.9731650.
+
+$$
+\boxed{G_m = g_{m1} r_{o1}\cdot g_{m2} \qquad \qquad R_{out} = \frac{1}{g_{m1}r_{o1}\cdot g_{m2}}}
+$$
+
+![image-20240923200147070](ana-tech/image-20240923200147070.png)
+
+
 
 
 

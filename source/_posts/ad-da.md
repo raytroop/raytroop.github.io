@@ -1112,7 +1112,27 @@ It divides the process into several comparison stages, the number of which is pr
 
 
 
-## Multiplying DACs (MDAC)
+### Non-Flip-Around & Flip-Around Amplifier
+
+<span style="color:white; background-color:black">Non-Flip-Around Amplifier</span>
+
+![image-20260929075323994](ad-da/image-20260929075323994.png)
+
+The amplifier's differential input stays approximately zero after settling; its individual input voltages need not be constant
+
+With matched capacitors, their common-mode contributions cancel when we subtract the two charge-conservation equations
+
+
+
+<span style="color:white; background-color:black">Flip-Around Amplifier</span>
+
+![image-20260929075641833](ad-da/image-20260929075641833.png)
+
+
+
+
+
+### Multiplying DACs (MDAC)
 
 ![image-20260915230732911](ad-da/image-20260915230732911.png)
 

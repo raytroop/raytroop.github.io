@@ -201,9 +201,17 @@ FVF exhibits a much-reduced output resistance (by a factor of gr mo) while maint
 
 A major limitation shared by all three designs is an **asymmetry** in response to a sudden rise/fall of an input waveform
 
+![image-20260928201215696](ana-tech/image-20260928201215696.png)
 $$
 SR^+_{SVF} \gt SR^-_{SVF} \qquad \qquad SR^+_{FVF} \lt SR^-_{FVF} \qquad \qquad SR^+_{SSF} \gt SR^-_{SSF}
 $$
+
+
+
+![image-20260929074441192](ana-tech/image-20260929074441192.png)
+
+![image-20260929074457503](ana-tech/image-20260929074457503.png)
+
 
 
 ## Differential pair

@@ -142,13 +142,48 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 
 ## source follower
 
-> A. Sheikholeslami, "Voltage Follower, Part III [Circuit Intuitions]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 2, pp. 14-26, Spring 2023, doi: 10.1109/MSSC.2023.3269457
+> A. Sheikholeslami, "Voltage Follower, Part 1 [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 14, no. 3, pp. 13-15, Summer 2022, doi: 10.1109/MSSC.2022.3182791
+>
+> —, "Voltage Follower, Part II [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 15, no. 1, pp. 17-19, winter 2023, doi: 10.1109/MSSC.2022.3218083
+>
+> —, "Voltage Follower, Part III [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 15, no. 2, pp. 14-26, Spring 2023, doi: 10.1109/MSSC.2023.3269457
+>
+> —, "Voltage Follower, Part IV [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 15, no. 3, pp. 6-19, Summer 2023, doi: 10.1109/MSSC.2023.3287342
 >
 > —, ESSCIRC2023 Circuit Insights [[https://youtu.be/2xFIZM5_FPw](https://youtu.be/2xFIZM5_FPw)]
 >
 > —, CICC2025 Circuit Insights:  From Simple to Super Source Follower [[https://youtu.be/CWfMKltPIQ8](https://youtu.be/CWfMKltPIQ8)]
 >
 > Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing.
+
+
+
+
+
+### Flipped Voltage Follower (FVF)
+
+> [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop)]
+>
+> Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 116-118, doi: 10.1109/ISSCC42614.2022.9731650.
+
+
+moving the current source from the source to the drain is referred to as **flipping**, and hence the name **FVF**
+
+![image-20240921110019881](ana-tech/image-20240921110019881.png)
+
+![image-20240921113630249](ana-tech/image-20240921113630249.png)
+
+<span style="color:white; background-color:black">T&H buffer in ADC</span>
+
+
+$$
+\boxed{G_m = g_{m1} r_{o1}\cdot g_{m2} \qquad \qquad R_{out} = \frac{1}{g_{m1}r_{o1}\cdot g_{m2}}}
+$$
+
+
+FVF exhibits a much-reduced output resistance (by a factor of gr mo) while maintaining the same voltage gain as that of an SVF (simple voltage follower)
+
+![image-20240923200147070](ana-tech/image-20240923200147070.png)
 
 
 
@@ -161,30 +196,14 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 ![image-20240924213853954](ana-tech/image-20240924213853954.png)
 
 
-### Flipped Voltage Follower (FVF)
 
-moving the current source from the source to the drain is referred to as **flipping**, and hence the name **FVF**
+### class AB SSF (AB-SSF)
 
-![image-20240921110019881](ana-tech/image-20240921110019881.png)
-
-![image-20240921113630249](ana-tech/image-20240921113630249.png)
-
-<span style="color:white; background-color:black">T&H buffer in ADC</span>
-
-> [[https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop](https://www.linkedin.com/posts/chembiyan-t-0b34b910_flipped-voltage-follower-fvf-basics-activity-7118482840803020800-qwyX?utm_source=share&utm_medium=member_desktop)]
->
-> Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 116-118, doi: 10.1109/ISSCC42614.2022.9731650.
+A major limitation shared by all three designs is an **asymmetry** in response to a sudden rise/fall of an input waveform
 
 $$
-\boxed{G_m = g_{m1} r_{o1}\cdot g_{m2} \qquad \qquad R_{out} = \frac{1}{g_{m1}r_{o1}\cdot g_{m2}}}
+SR^+_{SVF} \gt SR^-_{SVF} \qquad \qquad SR^+_{FVF} \lt SR^-_{FVF} \qquad \qquad SR^+_{SSF} \gt SR^-_{SSF}
 $$
-
-![image-20240923200147070](ana-tech/image-20240923200147070.png)
-
-
-
-
-
 
 
 ## Differential pair

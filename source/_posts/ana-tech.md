@@ -148,7 +148,7 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 >
 > —, CICC2025 Circuit Insights:  From Simple to Super Source Follower [[https://youtu.be/CWfMKltPIQ8](https://youtu.be/CWfMKltPIQ8)]
 >
-> Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiYDzqDOfoPaMVM.pdf)]
+> Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing.
 
 
 

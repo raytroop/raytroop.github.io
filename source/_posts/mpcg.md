@@ -34,8 +34,10 @@ $$
 ![image-20260917225735471](mpcg/image-20260917225735471.png)
 
 
+<span style="color:white; background-color:black">complementary of mixers-based QPD</span>
 
 
+![QPD_C-2026-09-29_10-38](mpcg/QPD_C-2026-09-29_10-38.png)
 
 ---
 

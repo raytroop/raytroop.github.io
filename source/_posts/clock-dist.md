@@ -35,6 +35,8 @@ mathjax: true
 >
 > T. Ali *et al*., "6.4 A 180mW 56Gb/s DSP-Based Transceiver for High Density IOs in Data Center Switches in 7nm FinFET Technology," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 118-120 [[https://sci-hub.se/10.1109/ISSCC.2019.8662523](https://sci-hub.se/10.1109/ISSCC.2019.8662523)]
 >
+> M. -A. LaCroix *et al*., "8.4 A 116Gb/s DSP-Based Wireline Transceiver in 7nm CMOS Achieving 6pJ/b at 45dB Loss in PAM-4/Duo-PAM-4 and 52dB in PAM-2," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 132-134 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9366030](https://sci-hub.ru/10.1109/ISSCC42613.2021.9366030)]
+>
 > hai-kun,『讲电路』传输线和驻波在时钟分布网络中的应用 [[https://zhuanlan.zhihu.com/p/30055007](https://zhuanlan.zhihu.com/p/30055007)]
 
 *TODO* &#128197;
@@ -42,6 +44,8 @@ mathjax: true
 ![image-20251217232140562](clock-dist/image-20251217232140562.png)
 
 
+
+![image-20260929235958980](clock-dist/image-20260929235958980.png)
 
 ## Inductive-Loaded Clock Distribution Technique
 

@@ -29,6 +29,32 @@ To achieve the same differential output amplitude, CML topologies consume $4$ ti
 
 
 
+
+
+
+
+## 1UI Data Staggering
+
+> T. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
+
+*TODO* &#128197;
+
+
+
+## 1UI Pulse Generator
+
+>  J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
+
+> **duty correction** & **delay adjustment** 
+
+*TODO* &#128197;
+
+![image-20260921231822433](tx/image-20260921231822433.png)
+
+![image-20260921231842187](tx/image-20260921231842187.png)
+
+
+
 ## Serialization
 
 > Z. Toprak-Deniz et al., "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.st/10.1109/JSSC.2019.2939081](https://sci-hub.st/10.1109/JSSC.2019.2939081)]
@@ -56,31 +82,6 @@ To achieve the same differential output amplitude, CML topologies consume $4$ ti
 ***Two latches***
 
 ![two-latch.drawio](tx/two-latch.drawio.svg)
-
-
-
-
-
-
-## 1UI Data Staggering
-
-*TODO* &#128197;
-
-
-
-## 1UI Pulse Generator
-
->  J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
-
-> **duty correction** & **delay adjustment** 
-
-*TODO* &#128197;
-
-![image-20260921231822433](tx/image-20260921231822433.png)
-
-![image-20260921231842187](tx/image-20260921231842187.png)
-
-
 
 
 
@@ -203,7 +204,7 @@ Where precursor  $R_L = L\times R_T$, main cursor $R_M = M\times R_T$ and post c
 
 ![image-20220709151054840](tx/image-20220709151054840.png)
 
-###  Equation-1
+<span style="color:white; background-color:black">Equation-1</span>
 
 > $D_{n-1}D_nD_{n+1}=1,-1,-1$
 
@@ -221,7 +222,7 @@ $$
 V_{L}= \frac{1}{2}\cdot\frac{N-(L+M)}{L+M+N}
 $$
 
-### Equation-2
+<span style="color:white; background-color:black">Equation-2</span>
 
 > $D_{n-1}D_nD_{n+1}=-1,1,-1$
 
@@ -232,7 +233,7 @@ $$
 V_M = \frac{1}{2}
 $$
 
-### Equation-3
+<span style="color:white; background-color:black">Equation-3</span>
 
 > $D_{n-1}D_nD_{n+1}=-1,-1,1$
 
@@ -248,7 +249,7 @@ $$
 V_N = \frac{1}{2}\cdot\frac{L-(N+M)}{L+M+N}
 $$
 
-### Obtain FIR coefficients
+<span style="color:white; background-color:black">Obtain FIR coefficients</span>
 
 We define
 $$\begin{align}
@@ -300,7 +301,7 @@ grid on;
 
 ## VM Driver Equalization - single ended termination
 
-### Equation-1
+<span style="color:white; background-color:black">Equation-1</span>
 
 ![pre_se.drawio](tx/pre_se.drawio.svg)
 
@@ -314,7 +315,7 @@ V_{L}= \frac{1}{2}\cdot\frac{N-(L+M)}{L+M+N}
 $$
 which is same with differential ended termination
 
-### Equation-2
+<span style="color:white; background-color:black">Equation-2</span>
 
 ![main_se.drawio](tx/main_se.drawio.svg)
 
@@ -328,13 +329,13 @@ V_{M}= \frac{1}{2}
 $$
 which is same with differential ended termination
 
-### Equation-3
+<span style="color:white; background-color:black">Equation-3</span>
 
 $$
 V_{N}= \frac{1}{2}\cdot\frac{L-(N+M)}{L+M+N}
 $$
 
-### Obtain FIR coefficients
+<span style="color:white; background-color:black">Obtain FIR coefficients</span>
 
 Same with differential ended termination driver.
 

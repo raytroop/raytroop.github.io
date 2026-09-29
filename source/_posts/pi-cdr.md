@@ -231,6 +231,10 @@ A **constant Output amplitude** is desired because the *swing-dependent delay ch
 
 ### Current-Mode Phase Interpolator
 
+
+Current-mode PIs (CMPIs) can achieve high linearity but at the cost of digital overhead to generate **sinusoidal weights**
+
+
 ### Voltage-Mode Phase Interpolator
 
 ### Integrating-Mode Phase Interpolator
@@ -438,3 +442,5 @@ Cortiula A, Menin D, Bandiziol A, Driussi F, Palestri P. Modeling of Phase-Inter
 G. Souliotis, A. Tsimpos and S. Vlassis, "Phase Interpolator-Based Clock and Data Recovery With Jitter Optimization," in *IEEE Open Journal of Circuits and Systems*, vol. 4, pp. 203-217, 2023 [[https://ieeexplore.ieee.org/document/10184121](https://ieeexplore.ieee.org/document/10184121)]
 
 B. Razavi, "The Design of a Phase Interpolator [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 4, pp. 6-10, Fall 2023 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf)]
+
+T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in IEEE Journal of Solid-State Circuits, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)]

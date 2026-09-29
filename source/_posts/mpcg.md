@@ -31,6 +31,9 @@ mathjax: true
 $$
 V_{ip}=\mathrm{XNOR}(CKD_0,CKD_{90})\qquad \qquad V_{in}=\mathrm{XNOR}(CKD_{45},CKD_{315})
 $$
+
+> The $225^\circ$ per-stage phase shift is constrained by the minimum inverter propagation delay
+
 ![image-20260917225735471](mpcg/image-20260917225735471.png)
 
 

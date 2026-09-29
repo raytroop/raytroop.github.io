@@ -60,10 +60,46 @@ Its main limitation is that accurate phase detection relies on the input clocks 
 
 
 
-## Multi-phase Generation using Divider
+## MPG using Divider
+
+> J. Q. Wang *et al*., "7.1 A 2.69pJ/b 212Gb/s DSP-Based PAM-4 Transceiver for Optical Direct-Detect Application in 5nm FinFET," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 123-125, doi: 10.1109/ISSCC49657.2024.10454275.
 
 ![image-20260922000536069](mpcg/image-20260922000536069.png)
 
+
+
+---
+
+---
+
+
+
+<span style="color:white; background-color:black">ph\<0:3\> 4UI clock to oph\<0:15> 16UI clock</span>
+
+![image-20260929210507026](mpcg/image-20260929210507026.png)
+
+
+
+![div4_4to16_cir.drawio](mpcg/div4_4to16_cir.drawio.svg)
+
+
+
+
+
+![div4_4to16.drawio](mpcg/div4_4to16.drawio.svg)
+
+
+
+| D / Db | Retiming clock (rising edge) | Q | Qb |
+|---|---|---|---|
+| QP1 / QN1 | ph<0> | oph<4> | oph<12> |
+| VOP1 / VON1 | ph<0> | oph<8> | oph<0> |
+| QP2 / QN2 | ph<2> | oph<6> | oph<14> |
+| VOP2 / VON2 | ph<2> | oph<10> | oph<2> |
+| QP1 / QN1 | ph<3> | oph<3> | oph<11> |
+| VOP1 / VON1 | ph<3> | oph<7> | oph<15> |
+| QP2 / QN2 | ph<1> | oph<5> | oph<13> |
+| VOP2 / VON2 | ph<1> | oph<9> | oph<1> |
 
 
 
@@ -74,11 +110,13 @@ Its main limitation is that accurate phase detection relies on the input clocks 
 
 <span style="color:white; background-color:black">ph\<0:3\> 4UI clock to oph\<0:7\> 8UI clock</span>
 
-![image-20260922001811838](mpcg/image-20260922001811838.png)
+![image-20260929211324839](mpcg/image-20260929211324839.png)
+
+![div2_4to8.drawio](mpcg/div2_4to8.drawio.svg)
 
 
 
-## Multi-Phase Generation using ILO
+## MPG using ILO
 
 > D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537
 >
@@ -90,13 +128,21 @@ Its main limitation is that accurate phase detection relies on the input clocks 
 
 
 
-## Skew Correction
+## Skew Correction by delay line
 
 > D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537
 
 ![image-20260921232817281](mpcg/image-20260921232817281.png)
 
 ![image-20260921233136817](mpcg/image-20260921233136817.png)
+
+
+
+## Skew Correction by phase interpolator
+
+> J. Q. Wang *et al*., "7.1 A 2.69pJ/b 212Gb/s DSP-Based PAM-4 Transceiver for Optical Direct-Detect Application in 5nm FinFET," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 123-125, doi: 10.1109/ISSCC49657.2024.10454275
+
+![image-20260929204119295](mpcg/image-20260929204119295.png)
 
 
 

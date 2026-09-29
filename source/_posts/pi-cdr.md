@@ -236,10 +236,12 @@ A **constant Output amplitude** is desired because the *swing-dependent delay ch
 ### Integrating-Mode Phase Interpolator
 
 
-
-## Sampling Offset due to PI Nonlinearity
+## PI Nonlinearity Effect
 
 > Wang, Zhaowen. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
+
+### Sampling Offset due to PI Nonlinearity
+
 
 ![image-20260919082930453](pi-cdr/image-20260919082930453.png)
 
@@ -393,7 +395,7 @@ That last term is precisely the relative INL error we discussed. The subscripts 
 
 
 
-## Deterministic Jitter due to PI Nonlinearity
+### Deterministic Jitter due to PI Nonlinearity
 
 ![image-20260919083229868](pi-cdr/image-20260919083229868.png)
 

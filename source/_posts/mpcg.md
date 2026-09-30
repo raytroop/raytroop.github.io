@@ -11,55 +11,6 @@ mathjax: true
 
 
 
-## Quadrature Phase Detector
-
-> S. Chen et al., "A 4-to-16GHz inverter-based injection-locked quadrature clock generator with phase interpolators for multi-standard I/Os in 7nm FinFET," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018, pp. 390-39 [[https://sci-hub.red/storage/twin/6715/2bc891863e9eac1eb1670deb776ff04d/chen2018.pdf](https://sci-hub.red/storage/twin/6715/2bc891863e9eac1eb1670deb776ff04d/chen2018.pdf)]
->
-> Z. Wang, Y. Zhang, Y. Onizuka and P. R. Kinget, "11.4 A High-Accuracy Multi-Phase Injection-Locked 8-Phase 7GHz Clock Generator in 65nm with 7b Phase Interpolators for High-Speed Data Links," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 186-188, [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365800](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365800)]
->
-> —, "Multi-Phase Clock Generation for Phase Interpolation With a Multi-Phase, Injection-Locked Ring Oscillator and a Quadrature DLL," in IEEE Journal of Solid-State Circuits, vol. 57, no. 6, pp. 1776-1787, June 2022, doi: 10.1109/JSSC.2021.3124486.
->
-> —, "A Very High Linearity Twin Phase Interpolator With a Low-Noise and Wideband Delta Quadrature DLL for High-Speed Data Link Clocking," in IEEE Journal of Solid-State Circuits, vol. 58, no. 4, pp. 1172-1184, April 2023, doi: 10.1109/JSSC.2022.3197061
->
-> —. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
->
-> Shaokang ZHAO, 2025, "Multi-Phase Clock Generator for High-Speed Wireline Systems," [[paper](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/1.Thesis/2.Mphil/Shaokang%20Thesis.pdf), [slides](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/2.Slides/2.Mphil/Shaokang_Zhao%20Slides.pdf)]
->
-> J. Im *et al*., "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 1, pp. 7-18, Jan. 2021, [[https://sci-hub.jp/10.1109/JSSC.2020.3024261](https://sci-hub.jp/10.1109/JSSC.2020.3024261)]
-
-
-
-![image-20260917225422455](mpcg/image-20260917225422455.png)
-$$
-V_{ip}=\mathrm{XNOR}(CKD_0,CKD_{90})\qquad \qquad V_{in}=\mathrm{XNOR}(CKD_{45},CKD_{315})
-$$
-
-> The $225^\circ$ per-stage phase shift is constrained by the minimum inverter propagation delay
-
-![image-20260917225735471](mpcg/image-20260917225735471.png)
-
-
-<span style="color:white; background-color:black">complementary of mixers-based QPD</span>
-
-
-![QPD_C-2026-09-29_10-38](mpcg/QPD_C-2026-09-29_10-38.png)
-
----
-
-A natural approach is to compare
-
-$$
-\mathrm{XOR}(CKD_0,CKD_{90})+\mathrm{XOR}(CKD_{45},CKD_{135})
-$$
-
-against
-
-$$
-\mathrm{XNOR}(CKD_0,CKD_{90})+\mathrm{XNOR}(CKD_{45},CKD_{135})
-$$
-
-Its main limitation is that accurate phase detection relies on the input clocks having a 50% duty cycle.
-
 
 
 ## MPG using Divider
@@ -130,7 +81,7 @@ Its main limitation is that accurate phase detection relies on the input clocks 
 
 
 
-## Skew Correction by delay line
+## delay line based Skew Correction 
 
 > D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537
 
@@ -140,12 +91,68 @@ Its main limitation is that accurate phase detection relies on the input clocks 
 
 
 
-## Skew Correction by phase interpolator
+## phase interpolator based Skew Correction
 
 > J. Q. Wang *et al*., "7.1 A 2.69pJ/b 212Gb/s DSP-Based PAM-4 Transceiver for Optical Direct-Detect Application in 5nm FinFET," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 123-125, doi: 10.1109/ISSCC49657.2024.10454275
 
 ![image-20260929204119295](mpcg/image-20260929204119295.png)
 
+
+## mixer based Quadrature Phase Detector
+
+> S. Chen et al., "A 4-to-16GHz inverter-based injection-locked quadrature clock generator with phase interpolators for multi-standard I/Os in 7nm FinFET," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018, pp. 390-39 [[https://sci-hub.red/storage/twin/6715/2bc891863e9eac1eb1670deb776ff04d/chen2018.pdf](https://sci-hub.red/storage/twin/6715/2bc891863e9eac1eb1670deb776ff04d/chen2018.pdf)]
+>
+> Z. Wang, Y. Zhang, Y. Onizuka and P. R. Kinget, "11.4 A High-Accuracy Multi-Phase Injection-Locked 8-Phase 7GHz Clock Generator in 65nm with 7b Phase Interpolators for High-Speed Data Links," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 186-188, [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365800](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365800)]
+>
+> —, "Multi-Phase Clock Generation for Phase Interpolation With a Multi-Phase, Injection-Locked Ring Oscillator and a Quadrature DLL," in IEEE Journal of Solid-State Circuits, vol. 57, no. 6, pp. 1776-1787, June 2022, doi: 10.1109/JSSC.2021.3124486.
+>
+> —, "A Very High Linearity Twin Phase Interpolator With a Low-Noise and Wideband Delta Quadrature DLL for High-Speed Data Link Clocking," in IEEE Journal of Solid-State Circuits, vol. 58, no. 4, pp. 1172-1184, April 2023, doi: 10.1109/JSSC.2022.3197061
+>
+> —. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
+>
+> Shaokang ZHAO, 2025, "Multi-Phase Clock Generator for High-Speed Wireline Systems," [[paper](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/1.Thesis/2.Mphil/Shaokang%20Thesis.pdf), [slides](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/2.Slides/2.Mphil/Shaokang_Zhao%20Slides.pdf)]
+>
+> J. Im *et al*., "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 1, pp. 7-18, Jan. 2021, [[https://sci-hub.jp/10.1109/JSSC.2020.3024261](https://sci-hub.jp/10.1109/JSSC.2020.3024261)]
+
+
+
+![image-20260917225422455](mpcg/image-20260917225422455.png)
+$$
+V_{ip}=\mathrm{XNOR}(CKD_0,CKD_{90})\qquad \qquad V_{in}=\mathrm{XNOR}(CKD_{45},CKD_{315})
+$$
+
+> The $225^\circ$ per-stage phase shift is constrained by the minimum inverter propagation delay
+
+![image-20260917225735471](mpcg/image-20260917225735471.png)
+
+
+<span style="color:white; background-color:black">complementary of mixers-based QPD</span>
+
+
+![QPD_C-2026-09-29_10-38](mpcg/QPD_C-2026-09-29_10-38.png)
+
+---
+
+A natural approach is to compare
+
+$$
+\mathrm{XOR}(CKD_0,CKD_{90})+\mathrm{XOR}(CKD_{45},CKD_{135})
+$$
+
+against
+
+$$
+\mathrm{XNOR}(CKD_0,CKD_{90})+\mathrm{XNOR}(CKD_{45},CKD_{135})
+$$
+
+Its main limitation is that accurate phase detection relies on the input clocks having a 50% duty cycle.
+
+
+## calibration ADC based skew detection
+
+> J. Q. Wang *et al*., "7.1 A 2.69pJ/b 212Gb/s DSP-Based PAM-4 Transceiver for Optical Direct-Detect Application in 5nm FinFET," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 123-125, doi: 10.1109/ISSCC49657.2024.10454275.
+
+*TODO* &#128197;
 
 
 ## DCC & AC-coupled buffer
@@ -234,9 +241,9 @@ Jihwan Kim,Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrica
 
 Heng Zhang, Broadcom, ISSCC 2025 - Forum *F4.2: High-speed ADCs for 100Gbps+ Wireline Transceivers*
 
-**H. Zhang**, D. Cui, J. Cao, and A.Momtaz, "Phase Adjustment Scheme for Time-interleaved ADCs", United States Patent. US 9065464 B2. Issued Jun.23, 2015*.* [[https://patentimages.storage.googleapis.com/c1/11/1f/6fb830d08b710b/US9065464.pdf](https://patentimages.storage.googleapis.com/c1/11/1f/6fb830d08b710b/US9065464.pdf)]
+**H. Zhang**, D. Cui, J. Cao, and A.Momtaz, *"Phase Adjustment Scheme for Time-interleaved ADCs"*, United States Patent. US 9065464 B2. Issued Jun.23, 2015. [[https://patentimages.storage.googleapis.com/c1/11/1f/6fb830d08b710b/US9065464.pdf](https://patentimages.storage.googleapis.com/c1/11/1f/6fb830d08b710b/US9065464.pdf)]
 
-***H. Zhang**, D. Cui,  and J. Cao, "Clock Generator for Use in A Time-interleaved ADC and Methods for Use therewith", United States Patent. US 8902094 B1. Issued Dec.2, 2014*. [[https://patentimages.storage.googleapis.com/c7/0b/73/74e61515ddffa2/US8902094.pdf](https://patentimages.storage.googleapis.com/c7/0b/73/74e61515ddffa2/US8902094.pdf)]
+**H. Zhang**, D. Cui,  and J. Cao, *"Clock Generator for Use in A Time-interleaved ADC and Methods for Use therewith"*, United States Patent. US 8902094 B1. Issued Dec.2, 2014. [[https://patentimages.storage.googleapis.com/c7/0b/73/74e61515ddffa2/US8902094.pdf](https://patentimages.storage.googleapis.com/c7/0b/73/74e61515ddffa2/US8902094.pdf)]
 
 rfinsights, Quadrature Phase Detector: passive mixer vs XOR gate [[https://www.rfinsights.com/concepts/quadrature-phase-detector-passive-mixer-vs-xor/](https://www.rfinsights.com/concepts/quadrature-phase-detector-passive-mixer-vs-xor/)]
 

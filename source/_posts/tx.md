@@ -33,7 +33,7 @@ To achieve the same differential output amplitude, CML topologies consume $4$ ti
 
 
 
-## 1UI Data Stagger
+## 1-UI Data Stagger
 
 > T. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
 
@@ -41,7 +41,7 @@ To achieve the same differential output amplitude, CML topologies consume $4$ ti
 
 
 
-## 1UI Pulse Generator
+## 1-UI Clock Pulse Generator
 
 >  J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
 

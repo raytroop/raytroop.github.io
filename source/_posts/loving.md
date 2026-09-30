@@ -2928,6 +2928,22 @@ https://www.zhihu.com/question/55954407/answer/2013199998242826068
 
 
 ```
+一个人的人生是非常短暂的，在你这个短暂的人生中间，要想放出点光彩，要想有点作为，必须要做到人生四行： 
+自己要行； 
+别人说你行； 
+说你行的人得行； 
+身体得行。
+
+
+---
+王立群 百家讲坛
+```
+
+
+
+
+
+```
 The greatest happiness is to know the source of unhappiness
 
 ---

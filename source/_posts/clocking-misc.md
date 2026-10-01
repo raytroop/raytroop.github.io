@@ -44,10 +44,14 @@ Large values of N lowers the loop BW which is bad for jitter
 ### Asynchronous vs Synchronous Divider
 
 > Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 Lecture 8: Divider Circuits  [[https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf)]
+>
+> Michael Perrott August 12, 2008, Short Course On Phase-Locked Loops and Their Applications Day 2, PM Lecture Basic Building Blocks (Part II) High Speed Frequency Dividers, Phase Detectors, Charge Pumps, and Loop Filter Design [[https://cppsim.org/PLL_Lectures/day2_pm.pdf](https://cppsim.org/PLL_Lectures/day2_pm.pdf)]
 
 ![image-20260815221338155](clocking-misc/image-20260815221338155.png)
 
+![image-20261001084429722](clocking-misc/image-20261001084429722.png)
 
+![image-20261001084530813](clocking-misc/image-20261001084530813.png)
 
 ### Dual-Modulus Dividers
 

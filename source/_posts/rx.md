@@ -127,6 +127,26 @@ Extensive work on DFEs has produced a multitude of architectures, which can be b
 
 *TODO* &#128197;
 
+
+
+
+
+## Peak to Main Ratio (PMR)
+
+> Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
+>
+> Boesch, et.al., “A 0.003 mm2 5.2 mW/tap 20 GBd inductor-less 5-tap analog RX-FFE,” 2016 IEEE Symposium on VLSI Circuits (VLSI-Circuits), 2016 [[https://sci-hub.ru/10.1109/VLSIC.2016.7573522](https://sci-hub.ru/10.1109/VLSIC.2016.7573522)]
+>
+>  —, “Signal preconditioning using feedforward equalizers in ADC-based data links”, Ph.D. Dissertation, Stanford University, 2016 [[https://purl.stanford.edu/dk653rc7126](https://purl.stanford.edu/dk653rc7126)]
+>
+>  K. Zheng, “System-Driven Circuit Design for ADC-Based Wireline Data Links”, Ph.D. Dissertation, Stanford University, 2018 [[https://purl.stanford.edu/hw458fp0168](https://purl.stanford.edu/hw458fp0168)]
+
+![image-20261001074247470](rx/image-20261001074247470.png)
+
+
+
+
+
 ## reference
 
 T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)] 

@@ -9,10 +9,19 @@ mathjax: true
 
 ![image-20260428003937326](tx/image-20260428003937326.png)
 
+## Analog-based TX vs. DSP/DAC TX
+
+![image-20261001085907790](tx/image-20261001085907790.png)
+
+
+
+
 
 ## SST vs. CML Driver
 
 > Z. Toprak-Deniz et al., "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.st/10.1109/JSSC.2019.2939081](https://sci-hub.st/10.1109/JSSC.2019.2939081)]
+>
+> Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
 
 ![image-20260531080813258](tx/image-20260531080813258.png)
 
@@ -29,33 +38,23 @@ To achieve the same differential output amplitude, CML topologies consume $4$ ti
 
 
 
+---
+
+---
+
+![image-20240825194548697](tx/image-20240825194548697.png)
+
+Current mode drivers become power competitive at very high data rates
+
+- <span style="background-color:yellow">Dynamic power consumption **scales with frequency** $\Longrightarrow$ SST drivers lose power advantage</span>
 
 
 
 
-## 1-UI Data Stagger
-
-> T. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
-
-*TODO* &#128197;
 
 
 
-## 1-UI Clock Pulse Generator
-
->  J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
-
-> **duty correction** & **delay adjustment** 
-
-*TODO* &#128197;
-
-![image-20260921231822433](tx/image-20260921231822433.png)
-
-![image-20260921231842187](tx/image-20260921231842187.png)
-
-
-
-## Serialization
+## Data Serialization
 
 > Z. Toprak-Deniz et al., "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.st/10.1109/JSSC.2019.2939081](https://sci-hub.st/10.1109/JSSC.2019.2939081)]
 
@@ -85,67 +84,170 @@ To achieve the same differential output amplitude, CML topologies consume $4$ ti
 
 
 
-## Eye Linearity vs. RLM (Relative Level Mismatch)
+## 1-UI Data Stagger
+
+> C. Menolfi *et al*., "6.2 A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018, pp. 104-106 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310205](https://sci-hub.ru/10.1109/ISSCC.2018.8310205)]
+>
+> T. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
+
+a.k.a <span style="background-color:yellow">**Phase Aligner**</span>, <span style="background-color:yellow">**Tap Delay Generator**</span>
+
+![image-20261001080205374](tx/image-20261001080205374.png)
+
+
+
+![image-20261001151432789](tx/image-20261001151432789.png)
+
+
+
+## 1-UI Clock Pulse Generator
+
+>  J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
+
+**duty correction** & **delay adjustment** 
 
 *TODO* &#128197;
 
-> Chaowaroj (Max) Wanotayaroj. Introduction to PAM4 [[https://indico.cern.ch/event/979659/contributions/4127016/attachments/2159338/3642883/PAM4Eval%20-%20Dec2020%20Seminar.pdf](https://indico.cern.ch/event/979659/contributions/4127016/attachments/2159338/3642883/PAM4Eval%20-%20Dec2020%20Seminar.pdf)]
+![image-20260921231822433](tx/image-20260921231822433.png)
 
-## CML vs. SST based driver
-
-![image-20240825194548697](tx/image-20240825194548697.png)
-
-> Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
+![image-20260921231842187](tx/image-20260921231842187.png)
 
 
 
-![image-20250607090928137](tx/image-20250607090928137.png)
+## Synchronized divider
 
-![image-20250607091140352](tx/image-20250607091140352.png)
+> M. A. Kossel *et al*., "8.3 An 8b DAC-Based SST TX Using Metal Gate Resistors with 1.4pJ/b Efficiency at 112Gb/s PAM-4 and 8-Tap FFE in 7nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 130-132 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784)]
+>
+> Michael Perrott August 12, 2008, Short Course On Phase-Locked Loops and Their Applications Day 2, PM Lecture Basic Building Blocks (Part II) High Speed Frequency Dividers, Phase Detectors, Charge Pumps, and Loop Filter Design [[https://cppsim.org/PLL_Lectures/day2_pm.pdf](https://cppsim.org/PLL_Lectures/day2_pm.pdf)]
 
-> the resistance of MOS is not highly controlled -> $R_T + Z_N$
+![image-20261001082434120](tx/image-20261001082434120.png)
 
-![image-20250607091858740](tx/image-20250607091858740.png)
+The lower speed sub-rate clocks are then obtained using a **synchronous divider** based on conventional master-slave flip-flops
 
+![syndiv8](tx/syndiv8.svg)
 
-
-## Peak power constraint of TX FIR
-
-![image-20250514215647905](tx/image-20250514215647905.png)
-
-Due to circuit limitation, circuit cannot have arbitrarily large voltage on the output, i.e. a *limited maximum swing*. In order to create the high frequency shape, the best we can do is *lower DC gain* (low frequency gain < 1)
-
-- FIR is not increasing the amplitude on the edges
-- FIR is reducing the inner eye diagram
-
-The maximum swing stays the same, $\sum_i |c_i|=1$
+![syndiv8_wv.drawio](tx/syndiv8_wv.drawio.svg)
 
 
 
-> Circuit Insights @ ISSCC2025: Circuits for Wireline Communications - Kevin Zheng [[https://youtu.be/8NZl81Dj45M&t=829](https://youtu.be/8NZl81Dj45M&t=829)]
+The preceding synchronous divider is equivalent to the synchronous implementation described below
+
+![image-20261001085428000](tx/image-20261001085428000.png)
+
+Each stage's toggle decision is computed from **the states of all previous stages**, but its timing comes only from the common input clock
 
 
 
-## Active Peaking CMOS Pre-Driver
+## Single-Ended-to-Differential (S2D)
 
-> C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018, pp. 104-106 [[slides](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf) [paper](https://sci-hub.se/10.1109/ISSCC.2018.8310205)]
+> T. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
 
-![image-20251217231605595](tx/image-20251217231605595.png)
+![image-20261001151302086](tx/image-20261001151302086.png)
 
-> ![image-20251217231902887](tx/image-20251217231902887.png)
+
+
+
+
+## Quarter-rate TX architecture
+
+> Z. Toprak-Deniz *et al*., "6.6 A 128Gb/s 1.3pJ/b PAM-4 Transmitter with Reconfigurable 3-Tap FFE in 14nm CMOS," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 122-124 [[https://sci-hub.ru/10.1109/ISSCC.2019.8662479](https://sci-hub.ru/10.1109/ISSCC.2019.8662479)]
+>
+> —, "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2939081](https://sci-hub.ru/10.1109/JSSC.2019.2939081)]
+
+**Quarter-Rate:** A clocking or sampling architecture where the internal circuit clock runs at one-fourth (1/4) of the total serial data rate
+
+**Quadrature:** A relationship between two signals or clocks that have a **90<sup>o</sup> phase difference** (a quarter of a complete wave cycle), commonly used for I/Q modulation, directional tracking in encoders, or generating multi-phase clocks
+
+![image-20261001154407300](tx/image-20261001154407300.png)
+
+![image-20261001154438645](tx/image-20261001154438645.png)
+
+
+
+
+
+---
+
+**Fig. 5(c)**: The 2-UI pulse D1′ is carved by C4IB alone — it starts on **C4IB rising** and ends on **C4IB falling**. For the D1 → D1′ stage, the margins are 1.5 UI before and 0.5 UI after, which is **asymmetric**
+
+**Fig. 5(d):** D1′ is the 1-UI pulse, C4IB isn't the only reference — It starts on **C4IB rising**, but it ends on **C4Q falling**, as the arrows in the figure show. The pulse generator is enabled only while C4IB *and* C4Q are both high
+
+![image-20261001200238448](tx/image-20261001200238448.png)
+
+| Case          | Window D1 must be stable over | Before | After  |
+| ------------- | ----------------------------- | ------ | ------ |
+| (c) D1 → D1′  | C4IB high (2 UI)              | 1.5 UI | 0.5 UI |
+| (c) D1 → D_OP | C4IB high and C4Q high (1 UI) | 1.5 UI | 1.5 UI |
+| (d) D1 → D1′  | C4IB high and C4Q high (1 UI) | 1 UI   | 2 UI   |
+
+
+
+The 0.5 UI in Fig. 5(c) is an idealized drawing, not a real delay value. In silicon, the D1 edge occurs at the launching C4 edge plus the **latch clock-to-Q delay plus wiring delay**. The authors drew it at 0.5 UI to show the ideal centered placement with symmetric margin
+
+The two sub-figures place D1 differently, which shows the data-to-clock offset is set by design and illustration choices. The real requirement is only that **D1 is stable, with margin**, whenever its carving gate is enabled
+
+If the natural delay lands too close to an active edge, the designer can fix it by choosing a different launching clock phase or adding delay
+
+
+
+##  Half-rate TX architecture
+
+> M. Meghelli *et al*., "A 10Gb/s 5-Tap-DFE/4-Tap-FFE Transceiver in 90nm CMOS," *2006 IEEE International Solid State Circuits Conference - Digest of Technical Papers*, San Francisco, CA, USA, 2006, pp. 213-222 [[https://sci-hub.ru/10.1109/ISSCC.2006.1696051](https://sci-hub.ru/10.1109/ISSCC.2006.1696051)]
+>
+> J. F. Bulzacchelli *et al*., "A 10-Gb/s 5-Tap DFE/4-Tap FFE Transceiver in 90-nm CMOS Technology," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 12, pp. 2885-2900, Dec. 2006 [[https://sci-hub.ru/10.1109/JSSC.2006.884342](https://sci-hub.ru/10.1109/JSSC.2006.884342)]
+>
+> Yang, Chih-Kong Ken. *Design of high-speed serial links in CMOS*. Stanford University, 1999. [[http://i.stanford.edu/pub/cstr/reports/csl/tr/98/775/CSL-TR-98-775.pdf](http://i.stanford.edu/pub/cstr/reports/csl/tr/98/775/CSL-TR-98-775.pdf)]
+>
+> Mark Horowitz, Chih-Kong Ken Yang, and Stefanos Sidiropoulos. 1998. High-Speed Electrical Signaling: Overview and Limitations. IEEE Micro 18, 1 (January 1998), 12–24. https://doi.org/10.1109/40.653013 [[https://people.engr.tamu.edu/spalermo/ecen689/hs_electrical_signaling_horowitz_micro_1998.pdf](https://people.engr.tamu.edu/spalermo/ecen689/hs_electrical_signaling_horowitz_micro_1998.pdf)]
+
+![image-20261001111219814](tx/image-20261001111219814.png)
+
+
+
+
+
+![image-20261001170626200](tx/image-20261001170626200.png)
+
+The half period that second-half selection "wastes" is deliberate slack: it lets each input settle fully before it is passed. You're trading a little latency for **robustness**, and designers almost always take that trade. If latency truly mattered, the better move would be to trim pipeline stages or the FIFO depth elsewhere, not to remove the settling slack from the highest-speed MUX.
+
+## Full-rate TX architecture
+
+> Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 5: Termination, TX Driver, & Multiplexer Circuits [[https://people.engr.tamu.edu/spalermo/ecen689/lecture5_ee720_termination_txdriver.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture5_ee720_termination_txdriver.pdf)]
+>
+> J. Cao *et al*., "OC-192 transmitter and receiver in standard 0.18-/spl mu/m CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 37, no. 12, pp. 1768-1780, Dec. 2002, doi: 
+
+![image-20261001141723228](tx/image-20261001141723228.png)
+
+With the FFs, latches, and clocks unchanged, **reversing** the MUX selection still works, but adds **latency**
+
+The bit order is preserved; each bit is selected later.
+
+- Reversing **both first-stage MUXes** adds **2 UI**
+- Reversing the **final MUX** adds **1 UI**.
+- Reversing **all three** preserves \(D_0,D_1,D_2,D_3,\ldots\), with **3 UI additional latency**
+
+
+
+---
+
+![image-20261001145947746](tx/image-20261001145947746.png)
+
+The **retimer** between the final stage of the MUX and the output driver is used to r**educe the data jitter** due to the bandwidth limitation of the selection circuit in the 2 : 1 MUX cell and duty cycle distortion of the half-rate clock driving that stage
+
+
 
 
 
 ## SST Driver
 
-### sharing termination in SST transmitter
+<span style="color:white; background-color:black">sharing termination in SST transmitter</span>
 
 ![tx_leg.drawio](tx/tx_leg.drawio.svg)
 
 Sharing termination keep a constant current through leg, which improve TX speed in this way.
 On the other hand, the sharing termination facilitate drain/source sharing technique in layout.
 
-### pull-up and pull-down resistor
+<span style="color:white; background-color:black">pull-up and pull-down resistor</span>
 
 ![sst-evolution](tx/sst-evolution.png)
 
@@ -174,7 +276,7 @@ Con's:
 
 
 
-## VM Driver Equalization - differential ended termination
+### VM Driver Equalization - differential ended termination
 
 $$
 V_o = D_{n+1}C_{-1}+D_nC_0+D_{n-1}C_{+1}
@@ -299,7 +401,7 @@ ylabel('mag');
 grid on;
 ```
 
-## VM Driver Equalization - single ended termination
+### VM Driver Equalization - single ended termination
 
 <span style="color:white; background-color:black">Equation-1</span>
 
@@ -340,7 +442,51 @@ $$
 Same with differential ended termination driver.
 
 
-## Basic Feed Forward Equalization Theory
+
+## Tailless CML driver
+
+> G. Steffan *et al*., "6.4 A 64Gb/s PAM-4 transmitter with 4-Tap FFE and 2.26pJ/b energy efficiency in 28nm CMOS FDSOI," *2017 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2017, pp. 116-117 [[https://sci-hub.ru/10.1109/ISSCC.2017.7870288](https://sci-hub.ru/10.1109/ISSCC.2017.7870288)]
+
+![image-20261001180040383](tx/image-20261001180040383.png)
+
+
+
+
+
+## Peak power constraint of TX FIR
+
+> Kevin Zheng , Circuit Insights @ ISSCC2025: Circuits for Wireline Communications [[https://youtu.be/8NZl81Dj45M&t=829](https://youtu.be/8NZl81Dj45M&t=829)]
+
+![image-20250514215647905](tx/image-20250514215647905.png)
+
+Due to circuit limitation, circuit cannot have arbitrarily large voltage on the output, i.e. a *limited maximum swing*. In order to create the high frequency shape, the best we can do is *lower DC gain* (low frequency gain < 1)
+
+- FIR is not increasing the amplitude on the edges
+- FIR is reducing the inner eye diagram
+
+The maximum swing stays the same, $\sum_i |c_i|=1$
+
+
+
+
+
+
+
+## Active Peaking CMOS Pre-Driver
+
+> C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018, pp. 104-106 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310205](https://sci-hub.ru/10.1109/ISSCC.2018.8310205)]
+>
+> HungWen Lu, ChauChin Su and Chien-Nan Liu, "A scalable digitalized buffer for gigabit I/O," *2008 IEEE Custom Integrated Circuits Conference*, San Jose, CA, USA, 2008, pp. 241-244 [[https://sci-hub.ru/10.1109/CICC.2008.4672068](https://sci-hub.ru/10.1109/CICC.2008.4672068)]
+
+![image-20261001072415008](tx/image-20261001072415008.png)
+
+![image-20251217231902887](tx/image-20251217231902887.png)
+
+
+
+
+
+## Basic FeedForward Equalization Theory
 
 ![image-20220709111229772](tx/image-20220709111229772.png)
 
@@ -455,6 +601,16 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 
 
+## Eye Linearity vs. RLM (Relative Level Mismatch)
+
+> Chaowaroj (Max) Wanotayaroj. Introduction to PAM4 [[https://indico.cern.ch/event/979659/contributions/4127016/attachments/2159338/3642883/PAM4Eval%20-%20Dec2020%20Seminar.pdf](https://indico.cern.ch/event/979659/contributions/4127016/attachments/2159338/3642883/PAM4Eval%20-%20Dec2020%20Seminar.pdf)]
+
+*TODO* &#128197;
+
+
+
+
+
 ## Tx Measurements
 
 > PAM4 Transmitter Test Challenges [[https://harrisburg.psu.edu/files/pdf/16861/2019/05/06/tektronix_penn_state_si_april_12_2019.pdf](https://harrisburg.psu.edu/files/pdf/16861/2019/05/06/tektronix_penn_state_si_april_12_2019.pdf)]
@@ -519,11 +675,7 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 ## reference
 
-Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter Circuits [[https://youtu.be/oofViBGlrjM](https://youtu.be/oofViBGlrjM)]
-
-—, Synopsys. Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
-
-—, Synopsys. CMOS Circuit Techniques for Wireline Transmitters [[https://www.synopsys.com/webinars/wireline-transmitters-part-1.html](https://www.synopsys.com/webinars/wireline-transmitters-part-1.html)]
+B. Razavi, "Design Techniques for High-Speed Wireline Transmitters," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 53-66, 2021,[[https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf)]
 
 Jihwan Kim, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
 
@@ -533,9 +685,13 @@ Jihwan Kim, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
 
 Friedel Gerfers, ISSCC2021 T6: Basics of DAC-based Wireline Transmitters
 
-Tod Dickson, IBM. High-Speed CMOS Serial Transmitters for 56-112Gb/s Electrical Interconnects [[https://www.youtube.com/watch?v=g1pcZabsRNc](https://www.youtube.com/watch?v=g1pcZabsRNc)]
+Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter Circuits [[https://youtu.be/oofViBGlrjM](https://youtu.be/oofViBGlrjM)]
 
-B. Razavi, "Design Techniques for High-Speed Wireline Transmitters," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 53-66, 2021,[[https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf)]
+—, Synopsys. Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
+
+—, Synopsys. CMOS Circuit Techniques for Wireline Transmitters [[https://www.synopsys.com/webinars/wireline-transmitters-part-1.html](https://www.synopsys.com/webinars/wireline-transmitters-part-1.html)]
+
+Tod Dickson, IBM. High-Speed CMOS Serial Transmitters for 56-112Gb/s Electrical Interconnects [[https://www.youtube.com/watch?v=g1pcZabsRNc](https://www.youtube.com/watch?v=g1pcZabsRNc)]
 
 ---
 
@@ -546,14 +702,4 @@ Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Manageme
 Sam Palermo. High-Performance SERDES Design" Online Course (2025):  Current-Mode DAC TX [[https://youtu.be/A2VsvCPDWxk](https://youtu.be/A2VsvCPDWxk)]
 
 PCIe® 6.0 Specification: The Interconnect for I/O Needs of the Future PCI-SIG® Educational Webinar Series, [[https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf](https://pcisig.com/sites/default/files/files/PCIe%206.0%20Webinar_Final_.pdf)]
-
-J. F. Bulzacchelli et al., "A 28-Gb/s 4-Tap FFE/15-Tap DFE Serial Link Transceiver in 32-nm SOI CMOS Technology," in IEEE Journal of Solid-State Circuits, vol. 47, no. 12, pp. 3232-3248, Dec. 2012, doi: 10.1109/JSSC.2012.2216414.
-
-C. Menolfi et al., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," 2018 IEEE International Solid - State Circuits Conference - (ISSCC), 2018, pp. 104-106, doi: 10.1109/ISSCC.2018.8310205.
-
-E. Chong et al., "A 112Gb/s PAM-4, 168Gb/s PAM-8 7bit DAC-Based Transmitter in 7nm FinFET," ESSCIRC 2021 - IEEE 47th European Solid State Circuits Conference (ESSCIRC), 2021, pp. 523-526, doi: 10.1109/ESSCIRC53450.2021.9567801.
-
-Wang, Z., Choi, M., Lee, K., Park, K., Liu, Z., Biswas, A., Han, J., Du, S., & Alon, E. (2022). An Output Bandwidth Optimized 200-Gb/s PAM-4 100-Gb/s NRZ Transmitter With 5-Tap FFE in 28-nm CMOS. IEEE Journal of Solid-State Circuits, 57(1), 21-31. https://doi.org/10.1109/JSSC.2021.3109562
-
-J. Kim et al., "A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," 2018 IEEE International Solid - State Circuits Conference - (ISSCC), 2018, pp. 102-104, doi: 10.1109/ISSCC.2018.8310204.
 

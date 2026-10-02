@@ -1157,3 +1157,14 @@ a[2] = 4
 a[3] = 5
 ```
 
+
+
+## marimo
+
+A reactive Python notebook
+
+
+
+## uv
+
+An extremely fast Python package and project manager, written in Rust.

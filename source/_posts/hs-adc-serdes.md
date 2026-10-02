@@ -277,7 +277,7 @@ Nhat Nguyen and Masum Hossain, ISSCC 2021 Forum *F6.7: 112Gb/s-and-Beyond Long-R
 
 Jihwan Kim, Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
 
-Ben Rhew, Samsung, ISSCC 2023 F5.6 Extreme Data Converters and Their Peripherals: High Performance ADC Design in High-Speed Wireline Transceivers and 5G Wireless Transceiver
+Ben Rhew, Samsung, ISSCC 2023 *F5.6 Extreme Data Converters and Their Peripherals: High Performance ADC Design in High-Speed Wireline Transceivers and 5G Wireless Transceiver*
 
 Ariel Cohen, Intel, ISSCC 2024 Forum *F6.3: Beyond 200Gbps Electrical transceivers – Circuit Architecture, Design Implementation and Silicon Results*
 

@@ -435,11 +435,13 @@ The transition point of this NAND gate is **skewed** to eliminate *metastability
 
 
 
-## Redundancy
+## Redundancy with Radix
 
 > Kuttner, Franz. "A 1.2V 10b 20MSample/s non-binary successive approximation ADC in 0.13/spl mu/m CMOS." *2002 IEEE International Solid-State Circuits Conference. Digest of Technical Papers (Cat. No.02CH37315)* 1 (2002): 176-177 vol.1. [[https://sci-hub.jp/10.1109/ISSCC.2002.992993](https://sci-hub.jp/10.1109/ISSCC.2002.992993)]
 >
 > M. Hesener, T. Eicher, A. Hanneberg, D. Herbison, F. Kuttner and H. Wenske, "A 14b 40MS/s Redundant SAR ADC with 480MHz Clock in 0.13pm CMOS," *2007 IEEE International Solid-State Circuits Conference. Digest of Technical Papers*, San Francisco, CA, USA, 2007, pp. 248-600 [[https://sci-hub.ru/10.1109/ISSCC.2007.373387](https://sci-hub.ru/10.1109/ISSCC.2007.373387)]
+>
+> Tomohiko OGAWA *et al*., SAR ADC Algorithm with Redundancy and Digital Error Correction, IEICE Transactions on Fundamentals of Electronics, Communications and Computer Sciences, 2010, Volume E93.A, Issue 2, Pages 415-423 [[https://sci-hub.ru/10.1587/TRANSFUN.E93.A.415](https://sci-hub.ru/10.1587/TRANSFUN.E93.A.415)]
 >
 > C. -C. Liu *et al*., "A 10b 100MS/s 1.13mW SAR ADC with binary-scaled error compensation," *2010 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2010, pp. 386-387 [[https://sci-hub.ru/10.1109/ISSCC.2010.5433970](https://sci-hub.ru/10.1109/ISSCC.2010.5433970)]
 >
@@ -460,6 +462,12 @@ The transition point of this NAND gate is **skewed** to eliminate *metastability
 > Krämer, M. et al. (2015) *High-resolution SAR A/D converters with loop-embedded input buffer*. dissertation. Available at: [[http://purl.stanford.edu/fc450zc8031](http://purl.stanford.edu/fc450zc8031)].
 >
 > sarthak, "Visualising redundancy in a 1.5 bit pipeline ADC“ [[https://electronics.stackexchange.com/a/523489/233816](https://electronics.stackexchange.com/a/523489/233816)]
+
+
+
+![image-20261002225950216](sar/image-20261002225950216.png)
+
+
 
 ![image-20241221140840026](sar/image-20241221140840026.png)
 
@@ -528,13 +536,13 @@ D_{out} &= s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1) \\
 
 
 
-<span style="color:white; background-color:black">**alternative method for d2a & CDAC equivalent weight**</span>
+<span style="color:white; background-color:black">**differential ADC**</span>
 
-| i        | M-1       | M-2       | ...       | 2       | 1       | 0      |
-| -------- | --------- | --------- | --------- | ------- | ------- | ------ |
-| **b[i]** | *b[M-1]*  | *b[M-2]*  | ***...*** | *b[2]*  | *b[1]*  | *b[0]* |
-| **w[i]** |           | *w[M-2]*  | ***...*** | *w[2]*  | *w[1]*  | *w[0]* |
-| **W[i]** | *2w[M-2]* | *2w[M-3]* | ***...*** | 2*w[1]* | *2w[0]* | *w[0]* |
+| i        | M-1                                                | M-2       | ...       | 2       | 1       | 0      |
+| -------- | -------------------------------------------------- | --------- | --------- | ------- | ------- | ------ |
+| **b[i]** | *b[M-1]*                                           | *b[M-2]*  | ***...*** | *b[2]*  | *b[1]*  | *b[0]* |
+| **w[i]** | <span style="background-color:yellow">**0**</span> | *w[M-2]*  | ***...*** | *w[2]*  | *w[1]*  | *w[0]* |
+| **W[i]** | *2w[M-2]*                                          | *2w[M-3]* | ***...*** | 2*w[1]* | *2w[0]* | *w[0]* |
 
 $$\begin{align}
 D_{out} &= \sum_{i=1}^{M-1}(2b_i -1)w_{i-1} + (b_0-1)w_0 \\
@@ -543,7 +551,7 @@ D_{out} &= \sum_{i=1}^{M-1}(2b_i -1)w_{i-1} + (b_0-1)w_0 \\
 &= \boxed{\color{blue}\sum_{i=0}^{M-1}b_i\cdot W_i  - \frac{1}{2}\left[\sum_{i=0}^{M-1}W_i + W_0\right]}
 \end{align}$$
 
-where $W_i = 2w_{i-1}$ for $i\in [M-1,1]$ and $W_0 = w_0$
+where $W_i = 2w_{i-1}$ for $i\in [M-1,1]$ and $W_0 = w_0$ are **equivalent weight**
 
 
 

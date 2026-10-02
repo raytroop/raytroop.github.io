@@ -15,11 +15,13 @@ mathjax: true
 
 ![image-20260503082957057](adc-calib/image-20260503082957057.png)
 
-![image-20250825173843550](adc-calib/image-20250825173843550.png)
+![image-20261001232555743](adc-calib/image-20261001232555743.png)
 
-**Walden FoM unit**: <span style="color:blue">**J/conv-step**</span>
+**Walden FoM unit**: <span style="color:blue">**J/conv-step**</span>  [joules per conversion]
 
+"Conversion-step" in the Walden FoM doesn't mean a physical operation like a comparator decision or a clock cycle. It means one **quantization level**, i.e., one effective LSB step out of the 2<sup>ENOB</sup> levels the converter can distinguish
 
+![image-20261001233710421](adc-calib/image-20261001233710421.png)
 
 ![image-20260503113513018](adc-calib/image-20260503113513018.png)
 
@@ -223,3 +225,5 @@ Boris Murmann, ISSCC2022 SC1: Introduction to ADCs/DACs: Metrics, Topologies, Tr
 —， ISSCC2012 SC3: Introduction to ADCs/DACs: Metrics, Topologies, Trade Space, and Applications
 
 —， A/D Converter Figures of Merit and Performance Trends
+
+Youngcheol Chae, Yonsei University, ISSCC 2023 *F5.2 Design Techniques for Energy Efficient Analog-to-Digital Converters*

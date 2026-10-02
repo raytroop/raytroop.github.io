@@ -435,6 +435,8 @@ Poulton, Ken. ISSCC2009  "Time-Interleaved ADCs, Past and Future" [(slides)](htt
 
 ISSCC2015 F1: High-Speed Interleaved ADCs
 
+Ron Kapusta, Analog Devices, CICC2015 ED007: SAR ADCs in parallel [time-interleaved] converter arrays
+
 Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis
 
 Ewout Martens. ESSCIRC 2019 Tutorials: Advanced Techniques for ADCs for 5G Massive MIMO [[https://youtu.be/7hYichGGU6k](https://youtu.be/7hYichGGU6k)]

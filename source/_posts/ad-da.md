@@ -759,7 +759,7 @@ print(f"Adjusted f_in: {fmt(coherent_sampling(10, 100, 2**6))}Hz")
 
 
 
-## Midrise and Midtread Quantizers
+## Midrise vs Midtread Quantizers
 
 $\Gamma_x$ is  ***no-overload range***
 
@@ -857,9 +857,9 @@ V_X &=V_{\text{out}}-V_C\\ &=V_{\text{in}} -\left(V_{\text{in}}+\frac{\Delta Q_2
 
 
 
+## Tracking nonidealities
 
-
-## Tracking Settling Accuracy
+### Tracking Settling Accuracy
 
 ![image-20260913185637548](ad-da/image-20260913185637548.png)
 
@@ -948,7 +948,8 @@ $$
 ![image-20260913190230077](ad-da/image-20260913190230077.png)
 
 
-## Tracking Nonlinearity
+
+### Tracking Nonlinearity
 
 > Wei Yu, Subhajit Sen and B. H. Leung, "Distortion analysis of MOS track-and-hold sampling mixers using time-varying Volterra series," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 46, no. 2, pp. 101-113, Feb. 1999 [[https://sci-hub.ru/10.1109/82.752910](https://sci-hub.ru/10.1109/82.752910)]
 >
@@ -961,107 +962,17 @@ HD_3 &\approx \frac{1}{4}\omega C V_m^2 \frac{\mathcal{d}^2 R_{on}}{\mathcal{d}v
 
 where $V_{OV}=V_{DD}-V_{IN}-V_t$, $R_{ON}=\frac{1}{\mu C_{ox}W/LV_{OV}}$ and $\omega_c=1/R_{ON}C$
 
-Even-order distortion products cancel in perfectly symmectrical circuits; But phase and amplitude imbalances lead to finite $HD_2$ in practice
-
-
-## DAC Settling Accuracy
-
-**In a SAR conversion the DAC doesn't move by full scale** — the **MSB trial is the largest single step**, and it is exactly **half of full scale**. Subsequent trials step by $V_{FS}/4$, $V_{FS}/8$, … So the MSB transition ($\color{red}0 \to V_{FS}/2$) is the worst case, and if it settles in the allotted per-bit time, every later trial does too.
-
-<span style="color:white; background-color:black">The accuracy criterion</span>
-
-The settling error must stay below half an LSB, where $\text{LSB} = V_{FS}/2^{n}$:
-
-$$
-\frac{V_{FS}}{2} - V_{DAC}(t_{settle}) \;\le\; \frac{1}{2}\cdot\frac{V_{FS}}{2^{n}} = \frac{V_{FS}}{2^{\,n+1}}
-$$
-
-Rearranged
-$$
-V_{DAC}(t_{settle}) \ge V_{FS}\left(\frac{1}{2}-\frac{1}{2^{n+1}}\right)
-$$
-
-<span style="color:white; background-color:black">Solving for the time</span>
-$$
-\frac{V_{FS}}{2}e^{-t_{settle}/\tau} \le \frac{V_{FS}}{2^{\,n+1}} \;\Longrightarrow\; e^{-t_{settle}/\tau} \le 2^{-n}
-$$
-
-$$
-\boxed{\;t_{settle} \ge n\,\tau\ln 2 \approx 0.693\,n\,\tau\;}
-$$
-
-| $n$ | 8 | 10 | 12 | 14 | 16 |
-|---|---|---|---|---|---|
-| $t_{settle}/\tau$ | 5.5 | 6.9 | 8.3 | 9.7 | 11.1 |
-
-
-
-## Redundancy
-
-![image-20241221140840026](ad-da/image-20241221140840026.png)
-
-Max tolerance of comparator offset is $\pm V_{FS}/4$
-
-1. $b_j$ error is $\pm 1$
-2. $b_{j+1}$ error is  $\pm 2$ , wherein $b_{j+1}$: $0\to 2$ or $1\to -1$  
-
-i.e. complementary analog and digital errors cancel each other, $V_o +\Delta V_{o}$ should be in **over-/under-range comparators** ($-V_{FS}/2 \sim 3V_{FS}/2$)
-
-
-
-$$\begin{align}
-V_{in,j} &= (b_j + \Delta b_j)\cdot \frac{V_{FS}}{2} + \frac{V_{out,j}+\Delta V_{out,j}}{2} \\
-V_{in,{j+1}} &= (b_{j+1} + \Delta b_{j+1})\cdot \frac{V_{FS}}{2} + \frac{V_{out,j+1}+\Delta V_{out,j+1}}{2}
-\end{align}$$
-
-with $V_{in,j+1} = V_{out,j}+\Delta V_{out,j}$
-
-$$\begin{align}
-V_{in,j} &= (b_j + \Delta b_j)\cdot \frac{V_{FS}}{2} + \frac{1}{2} \left\{ (b_{j+1} + \Delta b_{j+1})\cdot \frac{V_{FS}}{2} + \frac{V_{out,j+1}+\Delta V_{out,j+1}}{2} \right\} \\
-&= (b_j + \Delta b_j)\cdot \frac{V_{FS}}{2} + \frac{1}{2}(b_{j+1} + \Delta b_{j+1})\cdot \frac{V_{FS}}{2}+ \frac{1}{2}\frac{V_{in,j+2}}{2} \\
-&=\tilde{b_j} \cdot \frac{V_{FS}}{2}+ \tilde{b_{j+1}}\cdot \frac{V_{FS}}{4}+ \frac{1}{4}V_{in,j+2}
-\end{align}$$
-
-where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundant bits*
-
-![image-20241222115022613](ad-da/image-20241222115022613.png)
-
-
----
-
-**Uniform Sub-Radix-2 SAR ADC**
-
-![image-20241222130625469](ad-da/image-20241222130625469.png)
-
-> Minimal analog complexity, *no additional decoding effort*
-
-
-
-
-
-> Chang, Albert Hsu Ting. "Low-power high-performance SAR ADC with redundancy and digital background calibration." (2013). [[https://dspace.mit.edu/bitstream/handle/1721.1/82177/861702792-MIT.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/82177/861702792-MIT.pdf)]
->
-> Kuttner, Franz. "A 1.2V 10b 20MSample/s non-binary successive approximation ADC in 0.13/spl mu/m CMOS." *2002 IEEE International Solid-State Circuits Conference. Digest of Technical Papers (Cat. No.02CH37315)* 1 (2002): 176-177 vol.1. [[https://sci-hub.se/10.1109/ISSCC.2002.992993](https://sci-hub.se/10.1109/ISSCC.2002.992993)]
->
-> T. Ogawa, H. Kobayashi, et. al., "SAR ADC Algorithm with Redundancy and Digital Error Correction." IEICE Trans. Fundam. Electron. Commun. Comput. Sci. 93-A (2010): 415-423. [[paper](https://sci-hub.se/https://doi.org/10.1587/transfun.E93.A.415), [slides](https://pdfs.semanticscholar.org/9745/3f1a69d43414c123965280cd6fc45274f296.pdf)]
->
-> B. Murmann, “On the use of redundancy in successive approximation A/D converters,” International Conference on Sampling Theory and Applications (SampTA), Bremen, Germany, July 2013.  [[https://www.eurasip.org/Proceedings/Ext/SampTA2013/papers/p556-murmann.pdf](https://www.eurasip.org/Proceedings/Ext/SampTA2013/papers/p556-murmann.pdf)]
->
-> Krämer, M. et al. (2015) *High-resolution SAR A/D converters with loop-embedded input buffer*. dissertation. Available at: [[http://purl.stanford.edu/fc450zc8031](http://purl.stanford.edu/fc450zc8031)].
->
-> sarthak, "Visualising redundancy in a 1.5 bit pipeline ADC“ [[https://electronics.stackexchange.com/a/523489/233816](https://electronics.stackexchange.com/a/523489/233816)]
-
-
-
-
-
-## Thermometer to Binary encoder
-
-![image-20241214152349217](ad-da/image-20241214152349217.png)
+Even-order distortion products cancel in perfectly symmetrical circuits; But phase and amplitude imbalances lead to finite $HD_2$ in practice
 
 
 
 ## Pipeline ADC
+
+> Vishal Saxena, "Pipelined ADC Design - A Tutorial"[[https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20NonIdealities%20Slides%20v1_0.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20NonIdealities%20Slides%20v1_0.pdf)] [[https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20Slides%20v1_2.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20Slides%20v1_2.pdf)]
+>
+> Bibhu Datta Sahoo, Analog-to-Digital Converter Design From System Architecture to Transistor-level [[http://smdpc2sd.gov.in/downloads/IGF/IGF%201/Analog%20to%20Digital%20Converter%20Design.pdf](http://smdpc2sd.gov.in/downloads/IGF/IGF%201/Analog%20to%20Digital%20Converter%20Design.pdf)] 
+>
+> Bibhu Datta Sahoo, Associate Professor, IIT, Kharagpur, [[https://youtu.be/HiIWEBAYRJY](https://youtu.be/HiIWEBAYRJY)]
 
 ![image-20241006174924686](ad-da/image-20241006174924686.png)
 
@@ -1087,14 +998,6 @@ It divides the process into several comparison stages, the number of which is pr
 > Due to the pipeline structure of both analog and digital signal path, inter-stage **residue amplification** is needed which consumes considerable power and limits high speed operation
 
 
-
-
-
-> Vishal Saxena, "Pipelined ADC Design - A Tutorial"[[https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20NonIdealities%20Slides%20v1_0.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20NonIdealities%20Slides%20v1_0.pdf)] [[https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20Slides%20v1_2.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece517/s17/Lecture%20Notes/Pipelined%20ADC%20Slides%20v1_2.pdf)]
->
-> Bibhu Datta Sahoo, Analog-to-Digital Converter Design From System Architecture to Transistor-level [[http://smdpc2sd.gov.in/downloads/IGF/IGF%201/Analog%20to%20Digital%20Converter%20Design.pdf](http://smdpc2sd.gov.in/downloads/IGF/IGF%201/Analog%20to%20Digital%20Converter%20Design.pdf)] 
->
-> Bibhu Datta Sahoo, Associate Professor, IIT, Kharagpur, [[https://youtu.be/HiIWEBAYRJY](https://youtu.be/HiIWEBAYRJY)]
 
 
 
@@ -1181,10 +1084,15 @@ $$
 
 
 
+### Thermometer to Binary encoder
+
+![image-20241214152349217](ad-da/image-20241214152349217.png)
 
 
 
 ## R-2R & C-2C
+
+> B. Razavi, "The R-2R and C-2C Ladders [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 11, no. 3, pp. 10-15, Summer 2019 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf)]
 
 
 
@@ -1198,71 +1106,17 @@ V_B = \sum_{n=0}^{N_b-1} \frac{B_n}{2^{N_b-n}}
 $$
 with thermometer code
 
-$$\begin{align}
-V_o &= V_B\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R}+\sum_{n=0}^{2^{N_t}-2}T_n\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R} \\
-&= \frac{V_B}{2^{N_t}} + \frac{\sum_{n=0}^{2^{N_t}-2}T_n}{2^{N_t}} \\
-&= \sum_{n=0}^{N_b-1} \frac{B_n}{2^{N_t+N_b-n}} + \frac{\sum_{n=0}^{2^{N_t}-2}T_n}{2^{N_t}}
-\end{align}$$
-
-
-
-
-> B. Razavi, "The R-2R and C-2C Ladders [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 11, no. 3, pp. 10-15, Summer 2019 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf)]
+$$
+V_o = V_B\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R}+\sum_{n=0}^{2^{N_t}-2}T_n\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R} = \frac{V_B}{2^{N_t}} + \frac{\sum_{n=0}^{2^{N_t}-2}T_n}{2^{N_t}} = \sum_{n=0}^{N_b-1} \frac{B_n}{2^{N_t+N_b-n}} + \frac{\sum_{n=0}^{2^{N_t}-2}T_n}{2^{N_t}}
+$$
 
 
 
 ---
 
-
-
-4bit binary R2R DAC with Ru=1kOhm
-
-RVB equivalent R
+<span style="color:white; background-color:black">4bit binary R2R DAC with Ru=1kOhm; RVB equivalent R</span>
 
 ![image-20241214190045688](ad-da/image-20241214190045688.png)
-
----
-
-
-
-
-
-
-
-## Binary-Weighted (BW) DAC
-
-![image-20241215094852761](ad-da/image-20241215094852761.png)
-
-During $\Phi_1$, all capacitor are shorted, the net charge at $V_x$ is 0
-
-During $\Phi_2$, the charge at bottom plate of CDAC
-$$
-Q_{DAC,btm} = \sum_{i=0}^{N-1}(b_i\cdot V_R - V_x)\cdot 2^{i}C_u = C_uV_R\sum_{i=0}^{N-1}b_i2^i - (2^N-1)C_uV_x
-$$
-the charge at the internal plate of integrator
-$$
-Q_{intg} = V_x C_p + (V_x - V_o)2^NC_u
-$$
-and we know $-V_x A = V_o$ and $Q_{DAC,btm} = Q_{intg}$
-$$
-C_uV_R\sum_{i=0}^{N-1}b_i2^i - (2^N-1)C_uV_x = V_x C_p + (V_x - V_o)2^NC_u
-$$
-i.e.
-$$
-C_uV_R\sum_{i=0}^{N-1}b_i2^i = (2^N-1)C_uV_x + V_x C_p + (V_x - V_o)2^NC_u
-$$
-therefore
-$$
--V_o = \frac{2^N C_u}{\frac{(2^{N+1}-1)C_u+C_p}{A}+2^NC_u}\sum_{i=0}^{N-1}b_i\left(2^i\frac{V_R}{2^N}\right)\approx \sum_{i=0}^{N-1}b_i\left(2^i\frac{V_R}{2^N}\right)
-$$
-
----
-
-> *Midscale (MSB Transition)* often is the *largest DNL error*
-
-![image-20241215090447383](ad-da/image-20241215090447383.png)
-
-> $C_4$ and $C_1+C_2+C_3$ are independent (can't cancel out) and their variance is two largest ($16\sigma_u^2$, $15\sigma_u^2$, ), the total standard deviation is $\sqrt{16\sigma_u^2+15\sigma_u^2}=\sqrt{31}\sigma_u$
 
 
 

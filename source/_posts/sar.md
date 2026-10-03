@@ -340,11 +340,15 @@ $$
 
 ## CDAC Switching Scheme
 
+> Hariprasath, V., Jon Guerber, Seunghoon Lee and Un-Ku Moon. “Merged capacitor switching based SAR ADC with highest switching energy-efficiency.” *Electronics Letters* 46 (2010): 620-621. [[https://sci-hub.ru/10.1049/EL.2010.0706](https://sci-hub.ru/10.1049/EL.2010.0706)]
+>
 > Y. Zhu *et al*., "A 10-bit 100-MS/s Reference-Free SAR ADC in 90 nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 45, no. 6, pp. 1111-1121, June 2010 [[https://sci-hub.ru/10.1109/JSSC.2010.2048498](https://sci-hub.ru/10.1109/JSSC.2010.2048498)]
 >
 > C. -C. Liu, S. -J. Chang, G. -Y. Huang and Y. -Z. Lin, "A 10-bit 50-MS/s SAR ADC With a Monotonic Capacitor Switching Procedure," in *IEEE Journal of Solid-State Circuits*, vol. 45, no. 4, pp. 731-740, April 2010 [[https://sci-hub.ru/10.1109/JSSC.2010.2042254](https://sci-hub.ru/10.1109/JSSC.2010.2042254)]
 >
 > Rabuske, Taimur & Fernandes, Jorge. (2017). Review of SAR ADC Switching Schemes. [[https://sci-hub.ru/10.1007/978-3-319-39624-8_3](https://sci-hub.ru/10.1007/978-3-319-39624-8_3)]
+>
+> Ramkaj, A.T.; Pelgrom, M.J.M.; Steyaert, M.S.J.; Tavernier, F. *Multi-Gigahertz Nyquist Analog-to-Digital Converters: Architecture and Circuit Innovations in Deep-Scaled CMOS and FinFET Technologies*; Springer International Publishing: Berlin/Heidelberg, Germany, 2023. 
 
 
 
@@ -352,7 +356,7 @@ $$
 
 <span style="background-color:yellow">**Monotonic switching scheme**</span>:  Single-ended operation with CM varies 50%VFS
 
-<span style="background-color:yellow">**VCM-based switching scheme**</span>: No CM variation
+<span style="background-color:yellow">**VCM-based switching scheme**, a.k.a **merged capacitor switching (MCS)**</span>: No CM variation
 
 
 

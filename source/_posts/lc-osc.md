@@ -961,6 +961,24 @@ An **8-shaped (figure-8) inductor** is a specialized on-chip, high-Q component u
 
 
 
+### To Achieve Low PN
+
+![image-20261004000844136](lc-osc/image-20261004000844136.png)
+
+
+
+For example, halving $L$ while holding frequency, $Q_T$, and $F$ fixed gives:
+
+| Constraint                                                   | Result                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Constant voltage amplitude                                   | Phase noise improves by 3 dB; <span style="background-color:yellow">required current and tank power double</span> |
+| Constant drive current, current limited                      | Amplitude halves; phase noise worsens by 3 dB                |
+| Constant tank dissipation i.e. $V_0^2/R_p=\mathrm{constant}$ | Amplitude falls by $1/\sqrt2$; phase noise stays unchanged   |
+
+
+
+
+
 ## On-Chip Capacitor
 
 > A. Bonfanti, S. Levantino, C. Samori and A. L. Lacaita, "A varactor configuration minimizing the amplitude-to-phase noise conversion in VCOs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 53, no. 3, pp. 481-488, March 2006 [[https://sci-hub.ru/10.1109/TCSI.2005.858764](https://sci-hub.ru/10.1109/TCSI.2005.858764)]
@@ -1518,6 +1536,14 @@ hence $dC/dT<0$.
 
 
 
+![image-20261004004619617](lc-osc/image-20261004004619617.png)
+
+
+
+---
+
+
+
 continuous coding to eliminate glitch during code changing
 
 ![ChatGPT Image Aug 24, 2026, 08_56_43 PM](lc-osc/ChatGPT%20Image%20Aug%2024,%202026,%2008_56_43%20PM.png)
@@ -1805,3 +1831,5 @@ Manetakis, K. (2023). *Topics in LC Oscillators: Principles, phase noise, pullin
 Hajimiri, A., & Lee, T. H. (1999). The design of low noise oscillators. Norwell, MA: Kluwer
 
 Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity Oscillators*. [New York]: Kluwer Academic Publishers, 2005.
+
+Rhee, Woogeun, and Zhiping Yu. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons, 2024.

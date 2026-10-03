@@ -627,12 +627,36 @@ MMPD infers the channel response from baud-rate samples of the received data, th
 >
 > ![image-20260315215014444](eq-cdr/image-20260315215014444.png)
 
+
+
+---
+
+---
+
+> Chen, J., Gu, Y., Feng, X., Chi, R., Wu, J., & Chen, Y. (2024). Analysis of Mueller–Muller Clock and Data Recovery Circuits with a Linearized Model. *Electronics*, *13*(21), 4218 [[https://www.mdpi.com/2079-9292/13/21/4218](https://www.mdpi.com/2079-9292/13/21/4218)]
+>
+> Liu, Tao & Li, Tiejun & Lv, Fangxu & Liang, Bin & Zheng, Xuqiang & Wang, Heming & Wu, Miaomiao & Lu, Dechao & Zhao, Feng. (2021). Analysis and Modeling of Mueller-Muller Clock and Data Recovery Circuits. Electronics. [[10. 1888. 10.3390/electronics10161888.](https://www.mdpi.com/2079-9292/10/16/1888/pdf?version=1628492599)] 
+>
+> Gu, Youzhi & Feng, Xinjie & Chi, Runze & Chen, Yongzhen & Wu, Jiangfeng. (2022). Analysis of Mueller-Muller Clock and Data Recovery Circuits with a Linearized Model. [[10.21203/rs.3.rs-1817774/v1](https://www.researchgate.net/publication/362028333_Analysis_of_Mueller-Muller_Clock_and_Data_Recovery_Circuits_with_a_Linearized_Model)]
+
+
+
 ![image-20260112225032307](eq-cdr/image-20260112225032307.png)
 
 Suppose $x_k = d_{k-1}h_1 + d_k h_0 + d_{k+1}h_{-1}$ and $x_{k-1} = d_{k-2}h_1 + d_{k-1} h_0 + d_{k}h_{-1}$
 $$
 \color{red}E\{z_k\} = \frac{1}{2} E\{|d_{k-1}|^2h_1\} - \frac{1}{2} E\{|d_{k}|^2h_{-1}\} = \frac{1}{2}(h_1 - h_{-1})
 $$
+
+---
+
+---
+
+> Rhee, Woogeun, and Zhiping Yu. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons, 2024.
+
+![image-20261003225432249](eq-cdr/image-20261003225432249.png)
+
+
 
 
 

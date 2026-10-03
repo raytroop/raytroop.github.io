@@ -107,6 +107,8 @@ Frequency offset minimization is required to limit latency (the depth of elastic
 > A. C. Singer, N. R. Shanbhag and H. -m. Bae, "Electronic dispersion compensation," in *IEEE Signal Processing Magazine*, vol. 25, no. 6, pp. 110-130, November 2008 [[https://shanbhag.ece.illinois.edu/publications/singer-spm-2008.pdf](https://shanbhag.ece.illinois.edu/publications/singer-spm-2008.pdf)]
 >
 > —, ISSCC2007 T10: Fundamentals of Electronic Dispersion Compensation (EDC)
+>
+> R. Barrie, M. Yang, H. Shakiba, A. Chan Carusone, “Post-FEC BER Analysis of 200 Gb/s Wireline Systems using an FPGA Platform”, *DesignCon*, Santa Clara, California, January 2025. [[http://www.eecg.utoronto.ca/~tcc/Barrie_DC25.pdf](http://www.eecg.utoronto.ca/~tcc/Barrie_DC25.pdf)]
 
 ![image-20260401215526089](phy/image-20260401215526089.png)
 
@@ -507,6 +509,18 @@ Partial Response Signaling (PRS) and Maximum Likelihood Sequence Detection (MLSD
 
 ![image-20260528202037244](phy/image-20260528202037244.png)
 
+A general partial-response target is
+
+$$
+h(D) = 1 + h_1 D + h_2 D^2 + \dots + h_L D^L
+$$
+
+Precursor terms like $h_{-1}D^{-1}$ can also appear, but they only shift the time reference.
+
+- The classic integer-coefficient "partial response classes" include $1+D$ (duobinary), $1-D$ (dicode), $1-D^2$ (PR4), and EPR4 $=(1-D)(1+D)^2$
+- $1+\alpha D$ has two taps: the main cursor (1) and one post-cursor ($\alpha$). So people often call it a "**2-tap MLSD**"
+
+
 
 ## Flit (flow control unit)
 
@@ -529,6 +543,8 @@ The FEC in Flit Mode can correct up to a single 16-bit burst error in any given 
 > —, Broadcom, DesignCon 2026 *What is FEC and how do I use it in 200G/400G/800G/1.6T Ethernet?*
 >
 > Leslie A. Rusch , GEL7114 Digital Communications, Module 5 - Error Correcting Codes [[https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module5_en_1by1_1.pdf](https://wcours.gel.ulaval.ca/GEL7114/assets/pdfs/Module5_en_1by1_1.pdf)]
+>
+> R. Barrie, M. Yang, H. Shakiba, A. Chan Carusone, “Post-FEC BER Analysis of 200 Gb/s Wireline Systems using an FPGA Platform”, *DesignCon*, Santa Clara, California, January 2025. [[http://www.eecg.utoronto.ca/~tcc/Barrie_DC25.pdf](http://www.eecg.utoronto.ca/~tcc/Barrie_DC25.pdf)]
 
 
 ```

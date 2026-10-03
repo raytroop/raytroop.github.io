@@ -1882,3 +1882,5 @@ Hegazi, Emad, Asad Abidi, and Jacob Rael. *The Designer's Guide to High-purity O
 Bae, Woorham, and Deog-Kyoon Jeong. *Analysis and Design of CMOS Clocking Circuits for Low Phase Noise*. Institution of Engineering and Technology, 2020.
 
 M. Babaie, M. Shahmohammadi, R. B. Staszewski, (2019) "RF CMOS Oscillators for Modern Wireless Applications" River Publishers [[https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf](https://www.riverpublishers.com/pdf/ebook/RP_E9788793609488.pdf)]
+
+Rhee, Woogeun, and Zhiping Yu. *Phase-Locked Loops: System Perspectives and Circuit Design Aspects*. John Wiley & Sons, 2024.

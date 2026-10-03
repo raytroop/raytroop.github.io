@@ -230,6 +230,8 @@ R. Adler, "A Study of Locking Phenomena in Oscillators," in *Proceedings of the 
 
 B. Razavi, "A study of injection locking and pulling in oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 39, no. 9, pp. 1415-1424, Sept. 2004 [[https://www.seas.ucla.edu/brweb/papers/Journals/RSep04.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/RSep04.pdf)]
 
+A. A. Hafez and C. -K. K. Yang, "Analysis and Design of Superharmonic Injection-Locked Multipath Ring Oscillators," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 60, no. 7, pp. 1712-1725, July 2013 [[https://sci-hub.ru/10.1109/TCSI.2012.2230591](https://sci-hub.ru/10.1109/TCSI.2012.2230591)]
+
 ---
 
 Bae, Woorham, and Deog-Kyoon Jeong. *Analysis and Design of CMOS Clocking Circuits for Low Phase Noise*. Institution of Engineering and Technology, 2020

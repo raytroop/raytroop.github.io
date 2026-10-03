@@ -149,7 +149,9 @@ Extensive work on DFEs has produced a multitude of architectures, which can be b
 
 ## reference
 
-T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)] 
+T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)]
+
+S. Jang, J. Lee, Y. Choi, D. Kim and G. Kim, "Recent Advances in Ultrahigh-Speed Wireline Receivers With ADC-DSP-Based Equalizers," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 4, pp. 290-304, 2024 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10767763](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10767763)]
 
 Miguel Gandara, MediaTek. CICC 2025 Circuit Insights: Basics of Wireline Receiver Circuits [[https://youtu.be/X4JTuh2Gdzg](https://youtu.be/X4JTuh2Gdzg)]
 

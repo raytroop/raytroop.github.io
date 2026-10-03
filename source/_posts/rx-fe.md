@@ -381,6 +381,8 @@ disp(c');
 
 ![](rx-fe/image-20260925175504622.png)
 
+**“Inverse of 36 dB LR Channel Response”** shows the **impulse-response taps of the inverse filter/equalizer**. 
+
 **CTLE1**: $1-\alpha z^{-1}$,  without pole
 
 **CTLE2**: $1-\alpha z^{-1} + c_1 (\beta z^{-2} - \beta^2 z^{-3} + \dots) = 1 - \alpha z^{-1} +  \frac{c_1\beta z^{-2}}{1 + \beta z^{-1}}$, with pole $-\beta$
@@ -392,6 +394,27 @@ disp(c');
 ![image-20260925184603380](rx-fe/image-20260925184603380.png)
 
 ![image-20260925184646942](rx-fe/image-20260925184646942.png)
+
+**The Summer response** is also treated as an **impulse-response tap sequence**
+
+**when the starting sequence is the channel’s pulse response**, convolving it with the equalizer’s impulse-response taps gives the **equalized pulse-response taps**:
+
+$$
+p_{\text{out}}[n]=p_{\text{channel}}[n]*h_{\text{EQ}}[n]
+$$
+
+The distinction is whether the transmitted pulse is already included:
+
+$$
+\underbrace{p_{\text{TX}}*h_{\text{channel}}}_{p_{\text{channel}}} *h_{\text{EQ}} =p_{\text{out}}
+$$
+
+So:
+
+- **Pulse response ∗ impulse response → pulse response.**
+- **Impulse response ∗ impulse response → combined impulse response.**
+
+If CTLE_HF and Summer are both represented by their block impulse responses, their convolution gives the **combined impulse response**. Including the transmitted pulse gives the pulse response.
 
 
 

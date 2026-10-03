@@ -410,7 +410,9 @@ $$
 >
 > —. "Power Efficient System and A/D Converter Design for Ultra-Wideband Radio" [[http://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-71.pdf](http://www2.eecs.berkeley.edu/Pubs/TechRpts/2006/EECS-2006-71.pdf)]
 >
-> —. "Asynchronous SAR ADC: Past, Present and Beyond" [[https://viterbi-web.usc.edu/~swchen/index_files/async_sar_tutorial_chen_final.pdf](https://viterbi-web.usc.edu/~swchen/index_files/async_sar_tutorial_chen_final.pdf)]
+> —. "Asynchronous SAR ADC: Past, Present and Beyond"
+>
+> H. Karrari, P. Andreani and S. Tan, "Asynchronous vs Synchronous SAR ADCs – Performance Beyond Nominal Speed," *2024 19th Conference on Ph.D Research in Microelectronics and Electronics (PRIME)*, Larnaca, Cyprus, 2024, pp. 1-4, doi: 10.1109/PRIME61930.2024.10559690.
 
 The comparator itself trigger the next bit-conversion cycle as soon as the present bit decision has been taken
 
@@ -467,6 +469,16 @@ The transition point of this NAND gate is **skewed** to eliminate *metastability
 
 ![image-20261002225950216](sar/image-20261002225950216.png)
 
+<span style="background-color:yellow">**conventional binary SAR ADC**</span>
+
+- After each DAC switching, the effective input range is **reduced by a factor of 2**
+
+Kuttner ISSCC'02:  <span style="background-color:yellow">**non-binary SAR ADC**</span>
+
+-  the input range is **reduced by a factor smaller than 2 per each bit cycle**
+
+Liu ISSCC'10:  <span style="background-color:yellow">**binary-scaled CDAC**</span>
+
 
 
 ![image-20241221140840026](sar/image-20241221140840026.png)
@@ -512,8 +524,10 @@ where $b_j$ is *1-bit residue without redundancy* and $\tilde{b_j}$ is *redundan
 
 **final digital output** of $N$-bit $M$-step ADC
 $$
-\boxed{\color{blue}D_{out} = s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1)\cdot s(1)}
+\boxed{\color{blue}D_{out} = s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1)\cdot \text{1LSB}}
 $$
+
+where $b[M-1]\dots b[0]$ and $s(M)\dots s(1)$
 
 | i        | M      | M-1          | M-2          | ...       | 2          | 1          | 0      |
 | -------- | ------ | ------------ | ------------ | --------- | ---------- | ---------- | ------ |
@@ -521,6 +535,22 @@ $$
 | **s[i]** | *s(M)* | ***s(M-1)*** | ***s(M-2)*** | ***...*** | ***s(2)*** | ***s(1)*** |        |
 
 ![image-20250909211030234](sar/image-20250909211030234.png)
+
+
+
+---
+
+![image-20261003150647820](sar/image-20261003150647820.png)
+
+$$\begin{align}
+D_\text{out} &= 8 + (2B_1-1)\times3.5+ (2B_2-1)\times2+ (2B_3-1)\times1+ (2B_4-1)\times0.5+ (B_5-1)\times1 \\
+&= 7B_1+4B_2+2B_3+1B_4+1B_5
+\end{align}$$
+
+
+![Kuttner_nonbin.drawio](sar/Kuttner_nonbin.drawio.svg)
+
+
 
 
 
@@ -536,22 +566,39 @@ D_{out} &= s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1) \\
 
 
 
-<span style="color:white; background-color:black">**differential ADC**</span>
 
-| i        | M-1                                                | M-2       | ...       | 2       | 1       | 0      |
-| -------- | -------------------------------------------------- | --------- | --------- | ------- | ------- | ------ |
-| **b[i]** | *b[M-1]*                                           | *b[M-2]*  | ***...*** | *b[2]*  | *b[1]*  | *b[0]* |
-| **w[i]** | <span style="background-color:yellow">**0**</span> | *w[M-2]*  | ***...*** | *w[2]*  | *w[1]*  | *w[0]* |
-| **W[i]** | *2w[M-2]*                                          | *2w[M-3]* | ***...*** | 2*w[1]* | *2w[0]* | *w[0]* |
+
+<span style="color:white; background-color:black">**Differential ADC**</span>: $s(M) = 0$, i.e. $w_{M-1} = 0$ (using $w_i = s(i+1)$)
+
+| $i$       | $M-1$                                              | $M-2$      | $\cdots$ | $2$    | $1$    | $0$                                                    |
+| --------- | -------------------------------------------------- | ---------- | -------- | ------ | ------ | ------------------------------------------------------ |
+| **$b_i$** | $b_{M-1}$                                          | $b_{M-2}$  | $\cdots$ | $b_2$  | $b_1$  | $b_0$                                                  |
+| **$w_i$** | <span style="background-color:yellow">**0**</span> | $w_{M-2}$  | $\cdots$ | $w_2$  | $w_1$  | $w_0$                                                  |
+| **$W_i$** | $2w_{M-2}$                                         | $2w_{M-3}$ | $\cdots$ | $2w_1$ | $2w_0$ | <span style="background-color:yellow">**1 LSB**</span> |
 
 $$\begin{align}
-D_{out} &= \sum_{i=1}^{M-1}(2b_i -1)w_{i-1} + (b_0-1)w_0 \\
-&= \sum_{i=1}^{M-1}b_i\cdot 2w_{i-1} + b_0\cdot w_0 -\sum_{i=1}^{M-1}w_{i-1} -w_0 \\
-&= \left[\sum_{i=1}^{M-1}b_i\cdot 2w_{i-1} + b_0\cdot w_0\right] - \frac{1}{2}\left[\sum_{i=1}^{M-1}2w_{i-1} +w_0 + w_0\right] \\
-&= \boxed{\color{blue}\sum_{i=0}^{M-1}b_i\cdot W_i  - \frac{1}{2}\left[\sum_{i=0}^{M-1}W_i + W_0\right]}
+D_{out} &= \sum_{i=1}^{M-1}\left(2b_i-1\right)w_{i-1} + \left(b_0-1\right)\cdot 1\,\text{LSB} \\
+&= \sum_{i=1}^{M-1}b_i\cdot 2w_{i-1} + b_0\cdot 1\,\text{LSB} - \sum_{i=1}^{M-1}w_{i-1} - 1\,\text{LSB} \\
+&= \left[\sum_{i=1}^{M-1}b_i\cdot 2w_{i-1} + b_0\cdot 1\,\text{LSB}\right] - \frac{1}{2}\left[\sum_{i=1}^{M-1}2w_{i-1} + 1\,\text{LSB} + 1\,\text{LSB}\right] \\
+&= \boxed{\color{blue}\sum_{i=0}^{M-1}b_i\cdot W_i - \frac{1}{2}\left[\sum_{i=0}^{M-1}W_i + W_0\right]}
 \end{align}$$
 
-where $W_i = 2w_{i-1}$ for $i\in [M-1,1]$ and $W_0 = w_0$ are **equivalent weight**
+The ADC **equivalent weight** $W_i$
+
+$$
+\begin{cases}
+W_0 = 1\,\text{LSB} \\
+W_i = 2w_{i-1}, & \text{for } i \in [1, M-1]
+\end{cases}
+$$
+
+**Note:** when $\sum_{i=0}^{M-1} W_i = (2^N - 1)$ LSB, the constant term simplifies to $\frac{1}{2}\left[\sum_{i=0}^{M-1} W_i + W_0\right] = 2^{N-1}$ LSB, so
+
+$$
+D_{out} = \sum_{i=0}^{M-1} b_i\cdot W_i - 2^{N-1}
+$$
+
+which is a signed output in $\left[-2^{N-1},\ 2^{N-1}-1\right]$ LSB.
 
 
 

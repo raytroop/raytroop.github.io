@@ -54,7 +54,7 @@ Current mode drivers become power competitive at very high data rates
 
 
 
-## Data Serialization
+## Serialization Approaches
 
 > Z. Toprak-Deniz et al., "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.st/10.1109/JSSC.2019.2939081](https://sci-hub.st/10.1109/JSSC.2019.2939081)]
 
@@ -66,21 +66,52 @@ Current mode drivers become power competitive at very high data rates
 
 ![tripstack4to1MUX.drawio](tx/tripstack4to1MUX.drawio.svg)
 
-***mux timing***
+<span style="color:white; background-color:black">**2-1 mux timing**</span>
+
+![mux2-1_timing.drawio](tx/mux2-1_timing.drawio.svg)
+
+The circuit alone does not fix the bit order. It depends on which clock edge arrives first:
+
+- **First edge rising:** the a-flop captures first, and the output is a₀, b₀, a₁, b₁, …
+- **First edge falling:** the b-flop captures first, and the output is b₀, a₀, b₁, a₁, …
 
 
 
-![mux2-1.drawio](tx/mux2-1.drawio.svg)
+![mux2-1_serializer_timing.drawio](tx/mux2-1_serializer_timing.drawio.svg)
+
+The inverter chain sets the hold margin at the mux
+
+- The first two inverters delay the flop clocks behind the select, so each flop updates only after the mux has switched away from it
+
+- The third inverter mainly provides the inverted clock for the b-flop, and it adds a little extra hold margin to that path
+
+Because t_su + t_hd ≈ T/2, every bit of delay added for hold comes out of setup. The chain should therefore be just long enough to guarantee **positive hold margin** across PVT.
 
 
 
-***divider latch timing***
+<span style="color:white; background-color:black">**divider latch timing**</span>
 
-![div2-latch.drawio](tx/div2-latch.drawio.svg)
+![div2_mux_retime_latch.drawio](tx/div2_mux_retime_latch.drawio.svg)
 
-***Two latches***
+The clk_d inverters set where the latch's transparent window sits inside di's stable window:
 
-![two-latch.drawio](tx/two-latch.drawio.svg)
+- d_div is the delay from the clk edge to di changing: t_inv + t_cq,FF + t_mux,sel.
+- d_c is the delay of the clk_d path: 2·t_inv, plus the latch's internal delay.
+
+From those:
+
+t_hd ≈ d_div <span style="background-color:yellow">− d_c</span>
+ t_su ≈ T/2 <span style="background-color:yellow">+d_c</span> − d_div
+
+The sum is fixed at T/2, so **adding clk_d delay buys setup by spending hold, and removing it does the reverse**. The window is centred (t_su = t_hd = T/4) when d_c ≈ d_div − T/4
+
+
+
+<span style="color:white; background-color:black">**Two latches**</span>
+
+![two_latch_half_period_shift_1.drawio](tx/two_latch_half_period_shift_1.drawio.svg)
+
+
 
 
 
@@ -88,7 +119,17 @@ Current mode drivers become power competitive at very high data rates
 
 > C. Menolfi *et al*., "6.2 A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018, pp. 104-106 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310205](https://sci-hub.ru/10.1109/ISSCC.2018.8310205)]
 >
-> T. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
+> Z. Toprak-Deniz *et al*., "6.6 A 128Gb/s 1.3pJ/b PAM-4 Transmitter with Reconfigurable 3-Tap FFE in 14nm CMOS," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 122-124 [[https://sci-hub.ru/10.1109/ISSCC.2019.8662479](https://sci-hub.ru/10.1109/ISSCC.2019.8662479)]
+>
+> —, "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2939081](https://sci-hub.ru/10.1109/JSSC.2019.2939081)]
+>
+> T. O. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
+>
+> —, "A 72-GS/s, 8-Bit DAC-Based Wireline Transmitter in 4-nm FinFET CMOS for 200+ Gb/s Serial Links," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 4, pp. 1074-1086, April 2023, doi: 10.1109/JSSC.2022.3228632
+
+
+
+
 
 a.k.a <span style="background-color:yellow">**Phase Aligner**</span>, <span style="background-color:yellow">**Tap Delay Generator**</span>
 
@@ -96,7 +137,57 @@ a.k.a <span style="background-color:yellow">**Phase Aligner**</span>, <span styl
 
 
 
+
+
+---
+
+
+
 ![image-20261001151432789](tx/image-20261001151432789.png)
+
+
+
+![quarter_rate_1ui_stagger.drawio](tx/quarter_rate_1ui_stagger.drawio.svg)
+
+**D4'<0>** is launched by the **C4 0°** rising edge, **<1> by 90°**, **<2> by 180°** and **<3> by 270°**
+
+**Why the chains have 2, 3, 3 and 4 latches:** 
+
+- each latch passes data on to the next latch to open. That hop can only be **1 UI (a 90° step)** or **2 UI (a 180° step)**
+- the **first 0°** latch opens at **2 UI**, and the outputs must launch at **4, 5, 6 and 7 UI.** 
+  - one hop for <0> (**+2**) 
+  - two for <1> (**+1 +2**)
+  - two for <2> (**+2 +2**)
+  - three for <3> (**+1 +2 +2**)
+
+These match the slide's chains, which are the shortest possible for those targets
+
+The two hop types also have different margins, which ties back to the earlier figures:
+
+- **90° hop:** the input changes in the middle of the next latch's hold phase, so setup and hold are both about 1 UI.
+- **180° hop:** this is the master–slave case. The input changes right after the next latch closes, so hold margin is only clock-to-Q, while setup gets 2 UI
+
+![image-20261004153931893](tx/image-20261004153931893.png)
+
+
+
+---
+
+
+
+![image-20261004170946701](tx/image-20261004170946701.png)
+
+a **tap delay generator** retime the incoming data and provide **1-UI-staggered quarter-rate data (D0-D3)**
+
+![image-20261004184022619](tx/image-20261004184022619.png)
+
+![tap_delay_gen_fig9-Fig. 9 as drawn (7 latches).drawio](tx/tap_delay_gen_fig9-Fig.%209%20as%20drawn%20(7%20latches).drawio.svg)
+
+Fig 9. works for D0–D2, but the D3 path races. So Fig. 9 is probably simplified
+
+**Fix:** add one C4_Q latch to the D3 path, giving C4_I → C4_Q → C4_QB. 
+
+![tap_delay_gen_fig9-D3 path fixed (8 latches).drawio](tx/tap_delay_gen_fig9-D3%20path%20fixed%20(8%20latches).drawio.svg)
 
 
 
@@ -114,36 +205,6 @@ a.k.a <span style="background-color:yellow">**Phase Aligner**</span>, <span styl
 
 
 
-## Synchronized divider
-
-> M. A. Kossel *et al*., "8.3 An 8b DAC-Based SST TX Using Metal Gate Resistors with 1.4pJ/b Efficiency at 112Gb/s PAM-4 and 8-Tap FFE in 7nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 130-132 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784)]
->
-> Michael Perrott August 12, 2008, Short Course On Phase-Locked Loops and Their Applications Day 2, PM Lecture Basic Building Blocks (Part II) High Speed Frequency Dividers, Phase Detectors, Charge Pumps, and Loop Filter Design [[https://cppsim.org/PLL_Lectures/day2_pm.pdf](https://cppsim.org/PLL_Lectures/day2_pm.pdf)]
-
-![image-20261001082434120](tx/image-20261001082434120.png)
-
-The lower speed sub-rate clocks are then obtained using a **synchronous divider** based on conventional master-slave flip-flops
-
-![syndiv8](tx/syndiv8.svg)
-
-![syndiv8_wv.drawio](tx/syndiv8_wv.drawio.svg)
-
-
-
-The preceding synchronous divider is equivalent to the synchronous implementation described below
-
-![image-20261001085428000](tx/image-20261001085428000.png)
-
-Each stage's toggle decision is computed from **the states of all previous stages**, but its timing comes only from the common input clock
-
-
-
-## Single-Ended-to-Differential (S2D)
-
-> T. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
-
-![image-20261001151302086](tx/image-20261001151302086.png)
-
 
 
 
@@ -157,6 +218,8 @@ Each stage's toggle decision is computed from **the states of all previous stage
 **Quarter-Rate:** A clocking or sampling architecture where the internal circuit clock runs at one-fourth (1/4) of the total serial data rate
 
 **Quadrature:** A relationship between two signals or clocks that have a **90<sup>o</sup> phase difference** (a quarter of a complete wave cycle), commonly used for I/Q modulation, directional tracking in encoders, or generating multi-phase clocks
+
+<span style="background-color:yellow">**quadrature** **quarter-rate** (C4)</span>
 
 ![image-20261001154407300](tx/image-20261001154407300.png)
 
@@ -233,6 +296,30 @@ The bit order is preserved; each bit is selected later.
 ![image-20261001145947746](tx/image-20261001145947746.png)
 
 The **retimer** between the final stage of the MUX and the output driver is used to r**educe the data jitter** due to the bandwidth limitation of the selection circuit in the 2 : 1 MUX cell and duty cycle distortion of the half-rate clock driving that stage
+
+
+
+## Synchronized divider
+
+> M. A. Kossel *et al*., "8.3 An 8b DAC-Based SST TX Using Metal Gate Resistors with 1.4pJ/b Efficiency at 112Gb/s PAM-4 and 8-Tap FFE in 7nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 130-132 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784)]
+>
+> Michael Perrott August 12, 2008, Short Course On Phase-Locked Loops and Their Applications Day 2, PM Lecture Basic Building Blocks (Part II) High Speed Frequency Dividers, Phase Detectors, Charge Pumps, and Loop Filter Design [[https://cppsim.org/PLL_Lectures/day2_pm.pdf](https://cppsim.org/PLL_Lectures/day2_pm.pdf)]
+
+![image-20261001082434120](tx/image-20261001082434120.png)
+
+The lower speed sub-rate clocks are then obtained using a **synchronous divider** based on conventional master-slave flip-flops
+
+![syndiv8](tx/syndiv8.svg)
+
+![syndiv8_wv.drawio](tx/syndiv8_wv.drawio.svg)
+
+
+
+The preceding synchronous divider is equivalent to the synchronous implementation described below
+
+![image-20261001085428000](tx/image-20261001085428000.png)
+
+Each stage's toggle decision is computed from **the states of all previous stages**, but its timing comes only from the common input clock
 
 
 
@@ -453,19 +540,6 @@ Same with differential ended termination driver.
 
 
 
-## Peak power constraint of TX FIR
-
-> Kevin Zheng , Circuit Insights @ ISSCC2025: Circuits for Wireline Communications [[https://youtu.be/8NZl81Dj45M&t=829](https://youtu.be/8NZl81Dj45M&t=829)]
-
-![image-20250514215647905](tx/image-20250514215647905.png)
-
-Due to circuit limitation, circuit cannot have arbitrarily large voltage on the output, i.e. a *limited maximum swing*. In order to create the high frequency shape, the best we can do is *lower DC gain* (low frequency gain < 1)
-
-- FIR is not increasing the amplitude on the edges
-- FIR is reducing the inner eye diagram
-
-The maximum swing stays the same, $\sum_i |c_i|=1$
-
 
 
 
@@ -482,7 +556,26 @@ The maximum swing stays the same, $\sum_i |c_i|=1$
 
 ![image-20251217231902887](tx/image-20251217231902887.png)
 
+## Single-Ended-to-Differential (S2D)
 
+> T. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
+
+![image-20261001151302086](tx/image-20261001151302086.png)
+
+
+
+## Peak power constraint of TX FIR
+
+> Kevin Zheng , Circuit Insights @ ISSCC2025: Circuits for Wireline Communications [[https://youtu.be/8NZl81Dj45M&t=829](https://youtu.be/8NZl81Dj45M&t=829)]
+
+![image-20250514215647905](tx/image-20250514215647905.png)
+
+Due to circuit limitation, circuit cannot have arbitrarily large voltage on the output, i.e. a *limited maximum swing*. In order to create the high frequency shape, the best we can do is *lower DC gain* (low frequency gain < 1)
+
+- FIR is not increasing the amplitude on the edges
+- FIR is reducing the inner eye diagram
+
+The maximum swing stays the same, $\sum_i |c_i|=1$
 
 
 

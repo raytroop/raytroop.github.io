@@ -569,7 +569,7 @@ D_\text{out} &= 8 + (2B_1-1)\times3.5+ (2B_2-1)\times2+ (2B_3-1)\times1+ (2B_4-1
 
 
 
-**$N$-bit binary weighted algorithm**</span>
+<span style="color:white; background-color:black">**$N$-bit binary weighted algorithm**</span>
 
 with $N=M$ and $s(i)=2^{i-1}$, where $i\in \{N, N-1,...,2,1  \}$
 

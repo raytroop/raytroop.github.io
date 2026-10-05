@@ -376,7 +376,7 @@ The comparator common mode is **VCM + VREF/2 − Vin,cm**
 
 Each array has $8C$ in total ($4C + 2C + C + C$, counting the dummy unit cap). During sampling, the top plates sit at $V_{CM}$ and the bottom plates sit at the input.
 
-For the top (P) array, the charge is $8C(V_{CM} − V_{INP}$). Then $4C$ is switched to $V_{REF}$ and $4_C$ to ground. Charge conservation gives:
+For the top (P) array, the charge is $8C(V_{CM} − V_{INP}$). Then $4C$ is switched to $V_{REF}$ and $4C$ to ground. Charge conservation gives:
 
 $$
 8C\,V_x - 4C\,V_{REF} = 8C\,(V_{CM} - V_{INP}) \;\Rightarrow\; V_x = V_{CM} - V_{INP} + \tfrac{V_{REF}}{2}
@@ -387,8 +387,6 @@ For the bottom (N) array, the $4C$ goes to ground and the remaining $4C (2C + C 
 $$
 V_y = V_{CM} - V_{INN} + \tfrac{V_{REF}}{2}
 $$
-
-Your expression $V_{CM} + V_{REF} − V_{INN} − V_{REF}/2$ is the same thing; it just simplifies to this.
 
 **Common mode**
 $$

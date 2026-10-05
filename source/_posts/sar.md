@@ -222,8 +222,9 @@ $$
 
 
 
+### CDAC Energy calculation
 
-### CDAC Energy Consumption
+> Rabuske, Taimur & Fernandes, Jorge. (2016). "*Appendix: Voltage and Energy in CR ADCs*", Charge-Sharing SAR ADCs for Low-Voltage Low-Power Applications. 10.1007/978-3-319-39624-8. 
 
 
 $$
@@ -338,7 +339,7 @@ $$
 
 
 
-## CDAC Switching Scheme
+## CR Switching Schemes
 
 > Hariprasath, V., Jon Guerber, Seunghoon Lee and Un-Ku Moon. “Merged capacitor switching based SAR ADC with highest switching energy-efficiency.” *Electronics Letters* 46 (2010): 620-621. [[https://sci-hub.ru/10.1049/EL.2010.0706](https://sci-hub.ru/10.1049/EL.2010.0706)]
 >
@@ -346,30 +347,110 @@ $$
 >
 > C. -C. Liu, S. -J. Chang, G. -Y. Huang and Y. -Z. Lin, "A 10-bit 50-MS/s SAR ADC With a Monotonic Capacitor Switching Procedure," in *IEEE Journal of Solid-State Circuits*, vol. 45, no. 4, pp. 731-740, April 2010 [[https://sci-hub.ru/10.1109/JSSC.2010.2042254](https://sci-hub.ru/10.1109/JSSC.2010.2042254)]
 >
-> Rabuske, Taimur & Fernandes, Jorge. (2017). Review of SAR ADC Switching Schemes. [[https://sci-hub.ru/10.1007/978-3-319-39624-8_3](https://sci-hub.ru/10.1007/978-3-319-39624-8_3)]
+> Rabuske, Taimur & Fernandes, Jorge. (2017). "Review of SAR ADC Switching Schemes" Charge-Sharing SAR ADCs for Low-Voltage Low-Power Applications. 10.1007/978-3-319-39624-8. [[https://sci-hub.ru/10.1007/978-3-319-39624-8_3](https://sci-hub.ru/10.1007/978-3-319-39624-8_3)]
 >
 > Ramkaj, A.T.; Pelgrom, M.J.M.; Steyaert, M.S.J.; Tavernier, F. *Multi-Gigahertz Nyquist Analog-to-Digital Converters: Architecture and Circuit Innovations in Deep-Scaled CMOS and FinFET Technologies*; Springer International Publishing: Berlin/Heidelberg, Germany, 2023. 
 
+**Charge Redistribution (CR) Switching Schemes**:
 
+- <span style="background-color:yellow">**Conventional CR switching scheme**</span>: No CM variation
+- <span style="background-color:yellow">**Monotonic switching scheme**</span>:  Single-ended operation with CM varies 50%VFS
+
+- <span style="background-color:yellow">**VCM-based switching scheme**, a.k.a **merged capacitor switching (MCS)**</span>: No CM variation
 
 ![image-20261005083632008](sar/image-20261005083632008.png)
 
-**Charge Redistribution Switching Schemes**:
+![image-20261005172616703](sar/image-20261005172616703.png)
 
-- <span style="background-color:yellow">**Monotonic switching scheme**</span>:  Single-ended operation with CM varies 50%VFS
-- <span style="background-color:yellow">**VCM-based switching scheme**, a.k.a **merged capacitor switching (MCS)**</span>: No CM variation
+### Conventional Switching
 
+bottom-plate sampling
 
-
-
-
+![image-20261005193405609](sar/image-20261005193405609.png)
 
 
 
+The comparator common mode is **VCM + VREF/2 − Vin,cm**
 
----
+**Node voltages after the MSB switching**
 
-<span style="color:white; background-color:black">**CDAC with constant common-mode voltage**</span>
+Each array has $8C$ in total ($4C + 2C + C + C$, counting the dummy unit cap). During sampling, the top plates sit at $V_{CM}$ and the bottom plates sit at the input.
+
+For the top (P) array, the charge is $8C(V_{CM} − V_{INP}$). Then $4C$ is switched to $V_{REF}$ and $4_C$ to ground. Charge conservation gives:
+
+$$
+8C\,V_x - 4C\,V_{REF} = 8C\,(V_{CM} - V_{INP}) \;\Rightarrow\; V_x = V_{CM} - V_{INP} + \tfrac{V_{REF}}{2}
+$$
+
+For the bottom (N) array, the $4C$ goes to ground and the remaining $4C (2C + C + C)$ goes to $V_{REF}$. So you get the same form:
+
+$$
+V_y = V_{CM} - V_{INN} + \tfrac{V_{REF}}{2}
+$$
+
+Your expression $V_{CM} + V_{REF} − V_{INN} − V_{REF}/2$ is the same thing; it just simplifies to this.
+
+**Common mode**
+$$
+\frac{V_x + V_y}{2} = V_{CM} + \frac{V_{REF}}{2} - \frac{V_{INP} + V_{INN}}{2} = V_{CM} + \frac{V_{REF}}{2} - V_{in,cm}
+$$
+
+You can't drop the input common-mode term. The figure assumes the top-plate sampling voltage equals the input common mode ($V_{CM} = V_{in,cm} = 0.5$ V). Those two cancel, and the comparator common mode is simply $V_{REF}/2 = 0.5$ V. That is why both waveforms start at 0.5 V during sampling and converge back to 0.5 V.
+
+**Check against the plot**
+
+With $V_{INP} = 0.9$ V, $V_{INN} = 0.1$ V, $V_{CM} = 0.5$ V, and $V_{REF} = 1$ V:
+
+- <span style="color:blue">$V_x = 0.5 − 0.9 + 0.5 = 0.1$ V (blue trace)</span>
+- <span style="color:orange">$V_y = 0.5 − 0.1 + 0.5 = 0.9$ V (orange trace)</span>
+
+![image-20261005193428201](sar/image-20261005193428201.png)
+
+**Generalizing equation with <span style="background-color:yellow">trial-and-keep</span>**
+$$\begin{align}
+V_x^{(k)} &= V_{CM} - V_{INP} + \textcolor{red}{\sum_{i=1}^{k} b_i\,\Delta V_i} \\
+V_y^{(k)} &= V_{CM} - V_{INN} + V_{REF} - \textcolor{red}{\sum_{i=1}^{k} b_i\,\Delta V_i}
+\qquad \qquad \Delta V_i = \frac{V_{REF}}{2^i}
+\end{align}$$
+
+where
+$$
+b_k = \begin{cases} 1 & \text{if } V_y^{(k)} \ge V_x^{(k)} \color{red}\text{ with trial } b_k = 1 \\ 0 & \text{otherwise (\textcolor{red}{trial reverted})} \end{cases}
+$$
+During bit cycling, $V_y - V_x \to 0$, i.e.
+$$
+2 \textcolor{red}{\sum b_i   \Delta V_i } - \textcolor{blue}{V_{REF}}\qquad \Longrightarrow \qquad V_{INP} - V_{INN}
+$$
+After N = 8 bits:
+$$
+V_{INP} - V_{INN} = V_{REF}\left(2\sum_{i=1}^{8} b_i\,2^{-i} - 1\right) + \varepsilon,
+\qquad 0 \le \varepsilon < \frac{2V_{REF}}{2^8} = \text{1 LSB}
+$$
+For the complete 8-bit conversion shown in Fig. 3.3
+$$
+2\times (\frac{1}{2}\times1+\frac{1}{4}\times1+\frac{1}{8}\times1+\frac{1}{16}\times0+\frac{1}{32}\times0+\frac{1}{64}\times1+\frac{1}{128}\times1+\frac{1}{256}\times0)-1 = \frac{204}{256}
+$$
+i.e.
+$$
+\left|\frac{204}{256} - 0.8\right| \qquad \lt \qquad  \mathrm{1LSB}
+$$
+
+
+### Monotonic Switching
+
+
+
+
+
+### V<sub>CM</sub>-Based Capacitor Switching
+
+
+
+
+
+
+
+### CDAC with constant common-mode voltage
 
 ![cdac_vcm_retain.drawio](sar/cdac_vcm_retain.drawio.svg)
 

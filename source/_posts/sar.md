@@ -1,5 +1,5 @@
 ---
-title: Successive-approximation ADC
+title: Successive Approximation (SAR) ADC
 date: 2024-08-20 21:06:29
 tags:
 categories:
@@ -123,7 +123,7 @@ That is, it does not change the sign
 
 
 
-## CDAC
+## Capacitor DAC (CDAC)
 
 The *charge redistribution capacitor network* is used to sample the input signal and serves as a
 digital-to-analog converter (DAC) for creating and subtracting reference voltages
@@ -352,11 +352,16 @@ $$
 
 
 
- ![image-20261002001026339](sar/image-20261002001026339.png)
+![image-20261005083632008](sar/image-20261005083632008.png)
 
-<span style="background-color:yellow">**Monotonic switching scheme**</span>:  Single-ended operation with CM varies 50%VFS
+**Charge Redistribution Switching Schemes**:
 
-<span style="background-color:yellow">**VCM-based switching scheme**, a.k.a **merged capacitor switching (MCS)**</span>: No CM variation
+- <span style="background-color:yellow">**Monotonic switching scheme**</span>:  Single-ended operation with CM varies 50%VFS
+- <span style="background-color:yellow">**VCM-based switching scheme**, a.k.a **merged capacitor switching (MCS)**</span>: No CM variation
+
+
+
+
 
 
 
@@ -564,7 +569,7 @@ D_\text{out} &= 8 + (2B_1-1)\times3.5+ (2B_2-1)\times2+ (2B_3-1)\times1+ (2B_4-1
 
 
 
-<span style="color:white; background-color:black">**$N$-bit binary weighted algorithm**</span>
+**$N$-bit binary weighted algorithm**</span>
 
 with $N=M$ and $s(i)=2^{i-1}$, where $i\in \{N, N-1,...,2,1  \}$
 
@@ -779,6 +784,71 @@ plt.show()
 ```
 
 
+
+
+
+## Charge-Sharing SAR ADC
+
+> J. Craninckx and G. van der Plas, "A 65fJ/Conversion-Step 0-to-50MS/s 0-to-0.7mW 9b Charge-Sharing SAR ADC in 90nm Digital CMOS," *2007 IEEE International Solid-State Circuits Conference. Digest of Technical Papers*, San Francisco, CA, USA, 2007, pp. 246-600 [[https://sci-hub.jp/10.1109/ISSCC.2007.373386](https://sci-hub.jp/10.1109/ISSCC.2007.373386)]
+>
+> V. Giannini, P. Nuzzo, V. Chironi, A. Baschirotto, G. Van der Plas and J. Craninckx, "An 820μW 9b 40MS/s Noise-Tolerant Dynamic-SAR ADC in 90nm Digital CMOS," *2008 IEEE International Solid-State Circuits Conference - Digest of Technical Papers*, San Francisco, CA, USA, 2008, pp. 238-610 [[https://sci-hub.jp/10.1109/ISSCC.2008.4523145](https://sci-hub.jp/10.1109/ISSCC.2008.4523145)]
+>
+> Rabuske, Taimur & Fernandes, Jorge. (2016). Charge-Sharing SAR ADCs for Low-Voltage Low-Power Applications. 10.1007/978-3-319-39624-8.
+
+<span style="background-color:yellow">**Charge-based reference signal**</span>
+
+- The trick is to **analyze it in the charge domain** rather than the voltage domain
+
+![image-20261005134737378](sar/image-20261005134737378.png)
+
+
+
+<span style="color:white; background-color:black">**polarity switching in charge-sharing SAR capacitor arrays**</span>
+
+![charge_sharing_dac_add_subtract](sar/charge_sharing_dac_add_subtract.svg)
+
+Each DAC capacitor C_i has two plates, A and B, and typically six switches:
+
+- **Two precharge switches:** A to Vref and B to GND, closed during the sampling phase.
+- **Two "straight" switches:** A to P and B to N.
+- **Two "crossed" switches:** A to N and B to P
+
+![image-20261005151013735](sar/image-20261005151013735.png)
+
+
+
+![charge_sharing_3cap.drawio](sar/charge_sharing_3cap.drawio.svg)
+
+With $C_A = C_B = C_s$ and $\Delta V_C = V_{CP} - V_{CN}$:
+$$\begin{align}
+Q_A' &= V_A C_s + \Delta V_C \cdot C_C  = V_A' C_s + (V_A' - V_B')C_C \\
+Q_B' &= V_B C_s - \Delta V_C \cdot C_C  = V_B' C_s - (V_A' - V_B')C_C
+\end{align}$$
+then
+$$
+V_A' - V_B' = \frac{\textcolor{red}{C_s}\,(V_A - V_B) + \textcolor{red}{2C_C}\,\Delta V_C}{C_s + 2C_C}
+\qquad
+\frac{V_A' + V_B'}{2} = \frac{V_A + V_B}{2}
+$$
+This confirms the earlier claim: a **floating capacitor** $C_C$ across $P$ and $N$ acts like $2C_C$ in the single-ended picture. A straight connection has $\Delta V_C = +V_\text{ref}$ (add), and a flipped connection has $\Delta V_C = -V_\text{ref}$
+
+**An ideal floating capacitor injects zero common-mode charge**
+
+
+
+---
+
+
+
+| Aspect                      | Charge redistribution             | Charge sharing                                         |
+| --------------------------- | --------------------------------- | ------------------------------------------------------ |
+| Reference during bit cycles | Connected, must settle each cycle | Disconnected, only **precharges** during sampling      |
+| Reference current           | Signal-dependent                  | Constant (≈ C_DAC·Vref per conversion)                 |
+| Reference buffer demand     | High, especially at high fs       | Relaxed; a large decoupling cap often suffices         |
+| Signal at comparator        | Full swing                        | Attenuated by C_s / (C_s + C_DAC + C_p)                |
+| Full-scale / gain           | Set by Vref                       | Set by Vref × capacitor ratio, sensitive to parasitics |
+| Leakage sensitivity         | Low                               | Higher, since precharged caps float during conversion  |
+| Typical resolution          | Up to 16–18 bit                   | Usually ≤ 10–11 bit                                    |
 
 
 

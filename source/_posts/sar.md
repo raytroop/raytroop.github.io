@@ -454,7 +454,7 @@ V_y^{(k)} &= V_{INN} - \textcolor{red}{\sum_{i=1}^{k} (1-b_i)\,\Delta V_i}
 
 where
 $$
-b_k = \begin{cases} 1 & \text{if } V_x^{(k)} \ge V_y^{(k)} \\ 0 & \text{otherwise } \end{cases}
+b_k = \begin{cases} 1 & \text{if } V_x^{(k-1)} \ge V_y^{(k-1)} \\ 0 & \text{otherwise } \end{cases}
 $$
 During bit cycling, $V_y - V_x \to 0$, i.e.
 $$

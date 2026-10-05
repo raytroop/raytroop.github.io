@@ -358,15 +358,19 @@ $$
 
 - <span style="background-color:yellow">**VCM-based switching scheme**, a.k.a **merged capacitor switching (MCS)**</span>: No CM variation
 
+**Conventional (trial-and-keep)** switches the trial capacitor in first, then compares. If the result says the trial overshot, it switches that capacitor back out and inserts the next one. Bits are stored as which capacitors stay connected to $V_{REF}$
+
+**Monotonic (compare-then-move)** compares first, with no trial applied. Then it discharges the next capacitor (from $V_{REF}$ to ground) on whichever side is higher. That move is never undone; it simply sets up the next comparison
+
 ![image-20261005083632008](sar/image-20261005083632008.png)
 
 ![image-20261005172616703](sar/image-20261005172616703.png)
 
 ### Conventional Switching
 
-bottom-plate sampling
+<span style="background-color:yellow">bottom-plate sampling</span>
 
-![image-20261005193405609](sar/image-20261005193405609.png)
+![image-20261005213126847](sar/image-20261005213126847.png)
 
 
 
@@ -376,7 +380,7 @@ The comparator common mode is **VCM + VREF/2 − Vin,cm**
 
 Each array has $8C$ in total ($4C + 2C + C + C$, counting the dummy unit cap). During sampling, the top plates sit at $V_{CM}$ and the bottom plates sit at the input.
 
-For the top (P) array, the charge is $8C(V_{CM} − V_{INP}$). Then $4C$ is switched to $V_{REF}$ and $4C$ to ground. Charge conservation gives:
+For the top (P) array, the charge is $8C(V_{CM} − V_{INP})$. Then $4C$ is switched to $V_{REF}$ and $4C$ to ground. Charge conservation gives:
 
 $$
 8C\,V_x - 4C\,V_{REF} = 8C\,(V_{CM} - V_{INP}) \;\Rightarrow\; V_x = V_{CM} - V_{INP} + \tfrac{V_{REF}}{2}
@@ -422,11 +426,11 @@ $$
 After N = 8 bits:
 $$
 V_{INP} - V_{INN} = V_{REF}\left(2\sum_{i=1}^{8} b_i\,2^{-i} - 1\right) + \varepsilon,
-\qquad 0 \le \varepsilon < \frac{2V_{REF}}{2^8} = \text{1 LSB}
+\qquad 0 \le \varepsilon < \frac{2V_{REF}}{2^8} = \mathrm{1 LSB}
 $$
 For the complete 8-bit conversion shown in Fig. 3.3
 $$
-2\times (\frac{1}{2}\times1+\frac{1}{4}\times1+\frac{1}{8}\times1+\frac{1}{16}\times0+\frac{1}{32}\times0+\frac{1}{64}\times1+\frac{1}{128}\times1+\frac{1}{256}\times0)-1 = \frac{204}{256}
+2\times \left(\frac{1}{2}\times1+\frac{1}{4}\times1+\frac{1}{8}\times1+\frac{1}{16}\times0+\frac{1}{32}\times0+\frac{1}{64}\times1+\frac{1}{128}\times1+\frac{1}{256}\times0\right)-1 = \frac{204}{256}
 $$
 i.e.
 $$
@@ -436,7 +440,43 @@ $$
 
 ### Monotonic Switching
 
+<span style="background-color:yellow">top-plate sampling; use only discharging cycles</span>
 
+![image-20261005212330354](sar/image-20261005212330354.png)
+
+![image-20261005224007714](sar/image-20261005224007714.png)
+
+$$\begin{align}
+V_x^{(k)} &= V_{INP} - \textcolor{red}{\sum_{i=1}^{k} b_i\,\Delta V_i} \\
+V_y^{(k)} &= V_{INN} - \textcolor{red}{\sum_{i=1}^{k} (1-b_i)\,\Delta V_i}
+\qquad \qquad \Delta V_i = \frac{V_{REF}}{2^i}
+\end{align}$$
+
+where
+$$
+b_k = \begin{cases} 1 & \text{if } V_x^{(k)} \ge V_y^{(k)} \\ 0 & \text{otherwise } \end{cases}
+$$
+During bit cycling, $V_y - V_x \to 0$, i.e.
+$$
+\textcolor{red}{\sum (2b_i-1)   \Delta V_i } \qquad \Longrightarrow \qquad V_{INP} - V_{INN}
+$$
+For the monotonic result
+
+$$
+V_{REF}\sum (2b_k - 1)\,2^{-k} = 2V_{REF}\sum b_k 2^{-k}-V_{REF} + \color{red}\tfrac{V_{REF}}{2^N}
+$$
+
+so the relationship between Conventional and monotonic result
+$$
+V_\text{monotonic} = V_\text{Conventional} +  \color{red}\frac{\mathrm{1 LSB}}{2}
+$$
+For the complete 8-bit conversion of monotonic scheme shown in Fig. 3.4
+$$
+\frac{1}{2}+\frac{1}{4}+\frac{1}{8}-\frac{1}{16}-\frac{1}{32}+\frac{1}{64}+\frac{1}{128}-\frac{1}{256} = \frac{204}{256} +   \color{red}\frac{1}{256}
+$$
+
+
+![image-20261005224040223](sar/image-20261005224040223.png)
 
 
 

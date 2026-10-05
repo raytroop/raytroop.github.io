@@ -452,6 +452,14 @@ Julia version (Claude Opus 4.7)  [[https://gist.github.com/raytroop/53f210b2cca1
 
 
 
+## Mixed-signal charge-pump PLL (dual-PDK, AMS RNM) 
+
+> Ng Chuan Seng, **Phase 7**: Mixed-signal charge-pump PLL (dual-PDK, AMS RNM) [[https://github.com/chuanseng-ng/claude_verilog_test/blob/main/docs/PHASE7_MIXED_SIGNAL_PLL_PLAN.md](https://github.com/chuanseng-ng/claude_verilog_test/blob/main/docs/PHASE7_MIXED_SIGNAL_PLL_PLAN.md)]
+
+*TODO* &#128197;
+
+
+
 
 
 ## reference

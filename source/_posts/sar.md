@@ -374,7 +374,7 @@ $$
 
 
 
-The comparator common mode is **VCM + VREF/2 − Vin,cm**
+The comparator common mode is $V_{CM} + V_{REF}/2 − V_{in,cm}$
 
 **Node voltages after the MSB switching**
 
@@ -486,14 +486,34 @@ $$
 
 <span style="background-color:yellow">top-plate sampling;  No CM variation</span>
 
-![image-20261006094621665](sar/image-20261006094621665.png)
+![image-20261006163300602](sar/image-20261006163300602.png)
 
 $V_{CM} \to V_{REF} \text{ or } 0$
 
 
 
+$$\begin{align}
+V_x^{(k)} &= V_{INP} - \textcolor{red}{\sum_{i=1}^{k} b_i\,\Delta V_{\downarrow,i}} + \textcolor{red}{\sum_{i=1}^{k} (1-b_i)\,\Delta V_{\uparrow,i}} \\
+V_y^{(k)} &= V_{INN} - \textcolor{red}{\sum_{i=1}^{k} (1-b_i)\,\Delta V_{\downarrow,i}}+\textcolor{red}{\sum_{i=1}^{k} b_i\,\Delta V_{\uparrow,i}}
+\qquad \qquad \Delta V_{\downarrow,i} = \frac{V_{CM}}{2^i}\quad \Delta V_{\uparrow,i} = \frac{V_{REF}-V_{CM}}{2^i}
+\end{align}$$
 
-
+where
+$$
+b_k = \begin{cases} 1 & \text{if } V_x^{(k-1)} \ge V_y^{(k-1)} \\ 0 & \text{otherwise } \end{cases}
+$$
+During bit cycling, $V_y - V_x \to 0$, i.e.
+$$
+\textcolor{red}{\sum (2b_i-1)   \Delta V_{\downarrow,i} + \sum (2b_i-1)   \Delta V_{\uparrow,i}} \qquad \Longrightarrow \qquad V_{INP} - V_{INN}
+$$
+When $V_{CM}$ is precisely half of $V_{REF}$
+$$
+\Delta V_{\downarrow,i} = \Delta V_{\uparrow,i} = \frac{V_{REF}}{2^{i+1}}
+$$
+then
+$$
+V_{INP} - V_{INN} \approx \sum (2b_i-1)   \frac{V_{REF}}{2^{i}}
+$$
 
 
 ![image-20261006094655269](sar/image-20261006094655269.png)

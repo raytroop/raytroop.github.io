@@ -528,14 +528,6 @@ $$
 
 
 
-
-
-
-
-
-
-
-
 ## Synchronous SAR ADC
 
 It also divides a full conversion into several comparison stages in a way similar to the *pipeline ADC*, except the algorithm is executed **sequentially** rather than in *parallel* as in the pipeline case.

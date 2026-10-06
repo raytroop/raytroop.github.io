@@ -478,13 +478,25 @@ $$
 
 ![image-20261005224040223](sar/image-20261005224040223.png)
 
+**3-bit conversion of monotonic switching scheme** as Fig.3.4 drawn
 
+![monotonic-sw.drawio](sar/monotonic-sw.drawio.svg)
 
 ### V<sub>CM</sub>-Based Capacitor Switching
 
+<span style="background-color:yellow">top-plate sampling;  No CM variation</span>
+
+![image-20261006094621665](sar/image-20261006094621665.png)
+
+$V_{CM} \to V_{REF} \text{ or } 0$
 
 
 
+
+
+
+
+![image-20261006094655269](sar/image-20261006094655269.png)
 
 
 
@@ -670,23 +682,7 @@ where $b[M-1]\dots b[0]$ and $s(M)\dots s(1)$
 
 ![image-20250909211030234](sar/image-20250909211030234.png)
 
-
-
 ---
-
-![image-20261003150647820](sar/image-20261003150647820.png)
-
-$$\begin{align}
-D_\text{out} &= 8 + (2B_1-1)\times3.5+ (2B_2-1)\times2+ (2B_3-1)\times1+ (2B_4-1)\times0.5+ (B_5-1)\times1 \\
-&= 7B_1+4B_2+2B_3+1B_4+1B_5
-\end{align}$$
-
-
-![Kuttner_nonbin.drawio](sar/Kuttner_nonbin.drawio.svg)
-
-
-
-
 
 <span style="color:white; background-color:black">**$N$-bit binary weighted algorithm**</span>
 
@@ -701,6 +697,8 @@ D_{out} &= s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1) \\
 
 
 
+
+---
 
 <span style="color:white; background-color:black">**Differential ADC**</span>: $s(M) = 0$, i.e. $w_{M-1} = 0$ (using $w_i = s(i+1)$)
 
@@ -733,6 +731,90 @@ D_{out} = \sum_{i=0}^{M-1} b_i\cdot W_i - 2^{N-1}
 $$
 
 which is a signed output in $\left[-2^{N-1},\ 2^{N-1}-1\right]$ LSB.
+
+
+
+---
+
+<span style="color:white; background-color:black">**Non-Binary Search**</span>
+
+![image-20261003150647820](sar/image-20261003150647820.png)
+
+$$\begin{align}
+D_\text{out} &= 8 + (2B_1-1)\times3.5+ (2B_2-1)\times2+ (2B_3-1)\times1+ (2B_4-1)\times0.5+ (B_5-1)\times1 \\
+&= 7B_1+4B_2+2B_3+1B_4+1B_5
+\end{align}$$
+
+
+![Kuttner_nonbin.drawio](sar/Kuttner_nonbin.drawio.svg)
+
+![image-20261006081136508](sar/image-20261006081136508.png)
+
+
+
+---
+
+<span style="color:white; background-color:black">**Binary with Error Compensation**</span> a.k.a <span style="color:white; background-color:black">**Binary-Scaled Error Compensation**</span>
+
+![image-20261006081543815](sar/image-20261006081543815.png)
+
+![image-20261006082251332](sar/image-20261006082251332.png)
+
+>  this is the <span style="background-color:yellow">monotonic scheme</span>
+
+Each comparison is followed by switching one capacitor ($V_{REF} \to \text{ground}$) on whichever side is higher. That moves the differential DAC voltage by $\pm w\,u$, where $w$ is that capacitor's size in unit caps ($u$ below). The order is:
+
+- B1 → C1 (256), B2 → C2 (128), B3 → C3 (64)
+- **B3C → C3C (64)**
+- B4 → C4 (32), B5 → C5 (16), B6 → C6 (8)
+- **B6C → C6C (8)**
+- B7 → C7 (4), B8 → C8 (2), B9 → C9 (1)
+- **B9C → C9C (1)**
+- B10 → <span style="background-color:yellow">nothing (last decision)</span>
+
+That is 13 decisions, giving the "13b redundant code."
+
+Let one unit cap move the differential by $u = V_{REF}\cdot C_u/C_{total}$, and let $w_k = 2^{9-k}$ be the size of $C_k$. After the last move (C9C) the residue is within $\pm u$; B10 resolves its sign, so the reconstruction error is within $\pm u/2$:
+$$
+\frac{V_{in}}{u} \approx \underbrace{\sum_{k=1}^{9} (2B_k-1)\,w_k}_{\text{main caps}} \;+\; \underbrace{(2B_{3C}-1)\,64 + (2B_{6C}-1)\,8 + (2B_{9C}-1)\,1}_{\text{compensation caps}} \;+\; (2B_{10}-1)\tfrac12
+$$
+
+The 10-bit input range is $\color{blue}\pm512u$: $C_1\sim C_9$ span $\pm511u$ and B10 resolves the last $\pm u$. The compensation caps add $\pm73u$ of over-range (raw code $-73\dots1096$), which the DEC clips. Since $C_{total}\approx584\,C_u$, the full scale is $\pm\tfrac{512}{584}V_{REF}\approx\pm0.88\,V_{REF}$ (ignoring parasitics)
+
+So the output code, with **intentional offset $511.5$**
+$$
+D_{out} \approx \frac{V_{in}}{u} + \color{red}\left(511+\tfrac12\right)
+$$
+which maps the input onto $0 \dots 1023$
+
+after cancelling and rearranging
+
+$$\begin{align}
+D_{out} &= \underbrace{\sum_{k=1}^{9} B_k\cdot2w_k}_{\text{main caps}} \;+\; \underbrace{(2B_{3C}-1)\,64 + (2B_{6C}-1)\,8 + (2B_{9C}-1)\,1}_{\text{compensation caps}} \;+\; B_{10} \\
+&= \underbrace{\sum_{k=1}^{9} B_k\cdot2w_k}_{\text{main caps}} \;+\; \textcolor{red}{\underbrace{(B_{3C}-0.5)\,128 + (B_{6C}-0.5)\,16 + (B_{9C}-0.5)\,2}_{\text{compensation caps}}} \;+\; B_{10}
+\end{align}$$
+
+
+
+The relationship between $D_{out}$ and $V_{in}$
+
+$$
+\boxed{V_{in} \approx (D_{out} - 511.5)\,u, \qquad u = 1\text{ LSB} = V_{REF}\,\frac{C_u}{C_{total}}}
+$$
+
+Exactly, with ideal thresholds at integer multiples of u:
+
+$$
+\boxed{D_{out} - 512 \;\le\; \frac{V_{in}}{u} \;<\; D_{out} - 511 \quad\Longleftrightarrow\quad D_{out} = \left\lfloor \frac{V_{in}}{u} \right\rfloor + 512}
+$$
+
+
+
+![image-20261006091141386](sar/image-20261006091141386.png)
+
+
+
+![image-20261006091000081](sar/image-20261006091000081.png)
 
 
 

@@ -1,5 +1,5 @@
 ---
-title: Time-Interleaved ADCs
+title: Time-Interleaved ADC (TI-ADC)
 date: 2025-06-07 23:17:25
 tags:
 categories:

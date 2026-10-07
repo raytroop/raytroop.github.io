@@ -1168,3 +1168,16 @@ A reactive Python notebook
 ## uv
 
 An extremely fast Python package and project manager, written in Rust.
+
+
+
+
+
+## draw.io
+
+<span style="color:white; background-color:black">rounded corners</span>
+
+**"Abs. arc size"** stands for **Absolute Arc Size**. It is a shape property that controls how rounded corners are calculated when you resize a shape.
+
+- **When disabled (Percentage-based, default):** The corner radius scales dynamically with the size of the shape. If you make a small rectangle massive, the rounded corners will grow proportionally larger.
+- **When enabled (Absolute value):** The corner radius stays fixed at an exact pixel value, regardless of how large or small you resize the shape. This ensures consistent corner styling across shapes of different dimensions

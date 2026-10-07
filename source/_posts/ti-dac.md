@@ -29,7 +29,7 @@ mathjax: true
 
 > <span style="background-color:yellow">actually, it is hold margin, that is improve by the element</span>
 
-
+![Ret84_timing.drawio](ti-dac/Ret84_timing.drawio.svg)
 
 
 

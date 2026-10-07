@@ -1,6 +1,6 @@
 ---
 title: Time Interleaving DAC (TI-DAC)
-date: 2026-06-07 08:38:53
+date: 2025-10-07 14:24:47
 tags:
 categories:
 - adc-dac

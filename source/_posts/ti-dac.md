@@ -15,6 +15,24 @@ mathjax: true
 
 
 
+## 4:1 mux
+
+> M. Cusmai *et al*., "7.2 A 224Gb/s sub pJ/b PAM-4 and PAM-6 DAC-Based Transmitter in 3nm FinFET," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 126-128, doi: 10.1109/ISSCC49657.2024.10454558.
+>
+> —, "A 0.92-pJ/b PAM-4 and 0.61-pJ/b PAM-6 224-Gb/s DAC-Based Transmitter in 3-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 60, no. 1, pp. 23-34, Jan. 2025, doi: 10.1109/JSSC.2024.3456672
+
+![image-20261007154803778](ti-dac/image-20261007154803778.png)
+
+
+
+![image-20261007161428610](ti-dac/image-20261007161428610.png)
+
+> <span style="background-color:yellow">actually, it is hold margin, that is improve by the element</span>
+
+
+
+
+
 ## reference
 
 Schmidt, C. (2020). Interleaving Concepts for Digital-to-Analog Converters. Springer Vieweg, Wiesbaden.
@@ -26,3 +44,4 @@ Current-Steering DAC with Background Clock Phase Calibration," 2019 Symposium on
 Japan, 2019, pp. [[https://sci-hub.ru/10.23919/VLSIC.2019.8778096](https://sci-hub.ru/10.23919/VLSIC.2019.8778096)]
 
 E. Olieman, A. -J. Annema and B. Nauta, "An Interleaved Full Nyquist High-Speed DAC Technique," in *IEEE Journal of Solid-State Circuits*, vol. 50, no. 3, pp. 704-713, March 2015 [[https://sci-hub.ru/10.1109/JSSC.2014.2387946](https://sci-hub.ru/10.1109/JSSC.2014.2387946)]
+

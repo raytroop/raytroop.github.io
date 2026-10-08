@@ -3,7 +3,7 @@ title: Innovus
 date: 2022-02-07 21:06:53
 tags:
 categories:
-- pr
+- digital 
 ---
 
 ## create & assign bump

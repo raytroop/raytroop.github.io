@@ -121,6 +121,14 @@ stem(out)
 
 ![143512677-ccefdf22-4e30-4e72-9220-bbe667671e79](ssa/143512677-ccefdf22-4e30-4e72-9220-bbe667671e79.png)
 
+---
+
+<span style="color:white; background-color:black">**Single Ended** vs **Differential Signaling**</span>
+
+![image-20261009072430251](ssa/image-20261009072430251.png)
+
+
+
 ## S-Parameter to Single Bit Response (SBR)
 
 > Mike Li, "S-Parameter to Single Bit Response (SBR) Transformation and Convergence Study" [[https://ieee802.org/3/bj/public/may12/li_01_0512.pdf](https://ieee802.org/3/bj/public/may12/li_01_0512.pdf)]

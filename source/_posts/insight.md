@@ -188,7 +188,7 @@ $$
 
 ![image-20260417220427008](insight/image-20260417220427008.png)
 
-
+![sensor_test_desensitized](insight/sensor_test_desensitized.png)
 
 ![image-20260417221638635](insight/image-20260417221638635.png)
 

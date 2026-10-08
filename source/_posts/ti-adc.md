@@ -209,7 +209,11 @@ $\text{CK}$, $I/Q_1$ and $I/Q_{2,3}$ shift by **1UI**
 
 ## resync (alignment)
 
-*TODO* &#128197;
+> Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[www.theise.org/...](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
+
+![image-20261009070618262](ti-adc/image-20261009070618262.png)
+
+
 
 
 

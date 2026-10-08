@@ -419,6 +419,8 @@ where
 $$
 b_k = \begin{cases} 1 & \text{if } V_y^{(k)} \ge V_x^{(k)} \color{red}\text{ with trial } b_k = 1 \\ 0 & \text{otherwise (\textcolor{red}{trial reverted})} \end{cases}
 $$
+> For simplicity, the final term $\color{blue}(b[0]-1)\cdot 1\text{LSB}$ of the general equation $D_{out} = s(M) + \sum_{i=1}^{M-1}(2\cdot b[i] - 1)\times s(i) + (b[0] -1)\cdot \text{1LSB}$ is approximated as $\color{red}(2b[0] -1)\cdot\frac{\text{1LSB}}{2}$
+
 During bit cycling, $V_y - V_x \to 0$, i.e.
 $$
 2 \textcolor{red}{\sum b_i   \Delta V_i } - \textcolor{blue}{V_{REF}}\qquad \Longrightarrow \qquad V_{INP} - V_{INN}

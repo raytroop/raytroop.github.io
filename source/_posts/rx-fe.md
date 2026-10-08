@@ -491,6 +491,10 @@ Lvals = np.linspace(0.001, 1.5, 300)
 
 
 
+---
+
+![ctle_ind](rx-fe/ctle_ind.svg)
+
 
 
 

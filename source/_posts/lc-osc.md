@@ -81,9 +81,7 @@ FF = Qt^2*eta_I*eta_V*2/1e3/(kB*T)/10^(FoM/10); % 4.6006
 
 ![image-20260708231041696](lc-osc/image-20260708231041696.png)
 
-![image-20260704141326842](lc-osc/image-20260704141326842.png)
 
-![image-20260706215907304](lc-osc/image-20260706215907304.png)
 
 ### Class-C CMOS Oscillator
 
@@ -920,6 +918,8 @@ $I_n$ here is the **reactive tank current harmonic**, not directly the transisto
 > —, 片上变压器的应用与设计 （二）多峰值谐振腔 [[https://zhuanlan.zhihu.com/p/45799676](https://zhuanlan.zhihu.com/p/45799676)]
 >
 > Sunderarajan S. Mohan, Modeling, Design and Optimization of On-Chip Inductors and Transformers [[http://www-smirc.stanford.edu/papers/Orals99s-mohan.pdf](http://www-smirc.stanford.edu/papers/Orals99s-mohan.pdf)]
+>
+> W. Leng and A. A. Abidi, "Approximate Equivalent Circuits to Understand Tradeoffs in Geometry of On-Chip Inductors," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 68, no. 3, pp. 975-988, March 2021 [[https://sci-hub.ru/10.1109/TCSI.2020.3047987](https://sci-hub.ru/10.1109/TCSI.2020.3047987)]
 
 
 
@@ -1329,34 +1329,6 @@ $$
 
 
 
-## layout philosophy
-
-> S. Shahramian, "Tutorial: The Art of mm-Wave Design and Layout," *2023 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2023
->
-> Patrick Reynaert (KU Leuven), "The Art of CMOS RF Design & Layout" [[https://hoomanreyhani.com/product/2025j/](https://hoomanreyhani.com/product/2025j/)]
->
-> D. Turker et al., "A 7.4-to-14GHz PLL with 54fsrms jitter in 16nm FinFET for integrated RF-data-converter SoCs," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310342](https://sci-hub.ru/10.1109/ISSCC.2018.8310342)]
-
-In a **differential LC VCO**, every tuning bit should preserve the symmetry of the two tank nodes
-
-To maintain a **symmetric connection** between the inductor and the capacitor bank, each weighted capacitor branch should be split and placed symmetrically about the differential axis
-
-
-
----
-
-![image-20260808095856891](lc-osc/image-20260808095856891.png)
-
-
-
-
-
-
-
-![image-20260818225012824](lc-osc/image-20260818225012824.png)
-
-
-
 ## LC Tank Q
 
 ![image-20260620145624711](lc-osc/image-20260620145624711.png)
@@ -1432,6 +1404,163 @@ $$
 $$
 
 
+
+## Loaded Q in CMOS fully differential LC oscillator
+
+![image-20261010231914598](lc-osc/image-20261010231914598.png)
+
+![fig11b_resonator.drawio](lc-osc/fig11b_resonator.drawio.svg)
+
+| Regime                                              | $\omega_0$                                          | $Q_{PFET}$                                            |
+| --------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------- |
+| **Strong PFET**, $R_{PFET} \ll 1/(\omega_0 C_2)$    | $\dfrac{1}{\sqrt{L(C_1+C_2)}}$                      | $\dfrac{C_1+C_2}{\omega_0 C_2^2 R_{PFET}}$            |
+| Weak PFET, $R_{PFET} \gg 1/(\omega_0 C_2)$ (Eq. 19) | $\dfrac{1}{\sqrt{L\left(C_1+\frac{C_2}{2}\right)}}$ | $4\,\omega_0 R_{PFET}\left(C_1+\dfrac{C_2}{2}\right)$ |
+
+**Strong PFET**, $R_{PFET} \ll 1/(\omega_0 C_2)$, $R_{PFET}$ shorts out the left $C_2$, so the lossy branch is just $R_{PFET}$ in series with $C_2$. That series RC branch has its own quality factor
+
+$$
+Q_s = \frac{1}{\omega_0 R_{PFET} C_2}
+$$
+
+The usual series-to-parallel conversion turns it into $C_2$ in parallel with
+
+$$
+R_p = R_{PFET}(1+Q_s^2) \approx \frac{1}{\omega_0^2 C_2^2 R_{PFET}}
+$$
+
+The tank is now $L \parallel (C₁ + C₂) \parallel R_p$. Its resonant frequency is $\omega_0=\dfrac{1}{\sqrt{L(C_1+C_2)}}$, and its $Q$ is
+
+$$
+Q_{PFET} = \omega_0 (C_1+C_2) R_p = \frac{C_1+C_2}{\omega_0 C_2^2 R_{PFET}} = \frac{\sqrt{L(C_1+C_2)}}{C_2 R_{PFET}}\cdot\frac{C_1+C_2}{C_2}
+$$
+
+
+
+---
+
+
+
+![image-20261011002856002](lc-osc/image-20261011002856002.png)
+
+<span style="background-color:yellow">$G_{ds}$ is parallel with LC tank, thus **minimizing $G_{ds}$** is desirable</span>
+
+
+
+## XCP Parasitics
+
+> Chicco, Francesco, Raffaele Capoccia, Alessandro Pezzotta and Christian C. Enz. “Linear analysis of phase noise in LC oscillators in deep submicron CMOS technologies.” *2017 International Conference on Noise and Fluctuations (ICNF)* (2017): 1-4. [[https://infoscience.epfl.ch/server/api/core/bitstreams/a022482b-16e8-425f-8a99-3752789a22a9/content](https://infoscience.epfl.ch/server/api/core/bitstreams/a022482b-16e8-425f-8a99-3752789a22a9/content)]
+
+![xcp_Rs](lc-osc/xcp_Rs.svg)
+
+
+
+---
+
+> D. Murphy, J. J. Rael and A. A. Abidi, "Phase Noise in LC Oscillators: A Phasor-Based Analysis of a General Result and of Loaded Q," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 57, no. 6, pp. 1187-1203, June 2010 [[https://sci-hub.ru/10.1109/TCSI.2009.2030110](https://sci-hub.ru/10.1109/TCSI.2009.2030110)]
+
+<span style="color:white; background-color:black">Triode on-resistance</span> — **Q-degradation**
+
+**Standard Voltage-Biased nMOS Topology**
+
+![image-20261010124043111](lc-osc/image-20261010124043111.png)
+
+
+
+![image-20261010150913972](lc-osc/image-20261010150913972.png)
+
+
+
+At fixed $K$ and $V_t$, $G_{DS_{\text{eff}}}$ always increases with $A_c$, so $F_{VB}$ rises with amplitude
+
+![image-20261010170107913](lc-osc/image-20261010170107913.png)
+
+![gdseff_vs_amplitude](lc-osc/gdseff_vs_amplitude.svg)
+
+
+
+![image-20261010170418056](lc-osc/image-20261010170418056.png)
+
+
+
+---
+
+> F. Chicco, R. Capoccia, A. Pezzotta and C. Enz, "Linear analysis of phase noise in LC oscillators in deep submicron CMOS technologies," *2017 International Conference on Noise and Fluctuations (ICNF)*, Vilnius, Lithuania, 2017, pp. 1-4, doi: 10.1109/ICNF.2017.7985954. [[https://infoscience.epfl.ch/bitstreams/a022482b-16e8-425f-8a99-3752789a22a9/download](https://infoscience.epfl.ch/bitstreams/a022482b-16e8-425f-8a99-3752789a22a9/download)]
+>
+> P. Yelleswarapu, A. Jha, R. Willis, Y. Makris and K. K. O, "Phase Noise Reduction in LC VCO’s Using an Array of Cross-Coupled Nanoscale MOSFETs and Intelligent Post-Fabrication Selection," in *IEEE Transactions on Microwave Theory and Techniques*, vol. 70, no. 6, pp. 3244-3256, June 2022 [[https://sci-hub.ru/10.1109/TMTT.2022.3164949](https://sci-hub.ru/10.1109/TMTT.2022.3164949)]
+>
+> Pula, Bhanu Teja, Peerla, Rizwan Shaik, Mal, Arindam, Sahoo, Bibhu Datta, Mitigating Gate Resistance in 180 nm CMOS High-Frequency LC-VCOs: Enhanced Performance and Simulation-Model Validation, IET Circuits, Devices & Systems, 2026, 5399291, 11 pages, 2026. https://doi.org/10.1049/cds2/5399291
+
+<span style="color:white; background-color:black">Gate resistance</span>
+
+The key mechanism is that **gate capacitance draws RF current through** $R_g$, creating loss and feedback delay; $R_g$ also generates thermal voltage noise that modulates the channel current
+
+
+
+
+
+
+
+---
+
+> Seok-Ju Yun, Chong-Yul Cha, Hyoung-Chul Choi and Sang-Gug Lee, "RF CMOSLC-Oscillator With Source Damping Resistors," in *IEEE Microwave and Wireless Components Letters*, vol. 16, no. 9, pp. 511-513, Sept. 2006 [[https://sci-hub.ru/10.1109/LMWC.2006.880700](https://sci-hub.ru/10.1109/LMWC.2006.880700)]
+>
+> A. Hu, D. Liu, Z. Jin, M. Zhang, X. Shan and X. Zou, "A 2.3–5-GHz LC-VCO With Source Damping Resistors to Suppress 1/f Noise Up-Conversion," in *IEEE Microwave and Wireless Components Letters*, vol. 31, no. 10, pp. 1138-1141, Oct. 2021, doi: 10.1109/LMWC.2021.3107843.
+
+<span style="color:white; background-color:black">Source resistance</span>
+
+
+
+For \(R_s\), remember:
+$$
+Z_{\mathrm{diff}}=-\frac{2}{g_m}-2R_s, \qquad G_{\mathrm{neg}}=-\frac{g_m}{2(1+g_mR_s)}
+$$
+
+**A larger negative-resistance magnitude means weaker loss compensation in a parallel tank.**
+
+
+
+
+
+
+---
+
+> F. Pepe, A. Bonfanti, S. Levantino, C. Samori and A. L. Lacaita, "Suppression of Flicker Noise Up-Conversion in a 65-nm CMOS VCO in the 3.0-to-3.6 GHz Band," in *IEEE Journal of Solid-State Circuits*, vol. 48, no. 10, pp. 2375-2389, Oct. 2013 [[https://sci-hub.ru/10.1109/JSSC.2013.2273181](https://sci-hub.ru/10.1109/JSSC.2013.2273181)]
+>
+> —. *Analysis and minimization of flicker noise up-conversion in radio frequency LC-tuned oscillators*. 2014. Politecnico di Milano, PhD dissertation [[hdl.handle.net/10589/89783](hdl.handle.net/10589/89783)]
+
+<span style="color:white; background-color:black">Drain resistance</span>
+
+
+
+
+
+
+
+## layout philosophy
+
+> S. Shahramian, "Tutorial: The Art of mm-Wave Design and Layout," *2023 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2023
+>
+> Patrick Reynaert (KU Leuven), "The Art of CMOS RF Design & Layout" [[https://hoomanreyhani.com/product/2025j/](https://hoomanreyhani.com/product/2025j/)]
+>
+> D. Turker et al., "A 7.4-to-14GHz PLL with 54fsrms jitter in 16nm FinFET for integrated RF-data-converter SoCs," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310342](https://sci-hub.ru/10.1109/ISSCC.2018.8310342)]
+
+In a **differential LC VCO**, every tuning bit should preserve the symmetry of the two tank nodes
+
+To maintain a **symmetric connection** between the inductor and the capacitor bank, each weighted capacitor branch should be split and placed symmetrically about the differential axis
+
+
+
+---
+
+![image-20260808095856891](lc-osc/image-20260808095856891.png)
+
+
+
+
+
+
+
+![image-20260818225012824](lc-osc/image-20260818225012824.png)
 
 
 

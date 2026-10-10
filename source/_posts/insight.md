@@ -15,6 +15,16 @@ mathjax: true
 
 
 
+##  XCP as an impedance negator
+
+> B. Razavi, "The Cross-Coupled Pair - Part I [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 6, no. 3, pp. 7-10, Summer 2014 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine1.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine1.pdf)]
+
+![image-20261010104124326](insight/image-20261010104124326.png)
+$$
+\boxed{Z_\text{in1} = -Z_1 \textcolor{red}{-\frac{2}{g_m}} \qquad \qquad Z_\text{in2} = -Z_2 \textcolor{red}{+\frac{2}{g_m}}}
+$$
+
+
 
 
 ## Bode's Analysis

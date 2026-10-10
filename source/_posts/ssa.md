@@ -240,7 +240,9 @@ grid on;
 
 T. C. Carusone, "Introduction to Digital I/O: Constraining I/O Power Consumption in High-Performance Systems," in *IEEE Solid-State Circuits Magazine*, vol. 7, no. 4, pp. 14-22, Fall 2015
 
-Oh, Kyung Suk Dan, and Xing Chao Chuck Yuan. High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting. Prentice Hall, 2011. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiGPFydIQAYdxVx.pdf)]
+—, ISSCC 2017 T6: Signal Integrity Analysis for Gb/s Links
+
+Oh, Kyung Suk Dan, and Xing Chao Chuck Yuan. High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting. Prentice Hall, 2011.
 
 Ren, Jihong and Kyung Suk Oh. "Multiple Edge Responses for Fast and Accurate System Simulations." *IEEE Transactions on Advanced Packaging* 31 (2008) [[https://sci-hub.jp/10.1109/TADVP.2008.2002201](https://sci-hub.jp/10.1109/TADVP.2008.2002201)]
 

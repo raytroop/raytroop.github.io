@@ -1157,3 +1157,4 @@ Hideo Okawara's Mixed Signal Lecture Series [[https://tomverbeure.github.io/2024
 
 Jeffrey Walling, DSP to ASIC Block [[https://youtube.com/playlist?list=PLP4ZmM6GPueNEdnLhgkdr8_X8dSizUwMs](https://youtube.com/playlist?list=PLP4ZmM6GPueNEdnLhgkdr8_X8dSizUwMs)]
 
+Abdur Rafae Haqqani, Embedded Systems / FPGA Blogs On Request Rounding, dither and saturation when you cut word width in FPGA DSP. [[https://rafae1130.github.io/posts/on-request/fractions-in-fpga.html](https://rafae1130.github.io/posts/on-request/fractions-in-fpga.html)]

@@ -114,9 +114,7 @@ mathjax: true
 >
 > J. Im *et al*., "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 1, pp. 7-18, Jan. 2021, [[https://sci-hub.jp/10.1109/JSSC.2020.3024261](https://sci-hub.jp/10.1109/JSSC.2020.3024261)]
 
-
-
-![image-20260917225422455](mpcg/image-20260917225422455.png)
+![image-20261013003403829](mpcg/image-20261013003403829.png)
 $$
 V_{ip}=\mathrm{XNOR}(CKD_0,CKD_{90})\qquad \qquad V_{in}=\mathrm{XNOR}(CKD_{45},CKD_{315})
 $$

@@ -1454,7 +1454,7 @@ $$
 
 ![xcp_Rs](lc-osc/xcp_Rs.svg)
 
-
+![image-20261012230835722](lc-osc/image-20261012230835722.png)
 
 ---
 

@@ -15,7 +15,39 @@ The PI-based architecture decouples the high-frequency clock synthesis and local
 
 
 
-## Phase Interpolator (PI)
+
+
+## Current-Mode Phase Interpolator (CMPI)
+
+> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
+>
+> —, "Improving Linearity in CMOS Phase Interpolators," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 6, pp. 1623-1635, June 2023, doi: 10.1109/JSSC.2023.3243305 [[pdf](https://sudip.sites.olt.ubc.ca/files/2023/04/77.-Improving_Linearity_in_CMOS_Phase_Interpolators.pdf)]
+
+Current-mode PIs (CMPIs) can achieve high linearity but at the cost of digital overhead to generate **sinusoidal weights**
+
+![image-20261012235108905](pi-cdr/image-20261012235108905.png)
+
+
+
+A **constant Output amplitude** is desired because the *swing-dependent delay characteristic* of the CML-to-CMOS (C2C) circuit results in *AM–PM distortion* which eventually manifests as phase nonlinearity
+
+
+
+## Voltage-Mode Phase Interpolator (VMPI)
+
+> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
+
+![image-20261012233712634](pi-cdr/image-20261012233712634.png)
+
+
+
+## Integrating-Mode Phase Interpolator (IMPI)
+
+> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
+
+
+
+## Predistortion
 
 !!! Clock Edges
 
@@ -27,10 +59,6 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
-> John T. Stonick, ISSCC 2011 tutorial. "DPLL Based Clock and Data Recovery"
-
-
-
 ***kink problem***
 
 ![image-20240919223032380](pi-cdr/image-20240919223032380.png)
@@ -39,11 +67,11 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
-### Predistortion - sinusoidal
+### Predistortion for sinusoidal
 
 the interpolating inverters near the midscale can be made weaker so as to obtain more uniform phase increments. Alternatively, those at the top and bottom of the array can be made stronger
 
-#### Single-Quadrant PI
+<span style="color:white; background-color:black">**Single-Quadrant PI**</span>
 
 $$
 V_o(t) = m \cdot \sin(\omega t + \frac{\pi}{2}) + p\cdot \sin(\omega t) = m\cdot \cos(\omega t) + p\cdot \sin(\omega t) = \sqrt{m^2+p^2} \sin(\omega t + \phi)
@@ -101,7 +129,7 @@ xlabel('code p'); ylabel('Phase')
 
 
 
-#### Eight-Quadrant PI
+<span style="color:white; background-color:black">**Eight-Quadrant PI**</span>
 
 ![pi-region.drawio](pi-cdr/pi-region.drawio.svg)
 $$\begin{align}
@@ -159,85 +187,101 @@ xlabel('code p'); ylabel('Phase')
 
 
 
-### Predistortion - square wave
+### Predistortion for square wave
 
 > Weinlader, Daniel, Thomas H. Lee and James A. Gasbarro. "Precision CMOS receivers for VLSI testing applications." (2001). [[https://www-vlsi.stanford.edu/people/alum/pdf/0111_Weinlader_Precision_CMOS_Receivers_.pdf](https://www-vlsi.stanford.edu/people/alum/pdf/0111_Weinlader_Precision_CMOS_Receivers_.pdf)]
 
 ![image-20251017213153657](pi-cdr/image-20251017213153657.png)
 
-Suppose $V_i(t) =  1- e^{-\frac{t}{\tau}}$ and $V_q(t) =  1-e^{-\frac{t-\Delta t}{\tau}}$  with $t\ge \Delta t$
+Normalize Eq. (3.1) with $\tau = RC$ and threshold at mid-swing, suppose $V_i(t) = 1- e^{-\frac{t}{\tau}}$ and $V_q(t) = 1-e^{-\frac{t-\Delta t}{\tau}}$ with $t\ge \Delta t$
 $$
 \frac{1}{2} = (1-\alpha)\cdot V_i(t) + \alpha \cdot V_q(t)
 $$
-yield triggering time
+yields the trigger time
 $$
 t = \tau \ln\left[ 1 + \alpha \left(e^{\frac{\Delta t}{\tau}}-1\right)\right] + \tau \ln 2
 $$
+which holds for all $\alpha$ only if $\Delta t \le \tau \ln 2$, i.e. the crossing always happens after $V_q$ starts rising; otherwise, at small $\alpha$ the output crosses before $V_q$ arrives → ***kink problem***
+
 Then
 $$\begin{align}
-\frac{\partial t}{\partial \alpha} &= \tau \frac{e^{\frac{\Delta t}{\tau }}-1}{1+\alpha(e^{\frac{\Delta t}{t}}-1)} \gt 0 \\
-\frac{\partial^2 t}{\partial \alpha^2} &= -\tau \frac{\left(e^{\frac{\Delta t}{\tau }}-1\right)^2}{\left(1+\alpha(e^{\frac{\Delta t}{t}}-1)\right)^2} \lt 0
+\frac{\partial t}{\partial \alpha} &= \tau \frac{e^{\frac{\Delta t}{\tau }}-1}{1+\alpha(e^{\frac{\Delta t}{\tau}}-1)} \gt 0 \\
+\frac{\partial^2 t}{\partial \alpha^2} &= -\tau \frac{\left(e^{\frac{\Delta t}{\tau }}-1\right)^2}{\left(1+\alpha(e^{\frac{\Delta t}{\tau}}-1)\right)^2} \lt 0
 \end{align}$$
 
-As a conclusion, ***heavier weight while $\alpha$ approaching to 1*** in order to improve linearity
+- full span: $t(1) - t(0) = \Delta t$
+- step ratio: $\left.\frac{\partial t}{\partial \alpha}\right|_{\alpha=0} \Big/ \left.\frac{\partial t}{\partial \alpha}\right|_{\alpha=1} = e^{\frac{\Delta t}{\tau}}$
+- peak INL $\approx \frac{\Delta t^2}{8\tau}$ at $\alpha \approx \frac{1}{2}$
 
-![image-20251017220740310](pi-cdr/image-20251017220740310.png)
+Hence, ***larger weight step $\Delta \alpha$ as $\alpha$ approaches 1*** in order to improve linearity. Unlike the sinusoidal case (symmetric, S-shaped), the correction is one-sided
+
+For $N$ uniform delay steps $t_k - t_0 = \frac{k}{N}\Delta t$, the predistorted weight is
+$$
+\alpha_k = \frac{e^{\frac{k}{N}\frac{\Delta t}{\tau}}-1}{e^{\frac{\Delta t}{\tau}}-1}, \quad k = 0, 1, \dots, N
+$$
+
+![image-20261013001122226](pi-cdr/image-20261013001122226.png)
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
-tau = 15  # ps
-t = np.linspace(6, 56, 500001)
+tau = 15    # ps
+dt = 6      # ps, \Delta t
+N = 100     # number of codes
+t = np.linspace(dt, 56, 500001)
 
-vi = 1- np.exp(-t/tau)
-vq = 1 - np.exp(-(t-6)/tau)	# \Detla t = 6
+vi = 1 - np.exp(-t/tau)
+vq = 1 - np.exp(-(t-dt)/tau)
 
-td = []
-alpha_list = np.linspace(0, 101, 101,  endpoint=False)/100
+def t_cross(alpha):
+    viq = (1-alpha)*vi + alpha*vq
+    return t[np.argmin(np.abs(viq - 0.5))]
 
-plt.figure(figsize=(20,8))
-plt.subplot(1, 3, 1)
-for alpha in alpha_list:
-    viq = (1-alpha) * vi + alpha*vq
-    differences  = np.abs((viq - 0.5))
-    closest_index = np.argmin(differences)
-    t_closest = t[closest_index]
-    td.append(t_closest)
-    plt.plot(t,viq)
+k = np.arange(N+1)
+alpha_lin = k/N
+alpha_predist = (np.exp(k/N*dt/tau) - 1)/(np.exp(dt/tau) - 1)
+
+td_lin = np.array([t_cross(a) for a in alpha_lin])
+td_lin = td_lin - td_lin[0]
+td_predist = np.array([t_cross(a) for a in alpha_predist])
+td_predist = td_predist - td_predist[0]
+td_closed = tau*np.log(1 + alpha_lin*(np.exp(dt/tau) - 1))
+
+plt.figure(figsize=(16,10))
+plt.subplot(2, 2, 1)
+for alpha in alpha_lin:
+    plt.plot(t[::1000], ((1-alpha)*vi + alpha*vq)[::1000])
 plt.plot([0, 60], [0.5,0.5], '--c', linewidth=3); plt.grid()
 plt.xlabel('t', fontsize=14); plt.ylabel('Voltage', fontsize=14)
 
-td = np.array(td) - td[0]
-d_td = td[1:] - td[:-1]
+plt.subplot(2, 2, 2)
+plt.plot(k, alpha_lin, 'bs-', label='linear')
+plt.plot(k, alpha_predist, 'gd-', label='predistortion')
+plt.grid(); plt.legend(fontsize=12)
+plt.xlabel('code k', fontsize=14); plt.ylabel(r'$\alpha$', fontsize=14)
 
-plt.subplot(1, 3, 2)
-plt.plot(alpha_list, td, 'ro-', linewidth=2)
-plt.grid(); plt.xlabel(r'$\alpha$', fontsize=14); plt.ylabel(r'$t_d$', fontsize=14)
+plt.subplot(2, 2, 3)
+plt.plot(k, td_lin, 'bs-', label='linear')
+plt.plot(k, td_closed, 'r--', linewidth=3, label='closed form', zorder=3)
+plt.plot(k, td_predist, 'gd-', label='predistortion')
+plt.grid(); plt.legend(fontsize=12)
+plt.xlabel('code k', fontsize=14); plt.ylabel(r'$t_d$', fontsize=14)
 
-plt.subplot(1, 3, 3)
-plt.plot(alpha_list[:-1], d_td, 'bo-')
-plt.grid(); plt.xlabel(r'$\alpha$', fontsize=14); plt.ylabel(r'$\Delta t_d$', fontsize=14)
+plt.subplot(2, 2, 4)
+plt.plot(k[:-1], np.diff(td_lin), 'bs-', label='linear')
+plt.plot(k[:-1], np.diff(td_predist), 'gd-', label='predistortion')
+plt.grid(); plt.legend(fontsize=12)
+plt.xlabel('code k', fontsize=14); plt.ylabel(r'$\Delta t_d$', fontsize=14)
 
 plt.show()
 ```
 
 
 
-### Input/Output amplitude
-
-A **constant Output amplitude** is desired because the *swing-dependent delay characteristic* of the CML-to-CMOS (C2C) circuit results in *AM–PM distortion* which eventually manifests as phase nonlinearity
 
 
-### Current-Mode Phase Interpolator
 
-
-Current-mode PIs (CMPIs) can achieve high linearity but at the cost of digital overhead to generate **sinusoidal weights**
-
-
-### Voltage-Mode Phase Interpolator
-
-### Integrating-Mode Phase Interpolator
 
 
 ## PI Nonlinearity Effect
@@ -434,8 +478,6 @@ $$
 
 
 ## reference
-
-A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "Improving Linearity in CMOS Phase Interpolators," in IEEE Journal of Solid-State Circuits, vol. 58, no. 6, pp. 1623-1635, June 2023 [[pdf](https://sudip.sites.olt.ubc.ca/files/2023/04/77.-Improving_Linearity_in_CMOS_Phase_Interpolators.pdf)]
 
 Cortiula A, Menin D, Bandiziol A, Driussi F, Palestri P. Modeling of Phase-Interpolator-Based Clock and Data Recovery for High-Speed PAM-4 Serial Interfaces. *Electronics*. 2025; [[https://www.mdpi.com/2079-9292/14/10/1979](https://www.mdpi.com/2079-9292/14/10/1979)]
 

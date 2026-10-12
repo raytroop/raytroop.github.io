@@ -1448,6 +1448,8 @@ $$
 
 ## XCP Parasitics
 
+> D. Hauspie, E. -C. Park and J. Craninckx, "Wideband VCO With Simultaneous Switching of Frequency Band, Active Core, and Varactor Size," in IEEE Journal of Solid-State Circuits, vol. 42, no. 7, pp. 1472-1480, July 2007 [[https://sci-hub.ru/10.1109/JSSC.2007.899105](https://sci-hub.ru/10.1109/JSSC.2007.899105)]
+> 
 > Chicco, Francesco, Raffaele Capoccia, Alessandro Pezzotta and Christian C. Enz. “Linear analysis of phase noise in LC oscillators in deep submicron CMOS technologies.” *2017 International Conference on Noise and Fluctuations (ICNF)* (2017): 1-4. [[https://infoscience.epfl.ch/server/api/core/bitstreams/a022482b-16e8-425f-8a99-3752789a22a9/content](https://infoscience.epfl.ch/server/api/core/bitstreams/a022482b-16e8-425f-8a99-3752789a22a9/content)]
 
 ![xcp_Rs](lc-osc/xcp_Rs.svg)
@@ -1484,8 +1486,6 @@ At fixed $K$ and $V_t$, $G_{DS_{\text{eff}}}$ always increases with $A_c$, so $F
 
 ---
 
-> F. Chicco, R. Capoccia, A. Pezzotta and C. Enz, "Linear analysis of phase noise in LC oscillators in deep submicron CMOS technologies," *2017 International Conference on Noise and Fluctuations (ICNF)*, Vilnius, Lithuania, 2017, pp. 1-4, doi: 10.1109/ICNF.2017.7985954. [[https://infoscience.epfl.ch/bitstreams/a022482b-16e8-425f-8a99-3752789a22a9/download](https://infoscience.epfl.ch/bitstreams/a022482b-16e8-425f-8a99-3752789a22a9/download)]
->
 > P. Yelleswarapu, A. Jha, R. Willis, Y. Makris and K. K. O, "Phase Noise Reduction in LC VCO’s Using an Array of Cross-Coupled Nanoscale MOSFETs and Intelligent Post-Fabrication Selection," in *IEEE Transactions on Microwave Theory and Techniques*, vol. 70, no. 6, pp. 3244-3256, June 2022 [[https://sci-hub.ru/10.1109/TMTT.2022.3164949](https://sci-hub.ru/10.1109/TMTT.2022.3164949)]
 >
 > Pula, Bhanu Teja, Peerla, Rizwan Shaik, Mal, Arindam, Sahoo, Bibhu Datta, Mitigating Gate Resistance in 180 nm CMOS High-Frequency LC-VCOs: Enhanced Performance and Simulation-Model Validation, IET Circuits, Devices & Systems, 2026, 5399291, 11 pages, 2026. https://doi.org/10.1049/cds2/5399291
@@ -1510,7 +1510,7 @@ The key mechanism is that **gate capacitance draws RF current through** $R_g$, c
 
 
 
-For \(R_s\), remember:
+For $R_s$, remember:
 $$
 Z_{\mathrm{diff}}=-\frac{2}{g_m}-2R_s, \qquad G_{\mathrm{neg}}=-\frac{g_m}{2(1+g_mR_s)}
 $$
@@ -1526,7 +1526,7 @@ $$
 
 > F. Pepe, A. Bonfanti, S. Levantino, C. Samori and A. L. Lacaita, "Suppression of Flicker Noise Up-Conversion in a 65-nm CMOS VCO in the 3.0-to-3.6 GHz Band," in *IEEE Journal of Solid-State Circuits*, vol. 48, no. 10, pp. 2375-2389, Oct. 2013 [[https://sci-hub.ru/10.1109/JSSC.2013.2273181](https://sci-hub.ru/10.1109/JSSC.2013.2273181)]
 >
-> —. *Analysis and minimization of flicker noise up-conversion in radio frequency LC-tuned oscillators*. 2014. Politecnico di Milano, PhD dissertation [[hdl.handle.net/10589/89783](hdl.handle.net/10589/89783)]
+> —. *Analysis and minimization of flicker noise up-conversion in radio frequency LC-tuned oscillators*. 2014. Politecnico di Milano, PhD dissertation [[https://www.politesi.polimi.it/bitstream/10589/89783/1/2014_03_PhD_Pepe.pdf](https://www.politesi.polimi.it/bitstream/10589/89783/1/2014_03_PhD_Pepe.pdf)]
 
 <span style="color:white; background-color:black">Drain resistance</span>
 

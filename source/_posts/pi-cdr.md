@@ -466,6 +466,9 @@ $$
 
 ### rotation spur
 
+> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
+>
+> —, "Improving Linearity in CMOS Phase Interpolators," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 6, pp. 1623-1635, June 2023, doi: 10.1109/JSSC.2023.3243305 [[pdf](https://sudip.sites.olt.ubc.ca/files/2023/04/77.-Improving_Linearity_in_CMOS_Phase_Interpolators.pdf)]
 
 
 

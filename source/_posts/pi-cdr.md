@@ -284,7 +284,7 @@ plt.show()
 
 
 
-## PI Nonlinearity Effect
+## PI static & dynamic linearity
 
 > Wang, Zhaowen. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
 
@@ -458,6 +458,13 @@ $$
 $$
 K_{f,DCO} = \frac{K_T}{T_o}\cdot \frac{1}{T_o} = \frac{K_T}{T_o^2}
 $$
+
+
+---
+
+![image-2026-10-13_12-46](pi-cdr/image-2026-10-13_12-46.png)
+
+### rotation spur
 
 
 

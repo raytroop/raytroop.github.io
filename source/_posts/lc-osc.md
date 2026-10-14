@@ -861,7 +861,7 @@ $$
 \;\rightarrow\;
 \text{frequency shift}
 \;\rightarrow\;
-\text{phase noise}.
+\text{phase noise}
 $$
 
 > The **oscillator phase is perturbed directly for the cross-coupled pair**
@@ -905,7 +905,7 @@ $I_n$ here is the **reactive tank current harmonic**, not directly the transisto
 
 
 
-![image-20260707222643057](lc-osc/image-20260707222643057.png)
+![image-20261015005211191](lc-osc/image-20261015005211191.png)
 
 
 
@@ -1275,7 +1275,7 @@ graph LR
 
 
 
-### switch res impact on Q
+### switch resistance effect
 
 series model (R<sub>s</sub>, C<sub>s</sub>) to parallel model (R<sub>p</sub>, C<sub>p</sub>) with fixed C<sub>s</sub> but varying R<sub>s</sub>
 
@@ -1803,7 +1803,7 @@ $$
 
 
 
-### Harmonic Shaping
+### Harmonic Shaping (Common-Mode Resonance)
 
 > E. Hegazi, H. Sjoland and A. Abidi, "A filtering technique to lower oscillator phase noise," *2001 IEEE International Solid-State Circuits Conference. Digest of Technical Papers. ISSCC (Cat. No.01CH37177)*, San Francisco, CA, USA, 2001 [[paper](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/D23_4.pdf), [slides](https://engineering.purdue.edu/oxidemems/conferences/isscc2001/DATA/SS23_4.pdf)]
 >
@@ -1824,6 +1824,27 @@ $$
 > *Yunbo Huang, Zunsong Yang*, et al., "A 7.0-to-8.6GHz Balanced Class-F-1 VCO with a Trifilar Transformer-Based Tank Achieving 194.5dBc/Hz FoM," IEEE MTT-S Radio Frequency Integrated Circuits (**RFIC**), June 2026
 
 
+
+> credits to *Claude Opus 5.5*
+
+Give the common-mode (CM) loop a **high, resistive impedance at $2f_0$**, $Z_{2f_0}$: either $Z_S$ in the tail (explicit, Hegazi: $L_\text{tail}$ resonates the common-source capacitance at $2f_0$) or $Z_{CM}$ in the tank's CM path (implicit, Murphy, Shahmohammadi: CM resonance of the main tank). Either way the transistors see the same $V_{GS}$ and $V_{DS}$
+
+![cm_2f0_loop.drawio](lc-osc/cm_2f0_loop.drawio.svg)
+
+1. **Triode loading and thermal noise** ($1/f^2$ region): when the ON device enters deep triode, its $1/g_{ds0}$, a noisy resistor ($\gamma \to 1$), sits in series with $Z_{2f_0}$, which suppresses its loss and its noise together: it no longer de-Qs the tank, and the noise reaching the tank drops to $S_i \approx 4kT\gamma/(g_{ds0}\lvert Z_{2f_0}\rvert^2)$. The impedance matters at $2f_0$ because the two FETs take turns in triode: two events per period on a CM node. Loss matters more than noise here: triode sits at the waveform extremes, where the ISF $\approx 0$. With $V \propto \cos\omega_0 t$ and triode conductance $g(t)$, the loss scales as $\langle g\cos^2\omega_0 t\rangle$ but the PM noise as $\langle g\sin^2\omega_0 t\rangle$; a uniform $\pm 60^\circ$ triode window gives about $0.4\times$ the PM noise of a fixed resistor with the same loss
+2. **Flicker upconversion** ($1/f^3$ region): $I_{H2}$ is $\pi/2$ away from $I_{H1}$. A resistive $2f_0$ impedance keeps $V_{H2}$ at that phase, so the single-ended $V_{GS}$ and $V_{DS}$ rise and fall **symmetrically** and $\Gamma_\text{eff,dc} = 0$. The capacitive path of a plain tank adds another $-\pi/2$, the waveform turns asymmetric and $\Gamma_\text{eff,dc} \neq 0$. Energy view: $H_2$ no longer flows through a capacitor (the tail filter blocks it, or $R_{p2}$ absorbs it), so it adds no Groszkowski shift for $1/f$ noise to modulate
+
+The two benefits pull the $Q$ of the $2f_0$ resonance in opposite directions
+
+|                   | triode / thermal                      | flicker                     |
+| ----------------- | ------------------------------------- | --------------------------- |
+| **needs**         | $\lvert Z_{2f_0}\rvert \gg 1/g_{ds0}$ | $\angle Z_{2f_0} \approx 0$ |
+| **detuning**      | tolerant                              | must be tuned closely       |
+| **$Q$ at $2f_0$** | high helps                            | low is more robust          |
+
+A mistuned high-Q CM tank can be **worse than none**: Shahmohammadi's 5 GHz voltage-biased class-B ($Q_{DM}=10$, $Q_{CM}=20$) has a $1/f^3$ corner of ~10 kHz when tuned, **1.1 MHz** at $\omega_{CM}=1.7\,\omega_{DM}$, and 400 kHz without the technique. Hence the adaptive CM-resonance tuning in Gallucci (JSSC'25)
+
+---
 
 ![image-20260616224300853](lc-osc/image-20260616224300853.png)
 

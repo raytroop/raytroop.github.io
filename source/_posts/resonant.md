@@ -213,6 +213,12 @@ $$
 \boxed{R_p \approx Q_s^2R_s \qquad L_p \approx L_s}
 $$
 
+The quality factor is $Q_s = \omega L_s/R_s$. The parallel inductance formula is
+
+$$
+L_p = \frac{1+Q_s^2}{Q_s^2}L_s
+$$
+
 
 
 ### Q by general definition
@@ -245,6 +251,34 @@ $$
 $$
 Q = 2\pi \cdot \left. \frac{\frac{1}{2}LI_0^2}{\frac{V_0^2}{2R}R\cdot \frac{2\pi}{\omega}} \right|_{V_0=\omega LI_0} = \frac{R}{\omega L}
 $$
+
+
+
+### equivalent noise between series and parallel
+
+![vnin_series_parallel](resonant/vnin_series_parallel.svg)
+
+
+
+In the series circuit, the open-circuit voltage at P1–P2 is just $V_n$, since no current flows and L drops nothing:
+
+$$
+\overline{v_{P1P2}^2} = 4kTR
+$$
+
+In the parallel circuit, $I_n$ flows into $R_p \parallel j\omega L_p$. By construction of the transformation, that impedance equals $R + j\omega L$ at this ω. Using $R^2 + \omega^2L^2 = R^2(1+Q_s^2)$ and $R_p = R(1+Q_s^2)$:
+
+$$
+\overline{v_{P1P2}^2} = \frac{4kT}{R_p}\,(R^2 + \omega^2L^2) = \frac{4kT}{R(1+Q_s^2)}\cdot R^2(1+Q_s^2) = 4kTR \;\checkmark
+$$
+
+Both circuits give the same port noise, as they should.
+
+> To convert current-noise power spectral density into voltage-noise power spectral density, you multiply by $\color{red}|Z|^2$, not $Z^2$
+>
+> $|Z^2| = |Z|^2$
+
+
 
 ## Series/Parallel RLC tank
 

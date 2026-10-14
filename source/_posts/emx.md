@@ -491,7 +491,7 @@ $$
 - **drawing** layer rectangle pin and specify **Access Direction** as intended
 - check **Cadence pins** in **Advanced options**
 
-> The rectangle pins are always selected as driven port while there are **only rectangle pin**  whether **Cadence pins** checked or not.
+> When only rectangular pins are present, they are consistently assigned as driven ports, regardless of the "Cadence pins" selection state
 
 ---
 

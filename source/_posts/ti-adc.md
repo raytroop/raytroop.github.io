@@ -218,6 +218,7 @@ $\text{CK}$, $I/Q_1$ and $I/Q_{2,3}$ shift by **1UI**
 
 
 ## Calibration Techniques
+> M. Guo, J. Mao, S. -W. Sin, H. Wei and R. P. Martins, "A 5 GS/s 29 mW Interleaved SAR ADC With 48.5 dB SNDR Using Digital-Mixing Background Timing-Skew Calibration for Direct Sampling Applications," in IEEE Access, vol. 8, pp. 138944-138954, 2020, doi: 10.1109/ACCESS.2020.3012699 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9151956](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9151956)]
 
 ![image-20260324180833001](ti-adc/image-20260324180833001.png)
 

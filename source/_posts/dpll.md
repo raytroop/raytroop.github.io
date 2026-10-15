@@ -1131,6 +1131,10 @@ Topics in IC (Wireline Transceiver Design) [[https://ocw.snu.ac.kr/sites/default
 
 ---
 
+<span style="background-color:yellow">L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]</span>
+
+D. Pfaff, R. Abbott, X. -J. Wang, S. Moazzeni, R. Mason and R. R. smith, "A 14-GHz Bang-Bang Digital PLL With Sub-150-fs Integrated Jitter for Wireline Applications in 7-nm FinFET CMOS," in IEEE Journal of Solid-State Circuits, vol. 55, no. 3, pp. 580-591, March 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2946134](https://sci-hub.ru/10.1109/JSSC.2019.2946134)]
+
 M. Zanuso, D. Tasca, S. Levantino, A. Donadel, C. Samori and A. L. Lacaita, "Noise Analysis and Minimization in Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 56, no. 11, pp. 835-839, Nov. 2009 [[https://sci-hub.st/10.1109/TCSII.2009.2032470](https://sci-hub.st/10.1109/TCSII.2009.2032470)]
 
 N. Da Dalt, "Markov Chains-Based Derivation of the Phase Detector Gain in Bang-Bang PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 53, no. 11, pp. 1195-1199, Nov. 2006 [[https://sci-hub.st/10.1109/TCSII.2006.883197](https://sci-hub.st/10.1109/TCSII.2006.883197)]
@@ -1138,10 +1142,6 @@ N. Da Dalt, "Markov Chains-Based Derivation of the Phase Detector Gain in Bang-B
 —, "A design-oriented study of the nonlinear dynamics of digital bang-bang PLLs," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 52, no. 1, pp. 21-31, Jan. 2005 [[https://sci-hub.se/10.1109/TCSI.2004.840089](https://sci-hub.se/10.1109/TCSI.2004.840089)]
 
 —, "Theory and Implementation of Digital Bang-Bang Frequency Synthesizers for High Speed Serial Data Communications", PhD Dissertation, RWTH Aachen University, Aachen, North Rhine-Westphalia, Germany, 2007 [[pdf](https://publications.rwth-aachen.de/record/62439/files/DaDalt_Nicola.pdf)]
-
-D. Pfaff, R. Abbott, X. -J. Wang, S. Moazzeni, R. Mason and R. R. smith, "A 14-GHz Bang-Bang Digital PLL With Sub-150-fs Integrated Jitter for Wireline Applications in 7-nm FinFET CMOS," in IEEE Journal of Solid-State Circuits, vol. 55, no. 3, pp. 580-591, March 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2946134](https://sci-hub.ru/10.1109/JSSC.2019.2946134)]
-
-<span style="background-color:yellow">L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]</span>
 
 
 ---

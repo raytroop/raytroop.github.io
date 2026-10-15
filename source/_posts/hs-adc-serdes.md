@@ -25,6 +25,8 @@ mathjax: true
 
 ## Timing Skew for Broadband signals
 
+> N. Da Dalt, M. Harteneck, C. Sandner and A. Wiesbauer, "On the jitter requirements of the sampling clock for analog-to-digital converters," in *IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications*, vol. 49, no. 9, pp. 1354-1360, Sept. 2002 [[https://sci-hub.ru/10.1109/TCSI.2002.802353](https://sci-hub.ru/10.1109/TCSI.2002.802353)]
+>
 > M. El-Chammas and B. Murmann, "General Analysis on the Impact of Phase-Skew Mismatch in Time-Interleaved ADCs," IEEE Trans. on Circuits and Systems I, vol. 56, No. 5, pp. 902-910, May 2009 [[https://sci-hub.ru/10.1109/TCSI.2009.2015206](https://sci-hub.ru/10.1109/TCSI.2009.2015206)]
 >
 > —, "Background Calibration of Timing Skew in Time-Interleaved A/D Converters," Ph.D. Thesis, Stanford University, August 2010 [[https://purl.stanford.edu/xc093xt9301](https://purl.stanford.edu/xc093xt9301)]
@@ -32,20 +34,42 @@ mathjax: true
 > —, "Time-Interleaved ADCs: Theory and Design," Tutorial in IEEE International Conf. on Elec., Circ., and Sys., Lebanon, December 2011 [[https://el-chammas.com/papers/Manar_ICECS_handouts.pdf](https://el-chammas.com/papers/Manar_ICECS_handouts.pdf)]
 >
 > —, "The World of Time-Interleaved ADCs: From Theory to Design," Tutorial in IEEE International NEWCAS Conf., Montreal, Canada, June 2012 [[https://el-chammas.com/papers/Manar_NEWCAS_TIADC_tutorial.pdf](https://el-chammas.com/papers/Manar_NEWCAS_TIADC_tutorial.pdf)]
+>
+> Dalt, Nicola Da and Ali Sheikholeslami. “Understanding Jitter and Phase Noise: A Circuits and Systems Perspective.” (2018).
 
 
 
-![image-20260926112748037](hs-adc-serdes/image-20260926112748037.png)
+### Da Dalt's Approach
 
-Using a **normalized autocorrelation** (or equivalently assuming <span style="color:#FF5733">**unit signal power**</span>) — $\color{red}R(\tau) = \frac{R_x(\tau)}{R_x(0)}$
+> Nicola Da Dalt, ESSCIRC 2019 — *Jitter in Wireline and Data Converter Applications*
 
-![image-20260926110427560](hs-adc-serdes/image-20260926110427560.png)
+![image-20261015235749559](hs-adc-serdes/image-20261015235749559.png)
+
+
+
+![image-20261015235918881](hs-adc-serdes/image-20261015235918881.png)
+
+![image-20261015235946829](hs-adc-serdes/image-20261015235946829.png)
+
+
+
+### El-Chammas's Approach
+
+El-Chammas's exact SNR is always $\ge$ Da Dalt's: **more rigorous, not more conservative**
+
+![image-20261015235353792](hs-adc-serdes/image-20261015235353792.png)
+
+
+
+Eq. (29) above uses a **normalized autocorrelation** (or equivalently assumes <span style="color:#FF5733">**unit signal power**</span>) — $\color{red}R(\tau) = \frac{R_x(\tau)}{R_x(0)}$
+
+
 
 
 
 <span style="color:white; background-color:black">**sinusoidal input**</span>
 
-for a **sinusoid** $x(t)=\sqrt{2}\cos\omega t$
+for a **sinusoid** $x(t)=\sqrt{2}\cos(\omega t+\varphi)$, with random phase $\varphi\sim U[0,2\pi)$ so that $x(t)$ is WSS as (16) assumes
 $$
 \boxed{R(\tau)=\cos\omega\tau \qquad\Rightarrow\qquad |R''(0)|=(2\pi f)^2}
 $$
@@ -80,15 +104,13 @@ That factor of $1/3$ comes from averaging all frequencies uniformly from $-f_c$ 
 
 
 
-
-
-
-
 ---
 
 <span style="color:white; background-color:black">**sinusoidal input w/ N=2**</span>
 
 ![image-20260926091551033](hs-adc-serdes/image-20260926091551033.png)
+
+$\hat G$ in (2.49) is the optimal common gain, $\hat G=\frac{1}{NP}\sum_i R(\tau_i-\hat\tau)$ — see the comparison at the top of this subsection
 
 ***Reducing (2.51) to (20.23)***
 
@@ -113,11 +135,7 @@ The last step uses $\sin x\approx x$, and the result is exactly (20.23).
 
 
 
-
-
----
-
----
+### Murmann's Lecture
 
 > Boris Murmann, August 2013 Lectures on Circuit and Architecture Design for High-Speed ADCs — *Determining ADC specs from system specs* [[https://bbs.eetop.cn/thread-979682-1-1.html](https://bbs.eetop.cn/thread-979682-1-1.html)]
 
@@ -129,9 +147,7 @@ The last step uses $\sin x\approx x$, and the result is exactly (20.23).
 
 
 
-
-
----
+### Timing Skew Calibration 
 
 > M. El-Chammas and B. Murmann, "A 12-GS/s 81-mW 5-bit Time-Interleaved Flash ADC With Background Timing Skew Calibration," in *IEEE Journal of Solid-State Circuits*, vol. 46, no. 4, pp. 838-847, April 2011 [[https://sci-hub.ru/10.1109/JSSC.2011.2108125](https://sci-hub.ru/10.1109/JSSC.2011.2108125)]
 

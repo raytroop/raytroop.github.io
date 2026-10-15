@@ -1901,6 +1901,16 @@ A mistuned high-Q CM tank can be **worse than none**: Shahmohammadi's 5 GHz volt
 
 
 
+## Supply Sensitivity in LC Oscillators
+
+> Y. Chen et al., "A Supply Pushing Reduction Technique for LC Oscillators Based on Ripple Replication and Cancellation," in IEEE Journal of Solid-State Circuits, vol. 54, no. 1, pp. 240-252, Jan. 2019 [[https://sci-hub.ru/10.1109/JSSC.2018.2871195](https://sci-hub.ru/10.1109/JSSC.2018.2871195)]
+>
+> R. Yang, R. B. Staszewski, M. Babaie and Z. Zong, "Passive Techniques to Reduce Supply Sensitivity in an LC Oscillator Achieving 46-dB Suppression," 2025 IEEE European Solid-State Electronics Research Conference (ESSERC), Munich, Germany, 2025, pp. 509-512, doi: 10.1109/ESSERC66193.2025.11214006
+>
+> —, "Fully Passive Techniques for Reducing Supply Sensitivity in LC Oscillators," in IEEE Open Journal of the Solid-State Circuits Society, doi: 10.1109/OJSSCS.2026.3723352 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11653291](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11653291)]
+
+*TODO* &#128197;
+
 
 
 ## simulation in oscillator

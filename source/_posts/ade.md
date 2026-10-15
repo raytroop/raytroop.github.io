@@ -277,11 +277,16 @@ Layout XL里面的黄色框框
 
 ## s-Domain Controlled Source
 
+`scccc`, `sccvs`, `svccs`, `svcvs`
+
 ![image-20250806234417728](ade/image-20250806234417728.png)
 
 ![image-20250806235058423](ade/image-20250806235058423.png)
 
 
+## z-Domain Controlled Source
+
+`zcccc`, `zccvs`, `zvccs`, `zvcvs`
 
 ## Layout XL pointing to new schematic
 

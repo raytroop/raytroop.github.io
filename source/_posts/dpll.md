@@ -1097,7 +1097,13 @@ $$
 
 
 
+## DLF proportional coefficient $\beta_{opt}$
 
+> L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
+>
+> M. Zanuso, D. Tasca, S. Levantino, A. Donadel, C. Samori and A. L. Lacaita, "Noise Analysis and Minimization in Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 56, no. 11, pp. 835-839, Nov. 2009 [[https://sci-hub.st/10.1109/TCSII.2009.2032470](https://sci-hub.st/10.1109/TCSII.2009.2032470)]
+
+*TODO* &#128197;
 
 
 ## reference
@@ -1130,10 +1136,6 @@ Topics in IC (Wireline Transceiver Design) [[https://ocw.snu.ac.kr/sites/default
 
 
 ---
-
-<span style="background-color:yellow">L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]</span>
-
-<span style="background-color:yellow">M. Zanuso, D. Tasca, S. Levantino, A. Donadel, C. Samori and A. L. Lacaita, "Noise Analysis and Minimization in Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 56, no. 11, pp. 835-839, Nov. 2009 [[https://sci-hub.st/10.1109/TCSII.2009.2032470](https://sci-hub.st/10.1109/TCSII.2009.2032470)]</span>
 
 D. Pfaff, R. Abbott, X. -J. Wang, S. Moazzeni, R. Mason and R. R. smith, "A 14-GHz Bang-Bang Digital PLL With Sub-150-fs Integrated Jitter for Wireline Applications in 7-nm FinFET CMOS," in IEEE Journal of Solid-State Circuits, vol. 55, no. 3, pp. 580-591, March 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2946134](https://sci-hub.ru/10.1109/JSSC.2019.2946134)]
 

@@ -129,6 +129,20 @@ stem(out)
 
 
 
+---
+
+> Sai Goutham Sunkara, create a precursor in a single-bit response using RC filter [[linkdin](https://www.linkedin.com/posts/saigouthamsunkara_serdes-signalintegrity-wireline-share-7516975321414266880-TaIe/?highlightedUpdateUrn=urn%3Ali%3Aactivity%3A7517239267753029632&highlightedUpdateType=SOCIAL_SHARE&origin=SOCIAL_SHARE&utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
+
+![View image](ssa/1792186574888.jpeg)
+
+**Two poles** is the minimum RC-filter order needed to produce a nonzero −1-UI precursor
+
+The **cursors** are defined relative to the **response peak**, not to when the input arrived. A causal system can't respond before its input, but it can easily respond before its own peak. Any extra delay or smoothing that moves the peak more than 1 UI after the response begins will put signal at the −1 UI sample.
+
+
+
+
+
 ## S-Parameter to Single Bit Response (SBR)
 
 > Mike Li, "S-Parameter to Single Bit Response (SBR) Transformation and Convergence Study" [[https://ieee802.org/3/bj/public/may12/li_01_0512.pdf](https://ieee802.org/3/bj/public/may12/li_01_0512.pdf)]

@@ -345,6 +345,22 @@ $$\begin{align}
 
 ## Ahuja Compensation
 
+> B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6, pp. 629-633, Dec. 1983. [[https://sci-hub.se/10.1109/JSSC.1983.1052012](https://sci-hub.se/10.1109/JSSC.1983.1052012)]
+>
+> U. Dasgupta, "Issues in "Ahuja" frequency compensation technique", IEEE International Symposium on Radio-Frequency Integration Technology, 2009. [[https://sci-hub.se/10.1109/RFIT.2009.5383679](https://sci-hub.se/10.1109/RFIT.2009.5383679)]
+>
+> R. J. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage CMOS amplifier," in *IEEE Journal of Solid-State Circuits*, vol. 30, no. 5, pp. 591-594, May 1995 [[https://sci-hub.se/10.1109/4.384174](https://sci-hub.se/10.1109/4.384174)]
+>
+> A. Garimella and P. M. Furth, "Frequency compensation techniques for op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International Midwest Symposium on Circuits and Systems (MWSCAS), 2011 [[https://sci-hub.se/10.1109/MWSCAS.2011.6026315](https://sci-hub.se/10.1109/MWSCAS.2011.6026315)]
+>
+> H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE International Conference on Electronics, Circuits and Systems, 2006 [[https://sci-hub.se/10.1109/ICECS.2006.379776](https://sci-hub.se/10.1109/ICECS.2006.379776)]
+>
+> H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode compensation over Miller compensation in two-stage operational amplifiers," Proceeding of the 13th international symposium on Low power electronics and design (ISLPED '08), Bangalore, India, 2008 [[https://sci-hub.se/10.1145/1393921.1393995](https://sci-hub.se/10.1145/1393921.1393995)]
+>
+> Stabilizing a 2-Stage Amplifier URL:[https://a2d2ic.wordpress.com/2016/11/10/stabilizing-a-2-stage-amplifier/](https://a2d2ic.wordpress.com/2016/11/10/stabilizing-a-2-stage-amplifier/)
+>
+> EE 240B: Advanced Analog Circuit Design, Prof. Bernhard E. Boser [[OTA II, Multi-Stage](https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf)]
+
 This ***Ahuja compensation*** topology is popularly known as ***cascode compensation***
 
 The cause of the positive zero is the *feedforward current through $C_m$*.
@@ -473,7 +489,17 @@ a much greater magnitude than $g_\text{m9}/C_C$
 
 ## Pole-Zero Compensation
 
-> ***Pole-Zero Compensation*** is also known as ***Lead Compensation***, ***Parallel Compensation***
+>  R.Eschauzier "Wide Bandwidth Low Power Operational Amplifiers", Delft University Press, 1994.
+>
+> Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018. Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson. 6.7 Compensation
+>
+> Application Note AN-1286 Compensation for the LM3478 Boost Controller
+>
+> ECEN 607 Advanced Analog Circuit Design Techniques Spring 2017 [[Lect 1D Op-Amps Stability and Frequency Compensation Techniques](https://people.engr.tamu.edu/s-sanchez/Lec_for_607_stability Jan27.pdf)]
+>
+> Sergio Franco, San Francisco State University, Design with Operational Amplifiers and Analog Integrated Circuits, 4/e [[pdf](https://zakerhaghighi.ir/wp-content/uploads/2017/09/Sergio-Franco-Design-With-Operational-Amplifiers-And-Analog-Integrated-Circuits-McGraw-Hill-Series-in-Electrical-and-Computer-Engineering-c2015.pdf)]
+
+***Pole-Zero Compensation*** is also known as ***Lead Compensation***, ***Parallel Compensation***
 
 ![image-20220307234938855](freq-compensation/image-20220307234938855.png)
 
@@ -589,6 +615,22 @@ wzc = 1/2/pi/Rc/Cc; % zero frequency
 ![image-20251025011056582](freq-compensation/image-20251025011056582.png)
 
 ## Pole-Zero Doublet
+
+> C. Mangelsdorf, "Don’t Fear the Doublet [Shop Talk: What You Didn’t Learn in School]," in *IEEE Solid-State Circuits Magazine*, vol. 18, no. 3, pp. 16-21, Summer 2026, doi: 10.1109/MSSC.2026.3707281.
+>
+> Ha Tien Thanh, *Verification of Pole-Zero Doublet Behavior in Analog Circuits: A SkyWater Sky130 Simulation Study* [[linkedin](https://www.linkedin.com/posts/hatienthanh_pole-zero-doublet-behavior-in-analog-circuits-ugcPost-7516331651065475072-HxGx/?highlightedUpdateUrn=urn%3Ali%3Aactivity%3A7516331652101615617&highlightedUpdateType=SOCIAL_SHARE&origin=SOCIAL_SHARE&utm_source=share&utm_medium=member_desktop&rcm=ACoAAD-cuiIBDJ62eh9q3qTSSdslYXr-XMd8TGw)]
+>
+> Elad Alon, Lecture 10: Settling-Limited Amplifier Design Methodology, EE 240B – Spring 2018, Advanced Analog Integrated Circuits [[https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf)]
+>
+> Eric Chang, Prof. Elad Alon EE240B HW3 [[https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf); [https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf)]
+>
+> Prof. Tai-Haur Kuo, Analog IC Design ( 類比積體電路設計 ), Operational Amplifiers [http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf](http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf)
+>
+> SERGIO FRANCO, Demystifying pole-zero doublets [[https://www.edn.com/demystifying-pole-zero-doublets/](https://www.edn.com/demystifying-pole-zero-doublets/)]
+>
+> B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between frequency response and settling time of operational amplifiers," in IEEE Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974, [[https://sci-hub.se/10.1109/JSSC.1974.1050527](https://sci-hub.se/10.1109/JSSC.1974.1050527)]
+>
+> P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17, no. 6, pp. 969-982, Dec. 1982, [[https://sci-hub.se/10.1109/JSSC.1982.1051851](https://sci-hub.se/10.1109/JSSC.1982.1051851)]
 
 ![image-20251103210637155](freq-compensation/image-20251103210637155.png)
 
@@ -810,64 +852,19 @@ legend('\omega_{p2}<\omega_{z}', '\omega_{p2}=\omega_{z}', '\omega_{p2}>\omega_{
 
 ## reference
 
-Viola Schaffer,  ISSCC 2021 Tutorials Designing Amplifiers for Stability [[pdf](https://www.nishanchettri.com/isscc-slides/2021%20ISSCC/TUTORIALS/ISSCC2021-T9.pdf)]
+Viola Schaffer,  ISSCC 2021 Tutorials Designing Amplifiers for Stability
 
 J. H. Huijsing, "Operational Amplifiers, Theory and Design, 3rd ed. New York: Springer, 2017"
 
-Razavi, Behzad. Design of Analog CMOS Integrated Circuits. India: McGraw-Hill, 2017. [[pdf](https://picture.iczhiku.com/resource/eetop/shkFghTKAoYQtXXX.pdf)]
+Razavi, Behzad. Design of Analog CMOS Integrated Circuits. India: McGraw-Hill, 2017.
 
 Sansen, Willy M. Analog Design Essentials. Germany: Springer US, 2006.
 
 Gray, P. R., Hurst, P. J., Lewis, S. H., & Meyer, R. G. (2024). *Analysis and design of analog integrated circuits* (Sixth edition.). John Wiley & Sons, Inc..
 
----
 
-***Ahuja Compensation***
 
-B. K. Ahuja, "An Improved Frequency Compensation Technique for CMOS Operational Amplifiers," IEEE 1. Solid-State Circuits, vol. 18, no. 6, pp. 629-633, Dec. 1983. [[https://sci-hub.se/10.1109/JSSC.1983.1052012](https://sci-hub.se/10.1109/JSSC.1983.1052012)]
 
-U. Dasgupta, "Issues in "Ahuja" frequency compensation technique", IEEE International Symposium on Radio-Frequency Integration Technology, 2009. [[https://sci-hub.se/10.1109/RFIT.2009.5383679](https://sci-hub.se/10.1109/RFIT.2009.5383679)]
 
-R. J. Reay and G. T. A. Kovacs, "An unconditionally stable two-stage CMOS amplifier," in *IEEE Journal of Solid-State Circuits*, vol. 30, no. 5, pp. 591-594, May 1995 [[https://sci-hub.se/10.1109/4.384174](https://sci-hub.se/10.1109/4.384174)]
 
-A. Garimella and P. M. Furth, "Frequency compensation techniques for op-amps and LDOs: A tutorial overview," 2011 IEEE 54th International Midwest Symposium on Circuits and Systems (MWSCAS), 2011 [[https://sci-hub.se/10.1109/MWSCAS.2011.6026315](https://sci-hub.se/10.1109/MWSCAS.2011.6026315)]
 
-H. Aminzadeh, R. Lotfi and S. Rahimian, "Design Guidelines for Two-Stage Cascode-Compensated Operational Amplifiers," 2006 13th IEEE International Conference on Electronics, Circuits and Systems, 2006 [[https://sci-hub.se/10.1109/ICECS.2006.379776](https://sci-hub.se/10.1109/ICECS.2006.379776)]
-
-H. Aminzadeh and K. Mafinezhad, "On the power efficiency of cascode compensation over Miller compensation in two-stage operational amplifiers," Proceeding of the 13th international symposium on Low power electronics and design (ISLPED '08), Bangalore, India, 2008 [[https://sci-hub.se/10.1145/1393921.1393995](https://sci-hub.se/10.1145/1393921.1393995)]
-
-Stabilizing a 2-Stage Amplifier URL:[https://a2d2ic.wordpress.com/2016/11/10/stabilizing-a-2-stage-amplifier/](https://a2d2ic.wordpress.com/2016/11/10/stabilizing-a-2-stage-amplifier/)
-
-EE 240B: Advanced Analog Circuit Design, Prof. Bernhard E. Boser [[OTA II, Multi-Stage](https://people.eecs.berkeley.edu/~boser/courses/240B/lectures/M07%20OTA%20II.pdf)]
-
----
-
-***Parallel Compensation***
-
-R.Eschauzier "Wide Bandwidth Low Power Operational Amplifiers", Delft University Press, 1994.
-
-Gene F. Franklin, J. David Powell, and Abbas Emami-Naeini. 2018. Feedback Control of Dynamic Systems (8th Edition) (8th. ed.). Pearson. 6.7 Compensation
-
-Application Note AN-1286 Compensation for the LM3478 Boost Controller
-
-ECEN 607 Advanced Analog Circuit Design Techniques Spring 2017 [[Lect 1D Op-Amps Stability and Frequency Compensation Techniques](https://people.engr.tamu.edu/s-sanchez/Lec_for_607_stability Jan27.pdf)]
-
-Sergio Franco, San Francisco State University, Design with Operational Amplifiers and Analog Integrated Circuits, 4/e [[pdf](https://zakerhaghighi.ir/wp-content/uploads/2017/09/Sergio-Franco-Design-With-Operational-Amplifiers-And-Analog-Integrated-Circuits-McGraw-Hill-Series-in-Electrical-and-Computer-Engineering-c2015.pdf)]
-
----
-
-***Pole-Zero Doublet***
-
-C. Mangelsdorf, "Don’t Fear the Doublet [Shop Talk: What You Didn’t Learn in School]," in *IEEE Solid-State Circuits Magazine*, vol. 18, no. 3, pp. 16-21, Summer 2026, doi: 10.1109/MSSC.2026.3707281.
-
-Elad Alon, Lecture 10: Settling-Limited Amplifier Design Methodology, EE 240B – Spring 2018, Advanced Analog Integrated Circuits [[https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/lectures/Lecture10_Settling_Design_2up.pdf)]
-
-Eric Chang, Prof. Elad Alon EE240B HW3 [[https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3.pdf) and [https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf](https://inst.eecs.berkeley.edu/~ee240b/sp18/homeworks/hw3_soln.pdf)]
-
-Prof. Tai-Haur Kuo, Analog IC Design ( 類比積體電路設計 ), Operational Amplifiers [http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf](http://msic.ee.ncku.edu.tw/course/aic/201809/chapter5.pdf)
-
-SERGIO FRANCO, Demystifying pole-zero doublets [[https://www.edn.com/demystifying-pole-zero-doublets/](https://www.edn.com/demystifying-pole-zero-doublets/)]
-
-B. Y. T. Kamath, R. G. Meyer and P. R. Gray, "Relationship between frequency response and settling time of operational amplifiers," in IEEE Journal of Solid-State Circuits, vol. 9, no. 6, pp. 347-352, Dec. 1974, [[https://sci-hub.se/10.1109/JSSC.1974.1050527](https://sci-hub.se/10.1109/JSSC.1974.1050527)]
-
-P. R. Gray and R. G. Meyer, "MOS operational amplifier design-a tutorial overview," in IEEE Journal of Solid-State Circuits, vol. 17, no. 6, pp. 969-982, Dec. 1982, [[https://sci-hub.se/10.1109/JSSC.1982.1051851](https://sci-hub.se/10.1109/JSSC.1982.1051851)]

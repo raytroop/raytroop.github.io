@@ -533,10 +533,12 @@ Same with differential ended termination driver.
 ## Tailless CML driver
 
 > G. Steffan *et al*., "6.4 A 64Gb/s PAM-4 transmitter with 4-Tap FFE and 2.26pJ/b energy efficiency in 28nm CMOS FDSOI," *2017 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2017, pp. 116-117 [[https://sci-hub.ru/10.1109/ISSCC.2017.7870288](https://sci-hub.ru/10.1109/ISSCC.2017.7870288)]
+>
+> Z. Toprak-Deniz *et al*., "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2939081](https://sci-hub.ru/10.1109/JSSC.2019.2939081)]
 
 ![image-20261001180040383](tx/image-20261001180040383.png)
 
-
+![image-20261017095055911](tx/image-20261017095055911.png)
 
 
 
@@ -785,6 +787,8 @@ Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter 
 —, Synopsys. CMOS Circuit Techniques for Wireline Transmitters [[https://www.synopsys.com/webinars/wireline-transmitters-part-1.html](https://www.synopsys.com/webinars/wireline-transmitters-part-1.html)]
 
 Tod Dickson, IBM. High-Speed CMOS Serial Transmitters for 56-112Gb/s Electrical Interconnects [[https://www.youtube.com/watch?v=g1pcZabsRNc](https://www.youtube.com/watch?v=g1pcZabsRNc)]
+
+T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)]
 
 ---
 

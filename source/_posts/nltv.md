@@ -52,8 +52,13 @@ For white noise $n(t)$
 
 ## flicker noise Modulation
 
-
 ### flicker noise spectrum
+
+> Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
+>
+> P. Yelleswarapu, A. Jha, R. Willis, Y. Makris and K. K. O, "Phase Noise Reduction in LC VCO’s Using an Array of Cross-Coupled Nanoscale MOSFETs and Intelligent Post-Fabrication Selection," in *IEEE Transactions on Microwave Theory and Techniques*, vol. 70, no. 6, pp. 3244-3256, June 2022 [[https://sci-hub.ru/10.1109/TMTT.2022.3164949](https://sci-hub.ru/10.1109/TMTT.2022.3164949)]
+
+![image-20261017092235495](nltv/image-20261017092235495.png)
 
 ![image-20260724230315724](nltv/image-20260724230315724.png)
 
@@ -900,8 +905,6 @@ A. Demir, A. Mehrotra and J. Roychowdhury, "Phase noise in oscillators: a unifyi
 — and A. Sangiovanni-Vincentelli, *Analysis and Simulation of Noise in Nonlinear Electronic Circuits and Systems*, vol. 425. Boston, MA, USA: Kluwer Academic Publishers, 1998
 
 A. Mehrotra and A. Sangiovanni-Vincentelli, *Noise Analysis of Radio Frequency Circuits*, 1st ed. New York, NY, USA: Springer, 2004
-
-Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
 
 ---
 

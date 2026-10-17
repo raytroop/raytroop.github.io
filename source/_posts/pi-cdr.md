@@ -29,7 +29,7 @@ Current-mode PIs (CMPIs) can achieve high linearity but at the cost of digital o
 
 
 
-A **constant Output amplitude** is desired because the *swing-dependent delay characteristic* of the CML-to-CMOS (C2C) circuit results in *AM–PM distortion* which eventually manifests as phase nonlinearity
+A **constant Output amplitude** is desired because the *swing-dependent delay characteristic* of the **CML-to-CMOS (C2C)** circuit results in *AM–PM distortion* which eventually manifests as phase nonlinearity
 
 
 
@@ -44,10 +44,22 @@ A **constant Output amplitude** is desired because the *swing-dependent delay ch
 ## Integrating-Mode Phase Interpolator (IMPI)
 
 > A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
+>
+> Shaokang ZHAO, 2025, "Multi-Phase Clock Generator for High-Speed Wireline Systems," [[paper](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/1.Thesis/2.Mphil/Shaokang%20Thesis.pdf), [slides](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/2.Slides/2.Mphil/Shaokang_Zhao%20Slides.pdf)]
+
+![image-20261017142858523](pi-cdr/image-20261017142858523.png)
 
 
 
-## Predistortion
+## reference clock edges
+
+> **B. Razavi, **"The Design of a Phase Interpolator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 4, pp. 6-10, Fall 2023.([https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf))
+
+<span style="background-color:yellow">***kink problem***</span>
+
+![image-20240919223032380](pi-cdr/image-20240919223032380.png)
+
+
 
 !!! Clock Edges
 
@@ -59,11 +71,7 @@ And for a phase interpolator, you need those reference clocks to be completely t
 
 
 
-***kink problem***
-
-![image-20240919223032380](pi-cdr/image-20240919223032380.png)
-
-> B. Razavi, **"The Design of a Phase Interpolator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 15, Issue. 4, pp. 6-10, Fall 2023.([https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf))
+## Predistortion
 
 
 

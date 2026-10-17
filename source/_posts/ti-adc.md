@@ -172,15 +172,15 @@ Thus, differentiation produces two effects: **magnitude scaling by $\omega$** an
 
 ## Clock Generation for Interleaved ADCs
 
-![image-20260920233137056](ti-adc/image-20260920233137056.png)
+![image-20261017111944790](ti-adc/image-20261017111944790.png)
 
 Note that the falling edge of $\phi_1$ is **determined by the rising edge of CK** and is thus **free from jitter and mismatch in $X_1$**, which accumulates jitter and phase mismatch
 
 ![image-20260920233403464](ti-adc/image-20260920233403464.png)
 
-**reset mechanism** to the latches for nominal order
+<span style="background-color:yellow">**reset mechanism** to the latches for nominal order</span>
 
-![image-20260920233601904](ti-adc/image-20260920233601904.png)
+![image-20261017112345989](ti-adc/image-20261017112345989.png)
 
 
 

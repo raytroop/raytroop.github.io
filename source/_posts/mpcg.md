@@ -11,6 +11,16 @@ mathjax: true
 
 
 
+## MPG using DLL
+
+> Z. Wang,.*Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
+
+![image-20261017145847473](mpcg/image-20261017145847473.png)
+
+Each delay stage is an inverter, so it shifts phase by $180^\circ$ (inversion) plus its delay $\tau$. The QDLL locks $\tau = T/8$ ($45^\circ$), so each stage shifts by $225^\circ$: $CKDL_0 \to CKDL_{225} \to CKDL_{90} \to CKDL_{315}$. 
+
+$T/8$ is the shortest stage delay that keeps all 8 outputs on the $45^\circ$ grid (the others are $3T/8$, $5T/8$, $7T/8$), so the minimum inverter delay $\tau_{min}$ sets the maximum frequency: $\tau_{min} \le T/8$, i.e. $f \le 1/(8\tau_{min})$.
+
 
 
 ## MPG using Divider
@@ -69,6 +79,43 @@ mathjax: true
 
 
 
+---
+
+<span style="color:white; background-color:black">ph\<0:1\> 2UI clock to oph\<0:3\> 4UI clock</span>
+
+![div2to4_rt.drawio](mpcg/div2to4_rt.drawio.svg)
+
+
+
+---
+
+<span style="color:white; background-color:black">clock divide  by 2 only</span>
+
+![div2_ret.drawio](mpcg/div2_ret.drawio.svg)
+
+
+
+
+
+**Retiming functionality**
+
+- **Jitter removal**: the DFF re-samples the divider output with the input clock, so output edges are timed by the clock, not by the divider. The jitter and delay variation accumulated in the divider latches and logic are removed; only the DFF's clock-to-Q jitter is added. This works only while the divider output meets the DFF setup time, the critical constraint here.
+- **Glitch masking**: the divider latches are level-sensitive, so glitches during reset and at reset release show up on their outputs. The DFF is edge-triggered: its output changes only on a clock edge, so glitches between edges never reach the output.
+
+Note: the divider latches must be reset. They form a feedback loop that powers up in a random state, which leaves the output polarity (and the phase order across parallel dividers) undefined. The retiming DFF needs no reset: it has no feedback, so it picks up the divider's state on the first clock edge. Leaving reset out also keeps the DFF fast.
+
+
+
+---
+
+<span style="color:white; background-color:black">PH\<0:7\> 8UI clock to OC\<0:15> 16UI clock</span>
+
+![div2_8to16.drawio](mpcg/div2_8to16.drawio.svg)
+
+
+
+
+
 ## MPG using ILO
 
 > D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130, doi: 10.1109/ISSCC49657.2024.10454537
@@ -119,7 +166,7 @@ $$
 V_{ip}=\mathrm{XNOR}(CKD_0,CKD_{90})\qquad \qquad V_{in}=\mathrm{XNOR}(CKD_{45},CKD_{315})
 $$
 
-> The $225^\circ$ per-stage phase shift is constrained by the minimum inverter propagation delay
+> The loop settles where $V_{ip} = V_{in}$ on average, i.e. at a stage delay $\tau = T/8$ ($45^\circ$). Each inverter stage adds $180^\circ$ of inversion, so it shifts phase by $225^\circ$.  (see [MPG using DLL](#mpg-using-dll)).
 
 ![image-20260917225735471](mpcg/image-20260917225735471.png)
 
@@ -187,19 +234,25 @@ $$
 
 ---
 
-![image-20251014215409535](mpcg/image-20251014215409535.png)
-
-![image-20251014220640238](mpcg/image-20251014220640238.png)
-
 > C. Menolfi *et al*., "A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)* [[https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205](https://sci-hub.se/https://doi.org/10.1109/ISSCC.2018.8310205)],[[visual](https://picture.iczhiku.com/resource/eetop/shiGDYTDYikLlnXv.pdf)]
 >
 > M. A. Kossel *et al*., "8.3 An 8b DAC-Based SST TX Using Metal Gate Resistors with 1.4pJ/b Efficiency at 112Gb/s PAM-4 and 8-Tap FFE in 7nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021[[https://sci-hub.se/10.1109/ISSCC42613.2021.9365784](https://sci-hub.se/10.1109/ISSCC42613.2021.9365784)]
 >
 > C. Menolfi *et al*., "A 28Gb/s source-series terminated TX in 32nm CMOS SOI," *2012 IEEE International Solid-State Circuits Conference*, San Francisco, CA, USA, 2012
 >
-> Bob Lefferts, Navraj Nandra. SNUG Israel 2007 [[https://picture.iczhiku.com/resource/eetop/whKYwQorwYoPUVbm.pdf](https://picture.iczhiku.com/resource/eetop/whKYwQorwYoPUVbm.pdf)]
+> Bob Lefferts, Navraj Nandra. SNUG Israel 2007
+
+![image-20251014215409535](mpcg/image-20251014215409535.png)
+
+![image-20251014220640238](mpcg/image-20251014220640238.png)
+
+
 
 ---
+
+> Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
+>
+> Casper B, O'Mahony F. Clocking analysis, implementation and measurement techniques for high-speed data links: A tutorial. IEEE Transactions on Circuits and Systems I: Regular Papers. 2009;56(1):17-39 [[https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf](https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf)]
 
 ![image-20240720073616597](mpcg/image-20240720073616597.png)
 
@@ -212,9 +265,15 @@ $$
 
 
 
-> Bae, Woorham; Jeong, Deog-Kyoon: 'Analysis and Design of CMOS Clocking Circuits for Low Phase Noise' (Materials, Circuits and Devices, 2020)
->
-> Casper B, O'Mahony F. Clocking analysis, implementation and measurement techniques for high-speed data links: A tutorial. IEEE Transactions on Circuits and Systems I: Regular Papers. 2009;56(1):17-39
+
+
+
+
+## MUX Structure
+
+![mux](mpcg/mux.svg)
+
+
 
 
 

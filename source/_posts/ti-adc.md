@@ -82,11 +82,7 @@ only one front-end channel $L=1$ eliminate any timing/bandwidth mismatch errors 
 
 
 
-## Interchannel Crosstalk
 
-
-
-![image-20260920232810972](ti-adc/image-20260920232810972.png)
 
 
 
@@ -170,7 +166,9 @@ Thus, differentiation produces two effects: **magnitude scaling by $\omega$** an
 
 
 
-## Clock Generation for Interleaved ADCs
+## ADC Clocking
+
+<span style="background-color:yellow">**Track-and-Hold (TAH)**</span>, <span style="background-color:yellow">**Sample-and-Holds (SAH)**</span>
 
 ![image-20261017111944790](ti-adc/image-20261017111944790.png)
 
@@ -206,15 +204,63 @@ Note that the falling edge of $\phi_1$ is **determined by the rising edge of CK*
 $\text{CK}$, $I/Q_1$ and $I/Q_{2,3}$ shift by **1UI**
 
 
----
+
+### Interchannel Crosstalk
+
+> D. Xu *et al*., "8.5 A Scalable Adaptive ADC/DSP-Based 1.25-to-56Gbps/112Gbps High-Speed Transceiver Architecture Using Decision-Directed MMSE CDR in 16nm and 7nm," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 134-136 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9366063](https://sci-hub.ru/10.1109/ISSCC42613.2021.9366063)]
+
+![image-20260920232810972](ti-adc/image-20260920232810972.png)
+
+![image-20261018192820211](ti-adc/image-20261018192820211.png)
+
+
+
+### 64Gb/s Clock Generation
+
+> D. Xu *et al*., "8.5 A Scalable Adaptive ADC/DSP-Based 1.25-to-56Gbps/112Gbps High-Speed Transceiver Architecture Using Decision-Directed MMSE CDR in 16nm and 7nm," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 134-136 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9366063](https://sci-hub.ru/10.1109/ISSCC42613.2021.9366063)]
+
+![image-20261018193058479](ti-adc/image-20261018193058479.png)
+
+![image-20261018192820211](ti-adc/image-20261018192820211.png)
 
 ---
+
+<span style="color:white; background-color:black">**4x8 Time Interleaving w/ 25% duty cycle for input tracking**</span>
+
+
+
+![adc_clocking_TH](ti-adc/adc_clocking_TH.svg)
+
+![4way-clocking-TH.drawio](ti-adc/4way-clocking-TH.drawio.svg)
+
+
+
+<span style="background-color:yellow">Ensure nominal order by **masking some edges**</span>
+
+![adc_clocking_reset](ti-adc/adc_clocking_reset.svg)
+
+![4way-clocking-reset-mask.drawio](ti-adc/4way-clocking-reset-mask.drawio.svg)
+
+
+
+<span style="background-color:yellow">**ring counter** for generating **SAH** clock</span>
+
+![image-20261018235719799](ti-adc/image-20261018235719799.png)
+
+![adc_clocking_ring](ti-adc/adc_clocking_ring.svg)
+
+
+
+
+
+### 128Gb/s Clock Generation
 
 
 > Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022 [[https://sci-hub.st/10.1109/ISSCC42614.2022.9731650](https://sci-hub.st/10.1109/ISSCC42614.2022.9731650)]
 >
 > P. Liu et al., "A 128Gb/s ADC/DAC Based PAM-4 Transceiver with >45dB Reach in 3nm FinFET," 2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits), Kyoto, Japan, 2025
 
+![adc-clk_4to32way_8to64way.drawio](ti-adc/adc-clk_4to32way_8to64way.drawio.svg)
 
 ![image-20250806224145281](ti-adc/image-20250806224145281.png)
 
@@ -235,7 +281,27 @@ $\text{CK}$, $I/Q_1$ and $I/Q_{2,3}$ shift by **1UI**
 
 
 
-## resync (alignment)
+
+
+
+
+
+### 224Gb/s Clock Generation
+
+> M. Gambhir *et al*., "A 2.05pJ/bit, 212.5Gbps DSP Based Transceiver with 55dB Reach in 3nm FinFET," *2026 IEEE/JSAP Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2026, pp. 1-3, doi: 10.1109/VLSITechnologyandCir65830.2026.11577411.
+
+
+
+![image-20261018203306919](ti-adc/image-20261018203306919.png)
+
+![image-20261018203332571](ti-adc/image-20261018203332571.png)
+
+4UI track, 12UI hold in TAH
+
+
+
+
+## ADC Data Alignment
 
 > Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver [[www.theise.org/...](https://www.theise.org/wp-content/uploads/2023/10/Analog_1_%EA%B9%80%EA%B0%80%EC%9D%B8%EA%B5%90%EC%88%98%EB%8B%98_DGIST_LectureNote-Min-Jae-Seo.pdf)]
 

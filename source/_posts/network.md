@@ -435,7 +435,7 @@ writeva(hfit, 'channel_32poles.va');
 
 
 
-## Cascading S-Parameters
+## Cascaded Two-Ports
 
 > Sam Palermo, Lecture 6: S-Parameter Channel Examples [[https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_sparam_channels.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture6_ee689_sparam_channels.pdf)]
 >
@@ -477,7 +477,13 @@ With load impedance $v_3=i_3 Z_L$, cascade transfer function can be derived
 
 ![image-20260523135815455](network/image-20260523135815455.png)
 
+---
 
+> C. K. Singh and G. C. Temes, "R-C Ladder Design: A Tutorial [CAS Education]," in *IEEE Circuits and Systems Magazine*, vol. 24, no. 4, pp. 65-69, Fourthquarter 2024 [[https://sci-net.xyz/10.1109/MCAS.2024.3462661](https://sci-net.xyz/10.1109/MCAS.2024.3462661)]
+
+**second-order R-C lowpass filter**
+
+![image-20261018101538611](network/image-20261018101538611.png)
 
 
 
@@ -544,9 +550,11 @@ When you cascade two networks by multiplying their T-matrices, you're implicitly
 
 Bogatin, E. (2018). *Signal and power integrity, simplified*. Prentice Hall. [[pdf](https://www.oldfriend.url.tw/article/SI_PI_book/Signal%20and%20Power%20Integrity%20-%20Simplified_2nd_Eric%20Bogatin_Prentice%20Hall%20PTR_2010.pdf)]
 
-Oh, Kyung, and Xing Yuan. *High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting*. 1st edition. Prentice Hall, 2011. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiGPFydIQAYdxVx.pdf)]
+Oh, Kyung, and Xing Yuan. *High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting*. 1st edition. Prentice Hall, 2011.
 
 Pupalaikis, P. (2020). *S-Parameters for Signal Integrity*. Cambridge: Cambridge University Press. 
+
+Advanced Signal Integrity for High-Speed Digital Designs, S. H. Hall and H. L. Heck, John Wiley & Sons, 2009
 
 ---
 

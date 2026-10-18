@@ -192,6 +192,8 @@ ps = roots(as);
 > —, Integrated Analog Systems D - Lecture 03 (Continuous-Time Filters) [[https://youtu.be/6GdDiwaKDZw](https://youtu.be/6GdDiwaKDZw)]
 >
 > —, Integrated Analog Systems D - Lecture 05 (Continuous-Time Filters) [[https://youtu.be/LHhEK1RlC6w](https://youtu.be/LHhEK1RlC6w)]
+>
+> C. K. Singh and G. C. Temes, "R-C Ladder Design: A Tutorial [CAS Education]," in *IEEE Circuits and Systems Magazine*, vol. 24, no. 4, pp. 65-69, Fourthquarter 2024 [[https://sci-net.xyz/10.1109/MCAS.2024.3462661](https://sci-net.xyz/10.1109/MCAS.2024.3462661)]
 
 ![image-20260524100715080](filters/image-20260524100715080.png)
 
@@ -207,9 +209,9 @@ ps = roots(as);
 
 ---
 
-***2nd-Order RC LPF***
+<span style="color:white; background-color:black">***2nd-Order RC LPF***</span>
 
-***Loading effect** & **limitation***
+<span style="background-color:yellow">***Loading effect** & **limitation***</span>
 
 ![image-20260524103229122](filters/image-20260524103229122.png)
 
@@ -219,7 +221,7 @@ ps = roots(as);
 
 ![image-20260524103833060](filters/image-20260524103833060.png)
 
-**Phase Magin with damping Factor $\zeta$**
+<span style="background-color:yellow">**Phase Magin with damping Factor $\zeta$**</span>
 
 ![image-20260524103924774](filters/image-20260524103924774.png)
 $$
@@ -231,7 +233,7 @@ $$
 
 ---
 
-***General 2nd-Order RC LPF***
+<span style="color:white; background-color:black">***General 2nd-Order RC LPF***</span>
 
 ![image-20260524151528679](filters/image-20260524151528679.png)
 
@@ -239,11 +241,11 @@ $$
 
 ![image-20260524154744621](filters/image-20260524154744621.png)
 
-***Laplace Transform***
+<span style="background-color:yellow">***Laplace Transform***</span>
 
 ![image-20260524152125499](filters/image-20260524152125499.png)
 
-***Stability Analysis***
+<span style="background-color:yellow">***Stability Analysis***</span>
 
 ![image-20260524153121052](filters/image-20260524153121052.png)
 
@@ -253,6 +255,22 @@ $$
 
 ![image-20260524153009904](filters/image-20260524153009904.png)
 
+
+
+## Bode's noise theorem
+
+Bode's noise theorem holds only for **linear, passive networks in thermal equilibrium**, meaning every lossy element is at the same temperature T and the only noise is the thermal noise of that loss. 
+
+![image-20261018104835544](filters/image-20261018104835544.png)
+
+![image-20261018104519699](filters/image-20261018104519699.png)
+
+A **short circuit** is the limit of a capacitor with **infinite capacitance**, since its impedance go to 0 only when capacitance go to infinity. 
+
+For 1st RC filter, $C_\infty=C$, and $C_0$ (the capacitance "seen" at the output) is $C$ in parallel with a short, which is **infinite**, i.e. $C_0=C+\infty=\infty$
+$$
+V_n^2=kT(\frac{1}{C} - \frac{1}{\infty})=\frac{kT}{C}
+$$
 
 
 ## Active Filters

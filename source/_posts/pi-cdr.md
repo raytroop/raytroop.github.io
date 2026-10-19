@@ -41,6 +41,98 @@ A **constant Output amplitude** is desired because the *swing-dependent delay ch
 
 
 
+
+
+
+
+---
+
+> B. Razavi, "The Design of a Phase Interpolator [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 4, pp. 6-10, Fall 2023 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf)]
+
+<span style="background-color:yellow">Use of **resistors** in the interpolation network</span>
+
+![image-20261019221950869](pi-cdr/image-20261019221950869.png)
+
+| R               | High Value | Low Value |
+| --------------- | ---------- | --------- |
+| *kink*          | &#10062;   | &#9989;   |
+| *nonconformity* | &#9989;    | &#10062;  |
+
+![pi_inv_res_iso](pi-cdr/pi_inv_res_iso.svg)
+
+With $\tau_1 = R_1C_1$, $\tau_2 = R_2C_2$ and $\tau_{12} = R_1C_2$
+$$
+\frac{V_o}{V_{in}} = \frac{1}{D(s)}, \quad \frac{V_m}{V_{in}} = \frac{1+s\tau_2}{D(s)}
+$$
+where
+$$
+D(s) = 1 + s(\tau_1+\tau_2+\tau_{12}) + s^2\tau_1\tau_2 = (1+s\tau_a)(1+s\tau_b)
+$$
+
+$$
+\tau_{a,b} = \frac{1}{2}\left[(\tau_1+\tau_2+\tau_{12}) \pm \sqrt{(\tau_1+\tau_2+\tau_{12})^2 - 4\tau_1\tau_2}\right], \quad \tau_a > \tau_2 > \tau_b
+$$
+
+The step responses are
+$$\begin{align}
+V_o(t) &= 1 - \frac{\tau_a e^{-t/\tau_a} - \tau_b e^{-t/\tau_b}}{\tau_a - \tau_b} \\
+V_m(t) &= 1 - \frac{(\tau_a-\tau_2) e^{-t/\tau_a} + (\tau_2-\tau_b) e^{-t/\tau_b}}{\tau_a - \tau_b}
+\end{align}$$
+
+- initial slope: $V_m'(0^+) = \frac{1}{R_1C_1}$ for any $R_2$ ($V_m = V_o = 0$ at $t=0^+$, no current flows into $R_2$), while $V_o'(0^+) = 0$
+- Elmore time constant of $V_m$: $\int_0^\infty (1-V_m)\,dt = \tau_a + \tau_b - \tau_2 = R_1(C_1+C_2)$, ***independent of $R_2$***, all of $C_2$'s charge still flows through $R_1$
+- Elmore time constant of $V_o$: $\int_0^\infty (1-V_o)\,dt = \tau_a + \tau_b = R_1C_1 + (R_1+R_2)C_2$, grows with $R_2$
+
+For $R_2 \gg R_1$ (well-separated poles)
+$$
+\boxed{V_m(t) \approx 1 - \frac{R_2}{R_1+R_2}e^{-\frac{t}{(R_1\parallel R_2)C_1}} - \frac{R_1}{R_1+R_2}e^{-\frac{t}{(R_1+R_2)C_2}}}
+$$
+
+<span style="background-color:yellow">For the internal node (the inverter output), increasing $R_2$ does not change its Elmore time constant $R_1(C_1+C_2)$, but it reshapes the response</span>: 
+
+- most of the swing completes with a **fast pole** $\approx (R_1\parallel R_2)C_1 \to R_1C_1$, leaving a small tail of amplitude $\approx \frac{R_1}{R_1+R_2}$ with $\tau \approx (R_1+R_2)C_2$. 
+
+So the inverter edge gets sharper (an earlier mid-rail crossing) even though the output-node time constant $R_1C_1+(R_1+R_2)C_2$ grows
+
+![pi_inv_res_iso_step](pi-cdr/pi_inv_res_iso_step.png)
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+R1, C1, C2 = 1, 1, 4    # normalized, t in units of R1*C1
+t = np.linspace(0, 25, 25001)
+
+def step(R2):
+    tau1, tau2, tau12 = R1*C1, R2*C2, R1*C2
+    b1, b2 = tau1 + tau2 + tau12, tau1*tau2
+    ta = (b1 + np.sqrt(b1**2 - 4*b2))/2
+    tb = (b1 - np.sqrt(b1**2 - 4*b2))/2
+    vo = 1 - (ta*np.exp(-t/ta) - tb*np.exp(-t/tb))/(ta - tb)
+    vm = 1 - ((ta - tau2)*np.exp(-t/ta) + (tau2 - tb)*np.exp(-t/tb))/(ta - tb)
+    return vm, vo
+
+plt.figure(figsize=(12, 4.5))
+for R2 in [1e-3, 0.3, 1, 3, 10]:
+    vm, vo = step(R2)
+    label = r'$R_2 \to 0$' if R2 < 0.01 else rf'$R_2={R2:g}R_1$'
+    plt.subplot(1, 2, 1); plt.plot(t, vm, linewidth=2, label=label)
+    plt.subplot(1, 2, 2); plt.plot(t, vo, linewidth=2, label=label)
+
+for i, title in enumerate([r'$V_m$ (inverter output)', r'$V_o$ (shared output)']):
+    plt.subplot(1, 2, i+1)
+    plt.axhline(0.5, linestyle='--', color='gray'); plt.grid(); plt.legend(fontsize=10)
+    plt.title(title, fontsize=14); plt.xlabel(r'$t\,/\,R_1C_1$', fontsize=14)
+plt.subplot(1, 2, 1); plt.ylabel('step response', fontsize=14)
+plt.suptitle(r'$C_2 = 4C_1$', fontsize=14); plt.tight_layout()
+
+plt.show()
+```
+
+
+
+
+
 ## Integrating-Mode Phase Interpolator (IMPI)
 
 > A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
@@ -501,6 +593,14 @@ Cortiula A, Menin D, Bandiziol A, Driussi F, Palestri P. Modeling of Phase-Inter
 
 G. Souliotis, A. Tsimpos and S. Vlassis, "Phase Interpolator-Based Clock and Data Recovery With Jitter Optimization," in *IEEE Open Journal of Circuits and Systems*, vol. 4, pp. 203-217, 2023 [[https://ieeexplore.ieee.org/document/10184121](https://ieeexplore.ieee.org/document/10184121)]
 
-B. Razavi, "The Design of a Phase Interpolator [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 4, pp. 6-10, Fall 2023 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf)]
-
 T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in IEEE Journal of Solid-State Circuits, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)]
+
+CHUNG-CHUN (CC) CHEN, *Why Phase Interpolator Based CDR?* [[https://youtu.be/FkoJwnAYbMs](https://youtu.be/FkoJwnAYbMs)]
+
+—, *Why High Linearity Phase Interpolator with Low Power?* [[https://youtu.be/II9vQPH8MNM](https://youtu.be/II9vQPH8MNM)]
+
+—, *Why Not A Voltage Mode or A Current Mode Phase Interpolator?* [[https://youtu.be/1vrBgDNTOMA](https://youtu.be/1vrBgDNTOMA)]
+
+—, *Why An Integrating Mode Phase Interpolator?* [[https://youtu.be/VEkM8ZEcYnc](https://youtu.be/VEkM8ZEcYnc)]
+
+—, *Why High-Speed Integrating Mode Phase Interpolator, IMPI?* [[https://youtu.be/6197voGpOek](https://youtu.be/6197voGpOek)]

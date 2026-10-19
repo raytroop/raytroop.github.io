@@ -1,0 +1,942 @@
+{
+  "schemaVersion": 72,
+  "id": "project-e9c4da80-9780-46ef-bd04-6d0ef50f6183",
+  "name": "New Circuit",
+  "topDocumentId": "document-main",
+  "defaults": {
+    "instance": { "mirror": "none", "rotation": 0 },
+    "instancesByType": {
+      "capacitor": {
+        "parameters": { "value": "1p" },
+        "target": { "deviceClass": "capacitor", "kind": "primitive" }
+      },
+      "resistor": {
+        "parameters": { "value": "1k" },
+        "target": { "deviceClass": "resistor", "kind": "primitive" }
+      }
+    },
+    "label": { "alignment": "middle", "locked": false, "rotation": 0 },
+    "routeLeg": { "mode": "manual" }
+  },
+  "documents": [
+    {
+      "id": "document-main",
+      "name": "dut",
+      "netlist": { "formalParameters": [], "name": "dut", "terminals": [] },
+      "presentation": {
+        "compactness": "normal",
+        "grid": 10,
+        "labelSubscriptAfterFirst": false,
+        "labelSubscriptItalic": false,
+        "styleProfileId": "razavi-textbook-v1"
+      },
+      "instances": [
+        {
+          "type": "resistor",
+          "name": "R1",
+          "id": "R1",
+          "coordinate": [320, 120],
+          "rotation": 90,
+          "labels": [
+            {
+              "anchor": { "fallback": [320, 140], "offset": [0, 20] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["R"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["1"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-R1",
+              "kind": "instance-label",
+              "order": 0
+            }
+          ]
+        },
+        {
+          "type": "resistor",
+          "name": "R2",
+          "id": "R2",
+          "coordinate": [460, 120],
+          "rotation": 90,
+          "labels": [
+            {
+              "anchor": { "fallback": [460, 140], "offset": [0, 20] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["R"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["2"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-R2",
+              "kind": "instance-label",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "type": "capacitor",
+          "name": "C1",
+          "id": "C1",
+          "coordinate": [390, 180],
+          "labels": [
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [402, 185], "offset": [12, 5] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["C"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["1"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-C1",
+              "kind": "instance-label",
+              "order": 2
+            }
+          ]
+        },
+        {
+          "type": "capacitor",
+          "name": "C2",
+          "id": "C2",
+          "coordinate": [540, 180],
+          "labels": [
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [552, 185], "offset": [12, 5] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["C"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["2"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-C2",
+              "kind": "instance-label",
+              "order": 3
+            }
+          ]
+        },
+        {
+          "type": "voltage-source",
+          "name": "Vin",
+          "id": "V1",
+          "coordinate": [240, 170],
+          "parameters": {
+            "amplitude": "1",
+            "damping": "0",
+            "dc": "1",
+            "delay": "0",
+            "fall": "1ps",
+            "frequency": "1k",
+            "high": "1",
+            "low": "0",
+            "offset": "0",
+            "period": "10ns",
+            "phase": "0",
+            "rise": "1ps",
+            "waveform": "dc",
+            "width": "5ns"
+          },
+          "target": { "deviceClass": "voltage-source", "kind": "primitive" },
+          "labels": [
+            {
+              "alignment": "start",
+              "anchor": { "fallback": [255, 175], "offset": [15, 5] },
+              "bind": "name",
+              "format": {
+                "runs": [
+                  {
+                    "children": ["V"],
+                    "styles": ["italic", "bold"]
+                  },
+                  {
+                    "children": ["in"],
+                    "styles": ["subscript", "bold"]
+                  }
+                ]
+              },
+              "id": "instance-label-V1",
+              "kind": "instance-label",
+              "order": 4,
+              "sizeScale": 1
+            }
+          ]
+        },
+        {
+          "type": "ground",
+          "id": "GND1",
+          "coordinate": [240, 230]
+        }
+      ],
+      "routes": [
+        {
+          "end": { "junction": "junction-ui-3" },
+          "id": "route-ui-1-a-3",
+          "legId": "route-leg-ace29482c237b3d7",
+          "start": { "terminal": ["R1", "1"] }
+        },
+        {
+          "end": { "terminal": ["R2", "2"] },
+          "id": "route-ui-1-b-3",
+          "legId": "route-leg-51c28c9bdab88a30",
+          "start": { "junction": "junction-ui-3" }
+        },
+        {
+          "id": "route-ui-2",
+          "legs": [
+            {
+              "bend": "route-bend-77bdbebaa41b7a96",
+              "coordinate": [540, 120],
+              "id": "route-leg-77bdbebaa41b7a96"
+            },
+            {
+              "id": "route-leg-77bdbfbaa41b7c49",
+              "terminal": ["C2", "1"]
+            }
+          ],
+          "start": { "terminal": ["R2", "1"] }
+        },
+        {
+          "end": { "junction": "junction-ui-3" },
+          "id": "route-ui-4",
+          "legId": "route-leg-c70356568efe97cc",
+          "start": { "terminal": ["C1", "1"] }
+        },
+        {
+          "id": "route-ui-5",
+          "legs": [
+            {
+              "bend": "route-bend-b425448e843180bb",
+              "coordinate": [240, 120],
+              "id": "route-leg-b425448e843180bb"
+            },
+            {
+              "id": "route-leg-b425438e84317f08",
+              "terminal": ["R1", "2"]
+            }
+          ],
+          "start": { "terminal": ["V1", "+"] }
+        },
+        {
+          "id": "route-canonical-356dc19768ae6f95",
+          "legs": [
+            {
+              "bend": "route-bend-5920d8b8c0f73e48",
+              "coordinate": [240, 220],
+              "id": "route-leg-b310e4c4455a351e"
+            },
+            {
+              "id": "route-leg-467946f0b6589027",
+              "junction": "junction-ui-7"
+            }
+          ],
+          "start": { "terminal": ["V1", "-"] }
+        },
+        {
+          "end": { "junction": "junction-ui-7" },
+          "id": "route-ui-8",
+          "legId": "route-leg-05662e849956eae0",
+          "start": { "terminal": ["C1", "2"] }
+        },
+        {
+          "id": "route-ui-6-b-7",
+          "legs": [
+            {
+              "bend": "route-bend-845487703058ee8d",
+              "coordinate": [540, 220],
+              "id": "route-leg-3afcaad6b24584a5"
+            },
+            {
+              "id": "route-leg-845484703058e974",
+              "terminal": ["C2", "2"]
+            }
+          ],
+          "start": { "junction": "junction-ui-7" }
+        }
+      ],
+      "connections": {
+        "contacts": [],
+        "unrouted": [
+          [
+            {
+              "junction": "junction-ui-7"
+            },
+            {
+              "terminal": ["GND1", "0"]
+            }
+          ]
+        ]
+      },
+      "nets": [
+        {
+          "at": { "terminal": ["C1", "1"] },
+          "id": "net-ui-1"
+        },
+        {
+          "at": { "terminal": ["C2", "1"] },
+          "id": "net-ui-2"
+        },
+        {
+          "at": { "terminal": ["R1", "2"] },
+          "id": "net-ui-5"
+        },
+        {
+          "at": { "terminal": ["C1", "2"] },
+          "id": "net-ui-6"
+        }
+      ],
+      "junctions": [
+        {
+          "coordinate": [390, 120],
+          "id": "junction-ui-3",
+          "role": "branch"
+        },
+        {
+          "coordinate": [390, 220],
+          "id": "junction-ui-7",
+          "role": "branch"
+        }
+      ],
+      "annotations": [
+        {
+          "alignment": "start",
+          "anchor": {
+            "direction": "forward",
+            "fallbackPosition": { "x": 535, "y": 110 },
+            "kind": "route",
+            "legId": "route-leg-77bdbebaa41b7a96",
+            "normalOffset": -10,
+            "orientation": "follow",
+            "routeId": "route-ui-2",
+            "t": 0.9166666666666666
+          },
+          "bind": { "kind": "net-name", "netId": "net-ui-2" },
+          "id": "net-label-route-ui-2",
+          "kind": "net-label",
+          "netId": "net-ui-2",
+          "order": 5
+        },
+        {
+          "anchor": {
+            "direction": "forward",
+            "fallbackPosition": { "x": 410, "y": 110 },
+            "kind": "route",
+            "legId": "route-leg-51c28c9bdab88a30",
+            "normalOffset": -10,
+            "orientation": "follow",
+            "routeId": "route-ui-1-b-3",
+            "t": 0.4
+          },
+          "bind": { "kind": "net-name", "netId": "net-ui-1" },
+          "id": "net-label-route-ui-1-b-3",
+          "kind": "net-label",
+          "netId": "net-ui-1",
+          "order": 6
+        },
+        {
+          "anchor": {
+            "direction": "forward",
+            "fallbackPosition": { "x": 260, "y": 110 },
+            "kind": "route",
+            "legId": "route-leg-b425438e84317f08",
+            "normalOffset": -10,
+            "orientation": "follow",
+            "routeId": "route-ui-5",
+            "t": 0.3333333333333333
+          },
+          "bind": { "kind": "net-name", "netId": "net-ui-5" },
+          "id": "net-label-route-ui-5",
+          "kind": "net-label",
+          "netId": "net-ui-5",
+          "order": 7
+        }
+      ],
+      "drafting": { "objects": [] },
+      "mosBulkDefaults": { "nmosNetId": "net-ui-6" },
+      "connectivityEvidence": [
+        {
+          "id": "connectivity-evidence-05bc14a4cf4265ca",
+          "kind": "name-claim",
+          "name": "0",
+          "netId": "net-ui-6",
+          "owner": { "kind": "power-marker", "objectId": "GND1" },
+          "powerDomain": "ground",
+          "scope": "global"
+        },
+        {
+          "id": "connectivity-evidence-873a5c6e05d65a2e",
+          "kind": "name-claim",
+          "name": "V_o",
+          "netId": "net-ui-2",
+          "owner": { "annotationId": "net-label-route-ui-2", "kind": "net-label" },
+          "scope": "local"
+        },
+        {
+          "id": "connectivity-evidence-2e2d4acc15117805",
+          "kind": "name-claim",
+          "name": "V_m",
+          "netId": "net-ui-1",
+          "owner": { "annotationId": "net-label-route-ui-1-b-3", "kind": "net-label" },
+          "scope": "local"
+        },
+        {
+          "id": "connectivity-evidence-7df7a8b5d864cb82",
+          "kind": "name-claim",
+          "name": "V_i",
+          "netId": "net-ui-5",
+          "owner": { "annotationId": "net-label-route-ui-5", "kind": "net-label" },
+          "scope": "local"
+        }
+      ],
+      "layoutGroups": [],
+      "constraints": [],
+      "sourceStatus": "connectivity-modified",
+      "revision": 32,
+      "noConnects": []
+    }
+  ],
+  "componentDefinitions": [
+    {
+      "electrical": {
+        "capabilities": {
+          "supportsBulkBinding": false,
+          "supportsModel": false,
+          "supportsValueAnnotation": true
+        },
+        "deviceClass": "capacitor",
+        "dialects": ["spice", "spectre"],
+        "id": "capacitor",
+        "parameters": [
+          {
+            "defaultValue": "1p",
+            "displayRole": "value",
+            "editor": "text",
+            "help": "Capacitance",
+            "label": "Value",
+            "name": "value",
+            "placeholder": "1p",
+            "required": true,
+            "unitHint": "F"
+          }
+        ],
+        "pinOrder": ["1", "2"],
+        "pinSemantics": [
+          {
+            "pinName": "1",
+            "role": "capacitor-top-plate"
+          },
+          {
+            "pinName": "2",
+            "role": "capacitor-bottom-plate"
+          }
+        ],
+        "referencePrefix": "C",
+        "symbolId": "capacitor",
+        "targetPolicy": "builtin"
+      },
+      "symbol": {
+        "id": "capacitor",
+        "name": "Capacitor",
+        "pins": [
+          {
+            "at": { "x": 0, "y": -20 },
+            "direction": "north",
+            "name": "1",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "passive"
+          },
+          {
+            "at": { "x": 0, "y": 20 },
+            "direction": "south",
+            "name": "2",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "passive"
+          }
+        ],
+        "primitives": [
+          {
+            "from": { "x": 8.05064, "y": -3.233605 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "emphasis" },
+            "to": { "x": -8.05064, "y": -3.233605 }
+          },
+          {
+            "from": { "x": 8.05064, "y": 3.233605 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "emphasis" },
+            "to": { "x": -8.05064, "y": 3.233605 }
+          },
+          {
+            "from": { "x": 0, "y": -3.233605 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": 0, "y": -20 }
+          },
+          {
+            "from": { "x": 0, "y": 3.233605 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": 0, "y": 20 }
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [],
+        "viewBox": { "height": 48, "width": 24, "x": -12, "y": -24 }
+      }
+    },
+    {
+      "electrical": {
+        "capabilities": {
+          "supportsBulkBinding": false,
+          "supportsModel": false,
+          "supportsValueAnnotation": false
+        },
+        "deviceClass": "net-marker",
+        "dialects": ["spice", "spectre"],
+        "id": "ground",
+        "parameters": [],
+        "pinOrder": ["0"],
+        "referencePrefix": null,
+        "symbolId": "ground",
+        "targetPolicy": "none"
+      },
+      "symbol": {
+        "id": "ground",
+        "labelVisibility": "hidden",
+        "name": "Ground",
+        "pins": [
+          {
+            "at": { "x": 0, "y": -10 },
+            "direction": "north",
+            "name": "0",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "ground"
+          }
+        ],
+        "primitives": [
+          {
+            "from": { "x": 0, "y": -10 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": 0, "y": 0 }
+          },
+          {
+            "from": { "x": -6.395349, "y": 0 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "ground" },
+            "to": { "x": 6.395349, "y": 0 }
+          },
+          {
+            "from": { "x": -4.069767, "y": 5.813953 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "ground" },
+            "to": { "x": 4.069767, "y": 5.813953 }
+          },
+          {
+            "from": { "x": -2.325581, "y": 11.046512 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "ground" },
+            "to": { "x": 2.325581, "y": 11.046512 }
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [],
+        "viewBox": { "height": 31, "width": 24, "x": -12, "y": -14 }
+      }
+    },
+    {
+      "electrical": {
+        "capabilities": {
+          "supportsBulkBinding": false,
+          "supportsModel": false,
+          "supportsValueAnnotation": true
+        },
+        "deviceClass": "resistor",
+        "dialects": ["spice", "spectre"],
+        "id": "resistor",
+        "parameters": [
+          {
+            "defaultValue": "1k",
+            "displayRole": "value",
+            "editor": "text",
+            "help": "Resistance",
+            "label": "Value",
+            "name": "value",
+            "placeholder": "1k",
+            "required": true,
+            "unitHint": "Ohm"
+          }
+        ],
+        "pinOrder": ["1", "2"],
+        "referencePrefix": "R",
+        "symbolId": "resistor",
+        "targetPolicy": "builtin"
+      },
+      "symbol": {
+        "id": "resistor",
+        "name": "Resistor",
+        "pins": [
+          {
+            "at": { "x": 0, "y": -20 },
+            "direction": "north",
+            "name": "1",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "passive"
+          },
+          {
+            "at": { "x": 0, "y": 20 },
+            "direction": "south",
+            "name": "2",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "passive"
+          }
+        ],
+        "primitives": [
+          {
+            "bounds": { "height": 40, "width": 10.360465, "x": -4.988372, "y": -20 },
+            "data": "M 0 -20 L 0 -8.72093 L 5.372093 -6.395349 L -4.604651 -4.069767 L 5.372093 -1.162791 L -4.988372 1.744186 L 5.372093 4.651163 L -4.604651 7.55814 L 0 8.72093 L 0 20",
+            "kind": "path",
+            "style": {
+              "lineCap": "butt",
+              "lineJoin": "miter",
+              "miterLimit": 12,
+              "strokeRole": "normal"
+            }
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [],
+        "viewBox": { "height": 48, "width": 20, "x": -10, "y": -24 }
+      }
+    },
+    {
+      "electrical": {
+        "capabilities": {
+          "supportsBulkBinding": false,
+          "supportsModel": false,
+          "supportsValueAnnotation": true
+        },
+        "deviceClass": "voltage-source",
+        "dialects": ["spice", "spectre"],
+        "id": "voltage-source",
+        "parameters": [
+          {
+            "defaultValue": "1",
+            "displayRole": "value",
+            "editor": "text",
+            "help": "DC value and operating-point bias",
+            "label": "DC value",
+            "name": "dc",
+            "placeholder": "1.8",
+            "required": true,
+            "unitHint": "V"
+          },
+          {
+            "defaultValue": "dc",
+            "displayRole": "none",
+            "editor": "select",
+            "help": "Transient waveform emitted by this source",
+            "label": "Transient",
+            "name": "waveform",
+            "options": [
+              {
+                "label": "None",
+                "value": "dc"
+              },
+              {
+                "label": "PULSE",
+                "value": "pulse"
+              },
+              {
+                "label": "SIN",
+                "value": "sin"
+              },
+              {
+                "label": "PWL",
+                "value": "pwl"
+              }
+            ],
+            "placeholder": "dc",
+            "required": false
+          },
+          {
+            "displayRole": "none",
+            "editor": "text",
+            "help": "Comma-separated time/value pairs",
+            "label": "PWL points",
+            "name": "pwlPoints",
+            "placeholder": "0s 0, 1ns 0, 2ns 1",
+            "required": false,
+            "unitHint": "s / V",
+            "visibleForSourceWaveforms": ["pwl"]
+          },
+          {
+            "displayRole": "none",
+            "editor": "text",
+            "help": "Small-signal magnitude for AC analysis; leave empty for no AC excitation",
+            "label": "AC magnitude",
+            "name": "acMagnitude",
+            "placeholder": "1",
+            "required": false,
+            "unitHint": "V"
+          },
+          {
+            "displayRole": "none",
+            "editor": "text",
+            "help": "Small-signal phase in degrees; used only with an AC magnitude",
+            "label": "AC phase",
+            "name": "acPhase",
+            "placeholder": "0",
+            "required": false,
+            "unitHint": "deg"
+          },
+          {
+            "defaultValue": "0",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "PULSE value before and between active pulses",
+            "label": "Low",
+            "name": "low",
+            "placeholder": "0",
+            "required": false,
+            "unitHint": "V",
+            "visibleForSourceWaveforms": ["pulse"]
+          },
+          {
+            "defaultValue": "1",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "PULSE active value",
+            "label": "High",
+            "name": "high",
+            "placeholder": "1",
+            "required": false,
+            "unitHint": "V",
+            "visibleForSourceWaveforms": ["pulse"]
+          },
+          {
+            "defaultValue": "0",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "Time before the transient waveform begins",
+            "label": "Delay",
+            "name": "delay",
+            "placeholder": "0",
+            "required": false,
+            "unitHint": "s",
+            "visibleForSourceWaveforms": ["pulse", "sin"]
+          },
+          {
+            "defaultValue": "1ps",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "PULSE rising-edge duration",
+            "label": "Rise time",
+            "name": "rise",
+            "placeholder": "1ps",
+            "required": false,
+            "unitHint": "s",
+            "visibleForSourceWaveforms": ["pulse"]
+          },
+          {
+            "defaultValue": "1ps",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "PULSE falling-edge duration",
+            "label": "Fall time",
+            "name": "fall",
+            "placeholder": "1ps",
+            "required": false,
+            "unitHint": "s",
+            "visibleForSourceWaveforms": ["pulse"]
+          },
+          {
+            "defaultValue": "5ns",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "Time the PULSE source remains at its high value",
+            "label": "Pulse width",
+            "name": "width",
+            "placeholder": "5ns",
+            "required": false,
+            "unitHint": "s",
+            "visibleForSourceWaveforms": ["pulse"]
+          },
+          {
+            "defaultValue": "10ns",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "Time between PULSE rising edges",
+            "label": "Period",
+            "name": "period",
+            "placeholder": "10ns",
+            "required": false,
+            "unitHint": "s",
+            "visibleForSourceWaveforms": ["pulse"]
+          },
+          {
+            "defaultValue": "0",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "SIN waveform offset",
+            "label": "Offset",
+            "name": "offset",
+            "placeholder": "0",
+            "required": false,
+            "unitHint": "V",
+            "visibleForSourceWaveforms": ["sin"]
+          },
+          {
+            "defaultValue": "1",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "SIN peak amplitude",
+            "label": "Amplitude",
+            "name": "amplitude",
+            "placeholder": "1",
+            "required": false,
+            "unitHint": "V",
+            "visibleForSourceWaveforms": ["sin"]
+          },
+          {
+            "defaultValue": "1k",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "SIN frequency",
+            "label": "Frequency",
+            "name": "frequency",
+            "placeholder": "1k",
+            "required": false,
+            "unitHint": "Hz",
+            "visibleForSourceWaveforms": ["sin"]
+          },
+          {
+            "defaultValue": "0",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "SIN exponential damping factor",
+            "label": "Damping",
+            "name": "damping",
+            "placeholder": "0",
+            "required": false,
+            "unitHint": "1/s",
+            "visibleForSourceWaveforms": ["sin"]
+          },
+          {
+            "defaultValue": "0",
+            "displayRole": "none",
+            "editor": "text",
+            "help": "SIN phase in degrees",
+            "label": "SIN phase",
+            "name": "phase",
+            "placeholder": "0",
+            "required": false,
+            "unitHint": "deg",
+            "visibleForSourceWaveforms": ["sin"]
+          }
+        ],
+        "pinOrder": ["+", "-"],
+        "referencePrefix": "V",
+        "sourceWaveformDefault": "dc",
+        "symbolId": "voltage-source",
+        "targetPolicy": "builtin"
+      },
+      "symbol": {
+        "id": "voltage-source",
+        "name": "Independent Voltage Source",
+        "pins": [
+          {
+            "at": { "x": 0, "y": -20 },
+            "direction": "north",
+            "name": "+",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "positive"
+          },
+          {
+            "at": { "x": 0, "y": 20 },
+            "direction": "south",
+            "name": "-",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "negative"
+          }
+        ],
+        "primitives": [
+          {
+            "center": { "x": 0, "y": 0 },
+            "kind": "circle",
+            "radius": 10.755814,
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+          },
+          {
+            "from": { "x": -20.058139, "y": -14.534884 },
+            "kind": "line",
+            "part": "upright-polarity-positive-horizontal",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": -11.918605, "y": -14.534884 }
+          },
+          {
+            "from": { "x": -15.988372, "y": -18.604651 },
+            "kind": "line",
+            "part": "upright-polarity-positive-vertical",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": -15.988372, "y": -10.465117 }
+          },
+          {
+            "from": { "x": -20.058139, "y": 13.372093 },
+            "kind": "line",
+            "part": "upright-polarity-negative",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": -11.918605, "y": 13.372093 }
+          },
+          {
+            "from": { "x": 0, "y": -10.755814 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": 0, "y": -20 }
+          },
+          {
+            "from": { "x": 0, "y": 10.755814 },
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": { "x": 0, "y": 20 }
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [],
+        "viewBox": { "height": 48, "width": 39, "x": -24, "y": -24 }
+      }
+    }
+  ],
+  "externalSubcircuitDefinitions": [],
+  "simulationFolders": [],
+  "source": { "dialect": "none", "entry": null, "files": [], "sourcePolicy": "copy" },
+  "symbolLibrary": { "hash": "razavi-reference-v1", "id": "razavi-symbols", "version": "1" },
+  "structureRevision": 0
+}

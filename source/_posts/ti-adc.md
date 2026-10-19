@@ -249,7 +249,19 @@ $\text{CK}$, $I/Q_1$ and $I/Q_{2,3}$ shift by **1UI**
 
 ![adc_clocking_ring](ti-adc/adc_clocking_ring.svg)
 
+all FFs initialized to 0
 
+
+
+---
+
+---
+
+> J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
+
+
+
+![image-20261020002518255](ti-adc/image-20261020002518255.png)
 
 
 

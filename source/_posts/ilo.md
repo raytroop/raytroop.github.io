@@ -220,9 +220,39 @@ print(f"alpha({T:.0f}s): circuit ODE {np.degrees(a_ckt[-2*N]):+.2f} deg | "
 
 
 
+## Fundamental ILO (1st harmonic)
+
+*TODO* &#128197;
+
+
+
+## Subharmonic ILO
+
+*TODO* &#128197;
+
+
+
+## Multiplying ILO (MILO)
+
+> J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
+>
+> M. Erett *et al*., "16.7 A 126mW 56Gb/s NRZ wireline transceiver for synchronous short-reach applications in 16nm FinFET," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018, pp. 274-276 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310290](https://sci-hub.ru/10.1109/ISSCC.2018.8310290)]
+
+*TODO* &#128197;
+
+![image-20261020002412076](ilo/image-20261020002412076.png)
+
+![image-20261020002156517](ilo/image-20261020002156517.png)
+
+![image-20261020002220507](ilo/image-20261020002220507.png)
+
 
 
 ## reference
+
+Bae, Woorham, and Deog-Kyoon Jeong. *Analysis and Design of CMOS Clocking Circuits for Low Phase Noise*. Institution of Engineering and Technology, 2020
+
+Cowan, Glenn. (2024). Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations
 
 R. Adler, "A Study of Locking Phenomena in Oscillators," in *Proceedings of the IRE*, vol. 34, no. 6, pp. 351-357, June 1946 [[https://sci-hub.jp/10.1109/JRPROC.1946.229930](https://sci-hub.jp/10.1109/JRPROC.1946.229930)]
 
@@ -234,13 +264,9 @@ A. A. Hafez and C. -K. K. Yang, "Analysis and Design of Superharmonic Injection-
 
 ---
 
-Bae, Woorham, and Deog-Kyoon Jeong. *Analysis and Design of CMOS Clocking Circuits for Low Phase Noise*. Institution of Engineering and Technology, 2020
-
 Deog-Kyoon Jeong. "Topics in IC (Wireline Transceiver Design): Lec 4 - Injection Locked Oscillators" [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%204%20-%20Injection%20Locked%20Oscillators.pdf)]
 
 Min-Seong Choo. Review of Injection-Locked Oscillators [[https://journal.theise.org/jse/wp-content/uploads/sites/2/2020/09/JSE-2020-0001.pdf](https://journal.theise.org/jse/wp-content/uploads/sites/2/2020/09/JSE-2020-0001.pdf)]
-
-Cowan, Glenn. (2024). Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations
 
 Mozhgan Mansuri. ISSCC2021 SC3: Clocking, Clock Distribution, and Clock Management in Wireline/Wireless Subsystems
 

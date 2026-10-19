@@ -125,10 +125,18 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 ![image-20260921232848373](mpcg/image-20260921232848373.png)
 
 
+
+
+
+
+
 ## Multiplying Delay-Locked-Loop (MDLL)
 
-
 *TODO* &#128197;
+
+
+
+
 
 
 ## delay line based Skew Correction 
@@ -162,11 +170,10 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 >
 > Shaokang ZHAO, 2025, "Multi-Phase Clock Generator for High-Speed Wireline Systems," [[paper](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/1.Thesis/2.Mphil/Shaokang%20Thesis.pdf), [slides](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/2.Slides/2.Mphil/Shaokang_Zhao%20Slides.pdf)]
 >
-> J. Im *et al*., "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 1, pp. 7-18, Jan. 2021, [[https://sci-hub.jp/10.1109/JSSC.2020.3024261](https://sci-hub.jp/10.1109/JSSC.2020.3024261)]
 
 ![image-20261013003403829](mpcg/image-20261013003403829.png)
 $$
-V_{ip}=\mathrm{XNOR}(CKD_0,CKD_{90})\qquad \qquad V_{in}=\mathrm{XNOR}(CKD_{45},CKD_{315})
+V_{ip}=\mathrm{XNOR}(CKD_0,CKD_{90})\qquad \qquad V_{in}=\mathrm{XNOR}(CKD_{45},\textcolor{red}{CKD_{315}})
 $$
 
 > The loop settles where $V_{ip} = V_{in}$ on average, i.e. at a stage delay $\tau = T/8$ ($45^\circ$). Each inverter stage adds $180^\circ$ of inversion, so it shifts phase by $225^\circ$.  (see [MPG using DLL](#mpg-using-dll)).
@@ -194,6 +201,19 @@ $$
 $$
 
 Its main limitation is that accurate phase detection relies on the input clocks having a 50% duty cycle.
+
+
+
+---
+
+> J. Im *et al*., "6.1 A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 1, pp. 7-18, Jan. 2021, [[https://sci-hub.jp/10.1109/JSSC.2020.3024261](https://sci-hub.jp/10.1109/JSSC.2020.3024261)]
+
+![image-20261020003914033](mpcg/image-20261020003914033.png)
+
+
+
+
+
 
 
 ## calibration ADC based skew detection

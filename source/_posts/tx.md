@@ -535,12 +535,14 @@ Same with differential ended termination driver.
 > G. Steffan *et al*., "6.4 A 64Gb/s PAM-4 transmitter with 4-Tap FFE and 2.26pJ/b energy efficiency in 28nm CMOS FDSOI," *2017 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2017, pp. 116-117 [[https://sci-hub.ru/10.1109/ISSCC.2017.7870288](https://sci-hub.ru/10.1109/ISSCC.2017.7870288)]
 >
 > Z. Toprak-Deniz *et al*., "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2939081](https://sci-hub.ru/10.1109/JSSC.2019.2939081)]
+>
+> J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)
 
 ![image-20261001180040383](tx/image-20261001180040383.png)
 
 ![image-20261017095055911](tx/image-20261017095055911.png)
 
-
+![image-20261020001618501](tx/image-20261020001618501.png)
 
 
 

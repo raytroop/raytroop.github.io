@@ -147,9 +147,9 @@ AC simulation testbench, shown as below,
 
 ### PSTB analysis
 
-Spectre **pstb** is similar to stb, just set **pac** as **1** instead of  **ac** in current source and voltage source.
+Spectre's PSTB analysis is similar to STB analysis. The main difference is that PAC analysis is used instead of AC analysis, so the ac parameter in the current source and voltage source is replaced with pac=1.
 
-This analysis just use **harmonic 0** transfer function in pac analysis, which has limitation.
+PSTB analysis uses only the harmonic-0 transfer function from PAC analysis, which introduces certain limitations.
 
 
 

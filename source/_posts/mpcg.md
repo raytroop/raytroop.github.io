@@ -210,13 +210,19 @@ Its main limitation is that accurate phase detection relies on the input clocks 
 >
 > —, "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 56, no. 1, pp. 7-18, Jan. 2021 [[https://sci-hub.ru/10.1109/JSSC.2020.3024261](https://sci-hub.ru/10.1109/JSSC.2020.3024261)]
 
+ It is important to note that any DCD in the output of the PI will translate into the IQ error at the output of the divide-by-6 block.
+
 IQ correction of the 2.333-GHz clocks is carried out by adjusting the **duty cycle** after the PI
+
+An **analog-style XOR detection** is used to generate an error voltage which after processing with a dynamic comparator is used as an input to a digital control algorithm
+
+![image-20261020203940248](mpcg/image-20261020203940248.png)
 
 ![image-20261020003914033](mpcg/image-20261020003914033.png)
 
+![qed4dcd](mpcg/qed4dcd.svg)
 
-
-
+![dcd_IQ.drawio](mpcg/dcd_IQ.drawio.svg)
 
 
 

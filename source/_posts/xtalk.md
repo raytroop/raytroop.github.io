@@ -142,7 +142,7 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ---
 
-**skin effect** & **Dielectric loss**
+<span style="background-color:yellow">**skin effect** & **Dielectric loss**</span>
 
 ![image-20250705170028485](xtalk/image-20250705170028485-1751987296816-49.png)
 

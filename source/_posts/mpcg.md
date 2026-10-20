@@ -210,6 +210,8 @@ Its main limitation is that accurate phase detection relies on the input clocks 
 >
 > —, "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 56, no. 1, pp. 7-18, Jan. 2021 [[https://sci-hub.ru/10.1109/JSSC.2020.3024261](https://sci-hub.ru/10.1109/JSSC.2020.3024261)]
 
+IQ correction of the 2.333-GHz clocks is carried out by adjusting the **duty cycle** after the PI
+
 ![image-20261020003914033](mpcg/image-20261020003914033.png)
 
 

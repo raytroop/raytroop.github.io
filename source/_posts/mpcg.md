@@ -225,8 +225,9 @@ An **analog-style XOR detection** is used to generate an error voltage which aft
 ![dcd_IQ.drawio](mpcg/dcd_IQ.drawio.svg)
 
 $$
-\boxed{\text{SP} - \text{SN} = \text{Lo} - \text{Hi}}
+\boxed{\text{SP} - \text{SN} = \text{1Lo} - \text{1Hi}}
 $$
+
 
 
 ## calibration ADC based skew detection

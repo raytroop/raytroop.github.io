@@ -118,6 +118,18 @@ $$
 
 
 
+## Equipartition theorem
+
+> Carlo Samori, Phase Noise in LC Oscillators: From Basic Concepts to Advanced Topologies [[https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf](https://www.ieeetoronto.ca/wp-content/uploads/2020/06/DL-VCO-short.pdf)]
+>
+> Enrico Rubiola. The Measurement of AM-PM Noise, and the Origin of Noise in Oscillators [[https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf](https://rubiola.org/pdf-slides/2010T-ANL-Noise-and-oscillators.pdf)]
+
+![image-20251106214759580](osc-pn/image-20251106214759580.png)
+
+![image-20251104233701576](osc-pn/image-20251104233701576.png)
+
+**Stationary noise** can also be decomposed into AM and PM components, but there will always be ***equal amounts of both***.
+
 
 
 ## Leeson's model — LTI

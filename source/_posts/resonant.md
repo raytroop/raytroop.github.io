@@ -316,6 +316,18 @@ The **series RLC resonator** is a **voltage divider**,  driven by an alternating
 
 ![image-20260619174637248](resonant/image-20260619174637248.png)
 
+
+
+---
+
+> Ali Sheikholeslami, ESSERC 2026 Circuit Insights: *Fundamentals of Circuit Design at High Frequencies*
+
+![image-20261021211012752](resonant/image-20261021211012752.png)
+
+![image-20261021211029100](resonant/image-20261021211029100.png)
+
+
+
 ### Parallel Resonant RLC
 
 The **parallel RLC resonator** is a **current divider circuit**, driven by an alternating **current** source $i_s(t)=I_m\cos\omega t$

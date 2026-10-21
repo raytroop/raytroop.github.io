@@ -140,11 +140,11 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 
 
 
-## source follower
+## Source Follower
 
-> A. Sheikholeslami, "Voltage Follower, Part 1 [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 14, no. 3, pp. 13-15, Summer 2022, doi: 10.1109/MSSC.2022.3182791
+> A. Sheikholeslami, "Voltage Follower, Part 1 [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 14, no. 3, pp. 13-15, Summer 2022, [[https://sci-hub.jp/10.1109/MSSC.2022.3182791](https://sci-hub.jp/10.1109/MSSC.2022.3182791)]
 >
-> —, "Voltage Follower, Part II [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 15, no. 1, pp. 17-19, winter 2023, doi: 10.1109/MSSC.2022.3218083
+> —, "Voltage Follower, Part II [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 15, no. 1, pp. 17-19, winter 2023, [[https://sci-net.xyz/10.1109/MSSC.2022.3218083](https://sci-net.xyz/10.1109/MSSC.2022.3218083)]
 >
 > —, "Voltage Follower, Part III [Circuit Intuitions]," in IEEE Solid-State Circuits Magazine, vol. 15, no. 2, pp. 14-26, Spring 2023, doi: 10.1109/MSSC.2023.3269457
 >
@@ -197,7 +197,7 @@ FVF exhibits a much-reduced output resistance (by a factor of gr mo) while maint
 
 
 
-### class AB SSF (AB-SSF)
+### Class AB SSF (AB-SSF)
 
 A major limitation shared by all three designs is an **asymmetry** in response to a sudden rise/fall of an input waveform
 
@@ -209,6 +209,8 @@ $$
 
 
 ![image-20260929074441192](ana-tech/image-20260929074441192.png)
+
+Assuming R<sub>B</sub> to be very large and C<sub>B</sub> to act like a **short circuit** in the frequency range of interest
 
 ![image-20260929074457503](ana-tech/image-20260929074457503.png)
 

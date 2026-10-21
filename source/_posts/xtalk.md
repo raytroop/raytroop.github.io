@@ -112,6 +112,18 @@ For comparison, backward noise arrives at $x/v+x/v=2x/v$, so <span style="backgr
 
 
 
+## Wavelength vs. Frequency
+
+> Ali Sheikholeslami, ESSERC 2026 Circuit Insights: *Fundamentals of Circuit Design at High Frequencies*
+
+![image-20261021205707680](xtalk/image-20261021205707680.png)
+
+![image-20261021205726873](xtalk/image-20261021205726873.png)
+
+
+
+
+
 ## relative dielectric constant vs permittivity
 
 
@@ -119,6 +131,14 @@ For comparison, backward noise arrives at $x/v+x/v=2x/v$, so <span style="backgr
 ![img](xtalk/Difference-Between-Dielectric-Constant-and-Permittivity-.png)
 
 The relative dielectric constant characterizes some of the electrical properties of an insulator
+
+
+
+---
+
+<span style="background-color:yellow">**skin effect** & **Dielectric loss**</span>
+
+![image-20250705170028485](xtalk/image-20250705170028485-1751987296816-49.png)
 
 
 
@@ -140,11 +160,7 @@ Current return paths are frequency dependent $Z = R +j\omega L$
 
 ![image-20250705170949035](xtalk/image-20250705170949035-1751987296815-48.png)
 
----
 
-<span style="background-color:yellow">**skin effect** & **Dielectric loss**</span>
-
-![image-20250705170028485](xtalk/image-20250705170028485-1751987296816-49.png)
 
 ---
 

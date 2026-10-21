@@ -273,6 +273,16 @@ If the natural delay lands too close to an active edge, the designer can fix it 
 
 The half period that second-half selection "wastes" is deliberate slack: it lets each input settle fully before it is passed. You're trading a little latency for **robustness**, and designers almost always take that trade. If latency truly mattered, the better move would be to trim pipeline stages or the FIFO depth elsewhere, not to remove the settling slack from the highest-speed MUX.
 
+
+
+---
+
+![image-20261021232016291](tx/image-20261021232016291.png)
+
+![halfrate_tamu.drawio](tx/halfrate_tamu.drawio.svg)
+
+
+
 ## Full-rate TX architecture
 
 > Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 5: Termination, TX Driver, & Multiplexer Circuits [[https://people.engr.tamu.edu/spalermo/ecen689/lecture5_ee720_termination_txdriver.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture5_ee720_termination_txdriver.pdf)]
@@ -375,7 +385,7 @@ where $D_n \in \{-1, 1\}$
 $$
 V_{\text{rx}} = V_{\text{dd}} \frac{(R_2-R_1)R_T}{R_1R_T+R_2R_T+R_1R_2}
 $$
-With $R_u=(L+M+N)R_T$
+With $\color{blue}R_u=(L+M+N)R_T$
 
 Normalize above equation, obtain
 $$
@@ -399,12 +409,9 @@ Where precursor  $R_L = L\times R_T$, main cursor $R_M = M\times R_T$ and post c
 
 ![pre.drawio](tx/pre.drawio.svg)
 
-$$\begin{align}
-R_1 &= R_N \\
-&= \frac{R_u}{N} \\
-R_2 &= R_L\parallel R_M \\
-&= \frac{R_u}{L+M}
-\end{align}$$
+$$
+R_1 = R_N = \frac{R_u}{N} \qquad\qquad R_2 = R_L\parallel R_M = \frac{R_u}{L+M}
+$$
 
 We obtain
 $$
@@ -519,7 +526,6 @@ $$
 which is same with differential ended termination
 
 <span style="color:white; background-color:black">Equation-3</span>
-
 $$
 V_{N}= \frac{1}{2}\cdot\frac{L-(N+M)}{L+M+N}
 $$
@@ -537,6 +543,12 @@ Same with differential ended termination driver.
 > Z. Toprak-Deniz *et al*., "A 128-Gb/s 1.3-pJ/b PAM-4 Transmitter With Reconfigurable 3-Tap FFE in 14-nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 55, no. 1, pp. 19-26, Jan. 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2939081](https://sci-hub.ru/10.1109/JSSC.2019.2939081)]
 >
 > J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)
+
+a.k.a. <span style="color:white; background-color:black">Pseudo - CML</span>
+
+![image-20261021234731893](tx/image-20261021234731893.png)
+
+
 
 ![image-20261001180040383](tx/image-20261001180040383.png)
 

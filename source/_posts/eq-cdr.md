@@ -51,6 +51,12 @@ Until 6.5 dB of CTLE DC attenuation, the spread of the single pulse is *positive
 
 ![image-20260228001734379](eq-cdr/image-20260228001734379.png)
 
+---
+
+
+
+![image-20261022003832348](eq-cdr/image-20261022003832348.png)
+
 ### DFE
 
 > Keysight **Signal Integrity Educational Posts** [[Post 8: Eye-opening Experience with DFE](https://docs.keysight.com/eesofapps/post-8-eye-opening-experience-with-dfe-678068404.html)]
@@ -70,7 +76,9 @@ Since DFE assumes that past symbol decisions are *correct*. Incorrect decisions 
 - because symbol detection is nonlinear, decision feedback equalization is also *nonlinear*
 - because of the nonlinearity of the DFE response, it must be modeled in the *time domain*  
 
+---
 
+![image-20261022003913594](eq-cdr/image-20261022003913594.png)
 
 ### FFE vs. DFE
 

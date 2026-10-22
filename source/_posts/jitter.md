@@ -266,17 +266,27 @@ $$
 
 
 
-## Duty Cycle Distortion – DCD
+## Duty Cycle Distortion (DCD)
+
+> DCD peak to peak jitter #2 [[https://github.com/LewisLiuLiuLiu/SerDesSystemCProject/issues/2](https://github.com/LewisLiuLiuLiu/SerDesSystemCProject/issues/2)] [[Commit 1723ee6](https://github.com/LewisLiuLiuLiu/SerDesSystemCProject/commit/1723ee6acbb0ccefc07ed2456f2c5108325f28e3)]
 
 ![dcd.drawio](jitter/dcd.drawio.svg)
 $$
-\boxed{DJ_{DCD,pp} = 2 \times UI \times \left| DCD\% - 50\% \right|}
+\boxed{\text{DJ}_{\text{DCD,pp}} = 2 \times \text{UI} \times \left| \text{DCD}\% - 50\% \right|}
 $$
+
+
+```
+docs: correct DCD-induced jitter formula to 2·|DCD%−50%|·UI (EN/zh)
+Odd/even transitions are alternately displaced by ±(|DCD%−50%|/100)×UI, so the peak-to-peak jitter is twice the previously documented value: 48% duty at a 16 ps UI gives 0.64 ps p-p (±0.32 ps per edge), not 0.32 ps. Aligns mux.md and tx.md in both languages. (Reported as issue #2.)
+```
 
 
 | Jitter measurement | Description                                                  |
 | :----------------- | :----------------------------------------------------------- |
 | DCD                | Duty Cycle Distortion is the peak-to-peak amplitude of the component of the deterministic jitter correlated with the signal polarity. |
+
+
 
 ![image-20250816081711834](jitter/image-20250816081711834.png)
 

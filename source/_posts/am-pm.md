@@ -16,8 +16,9 @@ mathjax: true
 
 Transmitter: Complex to Real; Receiver: Real to Complex
 
+![image-20261022231433077](am-pm/image-20261022231433077.png)
 
-
+![image-20261022231653530](am-pm/image-20261022231653530.png)
 
 ## Rotaing Phasor
 

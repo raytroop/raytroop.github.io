@@ -7,6 +7,16 @@ categories:
 mathjax: true
 ---
 
+
+## Complex Signals & Mixer
+
+> Mark Oude Alink, ESSERC 2026 Circuit Insights: *Fundamentals of RF Mixer Design*
+
+Transmitter: Complex to Real; Receiver: Real to Complex
+
+
+
+
 ## Rotaing Phasor
 
 **phasor** in ***time domain*** as time elapses

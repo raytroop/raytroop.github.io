@@ -10,6 +10,8 @@ mathjax: true
 
 ## Complex Signals & Mixer
 
+> K. W. Martin, "Complex signal processing is not complex," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 51, no. 9, pp. 1823-1836, Sept. 2004, [[https://sci-hub.st/10.1109/TCSI.2004.834522](https://sci-hub.st/10.1109/TCSI.2004.834522])]
+>
 > Mark Oude Alink, ESSERC 2026 Circuit Insights: *Fundamentals of RF Mixer Design*
 
 Transmitter: Complex to Real; Receiver: Real to Complex

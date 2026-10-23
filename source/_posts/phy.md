@@ -624,6 +624,8 @@ RS is a forward error-correction (**FEC**) algorithm used to correct data corrup
 
 ## reference
 
+T. Anand, “Wireline Link Performance Survey,” [Online].  [[https://web.engr.oregonstate.edu/~anandt/linksurvey](https://web.engr.oregonstate.edu/~anandt/linksurvey)]
+
 John Swindle, *PCIe 1.1 Phy Design Considerations*
 
 Hidehiro Toyoda, Shinji Nishimura, and Masato Shishikura, *PMD architecture with skew compensation mechanism for parallel link* [[https://www.ieee802.org/3/hssg/public/nov06/nishimura_01_1106.pdf](https://www.ieee802.org/3/hssg/public/nov06/nishimura_01_1106.pdf)]

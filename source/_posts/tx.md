@@ -23,6 +23,8 @@ mathjax: true
 >
 > Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
 
+![image-20261024001902143](tx/image-20261024001902143.png)
+
 ![image-20260531080813258](tx/image-20260531080813258.png)
 
 
@@ -263,6 +265,24 @@ If the natural delay lands too close to an active edge, the designer can fix it 
 >
 > Mark Horowitz, Chih-Kong Ken Yang, and Stefanos Sidiropoulos. 1998. High-Speed Electrical Signaling: Overview and Limitations. IEEE Micro 18, 1 (January 1998), 12–24. https://doi.org/10.1109/40.653013 [[https://people.engr.tamu.edu/spalermo/ecen689/hs_electrical_signaling_horowitz_micro_1998.pdf](https://people.engr.tamu.edu/spalermo/ecen689/hs_electrical_signaling_horowitz_micro_1998.pdf)]
 
+<span style="color:white; background-color:black">**Five-latch 2:1 MUX**</span>
+
+![image-20261024004405229](tx/image-20261024004405229.png)
+
+![image-20261021232016291](tx/image-20261021232016291.png)
+
+![halfrate_tamu.drawio](tx/halfrate_tamu.drawio.svg)
+
+
+
+
+
+
+
+---
+
+
+
 ![image-20261001111219814](tx/image-20261001111219814.png)
 
 
@@ -274,12 +294,6 @@ If the natural delay lands too close to an active edge, the designer can fix it 
 The half period that second-half selection "wastes" is deliberate slack: it lets each input settle fully before it is passed. You're trading a little latency for **robustness**, and designers almost always take that trade. If latency truly mattered, the better move would be to trim pipeline stages or the FIFO depth elsewhere, not to remove the settling slack from the highest-speed MUX.
 
 
-
----
-
-![image-20261021232016291](tx/image-20261021232016291.png)
-
-![halfrate_tamu.drawio](tx/halfrate_tamu.drawio.svg)
 
 
 
@@ -577,6 +591,16 @@ a.k.a. <span style="color:white; background-color:black">Pseudo - CML</span>
 > T. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
 
 ![image-20261001151302086](tx/image-20261001151302086.png)
+
+
+
+## CDC between DSP and Seralizer
+
+![image-20261024010318929](tx/image-20261024010318929.png)
+
+
+
+
 
 
 

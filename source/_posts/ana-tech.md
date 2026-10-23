@@ -119,7 +119,7 @@ mathjax: true
 
 ![image-20250105083039901](ana-tech/image-20250105083039901.png)
 
-Assuming ***linear response***
+Assume a ***linear response*** to a 1 V input step
 $$
 V_o(t) = 1 - e^{-\omega_T t}
 $$
@@ -128,9 +128,9 @@ $$
 \frac{\mathrm{d}V_o}{\mathrm{d}t} = \omega_Te^{-\omega_T t} = \frac{g_m}{C_L}e^{-\omega_T t} = \frac{g_m}{I_B}\cdot \frac{I_B}{C_L}\cdot e^{-\omega_T t} \gt \frac{I_B}{C_L}
 $$
 
-where $\frac{g_m}{I_B} e^{-\omega_T t} \gt 1$ at initial response
+because $\frac{g_m}{I_B} e^{-\omega_T t} \gt 1$ near $t = 0$. The slope a linear response requires exceeds what $I_B$ can supply.
 
-Therefore,  initial response speed is dominated by ***SR***, rather than *$G_m$* (or *bandwidth*)
+Therefore, the initial response is limited by ***SR*** ($I_B/C_L$), not by *$G_m$* (or *bandwidth*)
 
 ![image-20250105090105095](ana-tech/image-20250105090105095.png)
 
@@ -138,9 +138,7 @@ Therefore,  initial response speed is dominated by ***SR***, rather than *$G_m$*
 
 ## MOS parasitic Rd&Rs, Cd&Cs
 
-Decrease  the parasitic R&C
-
-priority: $R_s \gt R_d$, $C_s \gt C_d$
+When reducing parasitic R and C, prioritize the source side: $R_s$ over $R_d$, $C_s$ over $C_d$
 
 
 
@@ -160,7 +158,7 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 >
 > Paul R. Gray. 2009. Analysis and Design of Analog Integrated Circuits (5th. ed.). Wiley Publishing.
 
-
+![image-20261023225958339](ana-tech/image-20261023225958339.png)
 
 
 
@@ -170,14 +168,16 @@ priority: $R_s \gt R_d$, $C_s \gt C_d$
 >
 > Z. Guo et al., "A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 116-118, [[https://sci-net.xyz/10.1109/ISSCC42614.2022.9731650](https://sci-net.xyz/10.1109/ISSCC42614.2022.9731650)]
 
+![image-20261023231116421](ana-tech/image-20261023231116421.png)
 
-moving the current source from the source to the drain is referred to as **flipping**, and hence the name **FVF**
+Moving the bias current source from the source to the drain of the follower transistor is called **flipping**, hence the name **FVF**
+
+![image-20261023231156998](ana-tech/image-20261023231156998.png)
 
 ![image-20240921110019881](ana-tech/image-20240921110019881.png)
 
 ![image-20240921113630249](ana-tech/image-20240921113630249.png)
 
-<span style="color:white; background-color:black">T&H buffer in ADC</span>
 
 
 $$
@@ -185,19 +185,12 @@ $$
 $$
 
 
-FVF exhibits a much-reduced output resistance (by a factor of gr mo) while maintaining the same voltage gain as that of an SVF (simple voltage follower)
-
-![image-20240923200147070](ana-tech/image-20240923200147070.png)
-
-
-
-
-
-
 
 
 
 ### Super-source follower (SSF)
+
+
 
 ![image-20240924213742877](ana-tech/image-20240924213742877.png)
 
@@ -209,7 +202,7 @@ FVF exhibits a much-reduced output resistance (by a factor of gr mo) while maint
 
 ### Class AB SSF (AB-SSF)
 
-A major limitation shared by all three designs is an **asymmetry** in response to a sudden rise/fall of an input waveform
+All three followers (SVF, FVF, SSF) share a major limitation: an **asymmetric** response to rising and falling input steps
 
 ![image-20260928201215696](ana-tech/image-20260928201215696.png)
 $$
@@ -220,9 +213,48 @@ $$
 
 ![image-20260929074441192](ana-tech/image-20260929074441192.png)
 
-Assuming R<sub>B</sub> to be very large and C<sub>B</sub> to act like a **short circuit** in the frequency range of interest
+Assume R<sub>B</sub> is very large and C<sub>B</sub> acts as a **short circuit** over the frequency range of interest
 
 ![image-20260929074457503](ana-tech/image-20260929074457503.png)
+
+
+
+### Folded Cascode FVF (CA-FVF)
+
+> Mao, Xiangyu, Yan Lu, and Rui P. Martins. *Fully-Integrated Low-Dropout Regulators*. Springer, 2025.
+
+![image-20261023223654148](ana-tech/image-20261023223654148.png)
+
+The basic FVF LDO has limited **loop gain**. To increase it:
+
+- (a) insert a **common-gate amplifier** (M<sub>2</sub>, biased by I<sub>2</sub>) between V<sub>D</sub> and V<sub>G</sub>
+- (b) add a **common-source amplifier** (M<sub>3</sub> with current mirror M<sub>4</sub>–M<sub>5</sub>) for further gain
+
+
+
+
+
+### built-in local negative feedback
+
+> T. Y. Man, K. N. Leung, C. Y. Leung, P. K. T. Mok and M. Chan, "Development of Single-Transistor-Control LDO Based on Flipped Voltage Follower for SoC," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 55, no. 5, pp. 1392-1401, June 2008, doi: 10.1109/TCSI.2008.916568 [[https://repository.hkust.edu.hk/ir/bitstream/1783.1-3269/1/044360751.pdf](https://repository.hkust.edu.hk/ir/bitstream/1783.1-3269/1/044360751.pdf)]
+
+![image-20261023223541363](ana-tech/image-20261023223541363.png)
+
+**Intuition**: building the loop from common-source stages and current mirrors keeps the internal nodes at low impedance, which pushes their poles to high frequency. The FVF can then drive a large capacitive load while its local negative feedback loop stays **stable**
+
+
+
+
+
+---
+
+<span style="color:white; background-color:black">**T&H buffer in ADC**</span>
+
+The FVF has the same voltage gain as a simple voltage follower (SVF) but an output resistance $g_m r_o$ times lower, which gives fast settling at low power
+
+![image-20240923200147070](ana-tech/image-20240923200147070.png)
+
+
 
 
 
@@ -259,12 +291,11 @@ $$
 
 ### Resistive Degeneration
 
-*Resistive degeneration* in differential pairs serves as one major technique for linear amplifier
+*Resistive degeneration* is a primary technique for linearizing a differential pair
 
 ![image-20240824132739726](ana-tech/image-20240824132739726.png)
 
-The linear region for CMOS differential pair would be extended by $±I_{SS}R/2$ as all of $I_{SS}/2$ flows
-through $R$.
+Degeneration extends the input linear range by $\pm I_{SS}R/2$. At the edge, M<sub>2</sub> turns off and M<sub>1</sub> carries all of $I_{SS}$, so $I_{SS}/2$ flows through $R$:
 $$
 V_{in}^+ -V_{in}^-  = V_{OV} + V_{TH}+\frac{I_{SS}}{2}R - V_{TH} = \sqrt{\frac{2I_{SS}}{\mu_nC_{OX}\frac{W}{L}}} + \frac{I_{SS}R}{2}
 $$
@@ -294,7 +325,7 @@ $$
 
 ## Double Differential pair
 
-$V_\text{ip}$ and $V_\text{im}$ are input, $V_\text{rp}$ and $V_\text{rm}$ are reference voltage
+$V_\text{ip}$/$V_\text{im}$ are the differential input and $V_\text{rp}$/$V_\text{rm}$ the differential reference
 $$
 V_o = A_v(\overline{V_\text{ip} - V_\text{im}} - \overline{V_\text{rp} - V_\text{rm}})
 $$
@@ -302,80 +333,78 @@ $$
 
 ![2diffpair.drawio](ana-tech/2diffpair.drawio.svg)
 
-In differential comparison mode, the feedback loop ensure $V_\text{ip} = V_\text{rp}$, $V_\text{im} = V_\text{rm}$ in the end
+In differential comparison mode, the feedback loop eventually forces $V_\text{ip} = V_\text{rp}$ and $V_\text{im} = V_\text{rm}$
 
-> assume input and reference common voltage are **same**
+> assuming the input and reference common-mode voltages are the **same**
 
 Pros of *(b)*
 
-- larger input range i.e.,  $\gt \pm \sqrt{2}V_\text{ov}$ of *(a)*, it works even one differential is off due to lower voltage
-- larger $g_m$ (smaller input difference of pair)
+- wider input range: *(a)* is limited to $\pm \sqrt{2}V_\text{ov}$, while *(b)* still works when one device of a pair is off
+- larger $g_m$: each pair sees only a small differential input near balance
 
 Cons of *(b)*
 
-- sensitive to the difference of common voltage between $V_\text{ip}$,  $V_\text{im}$ and  $V_\text{rp}$,  $V_\text{rm}$
+- sensitive to the common-mode difference between the input ($V_\text{ip}$, $V_\text{im}$) and the reference ($V_\text{rp}$, $V_\text{rm}$)
 
 
 ### common-mode voltage difference
 
 ![doublepair_cm.drawio](ana-tech/doublepair_cm.drawio.svg)
 
-copy aforementioned formula here for convenience
+Repeated from above for convenience
 $$
 V_o = A_v(\overline{V_\text{ip} - V_\text{im}} - \overline{V_\text{rp} - V_\text{rm}})
 $$
 
-*at sample phase*
+*(a) sample phase*
+
 $V_\text{ip}= V_\text{im}= V_\text{cmi}$ and $V_\text{rp}= V_\text{rm}= V_\text{cmr}$
 
 - $I_\text{ip0}= I_\text{im0} = I_\text{i0}$
 - $I_\text{rp0}= I_\text{rm0} = I_\text{r0}$
 
-i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} = 0$
+so $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} = 0$
 
 
 
-*at compare start*
+*(b) compare start*
 
-- $V_\text{ip}= V_\text{im}= V_\text{cmi}$ and $V_\text{rp}= V_\text{cmr}+\Delta$, $V_\text{rp}= V_\text{cmr}-\Delta$
+- $V_\text{ip}= V_\text{im}= V_\text{cmi}$, $V_\text{rp}= V_\text{cmr}+\Delta$ and $V_\text{rm}= V_\text{cmr}-\Delta$
 - $I_\text{ip}\lt I_\text{ip0}$, $I_\text{rp} \gt I_\text{rp0}$
-
 - $I_\text{im}\gt I_\text{im0}$, $I_\text{rm} \lt I_\text{rm0}$
 
-i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} \lt 0$, we need to increase $V_\text{ip}$ and decrease $V_\text{im}$.
+so $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} \lt 0$, and the loop must raise $V_\text{ip}$ and lower $V_\text{im}$
 
 
 
-*at the compare finish*
+*(c) compare finish*
 
 $$\begin{align}
 V_\text{ip}= V_\text{cmi} + \Delta \\
 V_\text{im}= V_\text{cmi} - \Delta
 \end{align}$$
 
-and $I_\text{ip0}= I_\text{im0} = I_\text{i0}$, $I_\text{rp0}= I_\text{rm0} = I_\text{r0}$
+The currents return to their sample-phase values, $I_\text{ip}= I_\text{im} = I_\text{i0}$ and $I_\text{rp}= I_\text{rm} = I_\text{r0}$
 
-i.e. $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} = 0$
+so $\overline{I_\text{ip} + I_\text{rm}} - \overline{I_\text{im} + I_\text{rp}} = 0$
 
 
 ---
 
-If $V_\text{cmr} - V_\text{cmi} = \sqrt{2}V_{OV} + \delta$, and $\delta \gt 0$. one transistor carries the entire tail current
+If $V_\text{cmr} - V_\text{cmi} = \sqrt{2}V_{OV} + \delta$ with $\delta \gt 0$, one transistor carries the entire tail current throughout the comparison
 
-- $I_\text{ip} =0$ and $I_\text{rp} = I_{SS}$,  all the time
+- $I_\text{ip} =0$ and $I_\text{rp} = I_{SS}$
 
-At the end, $V_\text{im} = V_\text{cmi} - (\Delta - \delta)$, the error is $\delta$
+The loop then settles at $V_\text{im} = V_\text{cmi} - (\Delta - \delta)$, an error of $\delta$
 
-In closing, $V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV}$ for normal work
+Correct operation therefore requires $V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV}$
 
-Furthermore, the difference between $V_\text{cmr}$ and $V_\text{cmi}$ should be minimized due to **limited impedance of current source** and **input pair offset**
-
-In the end
+In practice, the difference between $V_\text{cmr}$ and $V_\text{cmi}$ should be minimized further because of the **finite output impedance of the tail current source** and the **input-pair offset**, giving
 $$
 V_\text{cmr} - V_\text{cmi} \lt \sqrt{2}V_{OV} - V_{OS}
 $$
 
-Under the condition, every transistor of pairs are on in equilibrium
+Under this condition, all transistors in both pairs stay on at equilibrium
 
 ### pair mismatch
 
@@ -386,19 +415,19 @@ I_{SE} &= g_m(\sigma_{vth,0} + \sigma_{vth,1}) \\
 I_{DE} &= g_m(\sigma_{vth,0} + \sigma_{vth,1})
 \end{align}$$
 
-The input equivalient offset voltage
+The input-referred offset voltage
 $$\begin{align}
 V_{os,SE} &= \frac{I_{SE}}{2g_m} = \frac{\sigma_{vth,0} + \sigma_{vth,1}}{2} \\
 V_{os,DE} &= \frac{I_{DE}}{g_m} = \sigma_{vth,0} + \sigma_{vth,1}
 \end{align}$$
 
-Then
+With independent mismatch, $\sigma_{vth,0} = \sigma_{vth,1} = \sigma_{vth}$
 $$\begin{align}
 \sigma_{vos,SE} &= \sqrt{\frac{2\sigma_{vth}^2}{4}} = \frac{\sigma_{vth}}{\sqrt{2}} \\
 \sigma_{vos,DE} &= \sqrt{2\sigma_{vth}^2} = \sqrt{2}\sigma_{vth}
 \end{align}$$
 
-We obtain
+Therefore
 $$
 \sigma_{vos,DE} = 2\sigma_{vos,SE}
 $$
@@ -415,7 +444,7 @@ $$
 
 ![image-20230103220933081](ana-tech/image-20230103220933081.png)
 
-small gm/ID for High ro,  or high Early voltage $V_A$
+Use a small $g_m/I_D$ (strong inversion) for high $r_o$, i.e., a high Early voltage $V_A$: the gate controls the channel better, so $V_{DS}$ has less effect
 
 
 

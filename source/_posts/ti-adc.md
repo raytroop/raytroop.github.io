@@ -445,6 +445,8 @@ $$
 > Y. Shifman, Y. Krupnik, U. Virobnik, A. Khairi, Y. Sanhedrai and A. Cohen, "A 1.64mW Differential Super Source-Follower Buffer with 9.7GHz BW and 43dB PSRR for Time-Interleaved ADC Applications in 10nm," *2019 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Macau, Macao, 2019  [[pdf](https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969)]
 >
 > E. -H. Chen *et al*., "7.1 A 212.5Gb/s DSP-Based PAM-4 Transceiver with 50dB Loss Compensation for Large AI System Interconnects in 4nm FinFET," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025
+>
+> N. G. Jayaraman, “High speed buffering for time-interleaved ADCs with reduced ISI and increased voltage gain,” WO Patent 2018164928 A1, Sep. 13, 2018. [Online]. Available: [[https://patents.google.com/patent/WO2018164928A1](https://patents.google.com/patent/WO2018164928A1)]
 
 *TODO* &#128197;
 

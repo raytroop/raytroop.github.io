@@ -143,7 +143,11 @@ Extensive work on DFEs has produced a multitude of architectures, which can be b
 
 ![image-20261001074247470](rx/image-20261001074247470.png)
 
+![image-20261024195325839](rx/image-20261024195325839.png)
 
+![image-20261024195306253](rx/image-20261024195306253.png)
+
+![image-20261024200924921](rx/image-20261024200924921.png)
 
 
 

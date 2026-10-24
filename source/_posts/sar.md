@@ -25,14 +25,6 @@ mathjax: true
 
 
 
-## Sampling Front-End (SFE) Pulse Response
-
-![image-20250107234500537](sar/image-20250107234500537.png)
-
-sweep the setup time between ideal pulse input and clock, sample the output of SFE at falling edge
-
-
-
 
 
 ### sample-by-sample

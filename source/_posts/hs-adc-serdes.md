@@ -283,11 +283,25 @@ The qualification is that this compares their **instantaneous currents during re
 
 
 
+## Sampling Front-End (SFE) Pulse Response
+
+> Y. Frans, "ADC-based Wireline Transceiver," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-89 [[https://sci-hub.jp/10.1109/CICC.2019.8780306](https://sci-hub.jp/10.1109/CICC.2019.8780306)]
+
+![image-20250107234500537](hs-adc-serdes/image-20250107234500537.png)
+
+sweep the setup time between ideal pulse input and clock, sample the output of SFE at falling edge
+
+
+
+
+
+
+
 ## reference
 
 Samuel Palermo, ISSCC 2018 T10: ADC-Based Serial Links: Design and Analysis
 
-Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
+Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[https://sci-hub.jp/10.1109/CICC.2019.8780306](https://sci-hub.jp/10.1109/CICC.2019.8780306)]
 
 Nhat Nguyen and Masum Hossain, ISSCC 2021 Forum *F6.7: 112Gb/s-and-Beyond Long-Reach and Short-Reach Electrical Interfaces*
 

@@ -41,7 +41,9 @@ Think of a fiber as a highway, and different wavelengths as different lanes
 
 ## reference
 
-Vladimir Stojanović, VLSI 2016 SC6: Integrated Electronic-Photonic Communication Circuits
+Vladimir Stojanović, VLSI 2016 SC6: *Integrated Electronic-Photonic Communication Circuits*
+
+Azita Emami, CICC 2019 ES3-2: *High-Speed Optical Links*
 
 Sudip Shekhar, ISSCC 2021 Tutorial, *Silicon Photonics: From Basics to ASICs*
 

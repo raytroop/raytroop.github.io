@@ -633,6 +633,26 @@ The maximum swing stays the same, $\sum_i |c_i|=1$
 
 
 
+## 0.5b in segmented DAC
+
+> Z. Guo et al., "6.2 A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 116-118 [[https://sci-net.xyz/10.1109/ISSCC42614.2022.9731650](https://sci-net.xyz/10.1109/ISSCC42614.2022.9731650)]
+
+![image-20261024205151890](tx/image-20261024205151890.png)
+
+![image-20261024203740807](tx/image-20261024203740807.png)
+
+
+
+totalX = 1 +2 + 4 + 8 + (1 + 2 + 4)\*16 + 4\*16 = 1 +2 + 4 + 8 + 16\***11** = 191
+
+Therefore, the valid input range range is **0 ~ 191**, even though the input bit number is 8 (range 0~255)
+
+If we apply $\log_2$ to  $\boxed{N+0.5}$ bit DAC
+$$
+\log_2 (2^N + 2^{N-1}) = N - 1 + 3\log_2(3) = N + 0.585
+$$
+
+
 ## Basic FeedForward Equalization Theory
 
 ![image-20220709111229772](tx/image-20220709111229772.png)
@@ -831,8 +851,6 @@ Jihwan Kim, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
 —, CICC 2022, ES4-4: Transmitter Design for High-speed Serial Data Communications
 
 Friedel Gerfers, ISSCC2021 T6: Basics of DAC-based Wireline Transmitters
-
-[[https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf)]
 
 Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter Circuits [[https://youtu.be/oofViBGlrjM](https://youtu.be/oofViBGlrjM)]
 

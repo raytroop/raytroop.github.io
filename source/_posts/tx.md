@@ -7,7 +7,9 @@ categories:
 mathjax: true
 ---
 
-![image-20260428003937326](tx/image-20260428003937326.png)
+
+
+![image-20261024112822262](tx/image-20261024112822262.png)
 
 ## Analog-based TX vs. DSP/DAC TX
 
@@ -207,7 +209,84 @@ Fig 9. works for D0–D2, but the D3 path races. So Fig. 9 is probably simplifie
 
 
 
+## Full-rate TX architecture
 
+> Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 5: Termination, TX Driver, & Multiplexer Circuits [[https://people.engr.tamu.edu/spalermo/ecen689/lecture5_ee720_termination_txdriver.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture5_ee720_termination_txdriver.pdf)]
+>
+> J. Cao *et al*., "OC-192 transmitter and receiver in standard 0.18-/spl mu/m CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 37, no. 12, pp. 1768-1780, Dec. 2002 [[https://sci-hub.jp/10.1109/JSSC.2002.804336](https://sci-hub.jp/10.1109/JSSC.2002.804336)]
+
+![image-20261024143217254](tx/image-20261024143217254.png)
+
+With the FFs, latches, and clocks unchanged, **reversing** the MUX selection still works, but adds **latency**
+
+The bit order is preserved; each bit is selected later.
+
+- Reversing **both first-stage MUXes** adds **2 UI**
+- Reversing the **final MUX** adds **1 UI**.
+- Reversing **all three** preserves \(D_0,D_1,D_2,D_3,\ldots\), with **3 UI additional latency**
+
+
+
+---
+
+![image-20261001145947746](tx/image-20261001145947746.png)
+
+The **retimer** between the final stage of the MUX and the output driver is used to r**educe the data jitter** due to the bandwidth limitation of the selection circuit in the 2 : 1 MUX cell and duty cycle distortion of the half-rate clock driving that stage
+
+
+
+---
+
+![image-20261024162436538](tx/image-20261024162436538.png)
+
+
+
+
+
+
+##  Half-rate TX architecture
+
+> M. Meghelli *et al*., "A 10Gb/s 5-Tap-DFE/4-Tap-FFE Transceiver in 90nm CMOS," *2006 IEEE International Solid State Circuits Conference - Digest of Technical Papers*, San Francisco, CA, USA, 2006, pp. 213-222 [[https://sci-hub.ru/10.1109/ISSCC.2006.1696051](https://sci-hub.ru/10.1109/ISSCC.2006.1696051)]
+>
+> J. F. Bulzacchelli *et al*., "A 10-Gb/s 5-Tap DFE/4-Tap FFE Transceiver in 90-nm CMOS Technology," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 12, pp. 2885-2900, Dec. 2006 [[https://sci-hub.ru/10.1109/JSSC.2006.884342](https://sci-hub.ru/10.1109/JSSC.2006.884342)]
+>
+> Yang, Chih-Kong Ken. *Design of high-speed serial links in CMOS*. Stanford University, 1999. [[http://i.stanford.edu/pub/cstr/reports/csl/tr/98/775/CSL-TR-98-775.pdf](http://i.stanford.edu/pub/cstr/reports/csl/tr/98/775/CSL-TR-98-775.pdf)]
+>
+> Mark Horowitz, Chih-Kong Ken Yang, and Stefanos Sidiropoulos. 1998. High-Speed Electrical Signaling: Overview and Limitations. IEEE Micro 18, 1 (January 1998), 12–24. https://doi.org/10.1109/40.653013 [[https://people.engr.tamu.edu/spalermo/ecen689/hs_electrical_signaling_horowitz_micro_1998.pdf](https://people.engr.tamu.edu/spalermo/ecen689/hs_electrical_signaling_horowitz_micro_1998.pdf)]
+
+<span style="color:white; background-color:black">**Five-latch 2:1 MUX**</span>
+
+![image-20261024004405229](tx/image-20261024004405229.png)
+
+![image-20261021232016291](tx/image-20261021232016291.png)
+
+![halfrate_tamu.drawio](tx/halfrate_tamu.drawio.svg)
+
+
+
+---
+
+![image-20261024162210709](tx/image-20261024162210709.png)
+
+![image-20261024162248410](tx/image-20261024162248410.png)
+
+![halfrate_swap.drawio](tx/halfrate_swap.drawio.svg)
+
+
+
+---
+
+
+
+![image-20261001111219814](tx/image-20261001111219814.png)
+
+
+
+
+
+![image-20261001170626200](tx/image-20261001170626200.png)
+
+The half period that second-half selection "wastes" is deliberate slack: it lets each input settle fully before it is passed. You're trading a little latency for **robustness**, and designers almost always take that trade. If latency truly mattered, the better move would be to trim pipeline stages or the FIFO depth elsewhere, not to remove the settling slack from the highest-speed MUX.
 
 
 
@@ -255,71 +334,6 @@ If the natural delay lands too close to an active edge, the designer can fix it 
 
 
 
-##  Half-rate TX architecture
-
-> M. Meghelli *et al*., "A 10Gb/s 5-Tap-DFE/4-Tap-FFE Transceiver in 90nm CMOS," *2006 IEEE International Solid State Circuits Conference - Digest of Technical Papers*, San Francisco, CA, USA, 2006, pp. 213-222 [[https://sci-hub.ru/10.1109/ISSCC.2006.1696051](https://sci-hub.ru/10.1109/ISSCC.2006.1696051)]
->
-> J. F. Bulzacchelli *et al*., "A 10-Gb/s 5-Tap DFE/4-Tap FFE Transceiver in 90-nm CMOS Technology," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 12, pp. 2885-2900, Dec. 2006 [[https://sci-hub.ru/10.1109/JSSC.2006.884342](https://sci-hub.ru/10.1109/JSSC.2006.884342)]
->
-> Yang, Chih-Kong Ken. *Design of high-speed serial links in CMOS*. Stanford University, 1999. [[http://i.stanford.edu/pub/cstr/reports/csl/tr/98/775/CSL-TR-98-775.pdf](http://i.stanford.edu/pub/cstr/reports/csl/tr/98/775/CSL-TR-98-775.pdf)]
->
-> Mark Horowitz, Chih-Kong Ken Yang, and Stefanos Sidiropoulos. 1998. High-Speed Electrical Signaling: Overview and Limitations. IEEE Micro 18, 1 (January 1998), 12–24. https://doi.org/10.1109/40.653013 [[https://people.engr.tamu.edu/spalermo/ecen689/hs_electrical_signaling_horowitz_micro_1998.pdf](https://people.engr.tamu.edu/spalermo/ecen689/hs_electrical_signaling_horowitz_micro_1998.pdf)]
-
-<span style="color:white; background-color:black">**Five-latch 2:1 MUX**</span>
-
-![image-20261024004405229](tx/image-20261024004405229.png)
-
-![image-20261021232016291](tx/image-20261021232016291.png)
-
-![halfrate_tamu.drawio](tx/halfrate_tamu.drawio.svg)
-
-
-
-
-
-
-
----
-
-
-
-![image-20261001111219814](tx/image-20261001111219814.png)
-
-
-
-
-
-![image-20261001170626200](tx/image-20261001170626200.png)
-
-The half period that second-half selection "wastes" is deliberate slack: it lets each input settle fully before it is passed. You're trading a little latency for **robustness**, and designers almost always take that trade. If latency truly mattered, the better move would be to trim pipeline stages or the FIFO depth elsewhere, not to remove the settling slack from the highest-speed MUX.
-
-
-
-
-
-## Full-rate TX architecture
-
-> Sam Palermo, ECEN720: High-Speed Links Circuits and Systems Spring 2025 Lecture 5: Termination, TX Driver, & Multiplexer Circuits [[https://people.engr.tamu.edu/spalermo/ecen689/lecture5_ee720_termination_txdriver.pdf](https://people.engr.tamu.edu/spalermo/ecen689/lecture5_ee720_termination_txdriver.pdf)]
->
-> J. Cao *et al*., "OC-192 transmitter and receiver in standard 0.18-/spl mu/m CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 37, no. 12, pp. 1768-1780, Dec. 2002, doi: 
-
-![image-20261001141723228](tx/image-20261001141723228.png)
-
-With the FFs, latches, and clocks unchanged, **reversing** the MUX selection still works, but adds **latency**
-
-The bit order is preserved; each bit is selected later.
-
-- Reversing **both first-stage MUXes** adds **2 UI**
-- Reversing the **final MUX** adds **1 UI**.
-- Reversing **all three** preserves \(D_0,D_1,D_2,D_3,\ldots\), with **3 UI additional latency**
-
-
-
----
-
-![image-20261001145947746](tx/image-20261001145947746.png)
-
-The **retimer** between the final stage of the MUX and the output driver is used to r**educe the data jitter** due to the bandwidth limitation of the selection circuit in the 2 : 1 MUX cell and duty cycle distortion of the half-rate clock driving that stage
 
 
 
@@ -808,7 +822,7 @@ Where $C_{-1} = l$, $C_0 = m$ and $C_{1}=n$, which is same with that of NRZ
 
 ## reference
 
-B. Razavi, "Design Techniques for High-Speed Wireline Transmitters," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 53-66, 2021,[[https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf)]
+Jan Mulder, ISSCC2015 T5: High-Speed Current-Steering DACs
 
 Jihwan Kim, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
 
@@ -818,13 +832,19 @@ Jihwan Kim, ISSCC2019 F5: Design Techniques for a 112Gbs PAM-4 Transmitter
 
 Friedel Gerfers, ISSCC2021 T6: Basics of DAC-based Wireline Transmitters
 
+[[https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf)]
+
 Noman Hai, Synopsys. CICC 2025 Circuit Insights: Basics of Wireline Transmitter Circuits [[https://youtu.be/oofViBGlrjM](https://youtu.be/oofViBGlrjM)]
 
 —, Synopsys. Design Challenges Of High-Speed Wireline Transmitters [[https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/](https://semiengineering.com/design-challenges-of-high-speed-wireline-transmitters/)]
 
 —, Synopsys. CMOS Circuit Techniques for Wireline Transmitters [[https://www.synopsys.com/webinars/wireline-transmitters-part-1.html](https://www.synopsys.com/webinars/wireline-transmitters-part-1.html)]
 
-Tod Dickson, IBM. High-Speed CMOS Serial Transmitters for 56-112Gb/s Electrical Interconnects [[https://www.youtube.com/watch?v=g1pcZabsRNc](https://www.youtube.com/watch?v=g1pcZabsRNc)]
+Vivek Gurumoorthy, Marvell, ISSCC 2025 Circuit Insights: *Circuits for Optical Communication*
+
+Tod Dickson, IBM IEEE San Diego 2020. High-Speed CMOS Serial Transmitters for 56-112Gb/s Electrical Interconnects [[https://www.youtube.com/watch?v=g1pcZabsRNc](https://www.youtube.com/watch?v=g1pcZabsRNc)]
+
+B. Razavi, "Design Techniques for High-Speed Wireline Transmitters," in IEEE Open Journal of the Solid-State Circuits Society, vol. 1, pp. 53-66, 2021 [[https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BROJSSCSep21.pdf)]
 
 T. Chan Carusone, T. O. Dickson, S. Palermo, S. Shekhar and M. Mansuri, "Modern Wireline Transceivers," in *IEEE Journal of Solid-State Circuits*, vol. 61, no. 2, pp. 395-422, Feb. 2026 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11311714)]
 

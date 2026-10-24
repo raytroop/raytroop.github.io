@@ -35,6 +35,8 @@ mathjax: true
 
 ## reference
 
+Jan Mulder, ISSCC2015 T5: High-Speed Current-Steering DACs
+
 Schmidt, C. (2020). Interleaving Concepts for Digital-to-Analog Converters. Springer Vieweg, Wiesbaden.
 
 Gabriele Manganaro, MediaTek, ISSCC 2026 - Forum 6: Calibration for HighSpeed, High-Resolution DACs

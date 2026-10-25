@@ -29,17 +29,39 @@ Current-mode PIs (CMPIs) can achieve high linearity but at the cost of digital o
 
 ![image-20261012235108905](pi-cdr/image-20261012235108905.png)
 
-
+![image-20261025195127121](pi-cdr/image-20261025195127121.png)
 
 A **constant Output amplitude** is desired because the *swing-dependent delay characteristic* of the **CML-to-CMOS (C2C)** circuit results in *AM–PM distortion* which eventually manifests as phase nonlinearity
 
 ![image-20261019235127269](pi-cdr/image-20261019235127269.png)
 
+![image-20261025180111576](pi-cdr/image-20261025180111576.png)
+
+
+
+---
+
+> L. -m. Lee and C. -K. K. Yang, "Phase correction of a resonant clocking system using resonant interpolators," *2008 IEEE Symposium on VLSI Circuits*, Honolulu, HI, USA, 2008, pp. 170-171 [[https://sci-hub.jp/10.1109/VLSIC.2008.4585994](https://sci-hub.jp/10.1109/VLSIC.2008.4585994)] 
+
+![image-20261025211203236](pi-cdr/image-20261025211203236.png)
+
+![image-20261025201329931](pi-cdr/image-20261025201329931.png)
+
+---
+
+> M. Erett *et al*., "A 0.5–16.3 Gbps Multi-Standard Serial Transceiver With 219 mW/Channel in 16-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 52, no. 7, pp. 1783-1797, July 2017 [[https://sci-hub.jp/10.1109/JSSC.2017.2702711](https://sci-hub.jp/10.1109/JSSC.2017.2702711)]
+
+![image-20261025203506679](pi-cdr/image-20261025203506679.png)
+
 
 
 ## Voltage-Mode Phase Interpolator (VMPI)
 
-> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
+> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "17.7 A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3 [[https://sci-hub.jp/10.1109/ISSCC42614.2022.9731703](https://sci-hub.jp/10.1109/ISSCC42614.2022.9731703)]
+
+![image-20261025210925791](pi-cdr/image-20261025210925791.png)
+
+![image-20261025203937480](pi-cdr/image-20261025203937480.png)
 
 ![image-20261012233712634](pi-cdr/image-20261012233712634.png)
 
@@ -52,6 +74,8 @@ A **constant Output amplitude** is desired because the *swing-dependent delay ch
 ---
 
 > B. Razavi, "The Design of a Phase Interpolator [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 4, pp. 6-10, Fall 2023 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2023.pdf)]
+
+
 
 <span style="background-color:yellow">Use of **resistors** in the interpolation network</span>
 
@@ -139,7 +163,7 @@ plt.show()
 
 ## Integrating-Mode Phase Interpolator (IMPI)
 
-> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
+> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "17.7 A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
 >
 > Shaokang ZHAO, 2025, "Multi-Phase Clock Generator for High-Speed Wireline Systems," [[paper](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/1.Thesis/2.Mphil/Shaokang%20Thesis.pdf), [slides](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/2.Slides/2.Mphil/Shaokang_Zhao%20Slides.pdf)]
 
@@ -390,9 +414,50 @@ plt.show()
 
 ## PI static & dynamic linearity
 
+> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "17.7 A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, [[https://sci-hub.jp/10.1109/ISSCC42614.2022.9731703](https://sci-hub.jp/10.1109/ISSCC42614.2022.9731703)]
+>
+> —, "Improving Linearity in CMOS Phase Interpolators," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 6, pp. 1623-1635, June 2023, [[https://sci-net.xyz/10.1109/JSSC.2023.3243305](https://sci-net.xyz/10.1109/JSSC.2023.3243305)]
+>
 > Wang, Zhaowen. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
 
-### Sampling Offset due to PI Nonlinearity
+
+
+### PI rotation (dynamic operation)
+
+![image-20260919083229868](pi-cdr/image-20260919083229868.png)
+
+$$
+K_{f,PI} = \frac{1/2^N}{T_m/T_o}\cdot \frac{1}{T_o} = \frac{f_m}{2^N}
+$$
+![pi-code.drawio](pi-cdr/pi-code.drawio.svg)
+
+---
+
+<span style="color:white; background-color:black">**For DCO**</span>
+$$
+K_{f,DCO} = \frac{K_T}{T_o}\cdot \frac{1}{T_o} = \frac{K_T}{T_o^2}
+$$
+
+
+---
+
+![image-2026-10-13_12-46](pi-cdr/image-2026-10-13_12-46.png)
+
+
+
+### Deterministic Jitter & rotation spur
+
+> E. Monaco, G. Anzalone, G. Albasini, S. Erba, M. Bassi and A. Mazzanti, "A 2–11 GHz 7-Bit High-Linearity Phase Rotator Based on Wideband Injection-Locking Multi-Phase Generation for High-Speed Serial Links in 28-nm CMOS FDSOI," in *IEEE Journal of Solid-State Circuits*, vol. 52, no. 7, pp. 1739-1752, July 2017 [[https://sci-hub.jp/10.1109/JSSC.2017.2702742](https://sci-hub.jp/10.1109/JSSC.2017.2702742)]
+
+
+
+![image-20261025184806969](pi-cdr/image-20261025184806969.png)
+$$
+\boxed{\color{red}|\text{DJ}| \leq T_{LSB} (1+\max(\text{DNL}) + \text{INL}_\text{pk-pk})}
+$$
+
+
+---
 
 
 ![image-20260919082930453](pi-cdr/image-20260919082930453.png)
@@ -455,7 +520,7 @@ $E_e$ and $E_d$ are **timing errors**, measured in seconds—not the clock times
   $$
   E_e=t_e-t_{\text{transition}}.
   $$
-  
+
 - **$E_d$: data-sampling clock error** relative to the ideal data-sampling time, assumed here to be half a UI after that transition:
   $$
   E_d=t_d-\left(t_{\text{transition}}+\frac{\mathrm{UI}}{2}\right).
@@ -472,19 +537,19 @@ $$
 Let the desired edge-to-data spacing be
 
 $$
-H=\frac{\mathrm{UI}}{2},
+H=\frac{\mathrm{UI}}{2}
 $$
 
 and let the data-clock code be $k+m$ when the edge-clock code is $k$. Then
 
 $$
-t_d-t_e=mT+[I(k+m)-I(k)]T.
+t_d-t_e=mT+[I(k+m)-I(k)]T
 $$
 
 Consequently, the data-clock error relative to its ideal sampling position is
 
 $$
-\boxed{ E_d = E_e +\underbrace{(mT-H)}_{\text{spacing quantization}} +\underbrace{[I(k+m)-I(k)]T}_{\text{relative INL error}}. }
+\boxed{ E_d = E_e +\underbrace{(mT-H)}_{\text{spacing quantization}} +\underbrace{[I(k+m)-I(k)]T}_{\text{relative INL error}} }
 $$
 
 If $m$ is chosen by rounding $H/T$, then
@@ -496,7 +561,7 @@ $$
 Combining this with the paper’s edge-clock allowance gives
 
 $$
-|E_d| \le \underbrace{(0.5+|\mathrm{DNL}_p|)T}_{\text{edge-clock error}} +\underbrace{0.5T}_{\text{spacing quantization}} +\underbrace{\mathrm{INL}_{pp}T}_{\text{relative INL error}},
+|E_d| \le \underbrace{(0.5+|\mathrm{DNL}_p|)T}_{\text{edge-clock error}} +\underbrace{0.5T}_{\text{spacing quantization}} +\underbrace{\mathrm{INL}_{pp}T}_{\text{relative INL error}}
 $$
 
 which produces the quoted expression.
@@ -504,7 +569,7 @@ which produces the quoted expression.
 Using tighter edge-clock bound
 
 $$
-|E_d| \le \underbrace{\left(0.5+\frac{|\mathrm{DNL}_p|}{2}\right)T_{\mathrm{LSB}}}_{\text{edge-clock error}} +\underbrace{0.5T_{\mathrm{LSB}}}_{\text{spacing quantization}} +\underbrace{\mathrm{INL}_{pp}T_{\mathrm{LSB}}}_{\text{relative INL error}},
+|E_d| \le \underbrace{\left(0.5+\frac{|\mathrm{DNL}_p|}{2}\right)T_{\mathrm{LSB}}}_{\text{edge-clock error}} +\underbrace{0.5T_{\mathrm{LSB}}}_{\text{spacing quantization}} +\underbrace{\mathrm{INL}_{pp}T_{\mathrm{LSB}}}_{\text{relative INL error}}
 $$
 
 so
@@ -547,35 +612,6 @@ That last term is precisely the relative INL error we discussed. The subscripts 
 
 
 
-### Deterministic Jitter due to PI Nonlinearity
-
-![image-20260919083229868](pi-cdr/image-20260919083229868.png)
-
-$$
-K_{f,PI} = \frac{1/2^N}{T_m/T_o}\cdot \frac{1}{T_o} = \frac{f_m}{2^N}
-$$
-![pi-code.drawio](pi-cdr/pi-code.drawio.svg)
-
----
-
-<span style="color:white; background-color:black">**For DCO**</span>
-$$
-K_{f,DCO} = \frac{K_T}{T_o}\cdot \frac{1}{T_o} = \frac{K_T}{T_o^2}
-$$
-
-
----
-
-![image-2026-10-13_12-46](pi-cdr/image-2026-10-13_12-46.png)
-
-### rotation spur
-
-> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
->
-> —, "Improving Linearity in CMOS Phase Interpolators," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 6, pp. 1623-1635, June 2023, doi: 10.1109/JSSC.2023.3243305 [[pdf](https://sudip.sites.olt.ubc.ca/files/2023/04/77.-Improving_Linearity_in_CMOS_Phase_Interpolators.pdf)]
-
-
-
 ## PI vs. PLL based CDR
 
 > PCI Express Jitter Modeling Revision 1.0RD July 14, 2004
@@ -608,3 +644,5 @@ CHUNG-CHUN (CC) CHEN, *Why Phase Interpolator Based CDR?* [[https://youtu.be/Fko
 —, *Why An Integrating Mode Phase Interpolator?* [[https://youtu.be/VEkM8ZEcYnc](https://youtu.be/VEkM8ZEcYnc)]
 
 —, *Why High-Speed Integrating Mode Phase Interpolator, IMPI?* [[https://youtu.be/6197voGpOek](https://youtu.be/6197voGpOek)]
+
+rfinsights, phase rotator in serdes - every major topology, explained [[https://www.rfinsights.com/synthesizer/phase-rotator/](https://www.rfinsights.com/synthesizer/phase-rotator/)]

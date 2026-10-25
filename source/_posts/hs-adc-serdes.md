@@ -286,14 +286,16 @@ The qualification is that this compares their **instantaneous currents during re
 ## Sampling Front-End (SFE) Pulse Response
 
 > Y. Frans, "ADC-based Wireline Transceiver," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-89 [[https://sci-hub.jp/10.1109/CICC.2019.8780306](https://sci-hub.jp/10.1109/CICC.2019.8780306)]
+>
+> J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
 
 ![image-20250107234500537](hs-adc-serdes/image-20250107234500537.png)
 
 sweep the setup time between ideal pulse input and clock, sample the output of SFE at falling edge
 
+![image-20261025121943854](hs-adc-serdes/image-20261025121943854.png)
 
-
-
+The front-end (Rank-1) tracking bandwidth scales linearly to approximately **twice** the sampling frequency
 
 
 

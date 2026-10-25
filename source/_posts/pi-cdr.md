@@ -19,9 +19,9 @@ The PI-based architecture decouples the high-frequency clock synthesis and local
 
 ## Current-Mode Phase Interpolator (CMPI)
 
-> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3, doi: 10.1109/ISSCC42614.2022.9731703.
+> A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "17.7 A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3 [[https://sci-hub.jp/10.1109/ISSCC42614.2022.9731703](https://sci-hub.jp/10.1109/ISSCC42614.2022.9731703)]
 >
-> —, "Improving Linearity in CMOS Phase Interpolators," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 6, pp. 1623-1635, June 2023, doi: 10.1109/JSSC.2023.3243305 [[pdf](https://sudip.sites.olt.ubc.ca/files/2023/04/77.-Improving_Linearity_in_CMOS_Phase_Interpolators.pdf)]
+> —, "Improving Linearity in CMOS Phase Interpolators," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 6, pp. 1623-1635, June 2023 [[https://sci-net.xyz/10.1109/JSSC.2023.3243305](https://sci-net.xyz/10.1109/JSSC.2023.3243305)]
 >
 > D. Xu *et al*., "8.5 A Scalable Adaptive ADC/DSP-Based 1.25-to-56Gbps/112Gbps High-Speed Transceiver Architecture Using Decision-Directed MMSE CDR in 16nm and 7nm," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 134-136 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9366063](https://sci-hub.ru/10.1109/ISSCC42613.2021.9366063)]
 

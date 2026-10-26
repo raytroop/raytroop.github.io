@@ -31,6 +31,8 @@ Current-mode PIs (CMPIs) can achieve high linearity but at the cost of digital o
 
 ![image-20261025195127121](pi-cdr/image-20261025195127121.png)
 
+> $\alpha^2 + \beta^2=1$ ensure constant amplitude, however $\alpha$ still needed be selected with $\tan\phi = \frac{1-\alpha^2}{\alpha^2}$ for constant phase step
+
 A **constant Output amplitude** is desired because the *swing-dependent delay characteristic* of the **CML-to-CMOS (C2C)** circuit results in *AM–PM distortion* which eventually manifests as phase nonlinearity
 
 ![image-20261019235127269](pi-cdr/image-20261019235127269.png)

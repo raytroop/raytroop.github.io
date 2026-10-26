@@ -598,7 +598,31 @@ a.k.a. <span style="color:white; background-color:black">Pseudo - CML</span>
 
 ![image-20261001072415008](tx/image-20261001072415008.png)
 
+![active-peaking](tx/active-peaking.svg)
+$$
+I_\text{x} = g_\text{mfb}\cdot V_\text{x}\frac{1}{sR_\text{tg}C_\text{g}+1} \qquad \Longrightarrow \qquad R_\text{x}=\frac{V_\text{x}}{I_\text{x}}= \frac{1}{g_\text{mfb}} + s\frac{R_\text{tg}C_\text{g}}{g_\text{mfb}}
+$$
+
+i.e.
+$$
+R \approx \frac{1}{g_\text{mfb}} \qquad\qquad L \approx \frac{R_\text{tg}C_\text{g}}{g_\text{mfb}}
+$$
+
+
+
 ![image-20251217231902887](tx/image-20251217231902887.png)
+
+
+
+---
+
+> U. Singh *et al*., "8.6 A 280mW 112Gb/s PAM-4/NRZ Transceiver for Low-Power IOs in 5nm FinFET Technology," *2026 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2026, pp. 144-146, doi: 10.1109/ISSCC49663.2026.11409174
+
+![image-20261026213214551](tx/image-20261026213214551.png)
+
+
+
+
 
 ## Single-Ended-to-Differential (S2D)
 

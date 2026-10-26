@@ -134,6 +134,18 @@ $$
 
 ![image-20250902231449843](dpll/image-20250902231449843.png)
 
+
+
+## PFD + !!PD
+
+![pfd_bbpd.drawio](dpll/pfd_bbpd.drawio.svg)
+
+
+
+PFD is used for frequency-detection capability
+
+
+
 ## DCO Quantization Noise
 
 *TODO* &#128197;
@@ -1104,6 +1116,9 @@ $$
 > M. Zanuso, D. Tasca, S. Levantino, A. Donadel, C. Samori and A. L. Lacaita, "Noise Analysis and Minimization in Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 56, no. 11, pp. 835-839, Nov. 2009 [[https://sci-hub.st/10.1109/TCSII.2009.2032470](https://sci-hub.st/10.1109/TCSII.2009.2032470)]
 
 *TODO* &#128197;
+
+
+
 
 
 ## reference

@@ -294,6 +294,8 @@ C = (gamma_ftarget/Zline_ftarget).imag / omega
 ## 90<sup>o</sup> Turns
 
 > Mohammad Abu Khater, ISCAS2019 tutorial: High-Performance Printed Circuit Boards (PCBs)
+>
+> Eric Bogatin, Should You Avoid 90-Degree Corners in PCB Traces? [[https://www.quilter.ai/blog/90-degree-corners-pcb-traces](https://www.quilter.ai/blog/90-degree-corners-pcb-traces)]
 
 ![image-20260923225838811](xtalk/image-20260923225838811.png)
 

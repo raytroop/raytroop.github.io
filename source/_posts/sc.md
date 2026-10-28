@@ -210,30 +210,23 @@ $$
 
 
 
-## Hold Mode Feedthrough
-
-![image-20240820204720277](sc/image-20240820204720277.png)
-
-![image-20240820204959977](sc/image-20240820204959977.png)
-
-
+## Hold Mode & Clock Feedthrough
 
 > P. Schvan et al., "A 24GS/s 6b ADC in 90nm CMOS," 2008 IEEE International Solid-State Circuits Conference - Digest of Technical Papers, San Francisco, CA, USA, 2008, pp. 544-634
 >
 > B. Sedighi, A. T. Huynh and E. Skafidas, "A CMOS track-and-hold circuit with beyond 30 GHz input bandwidth," 2012 19th IEEE International Conference on Electronics, Circuits, and Systems (ICECS 2012), Seville, Spain, 2012, pp. 113-116
 >
 > Tania Khanna, ESE 568: Mixed Signal Circuit Design and Modeling [[https://www.seas.upenn.edu/~ese5680/fall2019/handouts/lec11.pdf](https://www.seas.upenn.edu/~ese5680/fall2019/handouts/lec11.pdf)]
+>
+> T. Ali *et al*., "6.4 A 180mW 56Gb/s DSP-Based Transceiver for High Density IOs in Data Center Switches in 7nm FinFET Technology," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 118-120 [[https://sci-hub.se/10.1109/ISSCC.2019.8662523](https://sci-hub.se/10.1109/ISSCC.2019.8662523)]
+
+![image-20240820204720277](sc/image-20240820204720277.png)
+
+![image-20240820204959977](sc/image-20240820204959977.png)
+
+![image-20261029002053008](sc/image-20261029002053008.png)
 
 
-
-
-
-
-## Clock Feedthrough
-
-> aka. **LO leakage**
-
-*TODO* &#128197;
 
 
 

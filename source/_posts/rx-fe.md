@@ -142,7 +142,7 @@ trade-offs between *noise amplification* and *signal equalization*
 >
 > Z. Li, M. Tang, T. Fan and Q. Pan, "A 56-Gb/s PAM4 Receiver Analog Front-End With Fixed Peaking Frequency and Bandwidth in 40-nm CMOS," in *IEEE Transactions on Circuits and Systems II: Express Briefs*, vol. 68, no. 9, pp. 3058-3062, Sept. 2021 [[slides](https://confcats-event-sessions.s3.amazonaws.com/isicas21/slides/9402.pdf)] [[paper](https://sci-hub.se/10.1109/TCSII.2021.3074384)]
 >
-> K. Kwon *et al*., "A 212.5Gb/s Pam-4 Receiver With Mutual Inductive Coupled Gm-Tia in 4nm Finfet," *2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Kyoto, Japan, 2025
+> K. Kwon *et al*., "C12-4 A 212.5Gb/s Pam-4 Receiver With Mutual Inductive Coupled Gm-Tia in 4nm Finfet," *2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Kyoto, Japan, 2025, pp. 1-3, doi: 10.23919/VLSITechnologyandCir65189.2025.11074881.
 >
 > Bae, W. (2019). CMOS Inverter as Analog Circuit: An Overview. *Journal of Low Power Electronics and Applications*. [[pdf](https://pdfs.semanticscholar.org/6494/3a15452b12c89d31cdcedb22d605c42ed8bd.pdf)]
 
@@ -576,6 +576,14 @@ That is $C_{-M}  = \frac{1}{\omega^2 M} \approx 10 \times C_E$
 Assuming, $I_\text{in}=\cos\omega_r t$ and $V_\text{out}=g\cos(\omega_r t +\theta)$
 
 with $I_\text{in} = C_L\frac{\mathrm{d}V_\text{out}}{\mathrm{d}t}$, yield $g=\sqrt{\frac{L}{C}}$ and $\theta=- \frac{\pi}{2}$, i.e. $V_\text{out} = \sqrt{\frac{L}{C}}\cos(\omega_r t - \frac{\pi}{2})$
+
+
+
+## Inductor shorting switches
+
+> J. Q. Wang et al., "7.1 A 2.69pJ/b 212Gb/s DSP-Based PAM-4 Transceiver for Optical Direct-Detect Application in 5nm FinFET," 2024 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2024, pp. 123-125 [[https://sci-net.xyz/10.1109/ISSCC49657.2024.10454275](https://sci-net.xyz/10.1109/ISSCC49657.2024.10454275)]
+
+![image-20261028203305142](rx-fe/image-20261028203305142.png)
 
 
 

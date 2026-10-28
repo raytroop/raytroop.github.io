@@ -25,7 +25,7 @@ Think of a fiber as a highway, and different wavelengths as different lanes
 
 ## Linear Driver
 
-> J. Q. Wang et al., "7.1 A 2.69pJ/b 212Gb/s DSP-Based PAM-4 Transceiver for Optical Direct-Detect Application in 5nm FinFET," 2024 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2024, pp. 123-125, doi: 10.1109/ISSCC49657.2024.10454275.
+> J. Q. Wang et al., "7.1 A 2.69pJ/b 212Gb/s DSP-Based PAM-4 Transceiver for Optical Direct-Detect Application in 5nm FinFET," 2024 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2024, pp. 123-125 [[https://sci-net.xyz/10.1109/ISSCC49657.2024.10454275](https://sci-net.xyz/10.1109/ISSCC49657.2024.10454275)]
 
 ![image-20261022002620377](optical/image-20261022002620377.png)
 
@@ -38,6 +38,8 @@ Think of a fiber as a highway, and different wavelengths as different lanes
 
 
 > AC capacitor maintain AC feedback path of FVF, and provide appropriate DC bias for tail NMOS
+>
+> ![image-20261028205924253](optical/image-20261028205924253.png)
 
 ![image-20261022003614437](optical/image-20261022003614437.png)
 
@@ -66,3 +68,5 @@ Mayank Raj, CICC 2024, ES3-3: *Design of Silicon photonics based high throughput
 Peter Ossieur, ISSCC 2025 tutorial T6: *Front-End Circuit Design for High-Speed Optical Transceivers*
 
 Vivek Gurumoorthy, Marvell, ISSCC 2025 Circuit Insights: *Circuits for Optical Communication*
+
+E-Hung Chen, MTK, ISSCC 2026 Forum *F2.3: State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*

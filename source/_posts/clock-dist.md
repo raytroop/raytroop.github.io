@@ -1,5 +1,5 @@
 ---
-title: Clock Distribution Techniques
+title: Clock Distribution
 date: 2022-05-16 00:39:22
 tags:
 categories:
@@ -27,9 +27,7 @@ mathjax: true
 
 
 
-
-
-## Standing Wave Based Clock Distribution Technique
+## Standing Wave Based Clock Distribution
 
 > G. Li, W. Lee, D. Cui, B. Zhang, A. Momtaz and J. Cao, "Standing wave based clock distribution technique with application to a 10 × 11 Gbps transceiver in 28 nm CMOS," *2015 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Xiamen, China, 2015, pp. 1-4 [[https://sci-hub.se/10.1109/ASSCC.2015.7387451](https://sci-hub.se/10.1109/ASSCC.2015.7387451)]
 >
@@ -37,9 +35,17 @@ mathjax: true
 >
 > M. -A. LaCroix *et al*., "8.4 A 116Gb/s DSP-Based Wireline Transceiver in 7nm CMOS Achieving 6pJ/b at 45dB Loss in PAM-4/Duo-PAM-4 and 52dB in PAM-2," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 132-134 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9366030](https://sci-hub.ru/10.1109/ISSCC42613.2021.9366030)]
 >
+> K. Kwon *et al*., "C12-4 A 212.5Gb/s Pam-4 Receiver With Mutual Inductive Coupled Gm-Tia in 4nm Finfet," *2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Kyoto, Japan, 2025, pp. 1-3, doi: 10.23919/VLSITechnologyandCir65189.2025.11074881.
+>
 > hai-kun,『讲电路』传输线和驻波在时钟分布网络中的应用 [[https://zhuanlan.zhihu.com/p/30055007](https://zhuanlan.zhihu.com/p/30055007)]
+>
+> Muhammad Aldacher, Analog Design of Clock Distribution Network using Standing-Waves [[https://github.com/muhammadaldacher/Analog-Design-of-Clock-Distribution-Network-using-Standing-Waves](https://github.com/muhammadaldacher/Analog-Design-of-Clock-Distribution-Network-using-Standing-Waves)]
 
-*TODO* &#128197;
+![image-20261029004421168](clock-dist/image-20261029004421168.png)
+
+![image-20261028233702418](clock-dist/image-20261028233702418.png)
+
+
 
 ![image-20251217232140562](clock-dist/image-20251217232140562.png)
 
@@ -47,17 +53,19 @@ mathjax: true
 
 ![image-20260929235958980](clock-dist/image-20260929235958980.png)
 
-## Inductive-Loaded Clock Distribution Technique
+
+
+## Inductive-Loaded Clock Distribution
 
 > T. Shibasaki *et al*., "3.5 A 56Gb/s NRZ-electrical 247mW/lane serial-link transceiver in 28nm CMOS," *2016 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2016, pp. 64-65 [[https://sci-hub.se/10.1109/ISSCC.2016.7417908](https://sci-hub.se/10.1109/ISSCC.2016.7417908)]
+>
+> J. Kim *et al*., "8.1 A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 126-128 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365840](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365840)]
 
-*TODO* &#128197;
-
-
-
-## LC Loaded Amps
+<span style="background-color:yellow">**LC Loaded Amps**</span>
 
 ![image-20260921231718388](clock-dist/image-20260921231718388.png)
+
+![image-20261029004402666](clock-dist/image-20261029004402666.png)
 
 
 
@@ -314,7 +322,7 @@ Phillip Restle. ISSCC2021 SC4: Processor Clock Generation, Distribution, and Clo
 
 Jihwan Kim,Intel, ISSCC 2023 Forum *F1.5: Circuit Designs for 200+Gb/s Electrical Transceivers*
 
-J. Kim *et al*., "8.1 A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 126-128
+E-Hung Chen, MTK, ISSCC 2026 Forum *F2.3: State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*
 
 ---
 

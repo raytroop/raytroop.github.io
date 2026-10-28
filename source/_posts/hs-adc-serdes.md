@@ -283,11 +283,28 @@ The qualification is that this compares their **instantaneous currents during re
 
 
 
-## Sampling Front-End (SFE) Pulse Response
+## ADC buffers
+
+> Y. Shifman, Y. Krupnik, U. Virobnik, A. Khairi, Y. Sanhedrai and A. Cohen, "A 1.64mW Differential Super Source-Follower Buffer with 9.7GHz BW and 43dB PSRR for Time-Interleaved ADC Applications in 10nm," *2019 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Macau, Macao, 2019  [[https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969](https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969)]
+
+
+
+### PVT-insensitive biasing
+
+> K. Kwon *et al*., "C12-4 A 212.5Gb/s Pam-4 Receiver With Mutual Inductive Coupled Gm-Tia in 4nm Finfet," *2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Kyoto, Japan, 2025, pp. 1-3, doi: 10.23919/VLSITechnologyandCir65189.2025.11074881.
+
+ <span style="background-color:yellow">**Replica buffer for PVT-insensitive biasing**</span>
+
+![image-20261028225331783](hs-adc-serdes/image-20261028225331783.png)
+
+
+
+### Sampling Front-End (SFE) Pulse Response
 
 > Y. Frans, "ADC-based Wireline Transceiver," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-89 [[https://sci-hub.jp/10.1109/CICC.2019.8780306](https://sci-hub.jp/10.1109/CICC.2019.8780306)]
 >
 > J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
+>
 
 ![image-20250107234500537](hs-adc-serdes/image-20250107234500537.png)
 
@@ -298,6 +315,30 @@ sweep the setup time between ideal pulse input and clock, sample the output of S
 The front-end (Rank-1) tracking bandwidth scales linearly to approximately **twice** the sampling frequency
 
 
+
+
+
+### T/H BW & ISI
+
+> N. G. Jayaraman, “High speed buffering for time-interleaved ADCs with reduced ISI and increased voltage gain,” WO Patent 2018164928 A1, Sep. 13, 2018. [Online]. Available: [[https://patents.google.com/patent/WO2018164928A1](https://patents.google.com/patent/WO2018164928A1)]
+>
+> T. Ali *et al*., "6.4 A 180mW 56Gb/s DSP-Based Transceiver for High Density IOs in Data Center Switches in 7nm FinFET Technology," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 118-120 [[https://sci-hub.se/10.1109/ISSCC.2019.8662523](https://sci-hub.se/10.1109/ISSCC.2019.8662523)]
+>
+> E. -H. Chen *et al*., "7.1 A 212.5Gb/s DSP-Based PAM-4 Transceiver with 50dB Loss Compensation for Large AI System Interconnects in 4nm FinFET," *2025 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2025, pp. 1-3, doi: 10.1109/ISSCC49661.2025.10904601.
+
+*TODO* &#128197;
+
+
+
+![image-20261029000508257](hs-adc-serdes/image-20261029000508257.png)
+
+![image-20261029005134950](hs-adc-serdes/image-20261029005134950.png)
+
+![image-20261029005414797](hs-adc-serdes/image-20261029005414797.png)
+
+
+
+![image-20261028211316651](hs-adc-serdes/image-20261028211316651.png)
 
 ## reference
 

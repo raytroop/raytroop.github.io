@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-![image-20260428215620699](electrical-characterization/image-20260428215620699.png)
+![image-20260428215620699](electrical-char/image-20260428215620699.png)
 
 
 
@@ -26,13 +26,13 @@ There are two primary approaches for obtaining a TDR response:
 1. Measurement in the **time domain using a sampling scope** 
 2. Simulation from measured **frequency-domain S-parameters** (Not every SI lab is equipped with a TDR instrument, but most have a VNA)
 
-![image-20260606181317936](electrical-characterization/image-20260606181317936.png)
+![image-20260606181317936](electrical-char/image-20260606181317936.png)
 
 
 
 ### Why TDR Impedance?
 
-![image-20260606175604915](electrical-characterization/image-20260606175604915.png)
+![image-20260606175604915](electrical-char/image-20260606175604915.png)
 
 
 
@@ -42,16 +42,16 @@ There are two primary approaches for obtaining a TDR response:
 >
 > Mike Steinberger, *TDR: Reading the Tea Leaves* [[https://siguys.com/wp-content/uploads/2016/01/TDR_TeaLeaves.pdf](https://siguys.com/wp-content/uploads/2016/01/TDR_TeaLeaves.pdf)]
 
-![image-20260419164454411](electrical-characterization/image-20260419164454411.png)
+![image-20260419164454411](electrical-char/image-20260419164454411.png)
 
-![image-20260419165629435](electrical-characterization/image-20260419165629435.png)
+![image-20260419165629435](electrical-char/image-20260419165629435.png)
 
-![image-20260420215923585](electrical-characterization/image-20260420215923585.png)
+![image-20260420215923585](electrical-char/image-20260420215923585.png)
 $$
 \color{red}Z_T(t) = Z_0\cdot \frac{1+\Gamma(t)}{1-\Gamma(t)}
 $$
 
-![image-20260427221738370](electrical-characterization/image-20260427221738370.png)
+![image-20260427221738370](electrical-char/image-20260427221738370.png)
 
 ### S-parameter-converted TDR
 
@@ -61,9 +61,9 @@ $$
 >
 
 
-![image-20260420232932030](electrical-characterization/image-20260420232932030.png)
+![image-20260420232932030](electrical-char/image-20260420232932030.png)
 
-![image-20260420232956757](electrical-characterization/image-20260420232956757.png)
+![image-20260420232956757](electrical-char/image-20260420232956757.png)
 
 #### w/ IFFT
 
@@ -93,9 +93,9 @@ Z(t)  – plotted vs t (in ns)   ← plot_attribute() with attribute='z',
                                 conversion='time_step'
 ```
 
-![Graphical illustrations of multiplicy the spectrum of a step function with a rectangular window to produce a finite edge in the time domain](electrical-characterization/windowfunctionsandtimedomainplot3.png)
+![Graphical illustrations of multiplicy the spectrum of a step function with a rectangular window to produce a finite edge in the time domain](electrical-char/windowfunctionsandtimedomainplot3.png)
 
-![image-20260420230505339](electrical-characterization/image-20260420230505339.png)
+![image-20260420230505339](electrical-char/image-20260420230505339.png)
 
 Window function with $w[0] = 1$ and $w[f_{max}]$=0 ensure $\Gamma(+\infty)$ and $\Gamma(0)$ are correct
 
@@ -111,7 +111,7 @@ Window function with $w[0] = 1$ and $w[f_{max}]$=0 ensure $\Gamma(+\infty)$ and 
 >
 > ADS `tdr_sp_imped`
 
-![image-20260420235747173](electrical-characterization/image-20260420235747173.png)
+![image-20260420235747173](electrical-char/image-20260420235747173.png)
 
 ---
 
@@ -119,9 +119,9 @@ Window function with $w[0] = 1$ and $w[f_{max}]$=0 ensure $\Gamma(+\infty)$ and 
 
 > Peter Goossens, *Transformation of time domain TDR to its frequency domain S11 (Return Loss) using FFT* [[https://www.gquipment.com/blog/transformation-of-time-domain-tdr-to-its-frequency-domain-s11-return-loss-using-fft](https://www.gquipment.com/blog/transformation-of-time-domain-tdr-to-its-frequency-domain-s11-return-loss-using-fft)]
 
-![image-20260420224211467](electrical-characterization/image-20260420224211467.png)
+![image-20260420224211467](electrical-char/image-20260420224211467.png)
 
-![image-20260420223849838](electrical-characterization/image-20260420223849838.png)
+![image-20260420223849838](electrical-char/image-20260420223849838.png)
 
 $$
 \color{green} \Gamma(t) \to S_{ii}
@@ -158,13 +158,13 @@ magnitude = 20 * np.log10(magnitude)
 
 > Tim Wang Lee, Ph.D., Keysight Technologies, *When Frequency Shapes Time: How S-Parameter Properties Shape Simulated TDR Behavior* [[https://www.signalintegrityjournal.com/articles/4287-when-frequency-shapes-time-how-s-parameter-properties-shape-simulated-tdr-behavior](https://www.signalintegrityjournal.com/articles/4287-when-frequency-shapes-time-how-s-parameter-properties-shape-simulated-tdr-behavior)]
 
-![image-20260606182231703](electrical-characterization/image-20260606182231703.png)
+![image-20260606182231703](electrical-char/image-20260606182231703.png)
 
 In principle, both methods should yield identical impedance profiles. In practice, differences in S-parameter quality, bandwidth, and simulation setup can lead to noticeable discrepancies. The poor quality of the S-parameter data and improper simulation parameters caused the two traces to differ
 
-![image-20260606180207608](electrical-characterization/image-20260606180207608.png)
+![image-20260606180207608](electrical-char/image-20260606180207608.png)
 
-![image-20260606181817488](electrical-characterization/image-20260606181817488.png)
+![image-20260606181817488](electrical-char/image-20260606181817488.png)
 
 
 
@@ -172,13 +172,13 @@ In principle, both methods should yield identical impedance profiles. In practic
 
 Non-causal data — Early arrival, pre-ringing
 
-![image-20260606191108954](electrical-characterization/image-20260606191108954.png)
+![image-20260606191108954](electrical-char/image-20260606191108954.png)
 $$
 \boxed{S(t) = \int_{-\infty}^{t} h(\tau) d\tau, \text{ with } S(\infty) = H(0)}
 $$
 pure phase manipulation (linear phase  or nonlinear phase) preserves the total area, and the TDR settles to the same final impedance on the flat sections
 
-![noncausal_precursor_to_tdr_dip_bump](electrical-characterization/noncausal_precursor_to_tdr_dip_bump.svg)
+![noncausal_precursor_to_tdr_dip_bump](electrical-char/noncausal_precursor_to_tdr_dip_bump.svg)
 
 
 
@@ -186,7 +186,7 @@ pure phase manipulation (linear phase  or nonlinear phase) preserves the total a
 
 *TODO* &#128197;
 
-![image-20260420220101203](electrical-characterization/image-20260420220101203.png)
+![image-20260420220101203](electrical-char/image-20260420220101203.png)
 
 
 
@@ -209,9 +209,9 @@ pure phase manipulation (linear phase  or nonlinear phase) preserves the total a
 
 ### Ripple in an S Parameters
 
-![image-20260110134112029](electrical-characterization/image-20260110134112029.png)
+![image-20260110134112029](electrical-char/image-20260110134112029.png)
 
-![image-20260110134010253](electrical-characterization/image-20260110134010253.png)
+![image-20260110134010253](electrical-char/image-20260110134010253.png)
 
 
 
@@ -220,11 +220,11 @@ pure phase manipulation (linear phase  or nonlinear phase) preserves the total a
 
 > Christiaan Bil, Intel. Challenges in Setting Appropriate NUI Value in Measured Step Response-based 32 GT/s Rx Calibration
 
-![image-20260501074124317](electrical-characterization/image-20260501074124317.png)
+![image-20260501074124317](electrical-char/image-20260501074124317.png)
 
-![image-20260501074547445](electrical-characterization/image-20260501074547445.png)
+![image-20260501074547445](electrical-char/image-20260501074547445.png)
 
-![image-20260501074650779](electrical-characterization/image-20260501074650779.png)
+![image-20260501074650779](electrical-char/image-20260501074650779.png)
 
 
 
@@ -241,7 +241,7 @@ pure phase manipulation (linear phase  or nonlinear phase) preserves the total a
 
 > Realtime oscilloscope bandwidth considerations for 25 Gbps PAM4 patterns, [[https://www.ieee802.org/3/cy/public/adhoc/chang_3cy_01_12_20_22.pdf](https://www.ieee802.org/3/cy/public/adhoc/chang_3cy_01_12_20_22.pdf)]
 
-![image-20260427220940809](electrical-characterization/image-20260427220940809.png)
+![image-20260427220940809](electrical-char/image-20260427220940809.png)
 
 ---
 

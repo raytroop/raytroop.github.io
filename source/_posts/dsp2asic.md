@@ -9,35 +9,33 @@ mathjax: true
 
 
 
-## FFE Implementation
+## FFE in DSP
 
 > M. A. Kossel *et al*., "8.3 An 8b DAC-Based SST TX Using Metal Gate Resistors with 1.4pJ/b Efficiency at 112Gb/s PAM-4 and 8-Tap FFE in 7nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 130-132 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784)]
 
 *TODO* &#128197;
 
+![image-20261028222012681](dsp2asic/image-20261028222012681.png)
 
 
-## DFE Implementation
+
+
+
+
+
+
+
+## DFE in DSP
 
 > Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI](https://youtu.be/puEP0DlVZGI)]
 >
-> Chen, Kuan-Chang (2022) *Energy-Efficient Receiver Design for High-Speed Interconnects.* Dissertation (Ph.D.), California Institute of Technology. [[https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf](https://thesis.library.caltech.edu/14318/9/chen_kuan-chang_2022_thesis_final.pdf)]
-
-![image-20250524224829419](dsp2asic/image-20250524224829419.png)
-
-**Parallel implementation**
-
-![image-20250524235031104](dsp2asic/image-20250524235031104.png)
+> Chen, Kuan-Chang (2022) *Energy-Efficient Receiver Design for High-Speed Interconnects.* Dissertation (Ph.D.), California Institute of Technology. [[https://thesis.caltech.edu/14318/09/chen_kuan-chang_2022_thesis_final.pdf](https://thesis.caltech.edu/14318/09/chen_kuan-chang_2022_thesis_final.pdf)]
 
 
 
-![image-20250525101922485](dsp2asic/image-20250525101922485.png)
+### Loop-Unrolling DFE
 
-
-
-**Loop-Unrolling DFE**
-
-![image-20250525105017605](dsp2asic/image-20250525105017605.png)
+> Y. Lu and E. Alon, "Design Techniques for a 66 Gb/s 46 mW 3-Tap Decision Feedback Equalizer in 65 nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 48, no. 12, pp. 3243-3257, Dec. 2013 [[https://sci-hub.ru/10.1109/JSSC.2013.2278804](https://sci-hub.ru/10.1109/JSSC.2013.2278804)]
 
 ![image-20250525191101301](dsp2asic/image-20250525191101301.png)
 
@@ -45,9 +43,11 @@ Corresponding to the three distinct voltage thresholds in the *PAM4* systems, it
 
 
 
-**Look-Ahead Multiplexing DFE**
+### Look-Ahead DFE
 
-![image-20250525151918214](dsp2asic/image-20250525151918214.png)
+> K. K. Parhi, "Pipelining of parallel multiplexer loops and decision feedback equalizers," 2004 IEEE International Conference on Acoustics, Speech, and Signal Processing, Montreal, QC, Canada, 2004, pp. V-21 [[https://sci-hub.ru/10.1109/ICASSP.2004.1327037](https://sci-hub.ru/10.1109/ICASSP.2004.1327037)]
+
+![image-20261028222046258](dsp2asic/image-20261028222046258.png)
 
 The look-ahead multiplexing technique brings the key benefit that the timing constraint can be significantly relaxed, as the iteration bound is ***doubled*** at the expense of extra hardware
 
@@ -57,7 +57,13 @@ The look-ahead multiplexing technique brings the key benefit that the timing con
 
 
 
+### Sliding-Block DFE
 
+> J. Bailey et al., "A 112-Gb/s PAM-4 Low-Power Nine-Tap Sliding-Block DFE in a 7-nm FinFET Wireline Receiver," in IEEE Journal of Solid-State Circuits, vol. 57, no. 1, pp. 32-43, Jan. 2022 [[https://sci-hub.jp/10.1109/JSSC.2021.3109167](https://sci-hub.jp/10.1109/JSSC.2021.3109167)]
+
+![image-20261028220525560](dsp2asic/image-20261028220525560.png)
+
+![image-20261028220745240](dsp2asic/image-20261028220745240.png)
 
 
 
@@ -179,7 +185,7 @@ endmodule
 
 
 
-## MASH 1-1-1 Implementation
+## MASH 1-1-1 in DSP
 
 > MASH-1-1-1 Noise-Shaping Truncator (DLF → DAC) [[https://github.com/raytroop/dsmwk](https://github.com/raytroop/dsmwk)]
 
@@ -334,7 +340,7 @@ with everything in the same units (<span style="color:blue">LSB₈²</span> is c
 
 ### decimation_filter
 
-Filter Equation
+<span style="color:white; background-color:black">**Filter Equation**</span>
 
 ```
 filtered[n] = (1*x[n] + 3*x[n-1] + 3*x[n-2] + 1*x[n-3]) / 8
@@ -492,3 +498,4 @@ Keshab K. Parhi [[http://www.ece.umn.edu/users/parhi/](http://www.ece.umn.edu/us
 
 謝秉璇. 2019 積體電路設計導論 [[link](https://nthuee.org/archive//%E7%A9%8D%E9%AB%94%E9%9B%BB%E8%B7%AF%E8%A8%AD%E8%A8%88%E5%B0%8E%E8%AB%96/2019%E8%AC%9D%E7%A7%89%E7%92%87/)]
 
+E-Hung Chen, MTK, ISSCC 2026 Forum *F2.3: State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*

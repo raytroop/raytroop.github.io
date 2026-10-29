@@ -1881,6 +1881,8 @@ P.E. Allen - 2003. ECE 6440 - Frequency Synthesizers: Lecture 160 – Phase Nois
 
 Jaeha Kim. Lecture 8. Special Topics: Design Trade -Offs in LC -Tuned Oscillators
 
+V. Pourahmad and E. Afshari, "Oscillator Phase Noise Theory: A Generalized Impulse Sensitivity Function Framework," in IEEE Open Journal of the Solid-State Circuits Society, doi: 10.1109/OJSSCS.2026.3744588
+
 ---
 
 ---

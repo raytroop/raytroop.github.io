@@ -202,6 +202,8 @@ $$
 
 ### Class AB SSF (AB-SSF)
 
+> Lopez-Martin, A.J., Acosta, L., Garcia-Alberdi, C., Carvajal, R.G. and Ramirez-Angulo, J. (2012), Power-efficient analog design based on the class AB super source follower. Int. J. Circ. Theor. Appl., 40: 1143-1163. [[https://sci-hub.st/10.1002/cta.776](https://sci-hub.st/10.1002/cta.776)]
+
 All three followers (SVF, FVF, SSF) share a major limitation: an **asymmetric** response to rising and falling input steps
 
 ![image-20260928201215696](ana-tech/image-20260928201215696.png)

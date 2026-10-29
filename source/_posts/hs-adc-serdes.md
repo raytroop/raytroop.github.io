@@ -283,7 +283,7 @@ The qualification is that this compares their **instantaneous currents during re
 
 
 
-## ADC buffers
+## ADC Source-Follower Buffer
 
 > Y. Shifman, Y. Krupnik, U. Virobnik, A. Khairi, Y. Sanhedrai and A. Cohen, "A 1.64mW Differential Super Source-Follower Buffer with 9.7GHz BW and 43dB PSRR for Time-Interleaved ADC Applications in 10nm," *2019 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Macau, Macao, 2019  [[https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969](https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969)]
 

@@ -12,16 +12,28 @@ mathjax: true
 ## FFE in DSP
 
 > M. A. Kossel *et al*., "8.3 An 8b DAC-Based SST TX Using Metal Gate Resistors with 1.4pJ/b Efficiency at 112Gb/s PAM-4 and 8-Tap FFE in 7nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 130-132 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784)]
+>
+> Z. Guo et al., "6.2 A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 116-118 [[https://sci-net.xyz/10.1109/ISSCC42614.2022.9731650](https://sci-net.xyz/10.1109/ISSCC42614.2022.9731650)]
 
 *TODO* &#128197;
 
 ![image-20261028222012681](dsp2asic/image-20261028222012681.png)
 
+![image-20261030002000362](dsp2asic/image-20261030002000362.png)
 
 
 
 
 
+## 1+αD partial FFE response
+
+> D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130 [[https://sci-net.xyz/10.1109/ISSCC49657.2024.10454537](https://sci-net.xyz/10.1109/ISSCC49657.2024.10454537)]
+
+<span style="background-color:yellow">**Full State MLSD**, **Reduced State MLSD**</span>
+
+![image-20261030000416472](dsp2asic/image-20261030000416472.png)
+
+![image-20261030000537331](dsp2asic/image-20261030000537331-1793290420270-3.png)
 
 
 
@@ -47,7 +59,7 @@ Corresponding to the three distinct voltage thresholds in the *PAM4* systems, it
 
 > K. K. Parhi, "Pipelining of parallel multiplexer loops and decision feedback equalizers," 2004 IEEE International Conference on Acoustics, Speech, and Signal Processing, Montreal, QC, Canada, 2004, pp. V-21 [[https://sci-hub.ru/10.1109/ICASSP.2004.1327037](https://sci-hub.ru/10.1109/ICASSP.2004.1327037)]
 
-![image-20261028222046258](dsp2asic/image-20261028222046258.png)
+![image-20261030001716855](dsp2asic/image-20261030001716855.png)
 
 The look-ahead multiplexing technique brings the key benefit that the timing constraint can be significantly relaxed, as the iteration bound is ***doubled*** at the expense of extra hardware
 

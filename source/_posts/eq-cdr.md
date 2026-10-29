@@ -1034,9 +1034,9 @@ def simulate(td_ui: int, kp: float, ki: float):
 
 ## reference
 
-Hall, Stephen H., and Howard L. Heck. *Advanced Signal Integrity for High-speed Digital Designs*. Wiley : IEEE, 2009 [[pdf](https://picture.iczhiku.com/resource/eetop/wHIFhWWoIkGkuXXv.pdf)]
+Hall, Stephen H., and Howard L. Heck. *Advanced Signal Integrity for High-speed Digital Designs*. Wiley : IEEE, 2009
 
-Oh, Kyung, and Xing Yuan. *High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting*. 1st edition. Prentice Hall, 2011. [[pdf](https://picture.iczhiku.com/resource/eetop/SyiGPFydIQAYdxVx.pdf)]
+Oh, Kyung, and Xing Yuan. *High-Speed Signaling: Jitter Modeling, Analysis, and Budgeting*. 1st edition. Prentice Hall, 2011
 
 John M. Cioffi, [[Chapter 3 - Equalization](https://cioffi-group.stanford.edu/doc/book/chap3.pdf)], [[Chapter 6 - Fundamentals of Synchronization](https://cioffi-group.stanford.edu/doc/book/chap6.pdf)]
 
@@ -1056,13 +1056,13 @@ Gain Kim, 2023. Equalization, Architecture, and Circuit Design for High-Speed Se
 
 —, CICC2022 ES4: Equalization, Architecture, and Circuit Design for High-Speed Serial Link Receiver
 
-S. Laxman, "Equalization algorithms in Millimeter wave communication systems," *2017 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2017 [[pdf](https://picture.iczhiku.com/resource/eetop/shIHewZLfoEzkMVc.pdf)]
+S. Laxman, "Equalization algorithms in Millimeter wave communication systems," *2017 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2017 [[https://sci-hub.ru/10.1109/CICC.2017.7993714](https://sci-hub.ru/10.1109/CICC.2017.7993714)]
 
 A. Amirkhany, "Basics of Clock and Data Recovery Circuits: Exploring High-Speed Serial Links," in *IEEE Solid-State Circuits Magazine*, vol. 12, no. 1, pp. 25-38, Winter 2020 [[https://sci-hub.jp/10.1109/MSSC.2019.2939342](https://sci-hub.jp/10.1109/MSSC.2019.2939342)]
 
 —, ISSCC2019 T6: "Basics of Clock and Data Recovery Circuits"
 
-Fulvio Spagna, CICC2018 Clock and Data Recovery Systems [[pdf](https://picture.iczhiku.com/resource/eetop/WhiTfzdJZSZyDcBM.pdf)]
+Fulvio Spagna, CICC2018 Clock and Data Recovery Systems
 
 Wei-Zen Chen, ISSCC2026. T9: Clocking and CDR Techniques for High-Performance Wireline Transceiver
 

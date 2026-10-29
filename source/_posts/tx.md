@@ -632,11 +632,19 @@ $$
 
 
 
+## Pulse Generator RJ Filtering
+
+> J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
+
+*TODO* &#128197;
+
+
+
 ## CDC between DSP and Seralizer
 
 ![image-20261024010318929](tx/image-20261024010318929.png)
 
-
+*TODO* &#128197;
 
 
 

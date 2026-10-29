@@ -126,7 +126,9 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 
 
 
+## Polyphase Filter (PPF)
 
+![image-20261029221128795](mpcg/image-20261029221128795.png)
 
 
 
@@ -336,6 +338,10 @@ Heng Zhang, Broadcom, ISSCC 2025 - Forum *F4.2: High-speed ADCs for 100Gbps+ Wir
 **H. Zhang**, D. Cui, J. Cao, and A.Momtaz, *"Phase Adjustment Scheme for Time-interleaved ADCs"*, United States Patent. US 9065464 B2. Issued Jun.23, 2015. [[https://patentimages.storage.googleapis.com/c1/11/1f/6fb830d08b710b/US9065464.pdf](https://patentimages.storage.googleapis.com/c1/11/1f/6fb830d08b710b/US9065464.pdf)]
 
 **H. Zhang**, D. Cui,  and J. Cao, *"Clock Generator for Use in A Time-interleaved ADC and Methods for Use therewith"*, United States Patent. US 8902094 B1. Issued Dec.2, 2014. [[https://patentimages.storage.googleapis.com/c7/0b/73/74e61515ddffa2/US8902094.pdf](https://patentimages.storage.googleapis.com/c7/0b/73/74e61515ddffa2/US8902094.pdf)]
+
+E-Hung Chen, MTK, ISSCC 2026 Forum *F2.3: State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*
+
+---
 
 Rhee, W. (2020). Phase-locked frequency generation and clocking : architectures and circuits for modern wireless and wireline systems. The Institution of Engineering and Technology
 

@@ -41,22 +41,6 @@ A **constant Output amplitude** is desired because the *swing-dependent delay ch
 
 
 
----
-
-> L. -m. Lee and C. -K. K. Yang, "Phase correction of a resonant clocking system using resonant interpolators," *2008 IEEE Symposium on VLSI Circuits*, Honolulu, HI, USA, 2008, pp. 170-171 [[https://sci-hub.jp/10.1109/VLSIC.2008.4585994](https://sci-hub.jp/10.1109/VLSIC.2008.4585994)] 
-
-![image-20261025211203236](pi-cdr/image-20261025211203236.png)
-
-![image-20261025201329931](pi-cdr/image-20261025201329931.png)
-
----
-
-> M. Erett *et al*., "A 0.5–16.3 Gbps Multi-Standard Serial Transceiver With 219 mW/Channel in 16-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 52, no. 7, pp. 1783-1797, July 2017 [[https://sci-hub.jp/10.1109/JSSC.2017.2702711](https://sci-hub.jp/10.1109/JSSC.2017.2702711)]
-
-![image-20261025203506679](pi-cdr/image-20261025203506679.png)
-
-
-
 ## Voltage-Mode Phase Interpolator (VMPI)
 
 > A. K. Mishra, Y. Li, P. Agarwal and S. Shekhar, "17.7 A 9b-Linear 14GHz Integrating-Mode Phase Interpolator in 5nm FinFET Process," *2022 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2022, pp. 1-3 [[https://sci-hub.jp/10.1109/ISSCC42614.2022.9731703](https://sci-hub.jp/10.1109/ISSCC42614.2022.9731703)]
@@ -170,6 +154,28 @@ plt.show()
 > Shaokang ZHAO, 2025, "Multi-Phase Clock Generator for High-Speed Wireline Systems," [[paper](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/1.Thesis/2.Mphil/Shaokang%20Thesis.pdf), [slides](https://yuegroup.hkust.edu.hk/sites/default/files/Thesis/2.Slides/2.Mphil/Shaokang_Zhao%20Slides.pdf)]
 
 ![image-20261017142858523](pi-cdr/image-20261017142858523.png)
+
+
+
+## CMPI using LC-resonant load
+
+> C. -f. Liang, S. -c. Hwu and S. -i. Liu, "A 10Gbps Burst-Mode CDR Circuit in 0.18μm CMOS," *IEEE Custom Integrated Circuits Conference 2006*, San Jose, CA, USA, 2006, pp. 599-602 [[https://sci-hub.ru/10.1109/CICC.2006.320828](https://sci-hub.ru/10.1109/CICC.2006.320828)]
+>
+> L. -m. Lee and C. -K. K. Yang, "Phase correction of a resonant clocking system using resonant interpolators," *2008 IEEE Symposium on VLSI Circuits*, Honolulu, HI, USA, 2008, pp. 170-171 [[https://sci-hub.jp/10.1109/VLSIC.2008.4585994](https://sci-hub.jp/10.1109/VLSIC.2008.4585994)] 
+>
+> M. Erett *et al*., "A 0.5–16.3 Gbps Multi-Standard Serial Transceiver With 219 mW/Channel in 16-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 52, no. 7, pp. 1783-1797, July 2017 [[https://sci-hub.jp/10.1109/JSSC.2017.2702711](https://sci-hub.jp/10.1109/JSSC.2017.2702711)]
+
+<span style="background-color:yellow">**harmonic filtering for less jitter, better INL & DNL**</span>
+
+![image-20261025211203236](pi-cdr/image-20261025211203236.png)
+
+![image-20261025201329931](pi-cdr/image-20261025201329931.png)
+
+
+
+![image-20261025203506679](pi-cdr/image-20261025203506679.png)
+
+
 
 
 

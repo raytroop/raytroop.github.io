@@ -41,9 +41,11 @@ source follower alleviate *gate leakage* impact on reference current
 
 
 
-## constant-gm
+## Constant-gm Bias Circuit
 
-> aka. **Beta-multiplier reference**
+> S. Pavan, "Systematic Development of CMOS Fixed-Transconductance Bias Circuits," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 69, no. 5, pp. 2394-2397, May 2022 [[https://sci-hub.ru/10.1109/TCSII.2022.3158358](https://sci-hub.ru/10.1109/TCSII.2022.3158358)] [[slides](https://confcats-event-sessions.s3.amazonaws.com/iscas22/slides/1894.pdf)]
+
+aka. <span style="background-color:yellow">**Beta-multiplier reference**</span>, <span style="background-color:yellow">**Fixed-transconductance bias current**</span>
 
 ![image-20240803155734754](biasing/image-20240803155734754.png)
 

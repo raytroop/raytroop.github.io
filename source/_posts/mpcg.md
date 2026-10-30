@@ -116,12 +116,32 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 
 ## MPG using PI
 
-> Y. Segal et al., "A 1.41pJ/b 224Gb/s PAM-4 SerDes Receiver with 31dB Loss Compensation," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 114-116 [[https://sci-hub.ru/10.1109/ISSCC42614.2022.9731794](https://sci-hub.ru/10.1109/ISSCC42614.2022.9731794)]
+> Y. Segal et al., "6.1 A 1.41pJ/b 224Gb/s PAM-4 SerDes Receiver with 31dB Loss Compensation," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 114-116 [[https://sci-hub.ru/10.1109/ISSCC42614.2022.9731794](https://sci-hub.ru/10.1109/ISSCC42614.2022.9731794)]
+>
+> A. Khairi *et al*., "A 1.41-pJ/b 224-Gb/s PAM4 6-bit ADC-Based SerDes Receiver With Hybrid AFE Capable of Supporting Long Reach Channels," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 1, pp. 8-18, Jan. 2023, doi: 10.1109/JSSC.2022.3211475.
+>
+> J. Kim *et al*., "Design of 224Gb/s DSP-Based Transceiver in CMOS Technology: Signal Integrity, Architecture, Circuits, and Packaging," *2024 IEEE Custom Integrated Circuits Conference (CICC)*, Denver, CO, USA, 2024, pp. 1-8 [[https://sci-net.xyz/10.1109/CICC60959.2024.10528970](https://sci-net.xyz/10.1109/CICC60959.2024.10528970)]
 
-A set of 16 CMOS PIs to generate the 16 1UI-separated clocks for TH1
 
 
-*TODO* &#128197;
+![image-20261030223532737](mpcg/image-20261030223532737.png)
+
+![image-20261030235317479](mpcg/image-20261030235317479.png)
+
+![image-20261031005135403](mpcg/image-20261031005135403.png)
+
+<span style="background-color:yellow"> **TH2 to TH1 clock timing**</span>
+
+![image-20261031005344387](mpcg/image-20261031005344387.png)
+
+
+
+![pi_th1.drawio](mpcg/pi_th1.drawio.svg)
+
+> Fig. 4(b) as drawn is missing an inversion on the Prev-PI input to the mux
+>
+> ![image-20261031011405633](mpcg/image-20261031011405633.png)
+
 
 
 ## MPG using ILO

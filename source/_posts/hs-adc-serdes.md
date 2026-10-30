@@ -288,6 +288,8 @@ The qualification is that this compares their **instantaneous currents during re
 > K. Sun, G. Wang, Q. Zhang, S. Elahmadi and P. Gui, "A 56-GS/s 8-bit Time-Interleaved ADC With ENOB and BW Enhancement Techniques in 28-nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 54, no. 3, pp. 821-833, March 2019 [[https://sci-hub.ru/10.1109/JSSC.2018.2884352](https://sci-hub.ru/10.1109/JSSC.2018.2884352)]
 >
 > Y. Shifman, Y. Krupnik, U. Virobnik, A. Khairi, Y. Sanhedrai and A. Cohen, "A 1.64mW Differential Super Source-Follower Buffer with 9.7GHz BW and 43dB PSRR for Time-Interleaved ADC Applications in 10nm," *2019 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Macau, Macao, 2019  [[https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969](https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969)]
+>
+> Y. Krupnik *et al*., "112-Gb/s PAM4 ADC-Based SERDES Receiver With Resonant AFE for Long-Reach Channels," in *IEEE Journal of Solid-State Circuits*, vol. 55, no. 4, pp. 1077-1085, April 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2959511](https://sci-hub.ru/10.1109/JSSC.2019.2959511)]
 
 
 

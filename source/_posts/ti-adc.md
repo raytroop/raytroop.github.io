@@ -243,38 +243,6 @@ $\text{CK}$, $I/Q_1$ and $I/Q_{2,3}$ shift by **1UI**
 
 
 
-<span style="background-color:yellow">**ring counter** for generating **SAH** clock</span>
-
-![image-20261018235719799](ti-adc/image-20261018235719799.png)
-
-![adc_clocking_ring](ti-adc/adc_clocking_ring.svg)
-
-all FFs initialized to 0
-
-
-
----
-
----
-
-> J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
-
-![image-20261025122439930](ti-adc/image-20261025122439930.png)
-
-![thck_6ui_2p4ui.drawio](ti-adc/thck_6ui_2p4ui.drawio.svg)
-
-![image-20261025125422783](ti-adc/image-20261025125422783.png)
-
-![image-20261025130744430](ti-adc/image-20261025130744430.png)
-
-![image-20261025135125595](ti-adc/image-20261025135125595.png)
-
-![th2ck_36ui_4ui.drawio](ti-adc/th2ck_36ui_4ui.drawio.svg)
-
-
-
-![image-20261025143050494](ti-adc/image-20261025143050494.png)
-
 ### 128Gb/s Clock Generation
 
 
@@ -319,6 +287,44 @@ all FFs initialized to 0
 ![image-20261018203332571](ti-adc/image-20261018203332571.png)
 
 4UI track, 12UI hold in TAH
+
+
+
+## shift register-based clock divider for TH<sub>2</sub> clocks
+
+a.k.a. <span style="background-color:yellow">**ring counter**</span>, generating **SAH** clock
+
+![image-20261018235719799](ti-adc/image-20261018235719799.png)
+
+![adc_clocking_ring](ti-adc/adc_clocking_ring.svg)
+
+all FFs initialized to 0
+
+
+
+---
+
+---
+
+> J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
+
+![image-20261025122439930](ti-adc/image-20261025122439930.png)
+
+![thck_6ui_2p4ui.drawio](ti-adc/thck_6ui_2p4ui.drawio.svg)
+
+![image-20261025125422783](ti-adc/image-20261025125422783.png)
+
+![image-20261025130744430](ti-adc/image-20261025130744430.png)
+
+![image-20261025135125595](ti-adc/image-20261025135125595.png)
+
+![th2ck_36ui_4ui.drawio](ti-adc/th2ck_36ui_4ui.drawio.svg)
+
+
+
+![image-20261025143050494](ti-adc/image-20261025143050494.png)
+
+
 
 
 

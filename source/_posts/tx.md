@@ -198,6 +198,8 @@ Fig 9. works for D0–D2, but the D3 path races. So Fig. 9 is probably simplifie
 ## 1-UI Clock Pulse Generator
 
 >  J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
+>
+>  —, "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 57, no. 1, pp. 6-20, Jan. 2022 [[https://sci-hub.ru/10.1109/JSSC.2021.3108969](https://sci-hub.ru/10.1109/JSSC.2021.3108969)]
 
 **duty correction** & **delay adjustment** 
 
@@ -635,6 +637,8 @@ $$
 ## Pulse Generator RJ Filtering
 
 > J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
+>
+> —, "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 57, no. 1, pp. 6-20, Jan. 2022 [[https://sci-hub.ru/10.1109/JSSC.2021.3108969](https://sci-hub.ru/10.1109/JSSC.2021.3108969)]
 
 *TODO* &#128197;
 

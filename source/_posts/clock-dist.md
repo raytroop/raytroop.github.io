@@ -55,19 +55,21 @@ mathjax: true
 
 
 
-## Inductive-Loaded Clock Distribution
+## Inductive-filtered Clock Distribution
 
 > T. Shibasaki *et al*., "3.5 A 56Gb/s NRZ-electrical 247mW/lane serial-link transceiver in 28nm CMOS," *2016 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2016, pp. 64-65 [[https://sci-hub.se/10.1109/ISSCC.2016.7417908](https://sci-hub.se/10.1109/ISSCC.2016.7417908)]
 >
 > J. Kim *et al*., "8.1 A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 126-128 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365840](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365840)]
+>
+> —, "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 57, no. 1, pp. 6-20, Jan. 2022 [[https://sci-hub.ru/10.1109/JSSC.2021.3108969](https://sci-hub.ru/10.1109/JSSC.2021.3108969)]
 
-<span style="background-color:yellow">**LC Loaded Amps**</span>
+<span style="background-color:yellow">**LC-filtering**</span>
 
 ![image-20260921231718388](clock-dist/image-20260921231718388.png)
 
 ![image-20261029004402666](clock-dist/image-20261029004402666.png)
 
-
+![image-20261030232328552](clock-dist/image-20261030232328552.png)
 
 
 

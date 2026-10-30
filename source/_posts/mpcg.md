@@ -114,6 +114,14 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 
 
 
+## MPG using PI
+
+> Y. Segal et al., "A 1.41pJ/b 224Gb/s PAM-4 SerDes Receiver with 31dB Loss Compensation," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 114-116 [[https://sci-hub.ru/10.1109/ISSCC42614.2022.9731794](https://sci-hub.ru/10.1109/ISSCC42614.2022.9731794)]
+
+A set of 16 CMOS PIs to generate the 16 1UI-separated clocks for TH1
+
+
+*TODO* &#128197;
 
 
 ## MPG using ILO
@@ -125,12 +133,14 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 ![image-20260921232848373](mpcg/image-20260921232848373.png)
 
 
+*TODO* &#128197;
 
-## Polyphase Filter (PPF)
+## MPG using Polyphase Filter (PPF)
 
 ![image-20261029221128795](mpcg/image-20261029221128795.png)
 
 
+*TODO* &#128197;
 
 ## Multiplying Delay-Locked-Loop (MDLL)
 

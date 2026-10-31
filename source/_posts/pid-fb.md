@@ -149,7 +149,7 @@ it simply *"latches up"* rather than oscillates
 
 ## Root-Locus Techniques
 
-***closed-loop system***
+<span style="background-color:yellow">**closed-loop system**</span>
 
 ![image-20260426164543043](pid-fb/image-20260426164543043.png)
 

@@ -9,14 +9,6 @@ mathjax: true
 
 
 
-## replica biasing
-
-*TODO* &#128197;
-
-
-
-
-
 ## noise in current mirror
 
 Noise of ref MOS is amplified by the current mirror's gain
@@ -44,12 +36,31 @@ source follower alleviate *gate leakage* impact on reference current
 ## Constant-gm Bias Circuit
 
 > S. Pavan, "Systematic Development of CMOS Fixed-Transconductance Bias Circuits," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 69, no. 5, pp. 2394-2397, May 2022 [[https://sci-hub.ru/10.1109/TCSII.2022.3158358](https://sci-hub.ru/10.1109/TCSII.2022.3158358)] [[slides](https://confcats-event-sessions.s3.amazonaws.com/iscas22/slides/1894.pdf)]
+>
+> —, ISSCC2026: Circuit Insights: *Voltage and Current Reference Generation*
 
 aka. <span style="background-color:yellow">**Beta-multiplier reference**</span>, <span style="background-color:yellow">**Fixed-transconductance bias current**</span>
 
 ![image-20240803155734754](biasing/image-20240803155734754.png)
 
-> $I_\text{out}$ is **PTAT** in case temperature coefficient of $R_s$ is less than that of $\mu_n$ 
+> $I_\text{out}$ is **PTAT** in case temperature coefficient of $R_s$ is less than that of $\mu_n$
+
+---
+
+![image-20261031190412148](biasing/image-20261031190412148.png)
+
+![image-20261031190747302](biasing/image-20261031190747302.png)
+
+![image-20261031191009110](biasing/image-20261031191009110.png)
+
+Both the circuits incorporate positive feedback
+
+- left circuit has a **loop gain less than one**, indicating a **stable** operating point
+- right circuit has a **loop gain greater than unity** and is **unsuitable**
+
+![image-20261031191553029](biasing/image-20261031191553029.png)
+
+
 
 ---
 

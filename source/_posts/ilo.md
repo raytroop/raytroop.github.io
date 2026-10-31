@@ -236,6 +236,8 @@ print(f"alpha({T:.0f}s): circuit ODE {np.degrees(a_ckt[-2*N]):+.2f} deg | "
 
 > J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
 >
+> —, "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 56, no. 1, pp. 7-18, Jan. 2021 [[https://sci-hub.ru/10.1109/JSSC.2020.3024261](https://sci-hub.ru/10.1109/JSSC.2020.3024261)]
+>
 > M. Erett *et al*., "16.7 A 126mW 56Gb/s NRZ wireline transceiver for synchronous short-reach applications in 16nm FinFET," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018, pp. 274-276 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310290](https://sci-hub.ru/10.1109/ISSCC.2018.8310290)]
 
 *TODO* &#128197;

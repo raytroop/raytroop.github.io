@@ -283,13 +283,15 @@ The qualification is that this compares their **instantaneous currents during re
 
 
 
-## ADC Source-Follower Buffer
+## ADC sampling front-end (SFE)
 
 > K. Sun, G. Wang, Q. Zhang, S. Elahmadi and P. Gui, "A 56-GS/s 8-bit Time-Interleaved ADC With ENOB and BW Enhancement Techniques in 28-nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 54, no. 3, pp. 821-833, March 2019 [[https://sci-hub.ru/10.1109/JSSC.2018.2884352](https://sci-hub.ru/10.1109/JSSC.2018.2884352)]
 >
 > Y. Shifman, Y. Krupnik, U. Virobnik, A. Khairi, Y. Sanhedrai and A. Cohen, "A 1.64mW Differential Super Source-Follower Buffer with 9.7GHz BW and 43dB PSRR for Time-Interleaved ADC Applications in 10nm," *2019 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Macau, Macao, 2019  [[https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969](https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969)]
 >
 > Y. Krupnik *et al*., "112-Gb/s PAM4 ADC-Based SERDES Receiver With Resonant AFE for Long-Reach Channels," in *IEEE Journal of Solid-State Circuits*, vol. 55, no. 4, pp. 1077-1085, April 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2959511](https://sci-hub.ru/10.1109/JSSC.2019.2959511)]
+>
+> G. Li *et al*., "18.1 A 600Gb/s DP-QAM64 Coherent Optical Transceiver Frontend with 4x105GS/s 8b ADC/DAC in 16nm CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 338-340 
 
 
 
@@ -303,12 +305,13 @@ The qualification is that this compares their **instantaneous currents during re
 
 
 
-### Sampling Front-End (SFE) Pulse Response
+### SFE Pulse Response
 
 > Y. Frans, "ADC-based Wireline Transceiver," *2019 IEEE Custom Integrated Circuits Conference (CICC)*, Austin, TX, USA, 2019, pp. 1-89 [[https://sci-hub.jp/10.1109/CICC.2019.8780306](https://sci-hub.jp/10.1109/CICC.2019.8780306)]
 >
 > J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
 >
+> —, "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 56, no. 1, pp. 7-18, Jan. 2021 [[https://sci-hub.ru/10.1109/JSSC.2020.3024261](https://sci-hub.ru/10.1109/JSSC.2020.3024261)]
 
 ![image-20250107234500537](hs-adc-serdes/image-20250107234500537.png)
 
@@ -343,6 +346,61 @@ The front-end (Rank-1) tracking bandwidth scales linearly to approximately **twi
 
 
 ![image-20261028211316651](hs-adc-serdes/image-20261028211316651.png)
+
+
+
+---
+
+> G. Li *et al*., "18.1 A 600Gb/s DP-QAM64 Coherent Optical Transceiver Frontend with 4x105GS/s 8b ADC/DAC in 16nm CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 338-340 [[https://sci-net.xyz/10.1109/ISSCC49657.2024.10454499](https://sci-net.xyz/10.1109/ISSCC49657.2024.10454499)]
+
+![image-20261031182815837](hs-adc-serdes/image-20261031182815837.png)
+
+![image-20261031183022018](hs-adc-serdes/image-20261031183022018.png)
+
+<span style="color:white; background-color:black">**SSF transfer function & complex poles**</span>
+
+PMOS input device $g_m$ (gate $V_i$, source $V_o$, drain $V_p$), PMOS feedback device $g_{mp}$ (gate $V_p$, drain $V_o$). $C_{bulk}$ is treated as AC short and $g_{ds}$ is omitted
+
+KCL at $V_o$ and $V_p$
+$$\begin{align}
+g_m(V_i-V_o) &= g_{mp}V_p + sC_LV_o \\
+g_m(V_o-V_i) &= V_p\left(\frac{1}{R_{fb}}+sC_p\right)
+\end{align}$$
+
+i.e. $V_p=\frac{g_mR_{fb}(V_o-V_i)}{1+sR_{fb}C_p}$, substitute into the first one
+$$
+V_i\left[g_m+\frac{g_mg_{mp}R_{fb}}{1+sR_{fb}C_p}\right] = V_o\left[g_m+\textcolor{red}{\frac{g_mg_{mp}R_{fb}}{1+sR_{fb}C_p}}+sC_L\right]
+$$
+
+> The red term is the loop through $V_o$. Dropping it leaves only the open-loop poles $-g_m/C_L$ and $-1/R_{fb}C_p$, and gives DC gain $1+g_{mp}R_{fb}\neq 1$
+
+$$
+\boxed{H(s)=\frac{V_o}{V_i}=\frac{g_m(1+g_{mp}R_{fb}+sR_{fb}C_p)}{s^2R_{fb}C_pC_L+s(C_L+g_mR_{fb}C_p)+g_m(1+g_{mp}R_{fb})}}
+$$
+
+$H(0)=1$, and LHP zero at $-(1+g_{mp}R_{fb})/R_{fb}C_p\approx -g_{mp}/C_p$
+
+Break the loop at gate of $g_{mp}$, the loop gain is
+$$
+T(s)=\frac{g_{mp}R_{fb}}{(1+s\tau_L)(1+s\tau_p)}\qquad \tau_L=\frac{C_L}{g_m},\quad \tau_p=R_{fb}C_p
+$$
+
+The denominator of $H(s)$ is $\propto 1+T(s)$, i.e. two-pole negative feedback: two open-loop poles move toward each other, meet and then split into complex pair as $g_{mp}R_{fb}$ increases
+$$\begin{align}
+\omega_n^2 &= \frac{1+g_{mp}R_{fb}}{\tau_L\tau_p} \approx \frac{g_mg_{mp}}{C_LC_p} \\
+Q &= \frac{\sqrt{(1+g_{mp}R_{fb})\,\tau_L\tau_p}}{\tau_L+\tau_p}
+\end{align}$$
+
+complex poles ($Q>1/2$) when
+$$
+g_{mp}R_{fb} > \frac{1}{4}\left(\sqrt{\frac{\tau_p}{\tau_L}}-\sqrt{\frac{\tau_L}{\tau_p}}\right)^2
+$$
+
+
+
+
+
+
 
 ## reference
 

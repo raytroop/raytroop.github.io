@@ -292,6 +292,34 @@ $\text{CK}$, $I/Q_1$ and $I/Q_{2,3}$ shift by **1UI**
 
 ## shift register-based clock divider for TH<sub>2</sub> clocks
 
+> J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
+>
+> —, "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 56, no. 1, pp. 7-18, Jan. 2021 [[https://sci-hub.ru/10.1109/JSSC.2020.3024261](https://sci-hub.ru/10.1109/JSSC.2020.3024261)]
+
+![image-20261025125422783](ti-adc/image-20261025125422783.png)
+
+![image-20261031123020616](ti-adc/image-20261031123020616.png)
+
+![thck_6ui_2p4ui.drawio](ti-adc/thck_6ui_2p4ui.drawio.svg)
+
+
+
+![image-20261025130744430](ti-adc/image-20261025130744430.png)
+
+![image-20261025135125595](ti-adc/image-20261025135125595.png)
+
+![th2ck_36ui_4ui.drawio](ti-adc/th2ck_36ui_4ui.drawio.svg)
+
+> ![image-20261031123046608](ti-adc/image-20261031123046608.png)
+>
+> ![image-20261025143050494](ti-adc/image-20261025143050494.png)
+
+
+
+
+
+---
+
 a.k.a. <span style="background-color:yellow">**ring counter**</span>, generating **SAH** clock
 
 ![image-20261018235719799](ti-adc/image-20261018235719799.png)
@@ -302,27 +330,37 @@ all FFs initialized to 0
 
 
 
----
-
----
+## Rank<sub>1</sub> & Rank<sub>2</sub> Clock relationship
 
 > J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
+>
+> —, "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 56, no. 1, pp. 7-18, Jan. 2021 [[https://sci-hub.ru/10.1109/JSSC.2020.3024261](https://sci-hub.ru/10.1109/JSSC.2020.3024261)]
+>
+> M. -A. LaCroix *et al*., "8.4 A 116Gb/s DSP-Based Wireline Transceiver in 7nm CMOS Achieving 6pJ/b at 45dB Loss in PAM-4/Duo-PAM-4 and 52dB in PAM-2," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 132-134 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9366030](https://sci-hub.ru/10.1109/ISSCC42613.2021.9366030)]
+>
+> G. Li *et al*., "18.1 A 600Gb/s DP-QAM64 Coherent Optical Transceiver Frontend with 4x105GS/s 8b ADC/DAC in 16nm CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 338-340 [[https://sci-net.xyz/10.1109/ISSCC49657.2024.10454499](https://sci-net.xyz/10.1109/ISSCC49657.2024.10454499)]
 
-![image-20261025122439930](ti-adc/image-20261025122439930.png)
+![image-20261031125216446](ti-adc/image-20261031125216446.png)
 
-![thck_6ui_2p4ui.drawio](ti-adc/thck_6ui_2p4ui.drawio.svg)
+There are overlap between clk6UI_ph0UI and clk36UI_ph0UI, clk36UI_ph12UI, clk36UI_ph24UI, clk36UI_ph6UI, clk36UI_ph18UI, clk36UI_ph30UI
 
-![image-20261025125422783](ti-adc/image-20261025125422783.png)
+<span style="color:white; background-color:black">J. Im: TH2 track overlaps TH1 track</span>
 
-![image-20261025130744430](ti-adc/image-20261025130744430.png)
+| 56GS/s, 1UI = 17.9ps                         | window                       |
+| -------------------------------------------- | ---------------------------- |
+| TH1 track (40% DCC)                          | $0 \to 2.4\text{UI}$         |
+| TH1 hold                                     | $2.4 \to 6\text{UI}$ (3.6UI) |
+| TH2 track (ring counter by ph0, trim by ph4) | $0 \to 4\text{UI}$           |
 
-![image-20261025135125595](ti-adc/image-20261025135125595.png)
+- overlap with TH1 **current** track: 2.4UI
+- TH2 settling after TH1 hold: $4-2.4 = 1.6\text{UI}$ (~29ps)
+- margin before TH1 **next** track: $6-4 = 2\text{UI}$ (~36ps)
 
-![th2ck_36ui_4ui.drawio](ti-adc/th2ck_36ui_4ui.drawio.svg)
+<span style="background-color:yellow">what matters is where $\Phi_2$ falling edge lands</span>: after $\Phi_1$ falling edge + settling, before $\Phi_1$ next rising edge with margin for PVT drift between fast Rank1 path & slow Rank2 path → LaCroix's **aligner**
 
+![image-20261031125418057](ti-adc/image-20261031125418057.png)
 
-
-![image-20261025143050494](ti-adc/image-20261025143050494.png)
+![image-20261031125520312](ti-adc/image-20261031125520312.png)
 
 
 
@@ -539,6 +577,8 @@ Ewout Martens. ESSCIRC 2019 Tutorials: Advanced Techniques for ADCs for 5G Massi
 Yohan Frans, CICC2019 ES3-3- "ADC-based Wireline Transceivers" [[pdf](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8780306)]
 
 John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs"
+
+Heng Zhang, Broadcom, ISSCC 2025 Forum *F4.2: High-speed ADCs for 100Gbps+ Wireline Transceivers*
 
 Athanasios Ramkaj. January 26, 2022, IEEE SSCS Santa Clara Valley Section Technical Talk: Design Considerations Towards Optimal High-Resolution Wide-Bandwidth Time-Interleaved ADCs [[video](https://youtu.be/k3jY9NtfYlY)] [[slides](https://r6.ieee.org/scv-sscs/wp-content/uploads/sites/80/2022/02/Thanos-Ramkaj-SCV-Talk-01-26-22.pdf)]
 

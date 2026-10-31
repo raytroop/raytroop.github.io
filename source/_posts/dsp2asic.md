@@ -69,8 +69,10 @@ The look-ahead multiplexing technique brings the key benefit that the timing con
 
 
 
-### Sliding-Block DFE
+### Sliding-Block DFE 
 
+> J. Bailey *et al*., "8.8 A 112Gb/s PAM-4 Low-Power 9-Tap Sliding-Block DFE in a 7nm FinFET Wireline Receiver," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 140-142 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365853](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365853)]
+>
 > J. Bailey et al., "A 112-Gb/s PAM-4 Low-Power Nine-Tap Sliding-Block DFE in a 7-nm FinFET Wireline Receiver," in IEEE Journal of Solid-State Circuits, vol. 57, no. 1, pp. 32-43, Jan. 2022 [[https://sci-hub.jp/10.1109/JSSC.2021.3109167](https://sci-hub.jp/10.1109/JSSC.2021.3109167)]
 
 ![image-20261028220525560](dsp2asic/image-20261028220525560.png)

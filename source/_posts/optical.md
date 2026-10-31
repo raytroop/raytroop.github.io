@@ -13,6 +13,10 @@ mathjax: true
 
 ODSP: Optical DSP
 
+![image-20261031181459948](optical/image-20261031181459948.png)
+
+
+
 ## Wavelength-Division Multiplexing (WDM)
 
 Different wavelengths can travel simultaneously through the same fiber. This technique is called WDM (Wavelength-Division Multiplexing)
@@ -42,6 +46,14 @@ Think of a fiber as a highway, and different wavelengths as different lanes
 > ![image-20261028205924253](optical/image-20261028205924253.png)
 
 ![image-20261022003614437](optical/image-20261022003614437.png)
+
+
+
+---
+
+
+
+
 
 
 

@@ -15,77 +15,67 @@ mathjax: true
 >
 > Taekwang Jang SSCS DL talk : Ultra-low noise Phase-locked Loop Technique
 
-![image-20251008190134196](clocking-misc/image-20251008190134196.png)
+![image-20251008190134196](clock-misc/image-20251008190134196.png)
 
 > K. J. Wang, A. Swaminathan and I. Galton, "Spurious Tone Suppression Techniques Applied to a Wide-Bandwidth 2.4 GHz Fractional-N PLL," in *IEEE Journal of Solid-State Circuits*, vol. 43, no. 12, pp. 2787-2797, Dec. 2008 [[https://sci-hub.se/10.1109/JSSC.2008.2005716](https://sci-hub.se/10.1109/JSSC.2008.2005716)]
 >
-> ![image-20251008190318146](clocking-misc/image-20251008190318146.png)
+> ![image-20251008190318146](clock-misc/image-20251008190318146.png)
 
-![image-20251008180157404](clocking-misc/image-20251008180157404.png)
+![image-20251008180157404](clock-misc/image-20251008180157404.png)
 
-![image-20251008180225932](clocking-misc/image-20251008180225932.png)
-
-
-
-## Frequency Divider
-
-> Gunnman, Kiran, and Mohammad Vahidfar. *Selected Topics in RF, Analog and Mixed Signal Circuits and Systems*. Aalborg: River Publishers, 2017
->
-> Arora, Mohit. “Clock Dividers Made Easy.” (2002). [[https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf](https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf)]
->
-> Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
-
-![image-20240803225130324](clocking-misc/image-20240803225130324.png)
-
-Large values of N lowers the loop BW which is bad for jitter
+![image-20251008180225932](clock-misc/image-20251008180225932.png)
 
 
 
-### Asynchronous vs Synchronous Divider
+
+
+
+
+## Asynchronous vs Synchronous Divider
 
 > Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025 Lecture 8: Divider Circuits  [[https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture08_ee620_dividers.pdf)]
 >
 > Michael Perrott August 12, 2008, Short Course On Phase-Locked Loops and Their Applications Day 2, PM Lecture Basic Building Blocks (Part II) High Speed Frequency Dividers, Phase Detectors, Charge Pumps, and Loop Filter Design [[https://cppsim.org/PLL_Lectures/day2_pm.pdf](https://cppsim.org/PLL_Lectures/day2_pm.pdf)]
 
-![image-20260815221338155](clocking-misc/image-20260815221338155.png)
+![image-20260815221338155](clock-misc/image-20260815221338155.png)
 
-![image-20261001084429722](clocking-misc/image-20261001084429722.png)
+![image-20261001084429722](clock-misc/image-20261001084429722.png)
 
-![image-20261001084530813](clocking-misc/image-20261001084530813.png)
+![image-20261001084530813](clock-misc/image-20261001084530813.png)
 
-### Dual-Modulus Dividers
+## Dual-Modulus Dividers
 
 <span style="color:blue">***divide-by-2/3***</span>
 
-![image-20260815211327476](clocking-misc/image-20260815211327476.png)
+![image-20260815211327476](clock-misc/image-20260815211327476.png)
 
 
 
 <span style="color:blue">***divide-by-4/5***</span>
 
-![image-20260815213030044](clocking-misc/image-20260815213030044.png)
+![image-20260815213030044](clock-misc/image-20260815213030044.png)
 
 
 
 <span style="color:blue"> ***Divide-by-8/9***</span>
 
-![image-20260815213540694](clocking-misc/image-20260815213540694.png)
+![image-20260815213540694](clock-misc/image-20260815213540694.png)
 
 
 
 
 
-### Multi-Modulus Dividers (MMD)
+## Multi-Modulus Dividers (MMD)
 
 
 
 ***Multi-modulus divider using a <span style="color:blue">cascade of divide-by-2/3s</span>***
 
-![image-20260815214721784](clocking-misc/image-20260815214721784.png)
+![image-20260815214721784](clock-misc/image-20260815214721784.png)
 
 <span style="background-color:yellow">***extra one cycle delay*** vs ***reducing accumulated noise*** from the last retiming DFF</span>
 
-![image-20260815221958790](clocking-misc/image-20260815221958790.png)
+![image-20260815221958790](clock-misc/image-20260815221958790.png)
 
 
 
@@ -93,9 +83,35 @@ Large values of N lowers the loop BW which is bad for jitter
 
 
 
-![image-20260815221854343](clocking-misc/image-20260815221854343.png)
+![image-20260815221854343](clock-misc/image-20260815221854343.png)
 
 
+
+## divide-by-1.5 circuit
+
+> US9065449B2 High-speed divide-by-1.5 circuit with 50 percent duty cycle [[https://patents.google.com/patent/US9065449B2](https://patents.google.com/patent/US9065449B2)]
+>
+> Arora, Mohit. “Clock Dividers Made Easy.” (2002). [[https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf](https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf)]
+>
+> Xu, Haojie & Luo, Bao & Jin, Gaofeng & Feng, Fei & Guo, Huanan & Gao, Xiang & Deo, Anupama. (2022). A Flexible 0.73-15.5 GHz Single LC VCO Clock Generator in 12 nm CMOS. IEEE Transactions on Circuits and Systems II: Express Briefs. 69. 4238 - 4242. [[https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS](https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS)]
+
+divide-by-3 circuit  + frequency doubler circuit
+
+![image-20260604215120255](clock-misc/image-20260604215120255.png)
+
+
+
+## Frequency Divider Effect
+
+> Gunnman, Kiran, and Mohammad Vahidfar. *Selected Topics in RF, Analog and Mixed Signal Circuits and Systems*. Aalborg: River Publishers, 2017
+>
+> Arora, Mohit. “Clock Dividers Made Easy.” (2002). [[https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf](https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf)]
+>
+> Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
+
+![image-20240803225130324](clock-misc/image-20240803225130324.png)
+
+Large values of N lowers the loop BW which is bad for jitter
 
 ### Noise in dividers (jitter generation)
 
@@ -113,7 +129,7 @@ Large values of N lowers the loop BW which is bad for jitter
 
 > Enrico Rubiola. Phase Noise and Jitter in Digital Electronics [[https://rubiola.org/pdf-slides/2016T-EFTF--Noise-in-digital-electronics.pdf](https://rubiola.org/pdf-slides/2016T-EFTF--Noise-in-digital-electronics.pdf)]
 
-![image-20250724072155205](clocking-misc/image-20250724072155205.png)
+![image-20250724072155205](clock-misc/image-20250724072155205.png)
 
 
 
@@ -140,9 +156,9 @@ real-time digital oscilloscope: measure sampled jitter directly
 
  **type-I PLLs**
 
-![image-20241222152826102](clocking-misc/image-20241222152826102.png)
+![image-20241222152826102](clock-misc/image-20241222152826102.png)
 
-![image-20241222152916367](clocking-misc/image-20241222152916367.png)
+![image-20241222152916367](clock-misc/image-20241222152916367.png)
 
  frequency divider weakens the feedback and ***increases** the phase margin*
 
@@ -152,7 +168,7 @@ real-time digital oscilloscope: measure sampled jitter directly
 
 **type-II PLLs**
 
-![image-20241222153430163](clocking-misc/image-20241222153430163.png)
+![image-20241222153430163](clock-misc/image-20241222153430163.png)
 
  frequency divider weakens the feedback and ***decrease** the phase margin*
 
@@ -167,7 +183,7 @@ real-time digital oscilloscope: measure sampled jitter directly
 >
 > [[Phase Noise Theory: Ideal Frequency Multipliers and Dividers]](http://www.ko4bb.com/~bruce/IdealFreqMultDiv.html)
 
-![image-20241013212542173](clocking-misc/image-20241013212542173.png)
+![image-20241013212542173](clock-misc/image-20241013212542173.png)
 
 - Multiplying the frequency of a signal by a factor of N using an **ideal** frequency multiplier increases the phase noise of the multiplied signal by $20\log(N)$ dB.
 - Similarly dividing a signal frequency by $N$ reduces the phase noise of the output signal by $20\log(N)$  dB
@@ -184,13 +200,13 @@ If the carrier frequency of a clock is divided down by a factor of $N$ then we e
 
 
 
-![20log(N).png](clocking-misc/rtaImage-1720945161770-5.png)
+![20log(N).png](clock-misc/rtaImage-1720945161770-5.png)
 
 #### What About Phase Jitter?
 
 We integrate *SSB* phase noise *L*(f) [dBc/Hz] to obtain rms phase jitter in seconds as follows for “brick wall” integration from f1 to f2 offset frequencies in Hz and where f0 is the carrier or clock frequency.
 
-![phase jitter.png](clocking-misc/rtaImage.png)
+![phase jitter.png](clock-misc/rtaImage.png)
 
 Note that the rms phase jitter in seconds is inversely proportional to f0. When frequency is divided down, the phase noise, *L*(f), goes down by a factor of 20log(N). However, since the frequency goes down by N also, the phase jitter expressed in units of time is constant.
 
@@ -203,7 +219,7 @@ Therefore, phase noise curves, related by 20log(N), with the same phase noise sh
 
 > Sam Palermo, ECEN620: Network Theory Broadband Circuit Design Fall 2025, *Lecture 10: Fractional-N Frequency Synthesizers* [[https://people.engr.tamu.edu/spalermo/ecen620/lecture10_ee620_fracn_freq_synth.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture10_ee620_fracn_freq_synth.pdf)]
 
-![image-20260609073055225](clocking-misc/image-20260609073055225.png)
+![image-20260609073055225](clock-misc/image-20260609073055225.png)
 
 with $M_{ref}$, the number of reference clock cycles
 $$
@@ -261,7 +277,7 @@ $$
 
   > [[https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf](https://people.engr.tamu.edu/spalermo/ecen620/lecture03_ee620_pll_system.pdf)]
   >
-  > ![image-20250602100424369](clocking-misc/image-20250602100424369.png)
+  > ![image-20250602100424369](clock-misc/image-20250602100424369.png)
 
 - if a small reference frequency is chosen, t*he reference spur in the output phase noise is located at a smaller offset frequency*
 
@@ -271,11 +287,11 @@ $$
 
 1. ***Dither Feedback Divider Ratio by a delta-sigma modulator***
 
-![image-20241003105023092](clocking-misc/image-20241003105023092.png)
+![image-20241003105023092](clock-misc/image-20241003105023092.png)
 
 2. ***Frequency Accumulation***
 
-![image-20241003105059989](clocking-misc/image-20241003105059989.png)
+![image-20241003105059989](clock-misc/image-20241003105059989.png)
 
 
 
@@ -287,7 +303,7 @@ A:  *TODO* &#128197;
 
 
 
-![image-20240901105919333](clocking-misc/image-20240901105919333.png)
+![image-20240901105919333](clock-misc/image-20240901105919333.png)
 
 
 
@@ -314,7 +330,7 @@ A:  *TODO* &#128197;
 
 ## clock edge impact
 
-![clock2clock.drawio](clocking-misc/clock2clock.drawio.svg)
+![clock2clock.drawio](clock-misc/clock2clock.drawio.svg)
 
 > ck1 is div2 of ck0
 
@@ -356,11 +372,11 @@ and $\phi _e(\infty) = 0$
 
 > Daniel Boschen. GRCon24 - Quick Start on Control Loops with Python Workshop [[https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf](https://events.gnuradio.org/event/24/contributions/599/attachments/187/480/Boschen%20Control%20Presentation.pdf)]
 
-![image-20250831230607689](clocking-misc/image-20250831230607689.png)
+![image-20250831230607689](clock-misc/image-20250831230607689.png)
 
-![image-20250831230637667](clocking-misc/image-20250831230637667.png)
+![image-20250831230637667](clock-misc/image-20250831230637667.png)
 
-![image-20250831230937353](clocking-misc/image-20250831230937353.png)
+![image-20250831230937353](clock-misc/image-20250831230937353.png)
 
 
 

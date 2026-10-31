@@ -1,5 +1,5 @@
 ---
-title: Multi-phase Clock Generation
+title: Multiphase Clock Generation
 date: 2025-09-05 10:36:32
 tags:
 categories:
@@ -114,6 +114,20 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 
 
 
+
+
+---
+
+> J. Im *et al*., "6.1 A 112Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR-ADC and Inverter-Based RX Analog Front-End in 7nm FinFET," *2020 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2020, pp. 116-118 [[https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081](https://sci-hub.ru/10.1109/ISSCC19947.2020.9063081)]
+>
+> —, "A 112-Gb/s PAM-4 Long-Reach Wireline Transceiver Using a 36-Way Time-Interleaved SAR ADC and Inverter-Based RX Analog Front-End in 7-nm FinFET," in IEEE Journal of Solid-State Circuits, vol. 56, no. 1, pp. 7-18, Jan. 2021 [[https://sci-hub.ru/10.1109/JSSC.2020.3024261](https://sci-hub.ru/10.1109/JSSC.2020.3024261)]
+
+<span style="color:white; background-color:black">**IQ-divide-by-6**</span>
+
+
+
+
+
 ## MPG using PI
 
 > Y. Segal et al., "6.1 A 1.41pJ/b 224Gb/s PAM-4 SerDes Receiver with 31dB Loss Compensation," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 114-116 [[https://sci-hub.ru/10.1109/ISSCC42614.2022.9731794](https://sci-hub.ru/10.1109/ISSCC42614.2022.9731794)]
@@ -140,7 +154,7 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 
 > Fig. 4(b) as drawn is missing an inversion on the Prev-PI input to the mux
 >
-> ![image-20261031011405633](mpcg/image-20261031011405633.png)
+> ![image-20261031090718588](mpcg/image-20261031090718588.png)
 
 
 

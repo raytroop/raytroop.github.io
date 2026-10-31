@@ -124,6 +124,36 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 
 <span style="color:white; background-color:black">**IQ-divide-by-6**</span>
 
+![image-20261031202600846](mpcg/image-20261031202600846.png)
+
+
+
+![IQ-divide-by-6 architecture and illustrative logic implementation](mpcg/iq_div6_circuit.drawio.svg)
+
+
+
+![IQ-divide-by-6 startup and timing diagram](mpcg/iq_div6_timing.drawio.svg)
+
+For the plotted startup example, reset is released before the first active edge of each path: I starts at $t=0$, and Q starts at $t=1.5T$. The reset-release instants are placed away from those edges; the plot omits propagation delay and recovery/removal timing. The output rising-edge order is
+
+$$
+\underbrace{I}_{0}\ \to\ \underbrace{Q}_{1.5T}\ \to\ \underbrace{\overline I}_{3T}\ \to\ \underbrace{\overline Q}_{4.5T}\ \to\ \underbrace{I}_{6T},
+\qquad
+\Delta\phi_{IQ}=360^\circ\frac{1.5T}{6T}=90^\circ.
+$$
+
+
+
+**for low jitter, I would add final retiming by CK/CKb.** The circuit I drew is the divider core: its ÷2 stage is clocked by the ÷3 output, so its output edges include delay variation from both stages.
+
+A suitable extension uses **two retiming DFFs with complementary outputs**:
+
+| Raw divider output → D | Retiming clock | Retimed outputs   |
+| ---------------------- | -------------- | ----------------- |
+| I-path output          | CK ↑           | `clk_i`, `clk_ib` |
+| Q-path output          | CKb ↑          | `clk_q`, `clk_qb` |
+
+Capture each raw output on the **next corresponding input-clock edge**, after it has settled. Both paths then acquire one input period of latency, preserving their **1.5T separation = 90°**. Retiming all four phases on the same clock polarity would lose that half-cycle spacing
 
 
 
@@ -202,7 +232,7 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 ![image-20260929204119295](mpcg/image-20260929204119295.png)
 
 
-## mixer based Quadrature Phase Detector
+##  XOR-based Quadrature Phase Detector
 
 > S. Chen et al., "A 4-to-16GHz inverter-based injection-locked quadrature clock generator with phase interpolators for multi-standard I/Os in 7nm FinFET," 2018 IEEE International Solid-State Circuits Conference - (ISSCC), San Francisco, CA, USA, 2018, pp. 390-39 [[https://sci-hub.red/storage/twin/6715/2bc891863e9eac1eb1670deb776ff04d/chen2018.pdf](https://sci-hub.red/storage/twin/6715/2bc891863e9eac1eb1670deb776ff04d/chen2018.pdf)]
 >
@@ -210,7 +240,7 @@ Note: the divider latches must be reset. They form a feedback loop that powers u
 >
 > —, "Multi-Phase Clock Generation for Phase Interpolation With a Multi-Phase, Injection-Locked Ring Oscillator and a Quadrature DLL," in IEEE Journal of Solid-State Circuits, vol. 57, no. 6, pp. 1776-1787, June 2022, doi: 10.1109/JSSC.2021.3124486.
 >
-> —, "A Very High Linearity Twin Phase Interpolator With a Low-Noise and Wideband Delta Quadrature DLL for High-Speed Data Link Clocking," in IEEE Journal of Solid-State Circuits, vol. 58, no. 4, pp. 1172-1184, April 2023, doi: 10.1109/JSSC.2022.3197061
+> —, "A Very High Linearity Twin Phase Interpolator With a Low-Noise and Wideband Delta Quadrature DLL for High-Speed Data Link Clocking," in IEEE Journal of Solid-State Circuits, vol. 58, no. 4, pp. 1172-1184, April 2023, [[https://sci-hub.ru/10.1109/JSSC.2022.3197061](https://sci-hub.ru/10.1109/JSSC.2022.3197061)]
 >
 > —. *Efficient and High-Performance Clocking Circuits for High-Speed Data Links*. 2022. Columbia University, PhD dissertation. *Academic Commons*,[[https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71](https://academiccommons.columbia.edu/doi/10.7916/g3f1-4e71)]
 >
@@ -281,6 +311,8 @@ $$
 > J. Q. Wang *et al*., "7.1 A 2.69pJ/b 212Gb/s DSP-Based PAM-4 Transceiver for Optical Direct-Detect Application in 5nm FinFET," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 123-125, doi: 10.1109/ISSCC49657.2024.10454275.
 
 *TODO* &#128197;
+
+
 
 
 ## DCC & AC-coupled buffer

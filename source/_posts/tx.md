@@ -343,7 +343,11 @@ If the natural delay lands too close to an active edge, the designer can fix it 
 
 > M. A. Kossel *et al*., "8.3 An 8b DAC-Based SST TX Using Metal Gate Resistors with 1.4pJ/b Efficiency at 112Gb/s PAM-4 and 8-Tap FFE in 7nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 130-132 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784)]
 >
+> —. (2023), Design of synchronous frequency dividers in 5-nm FinFET CMOS technology. Electron. Lett., 59: e13033. [[https://ietresearch.onlinelibrary.wiley.com/doi/epdf/10.1049/ell2.13033](https://ietresearch.onlinelibrary.wiley.com/doi/epdf/10.1049/ell2.13033)]
+>
 > Michael Perrott August 12, 2008, Short Course On Phase-Locked Loops and Their Applications Day 2, PM Lecture Basic Building Blocks (Part II) High Speed Frequency Dividers, Phase Detectors, Charge Pumps, and Loop Filter Design [[https://cppsim.org/PLL_Lectures/day2_pm.pdf](https://cppsim.org/PLL_Lectures/day2_pm.pdf)]
+>
+> Q. J. Gu and Z. Gao, "A CMOS High Speed Multi-Modulus Divider With Retiming for Jitter Suppression," in *IEEE Microwave and Wireless Components Letters*, vol. 23, no. 10, pp. 554-556, Oct. 2013, doi: 10.1109/LMWC.2013.2248080 [[https://www.ece.ucdavis.edu/hsics/wp-content/uploads/sites/4/2015/04/2013_A-CMOS-High-Speed-Multi-Modulus-Divider-With-Retiming-for-Jitter-Suppression.pdf](https://www.ece.ucdavis.edu/hsics/wp-content/uploads/sites/4/2015/04/2013_A-CMOS-High-Speed-Multi-Modulus-Divider-With-Retiming-for-Jitter-Suppression.pdf)]
 
 ![image-20261001082434120](tx/image-20261001082434120.png)
 

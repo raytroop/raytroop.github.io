@@ -43,11 +43,33 @@ mathjax: true
 
 ![image-20261001084530813](clock-misc/image-20261001084530813.png)
 
+
+
+---
+
+
+
+<span style="color:blue">***divide-by-7***</span>
+
+![div-7-cicuit](clock-misc/div-7-cicuit.svg)
+
+![div-7-timing.drawio](clock-misc/div-7-timing.drawio.svg)
+
+**No lock-up**: every one of all 16 starting states (4 DFF) of the four flip-flops settles into this same period-7 pattern
+
+
+
 ## Dual-Modulus Dividers
 
 <span style="color:blue">***divide-by-2/3***</span>
 
 ![image-20260815211327476](clock-misc/image-20260815211327476.png)
+
+![image-20261101174453523](clock-misc/image-20261101174453523.png)
+
+<span style="color:blue">***divide-by-3 w/ 50% duty cycle***</span>
+
+![image-20261101180638995](clock-misc/image-20261101180638995.png)
 
 
 
@@ -57,19 +79,40 @@ mathjax: true
 
 
 
+<span style="color:blue">***divide-by-4/5 w/ 50% duty cycle***</span>
+
+Use one mode bit $M$: **$M=0$ selects divide-by-4; $M=1$ selects divide-by-5**
+
+![Selectable divide-by-4/5 circuit with a negative-edge DFF and an SR latch](clock-misc/div-4-5-50-circuit.drawio.svg)
+
+| Mode | Feedback | Set input $a$ | Repeating state sequence $(q_1q_2q_3q_4)$ | Output high / low |
+| --- | --- | --- | --- | --- |
+| $M=0$: ÷4 | $d=\overline{q_1+q_2+q_3}$ | $q_4$ | $1000\to0100\to0010\to0001\to1000$ | $2T / 2T$ |
+| $M=1$: ÷5 | $d=\overline{q_1+q_2+q_3+q_4}$ | $r$ | $1000\to0100\to0010\to0001\to0000\to1000$ | $2.5T / 2.5T$ |
+
+![Divide-by-4 timing: latch inputs a and b produce 2T high and 2T low](clock-misc/div-4-5-50-timing-div4.drawio.svg)
+
+![Divide-by-5 timing: the negative-edge DFF delays a by half a cycle for 2.5T high and low](clock-misc/div-4-5-50-timing-div5.drawio.svg)
+
+
+
+
+
 <span style="color:blue"> ***Divide-by-8/9***</span>
 
 ![image-20260815213540694](clock-misc/image-20260815213540694.png)
 
 
 
+<span style="color:blue"> ***Divide-by-15/16***</span>
+
+![image-20261101175028763](clock-misc/image-20261101175028763.png)
+
 
 
 ## Multi-Modulus Dividers (MMD)
 
-
-
-***Multi-modulus divider using a <span style="color:blue">cascade of divide-by-2/3s</span>***
+***wide-range programmable divider using a <span style="color:blue">cascade of divide-by-2/3s</span>***
 
 ![image-20260815214721784](clock-misc/image-20260815214721784.png)
 
@@ -79,19 +122,15 @@ mathjax: true
 
 
 
-<span style="color:blue">***Pulse-swallow multi-modulus divider***</span>
+---
 
-
-
-![image-20260815221854343](clock-misc/image-20260815221854343.png)
+![image-20261101175602291](clock-misc/image-20261101175602291.png)
 
 
 
 ## divide-by-1.5 circuit
 
 > US9065449B2 High-speed divide-by-1.5 circuit with 50 percent duty cycle [[https://patents.google.com/patent/US9065449B2](https://patents.google.com/patent/US9065449B2)]
->
-> Arora, Mohit. “Clock Dividers Made Easy.” (2002). [[https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf](https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf)]
 >
 > Xu, Haojie & Luo, Bao & Jin, Gaofeng & Feng, Fei & Guo, Huanan & Gao, Xiang & Deo, Anupama. (2022). A Flexible 0.73-15.5 GHz Single LC VCO Clock Generator in 12 nm CMOS. IEEE Transactions on Circuits and Systems II: Express Briefs. 69. 4238 - 4242. [[https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS](https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS)]
 
@@ -230,6 +269,14 @@ yield effective divide ratio
 $$
 N_{eff} = \frac{N_{vco}}{M_{ref}} = \boxed{ \frac{A+B}{\frac{A}{N} + \frac{B}{N+1}} } = \textcolor{red}{\frac{\frac{A}{N}}{\frac{A}{N} + \frac{B}{N+1}}}\cdot N + \textcolor{blue}{\frac{\frac{B}{N+1}}{\frac{A}{N} + \frac{B}{N+1}}}\cdot (N+1)
 $$
+
+
+
+## MUX Structure
+
+![mux](clock-misc/mux.svg)
+
+![cmux-x](clock-misc/cmux-x.svg)
 
 
 
@@ -393,3 +440,5 @@ Dennis Fischette, Frequently Asked PLL Questions [[https://www.delroy.com/PLL_di
 Ian Galton, ISSCC 2010 SC3: Fractional-N PLLs [[https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf](https://www.nishanchettri.com/isscc-slides/2010%20ISSCC/Short%20Course/SC3.pdf)]
 
 Mike Shuo-Wei Chen, ISSCC 2020 T6: Digital Fractional-N Phase Locked Loop Design [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T6Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T6Visuals.pdf)]
+
+Arora, Mohit. “Clock Dividers Made Easy.” (2002). [[https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf](https://www.mikrocontroller.net/attachment/177198/Clock_Dividers_Made_Easy.pdf)]

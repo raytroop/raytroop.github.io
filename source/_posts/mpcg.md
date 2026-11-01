@@ -380,16 +380,6 @@ $$
 
 
 
-
-
-## MUX Structure
-
-![mux](mpcg/mux.svg)
-
-
-
-
-
 ## Pulse Width Jitter (PWJ)
 
 

@@ -348,6 +348,8 @@ $$
 > Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
 >
 > Bevan Baas, EEC 281 - VLSI Digital Signal Processing Winter 2025 [[QUANTIZATION NOISE AS A FUNCTION OF WORD SIZE](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.quant.pdf)] [[SATURATION&COMPRESSION](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.saturation.pdf)] [[ROUNDING](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.rounding.pdf)]
+>
+> Keshab K. Parhi, Chapter 11: Scaling and Round-off Noise [[http://www.ece.umn.edu/users/parhi/SLIDES/chap11.pdf](http://www.ece.umn.edu/users/parhi/SLIDES/chap11.pdf)]
 
 
 
@@ -777,6 +779,10 @@ Taylor, Fred. *Digital filters: principles and applications with MATLAB*. John W
 D. Markovic and R. W. Brodersen, DSP Architecture Design Essentials, Springer, 2012.
 
 X. Yang, Integrated Circuit Design: IC Design Flow and Project-Based Learning, 1st edition. Boca Raton: CRC Press, 2024 [[repo](https://github.com/IC-Design-Lab/IC-Design)]
+
+K.K. Parhi, VLSI Digital Signal Processing Systems: Design and Implementation, Wiley, NY 1999
+
+Shoab Ahmed Khan, *Digital Design of Signal Processing Systems: A Practical Approach* (Wiley, 2011)
 
 ---
 

@@ -199,6 +199,42 @@ endmodule
 
 
 
+## Synchronous Counter with D Flip-Flops
+
+> Ring-Counter,Johnson-Counter [[https://igulms.iqdigit.com/storage/15810/Ring-Counter,Johnson-Counter.pdf](https://igulms.iqdigit.com/storage/15810/Ring-Counter,Johnson-Counter.pdf)]
+
+<span style="color:white; background-color:black">**counter as FSM**</span>
+
+![image-20261101171306105](dsp2asic/image-20261101171306105.png)
+
+![image-20261101171839832](dsp2asic/image-20261101171839832.png)
+
+![image-20261101173106754](dsp2asic/image-20261101173106754.png)
+
+
+
+<span style="color:white; background-color:black">**ring counter**</span>, a.k.a. <span style="color:white; background-color:black">**one-hot counter**</span>
+
+connects the output of the **last shift register** to the first shift register input and circulates a single one (or zero) bit around the ring
+
+![4-bit ring counter using four D-type flip flops. Synchronous clock and reset line shown.](dsp2asic/500px-Overbeck_Counter_4bit.svg.pngutm_source=en.wikipedia.png)
+
+<span style="background-color:yellow">If $N$ flip-flop are there, then it counts $\color{red}N$ states</span>
+
+
+
+<span style="color:white; background-color:black">**Johnson counter**</span>, a.k.a. <span style="color:white; background-color:black">**twisted ring counter**</span>
+
+connects the **last shift register's complemented output** to the input of the first register and circulates a stream of ones followed by zeros around the ring
+
+![4-bit Johnson counter using four D-type flip flops. Synchronous clock and reset line shown.](dsp2asic/500px-Johnson_Counter_4bit.svg.pngutm_source=en.wikipedia.png)
+
+<span style="background-color:yellow">If $N$ flip-flop are there, then it counts $\color{red}2N$ states</span>
+
+
+
+
+
 ## MASH 1-1-1 in DSP
 
 > MASH-1-1-1 Noise-Shaping Truncator (DLF → DAC) [[https://github.com/raytroop/dsmwk](https://github.com/raytroop/dsmwk)]
@@ -499,6 +535,12 @@ endfunction
 ## reference
 
 K. K. Mishra, Advanced Chip Design: Practical Examples in Verilog. CreateSpace Independent Publishing Platform, 2013
+
+Brown, Stephen, and Zvonko Vranesic. Fundamentals of Digital Logic with Verilog Design. 3rd ed., McGraw-Hill Higher Education, 2014. [[https://daskalakispiros.com/files/Ebooks/Fundamentals_of_Digital_Logic_with_Verilog_Design_(3rd_edition)__ebook3000.pdf](https://daskalakispiros.com/files/Ebooks/Fundamentals_of_Digital_Logic_with_Verilog_Design_(3rd_edition)__ebook3000.pdf)]
+
+X. Yang, Integrated Circuit Design: IC Design Flow and Project-Based Learning, 1st edition. Boca Raton: CRC Press, 2024
+
+---
 
 Wei Yet, MakerCode RTL Challenge [[https://github.com/Weiyet/MakerCode_RTLChallenge](https://github.com/Weiyet/MakerCode_RTLChallenge)]
 

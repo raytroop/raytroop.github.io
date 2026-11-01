@@ -250,11 +250,21 @@ print(f"alpha({T:.0f}s): circuit ODE {np.degrees(a_ckt[-2*N]):+.2f} deg | "
 
 
 
+## Injection-Locked Frequency Divider (ILFD)
+
+*TODO* &#128197;
+
+
+
+
+
 ## reference
 
 Bae, Woorham, and Deog-Kyoon Jeong. *Analysis and Design of CMOS Clocking Circuits for Low Phase Noise*. Institution of Engineering and Technology, 2020
 
 Cowan, Glenn. (2024). Mixed-Signal CMOS for Wireline Communication: Transistor-Level and System-Level Design Considerations
+
+Luong, H. C., & Yin, J. (2016). *Transformer-based design techniques for oscillators and frequency dividers*. Springer International Publishing
 
 R. Adler, "A Study of Locking Phenomena in Oscillators," in *Proceedings of the IRE*, vol. 34, no. 6, pp. 351-357, June 1946 [[https://sci-hub.jp/10.1109/JRPROC.1946.229930](https://sci-hub.jp/10.1109/JRPROC.1946.229930)]
 

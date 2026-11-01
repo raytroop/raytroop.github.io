@@ -49,6 +49,14 @@ mathjax: true
 
 
 
+<span style="color:blue">***divide-by-3***</span>
+
+![image-20261101230300141](clock-misc/image-20261101230300141.png)
+
+
+
+
+
 <span style="color:blue">***divide-by-7***</span>
 
 ![div-7-cicuit](clock-misc/div-7-cicuit.svg)
@@ -128,15 +136,25 @@ Use one mode bit $M$: **$M=0$ selects divide-by-4; $M=1$ selects divide-by-5**
 
 
 
-## divide-by-1.5 circuit
+## divide-by-1.5
 
 > US9065449B2 High-speed divide-by-1.5 circuit with 50 percent duty cycle [[https://patents.google.com/patent/US9065449B2](https://patents.google.com/patent/US9065449B2)]
 >
 > Xu, Haojie & Luo, Bao & Jin, Gaofeng & Feng, Fei & Guo, Huanan & Gao, Xiang & Deo, Anupama. (2022). A Flexible 0.73-15.5 GHz Single LC VCO Clock Generator in 12 nm CMOS. IEEE Transactions on Circuits and Systems II: Express Briefs. 69. 4238 - 4242. [[https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS](https://www.researchgate.net/publication/382240520_A_Flexible_073-155_GHz_Single_LC_VCO_Clock_Generator_in_12_nm_CMOS)]
 
-divide-by-3 circuit  + frequency doubler circuit
+<span style="color:white; background-color:black">divide-by-3 + frequency doubler</span>
 
 ![image-20260604215120255](clock-misc/image-20260604215120255.png)
+
+---
+
+
+
+<span style="color:white; background-color:black">divide-by-3 + combinational logic</span>
+
+![div1p5.drawio](clock-misc/div1p5.drawio.svg)
+
+Using PI, ck1p5 & ck1p5_Q with 50% duty cycle
 
 
 

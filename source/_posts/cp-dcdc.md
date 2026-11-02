@@ -131,9 +131,9 @@ Zhang, Milin, Zhihua Wang, Jan van der Spiegel and Franco Maloberti. "Advanced T
 
 Anton Bakker, Tim Piessens., ISSCC2014 T9: Charge Pump and Capacitive DC-DC Converter Design
 
-Wicht, B., ISSCC2020 T2: Analog Building Blocks of DC-DC Converters [[https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T2Visuals.pdf](https://www.nishanchettri.com/isscc-slides/2020%20ISSCC/TUTORIALS/T2Visuals.pdf)]
+Wicht, B., ISSCC2020 T2: Analog Building Blocks of DC-DC Converters
 
-Hoi Lee, ISSCC2018 T8: Fundamentals of Switched-Mode Power Converter Design [[slides](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Visuals.pdf),[transcript](https://www.nishanchettri.com/isscc-slides/2018%20ISSCC/TUTORIALS/T8/T8Transcription.pdf)]
+Hoi Lee, ISSCC2018 T8: Fundamentals of Switched-Mode Power Converter Design
 
 G. Palumbo and D. Pappalardo, "Charge Pump Circuits: An Overview on Design Strategies and Topologies," in *IEEE Circuits and Systems Magazine*, vol. 10, no. 1, pp. 31-45, First Quarter 2010 [[pdf](https://mixsignal.wordpress.com/wp-content/uploads/2020/05/2010_charge-pump-circuits.pdf)]
 

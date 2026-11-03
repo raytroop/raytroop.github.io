@@ -2934,6 +2934,30 @@ https://www.zhihu.com/question/620576027/answer/2093838478320710666
 
 
 ```
+venus
+回复 momo : 我觉得一直待在舒适圈，在大厂反而很危险，工龄跟业务经历不匹配
+昨天 18:29广东
+
+---
+https://www.xiaohongshu.com/explore/6ae82695000000000f0279c7?xsec_token=CBdIBT8vr_L0iHnRc7Bkggp-KBNtM9Xia3hoXJ9FkdVmk
+```
+
+
+
+```
+JYJ
+一般员工会把内部micro问题扩大到macro，然后看衰自己公司。而且更会放大实际上对自己公司和市场的了解。反而很多都拿不住自己的股票
+06-05美国
+
+---
+https://www.xiaohongshu.com/explore/6a1f712e000000002101bafd?xsec_token=CBYrTPs-Pqwa_zDMdbGafxaK7wP-lDQAQQ_k7Qc-eCSkw
+```
+
+
+
+
+
+```
 从小的生活环境让你误以为你的交涉方都是无礼且强大大于你的，这种印象在你内心形成了枷锁。破解的方法是你需要先有一个心态上的转化，明白现在成年的你已经足够强大，能保护你自己了。保持自己的意见和立场，从面对小型冲突开始培养自己的自信。
 
 ---

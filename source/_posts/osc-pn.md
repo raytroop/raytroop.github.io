@@ -57,6 +57,12 @@ mathjax: true
 
 ![image-20250104085722649](osc-pn/image-20250104085722649.png)
 
+Even though $K_{VCO}$ unit: $\color{blue}\text{rad/s/V}$ , $\color{blue}\text{Hz/V}$, $\color{red}\text{rad}$ is used in PLL analysis, exclusively.
+
+![image-20261103213819255](osc-pn/image-20261103213819255.png)
+
+
+
 ---
 
 ![image-20250601101355166](osc-pn/image-20250601101355166.png)

@@ -162,6 +162,8 @@ That is, $g_{m,a1}+g_{m,b1} = \mu C_{OX}\frac{W}{L}(V_{a1}+V_{b1} - 2V_{TH})$
 
 To minimize the difference between $\Delta I_1$ and $\Delta I_0$, the drift of  both differential and common mode between $V_a$ and $V_b$ shall be alleviated
 
+![autozero-mos](precision/autozero-mos.svg)
+
 
 
 ## Chopping

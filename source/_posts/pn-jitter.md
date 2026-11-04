@@ -133,7 +133,7 @@ These two types of measurements deliver the <span style="color:blue">**same rms 
 
 ![image-20250530210543667](pn-jitter/image-20250530210543667.png)
 
-<span style="background-color:yellow">The factor $\frac{1}{2\pi F_0}$ converts RMS phase fluctuations (in radians) into RMS timing jitter (in seconds), where $F_0$ is the signal's fundamental frequency</span>
+<span style="background-color:yellow">The factor $\frac{1}{2\pi F_0}$ converts RMS phase fluctuations (in **radians**) into RMS timing jitter (in **seconds**), where $F_0$ is the signal's fundamental frequency</span>
 
 
 

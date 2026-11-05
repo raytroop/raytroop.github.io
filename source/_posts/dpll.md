@@ -1120,6 +1120,8 @@ $$
 
 ## adaptive loop gain controller (ALGC)
 
+> Jang, S.-C. (2015). Design of All-Digital PLL Using Statistical Data of Bang-Bang Phase Detection (Doctoral dissertation, Seoul National University). [[https://s-space.snu.ac.kr/handle/10371/119111](https://s-space.snu.ac.kr/handle/10371/119111)]
+
 *TODO* &#128197;
 
 

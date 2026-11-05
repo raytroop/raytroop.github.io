@@ -168,6 +168,18 @@ channel resistance & gate resistance
 
 ---
 
+<span style="color:white; background-color:black">Bulk connection: $C_{gg}$ versus vds</span>
+
+Both circuits below use an NMOS with its gate at $0\,\mathrm{V}$ and its source and drain shorted together. Define the swept voltage as
+
+$$
+V=\texttt{vdsswp}=V_D=V_S.
+$$
+
+Despite the variable name, this is a **common source/drain voltage sweep**: the actual $V_{DS}=V_D-V_S=0$ throughout. M1 has its bulk grounded, whereas M2 ties its bulk to the swept source/drain node.
+
+![Two NMOS capacitor circuits with grounded and swept bulk connections, and qualitative Cgg curves](mos-cap/cgg_vs_vdsswp.drawio.svg)
+
 
 
 ## Voltage dependence

@@ -1118,7 +1118,9 @@ $$
 *TODO* &#128197;
 
 
+## adaptive loop gain controller (ALGC)
 
+*TODO* &#128197;
 
 
 ## reference

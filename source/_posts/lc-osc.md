@@ -1131,7 +1131,7 @@ C_{\text{tot}}
 C_{mp}
 +
 \frac{C_m(C_v+C_p)}
-{C_m+C_v+C_p}.
+{C_m+C_v+C_p}
 $$
 
 Using the chain rule,
@@ -1140,7 +1140,7 @@ $$
 \frac{dC_{\text{tot}}}{dV}
 =
 \frac{\partial C_{\text{tot}}}{\partial C_v}
-\frac{dC_v}{dV}.
+\frac{dC_v}{dV}
 $$
 
 Since
@@ -1149,7 +1149,7 @@ $$
 \frac{\partial C_{\text{tot}}}{\partial C_v}
 =
 \frac{C_m^2}
-{(C_m+C_v+C_p)^2},
+{(C_m+C_v+C_p)^2}
 $$
 
 we obtain
@@ -1169,7 +1169,7 @@ $$
 Therefore, the effective tuning sensitivity $dC_{\text{tot}}/dV$ is attenuated relative to the intrinsic varactor sensitivity $dC_v/dV$ by
 
 $$
-\color{red}
+\color{blue}
 \left(
 \frac{C_m}
 {C_m+C_v+C_p}
@@ -1244,19 +1244,11 @@ $$
 (\sqrt{k}-1) \left[ C_m+C_p-C_v\sqrt{k} \right]>0
 $$
 
-Therefore, the effective tuning sensitivity increases when
+Therefore, the effective tuning sensitivity **increases** when
 
 $$
-\boxed{
-\min\left\{1,
-\left(\frac{C_m+C_p}{C_v}\right)^2
-\right\}
-<
-k
-<
-\max\left\{1,
-\left(\frac{C_m+C_p}{C_v}\right)^2
-\right\}
+\color{blue}\boxed{
+1<k<\left(\frac{C_m+C_p}{C_v}\right)^2
 }
 $$
 

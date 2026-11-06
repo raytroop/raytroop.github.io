@@ -1169,7 +1169,7 @@ $$
 Therefore, the effective tuning sensitivity $dC_{\text{tot}}/dV$ is attenuated relative to the intrinsic varactor sensitivity $dC_v/dV$ by
 
 $$
-color{red}
+\color{red}
 \left(
 \frac{C_m}
 {C_m+C_v+C_p}

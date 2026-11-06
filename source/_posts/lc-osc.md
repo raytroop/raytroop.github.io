@@ -1169,11 +1169,110 @@ $$
 Therefore, the effective tuning sensitivity $dC_{\text{tot}}/dV$ is attenuated relative to the intrinsic varactor sensitivity $dC_v/dV$ by
 
 $$
+color{red}
 \left(
 \frac{C_m}
 {C_m+C_v+C_p}
 \right)^2
 $$
+
+
+---
+
+Assume that the **varactor capacitance and its intrinsic tuning sensitivity are scaled by the same positive factor $k$**:
+
+$$
+C_v'=kC_v \qquad \left(\frac{dC_v}{dV}\right)'=k\frac{dC_v}{dV}
+$$
+
+
+Here, $k>1$ represents an increase in both capacitance and intrinsic tuning sensitivity, whereas $0<k<1$ represents a decrease.
+
+New Effective Tuning Sensitivity
+
+The total capacitance is given by
+
+$$
+C_{\mathrm{tot}}=C_{mp}+(C_v+C_p)\parallel C_m
+$$
+
+or equivalently,
+
+$$
+C_{\mathrm{tot}}=C_{mp}+\frac{C_m(C_v+C_p)}{C_m+C_v+C_p}
+$$
+
+Differentiating with respect to the tuning voltage \(V\), we obtain
+
+$$
+\frac{dC_{\mathrm{tot}}}{dV} = \left(\frac{C_m}{C_m+C_v+C_p}\right)^2\frac{dC_v}{dV}
+$$
+
+After scaling the varactor capacitance by $k$, the new effective tuning sensitivity becomes
+
+$$
+\boxed{
+\frac{dC_{\mathrm{tot}}'}{dV} = \left(\frac{C_m}{C_m+kC_v+C_p}\right)^2 k\frac{dC_v}{dV}
+}
+$$
+
+Comparison with the Original Tuning Sensitivity
+
+The ratio of the new effective tuning sensitivity to the original one is
+
+$$
+\boxed{
+R= \frac{dC_{\mathrm{tot}}'/dV}{dC_{\mathrm{tot}}/dV}=k\left(\frac{C_m+C_v+C_p}{C_m+kC_v+C_p}\right)^2
+}
+$$
+
+To determine whether the effective tuning sensitivity increases or decreases, we examine the condition $R>1$:
+
+$$
+k(C_m+C_v+C_p)^2 > (C_m+kC_v+C_p)^2
+$$
+
+Since all capacitances and $k$ are positive, taking the square root gives
+
+$$
+\sqrt{k}(C_m+C_v+C_p) > C_m+kC_v+C_p
+$$
+
+Rearranging and solving for $k$, we obtain
+
+$$
+(\sqrt{k}-1) \left[ C_m+C_p-C_v\sqrt{k} \right]>0
+$$
+
+Therefore, the effective tuning sensitivity increases when
+
+$$
+\boxed{
+\min\left\{1,
+\left(\frac{C_m+C_p}{C_v}\right)^2
+\right\}
+<
+k
+<
+\max\left\{1,
+\left(\frac{C_m+C_p}{C_v}\right)^2
+\right\}
+}
+$$
+
+The effective tuning sensitivity remains unchanged at either boundary:
+
+$$
+k=1
+$$
+
+or
+
+$$
+k=\left(\frac{C_m+C_p}{C_v}\right)^2
+$$
+
+Outside this interval, the effective tuning sensitivity decreases.
 
 
 

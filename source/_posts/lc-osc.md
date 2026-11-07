@@ -1666,7 +1666,7 @@ To maintain a **symmetric connection** between the inductor and the capacitor ba
 $$
 \omega=\frac{1}{\sqrt{L_p C_p}} = \frac{1}{\sqrt{L_s\frac{Q_L^2+1}{Q_L^2} C_s\frac{Q_C^2}{Q_C^2+1}}} = \frac{1}{\sqrt{L_sC_s}}\cdot \sqrt{\frac{1+1/Q_c^2}{1+1/Q_L^2}}
 $$
-Assuming the tank's Q is limited by the inductor's quality factor $Q_L$, i.e. $Q_L\ll Q_c$
+Assuming the **tank's Q is limited by the inductor's quality factor** $Q_L$, i.e. $Q_L\ll Q_c$
 $$
 \omega\approx  \frac{1}{\sqrt{L_sC_s}}\cdot \sqrt{1-\frac{1}{Q_L^2}} =\omega_0\cdot\sqrt{1-\frac{1}{Q_L^2}} = \omega_0\cdot\sqrt{1-\frac{C R_L^2}{L}}
 $$
@@ -1726,8 +1726,6 @@ $$
 \boxed{ \frac{dC}{dT} \approx -\frac{2R_L^2C^2}{L}\,TCR } \tag{5}
 $$
 
-which is exactly the paper's equation.
-
 
 
 Also, the negative sign has a physical meaning: for a metal inductor,
@@ -1769,6 +1767,53 @@ continuous coding to eliminate glitch during code changing
 ![ChatGPT Image Aug 24, 2026, 08_56_43 PM](lc-osc/ChatGPT%20Image%20Aug%2024,%202026,%2008_56_43%20PM.png)
 
 ![image-20260824211559451](lc-osc/image-20260824211559451.png)
+
+
+
+
+
+---
+
+> R. Groves, D. L. Harame and D. Jadus, "Temperature dependence of Q and inductance in spiral inductors fabricated in a silicon-germanium/BiCMOS technology," in *IEEE Journal of Solid-State Circuits*, vol. 32, no. 9, pp. 1455-1459, Sept. 1997 [[https://sci-hub.ru/10.1109/4.628763](https://sci-hub.ru/10.1109/4.628763)]
+
+<span style="color:white; background-color:black">**Temperature dependence of Q and inductance in on-chip inductor**</span>
+
+Cu/Al on-chip spiral inductor, inductance usually changes little with temperature, while Q is more sensitive
+
+![image-20261107082402356](lc-osc/image-20261107082402356.png)
+
+![image-20261107083644522](lc-osc/image-20261107083644522.png)
+
+
+
+---
+
+> Kun-Ming Chen, Guo-Wei Huang, Sheng-Chun Wang, Wen-Kuan Yeh, Yean-Kuen Fang and Fu-Liang Yang, "Characterization and modeling of SOI varactors at various temperatures," in *IEEE Transactions on Electron Devices*, vol. 51, no. 3, pp. 427-433, March 2004 [[https://sci-hub.ru/10.1109/TED.2003.822585](https://sci-hub.ru/10.1109/TED.2003.822585)]
+
+<span style="color:white; background-color:black">**Temperature dependence of Q and capacitance in varactor**</span>
+
+![image-20261107084119288](lc-osc/image-20261107084119288.png)
+
+**High voltage sensitivity places the operating point near the <span style="color:blue">accumulation-depletion transition</span>, rather than on the deep-accumulation plateau**, where $C\approx C_{\mathrm{ox}}$ and the C-V slope is small. An accumulation-mode MOS varactor therefore need not operate in deep accumulation during VCO tuning.
+
+A temperature-dependent flat-band voltage shifts the C-V curve. Writing $C=F(u,T)$ with $u=V_{\mathrm{GB}}-V_{\mathrm{FB}}(T)$ gives, at fixed terminal bias,
+
+$$
+\left.\frac{\partial C}{\partial T}\right|_{V_{\mathrm{GB}}}
+=\left.\frac{\partial F}{\partial T}\right|_u
+-\frac{\partial C}{\partial V_{\mathrm{GB}}}
+\frac{dV_{\mathrm{FB}}}{dT}.
+$$
+
+Thus, **the steep C-V slope that provides high tuning gain also amplifies capacitance drift caused by a temperature-dependent voltage shift**, even when oxide capacitance itself changes little
+
+Higher temperature normally reduces carrier mobility, increasing the accumulation-layer and well/access resistance. Gate resistance can also contribute  — resistance-driven Q reduction
+
+
+
+> When used as selectable temperature-compensation capacitors, MOS varactors are biased on the **high-capacitance accumulation plateau** or the **low-capacitance plateau** of C-V curve. These bias points **minimize control-voltage sensitivity and reduce capacitance drift caused by temperature-induced C-V shifts**
+
+
 
 
 

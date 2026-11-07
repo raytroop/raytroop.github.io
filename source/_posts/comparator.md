@@ -198,7 +198,7 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 
 
 
-## Kickback
+## Kickback Noise
 
 > Paolo Bruschi , Design of Mixed Signal Circuits and Systems [[https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/19_Comparators_2_Dei.pdf](https://docenti.ing.unipi.it/~a008309/mat_stud/MIXED/2023/Slides_pdf/19_Comparators_2_Dei.pdf)]
 >
@@ -244,6 +244,24 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 > K. Bult and A. Buchwald, "An embedded 240-mW 10-b 50-MS/s CMOS ADC in 1-mm/sup 2/," in IEEE Journal of Solid-State Circuits, vol. 32, no. 12, pp. 1887-1895, Dec. 1997 [[https://sci-hub.st/10.1109/4.643647](https://sci-hub.st/10.1109/4.643647)]
 
 ![image-20260802160729730](comparator/image-20260802160729730.png)
+
+
+
+---
+
+<span style="color:white; background-color:black">**Effect of kickback noise**</span>
+
+![image-20261107170600728](comparator/image-20261107170600728.png)
+
+|                              |                                                  |
+| ---------------------------- | ------------------------------------------------ |
+| **root cause**               | switching action                                 |
+| **effect of kickback noise** | error voltage at the comparator input            |
+| **reduction method**         | precede the comparator with **unswitched stage** |
+
+
+
+
 
 
 

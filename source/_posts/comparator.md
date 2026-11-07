@@ -13,7 +13,23 @@ mathjax: true
 
 ## Noise Analysis
 
-![image-20250526201936387](comparator/image-20250526201936387.png)
+> B. Razavi, **"The Design of a Comparator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4, pp. 8-14, Fall 2020. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf)]
+>
+> —, **"The StrongARM Latch [A Circuit for All Seasons],"** IEEE Solid-State Circuits Magazine, Issue. 2, pp. 12-17, Spring 2015. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf)]
+>
+> P. Nuzzo, F. De Bernardinis, P. Terreni and G. Van der Plas, "Noise Analysis of Regenerative Comparators for Reconfigurable ADC Architectures," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 55, no. 6, pp. 1441-1454, July 2008 [[https://sci-hub.ru/10.1109/TCSI.2008.917991](https://sci-hub.ru/10.1109/TCSI.2008.917991)]
+
+<span style="background-color:yellow">**Noise in Amplification Mode**</span> — <span style="background-color:yellow">**noise integration**</span>
+
+![image-20261107214129064](comparator/image-20261107214129064.png)
+
+![image-20261107214850998](comparator/image-20261107214850998.png)
+
+The voltage gain vary with time
+$$
+|V_P - V_Q| \approx (g_{m1,2}|V_{in1}-V_{in2}|/C_{P,Q})\textcolor{red}{t} \qquad \Longrightarrow\qquad \boxed{\frac{|V_P - V_Q|}{|V_{in1}-V_{in2}|} = \frac{g_{m1,2}\textcolor{red}{t}}{C_{P,Q}}}
+$$
+
 
 ---
 
@@ -26,6 +42,12 @@ mathjax: true
 ***sampling (amplification) phase***
 
 ![image-20250526195656447](comparator/image-20250526195656447.png)
+
+
+
+---
+
+![image-20261107220322613](comparator/image-20261107220322613.png)
 
 
 
@@ -192,7 +214,7 @@ here, fundamental frequency = fclk; integrated noise (0 ~ 0.5fclk)
 
 ---
 
-***A simple comparator based on the 4-transistor hysteresis cell***
+***A simple comparator based on the <span style="background-color:yellow">4-transistor hysteresis cell</span>***
 
 ![image-20260806223447008](comparator/image-20260806223447008.png)
 
@@ -301,7 +323,7 @@ $$
 
 ## Metastability
 
-*TODO* &#128197;
+> Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.
 
 If the comparator can not generate a well-defined logical output in half of the clock period, we say the circuit is "**metastable**"
 
@@ -309,9 +331,18 @@ If the comparator can not generate a well-defined logical output in half of the 
 
 
 
-## Mathematical Preliminaries
+![image-20261107202557534](comparator/image-20261107202557534.png)
 
-### Relating $\Phi$ and erf
+<span style="color:blue">small enough input difference -> **indecisiveness** of comparator -> comparator output **indeterminate** -> subsequent logic fail</span>
+
+![image-20261107202825661](comparator/image-20261107202825661.png)
+
+
+
+
+
+
+## Relating $\Phi$ with erf
 
  **Error Function** (**Erf**) of the standard Normal distribution
 $$
@@ -347,13 +378,13 @@ $$
 
 Xu, H. (2018). Mixed-Signal Circuit Design Driven by Analysis: ADCs, Comparators, and PLLs. *UCLA*. ProQuest ID: Xu_ucla_0031D_17380. Merritt ID: ark:/13030/m5f52m8x. Retrieved from [[https://escholarship.org/uc/item/88h8b5t3](https://escholarship.org/uc/item/88h8b5t3)]
 
-A. Abidi and H. Xu, "Understanding the Regenerative Comparator Circuit," Proceedings of the IEEE 2014 Custom Integrated Circuits Conference, San Jose, CA, 2014, pp. 1-8. [[https://picture.iczhiku.com/resource/ieee/WHiYwoUjPHwZPXmv.pdf](https://picture.iczhiku.com/resource/ieee/WHiYwoUjPHwZPXmv.pdf)]
+A. Abidi and H. Xu, "Understanding the Regenerative Comparator Circuit," Proceedings of the IEEE 2014 Custom Integrated Circuits Conference, San Jose, CA, 2014, pp. 1-8. 
 
 T. Sepke, P. Holloway, C. G. Sodini and H. -S. Lee, "Noise Analysis for Comparator-Based Circuits," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 56, no. 3, pp. 541-553, March 2009 [[https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf](https://dspace.mit.edu/bitstream/handle/1721.1/61660/Speke-2009-Noise%20Analysis%20for%20Comparator-Based%20Circuits.pdf)]
 
 Sepke, Todd. "Comparator design and analysis for comparator-based switched-capacitor circuits." (2006). [[https://dspace.mit.edu/handle/1721.1/38925](https://dspace.mit.edu/handle/1721.1/38925)]
 
-P. Nuzzo, F. De Bernardinis, P. Terreni and G. Van der Plas, "Noise Analysis of Regenerative Comparators for Reconfigurable ADC Architectures," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 55, no. 6, pp. 1441-1454, July 2008 [[https://picture.iczhiku.com/resource/eetop/SYirpPPPaAQzsNXn.pdf](https://picture.iczhiku.com/resource/eetop/SYirpPPPaAQzsNXn.pdf)]
+P. Nuzzo, F. De Bernardinis, P. Terreni and G. Van der Plas, "Noise Analysis of Regenerative Comparators for Reconfigurable ADC Architectures," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 55, no. 6, pp. 1441-1454, July 2008 [[https://sci-hub.ru/10.1109/TCSI.2008.917991](https://sci-hub.ru/10.1109/TCSI.2008.917991)]
 
 ---
 
@@ -387,13 +418,9 @@ Masaya Miyahara, Yusuke Asada, Daehwa Paik and Akira Matsuzawa, "A low-noise sel
 
 Art Schaldenbrand, Senior Product Manager, Keeping Things Quiet: A New Methodology for Dynamic Comparator Noise Analysis URL:[https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf](https://www.cadence.com/content/dam/cadence-www/global/en_US/videos/tools/custom-_ic_analog_rf_design/NoiseAnalyisposting201612Chalk%20Talk.pdf)
 
----
 
-B. Razavi, **"The Design of a Comparator [The Analog Mind],"** IEEE Solid-State Circuits Magazine, Volume. 12, Issue. 4, pp. 8-14, Fall 2020. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_4_2020.pdf)]
 
-—, **"The StrongARM Latch [A Circuit for All Seasons],"** IEEE Solid-State Circuits Magazine, Issue. 2, pp. 12-17, Spring 2015. [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_Magzine4.pdf)]
-
-B. Murmann. ISSCC 2011 Tutorial: Noise Analysis in Switched Capacitor Circuits [[slides](https://picture.iczhiku.com/resource/eetop/ShiFTilZDiTktncN.pdf), [transcription](https://picture.iczhiku.com/resource/eetop/SykTRQoPgiEGRBvV.pdf)]
+B. Murmann. ISSCC 2011 Tutorial: Noise Analysis in Switched Capacitor Circuits
 
 —, "Thermal Noise in Track-and-Hold Circuits: Analysis and Simulation Techniques," IEEE Solid-State Circuits Magazine, vol. 4, no. 2, pp. 46-54, June 2012 [[https://sci-hub.se/10.1109/MSSC.2012.2192190](https://sci-hub.se/10.1109/MSSC.2012.2192190)]
 

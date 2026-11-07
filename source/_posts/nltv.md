@@ -40,9 +40,21 @@ $$
 
 ##  instantaneous & average PSD
 
+> Darabi H. Radio Frequency Integrated Circuits and Systems. 2nd ed. Cambridge University Press; 2020.
+
 For white noise $n(t)$
 
 ![image-20260725005940162](nltv/image-20260725005940162.png)
+
+
+
+## integrated white noise & Ito's integrals
+
+> Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.
+
+ time-domain behavior of the output
+
+![image-20261107210158409](nltv/image-20261107210158409.png)
 
 
 

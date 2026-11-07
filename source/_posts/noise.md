@@ -1065,7 +1065,7 @@ As expected, the input referred noise voltage is $kT/C$ noise
 
 ## Windowed Integrals of Noise
 
-> A. A. Abidi, "Phase Noise and Jitter in CMOS Ring Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1803-1816, Aug. 2006 [[pdf](https://picture.iczhiku.com/resource/eetop/sHktDSoLwzWwObCx.pdf)]
+> A. A. Abidi, "Phase Noise and Jitter in CMOS Ring Oscillators," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 8, pp. 1803-1816, Aug. 2006 [[https://sci-hub.ru/10.1109/JSSC.2006.876206](https://sci-hub.ru/10.1109/JSSC.2006.876206)]
 
 ![image-20260212231450725](noise/image-20260212231450725.png)
 
@@ -1094,7 +1094,7 @@ $$
 \int_{0}^{t_d}\frac{1}{C}\cdot e^{-\frac{t}{RC}} \cdot e^{-st}dt = \frac{1}{C}\cdot \frac{1}{s+\frac{1}{RC}}\left(1-e^{-(st_d+\theta)}\right)=\frac{1}{C}\cdot \color{red}\frac{t_d}{st_d+\theta}\left(1-e^{-(st_d+\theta)}\right)
 $$
 
-> Google AI Mode [[https://share.google/aimode/O6rjWM1YWel0NudI7](https://share.google/aimode/O6rjWM1YWel0NudI7)]
+
 
 ![image-20260213011010297](noise/image-20260213011010297.png)
 

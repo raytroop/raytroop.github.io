@@ -166,7 +166,33 @@ where $h(n)$ is the impulse response of a discrete-time LTI system
 
 
 
-The signals of the form $e^{st}$ in continuous time and $z^{n}$ in discrete time, where $s$ and $z$ are *complex numbers* are referred to as an **eigenfunction** of the system, and the *amplitude factor* $H(s)$, $H(z)$ is referred to as the system's **eigenvalue**
+The signals of the form $e^{st}$ in continuous time and $z^{n}$ in discrete time, where $s$ and $z$ are *complex numbers* are referred to as an <span style="color:blue">**eigenfunction**</span> of the system, and the *amplitude factor* $H(s)$, $H(z)$ is referred to as the system's <span style="color:blue">**eigenvalue**</span>
+
+![image-20261107143257471](tf-freqresp/image-20261107143257471.png)
+
+---
+
+> Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.
+
+$s=j\omega$ is a common restriction for **frequency-response analysis**, rather than the general definition of \(s\).
+$$
+e^{st}=e^{\sigma t}e^{j\omega t}
+$$
+
+- <span style="color:blue">**Frequency response:**</span> set $s=j\omega$ to study **constant-amplitude sinusoids**, giving $H(j\omega)$
+- <span style="color:blue">**Natural response and stability:**</span> allow general $s=\sigma+j\omega$, because $\sigma$ describes growth or decay.
+
+The feedback example concerns a **growing natural response**, so it uses general $s$
+
+![image-20261107143644211](tf-freqresp/image-20261107143644211.png)
+
+With real $A_0$ and $\omega_0>0$, $s_1$ is real, and:
+
+- $A_0>1$: $s_1>0$, so the natural response $Ce^{s_1t}$ grows
+- $A_0=1$: $s_1=0$, giving a constant natural response
+- $A_0<1$: $s_1<0$, so the natural response decays
+
+
 
 
 

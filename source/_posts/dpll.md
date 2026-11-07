@@ -1118,11 +1118,21 @@ $$
 *TODO* &#128197;
 
 
+
+
+
+
 ## Adaptive Loop Gain Control (ALGC)
 
-> Jang, S.-C. (2015). Design of All-Digital PLL Using Statistical Data of Bang-Bang Phase Detection (Doctoral dissertation, Seoul National University). [[https://s-space.snu.ac.kr/handle/10371/119111](https://s-space.snu.ac.kr/handle/10371/119111)]
+> S. Jang. (2015). Design of All-Digital PLL Using Statistical Data of Bang-Bang Phase Detection (Doctoral dissertation, Seoul National University). [[https://s-space.snu.ac.kr/handle/10371/119111](https://s-space.snu.ac.kr/handle/10371/119111)]
+>
+> —, "An all-digital bang-bang PLL using two-point modulation and background gain calibration for spread spectrum clock generation," *2015 Symposium on VLSI Circuits (VLSI Circuits)*, Kyoto, Japan, 2015, pp. C136-C137 [[https://sci-hub.ru/10.1109/VLSIC.2015.7231353](https://sci-hub.ru/10.1109/VLSIC.2015.7231353)]
 
 *TODO* &#128197;
+
+
+
+
 
 
 ## reference

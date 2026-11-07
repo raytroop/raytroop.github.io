@@ -625,6 +625,8 @@ $$
 ---
 
 > U. Singh *et al*., "8.6 A 280mW 112Gb/s PAM-4/NRZ Transceiver for Low-Power IOs in 5nm FinFET Technology," *2026 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2026, pp. 144-146, doi: 10.1109/ISSCC49663.2026.11409174
+>
+> K. Thasari *et al*., "A 280-mW, 112-Gb/s PAM-4/NRZ Transceiver for Low-Power IOs in 5-nm FinFET Technology," in *IEEE Journal of Solid-State Circuits*, doi: 10.1109/JSSC.2026.3743919
 
 ![image-20261026213214551](tx/image-20261026213214551.png)
 

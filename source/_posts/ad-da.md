@@ -1140,11 +1140,11 @@ John P. Keane, ISSCC2020 T5: "Fundamentals of Time-Interleaved ADCs"
 
 Yun Chiu, ISSCC2023 T3: "Fundamentals of Data Converters" [[https://personal.utdallas.edu/~yxc101000/courses/7327/handout/isscc2023_tutorial.pdf](https://personal.utdallas.edu/~yxc101000/courses/7327/handout/isscc2023_tutorial.pdf)]
 
-—， "Design and Calibration Techniques for SAR and Pipeline ADCs" [[http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf](http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf)]
+—, "Design and Calibration Techniques for SAR and Pipeline ADCs" [[http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf](http://formation-old.in2p3.fr/microelectronique15/IN2P3_ADC.pdf)]
 
-—， Radiation-Tolerant SAR ADC Architecture and Digital Calibration Techniques [[https://indico.cern.ch/event/385097/attachments/768706/1054353/CERN_May15.pdf](https://indico.cern.ch/event/385097/attachments/768706/1054353/CERN_May15.pdf)]
+—, Radiation-Tolerant SAR ADC Architecture and Digital Calibration Techniques [[https://indico.cern.ch/event/385097/attachments/768706/1054353/CERN_May15.pdf](https://indico.cern.ch/event/385097/attachments/768706/1054353/CERN_May15.pdf)]
 
-—， Recent Advances in Multistep Nyquist ADC's [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf)]
+—, Recent Advances in Multistep Nyquist ADC's [[https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf](https://www.eecis.udel.edu/~vsaxena/courses/ece614/Handouts/Recent%20Advances%20in%20Nyquist%20rate%20ADCs.pdf)]
 
 Aaron Buchwald, ISSCC 2008 T2 Pipelined A/D Converters: The Basics
 

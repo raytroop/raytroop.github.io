@@ -3,7 +3,7 @@ title: High-Speed ADC for SerDes
 date: 2025-09-05 11:04:47
 tags:
 categories:
-- link
+- adc-dac
 mathjax: true
 ---
 

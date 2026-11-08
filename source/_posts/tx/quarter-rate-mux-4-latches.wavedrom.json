@@ -1,0 +1,233 @@
+{
+  "_comment": [
+    "Timing of the selected Quarter-Rate 4:1 MUX Structures slide (ISSCC 2019 paper 6.7, slide 7). This is a circuit-derived illustrative timing example, not a reproduction of measured timing.",
+    "Each UI is one output symbol. 14-GHz clocks have period 4 UI; 7-GHz clocks have period 8 UI. 90 degrees at 14 GHz and 45 degrees at 7 GHz both equal 1 UI.",
+    "Explicit common phase convention (not specified by the slide): CK0,14G rises at t=0; CK0,7G rises at t=-1 UI. Other 14-GHz and 7-GHz phases are delayed by i UI. Divider complementary phases are implicit.",
+    "An illustrative 0.25-UI 8:4-MUX propagation delay places R0=a at -0.75 UI. Latch propagation delay is also 0.25 UI. These are visualization choices, not reported device delays. Setup/hold, skew and nonoverlap must be budgeted in implementation.",
+    "Each latch is modeled as level-sensitive: when transparent its output follows its input after the propagation delay, and when opaque it holds. A bubble means LOW-transparent; no bubble means HIGH-transparent.",
+    "The 1-UI pulse convention is CK1=C0&C90, CK2=C90&C180, CK3=C180&C270, CK4=C270&C0. For lane i=0..3 its window is [i+1+4k, i+2+4k) UI. Thus selection occupies the latter half of the corresponding high-transparent interval.",
+    "Both structures output a,b,c,d,e,f,g,h,i,j,k,l over t=1..13 UI. Q/L lane i becomes a+i at i+0.25 UI. All selected data was checked stable throughout each 1-UI pulse. Hatched regions omit preceding words.",
+    "Colors identify data lanes: R0 yellow, R1 orange, R2 blue, R3 green. Input-pair assignment to the 2:1 muxes is chosen to give the shown serial order.",
+    "WaveDrom 3.7.0, narrow skin. One wave character is 0.25 UI. Zero-width-space tick tokens leave minor ticks unlabeled.",
+    "The octal-phase divider supplies four 7-GHz clock phases plus their complements. R_i changes at i-0.75+4k UI, already staggered by 1 UI per lane; only one HIGH-transparent latch Li is required per lane.",
+    "Each input is already stable 0.75 UI before its latch opens; the latch output follows 0.25 UI after opening and holds during the low phase. No input transitions occur within that lane's selected 1-UI window.",
+    "The lane-0 mode band names the transparent latch (M0/Q0 or L0); hold means the single latch is opaque. Other lanes have the same mode shifted by i UI.",
+    "Dout is the ideal selected 4:1-mux value; final 4:1 mux propagation delay is omitted. The illustrative 0.25-UI delays apply only to the 8:4 mux and the latches."
+  ],
+  "signal": [
+    [
+      "7 GHz",
+      {
+        "name": "CK0,7G",
+        "wave": "0...1...............0...............1...............0.......",
+        "period": 0.5
+      },
+      {
+        "name": "CK45,7G",
+        "wave": "0.......1...............0...............1...............0...",
+        "period": 0.5
+      },
+      {
+        "name": "CK90,7G",
+        "wave": "0...........1...............0...............1...............",
+        "period": 0.5
+      },
+      {
+        "name": "CK135,7G",
+        "wave": "0...............1...............0...............1...........",
+        "period": 0.5
+      }
+    ],
+    {},
+    [
+      "14-GHz latch clocks",
+      {
+        "name": "CK0,14G",
+        "wave": "0.......1.......0.......1.......0.......1.......0.......1...",
+        "period": 0.5
+      },
+      {
+        "name": "CK90,14G",
+        "wave": "1...0.......1.......0.......1.......0.......1.......0.......",
+        "period": 0.5
+      },
+      {
+        "name": "CK180,14G",
+        "wave": "1.......0.......1.......0.......1.......0.......1.......0...",
+        "period": 0.5
+      },
+      {
+        "name": "CK270,14G",
+        "wave": "0...1.......0.......1.......0.......1.......0.......1.......",
+        "period": 0.5
+      },
+      {
+        "name": "Lane 0: open latch",
+        "wave": "2.......2.......2.......2.......2.......2.......2.......2...",
+        "period": 0.5,
+        "data": [
+          "hold",
+          "L0",
+          "hold",
+          "L0",
+          "hold",
+          "L0",
+          "hold",
+          "L0"
+        ]
+      }
+    ],
+    {},
+    [
+      "MUX data",
+      {
+        "name": "R0  (8:4 output)",
+        "wave": "x....3...............3...............3...............3......",
+        "period": 0.5,
+        "data": [
+          "a",
+          "e",
+          "i",
+          "m"
+        ]
+      },
+      {
+        "name": "R1  (8:4 output)",
+        "wave": "x........4...............4...............4...............4..",
+        "period": 0.5,
+        "data": [
+          "b",
+          "f",
+          "j",
+          "n"
+        ]
+      },
+      {
+        "name": "R2  (8:4 output)",
+        "wave": "x............5...............5...............5..............",
+        "period": 0.5,
+        "data": [
+          "c",
+          "g",
+          "k"
+        ]
+      },
+      {
+        "name": "R3  (8:4 output)",
+        "wave": "x................7...............7...............7..........",
+        "period": 0.5,
+        "data": [
+          "d",
+          "h",
+          "l"
+        ]
+      }
+    ],
+    {},
+    [
+      "4 latches: track HIGH",
+      {
+        "name": "L0",
+        "wave": "x........3...............3...............3...............3..",
+        "period": 0.5,
+        "data": [
+          "a",
+          "e",
+          "i",
+          "m"
+        ]
+      },
+      {
+        "name": "L1",
+        "wave": "x............4...............4...............4..............",
+        "period": 0.5,
+        "data": [
+          "b",
+          "f",
+          "j"
+        ]
+      },
+      {
+        "name": "L2",
+        "wave": "x................5...............5...............5..........",
+        "period": 0.5,
+        "data": [
+          "c",
+          "g",
+          "k"
+        ]
+      },
+      {
+        "name": "L3",
+        "wave": "x....................7...............7...............7......",
+        "period": 0.5,
+        "data": [
+          "d",
+          "h",
+          "l"
+        ]
+      }
+    ],
+    {},
+    [
+      "4:1 select",
+      {
+        "name": "CK1  (1 UI)",
+        "wave": "0...........1...0...........1...0...........1...0...........",
+        "period": 0.5
+      },
+      {
+        "name": "CK2  (1 UI)",
+        "wave": "1...0...........1...0...........1...0...........1...0.......",
+        "period": 0.5
+      },
+      {
+        "name": "CK3  (1 UI)",
+        "wave": "0...1...0...........1...0...........1...0...........1...0...",
+        "period": 0.5
+      },
+      {
+        "name": "CK4  (1 UI)",
+        "wave": "0.......1...0...........1...0...........1...0...........1...",
+        "period": 0.5
+      }
+    ],
+    {},
+    {
+      "name": "Dout",
+      "wave": "x...........3...4...5...7...3...4...5...7...3...4...5...7...",
+      "period": 0.5,
+      "data": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l"
+      ]
+    }
+  ],
+  "head": {
+    "text": [
+      "tspan",
+      {
+        "class": "h4"
+      },
+      "Quarter-rate 4:1 MUX: 4 latches + octal-phase divider"
+    ],
+    "tick": "-2 ​ -1 ​ 0 ​ 1 ​ 2 ​ 3 ​ 4 ​ 5 ​ 6 ​ 7 ​ 8 ​ 9 ​ 10 ​ 11 ​ 12 ​ 13 "
+  },
+  "foot": {
+    "text": "Time in UI. 8:4 mux / latch delay = 0.25 UI (illustrative); 4:1 output ideal."
+  },
+  "config": {
+    "hscale": 1,
+    "skin": "narrow"
+  }
+}

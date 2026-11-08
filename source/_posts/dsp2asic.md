@@ -555,3 +555,7 @@ Keshab K. Parhi [[http://www.ece.umn.edu/users/parhi/](http://www.ece.umn.edu/us
 謝秉璇. 2019 積體電路設計導論 [[link](https://nthuee.org/archive//%E7%A9%8D%E9%AB%94%E9%9B%BB%E8%B7%AF%E8%A8%AD%E8%A8%88%E5%B0%8E%E8%AB%96/2019%E8%AC%9D%E7%A7%89%E7%92%87/)]
 
 E-Hung Chen, MTK, ISSCC 2026 Forum *F2.3: State-of-the-Art 200+ Gb/s Electrical and Optical Interconnects*
+
+---
+
+G. Kim *et al*., "Parallel Implementation Technique of Digital Equalizer for Ultra-High-Speed Wireline Receiver," *2018 IEEE International Symposium on Circuits and Systems (ISCAS)*, Florence, Italy, 2018, pp. 1-5 [[https://sci-hub.ru/10.1109/ISCAS.2018.8350924](https://sci-hub.ru/10.1109/ISCAS.2018.8350924)]

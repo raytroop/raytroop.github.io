@@ -133,8 +133,6 @@ The sum is fixed at T/2, so **adding clk_d delay buys setup by spending hold, an
 
 
 
-
-
 a.k.a <span style="background-color:yellow">**Phase Aligner**</span>, <span style="background-color:yellow">**Tap Delay Generator**</span>
 
 ![image-20261001080205374](tx/image-20261001080205374.png)
@@ -171,7 +169,7 @@ The two hop types also have different margins, which ties back to the earlier fi
 - **90° hop:** the input changes in the middle of the next latch's hold phase, so setup and hold are both about 1 UI.
 - **180° hop:** this is the master–slave case. The input changes right after the next latch closes, so hold margin is only clock-to-Q, while setup gets 2 UI
 
-![image-20261004153931893](tx/image-20261004153931893.png)
+
 
 
 
@@ -197,13 +195,70 @@ Fig 9. works for D0–D2, but the D3 path races. So Fig. 9 is probably simplifie
 
 ## 1-UI Pulse Generator
 
->  J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
+> Noman Hai, Synopsys. CMOS Circuit Techniques for Wireline Transmitters [[https://www.synopsys.com/webinars/wireline-transmitters-part-1.html](https://www.synopsys.com/webinars/wireline-transmitters-part-1.html)]
 >
->  —, "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 57, no. 1, pp. 6-20, Jan. 2022 [[https://sci-hub.ru/10.1109/JSSC.2021.3108969](https://sci-hub.ru/10.1109/JSSC.2021.3108969)]
 
-**duty correction** & **delay adjustment** 
+**1-UI Pulsegen Architectures**:
 
-*TODO* &#128197;
+- Logic Gates Style
+- Transmission Gates Style
+- Triple, Double and Single Stack MUX
+- 2-Stages 1-UI Generation
+- Tail-less CML
+- Dynamic Logic Style
+- NOR-NAND
+
+
+
+<span style="color:white; background-color:black">**Logic Gates Style**</span>
+
+> F. Celik, A. Akkaya, A. Tajalli and Y. Leblebici, "A 32-Gb/s PAM-4 SST Transmitter With Four-Tap FFE Using High-Impedance Driver in 28-nm FDSOI," in *IEEE Transactions on Very Large Scale Integration (VLSI) Systems*, vol. 29, no. 6, pp. 1132-1140, June 2021, [[https://sci-hub.ru/10.1109/TVLSI.2021.3068242](https://sci-hub.ru/10.1109/TVLSI.2021.3068242)]
+>
+> P. -J. Peng, Y. -T. Chen, S. -T. Lai, C. -H. Chen, H. -E. Huang and T. Shih, "6.7 A 112Gb/s PAM-4 Voltage-Mode Transmitter with 4-Tap Two-Step FFE and Automatic Phase Alignment Techniques in 40nm CMOS," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 124-126, [[https://sci-hub.ru/10.1109/ISSCC.2019.8662361](https://sci-hub.ru/10.1109/ISSCC.2019.8662361)]
+>
+> —, "A 112-Gb/s PAM-4 Voltage-Mode Transmitter With Four-Tap Two-Step FFE and Automatic Phase Alignment Techniques in 40-nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 56, no. 7, pp. 2123-2131, July 2021 [[https://sci-hub.ru/10.1109/JSSC.2020.3038818](https://sci-hub.ru/10.1109/JSSC.2020.3038818)]
+
+![image-20261108211330206](tx/image-20261108211330206.png)
+
+![image-20261108211230731](tx/image-20261108211230731.png)
+
+![image-20261108221019436](tx/image-20261108221019436.png)
+
+![image-20261108221343619](tx/image-20261108221343619.png)
+
+<span style="color:white; background-color:black">**Transmission Gates Style**</span>
+
+> C. Menolfi *et al*., "6.2 A 112Gb/S 2.6pJ/b 8-Tap FFE PAM-4 SST TX in 14nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018, pp. 104-106 [[https://sci-hub.ru/10.1109/ISSCC.2018.8310205](https://sci-hub.ru/10.1109/ISSCC.2018.8310205)]
+>
+> T. O. Dickson *et al*., "C3.2 A 72GS/s, 8-bit DAC-based Wireline Transmitter in 4nm FinFET CMOS for 200+Gb/s Serial Links," *2022 IEEE Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Honolulu, HI, USA, 2022, pp. 28-29 [[https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421](https://sci-hub.ru/10.1109/VLSITechnologyandCir46769.2022.9830421)]
+>
+> —, "A 72-GS/s, 8-Bit DAC-Based Wireline Transmitter in 4-nm FinFET CMOS for 200+ Gb/s Serial Links," in *IEEE Journal of Solid-State Circuits*, vol. 58, no. 4, pp. 1074-1086, April 2023, doi: 10.1109/JSSC.2022.3228632
+
+![image-20261109002159240](tx/image-20261109002159240.png)
+
+
+
+![image-20261108225611269](tx/image-20261108225611269.png)
+
+**Dual passgate logic (DPL)** $\text{OR}$ and $\text{AND}$ gates derive one-UI clock pulses from the quadrature C4 clocks
+
+$\text{C4x}=1$ and $\text{C4X} + 90^\circ=0$ select the current transmission gate
+
+![image-20261004153931893](tx/image-20261004153931893.png)
+
+
+
+
+
+
+
+---
+
+> J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
+>
+> —, "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 57, no. 1, pp. 6-20, Jan. 2022 [[https://sci-hub.ru/10.1109/JSSC.2021.3108969](https://sci-hub.ru/10.1109/JSSC.2021.3108969)]
+
+**duty correction** & **delay adjustment**
 
 ![image-20260921231822433](tx/image-20260921231822433.png)
 
@@ -345,6 +400,34 @@ If the natural delay lands too close to an active edge, the designer can fix it 
 ![image-20261108092820041](tx/image-20261108092820041.png)
 
 ![image-20261108093731862](tx/image-20261108093731862.png)
+
+
+
+---
+
+> A. A. Hafez, M. -S. Chen and C. -K. K. Yang, "A 32-to-48Gb/s serializing transmitter using multiphase sampling in 65nm CMOS," *2013 IEEE International Solid-State Circuits Conference Digest of Technical Papers*, San Francisco, CA, USA, 2013, pp. 38-39 [[https://sci-hub.ru/10.1109/ISSCC.2013.6487627](https://sci-hub.ru/10.1109/ISSCC.2013.6487627)]
+>
+> P. -J. Peng, Y. -T. Chen, S. -T. Lai, C. -H. Chen, H. -E. Huang and T. Shih, "6.7 A 112Gb/s PAM-4 Voltage-Mode Transmitter with 4-Tap Two-Step FFE and Automatic Phase Alignment Techniques in 40nm CMOS," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 124-126, [[https://sci-hub.ru/10.1109/ISSCC.2019.8662361](https://sci-hub.ru/10.1109/ISSCC.2019.8662361)]
+
+![image-20261108214551856](tx/image-20261108214551856.png)
+
+The timing examples below use **1 UI = one output symbol**: the 14-GHz clocks have a 4-UI period, and the 7-GHz clocks have an 8-UI period. For illustration, `CK0,14G` rises at 0 UI and `CK0,7G` rises at −1 UI; the 8:4 mux and each latch have a 0.25-UI propagation delay. The 1-UI select pulses are the overlaps of adjacent 14-GHz clock phases, occupying the latter half of each high phase. `Dout` shows ideal 4:1 selection, omitting the final mux's propagation delay.
+
+**8 latches — simultaneous 8:4 outputs, followed by four master–slave pairs**
+
+![Quarter-rate 4-to-1 mux timing with eight latches](tx/quarter-rate-mux-8-latches.svg)
+
+`M0`–`M3` are transparent while their clocks are **low**; `Q0`–`Q3` are transparent while their clocks are **high**. The master latches prevent a new simultaneous input word from propagating through the later lanes while those lanes are selected.
+
+**4 latches — staggered 8:4 outputs from an octal-phase divider**
+
+![Quarter-rate 4-to-1 mux timing with four latches and an octal-phase divider](tx/quarter-rate-mux-4-latches.svg)
+
+The 7-GHz phases `0°, 45°, 90°, 135°` stagger `R0`–`R3` by **0, 1, 2, 3 UI**; their complementary phases complete the octal clock set. Each lane now needs only one high-transparent latch. Both examples produce the same `a, b, c, d, …` output, with the selected data stable throughout every 1-UI pulse.
+
+
+
+
 
 
 

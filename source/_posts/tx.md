@@ -654,7 +654,21 @@ $$
 
 > *Fig. 5 has inconsistent symbol labels with  Fig. 4(c)*
 
+
+
+![image-20261108110840310](tx/image-20261108110840310.png)
+
+<span style="color:blue">trade **latency** with **extra setup margin**</span>
+
+![Quarter-rate FFE timing with three 3-UI retiming steps](tx/ffe-quarter-rate.svg)
+
+The highlighted path is `D<1>` → `D<1>'` → `D<1>"` → `post<1>`, with <span style="color:blue">**3 UI** between successive sampling edges</span>
+
+
+
 <span style="color:white; background-color:black">**Basic serializer unit — Fig. 4(b)**</span>
+
+![image-20261108184523246](tx/image-20261108184523246.png)
 
 ![Basic serializer timing: divided clock, internal registers, mux, and output capture](tx/basic-serializer-timing.svg)
 
@@ -665,16 +679,6 @@ Delays are illustrative. The output flip-flop samples on **↑CK**, before the d
 $$
 t_\mathrm{div}+t_\mathrm{mux}+t_\mathrm{su}<T_\mathrm{CK}
 $$
-
-
-
-![image-20261108110840310](tx/image-20261108110840310.png)
-
-<span style="color:blue">trade **latency** with **extra setup margin**</span>
-
-![Quarter-rate FFE timing with three 3-UI retiming steps](tx/ffe-quarter-rate.svg)
-
-The highlighted path is `D<1>` → `D<1>'` → `D<1>"` → `post<1>`, with <span style="color:blue">**3 UI** between successive sampling edges</span>
 
 
 

@@ -195,7 +195,7 @@ Fig 9. works for D0–D2, but the D3 path races. So Fig. 9 is probably simplifie
 
 
 
-## 1-UI Clock Pulse Generator
+## 1-UI Pulse Generator
 
 >  J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
 >
@@ -336,6 +336,16 @@ If the natural delay lands too close to an active edge, the designer can fix it 
 
 
 
+---
+
+
+
+![image-20261108092947736](tx/image-20261108092947736.png)
+
+![image-20261108092820041](tx/image-20261108092820041.png)
+
+![image-20261108093731862](tx/image-20261108093731862.png)
+
 
 
 
@@ -467,12 +477,9 @@ $$
 
 > $D_{n-1}D_nD_{n+1}=-1,-1,1$
 
-$$\begin{align}
-R_1 &= R_L \\
-&= \frac{R_u}{L} \\
-R_2 &= R_N\parallel R_M \\
-&= \frac{R_u}{N+M}
-\end{align}$$
+$$
+R_1 = R_L = \frac{R_u}{L} \qquad R_2 = R_N\parallel R_M = \frac{R_u}{N+M}
+$$
 
 We obtain
 $$
@@ -482,11 +489,9 @@ $$
 <span style="color:white; background-color:black">Obtain FIR coefficients</span>
 
 We define
-$$\begin{align}
-l &= \frac{L}{L+M+N} \\
-m &= \frac{M}{L+M+N} \\
-n &= \frac{N}{L+M+N}
-\end{align}$$
+$$
+l = \frac{L}{L+M+N} \qquad m = \frac{M}{L+M+N} \qquad n = \frac{N}{L+M+N}
+$$
 
 where $l+m+n=1$
 
@@ -507,11 +512,9 @@ C_{-1}-C_0-C_1 & = -l-m+n \\
 \end{array} \right.
 $$
 Then, **the relationship between FIR coefficients and legs is clear**, i.e.
-$$\begin{align}
-C_{-1} &= -\frac{L}{L+M+N} \\
-C_{0} &= \frac{M}{L+M+N} \\
-C_{1} &= -\frac{N}{L+M+N}
-\end{align}$$
+$$
+C_{-1} = -\frac{L}{L+M+N} \qquad C_{0} = \frac{M}{L+M+N} \qquad C_{1} = -\frac{N}{L+M+N}
+$$
 
 For example, $C_{-1}=-0.1$, $C_0=0.7$ and $C_1=-0.2$
 $$
@@ -535,10 +538,9 @@ grid on;
 
 ![pre_se.drawio](tx/pre_se.drawio.svg)
 
-$$\begin{align}
-V_{\text{rxp}} &= \frac{1}{2} \cdot \frac{N}{L+M+N} \\
-V_{\text{rxm}} &= \frac{1}{2} \cdot \frac{L+M}{L+M+N}
-\end{align}$$
+$$
+V_{\text{rxp}} = \frac{1}{2} \cdot \frac{N}{L+M+N} \qquad V_{\text{rxm}} = \frac{1}{2} \cdot \frac{L+M}{L+M+N}
+$$
 So
 $$
 V_{L}= \frac{1}{2}\cdot\frac{N-(L+M)}{L+M+N}
@@ -549,10 +551,10 @@ which is same with differential ended termination
 
 ![main_se.drawio](tx/main_se.drawio.svg)
 
-$$\begin{align}
-V_{\text{rxp}} &= \frac{1}{2} \\
-V_{\text{rxm}} &= 0
-\end{align}$$
+$$
+V_{\text{rxp}} = \frac{1}{2} \qquad V_{\text{rxm}} = 0
+$$
+
 So
 $$
 V_{M}= \frac{1}{2}
@@ -642,13 +644,65 @@ $$
 
 
 
+## FFE w/ Quarter-rate Clocks in Analog-TX
+
+> J. Kim *et al*., "6.1 A 112Gb/s PAM-4 transmitter with 3-Tap FFE in 10nm CMOS," *2018 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2018, pp. 102-104, [[https://sci-hub.ru/10.1109/ISSCC.2018.8310204](https://sci-hub.ru/10.1109/ISSCC.2018.8310204)]
+>
+> — "A 112 Gb/s PAM-4 56 Gb/s NRZ Reconfigurable Transmitter With Three-Tap FFE in 10-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 54, no. 1, pp. 29-42, Jan. 2019 [[https://sci-hub.ru/10.1109/JSSC.2018.2874040](https://sci-hub.ru/10.1109/JSSC.2018.2874040)]
+
+![image-20261108104105794](tx/image-20261108104105794.png)
+
+> *Fig. 5 has inconsistent symbol labels with  Fig. 4(c)*
+
+<span style="color:white; background-color:black">**Basic serializer unit — Fig. 4(b)**</span>
+
+![Basic serializer timing: divided clock, internal registers, mux, and output capture](tx/basic-serializer-timing.svg)
+
+`Q0` is the upper flip-flop output; `Q1a` and `Q1b` are the first and second lower flip-flop outputs. `Q0` and `Q1a` capture on **↑CKdiv**, while `Q1b` captures on **↓CKdiv**. The mux selects **Q0 when CKdiv = 0** and **Q1b when CKdiv = 1**.
+
+Delays are illustrative. The output flip-flop samples on **↑CK**, before the delayed divider transition changes the mux selection. The available setup interval is therefore $T_\mathrm{CK}-t_\mathrm{div}-t_\mathrm{mux}$:
+
+$$
+t_\mathrm{div}+t_\mathrm{mux}+t_\mathrm{su}<T_\mathrm{CK}
+$$
+
+
+
+![image-20261108110840310](tx/image-20261108110840310.png)
+
+<span style="color:blue">trade **latency** with **extra setup margin**</span>
+
+![Quarter-rate FFE timing with three 3-UI retiming steps](tx/ffe-quarter-rate.svg)
+
+The highlighted path is `D<1>` → `D<1>'` → `D<1>"` → `post<1>`, with <span style="color:blue">**3 UI** between successive sampling edges</span>
+
+
+
+<span style="color:white; background-color:black"> **3-UI timing path at interface**</span>
+
+![image-20261108180223263](tx/image-20261108180223263.png)
+
+
+
+
+
+
+
+
+
 ## Pulse Generator RJ Filtering
 
-> J. Kim et al., “A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
+> J. Kim et al., “8.1 A 224Gb/s DAC-Based PAM-4 Transmitter with 8-Tap FFE in 10nm CMOS,” ISSCC 2021 [[https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840](https://sci-hub.jp/10.1109/ISSCC42613.2021.9365840)]
 >
 > —, "A 224-Gb/s DAC-Based PAM-4 Quarter-Rate Transmitter With 8-Tap FFE in 10-nm FinFET," in *IEEE Journal of Solid-State Circuits*, vol. 57, no. 1, pp. 6-20, Jan. 2022 [[https://sci-hub.ru/10.1109/JSSC.2021.3108969](https://sci-hub.ru/10.1109/JSSC.2021.3108969)]
 
 *TODO* &#128197;
+
+
+
+
+
+
 
 
 
@@ -662,7 +716,7 @@ $$
 
 
 
-## Peak power constraint of TX FIR
+## Peak Power Constraint of TX FIR
 
 > Kevin Zheng , Circuit Insights @ ISSCC2025: Circuits for Wireline Communications [[https://youtu.be/8NZl81Dj45M&t=829](https://youtu.be/8NZl81Dj45M&t=829)]
 
@@ -674,6 +728,14 @@ Due to circuit limitation, circuit cannot have arbitrarily large voltage on the 
 - FIR is reducing the inner eye diagram
 
 The maximum swing stays the same, $\sum_i |c_i|=1$
+
+
+
+---
+
+
+
+
 
 
 
@@ -697,7 +759,8 @@ $$
 $$
 
 
-## Basic FeedForward Equalization Theory
+
+## FeedForward Equalization Theory
 
 ![image-20220709111229772](tx/image-20220709111229772.png)
 

@@ -1,0 +1,247 @@
+{
+  "_comment": [
+    "Redrawn from the Synopsys FFE with Quarter-rate Clocks in Analog-TX slide; checked against J. Kim et al., JSSC 54(1), 29-42, Jan. 2019, Figs. 4(c) and 5, DOI:10.1109/JSSC.2018.2874040.",
+    "One WaveDrom cell is 1 UI; clocks have period 4 UI. The a/b/c/d input word launches just after the ck4_0 edge at t=0 (cell 1). All flip-flops capture pre-edge values, including when input launch and capture share the same phase. Clock-to-Q and routing delays are omitted.",
+    "Colors follow input lanes: D0 yellow, D1 orange, D2 blue, D3 green. Hatched regions omit earlier pipeline data, rather than implying a reset state.",
+    "The earliest samples of the tracked a/b/c/d word are shown, including main3=a at 7 UI, pre2=a at 6 UI, and pre3=b at 7 UI. The lecture shades over these samples and starts those rows with e at 11 UI, e at 10 UI, and f at 11 UI respectively.",
+    "A->B->C->D follows b through D1 at 0 UI, D1-prime at 3 UI, D1-double-prime at 6 UI, and post1 at 9 UI. Each stage has 3 UI edge-to-edge; same-phase paths elsewhere have 4 UI.",
+    "Rendered with the locally installed WaveDrom Editor 3.7.0. Load this JSON in that editor to edit or export.",
+    "Independently verified against a connected FF netlist transcribed from Fig. 4(c), with simultaneous nonblocking updates: all 199 displayed symbol/time cells agree.",
+    "Fig. 5 contains a numeric-label inconsistency: Data_4UI<1>-prime and -double-prime show 4/8/12, but this lane-1 path must preserve 2/6/10 (b/f/j). Its aggregate input vector is also one 4-UI word ahead of the output labels if interpreted as the direct Fig. 4(c) input. This redraw uses the circuit and the explicitly defined t=0 launch instead of reproducing those inconsistencies."
+  ],
+  "signal": [
+    [
+      "Clocks",
+      {
+        "name": "ck4_0",
+        "wave": "01.0.1.0.1.0.1.0.1"
+      },
+      {
+        "name": "ck4_90",
+        "wave": "0.1.0.1.0.1.0.1.0."
+      },
+      {
+        "name": "ck4_180",
+        "wave": "10.1.0.1.0.1.0.1.0"
+      },
+      {
+        "name": "ck4_270",
+        "wave": "1.0.1.0.1.0.1.0.1."
+      }
+    ],
+    {},
+    [
+      "Inputs",
+      {
+        "name": "D<0>",
+        "wave": "33...3...3...3...3",
+        "data": [
+          "w",
+          "a",
+          "e",
+          "i",
+          "m",
+          "q"
+        ]
+      },
+      {
+        "name": "D<1>",
+        "wave": "44...4...4...4...4",
+        "data": [
+          "x",
+          "b",
+          "f",
+          "j",
+          "n",
+          "r"
+        ],
+        "node": ".A................"
+      },
+      {
+        "name": "D<2>",
+        "wave": "55...5...5...5...5",
+        "data": [
+          "y",
+          "c",
+          "g",
+          "k",
+          "o",
+          "s"
+        ]
+      },
+      {
+        "name": "D<3>",
+        "wave": "77...7...7...7...7",
+        "data": [
+          "z",
+          "d",
+          "h",
+          "l",
+          "p",
+          "t"
+        ]
+      }
+    ],
+    {},
+    [
+      "Main",
+      {
+        "name": "main<0>",
+        "wave": "x........4...4...4",
+        "data": [
+          "b",
+          "f",
+          "j"
+        ]
+      },
+      {
+        "name": "main<1>",
+        "wave": "x.........5...5...",
+        "data": [
+          "c",
+          "g"
+        ]
+      },
+      {
+        "name": "main<2>",
+        "wave": "x..........7...7..",
+        "data": [
+          "d",
+          "h"
+        ]
+      },
+      {
+        "name": "main<3>",
+        "wave": "x.......3...3...3.",
+        "data": [
+          "a",
+          "e",
+          "i"
+        ]
+      }
+    ],
+    {},
+    [
+      "Post",
+      {
+        "name": "post<0>",
+        "wave": "x........3...3...3",
+        "data": [
+          "a",
+          "e",
+          "i"
+        ]
+      },
+      {
+        "name": "post<1>",
+        "wave": "x.........4...4...",
+        "data": [
+          "b",
+          "f"
+        ],
+        "node": "..........D......."
+      },
+      {
+        "name": "post<2>",
+        "wave": "x..........5...5..",
+        "data": [
+          "c",
+          "g"
+        ]
+      },
+      {
+        "name": "post<3>",
+        "wave": "x...........7...7.",
+        "data": [
+          "d",
+          "h"
+        ]
+      }
+    ],
+    {},
+    [
+      "Pre",
+      {
+        "name": "pre<0>",
+        "wave": "x........5...5...5",
+        "data": [
+          "c",
+          "g",
+          "k"
+        ]
+      },
+      {
+        "name": "pre<1>",
+        "wave": "x.........7...7...",
+        "data": [
+          "d",
+          "h"
+        ]
+      },
+      {
+        "name": "pre<2>",
+        "wave": "x......3...3...3..",
+        "data": [
+          "a",
+          "e",
+          "i"
+        ]
+      },
+      {
+        "name": "pre<3>",
+        "wave": "x.......4...4...4.",
+        "data": [
+          "b",
+          "f",
+          "j"
+        ]
+      }
+    ],
+    {},
+    [
+      "Retiming",
+      {
+        "name": "D<1>' (270°)",
+        "wave": "x...4...4...4...4.",
+        "data": [
+          "b",
+          "f",
+          "j",
+          "n"
+        ],
+        "node": "....B............."
+      },
+      {
+        "name": "D<1>\" (180°)",
+        "wave": "x......4...4...4..",
+        "data": [
+          "b",
+          "f",
+          "j"
+        ],
+        "node": ".......C.........."
+      }
+    ]
+  ],
+  "edge": [
+    "A~>B 3 UI",
+    "B~>C 3 UI",
+    "C~>D 3 UI"
+  ],
+  "head": {
+    "text": [
+      "tspan",
+      {
+        "class": "h4"
+      },
+      "FFE with quarter-rate clocks in analog TX"
+    ],
+    "tick": -1
+  },
+  "foot": {
+    "text": "Time in UI; a/b/c/d launch at t = 0. Hatched: earlier data omitted."
+  },
+  "config": {
+    "hscale": 1
+  }
+}

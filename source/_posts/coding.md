@@ -1074,6 +1074,18 @@ graph TD;A-->B;A-->C;B-->D;C-->D;
 
 
 
+
+
+## WaveDrom
+
+WaveDrom is a JavaScript application. WaveJSON is a format that describes Digital Timing Diagrams. WaveDrom renders the diagrams directly inside the browser.
+
+
+
+
+
+
+
 ## C++
 
 ***Using g++ only***

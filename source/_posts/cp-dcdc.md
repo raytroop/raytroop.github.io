@@ -131,7 +131,7 @@ Zhang, Milin, Zhihua Wang, Jan van der Spiegel and Franco Maloberti. "Advanced T
 
 Anton Bakker, Tim Piessens., ISSCC2014 T9: Charge Pump and Capacitive DC-DC Converter Design
 
-Wicht, B., ISSCC2020 T2: Analog Building Blocks of DC-DC Converters
+Bernhard Wicht, ISSCC2020 T2: Analog Building Blocks of DC-DC Converters
 
 Hoi Lee, ISSCC2018 T8: Fundamentals of Switched-Mode Power Converter Design
 

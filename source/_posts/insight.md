@@ -577,9 +577,15 @@ R_2'  &= S_{R_2}^T  T | _{R_1=8000, R_2=2000} = 1280
 
 
 
-## Level Shifter
+## Level Shifters
 
-![image-20241003224949171](insight/image-20241003224949171.png)
+> Bernhard Wicht, ISSCC2020 T2: Analog Building Blocks of DC-DC Converters
+
+![image-20261109175551364](insight/image-20261109175551364.png)
+
+![lvl](insight/lvl.svg)
+
+
 
 
 ## TIA

@@ -10,9 +10,9 @@ hidden: true
 
 ## 爱
 
-> ***热爱生活，拥抱不确定性***
+> <span style="color:red">***热爱生活，拥抱不确定性***</span>
 >
-> ***loving life & embracing uncertainty***
+> <span style="color:red">***loving life & embracing uncertainty***</span>
 
 
 

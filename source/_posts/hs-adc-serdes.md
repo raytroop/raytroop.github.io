@@ -295,6 +295,19 @@ The qualification is that this compares their **instantaneous currents during re
 
 
 
+
+$$
+V_iC_i + \Delta V_{b1}C_{PAR} = V_{bo}C_i \qquad \Longrightarrow \qquad V_{bo} = V_i + \color{blue}\Delta V_{b1}\frac{C_{PAR}}{C_i}
+$$
+
+i.e.
+
+$$
+\varepsilon_\text{symbol8} = \Delta V_{b1}\frac{C_{PAR}}{C_i}
+$$
+
+
+
 ### PVT-insensitive biasing
 
 > K. Kwon *et al*., "C12-4 A 212.5Gb/s Pam-4 Receiver With Mutual Inductive Coupled Gm-Tia in 4nm Finfet," *2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Kyoto, Japan, 2025, pp. 1-3, doi: 10.23919/VLSITechnologyandCir65189.2025.11074881.

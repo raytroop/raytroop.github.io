@@ -251,6 +251,15 @@ pure phase manipulation (linear phase  or nonlinear phase) preserves the total a
 
 
 
+## RX/TX Rterm
+
+AC simulation @ 100MHz
+
+DC for termination calibration
+
+
+
+
 ## reference
 
 Bogatin, Eric. 2020. *Bogatin’s Practical Guide to Transmission Line Design and Characterization for Signal Integrity Applications / .Eric Bogatin.* Artech House.

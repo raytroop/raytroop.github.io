@@ -97,13 +97,13 @@ $$
 
 ---
 
+> Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
+
 ![image-20260810112135977](fpsp/image-20260810112135977.png)
 
 The useful **fixed-point multiplication** rule is
 $$
-Q_{F_1} \times Q_{F_2}
-\;\Rightarrow\;
-F_{\text{product}} = F_1 + F_2
+Q_{F_1} \times Q_{F_2} \qquad \Longrightarrow\qquad F_{\text{product}} = F_1 + F_2
 $$
 where $F_1$ and $F_2$ are the numbers of fractional bits of the two operands
 
@@ -127,6 +127,55 @@ Now temporarily ignore the binary point and multiply the integer bit patterns:
     -------
    0011100        (= 28)
 ```
+
+
+
+<span style="background-color:yellow">Multiplying or dividing by an **integer** changes the stored value; the **binary point stays in the same position**</span>
+
+```verilog
+module Ar_B (
+    input  [12:0] A,  // ratio
+    input  [11:0] B,  // offset
+    input  [11:0] r,  // raw output
+    output [12:0] So  // post-processed output
+);
+
+// So(r) = g(r) = A*(r/2^12) - B
+//
+// r: 12-bit unsigned integer.
+//
+// A: 13 bits.
+//    bit[12:4] integer.
+//    bit[3:0]  fractional.
+//
+// B: 12 bits.
+//    bit[11:4] integer.
+//    bit[3:0]  fractional.
+//
+// So: 13 bits.
+//     bit[12]   sign bit.
+//     bit[11:4] integer.
+//     bit[3:0]  fractional.
+
+wire [25:0] So_tmp;
+wire [25:0] A_tmp;
+wire [25:0] B_tmp;
+wire [25:0] So_int;
+wire        sign_tag;
+
+assign B_tmp    = (B[11:0] << 12);
+assign A_tmp    = A[12:0] * r[11:0];
+assign So_tmp   = (A_tmp > B_tmp) ? (A_tmp - B_tmp)
+                                      : (B_tmp - A_tmp);
+assign sign_tag = (B_tmp > A_tmp);
+assign So_int   = (So_tmp >> 12);
+
+assign So[12:0] = {sign_tag, So_int[11:0]};
+
+endmodule
+```
+
+
 
 
 

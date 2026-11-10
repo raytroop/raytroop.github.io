@@ -287,14 +287,15 @@ The qualification is that this compares their **instantaneous currents during re
 
 > K. Sun, G. Wang, Q. Zhang, S. Elahmadi and P. Gui, "A 56-GS/s 8-bit Time-Interleaved ADC With ENOB and BW Enhancement Techniques in 28-nm CMOS," in IEEE Journal of Solid-State Circuits, vol. 54, no. 3, pp. 821-833, March 2019 [[https://sci-hub.ru/10.1109/JSSC.2018.2884352](https://sci-hub.ru/10.1109/JSSC.2018.2884352)]
 >
-> Y. Shifman, Y. Krupnik, U. Virobnik, A. Khairi, Y. Sanhedrai and A. Cohen, "A 1.64mW Differential Super Source-Follower Buffer with 9.7GHz BW and 43dB PSRR for Time-Interleaved ADC Applications in 10nm," *2019 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Macau, Macao, 2019  [[https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969](https://sci-hub.se/10.1109/A-SSCC47793.2019.9056969)]
+> Y. Shifman, Y. Krupnik, U. Virobnik, A. Khairi, Y. Sanhedrai and A. Cohen, "A 1.64mW Differential Super Source-Follower Buffer with 9.7GHz BW and 43dB PSRR for Time-Interleaved ADC Applications in 10nm," *2019 IEEE Asian Solid-State Circuits Conference (A-SSCC)*, Macau, Macao, 2019 [[https://sci-hub.ru/10.1109/A-SSCC47793.2019.9056969](https://sci-hub.ru/10.1109/A-SSCC47793.2019.9056969)]
 >
 > Y. Krupnik *et al*., "112-Gb/s PAM4 ADC-Based SERDES Receiver With Resonant AFE for Long-Reach Channels," in *IEEE Journal of Solid-State Circuits*, vol. 55, no. 4, pp. 1077-1085, April 2020 [[https://sci-hub.ru/10.1109/JSSC.2019.2959511](https://sci-hub.ru/10.1109/JSSC.2019.2959511)]
 >
-> G. Li *et al*., "18.1 A 600Gb/s DP-QAM64 Coherent Optical Transceiver Frontend with 4x105GS/s 8b ADC/DAC in 16nm CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 338-340 
+> G. Li *et al*., "18.1 A 600Gb/s DP-QAM64 Coherent Optical Transceiver Frontend with 4x105GS/s 8b ADC/DAC in 16nm CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 338-340 [[https://sci-net.xyz/10.1109/ISSCC49657.2024.10454499](https://sci-net.xyz/10.1109/ISSCC49657.2024.10454499)]
 
+![image-20261110231036441](hs-adc-serdes/image-20261110231036441.png)
 
-
+By charge conservation at the input of this buffer
 
 $$
 V_iC_i + \Delta V_{b1}C_{PAR} = V_{bo}C_i \qquad \Longrightarrow \qquad V_{bo} = V_i + \color{blue}\Delta V_{b1}\frac{C_{PAR}}{C_i}

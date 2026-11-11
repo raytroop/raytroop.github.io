@@ -1866,8 +1866,12 @@ The digital AAC regulates the amplitude without increasing the amplitude modulat
 
 ![image-20260703234240260](lc-osc/image-20260703234240260.png)
 
+---
 
-
+![peakdet](lc-osc/peakdet.svg)
+$$
+V_{CM} + V_{GS0} = V_{CM} + V_{GS0} - V_\text{amp} + IR \qquad \Longrightarrow \qquad V_\text{amp} = IR
+$$
 
 
 ## PN Reduction Techniques

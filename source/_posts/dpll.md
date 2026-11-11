@@ -146,6 +146,10 @@ PFD is used for frequency-detection capability
 
 
 
+![bbpd_pfd_dff_timing.drawio](dpll/bbpd_pfd_dff_timing.drawio.svg)
+
+
+
 ## DCO Quantization Noise
 
 *TODO* &#128197;
@@ -1114,6 +1118,14 @@ $$
 > L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
 >
 > M. Zanuso, D. Tasca, S. Levantino, A. Donadel, C. Samori and A. L. Lacaita, "Noise Analysis and Minimization in Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 56, no. 11, pp. 835-839, Nov. 2009 [[https://sci-hub.st/10.1109/TCSII.2009.2032470](https://sci-hub.st/10.1109/TCSII.2009.2032470)]
+
+![image-20261111220833874](dpll/image-20261111220833874.png)
+
+i.e. reference clock with **white** phase noise, DCO with a $\mathbf{1/f^2}$ phase noise — reference clock jitter modeled as independent absolute jitter, DCO jitter modeled as period jitter
+
+
+
+
 
 *TODO* &#128197;
 

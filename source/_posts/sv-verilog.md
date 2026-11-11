@@ -9,6 +9,40 @@ mathjax: true
 
 
 
+## standard normal distribution using Box–Muller transform
+
+**one pseudorandom sample from a standard normal distribution** $\mathcal N(0,1)$, which has mean 0 and standard deviation 1
+
+**Box–Muller transform**: For independent uniform inputs $u_1$ and $u_2$, the expression below produces a standard normal sample.
+$$
+z=\sqrt{-2\ln u_1}\,\cos(2\pi u_2)
+$$
+
+```systemverilog
+// Declare these inside your testbench module.
+int seed = 12345;
+localparam real PI = 3.14159265358979323846;
+
+// Generate one standard normal sample using the Box–Muller transform.
+function automatic real std_normal();
+    int r1, r2;
+    real u1, u2;
+
+    r1 = $random(seed);
+    r2 = $random(seed);
+
+    // Map signed 32-bit integers to the open interval (0, 1).
+    u1 = (r1 + 2147483648.0 + 0.5) / 4294967296.0;
+    u2 = (r2 + 2147483648.0 + 0.5) / 4294967296.0;
+
+    return $sqrt(-2.0 * $ln(u1)) * $cos(2.0 * PI * u2);
+endfunction
+```
+
+<span style="background-color:yellow">**non-synthesizable**</span>
+
+
+
 ## Icarus Verilog (iverilog)
 
 1. compile a SystemVerilog design and testbench file

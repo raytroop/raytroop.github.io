@@ -176,6 +176,10 @@ where $\sigma_{\mathbf{p}}^2 = \frac{\mathcal{L}_0 f_{3dB}^2}{f_0^3}$
 ![image-20250902232230515](jitter/image-20250902232230515.png)
 
 > ![image-20250902231843251](jitter/image-20250902231843251.png)
+> $$
+> \sigma_\mathbf{p} = \sqrt{\frac{\mathcal{L_1}f_1^2}{f_0^3}}=\sqrt{\frac{10^{-13}\cdot 10^{6\cdot 2}}{10^{9\cdot 3}}}=10^{-14}=10\text{fs}
+> $$
+> 
 
 ---
 

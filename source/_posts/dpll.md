@@ -718,21 +718,21 @@ $$
 \epsilon[k] \rightarrow \underbrace{\beta\epsilon[k]+\psi[k]}_{u[k]} \rightarrow \underbrace{K_T u[k]}_{\text{DCO period change}} \rightarrow T_v.
 $$
 
-A useful distinction is that $K_T$ is **not the usual DCO frequency gain $K_{\mathrm{DCO}}$ in Hz/code**. This paper models the DCO in the **period domain**, so its gain is *period/code*. Around the nominal operating point, $f=\frac{1}{T}$
+A useful distinction is that $\color{blue}K_T$ is **not the usual DCO frequency gain $K_{\mathrm{DCO}}$ in Hz/code**. This paper models the DCO in the **period domain**, so its gain is <span style="color:blue">**period/code**</span>
 
-hence for a small period change,
+For a small period change
 
 $$
 \Delta f \approx -\frac{\Delta T}{T_0^2}.
 $$
 
-Therefore the corresponding frequency gain would be approximately
+Therefore, the corresponding frequency gain would be approximately
 
 $$
-\boxed{ K_{\mathrm{DCO}} \approx -\frac{K_T}{T_0^2} = -K_T f_v^2 }
+\color{blue}\boxed{ K_{\mathrm{DCO}} \approx -\frac{K_T}{T_0^2} = -K_T f_v^2 }
 $$
 
-in *Hz/code*. The minus sign means increasing the period lowers the frequency.
+in <span style="color:blue">**Hz/code**</span>. The minus sign means increasing the period lowers the frequency.
 
 
 ![bbdpll-mdl.drawio](dpll/bbdpll-mdl.drawio.svg)
@@ -1115,9 +1115,9 @@ $$
 
 ## DLF proportional coefficient $\beta_{opt}$
 
-> L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
->
 > M. Zanuso, D. Tasca, S. Levantino, A. Donadel, C. Samori and A. L. Lacaita, "Noise Analysis and Minimization in Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 56, no. 11, pp. 835-839, Nov. 2009 [[https://sci-hub.st/10.1109/TCSII.2009.2032470](https://sci-hub.st/10.1109/TCSII.2009.2032470)]
+>
+> L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
 
 ![image-20261111220833874](dpll/image-20261111220833874.png)
 
@@ -1140,7 +1140,7 @@ i.e. reference clock with **white** phase noise, DCO with a $\mathbf{1/f^2}$ pha
 >
 > —, "An all-digital bang-bang PLL using two-point modulation and background gain calibration for spread spectrum clock generation," *2015 Symposium on VLSI Circuits (VLSI Circuits)*, Kyoto, Japan, 2015, pp. C136-C137 [[https://sci-hub.ru/10.1109/VLSIC.2015.7231353](https://sci-hub.ru/10.1109/VLSIC.2015.7231353)]
 >
-> —, "An Optimum Loop Gain Tracking All-Digital PLL Using Autocorrelation of Bang–Bang Phase-Frequency Detection," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 62, no. 9, pp. 836-840, Sept. 2015 [[https://sci-hub.st/10.1109/TCSII.2015.2435691](https://sci-hub.st/10.1109/TCSII.2015.2435691)] [[phd thesis](https://s-space.snu.ac.kr/bitstream/10371/119111/1/000000066677.pdf)]
+> —, "An Optimum Loop Gain Tracking All-Digital PLL Using Autocorrelation of Bang–Bang Phase-Frequency Detection," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 62, no. 9, pp. 836-840, Sept. 2015 [[https://sci-hub.st/10.1109/TCSII.2015.2435691](https://sci-hub.st/10.1109/TCSII.2015.2435691)]
 
 *TODO* &#128197;
 

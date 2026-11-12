@@ -43,6 +43,54 @@ endfunction
 
 
 
+## Verilog-A
+
+```verilog
+analog begin
+    @(cross(V(in) - vth, 0));  // Resolve the threshold-crossing time
+
+    V(out) <+ transition(V(in) > vth ? 1.0 : 0.0, 0, tr);
+end
+```
+
+
+
+The `cross()` line determines **when an evaluation point is needed**.
+
+**Without `cross()`**, code that checks `V(in) > vth` could first observe the change at **1.20 ns**, introducing a timing error.
+
+**With `cross()`**, the simulator adjusts its steps to evaluate at or just after **1.05 ns**, within numerical tolerances. The model can then respond accurately to the transition
+
+
+
+**`<+` is the analog contribution operator**. It contributes a voltage or current to the circuit equations solved by the simulator.
+
+```verilog
+V(out) <+ transition(V(in) > vth ? 1.0 : 0.0, 0, tr);
+```
+
+drives `out` toward **1 V when `V(in) > vth`**, and toward **0 V otherwise**, with edges smoothed by `transition()`.
+
+| Operator | Purpose                                     | Example            |
+| -------- | ------------------------------------------- | ------------------ |
+| `=`      | Assign a value to a variable                | `level = 1.0;`     |
+| `<+`     | Contribute to an electrical branch equation | `V(out) <+ level;` |
+
+Multiple contributions to the same branch add together. For example,
+
+```verilog
+V(out) <+ 1.0;
+V(out) <+ 2.0;
+```
+
+
+
+
+
+**`&` is bitwise AND**, and **`& 1` keeps only the rightmost bit** 
+
+
+
 ## Icarus Verilog (iverilog)
 
 1. compile a SystemVerilog design and testbench file

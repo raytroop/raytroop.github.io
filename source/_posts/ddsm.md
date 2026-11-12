@@ -915,7 +915,7 @@ They compensate for the one-cycle STF delay introduced by each $\frac{z^{-1}}{1-
 | Fig. 3.10      | $\displaystyle \frac{\textcolor{red}{z^{-1}}}{1-z^{-1}}$ | $\displaystyle z^{-2}Y_1+z^{-1}(1-z^{-1})Y_2+(1-z^{-1})^2Y_3$ |
 | Fig. 9.18/9.21 | $\displaystyle \frac{1}{1-z^{-1}}$ / carry-based timing  | $\displaystyle C_1+(1-z^{-1})C_2+(1-z^{-1})^2C_3$            |
 
-![image-20260904225009193](ddsm/image-20260904225009193.png)
+![image-20261112205321619](ddsm/image-20261112205321619.png)
 
 
 

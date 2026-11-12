@@ -467,12 +467,18 @@ LAYOUT TEXT "DVSS" x2-coor y2-coor pin-text-layer
 > Latch-up in CMOS circuits: threat or opportunity (part 1)  [[https://monthly-pulse.com/2021/01/05/latch-up-in-cmos-circuits-threat-or-opportunity-part-1/](https://monthly-pulse.com/2021/01/05/latch-up-in-cmos-circuits-threat-or-opportunity-part-1/)]
 >
 > Latch-up in CMOS circuits: threat or opportunity (part 2) [[https://monthly-pulse.com/2021/01/05/latch-up-in-cmos-circuits-threat-or-opportunity-part-2/](https://monthly-pulse.com/2021/01/05/latch-up-in-cmos-circuits-threat-or-opportunity-part-2/)]
+>
+> Kwantae Kim, Analog Integrated Circuits I - Lecture 8 (Fabrication and Layout) [[https://youtu.be/9fT4nUnwt-I](https://youtu.be/9fT4nUnwt-I)]
 
 ![image-20250615105811120](esd-latchup/image-20250615105811120.png)
 
 ![image-20250615090308047](esd-latchup/image-20250615090308047.png)
 
 > This can happen when a ***parasitic thyristor***, which is essentially ***a pair of interconnected transistors***, is triggered into a latched state, leading to sustained current flow and potential device failure.
+
+![image-20261112205053497](esd-latchup/image-20261112205053497.png)
+
+
 
 ### Necessary Conditions
 

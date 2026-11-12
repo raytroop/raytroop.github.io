@@ -31,6 +31,46 @@ mathjax: true
 
 
 
+### Floating-point Number in IEEE 754 Format
+
+> Floating-point data in IEEE 754 Format [[https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf](https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf)]
+>
+> Rajaraman, V.. “IEEE standard for floating point numbers.” *Resonance* 21 (2016): 11 - 30. [[https://www.ias.ac.in/article/fulltext/reso/021/01/0011-0030](https://www.ias.ac.in/article/fulltext/reso/021/01/0011-0030)]
+>
+> IEEE Standard for Floating-Point Arithmetic [[https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf](https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf)]
+>
+> Dennis Forbes. Understanding Floating-Point Numbers [[https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/](https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/)]
+>
+> Bevan Baas, EEC 281 - VLSI Digital Signal Processing Winter 2025 [[FLOATING POINT](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.float.pt.pdf)] [[ FLOATING POINT <---> FIXED POINT CONVERSION ](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.float.convert.pdf)]
+
+![image-20260207101850895](fpsp/image-20260207101850895.png)
+
+![image-20260207104005414](fpsp/image-20260207104005414.png)
+
+|                                      |                                |                                                              |
+| ------------------------------------ | ------------------------------ | ------------------------------------------------------------ |
+| **32-bit floating-point version 1**  | store *implicit leading one*   | ![image-20260814232552030](fpsp/image-20260814232552030.png) |
+| **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](fpsp/image-20260207102147689.png) |
+| **IEEE 754 floating point notation** | ***biased exponent***          | ![image-20260207102210468](fpsp/image-20260207102210468.png) |
+
+![image-20260814235410144](fpsp/image-20260814235410144.png)
+
+![image-20260814235251961](fpsp/image-20260814235251961.png)
+$$
+\boxed{
+\begin{aligned}
+E=0 &: \quad \text{zero or subnormal},\\
+1\le E\le254 &: \quad \text{normal finite number},\\
+E=255 &: \quad \infty \text{ or NaN}.
+\end{aligned}
+}
+$$
+
+
+![image-20260814225825011](fpsp/image-20260814225825011.png)
+
+
+
 
 
 ### 2's Complement
@@ -47,9 +87,7 @@ mathjax: true
 
 ---
 
----
-
-***2's complement negative number***
+<span style="color:white; background-color:black">**2's complement negative number**</span>
 
 > Flip all bits then Add **1**
 
@@ -68,6 +106,18 @@ Add **1**
 $$
 A_- = A_{flip}+1 = M_{N-1}2^{N-1}-\sum_{k=0}^{N-2}M_k2^k = -A
 $$
+
+
+
+---
+
+<span style="color:white; background-color:black">negative number to 2's complement, interpreted as unsigned number</span>
+$$
+\text{S} = -2^{N-1} + \text{LSBs} \qquad \Longrightarrow \qquad \text{S} + 2^N = 2^{N-1} + \text{LSBs}
+$$
+For example -2 in 3-bit 2's complement is -2 + 8 = 6 = 3'110
+
+
 
 
 
@@ -202,46 +252,6 @@ So it is a **4-bit two's-complement fixed-point number**:
  ↑      ↑ ↑ ↑
 sign    3 fractional bits
 ```
-
-
-
-### Floating-point Number in IEEE 754 Format
-
-> Floating-point data in IEEE 754 Format [[https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf](https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf)]
->
-> Rajaraman, V.. “IEEE standard for floating point numbers.” *Resonance* 21 (2016): 11 - 30. [[https://www.ias.ac.in/article/fulltext/reso/021/01/0011-0030](https://www.ias.ac.in/article/fulltext/reso/021/01/0011-0030)]
->
-> IEEE Standard for Floating-Point Arithmetic [[https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf](https://www-users.cse.umn.edu/~vinals/tspot_files/phys4041/2020/IEEE%20Standard%20754-2019.pdf)]
->
-> Dennis Forbes. Understanding Floating-Point Numbers [[https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/](https://dennisforbes.ca/blog/features/floating_point/understanding-floating-point-numbers/)]
->
-> Bevan Baas, EEC 281 - VLSI Digital Signal Processing Winter 2025 [[FLOATING POINT](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.float.pt.pdf)] [[ FLOATING POINT <---> FIXED POINT CONVERSION ](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.float.convert.pdf)]
-
-![image-20260207101850895](fpsp/image-20260207101850895.png)
-
-![image-20260207104005414](fpsp/image-20260207104005414.png)
-
-|                                      |                                |                                                              |
-| ------------------------------------ | ------------------------------ | ------------------------------------------------------------ |
-| **32-bit floating-point version 1**  | store *implicit leading one*   | ![image-20260814232552030](fpsp/image-20260814232552030.png) |
-| **32-bit floating-point version 2**  | discard *implicit leading one* | ![image-20260207102147689](fpsp/image-20260207102147689.png) |
-| **IEEE 754 floating point notation** | ***biased exponent***          | ![image-20260207102210468](fpsp/image-20260207102210468.png) |
-
-![image-20260814235410144](fpsp/image-20260814235410144.png)
-
-![image-20260814235251961](fpsp/image-20260814235251961.png)
-$$
-\boxed{
-\begin{aligned}
-E=0 &: \quad \text{zero or subnormal},\\
-1\le E\le254 &: \quad \text{normal finite number},\\
-E=255 &: \quad \infty \text{ or NaN}.
-\end{aligned}
-}
-$$
-
-
-![image-20260814225825011](fpsp/image-20260814225825011.png)
 
 
 

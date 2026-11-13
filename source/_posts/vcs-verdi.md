@@ -6,23 +6,6 @@ categories:
 - digital
 ---
 
-## VCS with customized UVM version
-
-```bash
-# uvm 1.1 customized
-$ export VCS_UVM_HOME="path/to/uvm-1.1d/src"
-$ vcs -full64 -debug_access+all -kdb -sverilog -ntb_opts uvm -timescale=1ns/1ps -f filelist.f
-$ ./simv -gui=verdi
-```
-
-
-
-## VCS with release UVM
-
-```
-$ vcs -full64 -debug_access+all -kdb -sverilog -ntb_opts uvm-1.2
-```
-
 
 
 ## VCS compile-time options
@@ -99,7 +82,7 @@ Just add the `-kdb` option to VCS executables when running simulation
 
 
 
-## Common `simv` Option
+### Common `simv` Option
 
 `-gv <gen=value>`:  override runtime VHDL generics *
 
@@ -117,13 +100,15 @@ Just add the `-kdb` option to VCS executables when running simulation
 
 
 
-## verdi binkey
+## Verdi
+
+### Verdi binkey
 
 `SHIFT+A`: *Find Signal/Find Instance/Find Instport*
 
 `SHIFT+S`: *Find Scope*
 
-### module traverse
+<span style="color:white; background-color:black">**module traverse**</span>
 
 ![image-20220527165858163](vcs-verdi/image-20220527165858163.png)
 
@@ -135,7 +120,11 @@ Just add the `-kdb` option to VCS executables when running simulation
 >
 > Double-Click **module name** is same with click *Show Calling*
 
-### signal traverse
+
+
+<span style="color:white; background-color:black">**signal traverse**</span>
+
+
 
 ![image-20220527201122708](vcs-verdi/image-20220527201122708.png)
 
@@ -145,7 +134,9 @@ Just add the `-kdb` option to VCS executables when running simulation
 >
 > Double-Click **signal name** is same with click *Driver*
 
-## Verdi options
+
+
+### Verdi options
 
 `-ssf fastFile(s)|dumpFile(s)|fastFile list(s)`: Load FSDB (\*.fsdb), virtual FSDB (\*.vf) , gzipped FSDB (\*.fsdb.gz), bzip2 FSDB (\*.fsdb.bz2), waveform dump (\*.vcd, \*.vcd.gz) files, or FSDB file list (\*.flst)
 
@@ -159,7 +150,9 @@ Just add the `-kdb` option to VCS executables when running simulation
 
 `-f file_name / -file file_name`: Load an ASCII file containing design source files and additional simulator options
 
-## Import Design from UFE
+
+
+### Import Design from UFE
 
 > **Knowledge Database (KDB)**: As it compiles the design, the Verdi platform uses its internal synthesis technology to recognize and extract specific structural, logical, and functional information about the design and stores the resulting detailed design information in the KDB
 
@@ -175,7 +168,7 @@ The Unified Compiler Flow (UFE) uses VCS with the `-kdb` option and the generate
 
 3. `verdi -ssf novas.fsdb`
 
-   Load KDB automatically from FSDB,
+   Load KDB automatically from FSDB
 
 > For 2 and 3, use the `-dbdir` option to load *simv.dadir* if you have move it to somewhere else
 
@@ -187,13 +180,174 @@ The Unified Compiler Flow (UFE) uses VCS with the `-kdb` option and the generate
 
 > both vcs and verdi are needed for design import
 
-## Reference Design and FSDB on the Command Line
+
+
+
+
+### Reference Design and FSDB on the Command Line
 
 ```
 verdi -f <source_file_name> -ssf <fsdb_file_name>
 ```
 
 > Where, source_file_name is the source file name and fsdb_file_name is the name of the FSDB file
+
+
+
+## Icarus Verilog (iverilog)
+
+1. compile a SystemVerilog design and testbench file
+
+```bash
+iverilog -g2012 -o simulation_output.vvp design.sv testbench.sv
+```
+
+
+
+2. After successful compilation, you can run the simulation using the `vvp` runtime engine:
+
+```bash
+vvp sim.vvp +VCDFILE=output.vcd
+```
+
+`+VCDFILE=output.vcd`: This is the custom plusarg.
+
+`"$value$plusargs("VCDFILE=%s", filename)"`: The simulator searches for `+VCDFILE=`. It extracts the string after the `=` sign and saves it into the `filename` variable.
+
+`$dumpfile(filename)`: This opens a VCD file named `output.vcd`.
+
+`$dumpvars(0, DUT)`: This dumps all signals inside the module instance named `DUT` and everything below it
+
+```verilog
+string filename;
+
+initial begin
+   if ($value$plusargs("VCDFILE=%s",filename)) begin
+      $dumpfile(filename);
+      $dumpvars(0, DUT);
+   end
+end
+```
+
+
+
+3. open `vcd` file with `gtkwave`
+
+```bash
+gtkwave output.vcd
+```
+
+
+
+
+
+## questasim sim flow
+
+> A Short Intro to ModelSim Verilog Simulator [[https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator](https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator)]
+
+```bash
+vlib work
+vlog -f filelist tb.sv
+# "-c": command line mode
+vsim -voptargs=+acc -c -do "run 100ns; exit" work.topmodule
+```
+
+> `-voptargs=+acc`:  Add the option `-voptargs=+acc` to the *vsim* command, This enables full visibility into every aspect of the design.
+
+
+```verilog
+module topmodule;
+    ...
+endmodule
+```
+
+**uvm**:
+
+```bash
+> vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2
+> vsim -c -do "run -all;exit" +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2
+```
+
+
+
+## verilog-mode.el
+
+> Emacs Online Documentation [https://doc.endlessparentheses.com/](https://doc.endlessparentheses.com/)
+>
+> Emacs verilog-mode 的使用 URL: [https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/](https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/)
+
+
+
+
+```bash
+emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile
+```
+
+> CAUTION: *filename.v* is **overwrite** by command
+
+### verilog-mode.el
+
+```verilog
+/*AUTOINPUT*/
+/*AUTOWIRE*/
+/*AUTOINST*/
+/*AUTO_TEMPLATE*/
+```
+
+<span style="color:white; background-color:black">`-f verilog-batch-auto`</span>
+
+> For use with `--batch`, perform automatic expansions as a stand-alone tool. This sets up the appropriate Verilog mode environment, updates automatics with M-x verilog-auto on all command-line files, and saves the buffers.
+> For proper results, multiple filenames need to be passed on the command line in bottom-up order.
+
+<span style="color:white; background-color:black">`-f verilog-auto-save-compile`</span>
+
+> Update automatics with M-x verilog-auto, save the buffer, and *compile*
+
+
+
+### Emacs
+
+<span style="color:white; background-color:black">`--no-site-file`</span>
+
+Another file for site-customization is `site-start.el`. Emacs loads this *before* the user's init file (`.emacs`, `.emacs.el` or `.emacs.d/.emacs.d`). You can inhibit the loading of this file with the option ``--no-site-file``
+
+<span style="color:white; background-color:black">`--batch`</span>
+
+The command-line option `--batch` causes Emacs to run noninteractively.  The idea is that you specify Lisp programs to run; when they are finished, Emacs should exit.
+
+ `--load, -l FILE`, load Emacs Lisp FILE using the load function;
+
+`--funcall, -f FUNC`, call Emacs Lisp function FUNC with no arguments
+
+<span style="color:white; background-color:black">`-f FUNC`</span>
+
+`--funcall, -f FUNC`, call Emacs Lisp function FUNC with no arguments
+
+<span style="color:white; background-color:black">`--load, -l FILE`</span>
+
+`--load, -l FILE`, load Emacs Lisp FILE using the load function
+
+> Verilog-mode is a standard part of GNU Emacs as of 22.2.
+
+
+
+### multiple directories
+
+**AUTOINST** only search in the file's directory default.
+
+You can append below `verilog-library-directories` for multiple directories search
+
+```
+// Local Variables:
+// verilog-library-directories:("." "subdir" "subdir2")
+// End:
+```
+
+
+
+
+
+
 
 ## reference
 

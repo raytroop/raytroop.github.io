@@ -1064,6 +1064,24 @@ $$
 
 
 
+
+
+---
+
+**case** — `\begin{cases}`, `\end{cases}`
+$$
+\Delta=a+\Delta_{\text{offset}},
+\qquad
+r=
+\begin{cases}
++\Delta,& \texttt{code}_{i}=1,\\
+-\Delta,& \texttt{code}_{i}=0.
+\end{cases}
+$$
+
+
+
+
 ## mermaid
 
 *Mermaid is a JavaScript based diagramming and charting tool* that takes Markdown-inspired text definitions and creates diagrams dynamically in the browser

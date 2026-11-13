@@ -478,6 +478,8 @@ LAYOUT TEXT "DVSS" x2-coor y2-coor pin-text-layer
 
 ![image-20261112205053497](esd-latchup/image-20261112205053497.png)
 
+![img](esd-latchup/1794483981711.gif)
+
 
 
 ### Necessary Conditions

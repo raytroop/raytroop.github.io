@@ -1,5 +1,5 @@
 ---
-title: Verilog & SystemVerilog
+title: Arithmetic in Verilog & SystemVerilog
 date: 2022-05-07 21:12:38
 tags:
 categories:
@@ -9,1675 +9,588 @@ mathjax: true
 
 
 
-## standard normal distribution using Box–Muller transform
 
-**one pseudorandom sample from a standard normal distribution** $\mathcal N(0,1)$, which has mean 0 and standard deviation 1
 
-**Box–Muller transform**: For independent uniform inputs $u_1$ and $u_2$, the expression below produces a standard normal sample.
-$$
-z=\sqrt{-2\ln u_1}\,\cos(2\pi u_2)
-$$
+## Bit patterns, signedness, and literals
+
+An $N$-bit vector has the following ranges:
+
+| Type | Minimum | Maximum |
+| --- | ---: | ---: |
+| Unsigned | $0$ | $2^N-1$ |
+| Signed two's complement | $-2^{N-1}$ | $2^{N-1}-1$ |
+
+The same bits can represent different values:
 
 ```systemverilog
-// Declare these inside your testbench module.
-int seed = 12345;
-localparam real PI = 3.14159265358979323846;
-
-// Generate one standard normal sample using the Box–Muller transform.
-function automatic real std_normal();
-    int r1, r2;
-    real u1, u2;
-
-    r1 = $random(seed);
-    r2 = $random(seed);
-
-    // Map signed 32-bit integers to the open interval (0, 1).
-    u1 = (r1 + 2147483648.0 + 0.5) / 4294967296.0;
-    u2 = (r2 + 2147483648.0 + 0.5) / 4294967296.0;
-
-    return $sqrt(-2.0 * $ln(u1)) * $cos(2.0 * PI * u2);
-endfunction
-```
-
-<span style="background-color:yellow">**non-synthesizable**</span>
-
-
-
-## Verilog-A
-
-```verilog
-analog begin
-    @(cross(V(in) - vth, 0));  // Resolve the threshold-crossing time
-
-    V(out) <+ transition(V(in) > vth ? 1.0 : 0.0, 0, tr);
-end
-```
-
-
-
-The `cross()` line determines **when an evaluation point is needed**.
-
-**Without `cross()`**, code that checks `V(in) > vth` could first observe the change at **1.20 ns**, introducing a timing error.
-
-**With `cross()`**, the simulator adjusts its steps to evaluate at or just after **1.05 ns**, within numerical tolerances. The model can then respond accurately to the transition
-
-
-
-**`<+` is the analog contribution operator**. It contributes a voltage or current to the circuit equations solved by the simulator.
-
-```verilog
-V(out) <+ transition(V(in) > vth ? 1.0 : 0.0, 0, tr);
-```
-
-drives `out` toward **1 V when `V(in) > vth`**, and toward **0 V otherwise**, with edges smoothed by `transition()`.
-
-| Operator | Purpose                                     | Example            |
-| -------- | ------------------------------------------- | ------------------ |
-| `=`      | Assign a value to a variable                | `level = 1.0;`     |
-| `<+`     | Contribute to an electrical branch equation | `V(out) <+ level;` |
-
-Multiple contributions to the same branch add together. For example,
-
-```verilog
-V(out) <+ 1.0;
-V(out) <+ 2.0;
-```
-
-
-
-
-
-**`&` is bitwise AND**, and **`& 1` keeps only the rightmost bit** 
-
-
-
-## Icarus Verilog (iverilog)
-
-1. compile a SystemVerilog design and testbench file
-
-```bash
-iverilog -g2012 -o simulation_output.vvp design.sv testbench.sv
-```
-
-
-
-2. After successful compilation, you can run the simulation using the `vvp` runtime engine:
-
-```bash
-vvp sim.vvp +VCDFILE=output.vcd
-```
-
-`+VCDFILE=output.vcd`: This is the custom plusarg.
-
-`"$value$plusargs("VCDFILE=%s", filename)"`: The simulator searches for `+VCDFILE=`. It extracts the string after the `=` sign and saves it into the `filename` variable.
-
-`$dumpfile(filename)`: This opens a VCD file named `output.vcd`.
-
-`$dumpvars(0, DUT)`: This dumps all signals inside the module instance named `DUT` and everything below it
-
-```verilog
-string filename;
+logic        [7:0] u;
+logic signed [7:0] s;
 
 initial begin
-   if ($value$plusargs("VCDFILE=%s",filename)) begin
-      $dumpfile(filename);
-      $dumpvars(0, DUT);
-   end
+    u = 8'b1111_1111;  // 255
+    s = 8'b1111_1111;  // -1
 end
 ```
 
+Signedness does not change the stored bits. It changes how operations such as widening, comparison, division, and arithmetic right shift use those bits.
 
+### Sized literals
 
-3. open `vcd` file with `gtkwave`
+A sized integer literal has the form `<width>'[s]<base><digits>`. The optional `s` makes the literal signed; it does not add a sign bit.
 
-```bash
-gtkwave output.vcd
+| Literal | Width | Bits | Value |
+| --- | ---: | --- | ---: |
+| `6'b100000` | 6 | `100000` | 32 |
+| `6'sb100000` | 6 | `100000` | -32 |
+| `6'sb10000` | 6 | `010000` | 16 |
+| `8'd1` | 8 | `00000001` | 1, unsigned |
+| `8'sd1` | 8 | `00000001` | 1, signed |
+| `1'sb1` | 1 | `1` | -1 |
+
+For the ordinary binary digits shown here, missing digits are padded with zeros **within the declared literal width**, even when `s` is present. Subsequent widening of the completed signed literal uses its sign bit.
+
+An unsized decimal integer such as `1` is signed and at least 32 bits wide. Sized literals make width and signedness explicit in RTL.
+
+### Widening and narrowing
+
+When a standalone integral value is assigned to a wider vector, its signedness determines the extension. The destination's signedness does not select the extension rule.
+
+```systemverilog
+logic signed [7:0] a, b;
+logic        [7:0] c;
+
+assign a = 6'sb100000;  // 11100000: signed -32
+assign b = 6'b100000;   // 00100000: signed +32
+assign c = 6'sb100000;  // 11100000: unsigned 224
+```
+
+Assigning either `6'b100000` or `6'sb100000` directly to a **6-bit signed** destination produces -32: no widening occurs, so the same six bits are copied.
+
+Assigning a wider vector to a narrower vector discards the upper bits. It does **not** clamp the numeric value.
+
+### What `$signed` and `$unsigned` do
+
+`$signed(expr)` returns the bits of `expr` with a signed type. `$unsigned(expr)` returns them with an unsigned type. Neither conversion changes the bit width or bit pattern of its argument's result.
+
+```systemverilog
+logic        [5:0] x;
+logic signed [7:0] a, b;
+
+assign x = 6'b100000;
+assign a = x;           // Zero extension: 00100000 = +32
+assign b = $signed(x);  // Sign extension: 11100000 = -32
+```
+
+Here, `$signed(x)` is still six bits wide; the assignment then extends it to eight bits.
+
+Casting an unsigned vector to signed does not preserve its full unsigned numeric range. For example, `$signed(8'hff)` is -1. To represent unsigned 255 as a positive signed value, add a leading zero first:
+
+```systemverilog
+logic        [7:0] u;
+logic signed [8:0] u_signed;
+
+assign u_signed = $signed({1'b0, u});  // Range: 0 to 255
 ```
 
 
-
-
-
-## questasim sim flow
-
-> A Short Intro to ModelSim Verilog Simulator [[https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator](https://users.ece.cmu.edu/~jhoe/doku/doku.php?id=a_short_intro_to_modelsim_verilog_simulator)]
-
-```bash
-vlib work
-vlog -f filelist tb.sv
-# "-c": command line mode
-vsim -voptargs=+acc -c -do "run 100ns; exit" work.topmodule
-```
-
-> `-voptargs=+acc`:  Add the option `-voptargs=+acc` to the *vsim* command, This enables full visibility into every aspect of the design. 
-
-
-```verilog
-module topmodule;
-    ...
-endmodule
-```
-
-**uvm**:
-
-```bash
-> vlog test_pkg.sv tb_top.sv -L $QUESTA_HOME/uvm-1.2
-> vsim -c -do "run -all;exit" +UVM_TESTNAME=my_test work.tb_top  -L $QUESTA_HOME/uvm-1.2
-```
-
-
-
-## verilog-mode.el
-
-> Emacs Online Documentation [https://doc.endlessparentheses.com/](https://doc.endlessparentheses.com/)
->
-> Emacs verilog-mode 的使用 URL: [https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/](https://www.wenhui.space/docs/02-emacs/verilog_mode_useguide/)
-
-
-
-
-```bash
-emacs --no-site-file --load path/to/verilog-mode.el --batch filename.v -f verilog-auto-save-compile
-```
-
-> CAUTION: *filename.v* is **overwrite** by command
-
-### verilog-mode.el
-
-```verilog
-/*AUTOINPUT*/
-/*AUTOWIRE*/
-/*AUTOINST*/
-/*AUTO_TEMPLATE*/
-```
-
-#### `-f verilog-batch-auto`
-
-> For use with `--batch`, perform automatic expansions as a stand-alone tool. This sets up the appropriate Verilog mode environment, updates automatics with M-x verilog-auto on all command-line files, and saves the buffers.
-> For proper results, multiple filenames need to be passed on the command line in bottom-up order.
-
-#### `-f verilog-auto-save-compile`
-
-> Update automatics with M-x verilog-auto, save the buffer, and *compile*
-
-
-
-### Emacs
-
-#### `--no-site-file`
-
-Another file for site-customization is `site-start.el`. Emacs loads this *before* the user's init file (`.emacs`, `.emacs.el` or `.emacs.d/.emacs.d`). You can inhibit the loading of this file with the option ``--no-site-file``
-
-#### `--batch`
-
-The command-line option `--batch` causes Emacs to run noninteractively.  The idea is that you specify Lisp programs to run; when they are finished, Emacs should exit.
-
- `--load, -l FILE`, load Emacs Lisp FILE using the load function; 
-
-`--funcall, -f FUNC`, call Emacs Lisp function FUNC with no arguments
-
-#### `-f FUNC`
-
-`--funcall, -f FUNC`, call Emacs Lisp function FUNC with no arguments
-
-#### `--load, -l FILE`
-
-`--load, -l FILE`, load Emacs Lisp FILE using the load function
-
-> Verilog-mode is a standard part of GNU Emacs as of 22.2.
-
-
-
-### multiple directories
-
-**AUTOINST** only search in the file's directory default.
-
-You can append below `verilog-library-directories` for multiple directories search
-
-```
-// Local Variables:
-// verilog-library-directories:("." "subdir" "subdir2")
-// End:
-```
-
-
-
-## plusargs in Verilog
-
-> systemverilog-command-line-input URL: [https://www.chipverify.com/systemverilog/systemverilog-command-line-input](https://www.chipverify.com/systemverilog/systemverilog-command-line-input)
->
-> PLUSARGS IN SYSTEMVERILOG URL:[https://www.theartofverification.com/plusargs-in-systemverilog/](https://www.theartofverification.com/plusargs-in-systemverilog/)
-
-
-
-**plusargs** are command-line switches supported by the simulator. As per SystemVerilog LRM arguments beginning with the `+` character will be available using the `$test$plusargs` and `$value$plusargs` **PLI APIs**.
-
-```verilog
-$test$plusargs (user_string)
-
-$value$plusargs (user_string, variable)
-```
 
 ---
 
+**For integral expressions, `$signed(expr)` and `signed'(expr)` produce the same result:** they make the result signed while preserving its width and bit pattern
+
+|                       | `$signed(expr)`                  | `signed'(expr)` |
+| --------------------- | -------------------------------- | --------------- |
+| Syntax                | System function                  | Signing cast    |
+| Language support      | Verilog-2001 and *SystemVerilog* | *SystemVerilog* |
+| Result signedness     | Signed                           | Signed          |
+| Bit width and pattern | Preserved                        | Preserved       |
+
+For example:
+
 ```verilog
-// tb.v
-module tb;
-        int a;
-        initial begin
-                if($test$plusargs("RUNSIM")) begin
-                        $display("There is RUNSIM plusargs");
-                end else begin
-                        $display("There is NO $test$plusargs");
-                end
-                if($value$plusargs("SEED=%d",a)) begin
-                        $display("SEED=%d",a);
-                end else begin
-                        $display("There is NO $value$plusargs");
-                end
-        end
+logic        [5:0] x;
+logic signed [7:0] a, b;
+
+assign x = 6'b100000;
+
+assign a = $signed(x);  // 11100000 = -32
+assign b = signed'(x);  // 11100000 = -32
+```
+
+Both casts produce a **6-bit signed** value of −32. The assignment subsequently sign-extends it to eight bits
+
+
+
+### Concatenations and part-selects are unsigned
+
+A concatenation is unsigned, even when all its elements come from signed vectors. A bit-select or part-select is also unsigned, even if the part-select covers the entire signed vector.
+
+```systemverilog
+logic signed [5:0] x;
+logic signed [7:0] auto_ext, manual_ext, slice_ext, cast_ext;
+
+assign auto_ext   = x;                  // Automatic sign extension
+assign manual_ext = {{2{x[5]}}, x};     // Explicit sign-extension bits
+assign slice_ext  = x[5:0];             // Unsigned slice: zero extension
+assign cast_ext   = $signed(x[5:0]);    // Signed slice: sign extension
+```
+
+Manual extension makes the bits explicit, but does not by itself make an expression signed. When using an extended concatenation directly in signed arithmetic, use `$signed({{2{x[5]}}, x})` or first assign it to a signed intermediate.
+
+## Expression width and mixed signedness
+
+For a simple integral `a + b` or `a - b` expression:
+
+- If both operands are signed, the arithmetic expression is signed.
+- If either operand is unsigned, the arithmetic expression is unsigned; operands that need widening are zero-extended.
+- The assignment destination can increase the **evaluation width** of the expression.
+- Declaring the destination signed does not make an unsigned right-hand-side expression signed.
+
+These are rules for these integral operators, not a rule that every operand of every operator controls signedness. For example, a shift amount does not determine the signedness of the value being shifted.
+
+### The left-hand side can affect evaluation width
+
+```systemverilog
+logic [7:0] a, b;
+logic [8:0] wide_sum, narrow_sum, explicit_sum;
+
+assign wide_sum     = a + b;                  // Addition evaluated at 9 bits
+assign narrow_sum   = {a + b};                // Addition inside {} is 8 bits
+assign explicit_sum = {1'b0, a} + {1'b0, b};  // Explicit 9-bit operands
+```
+
+With `a = 8'd255` and `b = 8'd1`, `wide_sum` and `explicit_sum` are 256, while `narrow_sum` is 0.
+
+The concatenation's element `a + b` is **self-determined**: its width is set by its operands, so the outer assignment cannot preserve its carry. Parentheses alone do not create this boundary: `wide_sum = (a + b)` still preserves the carry.
+
+The same issue applies to `$signed(a + b)`: the cast changes signedness after its argument is evaluated at its own width. A cast around a result cannot recover bits already lost. Widen the operands or use an appropriately sized intermediate **before** an operation that needs more bits.
+
+See Sutherland and Mills, *Standard Gotchas*, Section 5, for a detailed discussion of expression sizing and signedness.
+
+### Addition and subtraction examples
+
+The following table assumes four-bit inputs and a five-bit destination. “Signed output” and “unsigned output” are two interpretations of the same five result bits.
+
+| Operation | Input types | Operands at evaluation width | Result bits | Signed output | Unsigned output |
+| --- | --- | --- | --- | ---: | ---: |
+| `0101 + 1111` | Signed + signed | `00101 + 11111` | `00100` | 4 | 4 |
+| `0101 + 1111` | Signed + unsigned | `00101 + 01111` | `10100` | -12 | 20 |
+| `0101 + 1111` | Unsigned + signed | `00101 + 01111` | `10100` | -12 | 20 |
+| `1111 - 0010` | Signed - signed | `11111 - 00010` | `11101` | -3 | 29 |
+| `1111 - 0010` | Signed - unsigned | `01111 - 00010` | `01101` | 13 | 13 |
+
+A compact testbench reproduces the distinction:
+
+```systemverilog
+module arithmetic_tb;
+    logic signed [3:0] a, b;
+    logic        [3:0] u;
+    logic signed [4:0] result_s;
+    logic        [4:0] result_u;
+
+    initial begin
+        a = 4'sb0101;
+        b = 4'sb1111;
+        u = 4'b1111;
+
+        result_s = a + b;
+        result_u = a + b;
+        $display("signed add: s=%0d u=%0d bits=%b",
+                 result_s, result_u, result_s);  // 4, 4, 00100
+
+        result_s = a + u;
+        result_u = a + u;
+        $display("mixed add:  s=%0d u=%0d bits=%b",
+                 result_s, result_u, result_s);  // -12, 20, 10100
+
+        a = -4'sd1;
+        b = 4'sd2;
+        u = 4'd2;
+
+        result_s = a - b;
+        result_u = a - b;
+        $display("signed sub: s=%0d u=%0d bits=%b",
+                 result_s, result_u, result_s);  // -3, 29, 11101
+
+        result_s = a - u;
+        result_u = a - u;
+        $display("mixed sub:  s=%0d u=%0d bits=%b",
+                 result_s, result_u, result_s);  // 13, 13, 01101
+    end
 endmodule
 ```
 
-- compile
+For subtraction at a chosen width, the hardware can compute $a + \overline b + 1$ and retain the required low bits. Apply the correct operand extension before taking the complement.
 
-  ```
-  $ vlib work
-  $ vlog -sv tb.v
-  ```
+### A mixed-width example: unsigned position plus signed offset
 
-- simulate (*QuestaSim*)
+```systemverilog
+logic        [7:0] x;
+logic signed [7:0] y;
+logic signed [3:0] move;
+logic signed [7:0] x1, y1;
+logic signed [9:0] x_full;
 
-  - with**out** plusargs
+assign x1     = x + move;
+assign y1     = y + move;
+assign x_full = $signed({1'b0, x}) + move;
+```
 
-    ```
-    $ vsim work.tb -c -do "run; exit"
-    ```
+For `x = 7`, `y = 7`, and `move = -4`:
 
-    ```
-    # //
-    # Loading sv_std.std
-    # Loading work.tb(fast)
-    # run
-    # There is NO $test$plusargs
-    # There is NO $value$plusargs
-    #  exit
-    # End time: 13:04:23 on Jun 04,2022, Elapsed time: 0:00:01
-    # Errors: 0, Warnings: 0
-    ```
+| Expression | Extended offset | Result |
+| --- | --- | ---: |
+| `x + move` | `00001100`, or +12 | 19 |
+| `y + move` | `11111100`, or -4 | 3 |
+| `$signed({1'b0, x}) + move` | Signed -4 at the evaluation width | 3 |
 
-  - with plusargs
+The last expression preserves `x` as a nonnegative signed operand. Its ten-bit result also covers the full mathematical range, $-8$ through $262$.
 
-    ```
-    $ vsim work.tb -c -do "run; exit" +SEED=31 +RUNSIM
-    ```
+## When signedness changes the result
 
-    > `+SEED=31 +RUNSIM`
+For `logic [7:0] x = 8'hff`:
 
-    ```
-    # //
-    # Loading sv_std.std
-    # Loading work.tb(fast)
-    # run
-    # There is RUNSIM plusargs
-    # SEED=         31
-    #  exit
-    # End time: 13:04:55 on Jun 04,2022, Elapsed time: 0:00:01
-    # Errors: 0, Warnings: 0
-    ```
+| Operation | Unsigned form | Signed form |
+| --- | --- | --- |
+| Compare with +1 | `x < 8'd1` is false | `$signed(x) < 8'sd1` is true |
+| Widen to 16 bits | `x` becomes `00000000_11111111` | `$signed(x)` becomes `11111111_11111111` |
+| Right shift, retaining 8 bits | `x >>> 1` gives `01111111` | `$signed(x) >>> 1` gives `11111111` |
+| Divide by 2, retaining 8 bits | `x / 8'd2` gives 127 | `$signed(x) / 8'sd2` gives 0 |
+
+Signed integer division truncates toward zero, so $-1/2$ gives 0.
+
+### Comparisons require compatible operand types
+
+For integral relational comparisons, if either operand is unsigned, the comparison is unsigned.
+
+```systemverilog
+// x = 8'hff
+$signed(x) < 8'sd1   // -1 < 1: true
+$signed(x) < 8'd1    // 255 < 1: false
+```
+
+Although `8'd1` and `8'sd1` have identical bits, their types change the comparison. Casting just one operand is insufficient when the other remains unsigned.
+
+### Arithmetic right shift
+
+`>>` always shifts in zeros. `>>>` shifts in copies of the sign bit only when its left operand, as evaluated in context, is signed.
+
+```systemverilog
+logic signed [7:0] s;
+logic signed [7:0] logical_shift, arithmetic_shift;
+
+assign s = -8'sd4;
+assign logical_shift    = s >> 1;   // 01111110 = +126
+assign arithmetic_shift = s >>> 1;  // 11111110 = -2
+```
+
+For the examples above, the destination has the same width as the shifted value. A wider assignment or a surrounding mixed-signedness expression can affect evaluation; use a signed intermediate when the intended shift behavior needs to be explicit.
+
+### Addition and subtraction at a fixed width
+
+When the operand bit patterns and evaluation width are fixed, the low $N$ result bits of addition and subtraction are identical for signed and unsigned arithmetic:
+
+$$
+r_{\text{add}}=(a+b)\bmod 2^N,\qquad
+r_{\text{sub}}=(a-b)\bmod 2^N.
+$$
+
+For example, eight-bit `11111111 + 00000001` produces `00000000` whether described as unsigned $255+1$ or signed $-1+1$.
+
+This does **not** imply that all signed and unsigned operations synthesize identically. Extension, comparison, division, and arithmetic right shift can change the required logic.
+
+## Overflow detection
+
+Overflow means the exact mathematical result lies outside the destination's representable range. A carry bit and a signed-overflow flag answer different questions.
+
+### Unsigned addition and subtraction
+
+For two $N$-bit unsigned operands, use an $N+1$-bit sum. Its top bit indicates unsigned addition overflow.
+
+```systemverilog
+logic [7:0] a, b;
+logic [8:0] sum;
+logic carry, borrow;
+
+assign sum    = {1'b0, a} + {1'b0, b};
+assign carry  = sum[8];
+assign borrow = (a < b);  // Underflow when unsigned a - b would be negative
+```
+
+### Signed addition and subtraction
+
+Let `r` be the truncated $N$-bit result of an operation on two $N$-bit signed operands:
+
+```systemverilog
+// Signed addition overflow:
+overflow_add = (a[N-1] == b[N-1]) && (r[N-1] != a[N-1]);
+
+// Signed subtraction overflow:
+overflow_sub = (a[N-1] != b[N-1]) && (r[N-1] != a[N-1]);
+```
+
+For addition, operands with opposite signs cannot overflow. With equal signs, overflow occurs when the retained result has the opposite sign.
+
+| 3-bit signed A | 3-bit signed B | Exact sum as 4-bit signed | Retained 3-bit result | Status |
+| --- | --- | --- | --- | --- |
+| `011` (+3) | `011` (+3) | `0110` (+6) | `110` (-2) | Positive overflow |
+| `100` (-4) | `100` (-4) | `1000` (-8) | `000` (0) | Negative overflow |
+| `111` (-1) | `110` (-2) | `1101` (-3) | `101` (-3) | In range |
+
+The four-bit exact sums above come from **sign-extended operands**. They are not the raw carry concatenated with the result of an unextended three-bit adder.
+
+### overflow detection from a widened signed result
+
+When `t` is an exact $(N+1)$-bit signed result, examine `t[N:N-1]` before narrowing to $N$ bits:
+
+| Top two bits | Meaning |
+| --- | --- |
+| `00` or `11` | Fits in $N$ signed bits |
+| `01` | Above the signed maximum; clamp upward |
+| `10` | Below the signed minimum; clamp downward |
+
+For example, a ten-bit accumulator plus a signed two-bit increment can use an eleven-bit intermediate:
+
+```systemverilog
+logic signed [1:0] acc_inc;
+logic signed [9:0] acc;
+logic signed [10:0] acc_w;
+logic signed [9:0] acc_sat;
+
+assign acc_w = acc + acc_inc;
+
+assign acc_sat = (acc_w[10:9] == 2'b01) ? 10'sb0111111111 :
+                 (acc_w[10:9] == 2'b10) ? 10'sb1000000000 :
+                                         acc_w[9:0];
+```
+
+Both overflow directions are often called ***signed overflow***. “**Negative overflow**” here means a result below the minimum; it is unrelated to floating-point underflow
 
 
 
-## Inertial & transport delays
+### underflow detection
 
-> [Verilog Nonblocking Assignments With Delays, Myths & Mysteries](http://www.sunburst-design.com/papers/CummingsSNUG2002Boston_NBAwithDelays.pdf)
->
-> [Correct Methods For Adding Delays To Verilog Behavioral Models](http://www.sunburst-design.com/papers/CummingsHDLCON1999_BehavioralDelays_Rev1_1.pdf)
->
-> Article (20488135) Title: Selecting Different Delay Modes in GLS (RAK)
->
-> Article (20447759) Title: Gate Level Simulation (GLS): A Quick Guide for Beginners
-
-
-
-![image-20230414232256309](sv-verilog/image-20230414232256309.png)
-
-![image-20230414232439556](sv-verilog/image-20230414232439556.png)
-
-
-
-### Inertial delay
-
-Inertial delay models are simulation delay models that filter pulses that are shorted than the propagation delay of **Verilog gate primitives** or **continuous assignments** (`assign #5 y = ~a;`)
-
-​													**COMBINATIONAL LOGIC ONLY !!!**
-
-> - Inertial delays swallow glitches
-> - **sequential logic** implemented with **procedure assignments** DON'T follow the rule
-
-#### continuous assignments
+signed to unsigned assignemnt
 
 ```verilog
-`timescale 1ns/100ps
-module tb;
+logic signed [7:0]  nxt;
+wire underflow = nxt[7] | (~(|nxt));
 
-	reg in;
-/////////////////////////////////////////////////////
-	wire out;
-	assign #2.5 out = in;
-/////////////////////////////////////////////////////
-	initial begin
-		in = 0;
-		#16;
-		in = 1;
-		#2;
-		in = 0;
-		#10;
-		in = 1;
-		#4;
-		in = 0;
-	end
-
-	initial begin
-		#50;
-		$finish();
-	end
-
-endmodule
+logic [4:0] tgt;
 ```
 
+There are two different uses of `|` here:
+
+- `nxt[7]` is 1 when `nxt` is **negative**.
+- `|nxt` is **reduction OR**: it ORs together every bit. Thus, `~(|nxt)` is 1 exactly when **all bits are zero**.
+- The outer `|` combines these two conditions.
+
+For known binary inputs:
+
+$$
+\text{underflow} =(a_{\text{next}}<0)\lor(a_{\text{next}}=0) =\boxed{a_{\text{next}}\le0}
+$$
 
 
-![image-20220317000509716](sv-verilog/image-20220317000509716.png)
 
-#### procedure assignment - combinational logic
 
-```verilog
-`timescale 1ns/100ps
-module tb;
 
-	reg in;
-	reg out;
+## Saturating arithmetic
 
-//////////// combination logic ////////////////////////
-	always @(*)
-		#2.5 out = in;
-///////////////////////////////////////////////////////
-/* the above code is same with following code
-    	always @(*) begin
-			#2.5;
-			out = in;
-		end
-*/
-	initial begin
-		in = 0;
-		#16;
-		in = 1;
-		#2;
-		in = 0;
-		#10;
-		in = 1;
-		#4;
-		in = 0;
-	end
+Saturation returns the nearest endpoint when a result is outside the output range:
 
-	initial begin
-		#50;
-		$finish();
-	end
+$$
+\operatorname{sat}_{[L,U]}(x)=
+\begin{cases}
+L, & x<L,\\
+x, & L\le x\le U,\\
+U, & x>U.
+\end{cases}
+$$
 
-endmodule
+First compute an exact intermediate; then clamp and narrow it. In the function names below, `u` means unsigned and `s` means signed, in the order **input A, input B, output**. These suffixes describe the intended numeric operation, not an implicit language conversion.
+
+### Unsigned + unsigned to unsigned
+
+The sum lies in $[0,510]$, so nine unsigned bits are sufficient.
+
+```systemverilog
+function automatic logic [7:0] satadd_uuu8b(
+    input logic [7:0] a,
+    input logic [7:0] b
+);
+    logic [8:0] t;
+    begin
+        t = {1'b0, a} + {1'b0, b};
+        satadd_uuu8b = t[8] ? 8'hff : t[7:0];
+    end
+endfunction
 ```
 
-![image-20220316235257361](sv-verilog/image-20220316235257361.png)
+### Signed + signed to signed
 
-#### procedure assignment - sequential logic
+The sum lies in $[-256,254]$, so nine signed bits are sufficient. The function's return type must also be signed if callers are to use its result as a signed operand.
 
-```verilog
-`timescale 1ns/100ps
-module tb;
-	reg clk;
-
-	reg in;
-	reg out;
-
-	always begin
-		clk = 0;
-		#5;
-		forever begin
-			clk = ~clk;
-			#5;
-		end
-	end
-//////////// sequential logic //////////////////
-	always @(posedge clk)
-		#2.5 out <= in;
-///////////////////////////////////////////////
-	initial begin
-		in = 0;
-		#16;
-		in = 1;
-		#2;
-		in = 0;
-		#10;
-		in = 1;
-	end
-
-	initial begin
-		#50;
-		$finish();
-	end
-
-endmodule
+```systemverilog
+function automatic logic signed [7:0] satadd_sss8b(
+    input logic signed [7:0] a,
+    input logic signed [7:0] b
+);
+    logic signed [8:0] t;
+    begin
+        t = a + b;
+        satadd_sss8b = (t[8:7] == 2'b01) ? 8'sh7f :
+                      (t[8:7] == 2'b10) ? 8'sh80 :
+                                          t[7:0];
+    end
+endfunction
 ```
 
-![image-20220316235620168](sv-verilog/image-20220316235620168.png)
+The last ternary branch is an unsigned part-select. All branches already have the final eight-bit width, so they select the intended bits; the declared function return type makes the returned value signed.
 
-> As shown above, sequential logic DON'T follow inertial delay
+### Signed + unsigned to unsigned
 
+The mathematical sum lies in $[-128,382]$. A **signed nine-bit** intermediate only covers $[-256,255]$, so use **ten signed bits**.
 
+```systemverilog
+function automatic logic [7:0] satadd_suu8b(
+    input logic signed [7:0] a,
+    input logic        [7:0] b
+);
+    logic signed [9:0] a_ext, b_ext, t;
+    begin
+        a_ext = {{2{a[7]}}, a};
+        b_ext = {2'b00, b};
+        t = a_ext + b_ext;
 
-### Transport delay
-
-Transport delay models are simulation delay models that pass all pulses, including pulses that are shorter than the propagation delay of corresponding **Verilog procedural assignments**
-
-> - Transport delays pass glitches, delayed in time
-> - Verilog can model RTL transport delays by adding **explicit delays to the right-hand-side (RHS) of a nonblocking assignment**
-
-```verilog
-always @(*)
-    y <= #5 ~a;
+        if (t > 10'sd255)
+            satadd_suu8b = 8'hff;
+        else if (t < 10'sd0)
+            satadd_suu8b = 8'h00;
+        else
+            satadd_suu8b = t[7:0];
+    end
+endfunction
 ```
 
-#### nonblocking assignment
+For example, $127+255=382$ must clamp to 255. Computing that sum as a nine-bit signed value would wrap to -130 before the saturation decision.
 
-```verilog
-`timescale 1ns/100ps
-module tb;
+### Signed +/- unsigned to signed
 
-	reg in;
-	reg out;
-/////////////// nonblocking assignment ///
-	always @(*) begin
-		out <= #2.5 in;
-	end
-/////////////////////////////////////////
-	initial begin
-		in = 0;
-		#16;
-		in = 1;
-		#2;
-		in = 0;
-		#10;
-		in = 1;
-		#4;
-		in = 0;
-	end
+For eight-bit operands, addition spans $[-128,382]$ and subtraction spans $[-383,127]$. Ten signed bits cover both.
 
-	initial begin
-		#50;
-		$finish();
-	end
+```systemverilog
+function automatic logic signed [7:0] satop_sus8b(
+    input logic signed [7:0] a,
+    input logic        [7:0] b,
+    input logic             plus
+);
+    logic signed [9:0] a_ext, b_ext, t;
+    begin
+        a_ext = {{2{a[7]}}, a};
+        b_ext = {2'b00, b};
+        t = plus ? (a_ext + b_ext) : (a_ext - b_ext);
 
-endmodule
+        if (t > 10'sd127)
+            satop_sus8b = 8'sh7f;
+        else if (t < -10'sd128)
+            satop_sus8b = 8'sh80;
+        else
+            satop_sus8b = t[7:0];
+    end
+endfunction
 ```
 
-![image-20220317003146825](sv-verilog/image-20220317003146825.png)
-
-
-
-#### blocking assignment
-
-```verilog
-`timescale 1ns/100ps
-module tb;
-
-	reg in;
-	reg out;
-/////////////// blocking assignment ///
-	always @(*) begin
-		out = #2.5 in;
-	end
-/////////////////////////////////////////
-	initial begin
-		in = 0;
-		#16;
-		in = 1;
-		#2;
-		in = 0;
-		#10;
-		in = 1;
-		#4;
-		in = 0;
-	end
-
-	initial begin
-		#50;
-		$finish();
-	end
-
-endmodule
-```
-
-![image-20220317003819457](sv-verilog/image-20220317003819457.png)
-
-> It seems that new event is **discarded** before previous event is realized.
-
-
-
-## clocking block in SystemVerilog
-
-> Assignment at \<interface\>.\<clocking block\>.\<output signal\> (i.e. synchronous) do **NOT** change \<interface\>.\<output signal\> until active clock edge.
-
- 
-
-```verilog
-// router_io.sv
-
-interface router_io(input bit clock);
-  logic    reset_n;
-  logic [15:0]  din;
-  logic [15:0]  frame_n;
-  logic [15:0]  valid_n;
-  logic [15:0]  dout;
-  logic [15:0]  valido_n;
-  logic [15:0]  busy_n;
-  logic [15:0]  frameo_n;
-
-  clocking cb @(posedge clock);
-    default input #1ns output #1ns;
-    output reset_n;
-    output din;
-    output frame_n;
-    output valid_n;
-    input  dout;
-    input  valido_n;
-    input  frameo_n;
-    input  busy_n;
-  endclocking: cb
-  
-  // `reset_n` can be either a synchronous or an asynchronous signal
-  modport TB(clocking cb, output reset_n);
-
-endinterface: router_io
-```
-
-> All interface signals are asynchronous and without a direction spection (i.e. input, output, inout). 
->
-> - The direction can only be specified in `clocking` block for **synchronous signals**
-> - or a `modport` for **asynchronous signals**
->
-> All directions for the signals in the clocking block must be with respect to the test program;
-
-
-```verilog
-// test.sv
-
-program automatic test(router_io.TB rtr_io);
-
-  initial begin
-    reset();
-  end
-    
-  task reset();
-    rtr_io.reset_n = 1'b0;
-    rtr_io.cb.frame_n <= '1;
-    rtr_io.cb.valid_n <= '1;
-    repeat(2) @rtr_io.cb;
-    rtr_io.cb.reset_n <= 1'b1;
-    repeat(15) @(rtr_io.cb);
-  endtask: reset
-
-endprogram: test
-```
-
-```verilog
-// router_test_top.sv
-
-`timescale 1ns/100ps
-
-module router_test_top;
-  parameter simulation_cycle = 100;
-
-  bit SystemClock = 0;
-
-  router_io top_io(SystemClock);
-  test t(top_io);
-
-  router dut(
-    .reset_n  (top_io.reset_n),
-    .clock    (top_io.clock),
-    .din    (top_io.din),
-    .frame_n  (top_io.frame_n),
-    .valid_n  (top_io.valid_n),
-    .dout    (top_io.dout),
-    .valido_n  (top_io.valido_n),
-    .busy_n    (top_io.busy_n),
-    .frameo_n  (top_io.frameo_n)
-  );
-
-  initial begin
-    $timeformat(-9, 1, "ns", 10);
-    $fsdbDumpvars;
-  end
-
-  always begin
-    #(simulation_cycle/2) SystemClock = ~SystemClock;
-  end
-
-endmodule
-```
-
-**compile**:
-
-```
-$ vcs -sverilog -full64 -kdb -debug_access+all router_test_top.sv test.sv router_io
-.sv ../../rtl/router.v
-```
-
-> file with ``timescale` must be placed in the first, which is `router_test_top.sv` in above example
-
-
-
-### clocking.output
-
-![image-20220621005749074](sv-verilog/image-20220621005749074.png)
-
-> systemverilog don't pass clocking.output to interface's until current or next active edge and after output-skew 
-
-
-
-### clocking.input
-
-![image-20220621010546293](sv-verilog/image-20220621010546293.png)
-
-> Systemverilog **automatically** update clocking.input signal from interface's value, input-skew before active edge
-
-
-### Gotcha
-
-An `interface` must be compiled separately like a `module` and CANNOT ``include` inside a `package` or ohter `module`
-
-
-
-## Cadence EE_pkg 101
-
-### What Is Real Number Modeling?
-
-- model analog blocks operation as signal flow model
-- only the digital solver is used for high-speed simulation
-  - Event-driven
-  - No convergence issues, because no analog solver is used
-- Five different language standards support real number modeling:
-  - **wreal** (wired-real) ports in Verilog-AMS
-  - **real** data type in VHDL
-  - **real** data type in Verilog
-  - **real** variables and **nettypes** in SystemVerilog (SV)
-  - **real** types in e
-
-### Benefits of RNM
-
-- Most analog circuits that need to be modeled for MS verification at the SoC level can be described in terms of real-valued voltages or currents
-- RNM is a mixed approach, borrowing concepts from both continuous and discrete domains
-  - The values are floating-point (real) number.
-  - Time is discrete; the real signals change values based on discrete events
-- Applicability of RNM is bounded primarily by **signal-flow** model style
-- Migrating analog behavior from the analog domain to the event or pseudo-analog domain can bring huge benefits without sacrificing too much accuracy
-- Simulation is executed by a digital simulation engine without need for the analog solver
-- Hence real-number modeling enables very high performance simulation of mixed-signal systems
-
-
-
-### Limitations of RNM
-
-- connecting **real** or **wreal** signals to electrical signals requires careful consideration
-  - Too conservative an approach can lead to large numbers of timepoints
-  - Too liberal an approach can lead to losing signal accuracy
-- Time accuracy limited by the discrete sampling approach and the ``timescale` setting - no continuous signals anymore
-- Limited capability for combination of signals by wiring outputs together
-  - Requires assumptions about impedances to do simple merging
-
-
-
-
-
-## constant part-select and indexed part-select in Verilog
-
-> Verilog scalar and vector [[link](https://www.chipverify.com/verilog/verilog-scalar-vector#:~:text=Part-selects,with%20an%20indexed%20part-select.&text=Having%20a%20variable%20part-select,select%20parts%20of%20the%20vector.)]
->
-> What is the "+:" operator called in Verilog? [[link](https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog)]
-
-A range of contiguous bits can be selected and is known as **part-select**. There are two types of part-selects, one with a **constant part-select** and another with an **indexed part-select**
-
-```verilog
-reg [31:0] addr;
-addr [23:16] = 8'h23; //bits 23 to 16 will be replaced by the new value 'h23 -> constant part-select
-```
-
-Having a variable part-select allows it to be used effectively in loops to select parts of the vector. Although the starting bit can be **varied**, the width has to be **constant**.
-
-> **[<start_bit +: <width>]	// part-select increments from start-bit**
->
-> **[<start_bit -: <width>]	// part-select decrements from start-bit**
-
-
-
-**Example**
-
-```verilog
-logic [31: 0] a_vect;
-logic [0 :31] b_vect;
-
-logic [63: 0] dword;
-integer sel;
-
-a_vect[ 0 +: 8] // == a_vect[ 7 : 0]
-a_vect[15 -: 8] // == a_vect[15 : 8]
-b_vect[ 0 +: 8] // == b_vect[0 : 7]
-b_vect[15 -: 8] // == b_vect[8 :15]
-
-dword[8*sel +: 8] // variable part-select with fixed width
-```
-
-
-
-## Mixing Signed and Unsigned in Verilog
-
-> Bevan Baas, VLSI Digital Signal Processing, EEC 281 - VLSI Digital Signal Processing [[https://www.ece.ucdavis.edu/~bbaas/281/](https://www.ece.ucdavis.edu/~bbaas/281/)]
-
-Sign Extension
-
-1) Calculate the necessary minimum width of the sum so that it contains all input possibilities
-2) Extend the inputs' sign bits to the width of the answer
-3) Add as usual
-4) Ignore bits that ripple to the left of the answer's MSB
-
-1. **signed**
-
-|               | inA (signed) | inB (signed) | outSum<br />(signed/unsigned) |
-| ------------- | ------------ | ------------ | ----------------------------- |
-|               | 0101 (5)     | 1111 (-1)    |                               |
-| *extend sign* | **0**0101    | **1**1111    |                               |
-| *sum result*  |              |              | 00100                         |
-```verilog
-module tb;
-	reg signed [3:0] inA;
-	reg signed [3:0] inB;
-    reg signed [4:0] outSumSg;	// signed result
-    reg [4:0] outSumUs;			// unsigned result
-
-	initial begin
-		inA = 4'b0101;
-		inB = 4'b1111;
-		outSumUs = inA + inB;
-		outSumSg = inA + inB;
-
-		$display("signed out(%%d): %0d", outSumSg);
-		$display("signed out(%%b): %b", outSumSg);
-
-		$display("unsigned out(%%d): %0d", outSumUs);
-		$display("unsigned out(%%b): %b", outSumUs);
-	end
-endmodule
-```
-2. **mixed**
-
-|               | inA (signed) | inB (unsigned) | outSum<br />(signed/unsigned) |
-| ------------- | ------------ | -------------- | ----------------------------- |
-|               | 0101 (5)     | 1111 (15)      |                               |
-| *extend sign* | **0**0101    | **0**1111      |                               |
-| *sum result*  |              |                | 10100                         |
-```verilog
-reg signed [3:0] inA;
-reg [3:0] inB;
-```
-|               | inA (unsigned) | inB (signed) | outSum<br />(signed/unsigned) |
-| ------------- | -------------- | ------------ | ----------------------------- |
-|               | 0101 (5)       | 1111 (-1)    |                               |
-| *extend sign* | **0**0101      | **0**1111    |                               |
-| *sum result*  |                |              | 10100                         |
-
-```verilog
-module tb;
-	reg [3:0] inA;
-	reg signed [3:0] inB;
-	reg signed [4:0] outSumSg;
-	reg [4:0] outSumUs;
-
-	initial begin
-		inA = 4'b0101;
-		inB = 4'b1111;
-		outSumUs = inA + inB;
-		outSumSg = inA + inB;
-
-		$display("signed out(%%d): %0d", outSumSg);
-		$display("signed out(%%b): %b", outSumSg);
-
-		$display("unsigned out(%%d): %0d", outSumUs);
-		$display("unsigned out(%%b): %b", outSumUs);
-	end
-endmodule
-```
-
-**xcelium**
-
-```
-xcelium> run
-signed out(%d): -12
-signed out(%b): 10100
-unsigned out(%d): 20
-unsigned out(%b): 10100
-xmsim: *W,RNQUIE: Simulation is complete.
-xcelium> exit
-```
-
-**vcs**
-
-```
-Compiler version S-2021.09-SP2-1_Full64; Runtime version S-2021.09-SP2-1_Full64;  May  7 17:24 2022
-signed out(%d): -12
-signed out(%b): 10100
-unsigned out(%d): 20
-unsigned out(%b): 10100
-           V C S   S i m u l a t i o n   R e p o r t
-```
-
-### observation
-
-> When *signed* and *unsigned* is **mixed**, the result is by default **unsigned**. 
->
-> Prepend to operands with **0**s instead of extending sign, even though the operands is signed
->
-> LHS **DONT** affect how the simulator operate on the operands but what the results represent, signed or unsigned
-
-
-
-Therefore, although `outSumUs` is declared as signed, its result is unsigned
-
-#### subtraction example
-
-In logic arithmetic, addition and subtraction are commonly used for digital design. Subtraction is similar to addition except that the subtracted number is 2's complement. By using 2's complement for the subtracted number, both addition and subtraction can be unified to using addition only.
-
-##### operands are signed
-
-|               | inA (signed) | inB (signed) | outSub<br />(signed/unsigned) |
-| ------------- | ------------ | ------------ | ----------------------------- |
-|               | 1111 (-1)    | 0010 (2)     |                               |
-| *extend sign* | **1**1111    | **0**0010    |                               |
-| *sub result*  |              |              | 11101                         |
-
-```verilog
-module tb;
-	reg signed [3:0] inA;
-	reg signed [3:0] inB;
-	reg signed [4:0] outSubSg;
-	reg [4:0] outSubUs;
-
-	initial begin
-		inA = 4'b1111;
-		inB = 4'b0010;
-		outSubUs = inA - inB;
-		outSubSg = inA - inB;
-
-		$display("signed out(%%d): %0d", outSubSg);
-		$display("signed out(%%b): %b", outSubSg);
-
-		$display("unsigned out(%%d): %0d", outSubUs);
-		$display("unsigned out(%%b): %b", outSubUs);
-	end
-endmodule
-```
-
-```
-Compiler version S-2021.09-SP2-1_Full64; Runtime version S-2021.09-SP2-1_Full64;  May  7 17:46 2022
-signed out(%d): -3
-signed out(%b): 11101
-unsigned out(%d): 29
-unsigned out(%b): 11101
-           V C S   S i m u l a t i o n   R e p o r t
-```
-
-```
-xcelium> run
-signed out(%d): -3
-signed out(%b): 11101
-unsigned out(%d): 29
-unsigned out(%b): 11101
-xmsim: *W,RNQUIE: Simulation is complete.
-```
-
-##### operands are mixed
-
-|               | inA (signed) | inB (unsigned) | outSub<br />(signed/unsigned) |
-| ------------- | ------------ | -------------- | ----------------------------- |
-|               | 1111 (-1)    | 0010 (2)       |                               |
-| *extend sign* | **0**1111    | **0**0010      |                               |
-| *sub result*  |              |                | 01101                         |
-
-```verilog
-module tb;
-	reg signed [3:0] inA;
-	reg [3:0] inB;
-	reg signed [4:0] outSubSg;
-	reg [4:0] outSubUs;
-
-	initial begin
-		inA = 4'b1111;
-		inB = 4'b0010;
-		outSubUs = inA - inB;
-		outSubSg = inA - inB;
-
-		$display("signed out(%%d): %0d", outSubSg);
-		$display("signed out(%%b): %b", outSubSg);
-
-		$display("unsigned out(%%d): %0d", outSubUs);
-		$display("unsigned out(%%b): %b", outSubUs);
-	end
-endmodule
-```
-
-```
-Compiler version S-2021.09-SP2-1_Full64; Runtime version S-2021.09-SP2-1_Full64;  May  7 17:50 2022
-signed out(%d): 13
-signed out(%b): 01101
-unsigned out(%d): 13
-unsigned out(%b): 01101
-           V C S   S i m u l a t i o n   R e p o r t 
-```
-
-```
-xcelium> run
-signed out(%d): 13
-signed out(%b): 01101
-unsigned out(%d): 13
-unsigned out(%b): 01101
-xmsim: *W,RNQUIE: Simulation is complete.
-xcelium> exit
-```
-
-
-
-### Danger Sign
-
-[https://projectf.io/posts/numbers-in-verilog/](https://projectf.io/posts/numbers-in-verilog/)
-
-> Verilog has a nasty habit of treating everything as unsigned unless all variables in an expression are signed. To add insult to injury, most tools won’t warn you if signed values are being ignored.
->
-> If you take one thing away from this post:
->
-> **Never mix signed and unsigned variables in one expression!**
-
-```verilog
-module signed_tb ();
-    logic [7:0] x;  // 'x' is unsigned
-    logic signed [7:0] y;  // 'y' is signed
-    logic signed [7:0] x1, y1;
-    logic signed [3:0] move;
-
+Examples:
+
+| Operation | Exact result | Saturated signed output |
+| --- | ---: | ---: |
+| $127+255$ | 382 | 127 |
+| $-128+255$ | 127 | 127 |
+| $-128-255$ | -383 | -128 |
+| $127-255$ | -128 | -128 |
+
+### Clamp an 8-bit signed input to 6 bits
+
+A six-bit signed value ranges from -32 to +31.
+
+```systemverilog
+module clamp_8_to_6 (
+    input  logic signed [7:0] din,
+    output logic signed [5:0] dout
+);
     always_comb begin
-        x1 = x + move;  // !? DANGER: 'x' is unsigned but 'move' is signed
-        y1 = y + move;
-    end
-
-    initial begin
-        #10
-        $display("Coordinates (7,7):");
-        x = 8'd7;
-        y = 8'd7;
-        #10
-        $display("x : %b  %d", x, x);
-        $display("y : %b  %d", y, y);
-
-        #10
-        $display("Move +4:");
-        move = 4'sd4;  // signed positive value
-        #10
-        $display("x1: %b  %d  *LOOKS OK*", x1, x1);
-        $display("y1: %b  %d", y1, y1);
-
-        #10
-        $display("Move -4:");
-        move = -4'sd4;  // signed negative value
-        #10
-        $display("x1: %b  %d  *SURPRISE*", x1, x1);     // 0000_0111 + {0000}_1100 = 0001_0011
-        $display("y1: %b  %d", y1, y1);                 // 0000_0111 + {1111}_1100 = 0000_0011
+        if (din > 8'sd31)
+            dout = 6'sd31;
+        else if (din < -8'sd32)
+            dout = 6'sb100000;
+        else
+            dout = din[5:0];
     end
 endmodule
 ```
 
-```
-Chronologic VCS simulator copyright 1991-2021
-Contains Synopsys proprietary information.
-Compiler version S-2021.09-SP2-2_Full64; Runtime version S-2021.09-SP2-2_Full64;  Nov 19 11:02 2022                                     
-Coordinates (7,7):
-x : 00000111    7
-y : 00000111            7
-Move +4:
-x1: 00001011           11  *LOOKS OK*
-y1: 00001011           11
-Move -4:
-x1: 00010011           19  *SURPRISE*
-y1: 00000011            3
-           V C S   S i m u l a t i o n   R e p o r t
-Time: 60
-CPU Time:      0.260 seconds;       Data structure size:   0.0Mb
-```
-
-
-
-
-
-
-
-## time format in Verilog
-
-> [https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94062](https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94062)
-> [https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94096](https://verificationacademy.com/forums/systemverilog/time-vs-realtime#answer-94096)
-
-
-
-### realtime vs time
-
-- `$realtime` round the current time to `timeprecision`
-
-- `$time` round the current time to integer
-
-- `%t` will scale the rounded value to represent `timeprecision`,
-
-  i.e.  $[\$\text{realtime}, \$\text{time}]\cdot \$\text{timeunit} / \$\text{timeprecision}$
-
-
-
-```verilog
-module tb;
-  timeunit 10ns;
-  timeprecision 1ps;
-
-  initial begin
-    $display("$realtime = %g", $realtime);
-    $display("$time = %g", $time);
-    // $realtime round to timeprecision
-    // $time round to integer
-    #1.10016
-    $display("$realtime = %g", $realtime);
-    $display("$time = %g", $time);
-
-    // %t format will scale the rounded value to represent timeprecision
-    // 1.1002*10e-9/1e-12 = 11002
-    $display("$realtime %%t = %t", $realtime);
-    $display("$time %%t = %t", $time);
-  end
-endmodule
-```
-
-output
-
-```
-  $realtime = 0
-  $time = 0
-  $realtime = 1.1002
-  $time = 1
-  $realtime %t =                11002
-  $time %t =                10000
-```
-
-### timeunit, timeprecision
-
-The time unit and time precision can be specified in the following two ways:
-
-- Using the compiler directive `` `timescale``
-- Using the keywords `timeunit` and `timeprecision`
-
-```verilog
-module D (...);
-  timeunit 100ps;
-  timeprecision 10fs;
-  ...
-endmodule
-
-module E (...);
-  timeunit 100ps / 10fs; // timeunit with optional second argument
-  ...
-endmodule
-```
-
-The minimum of `timeprecision` determine `%t` output, the nearest `timeunit` and `timeprecision` determine
-the round of `$realtime` and `$time`. Of course, the simulator follow the time tick shown by `$realtime`.
-
-```verilog
-`timescale 1ns/1ns
-
-// Due to minimum of timeprecision is 10ps
-module rawplant;
-  timeunit 1ns;
-  timeprecision 100ps;
-
-  task print;
-    /*
-    1ns: 1
-    100ps:  6
-    10ps: 6
-    1ps: 6
-    */
-    #1.666
-    $display("raw: $realtime = %g", $realtime);     // 1.7
-    $display("raw: $time = %g", $time);             // 2
-    $display("raw: $realtime %%t = %t", $realtime); // 1.7*1ns/10ps=170
-    $display("raw: $time %%t = %t", $time);         // 2*1ns/10ps = 200
-  endtask
-
-endmodule
-
-module fineplant;
-  timeunit 100ps;
-  timeprecision 10ps;
-
-  task print;
-    /*
-    100ps: 2
-    10ps: 6
-    1ps: 6
-    */
-    #2.66
-    $display("fine: $realtime = %g", $realtime);     // 2.7
-    $display("fine: $time = %g", $time);             // 3
-    $display("fine: $realtime %%t = %t", $realtime); // 2.7*100ps/10ps = 27
-    $display("fine: $time %%t = %t", $time);         // 3*100ps/10ps = 30
-  endtask
-
-endmodule
-
-module tb;
-  rawplant rawblock();
-  fineplant fineblock();
-
-  initial begin
-  fork
-    rawblock.print();
-    fineblock.print();
-  join
-  end
-endmodule
-```
-
-output
-
-```
-fine: $realtime = 2.7
-fine: $time = 3
-fine: $realtime %t =                   27
-fine: $time %t =                   30
-raw: $realtime = 1.7
-raw: $time = 2
-raw: $realtime %t =                  170
-raw: $time %t =                  200
-```
-
-
-
-### questasim cmd
-
-```bash
-vlib work
-vlog tb.v
-vsim -c -do "run -all;exit" work.tb
-```
-
-
-
-
-
-## data dumping of simulation
-
-> `$dumpvars` and `$dumpfile` Verilog, [[http://www.referencedesigner.com/tutorials/verilog/verilog_62.php](http://www.referencedesigner.com/tutorials/verilog/verilog_62.php)]
-
-### FSDB
-
-#### `$fsdbDumpfile`
-
-It specifies the FSDB file name created by the Novas object files for FSDB dumping. If it is not specified, then the default FSDB file name is "novas.fsdb".
-
-> This command is valid only **before** executing `$fsdbDumpvars` and is ignored if specified after `$fsdbDumpvars`
-
-
-
-#### `$fsdbSuppress`
-
-The `fsdbSuppress `utility is used to skip dumping of few instances, scopes, modules and signals. The `fsdbSuppress `utility is a system task like other fsdb tasks.
-
-> For `$fsdbSuppress()` to be effective, it needs to be specified/called **before** `$fsdbDumpvars`
-
-
-
-#### `$fsdbAutoSwitchDumpfile`
-
-Automatically switch to a new dump file when the working FSDB file reaches the specified size or the specified wall time period.
-
-> After the dumping is finished, a **virtual FSDB file (\*.vf)** is automatically created and list all of the generated FSDB files with the correct sequence. Only the **virtual FSDB file**, rather than all of the FSDB files, needs to be loaded to view the simulation results
-
-When specified in the design to switch based on **file size**:
-
-```
-$fsdbAutoSwitchDumpfile(File_Size | File_Size_var, "FSDB_Name" |FSDB_Name_var, Number_of_Files | Number_of_Files_var[ ,"log_filename" | ,log_filename_var ], ["+no_overwrite"]);
-```
-
-When specified in the design to switch based on **time period**
-
-```
-$fsdbAutoSwitchDumpfile(File_Size | File_Size_var, "FSDB_Name" |FSDB_Name_var, Number_of_Files | Number_of_Files_var[ ,"log_filename" | ,log_filename_var ], ["+no_overwrite"], “+by_period”);
-```
-
-> `“+by_period”`
-
-
-
-#### `$fsdbDumpvars`
-
-This command dumps the change in signal value to the FSDB file.
-
-```
-$fsdbDumpvars([ depth, | "level=",depth_var, ],[instance | "instance=",instance_var])
-```
-
-> For VCS users, to include memory, MDA, packed array and structure information in the generated FSDB file, the `-debug_access` option must be included when VCS is invoked to **compile the design**
-
-- `depth`
-
-  Specify how many sub-scope levels under the given scope you want to dump.
-
-  - Specify this argument as **1** to dump the signals under the given scope
-  - Specify this argument as **0** to dump all signals under the given scope and its descendant scopes.
-
-  0: all signals in all scopes.
-
-  1: all signals in current scope.
-
-  2: all signals in the current scope and all scopes one level below.
-
-  n: all signals in the current scope and all scopes n-1 levels below.
-
-  |                             | tb.clk  | tb.u_div2.div2 | tb.u_div2.u_div2neg.div2neg |
-  | --------------------------- | ------- | -------------- | --------------------------- |
-  | $fsdbDumpvars(0)            | &check; | &check;        | &check;                     |
-  | $fsdbDumpvars(1)            | &check; | &cross;        | &cross;                     |
-  | $fsdbDumpvars(2)            | &check; | &check;        | &cross;                     |
-  | $fsdbDumpvars(1, tb.u_div2) | &cross; | &check;        | &cross;                     |
-  | $fsdbDumpvars(0, tb.u_div2) | &cross; | &check;        | &check;                     |
-
-  ```verilog
-  module tb;
-  	reg clk;
-  
-  	divider2 u_div2(clk);
-  
-  	initial begin
-  		clk = 1'b0;
-  		forever #5 clk = ~clk;
-  	end
-  
-  	initial begin
-  		#100;
-  		$finish();
-  	end
-  
-  	initial begin
-  		 #10;
-  		 $fsdbDumpfile("tb.fsdb");
-  		 //$fsdbDumpvars(0);				// same with $fsdbDumpvars(0, tb)
-  		 //$fsdbDumpvars(1);				// same with $fsdbDumpvars(1, tb)
-  		 //$fsdbDumpvars(2);				// same with $fsdbDumpvars(2, tb)
-  		 //$fsdbDumpvars(1, tb.u_div2);
-  		 $fsdbDumpvars(0, tb.u_div2);
-  		 #80 $finish();
-  	end
-  
-  endmodule
-
-
-  module divider2 (
-  	input clk
-  );
-  	reg div2;
-
-  	divider2neg u_div2neg(div2);
-  	
-  	always@(posedge clk) begin
-  		div2 = ~div2;
-  	end
-  	
-  	initial begin
-  		div2 = 1'b0;
-  	end
-
-  endmodule
-
-  module divider2neg (
-  	input clk
-  );
-  	reg div2neg;
-
-  	always@(negedge clk) begin
-  		div2neg = ~div2neg;
-  	end
-  	
-  	initial begin
-  		div2neg= 1'b0;
-  	end
-
-  endmodule
-  ```
-  *compile*
-  ```
-  vcs -full64 -kdb -debug_access+all tb.v
-  ```
-
-  *simulate*
-
-  ```
-  ./simv
-  ```
-
-  *load fsdb*
-
-  ```
-  verdi -ssf tb.fsdb
-  ```
-
-  ![image-20220604192421888](data-dump/image-20220604192421888.png)
-
-#### `$fsdbDumpon, $fsdbDumpoff`
-
-```verilog
-$fsdbDumpon(["+fsdbfile+filename"])
-
-$fsdbDumpoff(["+fsdbfile+filename"])
-  ```
-
-These FSDB dumping commands turn dumping on and off. `fsdbDumpon/fsdbDumpoff` has the highest priority and overrides all other FSDB dumping commands.
-
-`fsdbDumpon/fsdbDumpoff` is not restricted to only `fsdbDumpvars`. If there is more than one FSDB file open for dumping at one simulation run, `fsdbDumpon/fsdbDumpoff` may only affect a specific FSDB file by specifying the specific file name.
-
-- `+fsdbfile+filename`: Specify the FSDB file name. If not specified, the default FSDB file name is "novas.fsdb"
-
-#### `$fsdbDumpFinish`
-
-This command closes all FSDB files in the current simulation and stops dumping of signals. Although all FSDB files are *closed automatically at the end of simulation*, this dumping command can be invoked to *explicitly* close the FSDB files during the simulation
-
-### VCD
-
-#### `$dumpfile`
-
-The declaration onf `$dumpfile` must come before the `$dumpvars` or any other system tasks that specifies dump.
-
-```verilog
-$dumpfile("test.vcd");
-```
-
-> argument **is necessary**, there is no default value
-
-#### `$dumpvars`
-
-The `$dumpvars` is used to specify which variables are to be dumped ( in the file mentioned by `$dumpfile`). The simplest way to use it is without any argument.
-
-```verilog
-$dumpvars(<levels> <, <module_or_variable>>* );
-```
-
-#### `$dumplimit`
-
-It is possible that you inadvertantly generate huge file in Gigabytes ( for examples while dumping a Gigahertz clock for one second). To reduce such occurrences, we may use `$dumplimit`. It usage is
-
-```verilog
-$dumplimit(<filesize>);
-```
-
-#### `$dumpoff and $dumpon`
-
-During the simulation if you are bothered about about only during a certain interval then you can use `$dumpoff` and `$dumpon`. The following example shows its usage. It will dump the changes for first 100 units of time and then between 10200 and 10400 units of time.
-
-```verilog
-initial
-    $monitor($time, " reset=%b,clk_out=%b",reset,clk_out);
-    initial begin
-            $dumpfile("clkdiv2n_tb.vcd");
-            $dumpvars(0,clkdiv2n_tb);
-            #100;
-            $dumpoff;
-            #10200;
-            $dumpon;
-            #10400;
-            $dumpoff;
-    end
-```
-
-#### demo
-
-stimulus.v
-
-```verilog
-`timescale 1ns / 1ps
-module stimulus;
-	// Inputs
-	reg x;
-	reg y;
-	// Outputs
-	wire z;
-	// Instantiate the Unit Under Test (UUT)
-	comparator uut (
-		.x(x),
-		.y(y),
-		.z(z)
-	);
-
-	initial begin
-		$dumpfile("test.vcd");
-		$dumpvars(0);
-		// Initialize Inputs
-		x = 0;
-		y = 0;
-
-		#20 x = 1;
-		#20 y = 1;
-		#20 y = 0;
-		#20 x = 1;
-		#40 ;
-
-	end
-
-	initial begin
-		$monitor("t=%3d x=%d,y=%d,z=%d \n",$time,x,y,z, );
-	end
-
-endmodule
-```
-
-
-
-comparator.v
-
-```verilog
-module comparator(
-	input x,
-	input y,
-	output z
-);
-
-	assign z = (~x & ~y) |(x & y);
-
-endmodule
-```
-
-```
-$ xrun stimulus.v comparator.v -access +rwc
-$ simvision test.vcd
-```
-
-
-
-## readmemb & readmemh in Verilog
-
-> Initialize Memory in Verilog [[https://projectf.io/posts/initialize-memory-in-verilog/](https://projectf.io/posts/initialize-memory-in-verilog/)]
-
-
-
-**`$readmemh("hex_memory_file.mem", memory_array, [start_address], [end_address])`**
-**`$readmemb("bin_memory_file.mem", memory_array, [start_address], [end_address])`**
-
-The system task has no versions to accept octal data or decimal data.
-
-- The 1st argument is the data file name.
-- The 2nd argument is the array to receive the data.
-- The 3rd argument is an optional start address, and if you provide it, you can also provide
-- The 4th argument optional end address.
-
-Note, the 3rd and 4th argument address is for array not data file.
-
-If the memory addresses are not specified anywhere, then the system tasks load file data sequentially  from the lowest address toward the highest address. 
-
-> The standard before 2005 specify that the system tasks load file data sequentially
-> from the left memory address bound to the right memory address bound.
-
-**readtest.v**
-
-```verilog
-module readfile;
-	reg [7:0] array4 [0:3];
-	reg [7:0] array7 [6:0];
-	reg [7:0] array12 [11:0];
-
-	integer i;
-
-	initial begin
-		$readmemb("data.txt", array4);
-		$readmemb("data.txt", array7, 2, 5);
-		$readmemb("data.txt", array12);
-
-		for (i = 0; i < 4; i = i+1)
-			$display("array4[%0d] = %b", i, array4[i]);
-
-		$display("=========================");
-
-		for (i = 0; i < 7; i = i+1)
-			$display("array7[%0d] = %b", i, array7[i]);
-
-		$display("=========================");
-
-		for (i = 0; i < 12; i = i+1)
-			$display("array12[%0d] = %b", i, array12[i]);
-	end
-endmodule
-```
-
-**data.txt**
-
-```
-00000000 
-00000001
-00000010
-00000011
-00000100
-00000101
-00000110
-00001000
-```
-
-**result**
-
-```
-array4[0] = 00000000
-array4[1] = 00000001
-array4[2] = 00000010
-array4[3] = 00000011
-=========================
-array7[0] = xxxxxxxx
-array7[1] = xxxxxxxx
-array7[2] = 00000000
-array7[3] = 00000001
-array7[4] = 00000010
-array7[5] = 00000011
-array7[6] = xxxxxxxx
-=========================
-array12[0] = 00000000
-array12[1] = 00000001
-array12[2] = 00000010
-array12[3] = 00000011
-array12[4] = 00000100
-array12[5] = 00000101
-array12[6] = 00000110
-array12[7] = 00001000
-array12[8] = xxxxxxxx
-array12[9] = xxxxxxxx
-array12[10] = xxxxxxxx
-array12[11] = xxxxxxxx
-```
-
-
-
-## iff in SystemVerilog
-
-> system verilog中的iff, [[https://www.francisz.cn/2019/07/18/sv-iff](https://www.francisz.cn/2019/07/18/sv-iff)]
-
-```verilog
-@(posedge clk iff(vld));
-do_something;
-```
-
-is equivalent to
-
-```verilog
-forever begin
-	@(posedge clk);
-    if(vld) break;
+The range check can also use the upper bits. The discarded bits `din[7:6]` must equal the retained sign bit `din[5]`.
+
+| `din[7:5]` | Input range | Action |
+| --- | --- | --- |
+| `000` | 0 to 31 | Keep `din[5:0]` |
+| `111` | -32 to -1 | Keep `din[5:0]` |
+| `001`, `010`, `011` | 32 to 127 | Clamp to +31 |
+| `100`, `101`, `110` | -128 to -33 | Clamp to -32 |
+
+The following block is an **alternative** to the block above, not an additional driver:
+
+```systemverilog
+always_comb begin
+    if (din[7:5] == {3{din[5]}})
+        dout = din[5:0];
+    else
+        dout = din[7] ? 6'sb100000 : 6'sb011111;
 end
-do_something;
 ```
 
-> `iff` is more efficient than `if` because the expression is recalculated when `vld` transition rather than `clk`.
+More generally, narrowing a signed $M$-bit value to $N$ bits, with $M>N$, preserves its value exactly when all bits `din[M-1:N-1]` equal `din[N-1]`.
 
+## What the synthesized adders show
 
+The following examples retain the original Design Compiler screenshots and mapped netlists. They illustrate how operand extension changes the Boolean function. Exact cell mapping depends on the synthesis tool, cell library, constraints, and optimization settings.
 
-One example, detecting the negative edge of `rtr_io.cb.frameo_n[da]`
+### Equal operand and result widths
 
-```verilog
-wait(rtr_io.cb.frameo_n[da] !== 0);
-@(rtr_io.cb iff(rtr_io.cb.frameo_n[da] === 0 )); 
-$display("[DEBUG HGUO] %0t, rtr_io.cb.frameo_n[da] negedge", $realtime);
-```
+These unsigned and signed three-bit adders compute the same three output bits. Neither preserves an extra overflow bit.
 
-![image-20220621182019927](sv-verilog/image-20220621182019927.png)
-
-```[DEBUG HGUO] 6887250.0ns, rtr_io.cb.frameo_n[da] negedge```
-
-
-
-
-## signed and unsigned arithmetic in Verilog
-
-With **implict sign extension**, the implementation of **signed** arithmetic is **DIFFERENT** from that of **unsigned**. Otherwise, their implementations are same.
-
-The implementations manifest the RTL's behaviour correctly
-
-### add without implicit sign extension
-
-#### unsigned
-
-##### rtl
-
-```verilog
-module TOP (
-	input wire [2:0] data0
-	,input wire [2:0] data1
-	,output wire [2:0] result
+```systemverilog
+module add3_unsigned (
+    input  wire [2:0] data0,
+    input  wire [2:0] data1,
+    output wire [2:0] result
 );
-	assign result = data0 + data1;
+    assign result = data0 + data1;
+endmodule
+
+module add3_signed (
+    input  wire signed [2:0] data0,
+    input  wire signed [2:0] data1,
+    output wire signed [2:0] result
+);
+    assign result = data0 + data1;
 endmodule
 ```
 
-![image-20220507114215200](sv-verilog/image-20220507114215200.png)
+Unsigned RTL and mapped circuit:
 
-##### synthesized netlist
+![Unsigned three-bit adder RTL](sv-verilog/image-20220507114215200.png)
 
-![image-20220507114307439](sv-verilog/image-20220507114307439.png) 
+![Unsigned three-bit adder mapped circuit](sv-verilog/image-20220507114307439.png)
+
+Signed RTL and mapped circuit:
+
+![Signed three-bit adder RTL](sv-verilog/image-20220507114654777.png)
+
+![Signed three-bit adder mapped circuit](sv-verilog/image-20220507114844111.png)
+
+Both original runs produced the same gate-level connectivity:
 
 ```verilog
 /////////////////////////////////////////////////////////////
@@ -1701,71 +614,25 @@ module TOP ( data0, data1, result );
 endmodule
 ```
 
-> vcs compile with `-v /path/to/lib.v`
+### Unequal operand widths: zero extension
 
-#### signed
+Here the two-bit unsigned input is extended as `{1'b0, data1}`.
 
-##### rtl
-
-```verilog
-module TOP (
-	input wire signed [2:0] data0
-	,input wire signed [2:0] data1
-	,output wire signed [2:0] result
+```systemverilog
+module add3_2_unsigned (
+    input  wire [2:0] data0,
+    input  wire [1:0] data1,
+    output wire [2:0] result
 );
-	assign result = data0 + data1;
+    assign result = data0 + data1;
 endmodule
 ```
 
-![image-20220507114654777](sv-verilog/image-20220507114654777.png)
+![Unsigned unequal-width adder RTL](sv-verilog/image-20220507121521303.png)
 
-##### synthesized netlist
+![Unsigned unequal-width adder mapped circuit](sv-verilog/image-20220507121622001.png)
 
-![image-20220507114844111](sv-verilog/image-20220507114844111.png)
-
-```verilog
-/////////////////////////////////////////////////////////////
-// Created by: Synopsys DC Ultra(TM) in wire load mode
-// Version   : S-2021.06-SP5
-// Date      : Sat May  7 11:48:54 2022
-/////////////////////////////////////////////////////////////
-
-
-module TOP ( data0, data1, result );
-  input [2:0] data0;
-  input [2:0] data1;
-  output [2:0] result;
-  wire   n4, n5, n6;
-
-  an02d0 U6 ( .A1(data0[0]), .A2(data1[0]), .Z(n5) );
-  nr02d0 U7 ( .A1(data0[0]), .A2(data1[0]), .ZN(n4) );
-  nr02d0 U8 ( .A1(n5), .A2(n4), .ZN(result[0]) );
-  ad01d0 U9 ( .A(data1[1]), .B(data0[1]), .CI(n5), .CO(n6), .S(result[1]) );
-  xr03d1 U10 ( .A1(n6), .A2(data0[2]), .A3(data1[2]), .Z(result[2]) );
-endmodule
-```
-
-### add WITH implicit sign extension
-
-#### unsigned with 0 extension
-
-##### rtl
-
-```verilog
-module TOP (
-    input wire [2:0] data0		// 3 bit unsigned
-    ,input wire [1:0] data1		// 2 bit unsigned
-    ,output wire [2:0] result	// 3 bit unsigned
-);
-	assign result = data0 + data1;
-endmodule
-```
-
-![image-20220507121521303](sv-verilog/image-20220507121521303.png)
-
-##### synthesized netlist
-
-![image-20220507121622001](sv-verilog/image-20220507121622001.png)
+Original mapped netlist:
 
 ```verilog
 /////////////////////////////////////////////////////////////
@@ -1789,25 +656,25 @@ module TOP ( data0, data1, result );
 endmodule
 ```
 
-#### signed with implicit sign extension
+### Unequal operand widths: sign extension
 
-##### rtl
+Here the two-bit signed input is extended as `{data1[1], data1}`. The extra dependence on `data1[1]` can change the mapped logic.
 
-```verilog
-module TOP (
-	input wire signed [2:0] data0
-	,input wire signed [1:0] data1
-	,output wire signed [2:0] result
+```systemverilog
+module add3_2_signed (
+    input  wire signed [2:0] data0,
+    input  wire signed [1:0] data1,
+    output wire signed [2:0] result
 );
-	assign result = data0 + data1;
+    assign result = data0 + data1;
 endmodule
 ```
 
-![image-20220507122053948](sv-verilog/image-20220507122053948.png)
+![Signed unequal-width adder RTL](sv-verilog/image-20220507122053948.png)
 
-##### synthesized netlist
+![Signed unequal-width adder mapped circuit](sv-verilog/image-20220507122217830.png)
 
-![image-20220507122217830](sv-verilog/image-20220507122217830.png)
+Original mapped netlist:
 
 ```verilog
 /////////////////////////////////////////////////////////////
@@ -1835,318 +702,319 @@ module TOP ( data0, data1, result );
 endmodule
 ```
 
+The three-bit outputs still wrap on overflow. A full-precision sum of these operands needs four output bits.
+
+The archived netlists use library-specific cells such as `ad01d0`. Gate-level simulation requires the matching cell models; for example, VCS can load them with `-v /path/to/lib.v`. Each archived `TOP` module is a separate example.
+
+## Bit selection and masking
+
+> Stuart Sutherland, Standard Gotchas Subtleties in the Verilog and SystemVerilog Standards That Every Engineer Should Know [[https://sutherland-hdl.com/papers/2006-SNUG-Boston_standard_gotchas_paper.pdf](https://sutherland-hdl.com/papers/2006-SNUG-Boston_standard_gotchas_paper.pdf)]
 
 
 
+### Constant and indexed part-selects
 
-## Latch Inference in Verilog
+A part-select extracts contiguous bits. A constant part-select fixes both endpoints:
 
-> UC Berkeley CS150 Lec #20: Finite State Machines [[slides](https://inst.eecs.berkeley.edu/~cs150/sp11/agenda/lec/lec20-fsm.pdf)]
+```systemverilog
+logic [31:0] addr;
+// Inside a procedural block:
+addr[23:16] = 8'h23;
+```
 
-### `always@( * )`
+An indexed part-select has a variable base but a constant width:
 
-`always@( * )` blocks are used to describe Combinational Logic, or Logic Gates. Only `=` (blocking)
-assignments should be used in an `always@( * )` block.
+| Form | Selected indices |
+| --- | --- |
+| `vector[base +: width]` | From `base` through `base + width - 1` |
+| `vector[base -: width]` | From `base` through `base - width + 1` |
 
-### Latch Inference
+The vector's declared direction determines the ordering of the returned bits:
 
-If you **DON'T** assign every element that can be assigned inside an `always@( * )` block every time that `always@( * )` block is executed, a latch will be inferred for that element
+```systemverilog
+logic [31:0] a_vect;
+logic [0:31] b_vect;
+logic [63:0] dword;
+int sel;
 
-The approaches to avoid latch generation:
+// Equivalent selections:
+a_vect[0  +: 8]  // a_vect[7:0]
+a_vect[15 -: 8]  // a_vect[15:8]
+b_vect[0  +: 8]  // b_vect[0:7]
+b_vect[15 -: 8]  // b_vect[8:15]
 
-- set default values
-- proper use of the `else` statement, and other flow constructs
+dword[8*sel +: 8]  // Select byte sel; valid byte indices are 0 through 7
+```
+
+For a packed integral vector, every part-select above is **unsigned**, regardless of the vector's declaration. Use `$signed(...)` when the extracted field represents a signed number.
+
+![image-20261113225049570](sv-verilog/image-20261113225049570.png)
+
+<span style="background-color:yellow">The `signed'()` cast matters because **a part-select is unsigned**, even when its source is signed. Without the cast, a negative value could appear as a large positive integer and incorrectly trigger this check</span>
 
 
 
-#### without default values
+### Bitwise AND, logical AND, and reduction AND
 
-> latch is generated
+| Expression | Meaning |
+| --- | --- |
+| `a & b` | Bitwise AND of the operands |
+| `a && b` | Logical AND; a one-bit truth result |
+| `&a` | Reduction AND; AND together all bits of `a` |
 
-##### RTL
+To extract bit `k` from an integer-like code:
 
-```verilog
-module TOP (
-	input wire Trigger,
-	input wire Pass,
-	output reg A,
-	output reg C
-);
-	always @(*) begin
-		A = 1'b0;
-		if (Trigger) begin
-			A = Pass;
-			C = Pass;
-		end
-	end
+```systemverilog
+(code_value >> k) & 1
+```
+
+The shift moves bit `k` to bit zero; `& 1` clears the other bits. The resulting value is 0 or 1 for known input bits, but the expression itself is generally wider than one bit because `1` is an unsized integer literal. In RTL with a packed vector, `code_value[k]` expresses the one-bit selection directly.
+
+## Testbench notes
+
+The following examples are for simulation rather than synthesizable datapath logic.
+
+### Simulation time and formatting
+
+Keep three concepts separate:
+
+| Construct | Purpose |
+| --- | --- |
+| `timeunit` | Unit used for local numeric delays and reported simulation time |
+| `timeprecision` | Resolution used to quantize delays in the scope |
+| `$timeformat` | Display units, decimal places, suffix, and field width for `%t` |
+
+`$realtime` returns the current simulation time as a real number in the calling scope's time unit. `$time` returns a 64-bit unsigned integer in that unit, rounded to an integer.
+
+Delay quantization occurs when scheduling events. A variable declared `realtime` is a real-valued variable; it is not automatically rounded to `timeprecision` merely because it stores a value.
+
+```systemverilog
+module time_tb;
+    timeunit 10ns;
+    timeprecision 1ps;
+
+    initial begin
+        $timeformat(-12, 0, " ps", 0);
+        #1.10016;
+        $display("$realtime = %0.4f", $realtime);
+        $display("$time = %0d", $time);
+        $display("$realtime as %%t = %t", $realtime);
+        $display("$time as %%t = %t", $time);
+    end
 endmodule
 ```
 
-##### synthesized  netlist
+The requested delay is $1.10016 \times 10\,\text{ns}=11.0016\,\text{ns}$. Quantization to 1 ps gives 11.002 ns:
 
-![image-20220509170640006](sv-verilog/image-20220509170640006.png)
+```text
+$realtime = 1.1002
+$time = 1
+$realtime as %t = 11002 ps
+$time as %t = 10000 ps
+```
 
-```verilog
-/////////////////////////////////////////////////////////////
-// Created by: Synopsys DC Ultra(TM) in wire load mode
-// Version   : S-2021.06-SP5
-// Date      : Mon May  9 17:09:18 2022
-/////////////////////////////////////////////////////////////
+The `$time` result has already lost its fractional local time units before `%t` formats it.
 
+Without an explicit `$timeformat` call, `%t` uses default formatting whose unit is based on the global simulation precision, not necessarily the local module's precision. Set `$timeformat` explicitly when reproducible logs matter.
 
-module TOP ( Trigger, Pass, A, C );
-  input Trigger, Pass;
-  output A, C;
+Time units and precision can be declared together:
 
-
-  lanhq1 C_reg ( .E(Trigger), .D(Pass), .Q(C) );
-  an02d0 U3 ( .A1(Pass), .A2(Trigger), .Z(A) );
+```systemverilog
+module timing_example;
+    timeunit 100ps / 10fs;
 endmodule
 ```
 
-#### add default value
+Verilog also supports the compiler directive `` `timescale 100ps/10fs ``. Unlike module-local declarations, a directive affects subsequent source text according to compilation-unit boundaries and source order.
 
-> Default values are an easy way to avoid latch generation
+#### Different local time units
 
-##### RTL
+This example fixes the display unit to 10 ps while giving each module its own scheduling precision:
 
-```verilog
-module TOP (
-	input wire Trigger,
-	input wire Pass,
-	output reg A,
-	output reg C
-);
-	always @(*) begin
-		A = 1'b0;
-        	C = 1'b1;
-		if (Trigger) begin
-			A = Pass;
-			C = Pass;
-		end
-	end
-```
+```systemverilog
+module rawplant;
+    timeunit 1ns;
+    timeprecision 100ps;
 
-
-
-##### synthesized  netlist
-
-![image-20220509171319204](sv-verilog/image-20220509171319204.png)
-
-```verilog
-/////////////////////////////////////////////////////////////
-// Created by: Synopsys DC Ultra(TM) in wire load mode
-// Version   : S-2021.06-SP5
-// Date      : Mon May  9 17:12:47 2022
-/////////////////////////////////////////////////////////////
-
-
-module TOP ( Trigger, Pass, A, C );
-  input Trigger, Pass;
-  output A, C;
-
-
-  nd12d0 U5 ( .A1(Pass), .A2(Trigger), .ZN(C) );
-  an02d0 U6 ( .A1(Pass), .A2(Trigger), .Z(A) );
+    task automatic print;
+        #1.666;
+        $display("raw: realtime=%0.1f time=%0d rt_fmt=%t t_fmt=%t",
+                 $realtime, $time, $realtime, $time);
+    endtask
 endmodule
 
-```
+module fineplant;
+    timeunit 100ps;
+    timeprecision 10ps;
 
+    task automatic print;
+        #2.66;
+        $display("fine: realtime=%0.1f time=%0d rt_fmt=%t t_fmt=%t",
+                 $realtime, $time, $realtime, $time);
+    endtask
+endmodule
 
+module mixed_time_tb;
+    timeunit 1ns;
+    timeprecision 10ps;
 
-### `if` evaluation
+    rawplant rawblock();
+    fineplant fineblock();
 
-`signed` number cast to `unsigned` automatically before evaluating
-
-```verilog
-// tb.v
-module tb; 
-  reg signed [1:0] datasg;
-  reg [1:0] dataug;
-
-  initial begin
-    datasg = 2'b11;
-    dataug = 2'b11;
-
-    $display("datasg(%%d): %d", datasg);
-    $display("dataug(%%d): %d", dataug);
-
-    if (datasg)
-      $display("datasg is OK");
-    if (dataug)
-      $display("dataug is OK");
-
-    $finish();
-  end 
+    initial begin
+        $timeformat(-11, 0, "", 0);  // Display %t in units of 10 ps
+        fork
+            rawblock.print();
+            fineblock.print();
+        join
+    end
 endmodule
 ```
 
-```
-$ vlog tb.v
-$ vsim -c -do "run;exit" work.tb
-# Loading work.tb(fast)
-# run
-# datasg(%d): -1
-# dataug(%d): 3
-# datasg is OK
-# dataug is OK
-# ** Note: $finish    : tb.v(16)
+Expected output:
+
+```text
+fine: realtime=2.7 time=3 rt_fmt=27 t_fmt=30
+raw: realtime=1.7 time=2 rt_fmt=170 t_fmt=200
 ```
 
+The finer module does not change how `#1.666` is rounded inside `rawplant`.
 
+### Standard normal samples using the Box–Muller transform
 
+For independent uniform variables $u_1,u_2\in(0,1)$, the Box–Muller transform produces a standard normal variable:
 
+$$
+z=\sqrt{-2\ln u_1}\cos(2\pi u_2),\qquad z\sim\mathcal N(0,1).
+$$
 
-## Arithmetic in Verilog
+The following simulation function maps signed 32-bit pseudorandom values into the open interval $(0,1)$. Keeping $u_1$ away from zero avoids evaluating $\ln 0$.
 
-### unsigned + unsigned = unsigned
+```systemverilog
+// Declare these inside a testbench module.
+int seed = 12345;
+localparam real PI = 3.14159265358979323846;
 
-```verilog
-function [7:0] satadd_uuu8b;   // unsigned + unsigned = unsigned
-    input [7:0] a;
-    input [7:0] b;
-
-    reg [8:0] t;   // extend 1b
+function automatic real std_normal();
+    int r1, r2;
+    real u1, u2;
     begin
-        t = {1'b0, a} + {1'b0, b};
-        satop_uuu16b = t[8] ? {8{1'b1}} : t[7:0];
+        r1 = $random(seed);
+        r2 = $random(seed);
+
+        u1 = (r1 + 2147483648.0 + 0.5) / 4294967296.0;
+        u2 = (r2 + 2147483648.0 + 0.5) / 4294967296.0;
+
+        std_normal = $sqrt(-2.0 * $ln(u1)) * $cos(2.0 * PI * u2);
     end
 endfunction
 ```
 
-> `1'b1`: overflow
+The `.0` constants make the mapping real-valued and avoid 32-bit integer overflow. `$random(seed)` updates the seed on each call; do not reset it before every sample. This code approximates the ideal distribution using finite-resolution pseudorandom inputs and is not synthesizable RTL.
 
-### signed + signed = signed
+For a desired mean $\mu$ and standard deviation $\sigma$, use $x=\mu+\sigma z$.
 
-```verilog
-function [7:0] satadd_sss8b;    // signed + signed = signed
-    input signed    [7:0] a;
-    input signed    [7:0] b;
+### Command-line plusargs
 
-    reg signed [8:0] t; // extend 1b
-    begin
-        t = a + b;  // extend sign bit automatically
-        satadd_sss8b =  (t[8:7] == 2'b01) ? {1'b0, 7{1'b1}} : // up sat
-                        (t[8:7] == 2'b10) ? {1'b1, 7{1'b0}} : // dn sat
-                                            t[7:0];
+`$test$plusargs` and `$value$plusargs` are simulation system functions for reading command-line arguments beginning with `+`.
+
+| Function | Behavior |
+| --- | --- |
+| `$test$plusargs("RUNSIM")` | Reports whether an argument starts with `RUNSIM` after the `+` |
+| `$value$plusargs("SEED=%d", seed)` | Parses a matching argument and returns nonzero on success |
+
+`$test$plusargs` performs a **prefix match**: `+RUNSIM_EXTRA` also matches `"RUNSIM"`.
+
+```systemverilog
+module plusargs_tb;
+    int seed;
+
+    initial begin
+        seed = 12345;
+        if ($test$plusargs("RUNSIM"))
+            $display("RUNSIM enabled");
+
+        if ($value$plusargs("SEED=%d", seed))
+            $display("SEED supplied");
+        else
+            $display("Using default seed");
+
+        $display("SEED=%0d", seed);
     end
-endfunction
+endmodule
 ```
 
-> `2'b01`: overflow
->
-> `2'b10`: underflow
+Example Questa commands:
 
-### signed + unsigned = unsigned
+```bash
+vlib work
+vlog -sv plusargs_tb.sv
+vsim work.plusargs_tb -c -do "run -all; quit -f" +SEED=31 +RUNSIM
+```
+
+Reading `+SEED=31` into a variable does not itself seed a random generator. Pass that variable to the intended random-generation mechanism, such as `$random(seed)` in the example above.
+
+## Verilog-A notes
+
+Verilog-A uses an analog solver and has different semantics from synthesizable digital RTL.
+
+### Why an empty `cross()` event statement is useful
 
 ```verilog
-function [7:0] satadd_suu8b;    // signed + unsigned = unsigned
-    input signed    [7:0] a;
-    input           [7:0] b;
-
-    reg signed [8:0] t; // extend 1b
-    begin
-        t = {a[7], a} + {1'b0, b};
-        satadd_ssu8b =  (t[8:7] == 2'b10) ? {8{1'b1}} : // up saturate for unsigned
-                        (t[8:7] == 2'b11) ? {8{1'b0}} : // dn saturate for unsigned
-                                            t[7:0];
-    end
-endfunction
+analog begin
+    @(cross(V(in) - vth, 0));  // Empty statement: resolve both crossing directions
+    V(out) <+ transition(V(in) > vth ? 1.0 : 0.0, 0, tr);
+end
 ```
 
+This fragment assumes `in` and `out` are electrical nodes and `vth` and `tr` are declared model parameters.
 
+The semicolon after the event control is an intentionally empty statement. No variable assignment is required: `cross()` asks the analog solver to resolve when `V(in)-vth` crosses zero. Direction 0 monitors both rising and falling crossings.
 
-### signed + unsigned = signed
+Without that event, the model might detect a threshold change only at a later solver evaluation point. With it, the solver places an event at or just beyond the crossing, subject to numerical tolerances. It does not force an exact mathematical crossing time or a fixed simulation step.
+
+The contribution remains outside the event statement and is evaluated by the analog solver. `cross()` does not generate an initialization event during DC analysis; keeping the threshold expression outside the event statement also allows the DC output level to be evaluated.
+
+`transition()` smooths the changes between the discrete 0 V and 1 V target levels. Its input here is piecewise constant, rather than the continuously varying `V(in)` itself.
+
+### The analog contribution operator `<+`
+
+`<+` contributes a term to the branch equations solved by the analog simulator. It is not an ordinary variable assignment.
+
+| Operator | Purpose | Example |
+| --- | --- | --- |
+| `=` | Assign a variable | `level = 1.0;` |
+| `<+` | Contribute to an electrical branch equation | `V(out) <+ level;` |
+
+For the comparator fragment, `V(out)` is driven to the smoothed voltage target relative to ground.
+
+Contributions of the same kind to the same branch in the same analog process accumulate:
 
 ```verilog
-function signed [7:0] satop_sus8b;    //signed +/- unsigned = signed
-    input signed    [7:0] a;
-    input           [7:0] b;
-    input plus;
-
-    reg signed [8:0] t;    // extend 1b
-    begin
-        if(plus) begin
-            t = {a[7], a} + {1'b0, b};
-            satop_sus8b = (t[8:7]==2'b01) ? {1'b0, {7{1'b1}}}   // up saturate for signed
-                                             : t[7:0];
-        end else begin
-            t = {a[7], a} - {1'b0, b};
-            satop_sus8b = (t[8:7]==2'b10) ? {1'b1, {7{1'b0}}}   // dn saturate for signed
-                                             : t[7:0];
-        end
-    end
-endfunction
+analog begin
+    V(out) <+ 1.0;
+    V(out) <+ 2.0;
+end
 ```
 
-
-
-## Overflow Detection in Verilog
-
-> Overflow Detection: [[http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html](http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html)]
-
-- Arithmetic operations have a potential to run into a condition known as *overflow*.
-- Overflow occurs with respect to the **size of the data type** that must accommodate the result.
-- Overflow indicates that the result was *too large* or *too small* to fit in the original data type.
+Together these impose `V(out) = 3.0`, rather than letting the second statement overwrite the first. Contributions are rebuilt each evaluation; the voltage does not accumulate by 3 V on every simulator step.
 
 
 
-### Overflow when adding unsigned number
+## References
 
-When two unsigned numbers are added, overflow occurs if
+Stuart Sutherland and Don Mills, [*Standard Gotchas: Subtleties in the Verilog and SystemVerilog Standards That Every Engineer Should Know*](https://sutherland-hdl.com/papers/2006-SNUG-Boston_standard_gotchas_paper.pdf), SNUG Boston, 2006. See Section 5 for expression sizing and signedness.
 
-- there is a **carry out** of the leftmost bit.
+Bevan Baas, [EEC 281: VLSI Digital Signal Processing](https://www.ece.ucdavis.edu/~bbaas/281/), University of California, Davis.
 
+Stuart Sutherland, *RTL Modeling with SystemVerilog for Simulation and Synthesis: Using SystemVerilog for ASIC and FPGA Design*, 1st ed.
 
+Weng Fook Lee, *Learning from VLSI Design Experience*. Springer, 2019.
 
-### Overflow when adding signed numbers
+IEEE Std 1800-2017, *IEEE Standard for SystemVerilog—Unified Hardware Design, Specification, and Verification Language*. See Clause 11 for expressions, Clause 20 for conversion and simulation-time functions, and Clause 21 for formatting and command-line input.
 
-When two signed 2's complement numbers are added, overflow is detected if:
+Accellera, [*Verilog-AMS Language Reference Manual*, VAMS-2023](https://accellera.org/images/downloads/standards/v-ams/VAMS-LRM-2023.pdf).
 
-1. both operands are positive and the result is negative, or
-2. both operands are negative and the result is positive.
+Designer's Guide Consulting, [Timing Statements](https://www.verilogams.org/refman/modules/analog-procedural/timing.html) and [Assignment Statements](https://www.verilogams.org/refman/modules/analog-procedural/assignment.html).
 
-Notice that when operands have **opposite signs**, their sum will never overflow. Therefore, *overflow can only occur when the operands have the same sign*.
-
-| A            | B            | carryout_sum   | overflow  |
-| ------------ | ------------ | -------------- | --------- |
-| **0**11 (3)  | **0**11 (3)  | 0_**1**10 (6)  | overflow  |
-| **1**00 (-4) | **1**00 (-4) | 1_**0**00 (-8) | underflow |
-| **1**11 (-1) | **1**10 (-2) | 1_**1**01 (-3) | -         |
-
-> carryout information **ISN'T** needed to detect overflow/underflow for signed number addition
-
-
-
-#### EXTBIT:MSB
-
-extended 1bit and msb bit can be used to detect overflow or underflow
-
-```verilog
-reg signed  [1:0]      acc_inc;
-reg signed  [10-1:0]   acc;
-wire signed [10  :0]   acc_w;  // extend 1b for saturation
-wire signed [10-1:0]   acc_stat;
-
-assign acc_w = acc + acc_inc;   // signed arithmetic
-
-assign acc_stat = (acc_w[10-1 +: 2] == 2'b01) ? {1'b0, {(10-1){1'b1}}} : // up saturation
-    (acc_w[10-1 +: 2] == 2'b10) ? {1'b1, {(10-1){1'b0}}}  :   			 // down saturation
-    acc_w[10-1:0];
-```
-
-> `2'b01` : overflow, up saturation
->
-> `2'b10`: underflow, down saturation
-
-
-
-
-
-
-## reference
-
-Lee, Weng Fook, Weng Fook Lee, and Glaser. *Learning from VLSI design experience*. Springer International Publishing, 2019.
-
-Bevan Baas, EEC281 VLSI Digital Signal Processing,  [[https://www.ece.ucdavis.edu/~bbaas/281/](https://www.ece.ucdavis.edu/~bbaas/281/)]
-
+Additional links from the original notes: [Project F: Numbers in Verilog](https://projectf.io/posts/numbers-in-verilog/), [Overflow Detection](http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html), [Verilog Scalar and Vector](https://www.chipverify.com/verilog/verilog-scalar-vector), [Indexed Part-select Syntax](https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog), [Time vs. Realtime](https://verificationacademy.com/forums/systemverilog/time-vs-realtime), [SystemVerilog Command-line Input](https://www.chipverify.com/systemverilog/systemverilog-command-line-input), and [Plusargs in SystemVerilog](https://www.theartofverification.com/plusargs-in-systemverilog/).

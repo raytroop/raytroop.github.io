@@ -164,6 +164,31 @@ In fact, one popular definition says that if the output of a *flip-flop* changes
 
 ![image-20250814202542548](resync/image-20250814202542548.png)
 
+## Reset Synchronizer
+
+> [[https://vlsiuniverse.blogspot.com/2016/09/reset-synchronizer.html](https://vlsiuniverse.blogspot.com/2016/09/reset-synchronizer.html)]
+>
+> Clifford E. Cummings, Asynchronous & Synchronous Reset Design Techniques - Part Deux [[http://staff.ustc.edu.cn/~wyu0725/FPGA/snug_collection/2SNUG%20Design/Asynchronous%20and%20Synchronous%20Reset%20Design%20Techniques_ppt.pdf](http://staff.ustc.edu.cn/~wyu0725/FPGA/snug_collection/2SNUG%20Design/Asynchronous%20and%20Synchronous%20Reset%20Design%20Techniques_ppt.pdf)]
+
+The way most of the designs have been modelled needs asynchronous reset assertion and <span style="background-color:yellow">**synchronous de-assertion**</span>
+
+![img](resync/reset_synchronizer.png)
+
+![image-20261113111551243](resync/image-20261113111551243.png)
+
+
+
+## Data Synchronizer
+
+> [[https://vlsiuniverse.blogspot.com/2013/09/synchronization-schemes.html](https://vlsiuniverse.blogspot.com/2013/09/synchronization-schemes.html)]
+
+![reset_data_synchronizer.drawio](resync/reset_data_synchronizer.drawio.svg)
+
+**using `rst_sync_n` to reset all three data synchronizer stages is a standard, reasonable arrangement**, provided both synchronizers use the same `local_clk`. It implements **asynchronous reset assertion and synchronous reset deassertion**
+
+
+
+
 
 ## reference
 
@@ -175,11 +200,11 @@ Steve Golson. Synchronization and Metastability [[https://trilobyte.com/pdf/gols
 
 Kinniment, D. J. Synchronization and arbitration in digital systems. John Wiley & Sons Ltd (2007).
 
-Synchronizers And Data FlipFlops are Different [[pdf](https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf)]
+Synchronizers And Data FlipFlops are Different [[https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf](https://ee.usc.edu/async2015/web/wp-content/uploads/2015/03/S1_P4_ASYNC2015IndustrialPaperDFF.pdf)]
 
 S. Beer, R. Ginosar, M. Priel, R. Dobkin and A. Kolodny, "The Devolution of Synchronizers," *2010 IEEE Symposium on Asynchronous Circuits and Systems*, Grenoble, France, 2010 [[pdf](https://kolodny.net.technion.ac.il/files/2016/07/The-devolution-of-synchronizers-ASYNC-2010.pdf)]
 
-赵启林 klin, Metastability [[https://picture.iczhiku.com/resource/eetop/SHKSFADwZerLPBXN.pdf](https://picture.iczhiku.com/resource/eetop/SHKSFADwZerLPBXN.pdf)]
+赵启林 klin, Metastability
 
 Asad Abidi. ISSCC 2023: Circuit Insights "The CMOS Latch" [[https://youtu.be/sVe3VUTNb4Q&t=681](https://youtu.be/sVe3VUTNb4Q&t=681)]
 

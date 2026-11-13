@@ -13,15 +13,15 @@ mathjax: true
 
 
 
-## Number Systems
+## N-bit number
 
 > Harris, David Money, and Sarah L. Harris. *Digital Design and Computer Architecture*. 2nd ed. Morgan Kaufmann, 2013. [[pdf](https://github.com/last-genius/comp_arch_list/blob/master/books/Digital%20Design%20and%20Computer%20Architecture.%20ARM%20Edition%20by%20Sarah%20Harris%2C%20David%20Harris.pdf)]
 
-***integers***
+<span style="color:white; background-color:black">**integers**</span>
 
 ![image-20260207093700537](fpsp/image-20260207093700537.png)
 
-***rational number***
+<span style="color:white; background-color:black">**rational number**</span>
 
 ![image-20260207094834081](fpsp/image-20260207094834081.png)
 
@@ -31,7 +31,7 @@ mathjax: true
 
 
 
-### Floating-point Number in IEEE 754 Format
+## Floating-point Number in IEEE 754 Format
 
 > Floating-point data in IEEE 754 Format [[https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf](https://github.com/IC-Design-Lab/IC-Design/blob/main/Training/Floating-point%20data%20in%20IEEE%20754%20Format.pdf)]
 >
@@ -73,7 +73,7 @@ $$
 
 
 
-### 2's Complement
+## 2's Complement
 
 > [[https://bpb-us-w2.wpmucdn.com/sites.coecis.cornell.edu/dist/4/81/files/2019/06/4740_lecture23ALU-circuits.pdf](https://bpb-us-w2.wpmucdn.com/sites.coecis.cornell.edu/dist/4/81/files/2019/06/4740_lecture23ALU-circuits.pdf)]
 
@@ -121,13 +121,13 @@ For example -2 in 3-bit 2's complement is -2 + 8 = 6 = 3'110
 
 
 
-### Fixed Point Number
+##  Fixed Point Number in $Q$-Format
 
 ![image-20260207095601437](fpsp/image-20260207095601437.png)
 
 
 
-### $Q$-Format
+
 
 ![image-20260810120058735](fpsp/image-20260810120058735.png)
 
@@ -180,7 +180,70 @@ Now temporarily ignore the binary point and multiply the integer bit patterns:
 
 
 
-<span style="background-color:yellow">Multiplying or dividing by an **integer** changes the stored value; the **binary point stays in the same position**</span>
+
+
+---
+
+<span style="color:white; background-color:black">**Different sources use slightly different $Q$-format conventions**</span>
+
+![image-20260809183953893](fpsp/image-20260809183953893.png)
+
+**$Q1.3$ means that the `1` includes the sign bit.**
+$$
+Q1.3
+=
+\underbrace{1\text{ bit}}_{\text{sign / integer side}}
++
+\underbrace{3\text{ fractional bits}}_{\text{fractional side}}
+$$
+So it is a **4-bit two's-complement fixed-point number**:
+
+```
+ b3 . b2 b1 b0
+ ↑      ↑ ↑ ↑
+sign    3 fractional bits
+```
+
+
+
+
+
+---
+
+<span style="color:white; background-color:black">**multiplication** or **format conversion**</span>
+
+For a fixed-point number, distinguish the **stored integer** $X$ from the **represented value** $x$:
+
+$$
+\color{blue}\boxed{x=\frac{1}{2^F}X}
+$$
+
+Here, $F$ is the number of fractional bits. The binary point is an interpretation of the bits; it is not physically stored
+
+
+
+```verilog
+assign ted_s5_3 = (ted_s2_0 << 3);	//s2.0 -> S5.3
+```
+
+The **stored integer** is multiplied by 8, while the **fractional-bit count** increases from zero to 3:
+
+$$
+Y=2^3 X,\qquad y=Y\,2^{-3}=X=x
+$$
+
+For an input value of +1:
+
+| Interpretation                       | Stored bits | Fractional bits | Represented value |                       |
+| ------------------------------------ | ----------- | --------------- | ----------------- | --------------------- |
+| Original `S2.0`                      | `01`        | 0               | 1                 |                       |
+| Shifted result interpreted as `S5.0` | `01000`     | 0               | 8                 | **multiplication**    |
+| Shifted result interpreted as `S5.3` | `01000`     | 3               | 1                 | **format conversion** |
+
+Thus, <span style="background-color:yellow">the same shift can implement **multiplication** or a **format conversion**, depending on the output scale</span>.
+
+- **SystemVerilog performs the bit operation**
+- your <span style="background-color:yellow">format convention</span> determines its **numerical meaning**
 
 ```verilog
 module Ar_B (
@@ -220,40 +283,104 @@ assign So_tmp   = (A_tmp > B_tmp) ? (A_tmp - B_tmp)
 assign sign_tag = (B_tmp > A_tmp);
 assign So_int   = (So_tmp >> 12);
 
-assign So[12:0] = {sign_tag, So_int[11:0]};
+assign So[12:0] = {sign_tag, So_int[11:0]};  // sign-magnitude encoding
 
 endmodule
 ```
 
+Let the **unsigned stored codes** be $A$, $B$, and $r$. The **intended values** are:
 
-
-
-
----
-
----
-
-***Different sources use slightly different $Q$-format conventions***
-
-![image-20260809183953893](fpsp/image-20260809183953893.png)
-
-**$Q1.3$ means that the `1` includes the sign bit.**
 $$
-Q1.3
-=
-\underbrace{1\text{ bit}}_{\text{sign / integer side}}
-+
-\underbrace{3\text{ fractional bits}}_{\text{fractional side}}
+a=\frac{A}{2^4},\qquad b=\frac{B}{2^4}
 $$
-So it is a **4-bit two's-complement fixed-point number**: 
 
+so the desired output is:
+
+$$
+g=a\frac{r}{2^{12}}-b =\boxed{\frac{Ar-B\,2^{12}}{2^{16}}}
+$$
+
+Consequently, the intermediate signals can be interpreted as follows:
+
+| Signal   | Stored integer                                             | Fractional bits | Represented value                                      |
+| -------- | ---------------------------------------------------------- | --------------- | ------------------------------------------------------ |
+| `A_tmp`  | $Ar$                                                       | 16              | $a(r/2^{12})$                                          |
+| `B_tmp`  | $B\,2^{12}$                                                | 16              | $b$                                                    |
+| `So_tmp` | $\lvert Ar-B\,2^{12}\rvert$                                | 16              | $\lvert g\rvert$                                       |
+| `So_int` | $\left\lfloor\texttt{So}_\texttt{tmp}/2^{12}\right\rfloor$ | 4               | $\lvert g\rvert$ quantized downward to steps of $1/16$ |
+
+Here, `B << 12` converts the offset from **4 fractional bits to 16**, preserving its represented value. Likewise, `So_tmp >> 12` converts the magnitude from **16 fractional bits to 4**, discarding precision.
+
+
+
+Let $A$ denote the stored integer code. Since $A$ has four fractional bits:
+
+$$
+a=\frac{A}{2^4}
+$$
+
+The multiplication produces the **stored integer**:
+
+$$
+P=Ar
+$$
+
+Its interpretation depends on the quantity we want it to represent:
+
+| Intended quantity | Relationship to stored product $P$ | Fractional bits |
+| ----------------- | ------------------------------------ | --------------- |
+| $a\,r$          | $a\,r=P/2^4$                       | 4               |
+| $a(r/2^{12})$   | $a(r/2^{12})=P/2^{16}$             | 16              |
+
+<span style="background-color:yellow">**The extra 12 fractional bits come from including the normalization by $2^{12}$ in the interpretation.** The multiplication itself does not add them automatically</span>
+
+Both interpretations are valid. For your complete calculation, the second makes the alignment particularly clear:
+
+$$
+g=\frac{\underbrace{Ar}_{\text{16 fractional bits}} -\underbrace{B\,2^{12}}_{\text{16 fractional bits}}}{2^{16}}
+$$
+
+Here, both numerator terms are stored codes using the same scale, $2^{-16}$
+
+
+
+<span style="color:white; background-color:black">**right shift effect**</span>
+
+```verilog
+assign So_int   = (So_tmp >> 12);
 ```
- b3 . b2 b1 b0
- ↑      ↑ ↑ ↑
-sign    3 fractional bits
+
+![rshift_frac.drawio](fpsp/rshift_frac.drawio.svg)
+
+
+| Signal   | Stored integer                                             | Fractional bits | Represented value                                      |
+| -------- | ---------------------------------------------------------- | --------------- | ------------------------------------------------------ |
+| `So_int` | $\left\lfloor\texttt{So}_\texttt{tmp}/2^{12}\right\rfloor$ | 4               | $\lvert g\rvert$ quantized downward to steps of $1/16$ |
+
+
+
+<span style="color:white; background-color:black">**left shift effect**</span>
+
+```verilog
+logic signed [5:0] obj_s6_3;		// S6.3
+logic signed [15:0] prop_s16_16;	// S16.16
+
+prop_s16_16 = obj_s6_3 << 10;	// gain = 1/2^3
 ```
 
+The gain from obj_s6_3 to prop_s16_16
+$$
+\left\{ \begin{array}{cl}
+x&=\frac{X}{2^3} \\
+y&=X 2^{10}\cdot \frac{1}{2^{16}}=\frac{X}{2^6}\end{array} \right. \qquad \Longrightarrow \qquad y=\frac{1}{2^3}\cdot  x
+$$
+Generally, a left shift by $k$ with input/output fractional-bit counts $F_{\text{in}}$ and $F_{\text{out}}$ gives:
 
+$$
+\boxed{y=2^{k+F_{\text{in}}-F_{\text{out}}}x}
+$$
+
+provided no bits are lost
 
 
 

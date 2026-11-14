@@ -121,62 +121,17 @@ For example -2 in 3-bit 2's complement is -2 + 8 = 6 = 3'110
 
 
 
-##  Fixed Point Number in $Q$-Format
+##  Fixed Point Number
+
+Different notations can be used to represent different fractional formats
 
 ![image-20260207095601437](fpsp/image-20260207095601437.png)
 
 
 
-
+<span style="color:white; background-color:black">**Q format**</span>; <span style="color:white; background-color:black">**Wordlength, Fractionlength Format**</span>
 
 ![image-20260810120058735](fpsp/image-20260810120058735.png)
-
-The **Q notation** is a way to specify the parameters of a **binary fixed point number format**
-
-`Q0.3` is a notation for a **fixed-point binary number format**.
-$$
-\boxed{Q0.3
-=
-\text{sign bit}
-+
-0\text{ integer bits}
-+
-3\text{ fractional bits}}
-$$
-
-
----
-
-> Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
-
-![image-20260810112135977](fpsp/image-20260810112135977.png)
-
-The useful **fixed-point multiplication** rule is
-$$
-Q_{F_1} \times Q_{F_2} \qquad \Longrightarrow\qquad F_{\text{product}} = F_1 + F_2
-$$
-where $F_1$ and $F_2$ are the numbers of fractional bits of the two operands
-
-4-bit words are
-
-```
-a      = 0.100  -> 0100
-y_hat  = 0.111  -> 0111
-```
-
-Now temporarily ignore the binary point and multiply the integer bit patterns:
-
-```
-      0100        (= 4)
-    × 0111        (= 7)
-    -------
-      0100
-     0100
-    0100
-   0000
-    -------
-   0011100        (= 28)
-```
 
 
 
@@ -206,9 +161,7 @@ sign    3 fractional bits
 
 
 
-
-
----
+##  Bit Shifts: Gain Scaling & Format Conversion
 
 <span style="color:white; background-color:black">**multiplication** or **format conversion**</span>
 
@@ -344,6 +297,8 @@ Here, both numerator terms are stored codes using the same scale, $2^{-16}$
 
 
 
+
+
 <span style="color:white; background-color:black">**right shift effect**</span>
 
 ```verilog
@@ -384,7 +339,53 @@ provided no bits are lost
 
 
 
-## Multipliers
+---
+
+<span style="color:white; background-color:black">**Programmable gain scaling**</span>
+
+```verilog
+module fixed_point_gain (
+    input  logic signed [5:0]  data_in,  // S6.2
+    input  logic        [1:0]  gain_sel,
+    output logic signed [23:0] data_out  // S24.19
+);
+
+    logic signed [15:0] gain_scaled;     // S16.11
+
+    always_comb begin
+        case (gain_sel)
+            2'd0:    gain_scaled = data_in << 10; // Gain = 2
+            2'd1:    gain_scaled = data_in << 9;  // Gain = 1
+            2'd2:    gain_scaled = data_in << 8;  // Gain = 1/2
+            2'd3:    gain_scaled = data_in << 7;  // Gain = 1/4
+            default: gain_scaled = '0;
+        endcase
+    end
+
+    // S16.11 -> S24.19: preserve the represented value.
+    assign data_out = gain_scaled << 8;
+
+endmodule
+```
+
+Let $X$ be the signed input code and $k$ the first-stage shift:
+
+$$
+x=X2^{-2}, \qquad y=(X2^k2^8)2^{-19} =\boxed{x\,2^{k-9}}
+$$
+
+| `gain_sel` | Shift \(k\) | Numerical gain |
+| ---------- | ----------- | -------------- |
+| `0`        | 10          | 2              |
+| `1`        | 9           | 1              |
+| `2`        | 8           | 1/2            |
+| `3`        | 7           | 1/4            |
+
+The widths are sufficient
+
+
+
+## Multiplication
 
 > B. Baas, [[HARDWARE MULTIPLIERS](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.mult.pdf)] [[FIXED-INPUT MULTS ](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.fixed.input.mults.pdf)] [[MULTIPLICATION SCALING](https://www.ece.ucdavis.edu/~bbaas/281/notes/Handout.mult.scaling.pdf)]
 >
@@ -420,7 +421,7 @@ provided no bits are lost
 
 ---
 
-***Multiplication Scaling***
+**Multiplication Scaling**
 
 ![image-20260816095555538](fpsp/image-20260816095555538.png)
 
@@ -430,16 +431,16 @@ provided no bits are lost
 
 ---
 
-
+<span style="color:white; background-color:black">**product wordlength**</span>
 
 ![image-20260816132359003](fpsp/image-20260816132359003.png)
 
 
 
-| Operands          | Nominal full product width |
-| ----------------- | -------------------------: |
-| Unsigned          |                      $m+n$ |
-| Signed fractional |                    $m+n-1$ |
+| Operands          | Nominal full product width |                                        |
+| ----------------- | -------------------------: | -------------------------------------- |
+| Unsigned          |                      $m+n$ | no overflow for any case               |
+| Signed fractional |                    $m+n-1$ | with the exception of `(-1)*(-1)` case |
 
 For **signed fractional multiplication**,
 
@@ -487,7 +488,7 @@ $$
 you need
 
 $$
-\boxed{m+n\text{ bits}}.
+\boxed{m+n\text{ bits}}
 $$
 
 Equivalently, if the operands have widths
@@ -509,8 +510,112 @@ $$
 The only exception is again
 
 $$
-(-1)(-1)=+1.
+(-1)(-1)=+1
 $$
+
+
+
+---
+
+> Alan V Oppenheim, Ronald W. Schafer. Discrete-Time Signal Processing, 3rd edition
+
+![image-20261114152920861](fpsp/image-20261114152920861.png)
+
+The useful **fixed-point multiplication** rule is
+$$
+Q_{F_1} \times Q_{F_2} \qquad \Longrightarrow\qquad F_{\text{product}} = F_1 + F_2
+$$
+where $F_1$ and $F_2$ are the numbers of fractional bits of the two operands
+
+4-bit words are
+
+```
+a      = 0.100  -> 0100
+y_hat  = 0.111  -> 0111
+```
+
+Now temporarily ignore the binary point and multiply the integer bit patterns:
+
+```
+      0100        (= 4)
+    × 0111        (= 7)
+    -------
+      0100
+     0100
+    0100
+   0000
+    -------
+   0011100        (= 28)
+```
+
+
+
+---
+
+**Multiplying an $M$-bit signed number by an $N$-bit signed number requires at most $M+N$ signed bits to avoid overflow**, assuming two’s-complement representation and that $M,N$ include the sign bits.
+
+The corner case is **the most negative value multiplied by the most negative value**:
+
+$$
+(-2^{M-1})(-2^{N-1})=+2^{M+N-2}
+$$
+
+An $(M+N-1)$-bit signed result can only represent positive values up to
+
+$$
+2^{M+N-2}-1
+$$
+
+so it is **one count short**. Hence $M+N$ bits are necessary for the full input range.
+
+For example, two signed 3-bit numbers can each equal $-4$:
+
+$$
+(-4)(-4)=16
+$$
+
+- Signed 5-bit range: $[-16,15]$ → overflow.
+- Signed 6-bit range: $[-32,31]$ → fits.
+
+For **fixed-point multiplication**, the fractional lengths also add:
+
+$$
+\boxed{W_{\text{out}}=M+N,\qquad F_{\text{out}}=F_a+F_b}
+$$
+
+---
+
+
+
+![image-20261114162623251](fpsp/image-20261114162623251.png)
+
+For the conversion $Q2.30\rightarrow Q1.31$, both formats have **32 total bits**:
+
+| Format                        | Stored integer | Represented value |
+| ----------------------------- | -------------- | ----------------- |
+| $Q2.30$                     | $P$          | $P\,2^{-30}$    |
+| $Q1.31$ after shifting left | $2P$         | $(2P)\,2^{-31}$ |
+
+Therefore, provided no overflow occurs,
+
+$$
+\boxed{x_{\text{after}}=(2P)\,2^{-31}=P\,2^{-30}=x_{\text{before}}}
+$$
+
+For a **32-bit** left shift converting $Q2.30\rightarrow Q1.31$, overflow is avoided only when the original two MSBs are identical:
+
+| Original two MSBs | Original $Q2.30$ value $x$ | Conversion        |
+| ----------------- | -------------------------- | ----------------- |
+| `00`              | $0\le x<1$                 | Safe              |
+| `11`              | $-1\le x<0$                | Safe              |
+| `01`              | $1\le x<2$                 | Positive overflow |
+| `10`              | $-2\le x<-1$               | Negative overflow |
+
+The shift **discards the original MSB**, and the second MSB becomes the new sign bit. When they match, the discarded bit is a redundant sign-extension bit, so the value is preserved after adjusting the fractional length
+
+
+
+
 
 
 ## FIR Filter Scaling

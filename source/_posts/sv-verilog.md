@@ -9,8 +9,6 @@ mathjax: true
 
 
 
-
-
 ## Bit patterns, signedness, and literals
 
 An $N$-bit vector has the following ranges:
@@ -50,6 +48,28 @@ A sized integer literal has the form `<width>'[s]<base><digits>`. The optional `
 For the ordinary binary digits shown here, missing digits are padded with zeros **within the declared literal width**, even when `s` is present. Subsequent widening of the completed signed literal uses its sign bit.
 
 An unsized decimal integer such as `1` is signed and at least 32 bits wide. Sized literals make width and signedness explicit in RTL.
+
+
+
+---
+
+**`'sb` is used for signed binary constants.** —  `<width>'sb<binary_digits>`
+
+```verilog
+3'sb011   // 3-bit signed constant: +3
+3'sb101   // 3-bit signed constant: -3
+4'sb0101  // 4-bit signed constant: +5
+```
+
+
+
+| Syntax       | Purpose                                                  |
+| ------------ | -------------------------------------------------------- |
+| `3'sb101`    | Write a signed binary constant                           |
+| `signed'(x)` | Make an existing expression signed, preserving its width |
+| `$signed(x)` | Same conversion as `signed'(x)`                          |
+
+
 
 ### Widening and narrowing
 
@@ -121,21 +141,7 @@ Both casts produce a **6-bit signed** value of −32. The assignment subsequentl
 
 
 
-### Concatenations and part-selects are unsigned
 
-A concatenation is unsigned, even when all its elements come from signed vectors. A bit-select or part-select is also unsigned, even if the part-select covers the entire signed vector.
-
-```systemverilog
-logic signed [5:0] x;
-logic signed [7:0] auto_ext, manual_ext, slice_ext, cast_ext;
-
-assign auto_ext   = x;                  // Automatic sign extension
-assign manual_ext = {{2{x[5]}}, x};     // Explicit sign-extension bits
-assign slice_ext  = x[5:0];             // Unsigned slice: zero extension
-assign cast_ext   = $signed(x[5:0]);    // Signed slice: sign extension
-```
-
-Manual extension makes the bits explicit, but does not by itself make an expression signed. When using an extended concatenation directly in signed arithmetic, use `$signed({{2{x[5]}}, x})` or first assign it to a signed intermediate.
 
 ## Expression width and mixed signedness
 
@@ -510,7 +516,9 @@ Examples:
 | $-128-255$ | -383 | -128 |
 | $127-255$ | -128 | -128 |
 
-### Clamp an 8-bit signed input to 6 bits
+
+
+### Clamp 8-bit signed input to 6 bits
 
 A six-bit signed value ranges from -32 to +31.
 
@@ -550,7 +558,59 @@ always_comb begin
 end
 ```
 
-More generally, narrowing a signed $M$-bit value to $N$ bits, with $M>N$, preserves its value exactly when all bits `din[M-1:N-1]` equal `din[N-1]`.
+More generally, narrowing a signed $M$-bit value to $N$ bits, with $M>N$, preserves its value exactly when all bits `din[M-1:N-1]` equal `din[N-1]`
+
+
+
+### Clamp signed input by threshold
+
+
+
+```verilog
+module signed_threshold_clamp (
+    input  logic              clk,
+    input  logic              rst_n,
+    input  logic signed [9:0] data_in,    // S10.4
+    input  logic        [2:0] threshold,  // U3.0: 0 to 7
+    output logic signed [7:0] data_out    // S8.4
+);
+
+    logic signed [3:0] threshold_pos;    // S4.0
+    logic signed [3:0] threshold_neg;    // S4.0
+    logic overflow, underflow;
+
+    assign threshold_pos = {1'b0, threshold};
+    assign threshold_neg = ~threshold_pos; // -T - 1
+
+    // Compare the signed integer part against integer thresholds.
+    assign overflow  = (signed'(data_in[9:4]) >= threshold_pos);
+    assign underflow = (signed'(data_in[9:4]) <  threshold_neg);
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n)
+            data_out <= '0;
+        else if (overflow)
+            data_out <= {threshold_pos, 4'd0};
+        else if (underflow)
+            data_out <= {threshold_neg, 4'd0};
+        else
+            data_out <= data_in[7:0];
+    end
+
+endmodule
+```
+
+If you want **symmetric limits \([-T,+T]\)**, replace:
+
+```verilog
+assign threshold_neg = -threshold_pos;
+```
+
+![signed_threshold_clamp.drawio](sv-verilog/signed_threshold_clamp.drawio.svg)
+
+
+
+
 
 ## What the synthesized adders show
 
@@ -746,7 +806,27 @@ b_vect[15 -: 8]  // b_vect[8:15]
 dword[8*sel +: 8]  // Select byte sel; valid byte indices are 0 through 7
 ```
 
-For a packed integral vector, every part-select above is **unsigned**, regardless of the vector's declaration. Use `$signed(...)` when the extracted field represents a signed number.
+For a packed integral vector, every part-select above is **unsigned**, regardless of the vector's declaration. Use `$signed(...)` when the extracted field represents a signed number
+
+
+
+### Concatenations and part-selects are unsigned
+
+A concatenation is unsigned, even when all its elements come from signed vectors. A bit-select or part-select is also unsigned, even if the part-select covers the entire signed vector.
+
+```systemverilog
+logic signed [5:0] x;
+logic signed [7:0] auto_ext, manual_ext, slice_ext, cast_ext;
+
+assign auto_ext   = x;                  // Automatic sign extension
+assign manual_ext = {{2{x[5]}}, x};     // Explicit sign-extension bits
+assign slice_ext  = x[5:0];             // Unsigned slice: zero extension
+assign cast_ext   = $signed(x[5:0]);    // Signed slice: sign extension
+```
+
+Manual extension makes the bits explicit, but does not by itself make an expression signed. When using an extended concatenation directly in signed arithmetic, use `$signed({{2{x[5]}}, x})` or first assign it to a signed intermediate.
+
+
 
 ![image-20261113225049570](sv-verilog/image-20261113225049570.png)
 

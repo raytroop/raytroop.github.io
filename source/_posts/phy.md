@@ -624,7 +624,7 @@ RS is a forward error-correction (**FEC**) algorithm used to correct data corrup
 
 ## Endianness: Little-Endian vs Big-Endian
 
-
+*TODO* &#128197;
 
 
 
@@ -641,4 +641,6 @@ Hidehiro Toyoda, Shinji Nishimura, and Masato Shishikura, *PMD architecture with
 Kamesh Velmail, Samsung, *Challenges, Complexities and Advanced Verification Techniques in Stress Testing of Elastic Buffer in High Speed SERDES IPs* [[pdf](https://dvcon-proceedings.org/wp-content/uploads/challenges-complexities-and-advanced-verification-techniques-in-stress-testing-of-elastic-buffer-in-high-speed-serdes-ips-paper.pdf)]
 
 Marianne Nourzad (Intel), DesignCon 2022. Transmitter Jitter Measurement Methodologies for PAM-4 IOs
+
+01signal.com, The basics of Multi-Gigabit transceivers [[https://www.01signal.com/using-ip/mgt/](https://www.01signal.com/using-ip/mgt/)]
 

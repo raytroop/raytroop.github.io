@@ -612,6 +612,30 @@ assign threshold_neg = -threshold_pos;
 
 
 
+## 2’s complement to offset binary
+
+```verilog
+logic signed [7:0] ds;
+logic [7:0] du;
+
+assign du = {~ds[7], ds[6:0]};
+```
+
+|               |      | +128 |              |      |
+| ------------- | ---- | ---- | ------------ | ---- |
+| 8'sb1000_0000 | -128 |      | 8'b0000_0000 | 0    |
+| 8'sb0111_1111 | 127  |      | 8'b1111_1111 | 255  |
+
+Flipping the MSB converts 8-bit two’s complement to <span style="background-color:yellow">**offset binary**</span>
+
+$$
+\boxed{\text{du} = \text{ds} + 128}
+$$
+
+Here, **+128 describes the mathematical mapping**. The implementation simply inverts one bit; every valid signed input maps exactly into the unsigned output range
+
+
+
 ## What the synthesized adders show
 
 The following examples retain the original Design Compiler screenshots and mapped netlists. They illustrate how operand extension changes the Boolean function. Exact cell mapping depends on the synthesis tool, cell library, constraints, and optimization settings.
@@ -1098,3 +1122,6 @@ Accellera, [*Verilog-AMS Language Reference Manual*, VAMS-2023](https://acceller
 Designer's Guide Consulting, [Timing Statements](https://www.verilogams.org/refman/modules/analog-procedural/timing.html) and [Assignment Statements](https://www.verilogams.org/refman/modules/analog-procedural/assignment.html).
 
 Additional links from the original notes: [Project F: Numbers in Verilog](https://projectf.io/posts/numbers-in-verilog/), [Overflow Detection](http://www.c-jump.com/CIS77/CPU/Overflow/lecture.html), [Verilog Scalar and Vector](https://www.chipverify.com/verilog/verilog-scalar-vector), [Indexed Part-select Syntax](https://electronics.stackexchange.com/questions/74277/what-is-the-operator-called-in-verilog), [Time vs. Realtime](https://verificationacademy.com/forums/systemverilog/time-vs-realtime), [SystemVerilog Command-line Input](https://www.chipverify.com/systemverilog/systemverilog-command-line-input), and [Plusargs in SystemVerilog](https://www.theartofverification.com/plusargs-in-systemverilog/).
+
+01signal.com, Signed arithmetic in Verilog: The only rule one needs to know [[https://www.01signal.com/verilog-design/arithmetic/signed-wire-reg/](https://www.01signal.com/verilog-design/arithmetic/signed-wire-reg/)]
+

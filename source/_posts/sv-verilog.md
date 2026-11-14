@@ -626,8 +626,7 @@ assign du = {~ds[7], ds[6:0]};
 | 8'sb1000_0000 | -128 |      | 8'b0000_0000 | 0    |
 | 8'sb0111_1111 | 127  |      | 8'b1111_1111 | 255  |
 
-Flipping the MSB converts 8-bit two’s complement to <span style="background-color:yellow">**offset binary**</span>
-
+**Flipping the MSB** converts 8-bit two’s complement to <span style="background-color:yellow">**offset binary**</span>
 $$
 \boxed{\text{du} = \text{ds} + 128}
 $$

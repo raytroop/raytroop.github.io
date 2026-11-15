@@ -155,17 +155,21 @@ note W/L is different $12/(135*2) \lt 6/(8*8)$
 
 ## Interconnect Resistance Evolution
 
+> White Paper: Microelectronics/Semiconductor Research Community Virtual Workshop  2022 [[https://nnci.net/sites/default/files/inline-files/Microelectronics%202022%20Workshop%20Report%20with%20Slides.pdf](https://nnci.net/sites/default/files/inline-files/Microelectronics%202022%20Workshop%20Report%20with%20Slides.pdf)]
+
 ![image-20250703232709089](dfm-layout/image-20250703232709089.png)
 
 
-
-> White Paper: Microelectronics/Semiconductor Research Community Virtual Workshop  2022 [[https://nnci.net/sites/default/files/inline-files/Microelectronics%202022%20Workshop%20Report%20with%20Slides.pdf](https://nnci.net/sites/default/files/inline-files/Microelectronics%202022%20Workshop%20Report%20with%20Slides.pdf)]
 
 
 
 ## Copper Pillar Bump vs Solder bump
 
-Cu-pillar bumping is a next-generation flip chip interconnection between chip & packages, especially for fine pitch applications
+> Copper Electroplating Fundamentals [[https://insulectro.com/wp-content/uploads/2022/02/Copper-pillar-electroplating-tutorial-Whitepaper-2.0.pdf](https://insulectro.com/wp-content/uploads/2022/02/Copper-pillar-electroplating-tutorial-Whitepaper-2.0.pdf)]
+>
+> J. H. Lau and K.-N. Chiang, Cu-Interconnects, Glass, and AI-Assisted Simulation for Chiplets and Heterogeneous Integration. Singapore: Springer, 2026
+
+**Cu-pillar bumping** is a next-generation flip chip interconnection between chip & packages, especially for fine pitch applications
 
 ![img](dfm-layout/pic_Cu-pillarBumping_01.svg)
 
@@ -178,6 +182,38 @@ Cu-pillar bumping is a next-generation flip chip interconnection between chip & 
 
 
 ![image-20250613233806417](dfm-layout/image-20250613233806417.png)
+
+![image-20261115162008427](dfm-layout/image-20261115162008427.png)
+
+Conventional <span style="background-color:yellow">**C4 (Controlled Collapse Chip Connection)**</span> bumping uses solder bumps rather than copper pillars
+
+![image-20261115163740850](dfm-layout/image-20261115163740850.png)
+
+
+
+## Keep-out Zone (KOZ) Layout Rules for HD MIM Capacitor
+
+![image-20261115160859736](dfm-layout/image-20261115160859736.png)
+
+![image-20261115161322993](dfm-layout/image-20261115161322993.png)
+
+
+
+## Packaging Substrate
+
+> Glass Core Substrate Sector Research: Part 2 [[https://aaig.substack.com/p/glass-core-substrate-sector-research-c2b](https://aaig.substack.com/p/glass-core-substrate-sector-research-c2b)]
+>
+> Glass Core Substrate [[https://eps.ieee.org/wp-content/uploads/2025/11/Glass_Substrates_Adv_Substrates_TC_UPDATED_Nov25.pdf](https://eps.ieee.org/wp-content/uploads/2025/11/Glass_Substrates_Adv_Substrates_TC_UPDATED_Nov25.pdf)]
+>
+> J. H. Lau and K.-N. Chiang, Cu-Interconnects, Glass, and AI-Assisted Simulation for Chiplets and Heterogeneous Integration. Singapore: Springer, 2026
+
+![img](dfm-layout/https%253A%252F%252Fsubstack-post-media.s3.amazonaws.com%252Fpublic%252Fimages%252F4daebd0e-2c38-4d93-921d-23c94c189380_1024x576.jpeg)
+
+<span style="color:white; background-color:black">**Organic-core substrate, Glass-core substrate**</span>
+
+![image-20261115163141057](dfm-layout/image-20261115163141057.png)
+
+![image-20261115164335318](dfm-layout/image-20261115164335318.png)
 
 
 

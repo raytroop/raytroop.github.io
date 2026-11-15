@@ -17,6 +17,14 @@ ODSP: Optical DSP
 
 
 
+## Pluggable transceiver
+
+> Lau, J., & Fan, X. J. (2025). *Hybrid bonding, advanced substrates, failure mechanisms, and thermal management for chiplets and heterogeneous integration*. Springer.
+
+![image-20261115164058459](optical/image-20261115164058459.png)
+
+
+
 ## Wavelength-Division Multiplexing (WDM)
 
 Different wavelengths can travel simultaneously through the same fiber. This technique is called WDM (Wavelength-Division Multiplexing)

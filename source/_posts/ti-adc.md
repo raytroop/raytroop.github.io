@@ -377,64 +377,288 @@ There are overlap between clk6UI_ph0UI and clk36UI_ph0UI, clk36UI_ph12UI, clk36U
 
 
 
-## Calibration Techniques
-> M. Guo, J. Mao, S. -W. Sin, H. Wei and R. P. Martins, "A 5 GS/s 29 mW Interleaved SAR ADC With 48.5 dB SNDR Using Digital-Mixing Background Timing-Skew Calibration for Direct Sampling Applications," in IEEE Access, vol. 8, pp. 138944-138954, 2020, doi: 10.1109/ACCESS.2020.3012699 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9151956](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9151956)]
+## Skew Calibration Techniques
 
-![image-20260324180833001](ti-adc/image-20260324180833001.png)
+Timing-skew calibration has two separate tasks: **detect the relative sampling-time errors**, then **correct the sampling instants or the resulting digital errors**. Foreground/background describes when estimation runs; analog/digital describes where correction occurs. A digital detector driving a variable delay line is a mixed-signal calibration loop.
 
+For an $M$-channel TI-ADC, let $f_s=1/T_s$ be the **aggregate** sampling rate and $\tau_i$ the skew of channel $i$:
 
+$$
+t_{i,k}=(kM+i)T_s,\qquad
+y_i[k]=x(t_{i,k}+\tau_i)
+\approx x(t_{i,k})+\tau_i\dot{x}(t_{i,k}).
+$$
 
-### Autocorrelation-based Skew Calibration
+This first-order model assumes small skew and omits other errors. It explains why timing error increases with input slope. Calibration removes **relative skew**: adding the same delay to every channel shifts the time origin without producing interleaving mismatch. Random aperture jitter and frequency-dependent bandwidth mismatch are separate limitations. See [S1](#skew-ref-1) and [S2](#skew-ref-2).
 
-> S. Chen, L. Wang, H. Zhang, R. Murugesu, D. Dunwell, A. Chan Carusone, “All-Digital Calibration of Timing Mismatch Error in Time-Interleaved Analog-to-Digital Converters,” *IEEE Transactions on VLSI Systems*, Sept. 2017. [[PDF](https://www.eecg.utoronto.ca/~tcc/Chen_TVLSI17.pdf), [slides](https://www.eecg.utoronto.ca/~tcc/Wang_ISCAS_SLIDES_2018.pdf)]
->
-> B. Razavi, "Problem of timing mismatch in interleaved ADCs," *Proceedings of the IEEE 2012 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2012 [[pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf)]
+### Method Comparison
 
+The main background families are **input-statistics-based**, **reference-channel-based**, and **reference-signal-based** [S1]. The rows below separate useful implementations within these families; digital correction is discussed separately because it can accompany several detectors.
 
+| Method | Timing-error observable | Main advantage | Main limitation / cost | Read |
+| --- | --- | --- | --- | --- |
+| Foreground training | Channel phase or sample error for a known sine, ramp, or reference edge | Simple identification and startup calibration | Interrupts normal conversion; stored trims do not track later drift | [S1](#skew-ref-1), [S2](#skew-ref-2) |
+| Autocorrelation / MAD | Unequal statistics of nominally equal sample intervals | No extra analog reference channel | Input statistics, coherent patterns, and detector slope affect convergence | [S3](#skew-ref-3), [S4](#skew-ref-4) |
+| Digital mixing | Products of channel outputs and an estimate of the autocorrelation slope | Can estimate skew magnitude for digital correction | Derivative estimation and correction bandwidth; some implementations add auxiliary samplers | [S5](#skew-ref-5), [S6](#skew-ref-6) |
+| Zero-crossing statistics | Unequal crossing counts between adjacent sampling instants | Simple sign/count logic | Requires crossing activity and appropriate sample-sequence control | [S7](#skew-ref-7) |
+| Reference-ADC correlation / variance | Correlation or difference between nominally coincident main/reference samples | Provides a common timing reference for all channels | Extra input loading, reference-clock quality, averaging, and possible reference spurs | [S8](#skew-ref-8), [S9](#skew-ref-9) |
+| Reference-ADC derivative / LMS | Main/reference sample error multiplied by input slope | Direct early/late information | Must obtain a useful slope estimate; weak input activity slows adaptation | [S10](#skew-ref-10) |
+| Injected reference / dither | Response to a known timing-sensitive signal correlated with its modulation sequence | Supplies excitation independently of the unknown input | Injection-path mismatch, headroom, kickback, and residual dither | [S11](#skew-ref-11), [S12](#skew-ref-12) |
 
-***Binary-Search Calibration Method & its limitations***
+### Foreground Calibration with a Known Input
+
+Apply a known calibration waveform, estimate each channel's relative timing, and store clock-trim codes or digital correction coefficients. For a sinusoid, an unwrapped phase difference gives $\Delta\tau=\Delta\phi/(2\pi f_{\mathrm{cal}})$ after accounting for the nominal interleaving phase. A ramp converts timing error into a voltage error through its known slope.
+
+This is useful for initial characterization and coarse startup alignment. Offset, gain, and analog-path phase must be separated from timing error; otherwise the trim can absorb another mismatch. Recalibration is needed if the relative delays drift. Foreground coefficients may be applied continuously during operation, but that alone does not make their **estimation** a background process [S1], [S2].
+
+### Autocorrelation-Based Skew Calibration
+
+Assume the input is wide-sense stationary over the averaging interval, with
+
+$$
+R_x(\tau)=E[x(t)x(t+\tau)].
+$$
+
+After offset/gain equalization, the correlation between adjacent channel samples is approximately
+
+$$
+C_i=R_x(T_s+\tau_{i+1}-\tau_i)
+\approx R_x(T_s)+R_x'(T_s)(\tau_{i+1}-\tau_i).
+$$
+
+For the last channel, use channel 0's sample from the **next** interleaving frame and set $\tau_M=\tau_0$. Equal nominal intervals should give equal correlations; deviations reveal relative skew when $R_x'(T_s)$ is observable.
+
+#### Hierarchical Calibration and Its Bandwidth Limit
+
+A hierarchical scheme first aligns widely separated channels, then fills in the intermediate phases. Its detector can therefore depend on $R_x'(L T_s)$ with $L>1$, whose sign is harder to guarantee over a wide input band. In the power-of-two hierarchy discussed in [S3], the first step uses a lag of $M T_s/2$; its usual input-bandwidth guarantee is limited to $f_s/M$ [S1].
+
+**Channel grouping and trim-code search are different choices.** Binary search over delay codes still needs a reliable, monotonic error indication; it does not remove a detector's input-bandwidth restriction.
 
 ![image-20260328225656118](ti-adc/image-20260328225656118.png)
 
----
+#### Adjacent-Channel Calibration
 
-> M. Gu, Y. Tao, X. He, Y. Zhong, L. Jie and N. Sun, "A 1-GS/s 11-b Time-Interleaved SAR ADC With Robust, Fast, and Accurate Autocorrelation-Based Background Timing-Skew Calibration," in IEEE Journal of Solid-State Circuits, vol. 60, no. 2, pp. 421-431, Feb. 2025
->
-> —. "Timing-Skew Calibration Techniques in Time-Interleaved ADCs," in *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 1-10, 2025 [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10804623)]
+Gu et al. [S4] use adjacent-channel statistics to extract all channel skews without the long-lag first step. The first-order relationship can be written as
 
-An autocorrelation-based background timing-skew calibration method, which uses the correlations between adjacent channels to extract timing-skew errors, which relaxes the input bandwidth limitation up to the **Nyquist frequency**
+$$
+\overline{C}=\frac{1}{M}\sum_{i=0}^{M-1}C_i\approx R_x(T_s),
+\qquad
+\sum_{i=0}^{m-1}(C_i-\overline{C})
+\approx R_x'(T_s)(\tau_m-\tau_0).
+$$
+
+The sum telescopes, giving the skew of channel $m$ relative to channel 0. This illustrates why adjacent correlations can support simultaneous estimation and extend the applicable bandwidth toward $f_s/2$.
 
 ![image-20260330204902627](ti-adc/image-20260330204902627.png)
 
 ![image-20260330205119231](ti-adc/image-20260330205119231.png)
 
+**Nyquist-band coverage is not input independence.** The ensemble model and finite per-channel averages can differ for coherent inputs. The review [S1] explicitly identifies a sinusoid at $f_s/M$ as a problematic case for [S4]. Low signal activity also reduces detector gain.
 
+For a random-phase sinusoid of amplitude $A$,
 
+$$
+R_x(\tau)=\frac{A^2}{2}\cos(2\pi f_{\mathrm{in}}\tau),
+\qquad
+R_x'(T_s)=-\pi A^2 f_{\mathrm{in}}\sin(2\pi f_{\mathrm{in}}T_s).
+$$
 
-
----
-
-***Analyses Of The Derivative of The Autocorrelation***
+Thus the ideal adjacent-correlation detector loses first-order sensitivity at DC and at an exact Nyquist tone. A result measured near Nyquist does not establish convergence for every coherent pattern.
 
 ![image-20260324183003185](ti-adc/image-20260324183003185.png)
 
+---
+
+<span style="background-color:yellow">**Why the Wei–Razavi method has a bandwidth restriction**</span>
+
+Using the correlation model discussed above, a detector comparing intervals $L+\Delta t$ and $L-\Delta t$ produces
+
+$$
+e=R_x(L+\Delta t)-R_x(L-\Delta t) \approx 2\Delta t\,R_x'(L)
+$$
+
+Therefore, **the sign of $e$ indicates the sign of skew only if the sign of $R_x'(L)$ is known**.
+
+For a real WSS input with two-sided PSD $S_x(f)$ confined to $|f|\le B$,
+
+$$
+R_x'(L) =-4\pi\int_0^B fS_x(f)\sin(2\pi fL)\,df
+$$
+
+A sufficient condition for a negative slope, assuming nonzero signal energy inside the band, is
+
+$$
+\boxed{B<\frac{1}{2L}}
+$$
+
+Above that range, positive and negative contributions can cancel or reverse the slope.
+
+In the hierarchical multichannel extension, the first calibration step uses $L=MT_s/2$, giving the familiar guarantee
+
+$$
+\boxed{B<\frac{f_s}{M}}
+$$
+
+The Gu's 2025 review explicitly identifies this limitation. It is a **detector-polarity guarantee**, rather than a claim that every higher-frequency input necessarily fails
+
+<span style="background-color:yellow">**Gu: shorten the correlation lag to address the restriction**</span>
+
+| Approach                                                     | What changes                                                 | Remaining limitation                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| **Adjacent-channel correlations — Gu et al., JSSC 2025 [S4]** | Uses only lag $T_s$, extending the correlation-slope bandwidth condition toward $f_s/2$ | Still depends on input statistics; certain coherent tones remain problematic |
+
+
+The method measures all adjacent-channel correlations, uses their average to estimate the ideal adjacent correlation, and combines the deviations to recover each channel’s relative skew. It avoids the widely separated channel pairs in the first hierarchical step:
+
+$$
+\boxed{ L:\frac{MT_s}{2}\rightarrow T_s \quad\Longrightarrow\quad B_{\mathrm{guarantee}}:\frac{f_s}{M}\rightarrow\frac{f_s}{2} }
+$$
+
+However, the review still identifies a coherent sinusoid at $f_s/M$ as a failure case. Extending the bandwidth does not eliminate sampling-pattern dependence.
 
 
 
+#### MAD (Mean Absolute Difference) vs. Correlation
 
-### MAD (Mean Absolute Difference) vs. correlation
+Wei et al. [S3] compare the mean absolute differences on the two sides of a sample, avoiding general-purpose multipliers. To understand the relationship, define
 
-> H. Wei, P. Zhang, B. Datta Sahoo and B. Razavi, "An 8-Bit 4-GS/s 120-mW CMOS ADC," *Proceedings of the IEEE 2013 Custom Integrated Circuits Conference*, San Jose, CA, USA, 2013 [[pdf](https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf)]
->
-> —, "An 8 Bit 4 GS/s 120 mW CMOS ADC," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 8, pp. 1751-1761, Aug. 2014 [[pdf](https://sci-hub.jp/10.1109/JSSC.2014.2313571)]
->
-> M. Gu, Y. Tao, X. He, Y. Zhong, L. Jie and N. Sun, "A 1-GS/s 11-b Time-Interleaved SAR ADC With Robust, Fast, and Accurate Autocorrelation-Based Background Timing-Skew Calibration," in IEEE Journal of Solid-State Circuits, vol. 60, no. 2, pp. 421-431, Feb. 2025
+$$
+D(\tau)=E[|x(t+\tau)-x(t)|],\qquad
+Q(\tau)=E[(x(t+\tau)-x(t))^2].
+$$
 
-*TODO* &#128197;
+For a real WSS signal, the squared-difference identity is exact:
 
-approximate the **absolute value operation** by **a squaring function**
+$$
+Q(\tau)=2[R_x(0)-R_x(\tau)].
+$$
+
+MAD does **not** equal the squared difference. Replacing the absolute value by a square in [S3] is an analytical surrogate. If the increment is zero-mean Gaussian, then $D(\tau)=\sqrt{2Q(\tau)/\pi}$, so the two metrics are monotonic functions of one another. WSS alone does not guarantee that relation for arbitrary input distributions.
 
 ![image-20260328212413965](ti-adc/image-20260328212413965.png)
+
+### Digital-Mixing-Based Calibration
+
+Here, digital mixing forms products of channel samples to measure correlation imbalance. It belongs to the statistical family above. To estimate skew **magnitude**, rather than only an update direction, the imbalance must be normalized by an estimate of the relevant correlation slope.
+
+Lin et al. [S5] obtain the required information with auxiliary delta-sampling SAR ADCs. Guo et al. [S6] estimate the autocorrelation derivative digitally and correct the timing error without those extra analog channels. Their first-order approximation and derivative bandwidth deserve attention, especially for direct sampling above the first Nyquist zone. The reported 29 mW in [S6] is **ADC-core power with mismatch calibration implemented off-chip**, not the power of a complete on-chip calibration system.
+
+The existing notes from [S6] are retained here:
+
+![image-20260324180833001](ti-adc/image-20260324180833001.png)
+
+### Zero-Crossing-Based Calibration
+
+Wang and Wu [S7] detect skew by counting input zero crossings between adjacent channels while randomly alternating their sampling order. The count imbalance drives digitally controlled delays. This uses sign decisions and counters instead of full-resolution products.
+
+The input must provide sufficient crossings, and the sampling-order scheme is part of the detector. A generic crossing counter cannot be assumed to recover skew for every waveform or sampling rate. Study the paper's convergence and residual-jitter analysis together with its switching sequence.
+
+### Reference-Channel-Based Calibration
+
+An extra ADC samples the same input at nominally coincident instants with each main channel. For an already gain/offset-matched pair, a local model is
+
+$$
+e_i=y_i-y_{\mathrm{ref}}
+\approx (\tau_i-\tau_{\mathrm{ref}})\dot{x}.
+$$
+
+The reference may run slowly while visiting all channel phases. In [S8], choosing $f_{\mathrm{CAL}}=f_s/K$ with $\gcd(K,M)=1$ provides that coverage. **Coprime division guarantees phase-slot coverage, not automatic physical edge alignment**; the clock origin and correction range still need to be designed.
+
+#### Correlation Maximization / Difference-Variance Minimization
+
+El-Chammas and Murmann [S8] maximize the cross-correlation between the reference and each main channel. With matched scaling and delay-independent signal power, maximizing correlation is equivalent to minimizing mean-squared sample difference. Song et al. [S9] provide a variance-based implementation to study alongside it.
+
+These metrics have an extremum at alignment, so a search or perturbation is needed to determine which direction to move. Reference-path bandwidth mismatch can move the optimum; extra sampling loads can also disturb the main input.
+
+#### Derivative-Based LMS
+
+Multiplying the error by an input-slope estimate gives a signed timing observable:
+
+$$
+E[e_i\dot{x}]
+\approx (\tau_i-\tau_{\mathrm{ref}})E[\dot{x}^{\,2}].
+$$
+
+A negative-feedback update can therefore drive the relative skew toward zero. Its actual code-update sign depends on whether increasing the delay code advances or retards the sampling edge.
+
+Stepanović and Nikolić [S10] estimate the derivative using two calibration paths with different analog bandwidths. Read this for the implementation of the slope detector and LMS loop. Unlike purely statistical correlation search, the slope provides direct directional information, but adds circuitry and still needs input activity.
+
+### Reference-Signal / Dither-Injection Calibration
+
+Inject a known waveform with a timing-sensitive slope into the input path. In foreground operation it can replace the normal input. For background operation, modulate the reference with a known pseudo-random sequence and correlate the ADC outputs with that sequence to extract its contribution [S11], [S12].
+
+This supplies calibration excitation even when the external input is quiet or unfavorable for a statistical detector. The main design issue is **which path the injected signal measures**. Injection after a mismatched input-buffer stage can miss that stage's delay; separate injection paths can introduce their own mismatch. Tao et al. [S11] and Cao et al. [S12] are useful comparisons of shared/global injection arrangements.
+
+Check the residual injected component, input headroom, reference-edge quality, and disturbance of the wanted signal. These determine the cost of improved input independence.
+
+### Clock Trimming vs. Digital Error Correction
+
+| Correction | Implementation | What to check |
+| --- | --- | --- |
+| Analog sampling-time correction | Digital detector adjusts a variable delay line, phase interpolator, or clock-buffer trim | Delay range, resolution, monotonicity, added jitter, and whether the adjusted edge controls the actual sampling aperture |
+| Digital reconstruction | Derivative cancellation or fractional-delay / reconstruction filters correct the output samples | Accurate skew magnitude, filter bandwidth, higher-order residuals, word length, throughput, and power |
+
+For small skew, the first-order digital correction is
+
+$$
+\widehat{x}[n]=y[n]-\widehat{\tau}_{i(n)}\,\widehat{\dot{x}}[n],
+\qquad i(n)=n\bmod M,
+$$
+
+where $\widehat{\dot{x}}$ estimates the derivative with respect to **physical time**. A derivative per sample instead requires the normalized coefficient $\widehat{\tau}_i/T_s$. Align the derivative-filter latency with the data and channel index. The remaining error depends on derivative accuracy and higher-order Taylor terms; a digital detector alone does not guarantee an all-digital solution. Read [S13](#skew-ref-13), [S6](#skew-ref-6), and the earlier adaptive approach in [S14](#skew-ref-14).
+
+A common front-end track-and-hold can reduce downstream aperture-mismatch sensitivity, while channel randomization can spread mismatch spurs. These are architectural mitigation techniques, not estimates of the skew itself; spur spreading does not by itself remove total error power [S1].
+
+For an ADC-based SerDes, a useful design check is to identify which front-end sampling rank sets the input aperture, then evaluate the detector with the actual equalized data statistics and repeating patterns. Common sampling-phase recovery and relative interleaver-skew calibration control different degrees of freedom.
+
+### Papers to Read
+
+Suggested first pass: **[S1] → [S2] → [S3] → [S4]** for statistical detection, then **[S8] → [S10] → [S11]** to compare reference-assisted approaches. Read **[S13] → [S6]** for digital correction. The remaining papers deepen particular branches.
+
+<span id="skew-ref-1"></span>
+**[S1] Overview.** M. Gu, Y. Tao, Y. Zhong, L. Jie, and N. Sun, “Timing-Skew Calibration Techniques in Time-Interleaved ADCs,” *IEEE Open Journal of the Solid-State Circuits Society*, vol. 5, pp. 1–10, 2025. [DOI / open-access paper](https://doi.org/10.1109/OJSSCS.2024.3519486). Read first for the taxonomy and input-dependence tradeoffs. Note that this review's author list differs from [S4].
+
+<span id="skew-ref-2"></span>
+**[S2] Fundamentals.** B. Razavi, “Problem of Timing Mismatch in Interleaved ADCs,” *IEEE CICC*, 2012. [Author PDF](https://www.seas.ucla.edu/brweb/papers/Conferences/BRCICC12.pdf). Read for the error model, sources of skew, and detection/correction alternatives.
+
+<span id="skew-ref-3"></span>
+**[S3] MAD detector and delay correction.** H. Wei, P. Zhang, B. D. Sahoo, and B. Razavi, “An 8 Bit 4 GS/s 120 mW CMOS ADC,” *IEEE JSSC*, vol. 49, no. 8, pp. 1751–1761, Aug. 2014. [DOI](https://doi.org/10.1109/JSSC.2014.2313571), [author PDF](https://www.seas.ucla.edu/brweb/papers/Journals/Hegong_JSSC14.pdf). The earlier CICC 2013 paper 16.3 is [here](https://www.seas.ucla.edu/brweb/papers/Conferences/HegongCICC13.pdf). Focus on the multiplier-free detector, channel hierarchy, and fine delay line.
+
+<span id="skew-ref-4"></span>
+**[S4] Adjacent-channel statistics.** M. Gu, Y. Tao, X. He, Y. Zhong, L. Jie, and N. Sun, “A 1-GS/s 11-b Time-Interleaved SAR ADC With Robust, Fast, and Accurate Autocorrelation-Based Background Timing-Skew Calibration,” *IEEE JSSC*, vol. 60, no. 2, pp. 421–431, Feb. 2025. [DOI](https://doi.org/10.1109/JSSC.2024.3421363). Compare its simultaneous extraction and bandwidth with [S3], and examine the remaining input restrictions.
+
+<span id="skew-ref-5"></span>
+**[S5] Digital mixing with auxiliary sampling.** C.-Y. Lin, Y.-H. Wei, and T.-C. Lee, “A 10-bit 2.6-GS/s Time-Interleaved SAR ADC With a Digital-Mixing Timing-Skew Calibration Technique,” *IEEE JSSC*, vol. 53, no. 5, pp. 1508–1517, May 2018. [DOI](https://doi.org/10.1109/JSSC.2018.2793535). Focus on the delta-sampling auxiliary ADCs and how skew magnitude is obtained.
+
+<span id="skew-ref-6"></span>
+**[S6] Fully digital mixing-based calibration.** M. Guo, J. Mao, S.-W. Sin, H. Wei, and R. P. Martins, “A 5 GS/s 29 mW Interleaved SAR ADC With 48.5 dB SNDR Using Digital-Mixing Background Timing-Skew Calibration for Direct Sampling Applications,” *IEEE Access*, vol. 8, pp. 138944–138954, 2020. [DOI / open-access paper](https://doi.org/10.1109/ACCESS.2020.3012699). Focus on the autocorrelation-derivative approximation and off-chip digital correction.
+
+<span id="skew-ref-7"></span>
+**[S7] Zero-crossing statistics.** C.-Y. Wang and J.-T. Wu, “A Background Timing-Skew Calibration Technique for Time-Interleaved Analog-to-Digital Converters,” *IEEE TCAS-II: Express Briefs*, vol. 53, no. 4, pp. 299–303, Apr. 2006. [DOI](https://doi.org/10.1109/TCSII.2005.861887), [institutional PDF](https://ir.lib.nycu.edu.tw/bitstream/11536/12403/1/000236891400012.pdf). Read for sampling-sequence randomization, crossing counts, and loop convergence.
+
+<span id="skew-ref-8"></span>
+**[S8] Reference-ADC correlation.** M. El-Chammas and B. Murmann, “A 12-GS/s 81-mW 5-bit Time-Interleaved Flash ADC With Background Timing Skew Calibration,” *IEEE JSSC*, vol. 46, no. 4, pp. 838–847, Apr. 2011. [DOI](https://doi.org/10.1109/JSSC.2011.2108125). Read together with B. Murmann and M. El-Chammas, “Background Calibration of Timing Skew in Time-Interleaved A/D Converters,” *SampTA*, 2011 ([author PDF](https://www.el-chammas.com/papers/sampTA2011.pdf)), which explains the coprime reference-clock schedule and correlation objective.
+
+<span id="skew-ref-9"></span>
+**[S9] Variance-based reference calibration.** J. Song, K. Ragab, X. Tang, and N. Sun, “A 10-b 800-MS/s Time-Interleaved SAR ADC With Fast Variance-Based Timing-Skew Calibration,” *IEEE JSSC*, vol. 52, no. 10, pp. 2563–2575, Oct. 2017. [DOI](https://doi.org/10.1109/JSSC.2017.2713523), [author page](https://sunlab.ee.tsinghua.edu.cn/zh/publication/jssc_201707_jeonggoo-song_7983356/). Focus on its single-comparator window detector and faster variance estimation; compare the objective with [S8].
+
+<span id="skew-ref-10"></span>
+**[S10] Analog derivative and LMS.** D. Stepanović and B. Nikolić, “A 2.8 GS/s 44.6 mW Time-Interleaved ADC Achieving 50.9 dB SNDR and 3 dB Effective Resolution Bandwidth of 1.5 GHz in 65 nm CMOS,” *IEEE JSSC*, vol. 48, no. 4, pp. 971–982, Apr. 2013. [DOI](https://doi.org/10.1109/JSSC.2013.2239005), [author PDF](https://people.eecs.berkeley.edu/~bora/Journals/2013/JSSC2013.pdf). Focus on the two calibration paths, derivative estimate, and timing-control loop.
+
+<span id="skew-ref-11"></span>
+**[S11] Background reference injection.** Y. Tao, M. Gu, B. Chi, Y. Zhong, L. Jie, and N. Sun, “22.4 A 4.8GS/s 7-ENoB Time-Interleaved SAR ADC with Dither-Based Background Timing-Skew Calibration and Bit-Distribution-Based Background Ping-Pong Comparator Offset Calibration,” *IEEE ISSCC*, pp. 394–396, 2024. [DOI](https://doi.org/10.1109/ISSCC49657.2024.10454299). Focus on reference modulation, injection location, and cancellation of the injected component.
+
+<span id="skew-ref-12"></span>
+**[S12] Global dither injection.** Y. Cao, M. Zhang, Y. Zhu, R. P. Martins, and C.-H. Chan, “A 12-GS/s 12-b 4× Time-Interleaved ADC Using Input-Independent Timing Skew Calibration With Global Dither Injection and Linearized Input Buffer,” *IEEE JSSC*, vol. 59, no. 12, pp. 4211–4224, Dec. 2024. [DOI](https://doi.org/10.1109/JSSC.2024.3482567). Read for the difference between local and global injection and the timing errors each can observe.
+
+<span id="skew-ref-13"></span>
+**[S13] All-digital estimation and correction.** S. Chen, L. Wang, H. Zhang, R. Murugesu, D. Dunwell, and A. Chan Carusone, “All-Digital Calibration of Timing Mismatch Error in Time-Interleaved Analog-to-Digital Converters,” *IEEE Transactions on VLSI Systems*, vol. 25, no. 9, pp. 2552–2560, Sept. 2017. [DOI](https://doi.org/10.1109/TVLSI.2017.2703141), [author PDF](https://www.eecg.utoronto.ca/~tcc/Chen_TVLSI17.pdf), [slides](https://www.eecg.utoronto.ca/~tcc/Wang_ISCAS_SLIDES_2018.pdf). Focus on difference-based estimation, derivative-filter correction, and residual SNDR limits.
+
+<span id="skew-ref-14"></span>
+**[S14] Early adaptive digital calibration.** S. M. Jamal, D. Fu, N. C.-J. Chang, P. J. Hurst, and S. H. Lewis, “A 10-b 120-Msample/s Time-Interleaved Analog-to-Digital Converter With Digital Background Calibration,” *IEEE JSSC*, vol. 37, no. 12, pp. 1618–1627, Dec. 2002. [DOI](https://doi.org/10.1109/JSSC.2002.804327). Read for correlation-driven adaptive correction of gain and sample-time errors.
+
+
+
 
 
 

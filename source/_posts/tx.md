@@ -803,6 +803,18 @@ $$
 
 
 
+## clock shift
+
+> P. Novellini and G. Guasti, "Lane-to-lane de-skew for transmitters," U.S. Patent 9 331 724 B2, May 3, 2016. [Online]. Available: https://patents.google.com/patent/US9331724B2/en
+
+
+
+*TODO* &#128197;
+
+
+
+
+
 ## Peak Power Constraint of TX FIR
 
 > Kevin Zheng , Circuit Insights @ ISSCC2025: Circuits for Wireline Communications [[https://youtu.be/8NZl81Dj45M&t=829](https://youtu.be/8NZl81Dj45M&t=829)]

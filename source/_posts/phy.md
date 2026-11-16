@@ -22,12 +22,16 @@ mathjax: true
 > Joe Winkles, *Elastic Buffer Implementations in PCI Express Devices* [[pdf](https://www.docdroid.net/B4VS5Nv/mindshare-pcie-elastic-buffer-pdf)]
 >
 > wikibooks, Clock and Data Recovery/Buffer Memory (Elastic Buffer)/Cascades of Buffers and CDRs, delays and tolerance [[link](https://en.wikibooks.org/wiki/Clock_and_Data_Recovery/Buffer_Memory_(Elastic_Buffer)/Cascades_of_Buffers_and_CDRs,_delays_and_tolerance)]
+>
+> Sakthivel Ramaiah, Design Engineering Architect Cadence Design Systems, PCI-SIG DevCon India 2026: *Clock Modelling for Formal Verification of PCIe® Elastic Buffer*
 
 ![image-20260402000348140](phy/image-20260402000348140.png)
 
 bridge between ***Recovered Clock Domain*** and ***Local Clock Domain***
 
 ![image-20260331221404321](phy/image-20260331221404321.png)
+
+**SKP Ordered Set (SKP OS)**
 
 ![image-20260331231925843](phy/image-20260331231925843.png)
 
@@ -59,6 +63,14 @@ N_t0 = 1/(f1 - f2);  % 1.6667e+03
 ![image-20260815001847647](phy/image-20260815001847647.png)
 
 Frequency offset minimization is required to limit latency (the depth of elastic buffer)
+
+
+
+---
+
+![image-20261117005124585](phy/image-20261117005124585.png)
+
+
 
 
 
@@ -625,6 +637,16 @@ RS is a forward error-correction (**FEC**) algorithm used to correct data corrup
 ## Endianness: Little-Endian vs Big-Endian
 
 *TODO* &#128197;
+
+
+
+## PHY Firmware
+
+> Disha Puri Director, IPG Synopsys, PCI-SIG DevCon India 2026: *Formal Analysis of Production PCIe® PHY Firmware*
+
+![image-20261117003952247](phy/image-20261117003952247.png)
+
+![image-20261117004026209](phy/image-20261117004026209.png)
 
 
 

@@ -116,9 +116,7 @@ where $\theta = 2\pi f N/f_0$
 ![image-20250901233055582](jitter/image-20250901233055582.png)
 
 
-As EQ(3.44), EQ(3.45)
-
-the autocorrelation is the inverse Fourier transform of the PSD
+As EQ(3.44), EQ(3.45), the autocorrelation is the inverse Fourier transform of the PSD
 
 $$
 R_{\varphi}(t) = \int_{-\infty}^{+\infty} S_{\varphi} (f) e^{j2\pi f t}df
@@ -136,30 +134,20 @@ Thus, yield EQ(3.48)
 
 ---
 
-***Simplified PLL Phase Noise Profile***
-
-
-
-***Absolute Jitter***
-
-*TODO* &#128197;
-
-
-
- ***Period Jitter***
+<span style="color:white; background-color:black">**Simplified PLL Phase Noise Profile**</span>
 
 ![image-20251218232426501](jitter/image-20251218232426501.png)
 
 ---
 
-Given Simple PLL $\frac{\mathcal{L}_0}{1 + (f / f_{3dB})^2}$ and $\sigma_{p(N)}^2=\frac{\mathcal{L}_0 f_{3dB}}{2\pi f_0^2} \left(1 - \exp\left(-2\pi f_{3dB} N / f_0\right)\right)$
+Since the simple PLL has $\mathcal{L}=\frac{\mathcal{L}_0}{1 + (f / f_{3dB})^2}$ and $\sigma_{p(N)}^2=\frac{\mathcal{L}_0 f_{3dB}}{2\pi f_0^2} \left(1 - \exp\left(-2\pi f_{3dB} N / f_0\right)\right)$
 
 |           | $1 - \exp\left(-2\pi f_{3dB} N / f_0\right)$ | $\sigma_{\mathbf{p}(N)}^2$                     |
 | --------- | -------------------------------------------- | ---------------------------------------------- |
 | small $N$ | $\frac{2\pi f_{3dB} N} {f_0}$                | $\sigma_{PER}^2\cdot N$                        |
 | large $N$ | $1$                                          | $\sigma_{PER}^2\cdot \frac{f_0}{2\pi f_{3dB}}$ |
 
-where $\sigma_{\mathbf{p}}^2 = \frac{\mathcal{L}_0 f_{3dB}^2}{f_0^3}$
+where $\sigma_{\mathbf{PER}}^2 = \frac{\mathcal{L}_0 f_{3dB}^2}{f_0^3}$
 
 
 
@@ -169,17 +157,17 @@ where $\sigma_{\mathbf{p}}^2 = \frac{\mathcal{L}_0 f_{3dB}^2}{f_0^3}$
 
 ---
 
-**a random-walk DCO - $1/f^2$ Phase Noise Profile**
-
 > L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
+
+<span style="color:white; background-color:black">**a random-walk DCO - $1/f^2$ Phase Noise Profile**</span>
 
 ![image-20250902232230515](jitter/image-20250902232230515.png)
 
-> ![image-20250902231843251](jitter/image-20250902231843251.png)
-> $$
-> \sigma_\mathbf{p} = \sqrt{\frac{\mathcal{L_1}f_1^2}{f_0^3}}=\sqrt{\frac{10^{-13}\cdot 10^{6\cdot 2}}{10^{9\cdot 3}}}=10^{-14}=10\text{fs}
-> $$
-> 
+![image-20250902231843251](jitter/image-20250902231843251.png)
+$$
+\sigma_\mathbf{p} = \sqrt{\frac{\mathcal{L_1}f_1^2}{f_0^3}}=\sqrt{\frac{10^{-13}\cdot 10^{6\cdot 2}}{10^{9\cdot 3}}}=10^{-14}=10\text{fs}
+$$
+
 
 ---
 
@@ -191,14 +179,11 @@ where $\sigma_{\mathbf{p}}^2 = \frac{\mathcal{L}_0 f_{3dB}^2}{f_0^3}$
 
 
 
-
 ---
 
----
+<span style="color:white; background-color:black">**$1/f^2$ phase noise corresponds to white frequency/period fluctuations**</span>
 
-**$1/f^2$$ phase noise corresponds to white frequency/period fluctuations**
-
-- $L(f) \propto \frac{1}{f^2}$ phase noise corresponds to **white frequency noise**.
+- $L(f) \propto \frac{1}{f^2}$ phase noise corresponds to **white frequency noise**
 - Frequency/period fluctuations are related to the derivative of phase, introducing an $f^2$ factor.
 
 Therefore:
@@ -206,6 +191,7 @@ Therefore:
 $$
 S_{\phi}(f) \propto \frac{1}{f^2} \quad\Rightarrow\quad S_{\Delta f}(f) \propto f^2 S_{\phi}(f) = \text{constant}
 $$
+
 
 
 ## Intersymbol interference (ISI)

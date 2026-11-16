@@ -23,13 +23,14 @@ mathjax: true
 
 ![image-20261107214129064](comparator/image-20261107214129064.png)
 
-![image-20261107214850998](comparator/image-20261107214850998.png)
+![image-20261116232656967](comparator/image-20261116232656967.png)
 
 The voltage gain vary with time
 $$
 |V_P - V_Q| \approx (g_{m1,2}|V_{in1}-V_{in2}|/C_{P,Q})\textcolor{red}{t} \qquad \Longrightarrow\qquad \boxed{\frac{|V_P - V_Q|}{|V_{in1}-V_{in2}|} = \frac{g_{m1,2}\textcolor{red}{t}}{C_{P,Q}}}
 $$
 
+> (13) use integrated white noise & Ito's integrals
 
 ---
 
@@ -39,13 +40,15 @@ $$
 
 ---
 
-***sampling (amplification) phase***
+<span style="color:white; background-color:black">**sampling (amplification) phase**</span>
 
 ![image-20250526195656447](comparator/image-20250526195656447.png)
 
 
 
 ---
+
+<span style="color:white; background-color:black">**voltage gain derivation**</span>
 
 ![image-20261107220322613](comparator/image-20261107220322613.png)
 

@@ -100,7 +100,7 @@ $$
 
 > Note that $f_{min}$ is related to the observation time. The longer we observe the device under test, the smaller $f_{min}$ must be
 
-![image-20250524081737793](osc-pn/image-20250524081737793.png)
+![image-20261116230227053](osc-pn/image-20261116230227053.png)
 
 ---
 
@@ -118,9 +118,11 @@ $$
 
 ---
 
+> B. Casper and F. O'Mahony, "Clocking Analysis, Implementation and Measurement Techniques for High-Speed Data Links-A Tutorial," in IEEE Transactions on Circuits and Systems I. [[https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf](https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf)]
+
 ![image-20250606204607565](osc-pn/image-20250606204607565.png)
 
-> B. Casper and F. O'Mahony, "Clocking Analysis, Implementation and Measurement Techniques for High-Speed Data Links-A Tutorial," in IEEE Transactions on Circuits and Systems I. [[https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf](https://people.engr.tamu.edu/spalermo/ecen689/clocking_analysis_hs_links_casper_tcas1_2009.pdf)]
+
 
 
 

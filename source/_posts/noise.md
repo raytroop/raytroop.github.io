@@ -1102,6 +1102,18 @@ $$
 
 
 
+## integrated white noise & Ito's integrals
+
+> Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.
+
+<span style="background-color:yellow">time-domain behavior of the output</span>
+
+![image-20261107210158409](noise/image-20261107210158409.png)
+
+![image-20261116233846945](noise/image-20261116233846945.png)
+
+
+
 
 
 ## reference

@@ -20,14 +20,14 @@ While many different analysis methods exist, including frequency and statistical
 > —, Microelectronics [[Introduction to SerDesPy](https://youtu.be/FPr4emBE7fo)], [[Simple Channel Modeling Example with SerDesPy](https://youtu.be/9dWpIQuulWo)], [[Modelling Equalization with SerDesPy](https://youtu.be/QPd3AhgH6Ko)]
 >
 > ```bash
-> # Python 3.10
+># Python 3.10
 > pip install samplerate
 > pip install 'numpy<2.0.0'
 > ```
 
 ![image-20260322185817496](link-mdl/image-20260322185817496.png)
 
-***ifft of sampling continuous-time transfer function***
+<span style="color:white; background-color:black">**ifft of sampling continuous-time transfer function**</span>
 
 ![freq2impulse.drawio](link-mdl/freq2impulse.drawio.svg)
 
@@ -128,15 +128,13 @@ signal_filtered_raw = sp.signal.convolve(signal_ideal, h[:ir_length], mode="full
 assert np.allclose(signal_filtered, signal_filtered_raw)
 ```
 
-> [[Google AI Mode](https://share.google/aimode/iENnIZQapJ3zcXvYm)]
->
 > ![image-20260322204100971](link-mdl/image-20260322204100971.png)
 
 ---
 
----
 
-***active CTLE***
+
+<span style="color:white; background-color:black">**active CTLE**</span>
 
 ![image-20260322190438173](link-mdl/image-20260322190438173.png)
 
@@ -162,9 +160,7 @@ signal_ctle = sp.signal.convolve(signal,h_ctle)
 
 ---
 
----
-
-***FFE & DFE Co-Optimization with LMS***
+<span style="color:white; background-color:black">**FFE & DFE Co-Optimization with LMS**</span>
 
 ![image-20260322204210257](link-mdl/image-20260322204210257.png)
 
@@ -374,7 +370,7 @@ def pam4_DFE(self, tap_weights):
 
 ---
 
-***PRQSm Generator*** by **multiplexing two PRBSn**
+<span style="color:white; background-color:black">**PRQSm Generator** by **multiplexing two PRBSn**</span>
 
 > Ilya Lyubomirsky, Finisar. PRQS Test Patterns for PAM4 [[https://www.ieee802.org/3/bs/public/15_09/lyubomirsky_3bs_01_0915.pdf](https://www.ieee802.org/3/bs/public/15_09/lyubomirsky_3bs_01_0915.pdf)]
 
@@ -437,11 +433,11 @@ def prqs12(seed):
 
 ---
 
-***Gaussian distribution jitter***
+<span style="color:white; background-color:black">**Gaussian distribution jitter**</span>
 
 ![image-20260323222626489](link-mdl/image-20260323222626489.png)
 
-***TX signal with jitter***
+<span style="color:white; background-color:black">**TX signal with jitter**</span>
 
 
 ![txjitter_serdespy.drawio](link-mdl/txjitter_serdespy.drawio.svg)
@@ -507,7 +503,7 @@ def gaussian_jitter(signal_ideal, UI,n_symbols,samples_per_symbol,stdev):
 
 
 
-***RX eye_diagram with jitter by horizontal shift***
+<span style="color:white; background-color:black">**RX eye_diagram with jitter by horizontal shift**</span>
 
 Each trace is shifted by its corresponding $\epsilon$, which is only used for **visualization** rather than as an input for the subsequent block.
 
@@ -530,7 +526,7 @@ def rx_jitter_eye(signal, window_len, ntraces, n_symbols, tstep, title,  stdev, 
 
 ---
 
-***RLM*** *through **nonlinearity***
+<span style="color:white; background-color:black">**RLM** through **nonlinearity**</span>
 
 ![image-20260323223744508](link-mdl/image-20260323223744508.png)
 
@@ -558,13 +554,23 @@ RLM = min((3*ES1),(3*ES2),(2-3*ES1),(2-3*ES2))
 
 
 
+
+
+### Open-SERDES
+
+> Open-SERDES Tutorial, BRICD, [[https://www.thebricd.org/serdes-tutorial/](https://www.thebricd.org/serdes-tutorial/)], CC BY 4.0 [[https://github.com/bricd-org/serdes-tutorial](https://github.com/bricd-org/serdes-tutorial)]
+
+![image-20261117000336980](link-mdl/image-20261117000336980.png)
+
+*TODO* &#128197;
+
+
+
 ### JLSD
 
 > Kevin Zheng, *JLSD - Julia SerDes* [[https://github.com/kevjzheng/JLSD](https://github.com/kevjzheng/JLSD)], [[forked](https://github.com/raytroop/JLSD)]
 
-
-
-***Kronecker product*** to create ***oversampled*** waveform
+<span style="color:white; background-color:black">**Kronecker product** to create **oversampled** waveform</span>
 
 ```julia
 function gen_wvfm(bits; tui, osr)
@@ -584,9 +590,7 @@ end
 
 ----
 
----
-
-***first order RC response, normalized to the time step***
+<span style="color:white; background-color:black">**first order RC response, normalized to the time step**</span>
 $$
 \frac{\alpha}{s+\alpha} \overset{\mathcal{L}^{-1}}{\longrightarrow} \alpha\cdot e^{-\alpha t}
 $$
@@ -640,11 +644,10 @@ end
 ![image-20260127222632389](link-mdl/image-20260127222632389.png)
 
 
----
 
 ---
 
-***Detailed Transmitter***
+<span style="color:white; background-color:black">**Detailed Transmitter**</span>
 
 ![tx blk diagram](link-mdl/tx_blk_diagram.png)
 
@@ -698,7 +701,7 @@ end
 
 ---
 
-***TX model jitter*** with ***fixed simulation time step***
+<span style="color:white; background-color:black">**TX model jitter** with **fixed simulation time step**</span>
 
 ![image-20260405101146001](link-mdl/image-20260405101146001.png)
 
@@ -757,8 +760,8 @@ Vfir = itp.(tt_uniform);
 
 `tt_uniform` is shifted by `prev_nui/2` to give wiggle room for sampling "before" and "after" the current block. **This is necessary for sinusoidal jitter**
 
-> [[copilot](https://github.com/copilot/share/c85d51be-0004-88e7-9840-ba09a4d569f8)]
->
+
+
 > DCD and RJ have much smaller shifts (typically <1 UI), but SJ can oscillate over multiple UI widths, requiring this ***centered offset to prevent interpolation boundary errors***.
 
 
@@ -784,7 +787,6 @@ This creates `tt_Vext` starting from `(n-1)*osr`, which means:
 
 - First segment: `0*osr + offset` to `1*osr + offset` = **starts at 0**
 - Second segment: `1*osr + offset` to `2*osr + offset`
-- etc.
 
 `tt_uniform` must **align with this same time scale** for interpolation to work correctly.
 
@@ -828,9 +830,7 @@ In each outer loop, `Δtt` and `Vfir` are created (size `blk_size`) and then cop
 
 ---
 
----
-
-***channel***
+<span style="color:white; background-color:black">**channel**</span>
 
 ```julia
 noise_Z::Float64 = 50  # termination impedance with thermal noise
@@ -856,9 +856,7 @@ $$
 
 ---
 
----
-
-***Clkgen-PI***
+<span style="color:white; background-color:black">**Clkgen-PI**</span>
 
 ```julia
 @kwdef mutable struct Clkgen
@@ -966,9 +964,7 @@ Wraps `pd_accum` into `[0, pi_bnd)` (i.e., `[0, 256)` for 8-bit PI), then floors
 
 ---
 
----
-
-***sampler***
+<span style="color:white; background-color:black">**sampler**</span>
 
 
 
@@ -1017,7 +1013,7 @@ These `Φ` values are in the same coordinate system as `tt_Vext`. Because `tt_Ve
 
 
 
-***Different `prev_nui` Sizes***
+<span style="color:white; background-color:black">**Different 'prev_nui' Sizes**</span>
 
 |                   | **Drv**                                                 | **Splr**                                                     |
 | ----------------- | ------------------------------------------------------- | ------------------------------------------------------------ |
@@ -1027,7 +1023,7 @@ These `Φ` values are in the same coordinate system as `tt_Vext`. Because `tt_Ve
 
 
 
-***adaptation and CDR loop***
+<span style="color:white; background-color:black">**adaptation and CDR loop**</span>
 
 ![image-20260326211044232](link-mdl/image-20260326211044232.png)
 
@@ -1245,9 +1241,7 @@ n     │ n%4+1 │ N_per_phi[n%4+1] │ zeros(Bool, ...)
 
 ---
 
----
-
-***elastic buffer to model frequency offsets of TRX***
+<span style="color:white; background-color:black">**elastic buffer to model frequency offsets of TRX**</span>
 
 {% note warning %}
 ~~elastic buffer~~  — an analog waveform window for the RX sampler, not a digital FIFO
@@ -1255,7 +1249,13 @@ n     │ n%4+1 │ N_per_phi[n%4+1] │ zeros(Bool, ...)
 
 
 
-Define the offset relative to TX $$f_\text{rx} = f_\text{tx}(1 + \text{ppm}\cdot 10^{-6})$$, RX **sample spacing** in TX-grid units
+Define the offset relative to TX 
+
+$$
+f_\text{rx} = f_\text{tx}(1 + \text{ppm}\cdot 10^{-6})
+$$
+
+RX **sample spacing** in TX-grid units
 $$
 \boxed{\text{osr}_\text{rx} = \dfrac{\text{osr}}{1+\text{ppm}\cdot 10^{-6}}}
 $$

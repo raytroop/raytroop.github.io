@@ -48,18 +48,6 @@ For white noise $n(t)$
 
 
 
-## integrated white noise & Ito's integrals
-
-> Razavi B. *Analysis and Design of Data Converters*. Cambridge University Press; 2025.
-
- time-domain behavior of the output
-
-![image-20261107210158409](nltv/image-20261107210158409.png)
-
-
-
-
-
 
 
 ## flicker noise Modulation

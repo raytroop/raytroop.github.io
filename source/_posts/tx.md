@@ -793,11 +793,20 @@ $$
 
 
 
-## CDC between DSP and Seralizer
+## DSP/Seralizer boundary
+
+> Synopsys PHY IP PCIe7 PHY x4 for TSMC 3PFF Databook, *dwc_pcie7phy_tsmc3pff_x4ns* — Product Code: J132-0, PHY Version: 1.05a February 23, 2026 [[https://bbs.eetop.cn/thread-996408-1-1.html](https://bbs.eetop.cn/thread-996408-1-1.html)]
 
 ![image-20261024010318929](tx/image-20261024010318929.png)
 
+![image-20261117234856759](tx/image-20261117234856759.png)
+
+![image-20261117235124021](tx/image-20261117235124021.png)
+
+### word clock
+
 *TODO* &#128197;
+
 
 
 ### Divider reset synchronizer
@@ -805,16 +814,48 @@ $$
 *TODO* &#128197;
 
 
+
+
+
+
+
+
 ### Lane-to-Lane Output Skew & clock shift
 
 > T. Pontius, "Alignment and deskew for multiple lanes of serial interconnect," WO Patent WO2007052229A2, May 10, 2007. [Online]. [[https://patents.google.com/patent/WO2007052229A2/en](https://patents.google.com/patent/WO2007052229A2/en)] 
 >
 > P. Novellini and G. Guasti, "Lane-to-lane de-skew for transmitters," U.S. Patent 9 331 724 B2, May 3, 2016. [Online]. [[https://patents.google.com/patent/US9331724B2/en](https://patents.google.com/patent/US9331724B2/en)]
+>
+> 70869 - TX Lane to Lane Alignment [[https://adaptivesupport.amd.com/s/article/70869?language=en_US](https://adaptivesupport.amd.com/s/article/70869?language=en_US)]
+
+<span style="background-color:yellow">**After reset, each channel latency is unknown**. In a multi-lane link, the residual skew after reset can be many UIs. </span>
+
+<span style="background-color:yellow">The **TX BUFFER**, that was originally removed for minimal and deterministic latency, is the key to guaranteeing the known latency and thus the lane **deskew**</span>
+
+The writing and reading pointer positions are constantly measured, and when some particular conditions happen (buffer half full, buffer overflow, buffer empty ..) a flag raises.
 
 
-*TODO* &#128197;
+![image-20261117220548864](tx/image-20261117220548864.png)
+
+![image-20261117221603878](tx/image-20261117221603878.png)
+
+> suppose READING CLOCK is word clock
+
+By driving the TX Phase Interpolator, we can delay or increment the phase of the reading pointer. This is represented by Circuit 1 in the picture below.
+
+Thus, by controlling the buffer state of fullness it is possible to precisely control the latency in the single channel and as a consequence, the skew between lanes.
 
 
+
+![image-20261117222016396](tx/image-20261117222016396.png)
+
+
+
+---
+
+> PCI Express® Base Specification Revision 7.0 June 05, 2025 *Table 8-6 Data Rate Dependent Transmitter Parameters*
+
+![image-20261117230437385](tx/image-20261117230437385.png)
 
 
 
@@ -859,6 +900,16 @@ If we apply $\log_2$ to  $\boxed{N+0.5}$ bit DAC
 $$
 \log_2 (2^N + 2^{N-1}) = N - 1 + 3\log_2(3) = N + 0.585
 $$
+
+
+
+## Receiver Detection
+
+> Synopsys PHY IP PCIe7 PHY x4 for TSMC 3PFF Databook, *dwc_pcie7phy_tsmc3pff_x4ns* — Product Code: J132-0, PHY Version: 1.05a February 23, 2026 [[https://bbs.eetop.cn/thread-996408-1-1.html](https://bbs.eetop.cn/thread-996408-1-1.html)]
+
+![image-20261118000329319](tx/image-20261118000329319.png)
+
+
 
 
 

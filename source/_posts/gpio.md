@@ -1,5 +1,5 @@
 ---
-title: Serial Communication Protocols
+title: Control and Configuration Interfaces
 date: 2024-11-08 18:42:06
 tags:
 categories:
@@ -11,13 +11,27 @@ mathjax: true
 
 ## UART (Universal Asynchronous Receiver/Transmitter)
 
+*TODO* &#128197;
+
 
 
 ##  SPI (Serial Peripheral Interface)
 
+*TODO* &#128197;
+
 
 
 ## I2C (Inter-Integrated Circuit)
+
+*TODO* &#128197;
+
+
+
+## APB (Advanced Peripheral Bus)
+
+*TODO* &#128197;
+
+
 
 
 

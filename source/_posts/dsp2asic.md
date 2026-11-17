@@ -28,12 +28,18 @@ mathjax: true
 ## 1+αD partial FFE response
 
 > D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130 [[https://sci-net.xyz/10.1109/ISSCC49657.2024.10454537](https://sci-net.xyz/10.1109/ISSCC49657.2024.10454537)]
+>
+> Synopsys PHY IP PCIe7 PHY x4 for TSMC 3PFF Databook, *dwc_pcie7phy_tsmc3pff_x4ns* — Product Code: J132-0, PHY Version: 1.05a February 23, 2026 [[https://bbs.eetop.cn/thread-996408-1-1.html](https://bbs.eetop.cn/thread-996408-1-1.html)]
 
 <span style="background-color:yellow">**Full State MLSD**, **Reduced State MLSD**</span>
 
 ![image-20261030000416472](dsp2asic/image-20261030000416472.png)
 
 ![image-20261030000537331](dsp2asic/image-20261030000537331-1793290420270-3.png)
+
+
+
+![image-20261117235950522](dsp2asic/image-20261117235950522.png)
 
 
 

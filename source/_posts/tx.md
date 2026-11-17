@@ -805,7 +805,7 @@ $$
 
 ## clock shift
 
-> P. Novellini and G. Guasti, "Lane-to-lane de-skew for transmitters," U.S. Patent 9 331 724 B2, May 3, 2016. [Online]. Available: https://patents.google.com/patent/US9331724B2/en
+> P. Novellini and G. Guasti, "Lane-to-lane de-skew for transmitters," U.S. Patent 9 331 724 B2, May 3, 2016. [Online]. [[https://patents.google.com/patent/US9331724B2/en](https://patents.google.com/patent/US9331724B2/en)]
 
 
 

@@ -233,6 +233,13 @@ connects the **last shift register's complemented output** to the input of the f
 
 
 
+![blog_asset_1784665144352_vx05no](dsp2asic/blog_asset_1784665144352_vx05no.jpg)
+
+
+<span style="color:blue">counter can be used as clock divider</span>
+
+![johnsoncounter-div](dsp2asic/johnsoncounter-div.svg)
+
 
 
 ## MASH 1-1-1 in DSP

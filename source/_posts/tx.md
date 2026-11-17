@@ -800,13 +800,16 @@ $$
 *TODO* &#128197;
 
 
+### Divider reset synchronizer
+
+*TODO* &#128197;
 
 
+### Lane-to-Lane Output Skew & clock shift
 
-## clock shift
-
+> T. Pontius, "Alignment and deskew for multiple lanes of serial interconnect," WO Patent WO2007052229A2, May 10, 2007. [Online]. [[https://patents.google.com/patent/WO2007052229A2/en](https://patents.google.com/patent/WO2007052229A2/en)] 
+>
 > P. Novellini and G. Guasti, "Lane-to-lane de-skew for transmitters," U.S. Patent 9 331 724 B2, May 3, 2016. [Online]. [[https://patents.google.com/patent/US9331724B2/en](https://patents.google.com/patent/US9331724B2/en)]
-
 
 
 *TODO* &#128197;

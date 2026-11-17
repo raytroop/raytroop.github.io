@@ -1278,6 +1278,20 @@ https://www.zhihu.com/question/599006651/answer/2016829443356770860
 
 
 ```
+日光像个黄蜂
+这种男的就属于不卑不亢，真正接受自己的，相处起来会更轻松愉快，这个优点非常大，比很多高、富或者帅的优点都要突出和难得，人和人相处最怕卑和亢，一旦卑或者亢矛盾就会非常多，关系也不会轻松愉快
+
+Nnora
+是啊，说明这个男生内在自尊很健康
+
+
+---
+https://www.xiaohongshu.com/discovery/item/6af9baaa000000002903c7bb?app_platform=ios&app_version=9.54.2&share_from_user_hidden=true&xsec_source=app_share&type=normal&xsec_token=CBL5daFioi8jS4AGHCzWUpuTFhtsIV1gExO7FRhGxFo3c%3D&author_share=1&xhsshare=CopyLink&shareRedId=OD1EMERJRks2NzUyOTgwNjY6OTc3NjlP&apptime=1794826902&share_id=c4158ae725c04877abc599198469efef&anchorCommentId=6afacb2d000000002d01ba1b&anchorCardType=2&track_code=riM1IB881y
+```
+
+
+
+```
 我告诉你，我前半辈子最大的错误，是总想把所有事都彻底搞定，后来才发现，人生绝大多数的难题，
 都不是用来解决的，而是用来承受和共存的。
 
@@ -3231,6 +3245,17 @@ Until you make the unconscious conscious, it will direct your life and you will 
 
 ---
 《德米安:彷徨少年时》赫尔曼·黑塞
+```
+
+
+
+```
+不着急、不害怕、不要脸
+
+少年时代见识短，我以为身边的世间就是世间
+
+---
+《不着急，:不害怕，不要脸》冯唐
 ```
 
 

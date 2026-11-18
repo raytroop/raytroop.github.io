@@ -805,7 +805,9 @@ $$
 
 ### word clock
 
-*TODO* &#128197;
+
+![word_clk_rcv.drawio](tx/word_clk_rcv.drawio.svg)
+
 
 
 

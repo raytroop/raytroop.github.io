@@ -856,9 +856,12 @@ Thus, by controlling the buffer state of fullness it is possible to precisely co
 ---
 
 > PCI Express® Base Specification Revision 7.0 June 05, 2025 *Table 8-6 Data Rate Dependent Transmitter Parameters*
+>
+> Tektronix, "PCI Express® Transmitter Lane-to-Lane Skew Measurement," Tektronix, Inc., Beaverton, OR, USA, White Paper 55W-73900-0, Dec. 2023. [Online]. Available: [[https://download.tek.com/document/PCIe_Lane-to-Lane_Skew_WP_55W-73900-0.pdf](https://download.tek.com/document/PCIe_Lane-to-Lane_Skew_WP_55W-73900-0.pdf)]
 
 ![image-20261117230437385](tx/image-20261117230437385.png)
 
+> The PCI Express® (PCIe®) serial communication standard supports up to 16 lanes of full-duplex data transfer. The standard requires receivers to tolerate some lane-to-lane skew, but exceeding this limit can be detrimental to the link stability and performance.
 
 
 ## Peak Power Constraint of TX FIR

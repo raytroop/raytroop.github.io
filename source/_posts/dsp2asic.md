@@ -14,6 +14,8 @@ mathjax: true
 > M. A. Kossel *et al*., "8.3 An 8b DAC-Based SST TX Using Metal Gate Resistors with 1.4pJ/b Efficiency at 112Gb/s PAM-4 and 8-Tap FFE in 7nm CMOS," *2021 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2021, pp. 130-132 [[https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784](https://sci-hub.ru/10.1109/ISSCC42613.2021.9365784)]
 >
 > Z. Guo et al., "6.2 A 112.5Gb/s ADC-DSP-Based PAM-4 Long-Reach Transceiver with >50dB Channel Loss in 5nm FinFET," 2022 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2022, pp. 116-118 [[https://sci-net.xyz/10.1109/ISSCC42614.2022.9731650](https://sci-net.xyz/10.1109/ISSCC42614.2022.9731650)]
+>
+> Y. Choi, S. Jang and G. Kim, "Area Optimization of the Feed-Forward Equalizer for ADC-Based High-Speed Wireline Receiver Using Channel Characteristics," 2024 International Conference on Electronics, Information, and Communication (ICEIC), Taipei, Taiwan, 2024, pp. 1-3 [[https://sci-net.xyz/10.1109/ICEIC61013.2024.10457088](https://sci-net.xyz/10.1109/ICEIC61013.2024.10457088)]
 
 *TODO* &#128197;
 
@@ -30,6 +32,11 @@ mathjax: true
 > D. Pfaff *et al*., "7.3 A 224Gb/s 3pJ/b 40dB Insertion Loss Transceiver in 3nm FinFET CMOS," *2024 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2024, pp. 128-130 [[https://sci-net.xyz/10.1109/ISSCC49657.2024.10454537](https://sci-net.xyz/10.1109/ISSCC49657.2024.10454537)]
 >
 > Synopsys PHY IP PCIe7 PHY x4 for TSMC 3PFF Databook, *dwc_pcie7phy_tsmc3pff_x4ns* — Product Code: J132-0, PHY Version: 1.05a February 23, 2026 [[https://bbs.eetop.cn/thread-996408-1-1.html](https://bbs.eetop.cn/thread-996408-1-1.html)]
+>
+> S. Palermo, S. Hoyos, S. Cai, S. Kiran and Y. Zhu, "Analog-to-Digital Converter-Based Serial Links: An Overview," in IEEE Solid-State Circuits Magazine, vol. 10, no. 3, pp. 35-47, Summer 2018 [[https://sci-hub.ru/10.1109/MSSC.2018.2844603](https://sci-hub.ru/10.1109/MSSC.2018.2844603)]
+>
+> Y. Choi et al., "A Low-Latency Reconstruction-Based Symbol Error Correction for PAM-4 DSP-Based Wireline Receivers," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 73, no. 11, pp. 7703-7716, Nov. 2026, doi: 10.1109/TCSI.2026.3722199.
+
 
 <span style="background-color:yellow">**Full State MLSD**, **Reduced State MLSD**</span>
 
@@ -48,6 +55,8 @@ mathjax: true
 > Synopsys Italia, Tech Talk: Introduction to DSP-based SerDes [[https://youtu.be/puEP0DlVZGI](https://youtu.be/puEP0DlVZGI)]
 >
 > Chen, Kuan-Chang (2022) *Energy-Efficient Receiver Design for High-Speed Interconnects.* Dissertation (Ph.D.), California Institute of Technology. [[https://thesis.caltech.edu/14318/09/chen_kuan-chang_2022_thesis_final.pdf](https://thesis.caltech.edu/14318/09/chen_kuan-chang_2022_thesis_final.pdf)]
+>
+> S. Jang, J. Lee, Y. Choi, D. Kim and G. Kim, "Recent Advances in Ultrahigh-Speed Wireline Receivers With ADC-DSP-Based Equalizers," in IEEE Open Journal of the Solid-State Circuits Society, vol. 4, pp. 290-304, 2024 [[https://ieeexplore.ieee.org/document/10767763](https://ieeexplore.ieee.org/document/10767763)]
 
 
 
@@ -84,6 +93,13 @@ The look-ahead multiplexing technique brings the key benefit that the timing con
 ![image-20261028220525560](dsp2asic/image-20261028220525560.png)
 
 ![image-20261028220745240](dsp2asic/image-20261028220745240.png)
+
+
+
+
+## MLSE (MLSD) in DSP
+
+> D. Kwon, D. Kim, Y. Choi, Y. Leblebici and G. Kim, "Fixed-Point Implementation Analysis of MLSE Receiver DSP for High-Speed Wireline Transceivers," 2026 IEEE International Symposium on Circuits and Systems (ISCAS), Shanghai, China, 2026, pp. 2076-2080, doi: 10.1109/ISCAS66217.2026.11562189.
 
 
 

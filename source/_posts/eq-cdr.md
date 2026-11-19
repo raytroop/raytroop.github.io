@@ -732,6 +732,18 @@ Then, $h_{-1}$ and $h_1$ are same, which is desired
 
 
 
+## Multiphase clock CDR
+
+> Woo-Young Choi, High-speed Serial Interface Lect. 16 – Clock and Data Recovery 3 [[http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf](http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf)]
+>
+> Jri Lee, Clock and Data Recovery [[https://cc.ee.ntu.edu.tw/~jrilee/course/COMMIC08/CommIC_11.pdf](https://cc.ee.ntu.edu.tw/~jrilee/course/COMMIC08/CommIC_11.pdf)]
+
+<span style="background-color:yellow">**Full-rate, Half-rate, Quarter-rate CDR**</span>
+
+![image-20261119225457356](eq-cdr/image-20261119225457356.png)
+
+
+
 ## CDR Loop Latency
 
 > A. Amirkhany, "Tutorial: Basics of Clock-and-Data Recovery Circuits," *2019 IEEE International Solid-State Circuits Conference - (ISSCC)*, San Francisco, CA, USA, 2019, pp. 1-105, doi: 10.1109/ISSCC19946.2019.11005770.

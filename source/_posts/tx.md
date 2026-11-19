@@ -843,11 +843,19 @@ The writing and reading pointer positions are constantly measured, and when some
 
 > suppose READING CLOCK is word clock
 
-By driving the TX Phase Interpolator, we can delay or increment the phase of the reading pointer. This is represented by Circuit 1 in the picture below.
+By driving the TX Phase Interpolator, we can delay or increment the phase of the reading pointer. This is represented by Circuit 1 in the picture below
 
-Thus, by controlling the buffer state of fullness it is possible to precisely control the latency in the single channel and as a consequence, the skew between lanes.
+Thus, by controlling the buffer state of fullness it is possible to precisely control the latency in the single channel and as a consequence, the skew between lanes
+
+---
+
+![clk-shift-req-ack](tx/clk-shift-req-ack.svg)
+
+![onepulse_swallow.drawio](tx/onepulse_swallow.drawio.svg)
 
 
+
+---
 
 ![image-20261117222016396](tx/image-20261117222016396.png)
 
@@ -862,6 +870,8 @@ Thus, by controlling the buffer state of fullness it is possible to precisely co
 ![image-20261117230437385](tx/image-20261117230437385.png)
 
 > The PCI Express® (PCIe®) serial communication standard supports up to 16 lanes of full-duplex data transfer. The standard requires receivers to tolerate some lane-to-lane skew, but exceeding this limit can be detrimental to the link stability and performance.
+
+
 
 
 ## Peak Power Constraint of TX FIR

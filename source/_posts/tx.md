@@ -843,9 +843,9 @@ The writing and reading pointer positions are constantly measured, and when some
 
 > suppose READING CLOCK is word clock
 
-By driving the TX Phase Interpolator, we can delay or increment the phase of the reading pointer. This is represented by Circuit 1 in the picture below
+By driving the TX Phase Interpolator, we can delay or increment the phase of the reading pointer. This is represented by Circuit 1
 
-Thus, by controlling the buffer state of fullness it is possible to precisely control the latency in the single channel and as a consequence, the skew between lanes
+Thus, by **controlling the buffer state of fullness** it is possible to precisely **control the latency in the single channel** and as a consequence, the skew between lanes
 
 ---
 

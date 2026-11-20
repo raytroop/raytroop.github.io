@@ -925,7 +925,9 @@ $$
 ![image-20261118000329319](tx/image-20261118000329319.png)
 
 
+## DC Common Mode Voltage
 
+*TODO* &#128197;
 
 
 ## FeedForward Equalization Theory

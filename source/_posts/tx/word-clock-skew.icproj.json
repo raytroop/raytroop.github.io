@@ -1,0 +1,912 @@
+{
+  "schemaVersion": 84,
+  "id": "project-fc3fcb61-8db4-415b-b49d-51365a04dd89",
+  "name": "word-clock-skew",
+  "topDocumentId": "document-34a60705-9473-4612-80d1-6d9c7df94943",
+  "defaults": {
+    "instance": { "mirror": "none", "rotation": 0 },
+    "instancesByType": {
+      "d-flip-flop-q": {
+        "parameters": { "td": "10p", "vt": "10m" },
+        "target": { "kind": "unresolved-subcircuit", "name": "d_flip_flop_q" }
+      },
+      "delay-cell": {
+        "parameters": { "tpd": "10p", "vt": "10m" },
+        "target": { "kind": "unresolved-subcircuit", "name": "delay_cell" }
+      }
+    },
+    "label": { "alignment": "middle", "locked": false, "rotation": 0 },
+    "routeLeg": { "mode": "manual" }
+  },
+  "documents": [
+    {
+      "id": "document-34a60705-9473-4612-80d1-6d9c7df94943",
+      "name": "dut",
+      "netlist": {
+        "formalParameters": [],
+        "name": "dut",
+        "terminals": [
+          {
+            "direction": "passive",
+            "id": "terminal-p1",
+            "interfaceInstanceIds": ["P1"],
+            "name": "VB1",
+            "netId": "net-ui-86",
+            "signal": {
+              "expression": "VB1",
+              "members": [
+                {
+                  "id": "signal-member-d4ca4b116aea08e4",
+                  "name": "VB1",
+                  "netId": "net-ui-86"
+                }
+              ]
+            }
+          },
+          {
+            "direction": "passive",
+            "id": "terminal-p2",
+            "interfaceInstanceIds": ["P2"],
+            "name": "VB2",
+            "netId": "net-ui-84",
+            "signal": {
+              "expression": "VB2",
+              "members": [
+                {
+                  "id": "signal-member-efd3b0cd2c09a591",
+                  "name": "VB2",
+                  "netId": "net-ui-84"
+                }
+              ]
+            }
+          },
+          {
+            "direction": "passive",
+            "id": "terminal-p3",
+            "interfaceInstanceIds": ["P3"],
+            "name": "Vinp",
+            "netId": "net-ui-85",
+            "signal": {
+              "expression": "Vinp",
+              "members": [
+                {
+                  "id": "signal-member-e6d8db2d80437d12",
+                  "name": "Vinp",
+                  "netId": "net-ui-85"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "presentation": {
+        "compactness": "normal",
+        "grid": 10,
+        "labelSubscriptAfterFirst": false,
+        "labelSubscriptItalic": false,
+        "styleProfileId": "razavi-textbook-v1"
+      },
+      "instances": [
+        {
+          "type": "d-flip-flop-q",
+          "name": "X1",
+          "id": "X1",
+          "coordinate": [370, 200]
+        },
+        {
+          "type": "d-flip-flop-q",
+          "name": "X2",
+          "id": "X2",
+          "coordinate": [730, 210]
+        },
+        {
+          "type": "delay-cell",
+          "name": "X3",
+          "id": "X3",
+          "coordinate": [640, 290],
+          "rotation": 90,
+          "color": "#2563eb"
+        },
+        {
+          "type": "delay-cell",
+          "name": "X4",
+          "id": "X3_2",
+          "coordinate": [570, 340],
+          "color": "#2563eb"
+        },
+        {
+          "type": "delay-cell",
+          "name": "X5",
+          "id": "X3_3",
+          "coordinate": [380, 340],
+          "color": "#9ca3af"
+        },
+        {
+          "type": "port-filled",
+          "id": "P1",
+          "coordinate": [530, 340]
+        },
+        {
+          "type": "port-filled",
+          "id": "P2",
+          "coordinate": [640, 240],
+          "rotation": 90
+        },
+        {
+          "type": "port",
+          "id": "P3",
+          "coordinate": [800, 340],
+          "rotation": 180
+        }
+      ],
+      "routes": [
+        {
+          "end": { "terminal": ["X2", "D"] },
+          "id": "route-ui-83",
+          "legId": "route-leg-62ac523f7285e384",
+          "start": { "terminal": ["X1", "Q"] }
+        },
+        {
+          "end": { "terminal": ["P2", "P"] },
+          "id": "route-ui-84-a-contact-p2-p",
+          "legId": "route-leg-1c6190433368eecd",
+          "start": { "terminal": ["X3", "A"] }
+        },
+        {
+          "id": "route-ui-84-b-contact-p2-p",
+          "legs": [
+            {
+              "bend": "route-bend-90fca9c1c7927760",
+              "coordinate": [640, 220],
+              "id": "route-leg-35a48bbaf7bdf6ed"
+            },
+            {
+              "id": "route-leg-d31217fc30f2453f",
+              "terminal": ["X2", "CK"]
+            }
+          ],
+          "start": { "terminal": ["P2", "P"] }
+        },
+        {
+          "end": { "junction": "junction-ui-89" },
+          "id": "route-ui-85-a-89",
+          "legId": "route-leg-1366baa387a2c64e",
+          "start": { "terminal": ["X3_2", "Y"] }
+        },
+        {
+          "end": { "terminal": ["X3", "Y"] },
+          "id": "route-ui-85-b-89",
+          "legId": "route-leg-1366bba387a2c801",
+          "start": { "junction": "junction-ui-89" }
+        },
+        {
+          "end": { "terminal": ["X3_3", "Y"] },
+          "id": "route-ui-86-a-splice-x3_3-first",
+          "legId": "route-leg-f3cdf06931bf73af",
+          "start": { "terminal": ["X3_2", "A"] }
+        },
+        {
+          "id": "route-ui-86-b-splice-x3_3-first-b-splice-x3_3-second",
+          "legs": [
+            {
+              "bend": "route-bend-f3cdf06931bf73af",
+              "coordinate": [330, 340],
+              "id": "route-leg-d16f7d22d97a158e"
+            },
+            {
+              "id": "route-leg-f3cdef6931bf71fc",
+              "terminal": ["X1", "CK"]
+            }
+          ],
+          "start": { "terminal": ["X3_3", "A"] }
+        },
+        {
+          "end": { "junction": "junction-ui-87" },
+          "id": "route-ui-88",
+          "legId": "route-leg-9d60b813512a1ec9",
+          "start": { "terminal": ["X1", "D"] }
+        },
+        {
+          "end": { "junction": "junction-ui-90" },
+          "id": "route-ui-91",
+          "legId": "route-leg-5f0863f10e4baa03",
+          "start": { "junction": "junction-ui-89" }
+        },
+        {
+          "end": { "junction": "junction-ui-92" },
+          "id": "route-ui-93",
+          "legId": "route-leg-2bd70c1ed03ff2a1",
+          "start": { "terminal": ["X2", "Q"] }
+        }
+      ],
+      "connections": {
+        "contacts": [
+          [
+            {
+              "junction": "junction-ui-90"
+            },
+            {
+              "terminal": ["P3", "P"]
+            }
+          ],
+          [
+            {
+              "terminal": ["P1", "P"]
+            },
+            {
+              "terminal": ["X3_2", "A"]
+            }
+          ]
+        ],
+        "unrouted": []
+      },
+      "nets": [
+        {
+          "at": { "terminal": ["X1", "Q"] },
+          "id": "net-ui-83"
+        },
+        {
+          "at": { "terminal": ["P2", "P"] },
+          "id": "net-ui-84"
+        },
+        {
+          "at": { "terminal": ["P3", "P"] },
+          "id": "net-ui-85"
+        },
+        {
+          "at": { "terminal": ["P1", "P"] },
+          "id": "net-ui-86"
+        },
+        {
+          "at": { "terminal": ["X1", "D"] },
+          "id": "net-ui-87"
+        },
+        {
+          "at": { "terminal": ["X2", "Q"] },
+          "id": "net-ui-92"
+        },
+        {
+          "at": { "terminal": ["X1", "CK"] },
+          "id": "net-7ba2b5504fbeeb50"
+        }
+      ],
+      "junctions": [
+        {
+          "coordinate": [280, 190],
+          "id": "junction-ui-87",
+          "role": "route-anchor"
+        },
+        {
+          "coordinate": [640, 340],
+          "id": "junction-ui-89",
+          "role": "branch"
+        },
+        {
+          "coordinate": [800, 340],
+          "id": "junction-ui-90",
+          "role": "route-anchor"
+        },
+        {
+          "coordinate": [810, 210],
+          "id": "junction-ui-92",
+          "role": "route-anchor"
+        }
+      ],
+      "annotations": [],
+      "drafting": {
+        "objects": [
+          {
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 530, "y": 100 }
+            },
+            "id": "construction-74",
+            "kind": "construction-line",
+            "lineStyle": "dashed",
+            "locked": false,
+            "points": [
+              {
+                "x": 530,
+                "y": 150
+              },
+              {
+                "x": 530,
+                "y": 370
+              }
+            ],
+            "styleOverride": { "color": "#9ca3af" },
+            "zIndex": 0
+          },
+          {
+            "alignment": "middle",
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 772, "y": 330 }
+            },
+            "content": {
+              "runs": [
+                {
+                  "children": ["word_clk"],
+                  "styles": ["bold"]
+                }
+              ]
+            },
+            "id": "note-79",
+            "kind": "text",
+            "locked": false,
+            "rotation": 0,
+            "typographyToken": "label",
+            "zIndex": 0
+          },
+          {
+            "alignment": "middle",
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 475, "y": 330 }
+            },
+            "content": {
+              "runs": [
+                {
+                  "children": ["tx_word_clk"],
+                  "styles": ["bold"]
+                }
+              ]
+            },
+            "id": "note-79_2",
+            "kind": "text",
+            "locked": false,
+            "rotation": 0,
+            "styleOverride": { "sizeScale": 1, "weight": "normal" },
+            "typographyToken": "label",
+            "zIndex": 0
+          },
+          {
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 420, "y": 190 }
+            },
+            "id": "construction-80",
+            "kind": "construction-line",
+            "lineStyle": "dashed",
+            "locked": false,
+            "points": [
+              {
+                "x": 420,
+                "y": 190
+              },
+              {
+                "x": 410,
+                "y": 210
+              }
+            ],
+            "styleOverride": { "lineStyle": "solid", "strokeScale": 2 },
+            "zIndex": 0
+          },
+          {
+            "alignment": "middle",
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 590, "y": 237 }
+            },
+            "content": {
+              "runs": [
+                {
+                  "children": ["word_clk_local"],
+                  "styles": ["bold"]
+                }
+              ]
+            },
+            "id": "note-79_3",
+            "kind": "text",
+            "locked": false,
+            "rotation": 0,
+            "styleOverride": { "sizeScale": 0.7, "weight": "normal" },
+            "typographyToken": "label",
+            "zIndex": 0
+          },
+          {
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 780, "y": 200 }
+            },
+            "id": "construction-80_2",
+            "kind": "construction-line",
+            "lineStyle": "dashed",
+            "locked": false,
+            "points": [
+              {
+                "x": 780,
+                "y": 200
+              },
+              {
+                "x": 770,
+                "y": 220
+              }
+            ],
+            "styleOverride": { "lineStyle": "solid", "strokeScale": 2 },
+            "zIndex": 0
+          },
+          {
+            "alignment": "middle",
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 390, "y": 160 }
+            },
+            "content": {
+              "runs": [
+                {
+                  "children": ["TX DSP"],
+                  "styles": ["bold"]
+                }
+              ]
+            },
+            "id": "note-79_4",
+            "kind": "text",
+            "locked": false,
+            "rotation": 0,
+            "styleOverride": { "color": "#dc2626", "sizeScale": 1, "weight": "normal" },
+            "typographyToken": "label",
+            "zIndex": 0
+          },
+          {
+            "alignment": "middle",
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 620, "y": 160 }
+            },
+            "content": {
+              "runs": [
+                {
+                  "children": ["TX ANA"],
+                  "styles": ["bold"]
+                }
+              ]
+            },
+            "id": "note-79_5",
+            "kind": "text",
+            "locked": false,
+            "rotation": 0,
+            "styleOverride": { "color": "#dc2626", "sizeScale": 1, "weight": "normal" },
+            "typographyToken": "label",
+            "zIndex": 0
+          },
+          {
+            "alignment": "middle",
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 550, "y": 390 }
+            },
+            "content": { "runs": ["pay attention to the word clock skew"] },
+            "id": "note-85",
+            "kind": "text",
+            "locked": false,
+            "rotation": 0,
+            "styleOverride": { "color": "#2563eb", "sizeScale": 1, "weight": "normal" },
+            "typographyToken": "label",
+            "zIndex": 0
+          },
+          {
+            "anchor": {
+              "kind": "free",
+              "position": { "x": 310, "y": 180 }
+            },
+            "id": "construction-80_3",
+            "kind": "construction-line",
+            "lineStyle": "dashed",
+            "locked": false,
+            "points": [
+              {
+                "x": 310,
+                "y": 180
+              },
+              {
+                "x": 300,
+                "y": 200
+              }
+            ],
+            "styleOverride": { "lineStyle": "solid", "strokeScale": 2 },
+            "zIndex": 0
+          }
+        ]
+      },
+      "connectivityEvidence": [],
+      "sourceStatus": "connectivity-modified",
+      "revision": 127
+    }
+  ],
+  "componentDefinitions": [
+    {
+      "subcircuit": {
+        "id": "d-flip-flop-q",
+        "ports": [
+          {
+            "direction": "inout",
+            "name": "VDD",
+            "supply": "VDD"
+          },
+          {
+            "direction": "inout",
+            "name": "VSS",
+            "supply": "VSS"
+          },
+          {
+            "direction": "input",
+            "name": "D",
+            "pinName": "D"
+          },
+          {
+            "direction": "input",
+            "name": "CK",
+            "pinName": "CK"
+          },
+          {
+            "direction": "output",
+            "name": "Q",
+            "pinName": "Q"
+          }
+        ],
+        "symbolId": "d-flip-flop-q",
+        "target": "d_flip_flop_q"
+      },
+      "symbol": {
+        "defaultVariantId": "signal-pins",
+        "id": "d-flip-flop-q",
+        "name": "D Flip-Flop (Q)",
+        "pins": [
+          {
+            "at": [-40, -10],
+            "direction": "west",
+            "name": "D",
+            "presentation": {
+              "leadLength": 15,
+              "showName": true,
+              "textSizeScale": 0.68,
+              "textStyle": "math-symbol",
+              "visibility": "visible"
+            },
+            "role": "input"
+          },
+          {
+            "at": [-40, 10],
+            "direction": "west",
+            "name": "CK",
+            "presentation": {
+              "leadLength": 15,
+              "showName": true,
+              "textSizeScale": 0.68,
+              "textStyle": "math-symbol",
+              "visibility": "visible"
+            },
+            "role": "clock"
+          },
+          {
+            "at": [40, 0],
+            "direction": "east",
+            "name": "Q",
+            "presentation": {
+              "leadLength": 15,
+              "showName": true,
+              "textSizeScale": 0.68,
+              "textStyle": "math-symbol",
+              "visibility": "visible"
+            },
+            "role": "output"
+          },
+          {
+            "at": [0, -40],
+            "direction": "north",
+            "name": "VDD",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "positive-supply"
+          },
+          {
+            "at": [0, 40],
+            "direction": "south",
+            "name": "VSS",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "negative-supply"
+          }
+        ],
+        "primitives": [
+          {
+            "from": [-40, -10],
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [-25.000855, -10]
+          },
+          {
+            "from": [-40, 10],
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [-25.000855, 10]
+          },
+          {
+            "data": "M -25.000855 -25.0 L 25.000855 -25.0 L 25.000855 25.0 L -25.000855 25.0 Z",
+            "kind": "path",
+            "style": {
+              "lineCap": "butt",
+              "lineJoin": "miter",
+              "miterLimit": 4,
+              "strokeRole": "emphasis"
+            }
+          },
+          {
+            "from": [25.000855, 0],
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [40, 0]
+          },
+          {
+            "from": [0, -25],
+            "kind": "line",
+            "part": "vdd-lead",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [0, -40]
+          },
+          {
+            "from": [0, 25],
+            "kind": "line",
+            "part": "vss-lead",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [0, 40]
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [
+          {
+            "additionalPrimitives": [],
+            "hiddenPinNames": ["VDD", "VSS"],
+            "hiddenPrimitiveParts": ["vdd-lead", "vss-lead"],
+            "id": "signal-pins"
+          },
+          {
+            "additionalPrimitives": [],
+            "hiddenPinNames": [],
+            "hiddenPrimitiveParts": [],
+            "id": "supply-pins"
+          }
+        ],
+        "viewBox": { "height": 54, "width": 84, "x": -42, "y": -27 }
+      }
+    },
+    {
+      "subcircuit": {
+        "id": "delay-cell",
+        "ports": [
+          {
+            "direction": "inout",
+            "name": "VDD",
+            "supply": "VDD"
+          },
+          {
+            "direction": "inout",
+            "name": "VSS",
+            "supply": "VSS"
+          },
+          {
+            "direction": "input",
+            "name": "A",
+            "pinName": "A"
+          },
+          {
+            "direction": "output",
+            "name": "Y",
+            "pinName": "Y"
+          }
+        ],
+        "symbolId": "delay-cell",
+        "target": "delay_cell"
+      },
+      "symbol": {
+        "defaultVariantId": "signal-pins",
+        "id": "delay-cell",
+        "name": "Delay Cell",
+        "pins": [
+          {
+            "at": [-40, 0],
+            "direction": "west",
+            "name": "A",
+            "presentation": { "leadLength": 15, "visibility": "visible" },
+            "role": "input"
+          },
+          {
+            "at": [40, 0],
+            "direction": "east",
+            "name": "Y",
+            "presentation": { "leadLength": 15, "visibility": "visible" },
+            "role": "output"
+          },
+          {
+            "at": [0, -20],
+            "direction": "north",
+            "name": "VDD",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "positive-supply"
+          },
+          {
+            "at": [0, 20],
+            "direction": "south",
+            "name": "VSS",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "negative-supply"
+          }
+        ],
+        "primitives": [
+          {
+            "from": [-40, 0],
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [-24, 0]
+          },
+          {
+            "data": "M -24 -12 L 24 -12 L 24 12 L -24 12 Z",
+            "kind": "path",
+            "style": {
+              "lineCap": "butt",
+              "lineJoin": "miter",
+              "miterLimit": 4,
+              "strokeRole": "emphasis"
+            }
+          },
+          {
+            "from": [24, 0],
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [40, 0]
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "points": [
+              [-0.951005, -3.867967],
+              [-1.48366, -1.398387],
+              [-4.606953, 5.332432],
+              [-5.551205, 6.034567]
+            ],
+            "stroke": "none"
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "points": [
+              [-0.951005, -3.867967],
+              [3.092327, 6.034567],
+              [1.300671, 5.332432],
+              [-1.48366, -1.398387]
+            ],
+            "stroke": "none"
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "points": [
+              [-5.551205, 6.034567],
+              [-4.606953, 5.332432],
+              [1.300671, 5.332432],
+              [3.092327, 6.034567]
+            ],
+            "stroke": "none"
+          },
+          {
+            "fill": "foreground",
+            "kind": "polygon",
+            "points": [
+              [6.610361, 4.848793],
+              [4.842916, 4.848793],
+              [6.319823, -2.293621],
+              [3.801819, -2.293621],
+              [4.116569, -3.722104],
+              [10.871599, -3.722104],
+              [10.581059, -2.293621],
+              [8.087267, -2.293621]
+            ],
+            "stroke": "none"
+          },
+          {
+            "from": [0, -12],
+            "kind": "line",
+            "part": "vdd-lead",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [0, -20]
+          },
+          {
+            "from": [0, 12],
+            "kind": "line",
+            "part": "vss-lead",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [0, 20]
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [
+          {
+            "additionalPrimitives": [],
+            "hiddenPinNames": ["VDD", "VSS"],
+            "hiddenPrimitiveParts": ["vdd-lead", "vss-lead"],
+            "id": "signal-pins"
+          },
+          {
+            "additionalPrimitives": [],
+            "hiddenPinNames": [],
+            "hiddenPrimitiveParts": [],
+            "id": "supply-pins"
+          }
+        ],
+        "viewBox": { "height": 48, "width": 88, "x": -44, "y": -24 }
+      }
+    },
+    {
+      "symbol": {
+        "id": "port",
+        "name": "Port",
+        "pins": [
+          {
+            "at": [0, 0],
+            "direction": "east",
+            "name": "P",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "port"
+          }
+        ],
+        "primitives": [
+          {
+            "center": [-7.086614, 0],
+            "fill": "none",
+            "kind": "circle",
+            "radius": 2.47907,
+            "stroke": "foreground",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+          },
+          {
+            "from": [0, 0],
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [-4.607544, 0]
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [],
+        "viewBox": { "height": 14, "width": 18, "x": -14, "y": -7 }
+      }
+    },
+    {
+      "symbol": {
+        "id": "port-filled",
+        "name": "Bias Voltage Port",
+        "pins": [
+          {
+            "at": [0, 0],
+            "direction": "east",
+            "name": "P",
+            "presentation": { "leadLength": 10, "visibility": "visible" },
+            "role": "port"
+          }
+        ],
+        "primitives": [
+          {
+            "center": [-7.086614, 0],
+            "fill": "foreground",
+            "kind": "circle",
+            "radius": 2.47907,
+            "stroke": "foreground",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" }
+          },
+          {
+            "from": [0, 0],
+            "kind": "line",
+            "style": { "lineCap": "butt", "lineJoin": "miter", "strokeRole": "normal" },
+            "to": [-4.607544, 0]
+          }
+        ],
+        "schemaVersion": 1,
+        "variants": [],
+        "viewBox": { "height": 14, "width": 18, "x": -14, "y": -7 }
+      }
+    }
+  ],
+  "externalSubcircuitDefinitions": [],
+  "simulationFolders": [],
+  "source": { "dialect": "none", "entry": null, "files": [], "sourcePolicy": "copy" },
+  "symbolLibrary": { "hash": "razavi-reference-v1", "id": "razavi-symbols", "version": "1" },
+  "structureRevision": 14
+}

@@ -803,21 +803,24 @@ $$
 
 ![image-20261117235124021](tx/image-20261117235124021.png)
 
-### word clock
+### Word Clock Skew
 
 
 ![word_clk_rcv.drawio](tx/word_clk_rcv.drawio.svg)
 
+![word-clock-skew](tx/word-clock-skew.svg)
 
 
 
 ### Divider reset synchronizer
 
-*TODO* &#128197;
+![reset-divider](tx/reset-divider.svg)
 
 
 
+<span style="color:white; background-color:black">**32 to 4 timing diagram**</span>
 
+![reset-divider-timing.drawio](tx/reset-divider-timing.drawio.svg)
 
 
 
@@ -927,7 +930,13 @@ $$
 
 ## DC Common Mode Voltage
 
-*TODO* &#128197;
+> PCI Express® Base Specification Revision 7.0 June 05, 2025
+
+**maintain the DC common-mode bias at the transmitter output pins**
+
+![image-20261121104525923](tx/image-20261121104525923.png)
+
+
 
 
 ## FeedForward Equalization Theory

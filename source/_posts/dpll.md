@@ -157,6 +157,10 @@ For independent, equiprobable bits, $\alpha_T=0.5$. This is the variance seen at
 
 ![image-20261122103538936](dpll/image-20261122103538936.png)
 
+<span style="background-color:cyan">The CDR loop attenuates BB-PD output noise at frequencies well above its bandwidth, so these components contribute little to recovered-clock jitter</span>
+
+
+
 ---
 
 ![image-20261122111402207](dpll/image-20261122111402207.png)

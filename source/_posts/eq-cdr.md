@@ -7,7 +7,7 @@ categories:
 mathjax: true
 ---
 
-## Summary of Equalizations
+## Equalization Types
 
 > 32 to 56 Gbps Serial Link Analysis and Optimization Methods for Pathological Channels [[https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf](https://docs.keysight.com/eesofapps/files/678068240/678068273/1/1629077956000/tutorial-32-to-56-gbps-serial-link-analysis-optimization-methods-pathological-channels.pdf)]
 
@@ -756,8 +756,6 @@ Then, $h_{-1}$ and $h_1$ are same, which is desired
 
 
 
-
-
 ## JTOL (jitter tolerance) in CDR
 
 > CC Chen, Circuit Images: Why JTOL in a CDR? [[https://youtu.be/kZExm9wy0G8](https://youtu.be/kZExm9wy0G8)]
@@ -780,27 +778,109 @@ Then, $h_{-1}$ and $h_1$ are same, which is desired
 $$
 \boxed{\color{blue}\text{JTOL} = \lvert 1 +\text{LG(f)}\rvert \times \text{1UI}_\text{PP}}
 $$
-![image-20261122084319278](eq-cdr/image-20261122084319278.png)
-
-![image-20250627202659095](eq-cdr/image-20250627202659095.png)
-
-![image-20261121215000009](eq-cdr/image-20261121215000009.png)
-
-![image-20250627203654688](eq-cdr/image-20250627203654688.png)
+![image-20261122160142805](eq-cdr/image-20261122160142805.png)
 
 
 
-## slew-rate limited JTOL in CDR
+---
 
-> C. Kromer, G. Sialm, C. Menolfi, M. Schmatz, F. Ellinger and H. Jackel, "A 25-Gb/s CDR in 90-nm CMOS for High-Density Interconnects," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 12, pp. 2921-2929, Dec. 2006
+![image-20261122153134722](eq-cdr/image-20261122153134722.png)
+
+![image-20261122153226043](eq-cdr/image-20261122153226043.png)
+
+
+
+---
+
+<span style="color:white; background-color:black">**Limited VCO Tuning Range**</span>
+
+![image-20261122153624378](eq-cdr/image-20261122153624378.png)
+
+![image-20261122153845766](eq-cdr/image-20261122153845766.png)
+$$
+\boxed{\color{blue}\text{JTOL}(f) \leq \frac{\Delta f_p}{\pi f}}
+$$
+
+
+
+
+## Slew-rate limited JTOL in CDR
+
+> C. Kromer, G. Sialm, C. Menolfi, M. Schmatz, F. Ellinger and H. Jackel, "18.1 A 25Gb/s CDR in 90nm CMOS for High-Density Interconnects," *2006 IEEE International Solid State Circuits Conference - Digest of Technical Papers*, San Francisco, CA, USA, 2006, pp. 1266-1275 [[https://sci-hub.ru/10.1109/ISSCC.2006.1696174](https://sci-hub.ru/10.1109/ISSCC.2006.1696174)]
+>
+> —, "A 25-Gb/s CDR in 90-nm CMOS for High-Density Interconnects," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 12, pp. 2921-2929, Dec. 2006 [[https://sci-hub.ru/10.1109/JSSC.2006.884389](https://sci-hub.ru/10.1109/JSSC.2006.884389)]
 >
 > Nicola Da Dalt, ESSCIRC 2019 — *Jitter in Wireline and Data Converter Applications*
 >
 > CC Chen, Why Bang-bang (BB) Loop Dynamic Analysis or Phase Tracking Modeling in a BB CDR Design? [[https://youtu.be/eYDcKnffkLo](https://youtu.be/eYDcKnffkLo)]
 >
 > Open-SERDES Tutorial, BRICD, [[https://www.thebricd.org/serdes-tutorial/](https://www.thebricd.org/serdes-tutorial/)], CC BY 4.0 [[https://github.com/bricd-org/serdes-tutorial](https://github.com/bricd-org/serdes-tutorial)]
+>
+> Walker, Richard. (2003). Designing Bang-Bang PLLs for Clock and Data Recovery in Serial Data Transmission Systems. [[paper](https://www.omnisterra.com/walker/pdfs.papers/BBPLL.pdf),[slides](https://www.omnisterra.com/walker/pdfs.talks/bctm2.maker.pdf)]
+>
+> —, Clock and Data Recovery for Serial Data Communications, focusing on bang-bang CDR design methodology, ISSCC Short Course, February 2002. [[slides](https://www.omnisterra.com/walker/pdfs.talks/ISSCC2002.pdf)]
+>
+> Jri Lee, K. S. Kundert and B. Razavi, "Analysis and modeling of bang-bang clock and data recovery circuits," in *IEEE Journal of Solid-State Circuits*, vol. 39, no. 9, pp. 1571-1580, Sept. 2004 [[https://sci-hub.ru/10.1109/JSSC.2004.831600](https://sci-hub.ru/10.1109/JSSC.2004.831600)]
+
+![image-20261122194010562](eq-cdr/image-20261122194010562.png)
+
+![image-20261122194040849](eq-cdr/image-20261122194040849.png)
+
+input jitter $\Delta \phi = 2\pi A_{pk}\sin(\omega_m t)$ in radian, and $A_{pk}$ in UI
+$$
+S_{sj} =\frac{2\pi A_{pk}\omega_m}{2\pi}=A_{pk}\omega_m \quad \text{[UI/s]}
+$$
 
 
+
+
+![image-20261122194320680](eq-cdr/image-20261122194320680.png)
+
+**1. Find the output amplitude in strong slewing.** Let the input be $A_{\rm pk}\sin(\omega t)$, with $A_{\rm pk}$ in UI and the maximum recovered-phase slope $S$ in UI/s. In strong slewing, the recovered phase rises at $+S$ for half a modulation period and falls at $-S$ for the other half. During the rising half-period it goes from $-A_{\rm out,pk}$ to $+A_{\rm out,pk}$. Therefore, with $T=2\pi/\omega$
+$$
+2A_{\rm out,pk}=S\frac{T}{2} \quad\Longrightarrow\quad A_{\rm out,pk}=\frac{ST}{4}=\frac{\pi S}{2\omega}
+$$
+
+The resulting **peak-amplitude gain** is $G_{\rm slew}(\omega)=\pi S/(2A_{\rm pk}\omega)$. This is the falling, $-20$ dB/decade line in Fig. 8(a)
+
+**2. Match that line to the low-frequency gain.** At low frequency the recovered phase tracks the input, so $G\approx1$. The two asymptotes intersect at
+
+$$
+1=\frac{\pi S}{2A_{\rm pk}\omega_c} \quad\Longrightarrow\quad \boxed{\omega_c=\frac{\pi S}{2A_{\rm pk}}}
+$$
+
+![image-20261122194641676](eq-cdr/image-20261122194641676.png)
+
+| Quantity                      | Criterion                               | Modulation frequency in Hz              |
+| ----------------------------- | --------------------------------------- | --------------------------------------- |
+| Onset of slewing              | Input peak slope reaches $S$          | $f_{\rm onset}=S/(2\pi A_{\rm pk})$   |
+| Estimated $-3$ dB bandwidth | Intersection of the two gain asymptotes | $f_{-3\rm dB}\approx S/(4A_{\rm pk})$ |
+
+Estimated $-3$ dB bandwidth:
+
+$$
+1=\frac{\pi S}{2A_{\rm pk}\omega_c} \quad\Longrightarrow\quad \boxed{\omega_c=\frac{\pi S}{2A_{\rm pk}}} \quad\Longrightarrow\quad \boxed{f_c=\frac{\omega_c}{2\pi}=\frac{S}{4A_{\rm pk}}}
+$$
+
+
+
+
+
+---
+
+![image-20261122175700385](eq-cdr/image-20261122175700385.png)
+
+![image-20261122175840301](eq-cdr/image-20261122175840301.png)
+
+![image-20261122180038872](eq-cdr/image-20261122180038872.png)
+
+For sinusoidal phase modulation with zero static frequency offset, **slide 53 is missing a factor of  $2\pi$ in the denominator** when the peak amplitude is expressed in UI. Walker’s expression $f_{bb}/f_{\mathrm{mod}}$ gives the peak amplitude in **radians**
+
+The VCO switches between $f_{\mathrm{nom}}-f_{bb}$ and $f_{\mathrm{nom}}+f_{bb}$, so the slew limit is reached when the required peak frequency deviation equals $f_{bb}$
+
+$$
+\boxed{A_{\mathrm{UI,pk,max}}=\frac{f_{bb}}{2\pi f_{\mathrm{mod}}}} \qquad \qquad \boxed{A_{\mathrm{UI,pp,max}}=\frac{f_{bb}}{\pi f_{\mathrm{mod}}}}
+$$
 
 
 

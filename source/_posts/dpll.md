@@ -137,6 +137,14 @@ $$
 >
 > —, "Loop Gain Adaptation for Optimum Jitter Tolerance in Digital CDRs," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 9, pp. 2696-2708, Sept. 2018 [[https://sci-hub.ru/10.1109/JSSC.2018.2839038](https://sci-hub.ru/10.1109/JSSC.2018.2839038)]
 
+
+
+![image-20261122102735061](dpll/image-20261122102735061.png)
+
+
+
+---
+
 ![image-20261122103448984](dpll/image-20261122103448984.png)
 
 **What does Stonick's 0.5 measure?** Let $T$ be 1 on a data transition and 0 otherwise, with $\Pr(T=1)=\alpha_T$. The normalized decision per UI is $y=T\,\operatorname{sgn}(\varphi_e)$, so $y^2=T$. At zero mean phase offset, symmetric jitter gives equally likely early and late decisions on transitions. Hence $E[y]=0$ and
@@ -164,12 +172,6 @@ $$
 $$
 
 Stonick’s $0.5$ is the total BB-PD output variance, EQ (7.34) is the remaining output variance after the linear gain accounts for the instantaneous phase error
-
----
-
-![image-20261122102735061](dpll/image-20261122102735061.png)
-
-
 
 
 

@@ -652,6 +652,42 @@ RS is a forward error-correction (**FEC**) algorithm used to correct data corrup
 
 
 
+## CMI & DMI
+
+> Ahmed Sada Staff Silicon Validation Engineer, Synopsys. Don't Be Intimidated: Manual Calibration for Stressed Eye Testing
+>
+> Patrick Kennedy, Impact of Noise Coupler on 128 GT/s Rx Calibration and DUT Testing
+>
+> Anritsu White paper: PCIe® 6.0: Testing for a New Generation [[link](https://img.datacenterfrontier.com/files/base/ebm/datacenterfrontier/document/2022/09/1663627621780-pcie60testingforanewgenerationnewlogo.pdf?dl=1663627621780-pcie60testingforanewgenerationnewlogo.pdf)]
+>
+> Chung-Chun Chen (CC) 陳俊中, Why PCIe Adds a 2.1 GHz Interference Tone? [[https://youtu.be/8qN2-QVUJRs](https://youtu.be/8qN2-QVUJRs)]
+
+<span style="background-color:yellow">**sinusoidal** differential mode interference (**DMI**)</span>, and <span style="background-color:yellow">common mode interference (**CMI**)</span>
+
+![image-20250904225444111](phy/image-20250904225444111.png)
+
+![image-20250904223855075](phy/image-20250904223855075.png)
+
+
+
+---
+
+![image-20250904204007383](phy/image-20250904204007383.png)
+
+
+
+---
+
+> Mike Dudek Marvell, *Differential-mode to Common-mode and Common-mode to Differential-mode reflection specifications* [[https://www.ieee802.org/3/dj/public/25_07/dudek_3dj_01_2507.pdf](https://www.ieee802.org/3/dj/public/25_07/dudek_3dj_01_2507.pdf)]
+>
+> Ali Ghiasi Ghiasi Quantum LLC, *Differential, Conversion, and Common Mode Return Losses* [[https://www.ieee802.org/3/ck/public/20_07/ghiasi_3ck_03a_0720.pdf](https://www.ieee802.org/3/ck/public/20_07/ghiasi_3ck_03a_0720.pdf)]
+
+*TODO* &#128197;
+
+
+
+
+
 ## reference
 
 T. Anand, “Wireline Link Performance Survey,” [Online].  [[https://web.engr.oregonstate.edu/~anandt/linksurvey](https://web.engr.oregonstate.edu/~anandt/linksurvey)]

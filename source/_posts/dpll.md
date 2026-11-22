@@ -11,7 +11,7 @@ mathjax: true
 
 
 
-## BB PD
+## Linear Model of BB-PD
 
 > Youngdon Choi, Deog-Kyoon Jeong and W. Kim, "Jitter transfer analysis of tracked oversampling techniques for multigigabit clock and data recovery," in IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, vol. 50, no. 11, pp. 775-783, Nov. 2003 [[https://sci-hub.st/10.1109/TCSII.2003.819070](https://sci-hub.st/10.1109/TCSII.2003.819070)]
 >
@@ -23,9 +23,11 @@ mathjax: true
 
 It's **ternary**, because *early*, *late* and *no transition*
 
-notice the ***transition density = 1*** in digital PLL
+> <span style="background-color:yellow">***transition density = 1*** in digital PLL</span>
 
-### Linearization
+
+
+### Effect of Jitter on BB-PD Gain
 
 The effective PD gain is a function of the **input jitter pdf**, it enables one to anticipate the effects of input jitter on loop characteristics
 
@@ -46,25 +48,14 @@ where $\mu = (1)\times \mathrm{P}(\text{late}|\phi) + (-1)\times \mathrm{P}(\tex
 > Both jitter and amplitude noise distribution are same, just scaled by slope
 
 
-### Self-Noise Term
 
-One price we pay for ***BB PD*** versus ***linear PD*** is the self-noise term. **For** **small phase errors** BB output noise is the **full magnitude** of the sliced data
+![image-20261121230906285](dpll/image-20261121230906285.png)
 
-> The PD output should be almost **0** for small phase errors. i.e. ideal PD output noise should be **0**
-
-$$
-\sigma_{BB}^2 = 1^2 \cdot \mathrm{P}(\text{trans}) + 0^2\cdot (1-\mathrm{P}(\text{trans})) = 0.5
-$$
-
-![image-20241127215947017](dpll/image-20241127215947017.png)
-
-**Input referred jitter** from BB PD is **proportional to incoming jitter**
-
-![image-20241127220933103](dpll/image-20241127220933103.png)
+![image-20261122100959772](dpll/image-20261122100959772.png)
 
 
 
-### gain simulation
+### Gain extraction from time domain
 
 > L. Avallone, M. Mercandelli, A. Santiccioli, M. P. Kennedy, S. Levantino and C. Samori, "A Comprehensive Phase Noise Analysis of Bang-Bang Digital PLLs," in IEEE Transactions on Circuits and Systems I: Regular Papers, vol. 68, no. 7, pp. 2775-2786, July 2021 [[https://sci-hub.st/10.1109/TCSI.2021.3072344](https://sci-hub.st/10.1109/TCSI.2021.3072344)]
 >
@@ -136,6 +127,52 @@ $$
 
 
 
+### Added Jitter due to BB-PD
+
+> J. T. Stonick, “DPLL-Based Clock and Data Recovery,” ISSCC 2011, tutorial T5, slides 24–25. [Slides](https://www.nishanchettri.com/isscc-slides/2011%20ISSCC/TUTORIALS/ISSCC2011Visuals-T5.pdf)
+>
+> N. Da Dalt and A. Sheikholeslami, *Understanding Jitter and Phase Noise*, Cambridge University Press, 2018, §7.3.3, Eq. (7.34). [Chapter 7](https://doi.org/10.1017/9781316981238.008)
+>
+> J. Liang, A. Sheikholeslami, H. Tamura, Y. Ogata and H. Yamaguchi, "6.7 A 28Gb/s digital CDR with adaptive loop gain for optimum jitter tolerance," *2017 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2017, pp. 122-123 [[https://sci-hub.ru/10.1109/ISSCC.2017.7870291](https://sci-hub.ru/10.1109/ISSCC.2017.7870291)]
+>
+> —, "Loop Gain Adaptation for Optimum Jitter Tolerance in Digital CDRs," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 9, pp. 2696-2708, Sept. 2018 [[https://sci-hub.ru/10.1109/JSSC.2018.2839038](https://sci-hub.ru/10.1109/JSSC.2018.2839038)]
+
+![image-20261122103448984](dpll/image-20261122103448984.png)
+
+**What does Stonick's 0.5 measure?** Let $T$ be 1 on a data transition and 0 otherwise, with $\Pr(T=1)=\alpha_T$. The normalized decision per UI is $y=T\,\operatorname{sgn}(\varphi_e)$, so $y^2=T$. At zero mean phase offset, symmetric jitter gives equally likely early and late decisions on transitions. Hence $E[y]=0$ and
+
+$$
+\operatorname{var}(y)=E[y^2]=\alpha_T.
+$$
+
+For independent, equiprobable bits, $\alpha_T=0.5$. This is the variance seen at the detector output when the **mean offset** is held at zero and individual edges still jitter.
+
+![image-20261122103538936](dpll/image-20261122103538936.png)
+
+---
+
+![image-20261122111402207](dpll/image-20261122111402207.png)
+$$
+\textcolor{cyan}{\operatorname{sgn}(\phi_e)}=\textcolor{brown}{K_{PD0}\varphi_e}+\textcolor{magenta}{\varphi_{PD}}
+$$
+
+
+The gain makes the residual $\varphi_{PD}$ uncorrelated with $\varphi_e$, so at $\alpha_T=0.5$ the variance splits as follows. 
+
+$$
+\textcolor{cyan}{\underbrace{0.5}_{\text{total decision variance}}} = \textcolor{brown}{\underbrace{\frac{1}{2\pi}}_{\text{linear term}\;\approx\,0.1592}} + \textcolor{magenta}{\underbrace{\left(0.5-\frac{1}{2\pi}\right)}_{\text{added BB-PD noise}\;\approx\,0.3408}}
+$$
+
+Stonick’s $0.5$ is the total BB-PD output variance, EQ (7.34) is the remaining output variance after the linear gain accounts for the instantaneous phase error
+
+---
+
+![image-20261122102735061](dpll/image-20261122102735061.png)
+
+
+
+
+
 ## PFD + !!PD
 
 ![pfd_bbpd.drawio](dpll/pfd_bbpd.drawio.svg)
@@ -170,7 +207,11 @@ PFD is used for frequency-detection capability
 
 ## Hunting Jitter & limit cycle
 
+> N. Da Dalt, "A design-oriented study of the nonlinear dynamics of digital bang-bang PLLs," in *IEEE Transactions on Circuits and Systems I: Regular Papers*, vol. 52, no. 1, pp. 21-31, Jan. 2005 [[https://sci-hub.se/10.1109/TCSI.2004.840089](https://sci-hub.se/10.1109/TCSI.2004.840089)]
+>
 > S. Jang, S. Kim, S. -H. Chu, G. -S. Jeong, Y. Kim and D. -K. Jeong, "An Optimum Loop Gain Tracking All-Digital PLL Using Autocorrelation of Bang–Bang Phase-Frequency Detection," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 62, no. 9, pp. 836-840, Sept. 2015 [[https://sci-hub.st/10.1109/TCSII.2015.2435691](https://sci-hub.st/10.1109/TCSII.2015.2435691)] [[phd thesis](https://s-space.snu.ac.kr/bitstream/10371/119111/1/000000066677.pdf)]
+>
+> ---
 >
 > Deog-Kyoon Jeong. Topics in IC (Wireline Transceiver Design). Lec 3 - All-Digital PLL [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf)]
 >
@@ -184,12 +225,18 @@ PFD is used for frequency-detection capability
 >
 > CC Chen. Why Hunting Jitter Happens in CDR: The Role of Input Jitter and Latency? [[https://youtu.be/hPDielPsFgY](https://youtu.be/hPDielPsFgY)]
 
+<span style="background-color:yellow">a bang-bang phase detector always makes a quantized binary decision regardless of how low the phase difference is</span>
 
 ***Hunting jitter*** is often referred to as ***dithering jitter***, the *periodic* time error between *data clock* and input data, which exhibits a ***limit-cycle*** behavior
 
 ![image-20250819202727871](dpll/image-20250819202727871.png)
 
-![image-20250819203806711](dpll/image-20250819203806711.png)
+![image-20261121174611115](dpll/image-20261121174611115.png)
+
+$$
+\boxed{\color{blue}\Delta t = K_P \cdot K_{DCO}}
+$$
+
 
 ![image-20250819210031102](dpll/image-20250819210031102.png)
 

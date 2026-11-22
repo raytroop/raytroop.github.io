@@ -434,6 +434,7 @@ plt.show()
 
 ![image-20260919083229868](pi-cdr/image-20260919083229868.png)
 
+At a fixed update rate $f_m$, advancing one PI code per update completes a full rotation in $2^N$ updates, so the <span style="background-color:yellow">equivalent DCO gain $K_{f,PI}$ is independent of the nominal clock period $T_o$</span>
 $$
 K_{f,PI} = \frac{1/2^N}{T_m/T_o}\cdot \frac{1}{T_o} = \frac{f_m}{2^N}
 $$

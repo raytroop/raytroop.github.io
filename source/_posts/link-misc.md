@@ -124,40 +124,6 @@ $$
 
 
 
-## CMI & DMI
-
-> Ahmed Sada Staff Silicon Validation Engineer, Synopsys. Don't Be Intimidated: Manual Calibration for Stressed Eye Testing
->
-> Patrick Kennedy, Impact of Noise Coupler on 128 GT/s Rx Calibration and DUT Testing
->
-> Anritsu White paper: PCIe® 6.0: Testing for a New Generation [[link](https://img.datacenterfrontier.com/files/base/ebm/datacenterfrontier/document/2022/09/1663627621780-pcie60testingforanewgenerationnewlogo.pdf?dl=1663627621780-pcie60testingforanewgenerationnewlogo.pdf)]
->
-> Chung-Chun Chen (CC) 陳俊中, Why PCIe Adds a 2.1 GHz Interference Tone? [[https://youtu.be/8qN2-QVUJRs](https://youtu.be/8qN2-QVUJRs)]
-
-***sinusoidal*** differential mode interference (**DMI**), and common mode interference (**CMI**)
-
-![image-20250904225444111](link-misc/image-20250904225444111.png)
-
-![image-20250904223855075](link-misc/image-20250904223855075.png)
-
-
-
----
-
-![image-20250904204007383](link-misc/image-20250904204007383.png)
-
-
-
----
-
----
-
-> Mike Dudek Marvell, *Differential-mode to Common-mode and Common-mode to Differential-mode reflection specifications* [[https://www.ieee802.org/3/dj/public/25_07/dudek_3dj_01_2507.pdf](https://www.ieee802.org/3/dj/public/25_07/dudek_3dj_01_2507.pdf)]
->
-> Ali Ghiasi Ghiasi Quantum LLC, *Differential, Conversion, and Common Mode Return Losses* [[https://www.ieee802.org/3/ck/public/20_07/ghiasi_3ck_03a_0720.pdf](https://www.ieee802.org/3/ck/public/20_07/ghiasi_3ck_03a_0720.pdf)]
-
-*TODO* &#128197;
-
 
 
 
@@ -181,18 +147,6 @@ $$
 ![image-20250817110059363](link-misc/image-20250817110059363.png)
 
 ***Since we have (ideally) no return current, the ground reference becomes less important.*** The ground potential can even be different at the sender and receiver or moving around within a certain acceptable range. However, you need to be careful because DC-coupled differential signaling (such as USB, RS-485, CAN) generally requires a shared ground potential to ensure that the signals stay within the interface's maximum and minimum allowable common-mode voltage.
-
-
-
-##  Low-Latency PCIe
-
-*TODO* &#128197;
-
-
-
-## AC-coupling vs DC-coupling
-
-*TODO* &#128197;
 
 
 
@@ -413,85 +367,6 @@ $$
 Jitter generation is **high-pass filter** with two zeros, at zero frequency, and two poles identical to those of the jitter transfer function
 
 ![image-20220504110737718](link-misc/image-20220504110737718.png)
-
-### Jitter Tolerance (JTOL)
-
-To quantify jitter tolerance, we often apply a sinusoidal jitter of a fixed frequency to the CDR input data and observe the BER of the CDR
-
-The jitter tolerance curve **DONT** capture a CDR's true tolerance to **random** jitter. Because we are applying "sinusoidal" jitter, which is **deterministic** signal.
-
-We can deal only with the jitter's amplitude and frequency instead of the PSD of the jitter thanks to deterministic sinusoidal jitter signal.
-$$
-JTOL(f) = \left | \varphi_{in}(f)  \right |_{\text{pp-max}} \quad \text{for a fixed BER}
-$$
-Where the subscript **$\text{pp-max}$** indicates the maximum **peak-to-peak amplitude**. We can further expand this equation as follows
-$$
-JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right| \cdot |\varphi_e(f)|_\text{pp-max}
-$$
-![image-20250627204121289](link-misc/image-20250627204121289.png)
-
-> Relative jitter, $\varphi_e$ must be less than 1UIpp for error-free operation
-
-
-
-In an ideal CDR, the **maximum peak-to-peak amplitude** of $|\varphi_e(f)|$ is **1UI**, i.e.,$|\varphi_e(f)|_\text{pp-max}=1UI$
-
-Accordingly, jitter tolerance can be expressed in terms of the number of UIs as
-$$
-JTOL(f)=\left| \frac{\varphi_{in}(f)}{\varphi_{e}(f)} \right|\quad \text{[UI]}
-$$
-Given the linear CDR model, we can write
-$$
-JTOL(f)=\left| 1+\frac{K_{PD}K_{VCO}H_{LF}(f)}{j2\pi f} \right|\quad \text{[UI]}
-$$
-Expand $H_{LF}(f)$ for the CDR, we can write
-$$
-JTOL(f)=\left| 1-2\xi j \left(\frac{f_n}{f}\right) - \left(\frac{f_n}{f}\right)^2 \right|\quad \text{[UI]}
-$$
-At frequencies far below and above the natural frequency, the jitter tolerance can be approximated by the following
-$$
-JTOL(f) = \left\{ \begin{array}{cl}
-\left(\frac{f_n}{f}\right)^2 & : \ f\ll f_n \\
-1 & : \ f\gg f_n
-\end{array} \right.
-$$
-
-> the jitter tolerance at very **high jitter frequencies** is limited to **1UIpp**
-
-
-
-![image-20250627212710868](link-misc/image-20250627212710868.png)
-
-```matlab
-clc;
-clear all;
-
-f_fn = logspace(-1, 2, 60);
-for xi = [2, 1, 0.5, 0.2]
-    jtol = abs(1- 1i*2*xi.*(1./f_fn)- (1./f_fn).^2);
-    loglog(f_fn, jtol,LineWidth=2)
-    disp(["min(JTpp)=", min(jtol),"@\xi=",xi])
-    hold on
-end    
-grid on;
-xlabel("f/f_n")
-ylabel('JT_{pp}')
-legend('\xi=2', '\xi=1', '\xi=0.5', '\xi=0.2')
-```
-
-
-
----
-
-CC Chen, Circuit Images: Why JTOL in a CDR? [[https://youtu.be/kZExm9wy0G8](https://youtu.be/kZExm9wy0G8)]
-
-—. Why Pseudo-JTOL in a CDR Design or Verification? [[https://youtu.be/DZyzLhk59aY](https://youtu.be/DZyzLhk59aY)]
-
-![image-20250627202659095](link-misc/image-20250627202659095.png)
-
-![image-20250627203101366](link-misc/image-20250627203101366.png)
-
-![image-20250627203654688](link-misc/image-20250627203654688.png)
 
 
 

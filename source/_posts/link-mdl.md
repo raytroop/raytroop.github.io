@@ -208,7 +208,7 @@ def shift_signal(signal, samples_per_symbol):
 
 ---
 
-`lms_equalizer` performs **offline adaptation** and it fail due to DFE Error Propagation if `reference` is `None`
+`lms_equalizer` performs **offline adaptation** and it will fail due to DFE Error Propagation if `reference` is `None`
 $$
 \underbrace{\mathbf{y}_k}_{\text{FFE input}}
 \;\xrightarrow{\;\langle\cdot,\mathbf{w}_{\text{ffe}}\rangle\;}\;
@@ -560,9 +560,13 @@ RLM = min((3*ES1),(3*ES2),(2-3*ES1),(2-3*ES2))
 
 > Open-SERDES Tutorial, BRICD, [[https://www.thebricd.org/serdes-tutorial/](https://www.thebricd.org/serdes-tutorial/)], CC BY 4.0 [[https://github.com/bricd-org/serdes-tutorial](https://github.com/bricd-org/serdes-tutorial)]
 
-![image-20261117000336980](link-mdl/image-20261117000336980.png)
+![image-20261121210348800](link-mdl/image-20261121210348800.png)
 
 *TODO* &#128197;
+
+
+
+
 
 
 

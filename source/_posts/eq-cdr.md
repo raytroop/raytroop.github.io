@@ -732,15 +732,93 @@ Then, $h_{-1}$ and $h_1$ are same, which is desired
 
 
 
-## Multiphase clock CDR
+
+
+## BB-CDR Types
+
+### filter type & phase converter
+
+![image-20261121233008247](eq-cdr/image-20261121233008247.png)
+
+
+
+### Multiphase clock CDR
 
 > Woo-Young Choi, High-speed Serial Interface Lect. 16 – Clock and Data Recovery 3 [[http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf](http://tera.yonsei.ac.kr/class/2013_1_2/lecture/Lect16_CDR-3.pdf)]
 >
 > Jri Lee, Clock and Data Recovery [[https://cc.ee.ntu.edu.tw/~jrilee/course/COMMIC08/CommIC_11.pdf](https://cc.ee.ntu.edu.tw/~jrilee/course/COMMIC08/CommIC_11.pdf)]
+>
+> CC Chen, Why Half-Rate or Quarter-Rate CDR? [[https://youtu.be/bW_S6z1vi2w](https://youtu.be/bW_S6z1vi2w)]
 
 <span style="background-color:yellow">**Full-rate, Half-rate, Quarter-rate CDR**</span>
 
 ![image-20261119225457356](eq-cdr/image-20261119225457356.png)
+
+
+
+
+
+## JTOL (jitter tolerance) in CDR
+
+> CC Chen, Circuit Images: Why JTOL in a CDR? [[https://youtu.be/kZExm9wy0G8](https://youtu.be/kZExm9wy0G8)]
+>
+> —. Why Pseudo-JTOL in a CDR Design or Verification? [[https://youtu.be/DZyzLhk59aY](https://youtu.be/DZyzLhk59aY)]
+>
+> J. Liang, A. Sheikholeslami, H. Tamura, Y. Ogata and H. Yamaguchi, "6.7 A 28Gb/s digital CDR with adaptive loop gain for optimum jitter tolerance," *2017 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2017, pp. 122-123 [[https://sci-hub.ru/10.1109/ISSCC.2017.7870291](https://sci-hub.ru/10.1109/ISSCC.2017.7870291)]
+>
+> —, "Loop Gain Adaptation for Optimum Jitter Tolerance in Digital CDRs," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 9, pp. 2696-2708, Sept. 2018 [[https://sci-hub.ru/10.1109/JSSC.2018.2839038](https://sci-hub.ru/10.1109/JSSC.2018.2839038)]
+>
+> Nicola Da Dalt, ESSCIRC 2019 — *Jitter in Wireline and Data Converter Applications*
+
+
+
+![image-20261122084609311](eq-cdr/image-20261122084609311.png)
+
+![image-20261122091752132](eq-cdr/image-20261122091752132.png)
+
+![image-20261122093602664](eq-cdr/image-20261122093602664.png)
+$$
+\boxed{\color{blue}\text{JTOL} = \lvert 1 +\text{LG(f)}\rvert \times \text{1UI}_\text{PP}}
+$$
+![image-20261122084319278](eq-cdr/image-20261122084319278.png)
+
+![image-20250627202659095](eq-cdr/image-20250627202659095.png)
+
+![image-20261121215000009](eq-cdr/image-20261121215000009.png)
+
+![image-20250627203654688](eq-cdr/image-20250627203654688.png)
+
+
+
+## slew-rate limited JTOL in CDR
+
+> C. Kromer, G. Sialm, C. Menolfi, M. Schmatz, F. Ellinger and H. Jackel, "A 25-Gb/s CDR in 90-nm CMOS for High-Density Interconnects," in *IEEE Journal of Solid-State Circuits*, vol. 41, no. 12, pp. 2921-2929, Dec. 2006
+>
+> Nicola Da Dalt, ESSCIRC 2019 — *Jitter in Wireline and Data Converter Applications*
+>
+> CC Chen, Why Bang-bang (BB) Loop Dynamic Analysis or Phase Tracking Modeling in a BB CDR Design? [[https://youtu.be/eYDcKnffkLo](https://youtu.be/eYDcKnffkLo)]
+>
+> Open-SERDES Tutorial, BRICD, [[https://www.thebricd.org/serdes-tutorial/](https://www.thebricd.org/serdes-tutorial/)], CC BY 4.0 [[https://github.com/bricd-org/serdes-tutorial](https://github.com/bricd-org/serdes-tutorial)]
+
+
+
+
+
+## ALGC for Optimum JTOL in CDR
+
+> J. Liang, A. Sheikholeslami, H. Tamura, Y. Ogata and H. Yamaguchi, "6.7 A 28Gb/s digital CDR with adaptive loop gain for optimum jitter tolerance," *2017 IEEE International Solid-State Circuits Conference (ISSCC)*, San Francisco, CA, USA, 2017, pp. 122-123 [[https://sci-hub.ru/10.1109/ISSCC.2017.7870291](https://sci-hub.ru/10.1109/ISSCC.2017.7870291)]
+>
+> —, "Loop Gain Adaptation for Optimum Jitter Tolerance in Digital CDRs," in *IEEE Journal of Solid-State Circuits*, vol. 53, no. 9, pp. 2696-2708, Sept. 2018 [[https://sci-hub.ru/10.1109/JSSC.2018.2839038](https://sci-hub.ru/10.1109/JSSC.2018.2839038)]
+
+![image-20261122094539539](eq-cdr/image-20261122094539539.png)
+
+![image-20261122100317971](eq-cdr/image-20261122100317971.png)
+
+<span style="background-color:yellow">Low frequency JTOL &#x21D2; loop gain $\text{LG}(f)$</span>
+
+<span style="background-color:yellow">High frequency JTOL &#x21D2; relative jitter $\psi_{ER}$</span>
+
+
 
 
 

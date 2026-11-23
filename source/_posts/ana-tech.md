@@ -75,15 +75,11 @@ mathjax: true
 
 ![image-20240816175038971](ana-tech/image-20240816175038971.png)
 
-**Avoid *zero current* in cascodes**
+**To avoid *zero current* in cascodes**
 
-- left circuit
-
-  $I_b \gt I_a$
-
-- right circuit
-
-  $I_b \gt 2I_a$
+| left circuit  | right circuit  |
+| ------------- | -------------- |
+| $I_b \gt I_a$ | $I_b \gt 2I_a$ |
 
 
 

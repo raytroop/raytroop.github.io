@@ -120,6 +120,10 @@ Use one mode bit $M$: **$M=0$ selects divide-by-4; $M=1$ selects divide-by-5**
 
 ## Multi-Modulus Dividers (MMD)
 
+> B. Razavi, "The Design of a Millimeter-Wave Frequency Divider [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 14, no. 4, pp. 6-16, Fall 2022 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_Fall_2022.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_Fall_2022.pdf)]
+>
+> —, "The Design of a Millimeter-Wave Frequency Synthesizer [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 2, pp. 6-13, Spring 2023 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2023.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_2_2023.pdf)]
+
 ***wide-range programmable divider using a <span style="color:blue">cascade of divide-by-2/3s</span>***
 
 ![image-20260815214721784](clock-misc/image-20260815214721784.png)

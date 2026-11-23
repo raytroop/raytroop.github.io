@@ -824,7 +824,7 @@ $$
 
 ![image-20261122194010562](eq-cdr/image-20261122194010562.png)
 
-![image-20261122194040849](eq-cdr/image-20261122194040849.png)
+![image-20261123231213197](eq-cdr/image-20261123231213197.png)
 
 input jitter $\Delta \phi = 2\pi A_{pk}\sin(\omega_m t)$ in radian, and $A_{pk}$ in UI
 $$
@@ -833,8 +833,7 @@ $$
 
 
 
-
-![image-20261122194320680](eq-cdr/image-20261122194320680.png)
+![image-20261123231103073](eq-cdr/image-20261123231103073.png)
 
 **1. Find the output amplitude in strong slewing.** Let the input be $A_{\rm pk}\sin(\omega t)$, with $A_{\rm pk}$ in UI and the maximum recovered-phase slope $S$ in UI/s. In strong slewing, the recovered phase rises at $+S$ for half a modulation period and falls at $-S$ for the other half. During the rising half-period it goes from $-A_{\rm out,pk}$ to $+A_{\rm out,pk}$. Therefore, with $T=2\pi/\omega$
 $$
@@ -848,6 +847,8 @@ The resulting **peak-amplitude gain** is $G_{\rm slew}(\omega)=\pi S/(2A_{\rm pk
 $$
 1=\frac{\pi S}{2A_{\rm pk}\omega_c} \quad\Longrightarrow\quad \boxed{\omega_c=\frac{\pi S}{2A_{\rm pk}}}
 $$
+
+**Loop latency.** Lee et al. neglect decision-to-VCO delay in Fig. 6 and the bandwidth estimate in Eq. (12). The $T/4$ in Eq. (10) measures the time from the output triangle's own zero crossing to its peak. Delaying both slope reversals equally shifts the peak relative to the input and preserves $A_{\rm out,pk}=ST/4$.
 
 ![image-20261122194641676](eq-cdr/image-20261122194641676.png)
 
@@ -898,6 +899,10 @@ $$
 
 <span style="background-color:yellow">High frequency JTOL &#x21D2; relative jitter $\psi_{ER}$</span>
 
+**JTOL with jitter**
+$$
+\text{JTOL}(f) = \lvert 1+\text{LG}(f)\rvert \times (\text{1UI}_\text{pp} - \lvert\textcolor{red}{\psi_{ER,PP}}\lvert )
+$$
 
 
 

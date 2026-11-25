@@ -804,7 +804,7 @@ $$
 
 
 
-## Slew-rate limited JTOL in CDR
+## Slew-rate limited JTOL in BB-CDR
 
 > C. Kromer, G. Sialm, C. Menolfi, M. Schmatz, F. Ellinger and H. Jackel, "18.1 A 25Gb/s CDR in 90nm CMOS for High-Density Interconnects," *2006 IEEE International Solid State Circuits Conference - Digest of Technical Papers*, San Francisco, CA, USA, 2006, pp. 1266-1275 [[https://sci-hub.ru/10.1109/ISSCC.2006.1696174](https://sci-hub.ru/10.1109/ISSCC.2006.1696174)]
 >

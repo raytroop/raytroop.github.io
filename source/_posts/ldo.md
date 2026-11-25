@@ -186,6 +186,13 @@ $$
 
 ## Feedforward Compensation with $C_\text{FF}$
 
+> Application Report SBVA042–July 2014, Pros and Cons of Using a Feedforward Capacitor with a Low-Dropout Regulator [[https://www.ti.com/lit/an/sbva042/sbva042.pdf](https://www.ti.com/lit/an/sbva042/sbva042.pdf)]
+>
+> LDO Basics: Noise – How a Feed-forward Capacitor Improves System Performance [[https://www.ti.com/document-viewer/lit/html/SSZTA13](https://www.ti.com/document-viewer/lit/html/SSZTA13)]
+>
+> LDO Basics: Noise – How a Noise-reduction Pin Improves System Performance [[https://www.ti.com/document-viewer/lit/html/SSZTA40](https://www.ti.com/document-viewer/lit/html/SSZTA40)]
+
+
 - Improved Noise
 - Improved Stability and Transient Response
 - Improved PSRR
@@ -213,11 +220,6 @@ $$\begin{align}
 
 
 
-> Application Report SBVA042–July 2014, Pros and Cons of Using a Feedforward Capacitor with a Low-Dropout Regulator [[https://www.ti.com/lit/an/sbva042/sbva042.pdf](https://www.ti.com/lit/an/sbva042/sbva042.pdf)]
->
-> LDO Basics: Noise – How a Feed-forward Capacitor Improves System Performance [[https://www.ti.com/document-viewer/lit/html/SSZTA13](https://www.ti.com/document-viewer/lit/html/SSZTA13)]
->
-> LDO Basics: Noise – How a Noise-reduction Pin Improves System Performance [[https://www.ti.com/document-viewer/lit/html/SSZTA40](https://www.ti.com/document-viewer/lit/html/SSZTA40)]
 
 
 

@@ -263,7 +263,7 @@ $$\begin{align}
 | W, L                                                         | 1            | 1               | 1                         | $I_{\Delta_{V_{TH}}}+I_{\Delta_{WL}}$            | 3.44     |
 | W, 2L                                                        | $1/\sqrt{2}$ | $1/\sqrt{2}$    | $1/\sqrt{2}$              | $I_{\Delta_{V_{TH}}}/2+I_{\Delta_{WL}}/\sqrt{2}$ | 1.98     |
 | 2W, L                                                        | $\sqrt{2}$   | $1/\sqrt{2}$    | $1/\sqrt{2}$              | $I_{\Delta_{V_{TH}}}+I_{\Delta_{WL}}/\sqrt{2}$   | 2.93     |
-| We get $I_{\Delta_{V_{TH}}}\simeq 1.71\%$ and $I_{\Delta_{WL}} \simeq 1.73\%$ |              |                 |                           |                                                  |          |
+| We get $I_{\Delta_{V_{TH}}}\approx 1.71\%$ and $I_{\Delta_{WL}} \approx 1.73\%$ |              |                 |                           |                                                  |          |
 
 ![image-20221003001056211](biasing/image-20221003001056211.png)
 
@@ -367,7 +367,7 @@ If the loop gain evaluated at an operating point is **less than one**, that oper
 
 With $m_{1\to 2} = 1$
 $$
-\text{Loop Gain} \simeq \frac{V_{BN}-V_{T2}}{V_{BN}-V_{T2} + V_R} \tag{$LG_0$}
+\text{Loop Gain} \approx \frac{V_{BN}-V_{T2}}{V_{BN}-V_{T2} + V_R} \tag{$LG_0$}
 $$
 Assuming all MOS in strong inv operation, $I$, $V_{BN}$ and $V_R$ is obtain
 $$\begin{align}
@@ -378,7 +378,7 @@ IR &= \frac{2}{R}\left( \frac{1}{\sqrt{\beta_2}} -  \frac{1}{\sqrt{\beta_1}} \ri
 
 Substitute $V_{BN}$ and $V_R$ of $LG_0$
 $$\begin{align}
-\text{Loop Gain} & \simeq \frac{1-\sqrt{\frac{\beta_2}{\beta_1}}}{\frac{\beta_2}{\beta_1} - 3\sqrt{\frac{\beta_2}{\beta_1}}+2} \\
+\text{Loop Gain} & \approx \frac{1-\sqrt{\frac{\beta_2}{\beta_1}}}{\frac{\beta_2}{\beta_1} - 3\sqrt{\frac{\beta_2}{\beta_1}}+2} \\
 &= \frac{1}{2-\sqrt{\frac{\beta_2}{\beta_1}}} \tag{$LG_1$}
 \end{align}$$
 

@@ -629,9 +629,9 @@ G. Souliotis, A. Tsimpos and S. Vlassis, "Phase Interpolator-Based Clock and Dat
 
 ### CDR Loop Latency 
 
-Denoting the CDR loop latency by $\Delta T$ , we note that the loop transmission is multiplied by $exp(-s\Delta T)\simeq 1-s\Delta T$.The resulting right-half-plane zero, $f_z$ degrades the phase margin and must remain about **one decade beyond the BW**
+Denoting the CDR loop latency by $\Delta T$ , we note that the loop transmission is multiplied by $exp(-s\Delta T)\approx 1-s\Delta T$.The resulting right-half-plane zero, $f_z$ degrades the phase margin and must remain about **one decade beyond the BW**
 $$
-f_z\simeq \frac{1}{2\pi \Delta T}
+f_z\approx \frac{1}{2\pi \Delta T}
 $$
 
 

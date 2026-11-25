@@ -44,7 +44,7 @@ I_\text{c,in}  &= (v_i + A_v v_i)sC_c \\
 & = v_i s (1+A_v)C_c
 \end{align}$$
 
-we get $C_\text{in,eq}= (1+A_v)C_c\simeq A_vC_c$
+we get $C_\text{in,eq}= (1+A_v)C_c\approx A_vC_c$
 
 Similarly
 $$\begin{align}
@@ -533,8 +533,8 @@ z_c = \frac{1}{R_cC_c}
 $$
 Given $R_c \ll R$ and $C_c \gg C$
 $$\begin{align}
-p_{1c} &\simeq \frac{1}{R_1(C_c+C_1)} \simeq \frac{1}{R_1C_c}\\
-p_{3c} &= \frac{1}{R_cC_1}+\frac{1}{R_cC_c}+\frac{1}{R_1C_1} \simeq \frac{1}{R_cC_1}
+p_{1c} &\approx \frac{1}{R_1(C_c+C_1)} \approx \frac{1}{R_1C_c}\\
+p_{3c} &= \frac{1}{R_cC_1}+\frac{1}{R_cC_c}+\frac{1}{R_1C_1} \approx \frac{1}{R_cC_1}
 \end{align}$$
 
 The output pole is unchanged, which is

@@ -1126,7 +1126,7 @@ R_\text{eq} &= \frac{A_i}{1+|A|^2-2A_r}\cdot \frac{1}{\omega C_f}
 That is, top of $M_2$ is `drain` and bottom is `source`,
 $$\begin{align}
 R_\text{eq2} &= \frac{r_\text{o2}+R_L}{1+g_\text{m2}r_\text{o2}} \\
-& \simeq  \frac{1}{g_\text{m2}}
+& \approx  \frac{1}{g_\text{m2}}
 \end{align}$$
 
 

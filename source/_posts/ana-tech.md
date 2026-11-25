@@ -61,7 +61,7 @@ mathjax: true
 
 ![image-20240817161915989](ana-tech/image-20240817161915989.png)
 
-> In practice, we choose $I_P \simeq I_{SS}$
+> In practice, we choose $I_P \approx I_{SS}$
 
 ---
 

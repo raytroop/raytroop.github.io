@@ -182,7 +182,7 @@ During recovery phase where the gate voltage of pMOS is high and stress is remov
 
 Short-channel MOSFETs may exprience **high lateral electric fields** if the drain-source voltage is large. while the average velocity of carriers saturate at high fields, the instantaneous velocity and hence the kinetic energy of the carriers continue to increase, especially as they accelerate toward the drain. These are called **hot** carriers.
 
-In nanometer technologies, hot carrier effects have **subsided**. This is because the energy required to create an electron-hole pair, $E_g \simeq 1.12 eV$, is simply not available if the supply voltage is around 1V.
+In nanometer technologies, hot carrier effects have **subsided**. This is because the energy required to create an electron-hole pair, $E_g \approx 1.12 eV$, is simply not available if the supply voltage is around 1V.
 
 $$
 F_E= E \cdot q

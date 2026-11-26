@@ -145,6 +145,10 @@ trade-offs between *noise amplification* and *signal equalization*
 > K. Kwon *et al*., "C12-4 A 212.5Gb/s Pam-4 Receiver With Mutual Inductive Coupled Gm-Tia in 4nm Finfet," *2025 Symposium on VLSI Technology and Circuits (VLSI Technology and Circuits)*, Kyoto, Japan, 2025, pp. 1-3, doi: 10.23919/VLSITechnologyandCir65189.2025.11074881.
 >
 > Bae, W. (2019). CMOS Inverter as Analog Circuit: An Overview. *Journal of Low Power Electronics and Applications*. [[pdf](https://pdfs.semanticscholar.org/6494/3a15452b12c89d31cdcedb22d605c42ed8bd.pdf)]
+>
+> U. Singh et al., "8.6 A 280mW 112Gb/s PAM-4/NRZ Transceiver for Low-Power IOs in 5nm FinFET Technology," 2026 IEEE International Solid-State Circuits Conference (ISSCC), San Francisco, CA, USA, 2026, pp. 144-146, doi: 10.1109/ISSCC49663.2026.11409174.
+>
+> —, "A 280-mW, 112-Gb/s PAM-4/NRZ Transceiver for Low-Power IOs in 5-nm FinFET Technology," in IEEE Journal of Solid-State Circuits, doi: 10.1109/JSSC.2026.3743919
 
 *CTLE, with Gm + TIA structure*
 

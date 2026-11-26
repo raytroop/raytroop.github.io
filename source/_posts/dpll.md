@@ -1203,7 +1203,11 @@ i.e. reference clock with **white** phase noise, DCO with a $\mathbf{1/f^2}$ pha
 
 
 
+## Bandwidth Control of DPLL
 
+> M. Mercandelli, L. Grimaldi, L. Bertulessi, C. Samori, A. L. Lacaita and S. Levantino, "A Background Calibration Technique to Control the Bandwidth of Digital PLLs," in IEEE Journal of Solid-State Circuits, vol. 53, no. 11, pp. 3243-3255, Nov. 2018 [[https://sci-hub.ru/10.1109/JSSC.2018.2866454](https://sci-hub.ru/10.1109/JSSC.2018.2866454)]
+
+*TODO* &#128197;
 
 
 ## reference

@@ -277,7 +277,7 @@ add MIMCAP dummy in ***chip level*** due to RV (Mtop to AP) impact
 
 ---
 
-***Rotated Metal-Oxide-Metal capacirot (RTMOM)***
+***Rotated Metal-Oxide-Metal capacitor (RTMOM)***
 
 Capacitors are not only formed between metal fingers in the same metal layer but also between different layers of metal
 

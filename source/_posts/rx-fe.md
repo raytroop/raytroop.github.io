@@ -134,7 +134,7 @@ trade-offs between *noise amplification* and *signal equalization*
 
 
 
-## Gm-TIA
+## Gm-TIA (Cherry-Hooper topology)
 
 > H. Kimura *et al*., "A 28 Gb/s 560 mW Multi-Standard SerDes With Single-Stage Analog Front-End and 14-Tap Decision Feedback Equalizer in 28 nm CMOS," in *IEEE Journal of Solid-State Circuits*, vol. 49, no. 12, pp. 3091-3103, Dec. 2014 [[https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf](https://ieeexplore.ieee.org/ielx7/4/6963535/06894632.pdf)]
 >
@@ -150,7 +150,28 @@ trade-offs between *noise amplification* and *signal equalization*
 >
 > —, "A 280-mW, 112-Gb/s PAM-4/NRZ Transceiver for Low-Power IOs in 5-nm FinFET Technology," in IEEE Journal of Solid-State Circuits, doi: 10.1109/JSSC.2026.3743919
 
-*CTLE, with Gm + TIA structure*
+
+
+![image-20261126220637001](rx-fe/image-20261126220637001.png)
+
+**DC gain of Cherry Hooper**
+$$
+\left\{ \begin{array}{cl}
+g_{m1}V_i = \frac{V_o-V_x}{R_F} & \\
+\frac{V_o-V_x}{R_F}+g_{m2}V_x+\frac{V_o}{R_L} &
+\end{array} \right. \quad \Rightarrow \quad \frac{V_o}{V_i}=g_{m1}R_F\frac{g_{m2}R_F-1}{g_{m2}R_F+\frac{R_F}{R_L}} \quad \overset{R_F\ll R_L}{\Longrightarrow}\quad \frac{V_o}{V_i}=g_{m1}\left(R_F-\frac{1}{g_{m2}}\right)
+$$
+
+
+![image-20261126223547381](rx-fe/image-20261126223547381.png)
+
+
+
+
+
+
+
+---
 
 ![image-20260921214634581](rx-fe/image-20260921214634581.png)
 
@@ -172,11 +193,13 @@ trade-offs between *noise amplification* and *signal equalization*
 
 
 
-## Cherry-Hooper Amplifier
+---
 
 ![image-20260921235713422](rx-fe/image-20260921235713422.png)
 
-![image-20260921235635071](rx-fe/image-20260921235635071.png)
+
+
+
 
 ## Resonator-Based CTLE
 

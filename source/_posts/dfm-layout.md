@@ -217,6 +217,27 @@ Conventional <span style="background-color:yellow">**C4 (Controlled Collapse Chi
 
 
 
+---
+
+> K. Thasari et al., "A 280-mW, 112-Gb/s PAM-4/NRZ Transceiver for Low-Power IOs in 5-nm FinFET Technology," in IEEE Journal of Solid-State Circuits, doi: 10.1109/JSSC.2026.3743919
+
+<span style="background-color:yellow">silicon die: **bump-to-bump**</span>
+
+<span style="background-color:yellow">package: **ball-to-ball**</span>
+
+![image-20261126212718110](dfm-layout/image-20261126212718110.png)
+
+```mermaid
+flowchart LR
+    A["Bump (Silicon Die) @ TX"] --> B["Ball @TX Package (3dB)"]
+    B --> C["Channel (24dB)"]
+    C --> D["Ball @RX Package (3dB)"]
+    D --> E["Bump (Silicon Die) @ RX"]
+
+```
+
+
+
 ## IP_TIGHTEN_DENSITY
 
 ![image-20260227210700062](dfm-layout/image-20260227210700062.png)

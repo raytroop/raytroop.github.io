@@ -1238,6 +1238,7 @@ Saurabh Saxena, IIT Madras. Phase-Locked Loops: Noise Analysis in Digital PLL [[
 
 Topics in IC (Wireline Transceiver Design) [[https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf](https://ocw.snu.ac.kr/sites/default/files/NOTE/Lec%203%20-%20ADPLL.pdf)]
 
+S. Levantino, "Recent Advances in High-Performance Frequency Synthesizer Design," 2022 IEEE Custom Integrated Circuits Conference (CICC), Newport Beach, CA, USA, 2022, pp. 1-7 [[https://sci-hub.ru/10.1109/CICC53496.2022.9772842](https://sci-hub.ru/10.1109/CICC53496.2022.9772842)]
 
 ---
 

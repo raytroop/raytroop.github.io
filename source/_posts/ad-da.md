@@ -1090,38 +1090,6 @@ $$
 
 
 
-## R-2R & C-2C
-
-> B. Razavi, "The R-2R and C-2C Ladders [A Circuit for All Seasons]," in *IEEE Solid-State Circuits Magazine*, vol. 11, no. 3, pp. 10-15, Summer 2019 [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2019.pdf)]
-
-
-
-$N_b$ bit binary + $N_t$ bit thermometer DAC
-
-![R-2R.drawio](ad-da/R-2R.drawio.svg)
-
-$N_b$ bit binary can be simplified with Thevenin Equivalent
-$$
-V_B = \sum_{n=0}^{N_b-1} \frac{B_n}{2^{N_b-n}}
-$$
-with thermometer code
-
-$$
-V_o = V_B\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R}+\sum_{n=0}^{2^{N_t}-2}T_n\frac{\frac{2R}{2^{N_t}-1}}{\frac{2R}{2^{N_t}-1}+ 2R} = \frac{V_B}{2^{N_t}} + \frac{\sum_{n=0}^{2^{N_t}-2}T_n}{2^{N_t}} = \sum_{n=0}^{N_b-1} \frac{B_n}{2^{N_t+N_b-n}} + \frac{\sum_{n=0}^{2^{N_t}-2}T_n}{2^{N_t}}
-$$
-
-
-
----
-
-<span style="color:white; background-color:black">4bit binary R2R DAC with Ru=1kOhm; RVB equivalent R</span>
-
-![image-20241214190045688](ad-da/image-20241214190045688.png)
-
-
-
-
-
 ## reference
 
 Maloberti, F. *Data Converters*. Dordrecht, Netherlands: Springer, 2007.

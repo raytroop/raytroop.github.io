@@ -426,6 +426,17 @@ $$\begin{align}
 
 
 
+## Overvoltage Protection in Mixed-Voltage Bias Circuits
+
+A core NMOS current sink that biases a diode-connected PMOS in the high-voltage domain can experience excessive drain-to-source voltage (left). 
+
+![core-io-ibias](biasing/core-io-ibias.svg)
+
+- In the center circuit, an I/O NMOS with its gate held at $V_B$ clamps the drain of the upper core NMOS to $V_B - V_{\mathrm{GS,IO}}$
+- In the right-hand circuit, the reference branch biases an I/O cascode that sustains the excess drain-to-source voltage, limiting $V_{\mathrm{DS}}$ of the underlying core NMOS
+
+
+
 ## reference
 
 B. Razavi, "The Design of a Low-Voltage Bandgap Reference [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 13, no. 3, pp. 6-16, Summer 2021, [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2021.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2021.pdf)]

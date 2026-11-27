@@ -1841,6 +1841,7 @@ $$
 $\frac{\Delta}{N}$ determine measurement accuracy, $\frac{\Delta}{N} \lt 0.01$ if 1% accuracy is needed
 
 
+A frequency accuracy of **100 ppm** is considered sufficient for AFC detection and is practically achievable using a capacitor-bank-based implementation with an LSB resolution of **500 ppm**
 
 ---
 

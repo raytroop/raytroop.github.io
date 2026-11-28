@@ -1158,25 +1158,6 @@ To overcome this issue, a *deep N-well* can be used to more effectively isolate 
 - because the circuit within the deep N-well is separated from the p-substrate in this structure,
   there is the benefit that this circuitry is less susceptible to noise that propagates through the p-substrate.
 
-## Decap
-
-![img](dfm-layout/real-caps.png)
-
----
-
-
-
-![img](dfm-layout/decouple_vbias_comp-1.png)
-
-
-
-
-> Kevin Zheng. The Unsung Heroes – Dummies, Decaps, and More [[https://circuit-artists.com/the-unsung-heroes-dummies-decaps-and-more/](https://circuit-artists.com/the-unsung-heroes-dummies-decaps-and-more/)]
->
-> The Difference Between MOM, MIM, and MOS Capacitors [[https://www.ansys.com/blog/difference-between-mom-mim-mos-capacitor](https://www.ansys.com/blog/difference-between-mom-mim-mos-capacitor)]
->
-> MIM/MOM capacitor extraction boosts analog and RF designs [[https://www.eeworldonline.com/mim-mom-capacitor-extraction-boosts-analog-and-rf-designs/](https://www.eeworldonline.com/mim-mom-capacitor-extraction-boosts-analog-and-rf-designs/)]
-
 
 
 ## Metal Resistors In Wire Management

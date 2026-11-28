@@ -493,6 +493,46 @@ $$
 
 
 
+
+
+## Decap
+
+> Kevin Zheng. The Unsung Heroes – Dummies, Decaps, and More [[https://circuit-artists.com/the-unsung-heroes-dummies-decaps-and-more/](https://circuit-artists.com/the-unsung-heroes-dummies-decaps-and-more/)]
+>
+> The Difference Between MOM, MIM, and MOS Capacitors [[https://www.ansys.com/blog/difference-between-mom-mim-mos-capacitor](https://www.ansys.com/blog/difference-between-mom-mim-mos-capacitor)]
+>
+> MIM/MOM capacitor extraction boosts analog and RF designs [[https://www.eeworldonline.com/mim-mom-capacitor-extraction-boosts-analog-and-rf-designs/](https://www.eeworldonline.com/mim-mom-capacitor-extraction-boosts-analog-and-rf-designs/)]
+
+![img](biasing/real-caps.png)
+
+---
+
+
+
+![img](biasing/decouple_vbias_comp-1.png)
+
+
+
+
+
+
+
+## Power supply noise
+
+> C. Mangelsdorf, "VDD is not your BFF: Four things you didn’t know could go wrong [Shop Talk: What You Didn’t Learn in School]," in *IEEE Solid-State Circuits Magazine*, vol. 14, no. 4, pp. 11-16, Fall 2022, doi: 10.1109/MSSC.2022.3205790
+>
+> —, "OMG, PSRR!: Protect yourself from your supplies [Shop Talk: What you Didn’t Learn in School]," in *IEEE Solid-State Circuits Magazine*, vol. 15, no. 3, pp. 10-17, Summer 2023 [[https://sci-net.xyz/10.1109/MSSC.2023.3287343](https://sci-net.xyz/10.1109/MSSC.2023.3287343)]
+
+
+
+<span style="color:white; background-color:black">**Bandini Mountain**</span>
+
+![image-20261128151323855](biasing/image-20261128151323855.png)
+
+
+
+
+
 ## reference
 
 B. Razavi, "The Design of a Low-Voltage Bandgap Reference [The Analog Mind]," in *IEEE Solid-State Circuits Magazine*, vol. 13, no. 3, pp. 6-16, Summer 2021, [[https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2021.pdf](https://www.seas.ucla.edu/brweb/papers/Journals/BR_SSCM_3_2021.pdf)]

@@ -7,9 +7,11 @@ categories:
 mathjax: true
 ---
 
-![image-20241124184248887](network/image-20241124184248887.png)
+![image-20261128093025400](network/image-20261128093025400.png)
 
+![image-20261128091944863](network/image-20261128091944863.png)
 
+![image-20261128093422936](network/image-20261128093422936.png)
 
 ---
 
@@ -571,3 +573,7 @@ Dr. John Choma. EE 541, Fall 2006: Course Notes #2 Scattering Parameters: Concep
 Dr. Ray Kwok . Network Techniques: Conversion between Filter Transfer Function and Filter Scattering (SMatrix) Parameters [[https://www.sjsu.edu/people/raymond.kwok/docs/project172/FTF%20to%20S-Matrix%20Spring%202011.pdf](https://www.sjsu.edu/people/raymond.kwok/docs/project172/FTF%20to%20S-Matrix%20Spring%202011.pdf)]
 
 田庆诚教授 台湾中华大学 射频电路基础（公司培训）[[https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249](https://www.bilibili.com/video/BV1LA41177wr/?p=3&share_source=copy_web&vd_source=5a095c2d604a5d4392ea78fa2bbc7249)]
+
+---
+
+A. Sheikholeslami, "Reflections on S-Parameters: Part I," in IEEE Solid-State Circuits Magazine, vol. 18, no. 4, pp. 7-13, Fall 2026, doi: 10.1109/MSSC.2026.3737248. [[https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11812803](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=11812803)]
